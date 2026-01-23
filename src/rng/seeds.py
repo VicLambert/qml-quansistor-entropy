@@ -1,3 +1,1 @@
-
-def gate_seed():
-    pass
+def gate_seed(): ...

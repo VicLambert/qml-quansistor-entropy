@@ -1,6 +1,7 @@
-from dataclasses import dataclass
-from typing import Iterable, Protocol, Any
+from typing import Any, Iterable, Protocol
+
 from ..spec import CircuitSpec, GateSpec
+
 
 class Family(Protocol):
     name: str

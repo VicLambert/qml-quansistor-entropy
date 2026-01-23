@@ -1,8 +1,8 @@
 import numpy as np
 
+
 def circ_X(a, b, g):
-    """
-    Creates a matrix of symmetry class X defined in section A of
+    """Creates a matrix of symmetry class X defined in section A of
     https://doi.org/10.1103/PhysRevA.106.062610.
 
     @param a: Parameter alpha defined in equation 18 of
@@ -39,12 +39,11 @@ def circ_X(a, b, g):
             [e14, e11, e12, e13],
             [e13, e14, e11, e12],
             [e12, e13, e14, e11],
-        ]
+        ],
     )
 
 def circ_Y(a, b, g):
-    """
-    Creates a matrix of symmetry class Y defined in section B of
+    """Creates a matrix of symmetry class Y defined in section B of
     https://doi.org/10.1103/PhysRevA.106.062610.
 
     @param a: Parameter alpha defined in equation 23 of
@@ -91,7 +90,7 @@ def circ_Y(a, b, g):
             [-E_I_3_PI_OVER_4 * e14, e11, e23a + e23b, e24],
             [e13, e34a + e34b, e11, e34a - e34b],
             [-E_I_3_PI_OVER_4 * e12, e24, e23a - e23b, e11],
-        ]
+        ],
     )
 
 def haar_unitary_gate(dim, rng):

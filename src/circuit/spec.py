@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Tuple, dict, Any
+from typing import Any, Tuple
 
 Wires = Tuple[int, ...]
 
@@ -7,6 +7,7 @@ Wires = Tuple[int, ...]
 class GateSpec:
     kind: str
     wires: Wires
+    d: int
     seed: int | None = None
     tags: Tuple[str, ...] = ()
     meta: dict[str, Any] = field(default_factory=dict)
@@ -20,5 +21,5 @@ class CircuitSpec:
     family: str
     topology: str
     global_seed: int
-    gates: Tuple[GateSpec, ...]
-    params: list[Any]
+    gates: Tuple[GateSpec, ...] = ()
+    params: dict[str, Any] = field(default_factory=dict)
