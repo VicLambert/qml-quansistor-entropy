@@ -36,6 +36,12 @@ docs = [
     "sphinx-rtd-theme>=1.0.0",
 ]
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.black]
 line-length = 95
 
@@ -99,3 +105,5 @@ convention = "google"
 [tool.ruff.lint.mccabe]
 max-complexity = 10
 
+[tool.ruff]
+fix=true

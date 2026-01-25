@@ -1,7 +1,10 @@
-from dataclasses import dataclass, field
-from typing import Any, Tuple
 
-Wires = Tuple[int, ...]
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any
+
+Wires = tuple[int, ...]
 
 @dataclass(frozen=True)
 class GateSpec:
@@ -9,7 +12,7 @@ class GateSpec:
     wires: Wires
     d: int
     seed: int | None = None
-    tags: Tuple[str, ...] = ()
+    tags: tuple[str, ...] = ()
     meta: dict[str, Any] = field(default_factory=dict)
 
 
@@ -21,5 +24,5 @@ class CircuitSpec:
     family: str
     topology: str
     global_seed: int
-    gates: Tuple[GateSpec, ...] = ()
+    gates: tuple[GateSpec, ...] = ()
     params: dict[str, Any] = field(default_factory=dict)

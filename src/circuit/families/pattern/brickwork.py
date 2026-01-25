@@ -1,16 +1,19 @@
 from __future__ import annotations
 
-from typing import Tuple, list
-
 
 def brickwork_pattern(
         n_qubits: int,
         layer: int,
         *,
         topology: str = "line",
-) -> list[Tuple[int, int]]:
+) -> list[tuple[int, int]]:
     """Returns the nearest-neighbour pairs in brickwork pattern.
-    Parity of layers sets the offset
+
+    Args:
+        n_qubits: Number of qubits in the circuit.
+        layer: Layer index (0-indexed).
+        topology: Topology of the qubits, either "line" or "loop".
+    Parity of layers sets the offset.
     """
     start = layer % 2
     pairs = [(i, i + 1) for i in range(start, n_qubits - 1 , 2)]

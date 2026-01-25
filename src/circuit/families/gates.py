@@ -93,11 +93,16 @@ def circ_Y(a, b, g):
         ],
     )
 
-def haar_unitary_gate(dim, rng):
-    a, b = rng.normal(size=(dim, dim)), rng.normal(size=(dim, dim))
+def haar_unitary_gate(d, rng):
+    a, b = rng.normal(size=(d, d)), rng.normal(size=(d, d))
 
     Z = a + 1j * b
     Q, R = np.linalg.qr(Z)
 
-    Lambda = np.diag([R[i, i] / np.abs(R[i, i]) for i in range(dim)])
+    Lambda = np.diag([R[i, i] / np.abs(R[i, i]) for i in range(d)])
     return np.dot(Q, Lambda)
+
+def random_quansistor_gate(rng):
+    a, b, g = rng.standard_normal(3)
+    U = circ_X(a, b, g) if rng.choice(["X", "Y"]) == "X" else circ_Y(a, b, g)
+    return U

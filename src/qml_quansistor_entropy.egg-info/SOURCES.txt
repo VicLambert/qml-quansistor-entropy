@@ -1,5 +1,4 @@
 pyproject.toml
-src/circuit/base.py
 src/circuit/spec.py
 src/circuit/families/__init__.py
 src/circuit/families/base.py
@@ -15,3 +14,4 @@ src/qml_quansistor_entropy.egg-info/dependency_links.txt
 src/qml_quansistor_entropy.egg-info/requires.txt
 src/qml_quansistor_entropy.egg-info/top_level.txt
 src/rng/seeds.py
+src/tests/test_imports.py

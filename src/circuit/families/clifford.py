@@ -20,7 +20,7 @@ class CliffordBrickwork:
             n_qubits: int,
             n_layers: int,
             d: int,
-            seed: int | None,
+            seed: int,
             *,
             topology: str = "loop",
             **kwargs: Any,
@@ -43,7 +43,7 @@ class CliffordBrickwork:
 
         if tdoping is not None:
             tlocs = tdoping.locations(
-                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=spec.seed, topology=spec.topology,
+                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=spec.global_seed, topology=spec.topology,
             )
 
         for layer in range(spec.n_layers):
@@ -56,6 +56,7 @@ class CliffordBrickwork:
                 yield GateSpec(
                     kind="clifford",
                     wires=(a,b),
+                    d=spec.d,
                     seed=s,
                     tags=("layer", f"L{layer}", "clifford"),
                 )

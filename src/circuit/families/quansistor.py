@@ -1,16 +1,16 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Iterable, Set, Tuple, list
+from typing import Any, Iterable, Set, Tuple
 
-from ...rng.seeds import gate_seed
+from rng.seeds import gate_seed
 from ..spec import CircuitSpec, GateSpec
 
 
 def quansistor_block(
     n_qubits: int,
     n_layer: int,
-) -> list[Tuple[int, int, int, int]]:
+) -> list[tuple[int, int, int, int]]:
     start = n_layer % 2
     blocks = []
 
@@ -19,7 +19,7 @@ def quansistor_block(
     return blocks
 
 
-def leftover_pairs(n_qubits: int, used: Set[int], topology: str) -> list[Tuple[int, int]]:
+def leftover_pairs(n_qubits: int, used: Set[int], topology: str) -> list[tuple[int, int]]:
     left = [i for i in range(n_qubits) if i not in used]
     # TODO implement neighbours logic
     return []
@@ -34,7 +34,7 @@ class QuansistorBrickwork:
         n_qubits: int,
         n_layers: int,
         d: int,
-        seed: int | None,
+        seed: int,
         *,
         topology: str = "loop",
         **kwargs: Any,
@@ -57,7 +57,7 @@ class QuansistorBrickwork:
             for idx, (q0, q1, q2, q3) in enumerate(blocks):
                 used.update((q0, q1, q2, q3))
                 s = gate_seed(
-                    spec.seed,
+                    spec.global_seed,
                     layer=layer,
                     slot=idx,
                     wires=(q0, q1, q2, q3),
@@ -66,6 +66,7 @@ class QuansistorBrickwork:
                 yield GateSpec(
                     kind="quansistor_block",
                     wires=(q0, q1, q2, q3),
+                    d=spec.d,
                     seed=s,
                     tags=("layer", f"L{layer}", "block"),
                 )
@@ -73,7 +74,7 @@ class QuansistorBrickwork:
             pairs = leftover_pairs(spec.n_qubits, used, spec.topology)
             for j, (a, b) in enumerate(pairs):
                 s = gate_seed(
-                    spec.seed, layer=layer, slot=1000 + j, wires=(a, b), kind="quansistor2",
+                    spec.global_seed, layer=layer, slot=1000 + j, wires=(a, b), kind="quansistor2",
                 )
                 yield GateSpec(
                     kind="quansistor2",
