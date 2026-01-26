@@ -1,0 +1,1 @@
+from properties.results import PropertyResult
