@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal, Set, Tuple
+from typing import Literal
 
 Placement = Literal["center_pair", "center_wire", "random_wires"]
 
@@ -11,13 +11,13 @@ class TdopingRules:
     placement: Placement = "center_pair"
     per_layer: int = 2
 
-    def location(
+    def locations(
             self,
             *,
             n_qubit: int,
             layer: int,
             seed: int,
-            topology: str,
-    ) -> Set[Tuple[int, int]]:
+            connectivity: str,
+    ) -> set[tuple[int, int]]:
 
         locs: set[tuple[int,int]] = set()

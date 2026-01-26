@@ -22,7 +22,8 @@ class CliffordBrickwork:
             d: int,
             seed: int,
             *,
-            topology: str = "loop",
+            connectivity: str = "loop",
+            pattern: str = "brickwork",
             **kwargs: Any,
     ) -> CircuitSpec:
         params = dict(kwargs)
@@ -33,7 +34,8 @@ class CliffordBrickwork:
             d=d,
             global_seed=seed,
             family=self.name,
-            topology=topology,
+            connectivity=connectivity,
+            pattern=pattern,
             params=params,
         )
 
@@ -43,11 +45,11 @@ class CliffordBrickwork:
 
         if tdoping is not None:
             tlocs = tdoping.locations(
-                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=spec.global_seed, topology=spec.topology,
+                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=spec.global_seed, connectivity=spec.connectivity,
             )
 
         for layer in range(spec.n_layers):
-            pairs = brickwork_pattern(spec.n_qubits, layer, topology=spec.topology)
+            pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
 
             for slot, (a, b) in enumerate(pairs):
                 s = gate_seed(
@@ -67,6 +69,6 @@ class CliffordBrickwork:
                         kind="T",
                         wires=(wire,),
                         d=spec.d,
-                        seed=None,
+                        seed=s,
                         tags=("layer", f"L{layer}", "T-gate"),
                     )

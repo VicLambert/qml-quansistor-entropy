@@ -11,9 +11,10 @@ class Family(Protocol):
             n_qubits: int,
             n_layers: int,
             d: int,
-            seed: int | None,
+            seed: int,
             *,
-            topology: str = "loop",
+            connectivity: str = "loop",
+            pattern: str = "random",
             **kwargs: Any,
     ) -> CircuitSpec:
         """Returns the circuit specification"""
