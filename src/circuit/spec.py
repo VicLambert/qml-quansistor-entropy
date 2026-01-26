@@ -16,7 +16,7 @@ class GateSpec:
     kind: str
     wires: Wires
     d: int
-    seed: int
+    seed: int | None = None
     tags: tuple[str, ...] = ()
     meta: dict[str, Any] = field(default_factory=dict)
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Iterable
 
-from rng.seeds import gate_seed
+from rng.seeds import gate_seed, spawn_seed
 
 from ..spec import CircuitSpec, GateSpec
 from .pattern.brickwork import brickwork_pattern
@@ -12,6 +12,7 @@ from .pattern.tdoping import TdopingRules
 
 @dataclass(frozen=True)
 class CliffordBrickwork:
+    """Clifford circuit family with brickwork pattern and optional T-gate doping."""
     name: str = "clifford"
     tdoping: TdopingRules | None = None
 
@@ -22,7 +23,7 @@ class CliffordBrickwork:
             d: int,
             seed: int,
             *,
-            connectivity: str = "loop",
+            connectivity: str = "line",
             pattern: str = "brickwork",
             **kwargs: Any,
     ) -> CircuitSpec:
@@ -44,8 +45,9 @@ class CliffordBrickwork:
         tlocs = set()
 
         if tdoping is not None:
+            seed_T = spawn_seed(spec.global_seed, name="tdoping")
             tlocs = tdoping.locations(
-                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=spec.global_seed, connectivity=spec.connectivity,
+                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=seed_T, connectivity=spec.connectivity,
             )
 
         for layer in range(spec.n_layers):
@@ -69,6 +71,6 @@ class CliffordBrickwork:
                         kind="T",
                         wires=(wire,),
                         d=spec.d,
-                        seed=s,
-                        tags=("layer", f"L{layer}", "T-gate"),
+                        seed=None,
+                        tags=("layer", f"L{layer}","wire", f"W{wire}", "T-gate"),
                     )
