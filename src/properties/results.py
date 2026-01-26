@@ -4,8 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Union
 
-if TYPE_CHECKING:
-    import numpy as np
+import numpy as np
 
 Value = Union[float, np.ndarray]
 

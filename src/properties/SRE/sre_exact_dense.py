@@ -35,6 +35,7 @@ def make_qudit_ops(dim):
     return ops
 
 def fast_kron(mats, vec):
+    """Compute (M1 ⊗ M2 ⊗ ... ⊗ Mn) @ vec efficiently."""
     mats = [np.asarray(M, dtype=complex) for M in mats]
     dims = [M.shape[0] for M in mats]
     y = vec.reshape(dims)
@@ -45,6 +46,7 @@ def fast_kron(mats, vec):
 
 
 def pauli_expval_fast_kron(state, label, dim):
+    """Compute the expectation value of a multi-qudit Pauli operator."""
     pauli_ops = make_qudit_ops(dim=dim)
     mats = [pauli_ops[int(idx)] for idx in label]
     v = fast_kron(mats, state)
