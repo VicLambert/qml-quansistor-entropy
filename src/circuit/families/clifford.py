@@ -1,3 +1,8 @@
+"""Clifford circuit family with brickwork pattern and optional T-gate doping.
+
+This module provides the CliffordBrickwork class for generating Clifford circuits
+with configurable brickwork patterns and optional T-gate doping.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -27,6 +32,30 @@ class CliffordBrickwork:
             pattern: str = "brickwork",
             **kwargs: Any,
     ) -> CircuitSpec:
+        """Create a circuit specification for a Clifford brickwork circuit.
+
+        Parameters
+        ----------
+        n_qubits : int
+            Number of qubits in the circuit.
+        n_layers : int
+            Number of layers in the circuit.
+        d : int
+            Depolarizing error parameter.
+        seed : int
+            Global random seed for reproducibility.
+        connectivity : str, optional
+            Qubit connectivity pattern, by default "line".
+        pattern : str, optional
+            Gate pattern type, by default "brickwork".
+        **kwargs : Any
+            Additional parameters passed to the circuit specification.
+
+        Returns:
+        -------
+        CircuitSpec
+            A circuit specification object with the given parameters.
+        """
         params = dict(kwargs)
         params["tdoping"] = None if self.tdoping is None else self.tdoping
         return CircuitSpec(

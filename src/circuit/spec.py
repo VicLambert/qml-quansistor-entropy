@@ -13,6 +13,23 @@ Wires = tuple[int, ...]
 
 @dataclass(frozen=True)
 class GateSpec:
+    """Specification for a quantum gate.
+
+    Attributes:
+    ----------
+    kind : str
+        The type or name of the quantum gate.
+    wires : Wires
+        The qubits on which the gate operates.
+    d : int
+        The dimension parameter for the gate.
+    seed : int | None
+        Optional random seed for gate initialization.
+    tags : tuple[str, ...]
+        Optional tags for categorizing or labeling the gate.
+    meta : dict[str, Any]
+        Optional metadata associated with the gate.
+    """
     kind: str
     wires: Wires
     d: int
@@ -23,6 +40,29 @@ class GateSpec:
 
 @dataclass(frozen=True)
 class CircuitSpec:
+    """Specification for a quantum circuit.
+
+    Attributes:
+    ----------
+    n_qubits : int
+        The number of qubits in the circuit.
+    n_layers : int
+        The number of layers in the circuit.
+    d : int
+        The dimension parameter for the circuit.
+    family : str
+        The family or type of the circuit.
+    connectivity : str
+        The connectivity pattern of the circuit.
+    pattern : str
+        The gate pattern used in the circuit.
+    global_seed : int
+        The global random seed for circuit initialization.
+    gates : tuple[GateSpec, ...]
+        The gates in the circuit.
+    params : dict[str, Any]
+        Optional parameters for the circuit.
+    """
     n_qubits: int
     n_layers: int
     d: int

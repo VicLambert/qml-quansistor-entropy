@@ -1,4 +1,10 @@
 
+"""Abstract base class and types for quantum circuit backends.
+
+This module provides the base interface for implementing quantum circuit
+simulators with support for different state representations (dense, MPS, TN).
+"""
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
@@ -28,6 +34,8 @@ class BaseBackend(ABC):
         Args:
             spec: Circuit specification.
             state_type: Type of state representation to use.
+            max_bond: Maximum bond dimension for MPS state representation.
+            **kwargs: Additional backend-specific keyword arguments.
 
         Returns:
             The final state after simulation.

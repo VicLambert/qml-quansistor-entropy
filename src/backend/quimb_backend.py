@@ -1,20 +1,35 @@
 
+"""Quimb tensor network backend for quantum circuit simulation.
+
+This module provides the QuimbBackend class that implements quantum circuit
+simulation using the quimb library, supporting both dense and MPS state types.
+"""
+
 from __future__ import annotations
 
-from functools import singledispatchmethod
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any
 
-import numpy as np
-import quimb as qb
 import quimb.tensor as qtn
 
-from src.backend.base import BaseBackend, StateType, State
+from src.backend.base import BaseBackend, State
 from src.circuit.matrix_factory import gate_unitary
-from src.circuit.spec import CircuitSpec, GateSpec
 from src.states.types import DenseState, MPSState
+
+if TYPE_CHECKING:
+    from src.circuit.spec import CircuitSpec, GateSpec
 
 
 class QuimbBackend(BaseBackend):
+    """Quimb tensor network backend for quantum circuit simulation.
+
+    Supports both dense and MPS state types for quantum circuit simulation
+    using the quimb library.
+
+    Attributes:
+    ----------
+    name : str
+        The name of the backend ("quimb").
+    """
     name = "quimb"
 
     def _make_circuit(
@@ -50,6 +65,31 @@ class QuimbBackend(BaseBackend):
         cutoff: int | None = None,
         **kwargs: Any,
     ) -> State:
+        """Simulate a quantum circuit using quimb.
+
+        Parameters
+        ----------
+        spec : CircuitSpec
+            The circuit specification to simulate.
+        state_type : str, optional
+            The state type to use ("dense" or "mps"), by default "dense".
+        max_bond : int | None, optional
+            Maximum bond dimension for MPS, by default None.
+        cutoff : int | None, optional
+            Cutoff for MPS truncation, by default None.
+        **kwargs : Any
+            Additional keyword arguments.
+
+        Returns:
+        -------
+        State
+            The resulting quantum state after simulation.
+
+        Raises:
+        ------
+        NotImplementedError
+            If the state_type is not supported.
+        """
         self._validate_materialized(spec)
 
         circ = self._make_circuit(
