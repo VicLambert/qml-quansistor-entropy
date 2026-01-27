@@ -42,6 +42,7 @@ def circ_X(a, b, g):
         ],
     )
 
+
 def circ_Y(a, b, g):
     """Creates a matrix of symmetry class Y defined in section B of
     https://doi.org/10.1103/PhysRevA.106.062610.
@@ -93,6 +94,7 @@ def circ_Y(a, b, g):
         ],
     )
 
+
 def haar_unitary_gate(d, rng):
     a, b = rng.normal(size=(d, d)), rng.normal(size=(d, d))
 
@@ -102,7 +104,52 @@ def haar_unitary_gate(d, rng):
     Lambda = np.diag([R[i, i] / np.abs(R[i, i]) for i in range(d)])
     return np.dot(Q, Lambda)
 
+
 def random_quansistor_gate(rng):
     a, b, g = rng.standard_normal(3)
     U = circ_X(a, b, g) if rng.choice(["X", "Y"]) == "X" else circ_Y(a, b, g)
     return U
+
+
+def _I() -> np.ndarray:
+    return np.eye(2, dtype=complex)
+
+
+def _H() -> np.ndarray:
+    return (1.0 / np.sqrt(2.0)) * np.array([[1, 1], [1, -1]], dtype=complex)
+
+
+def _S() -> np.ndarray:
+    return np.array([[1, 0], [0, 1j]], dtype=complex)
+
+
+def _CNOT() -> np.ndarray:
+    # control = first qubit, target = second qubit, basis |00>,|01>,|10>,|11>
+    return np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]], dtype=complex)
+
+
+_ONEQ = {
+    "I": _I(),
+    "H": _H(),
+    "S": _S(),
+}
+
+def kron2(A: np.ndarray, B: np.ndarray) -> np.ndarray:
+    return np.kron(A, B)
+
+
+def clifford_recipe_unitary(seed: int) -> tuple[str, str, np.ndarray]:
+    """Using the given seed, choose two random 1-qubit gates from {I,H,S}.
+
+    Apply a CNOT between them (control=wire0 -> target=wire1).
+    Returns (U_a_name, U_b_name, U_4x4).
+    """
+    rng = np.random.default_rng(seed)
+    labels = np.array(["I", "H", "S"], dtype=object)
+    U_a_name, U_b_name = rng.choice(labels, size=2, replace=True)
+
+    Ua = _ONEQ[str(U_a_name)]
+    Ub = _ONEQ[str(U_b_name)]
+
+    U = _CNOT() @ kron2(Ua, Ub)
+    return str(U_a_name), str(U_b_name), U

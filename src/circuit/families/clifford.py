@@ -47,16 +47,15 @@ class CliffordBrickwork:
         if tdoping is not None:
             seed_T = spawn_seed(spec.global_seed, name="tdoping")
             tlocs = tdoping.locations(
-                n_qubits=spec.n_qubits, layer=spec.n_layers, seed=seed_T, connectivity=spec.connectivity,
+                n_qubits=spec.n_qubits, n_layers=spec.n_layers, seed=seed_T, connectivity=spec.connectivity,
             )
 
         for layer in range(spec.n_layers):
             pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
 
             for slot, (a, b) in enumerate(pairs):
-                s = gate_seed(
-                    spec.global_seed, layer=layer, slot=slot, wires=(a,b), kind="clifford",
-                )
+                s = gate_seed(spec.global_seed, layer=layer, slot=slot, wires=(a,b), kind="clifford", ordered_wires=True)
+
                 yield GateSpec(
                     kind="clifford",
                     wires=(a,b),

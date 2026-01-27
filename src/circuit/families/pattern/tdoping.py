@@ -36,6 +36,61 @@ class TdopingRules:
             raise ValueError(f"Requested T-gates ({self.count}) exceed maximum possible ({max_tgates}).")
 
         rng = np.random.default_rng(seed)
+        if n_qubits % 2 == 0:
+            center_wires = (n_qubits // 2 - 1, n_qubits // 2)
+        else:
+            center_wires = (n_qubits // 2,)
+
+        def pick_wires_for_layer(k: int) -> list[int]:
+            if k <= 0:
+                return []
+
+            if self.placement == "random_wires":
+                return [int(x) for x in rng.choice(n_qubits, size=k, replace=False)]
+
+            if self.placement == "center_wire":
+                c = center_wires[0]
+                wires = [c]
+                if k == 1:
+                    return wires
+                step = 1
+
+                while len(wires) < k:
+                    left = c - step
+                    right = c + step
+                    if left >= 0:
+                        wires.append(left)
+                        if len(wires) == k:
+                            break
+                    if right < n_qubits:
+                        wires.append(right)
+                        if len(wires) == k:
+                            break
+                    step += 1
+                return wires[:k]
+            if self.placement == "center_pair":
+                base = list(center_wires)
+                if k <= len(base):
+                    return [int(x) for x in rng.choice(base, size=k, replace=False)]
+                used = set(base)
+                wires = base[:]
+                mid = center_wires[0]
+                step = 1
+
+                while len(wires) < k:
+                    for w in (mid - step, mid + step, (center_wires[-1] + step) if len(center_wires) == 2 else None):
+                        if w is None:
+                            continue
+                        if 0 <= w < n_qubits and w not in used:
+                            used.add(w)
+                            wires.append(w)
+                            if len(wires) == k:
+                                break
+                    step += 1
+                return wires[:k]
+            raise ValueError(f"Unknown placement strategy")
+
+
         remaining = self.count
         t_gate_per_layer = np.zeros(n_layers, dtype=int)
 
@@ -55,40 +110,14 @@ class TdopingRules:
             remaining -= 1
 
         locs: set[tuple[int,int]] = set()
-        if n_qubits % 2 == 0:
-            center_wires = (n_qubits // 2 - 1, n_qubits // 2)
-        else:
-            center_wires = (n_qubits // 2,)
 
         for layer in range(n_layers):
-            n_tgates = t_gate_per_layer[layer]
+            n_tgates = int(t_gate_per_layer[layer])
             if n_tgates == 0:
                 continue
-
-            if self.placement == "center_pair":
-                if n_tgates <= len(center_wires):
-                    wires = rng.choice(list(center_wires), size=n_tgates, replace=False).tolist()
-                else:
-                    used = set(center_wires)
-                    wires = list(center_wires)
-                    remaining_wires = n_tgates - len(wires)
-                    if remaining_wires > 0:
-                        possible_wires = [w for w in range(n_qubits) if w not in used]
-                        extra_wires = rng.choice(possible_wires, size=remaining_wires, replace=False).tolist()
-                        wires.extend(extra_wires)
-
-            elif self.placement == "center_wire":
-                if len(center_wires) == 1:
-                    wires = [center_wires[0]] * n_tgates
-                else:
-                    offset = int(rng.choice(0, 2))
-                    wires = [center_wires[(offset + i) % 2] for i in range(n_tgates)]
-
-            elif self.placement == "random_wires":
-                possible_wires = rng.choice(n_qubits, size=n_tgates, replace=False).tolist()
-            else:
-                raise ValueError(f"Unknown placement strategy: {self.placement!r}")
-
+            wires = pick_wires_for_layer(n_tgates)
+            if len(set(wires)) != len(wires):
+                raise RuntimeError("Internal Error")
             for w in wires:
                 locs.add((layer, w))
 

@@ -16,6 +16,9 @@ class DenseState:
     d: int
     backend: str
 
+    def copy(self) -> DenseState:
+        return DenseState(self.vector.copy(), self.n_qubits, self.d, self.backend)
+
 @dataclass
 class MPSState:
     """Class representing a matrix product state (MPS)."""

@@ -68,7 +68,7 @@ def rng_from_gate(**kwargs) -> np.random.Generator:
 
 def spawn_seed(global_seed: int, *, name: str) -> int:
     """Generates a new seed spawned from the global seed and a name."""
-    return gate_seed(global_seed, kind="spawn", layer=0, extra=name)
+    return gate_seed(global_seed, kind="spawn", layer=0, slot=0, wires=None, extra=name)
 
 @dataclass(frozen=True)
 class SeedSchedule:
