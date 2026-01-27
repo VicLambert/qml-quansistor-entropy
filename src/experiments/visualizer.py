@@ -13,7 +13,7 @@ from src.circuit.spec import CircuitSpec
 from src.states.types import DenseState
 
 
-def _layer_from_tags(tags: tuple[str, ...]) -> Optional[int]:
+def _layer_from_tags(tags: tuple[str, ...]) -> int | None:
     # Expected tags include "L0", "L1", ... OR ("layer","L0",...)
     for t in tags:
         if isinstance(t, str) and t.startswith("L") and t[1:].isdigit():
@@ -30,15 +30,17 @@ def plot_pennylane_circuit(
     spec: CircuitSpec,
     *,
     device_name: str = "lightning.qubit",
-    title: Optional[str] = None,
-    save_path: Optional[str] = None,
-    show: bool = True,
+    title: str | None = None,
+    save_path: str | None = None,
+    show: bool = False,
 ):
     """Plot a quantum circuit using PennyLane's native matplotlib drawer.
+
     Requires spec.gates to be materialized.
     """
     if not spec.gates:
-        raise ValueError("CircuitSpec.gates is empty. Cannot visualize PennyLane circuit.")
+        msg = "CircuitSpec.gates is empty. Cannot visualize PennyLane circuit."
+        raise ValueError(msg)
 
     dev = qml.device(device_name, wires=spec.n_qubits)
 
