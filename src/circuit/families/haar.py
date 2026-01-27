@@ -31,8 +31,9 @@ class HaarBrickwork:
         d: int,
         seed: int,
         *,
-        topology: str = "loop",
-        **kwargs,
+        connectivity: str = "line",
+        pattern: str = "brickwork",
+        **kwargs: Any,
     ) -> CircuitSpec:
         return CircuitSpec(
             n_qubits=n_qubits,
@@ -40,12 +41,14 @@ class HaarBrickwork:
             d=d,
             global_seed=seed,
             family=self.name,
-            topology=topology,
+            connectivity=connectivity,
+            pattern=pattern,
+            params={},
         )
 
     def gates(self, spec: CircuitSpec) -> Generator[GateSpec]:
         for layer in range(spec.n_layers):
-            pairs = brickwork_pattern(spec.n_qubits, layer, topology=spec.topology)
+            pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
 
             for slot, (a, b) in enumerate(pairs):
                 s = gate_seed(

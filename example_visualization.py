@@ -7,6 +7,8 @@ from pathlib import Path
 
 from src.circuit.spec import CircuitSpec
 from src.circuit.families.clifford import CliffordBrickwork
+from src.circuit.families.haar import HaarBrickwork
+from src.circuit.families.quansistor import QuansistorBrickwork
 from src.backend.pennylane_backend import PennylaneBackend
 from src.backend.quimb_backend import QuimbBackend
 
@@ -30,14 +32,16 @@ def example_pennylane():
     print("Example 1: PennyLane Clifford Circuit")
     print("-" * 50)
 
-    family = CliffordBrickwork(tdoping=TdopingRules(
-        count=48,
-        placement="center_pair",
-        per_layer=2,
-    ))
+    # family = CliffordBrickwork(tdoping=TdopingRules(
+    #     count=48,
+    #     placement="center_pair",
+    #     per_layer=2,
+    # ))
+    # family = HaarBrickwork()
+    family = QuansistorBrickwork()
 
     spec = family.make_spec(
-        n_qubits=10,
+        n_qubits=6,
         n_layers=25,
         d=2,
         seed=42,
@@ -51,7 +55,7 @@ def example_pennylane():
 
     plot_pennylane_circuit(
         spec,
-        save_path=OUT / "pennylane_circuit.png",
+        save_path=OUT / "pennylane_quansistor_circuit.png",
     )
     # plot_circuit_diagram(
     #     spec,

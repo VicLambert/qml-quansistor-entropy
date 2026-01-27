@@ -36,7 +36,8 @@ class QuansistorBrickwork:
         d: int,
         seed: int,
         *,
-        topology: str = "loop",
+        connectivity: str = "line",
+        pattern: str = "brickwork",
         **kwargs: Any,
     ) -> CircuitSpec:
         return CircuitSpec(
@@ -45,7 +46,8 @@ class QuansistorBrickwork:
             d=d,
             global_seed=seed,
             family=self.name,
-            topology=topology,
+            connectivity=connectivity,
+            pattern=pattern,
             params={},
         )
 
@@ -54,30 +56,30 @@ class QuansistorBrickwork:
             blocks = quansistor_block(spec.n_qubits, layer)
             used = set()
 
-            for idx, (q0, q1, q2, q3) in enumerate(blocks):
-                used.update((q0, q1, q2, q3))
+            for idx, (q0, q1) in enumerate(blocks):
+                used.update((q0, q1))
                 s = gate_seed(
                     spec.global_seed,
                     layer=layer,
                     slot=idx,
-                    wires=(q0, q1, q2, q3),
-                    kind="quansistor_block",
+                    wires=(q0, q1),
+                    kind="quansistor",
                 )
                 yield GateSpec(
-                    kind="quansistor_block",
-                    wires=(q0, q1, q2, q3),
+                    kind="quansistor",
+                    wires=(q0, q1),
                     d=spec.d,
                     seed=s,
                     tags=("layer", f"L{layer}", "block"),
                 )
 
-            pairs = leftover_pairs(spec.n_qubits, used, spec.topology)
+            pairs = leftover_pairs(spec.n_qubits, used, spec.connectivity)
             for j, (a, b) in enumerate(pairs):
                 s = gate_seed(
                     spec.global_seed, layer=layer, slot=1000 + j, wires=(a, b), kind="quansistor2",
                 )
                 yield GateSpec(
-                    kind="quansistor2",
+                    kind="quansistor",
                     wires=(a, b),
                     d=spec.d,
                     seed=s,
