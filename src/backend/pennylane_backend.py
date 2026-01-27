@@ -8,10 +8,10 @@ import numpy as np
 import quimb as qb
 import quimb.tensor as qtn
 
-from backend.base import BaseBackend, StateType, State
-from circuit.matrix_factory import gate_unitary
-from circuit.spec import CircuitSpec, GateSpec
-from states.types import DenseState, MPSState
+from src.backend.base import BaseBackend, StateType, State
+from src.circuit.matrix_factory import gate_unitary
+from src.circuit.spec import CircuitSpec, GateSpec
+from src.states.types import DenseState, MPSState
 
 import pennylane as qml
 

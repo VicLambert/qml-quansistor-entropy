@@ -1,4 +1,7 @@
+backend
 circuit
-entropy
+experiments
+properties
 rng
+states
 tests

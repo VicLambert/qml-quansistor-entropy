@@ -6,9 +6,11 @@ from typing import Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pennylane as qml
 
-from circuit.spec import CircuitSpec, GateSpec
-from states.types import DenseState, MPSState
+from src.circuit.matrix_factory import gate_unitary
+from src.circuit.spec import CircuitSpec
+from src.states.types import DenseState
 
 
 def _layer_from_tags(tags: tuple[str, ...]) -> Optional[int]:
@@ -24,19 +26,74 @@ def _layer_from_tags(tags: tuple[str, ...]) -> Optional[int]:
                 return int(nxt[1:])
     return None
 
+def plot_pennylane_circuit(
+    spec: CircuitSpec,
+    *,
+    device_name: str = "lightning.qubit",
+    title: Optional[str] = None,
+    save_path: Optional[str] = None,
+    show: bool = True,
+):
+    """Plot a quantum circuit using PennyLane's native matplotlib drawer.
+    Requires spec.gates to be materialized.
+    """
+    if not spec.gates:
+        raise ValueError("CircuitSpec.gates is empty. Cannot visualize PennyLane circuit.")
+
+    dev = qml.device(device_name, wires=spec.n_qubits)
+
+    @qml.qnode(dev)
+    def circuit():
+        for gate in spec.gates:
+            U = gate_unitary(gate)
+            # Extract gate type from tags for better visualization
+            gate_label = None
+            if "T-gate" in gate.tags:
+                gate_label = "T"
+            elif "clifford" in gate.tags:
+                gate_label = "C"
+            qml.QubitUnitary(U, wires=gate.wires, id=gate_label)
+        return qml.state()
+
+    drawer = qml.draw_mpl(circuit)
+    fig, ax = drawer()
+
+    if title is None:
+        title = f"PennyLane circuit ({spec.family}), n={spec.n_qubits}, L={spec.n_layers}"
+    ax.set_title(title, fontsize=12, fontweight="bold")
+
+    if save_path:
+        Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=200, bbox_inches="tight")
+
+    if show:
+        fig.show()
+
+    return fig
 
 @dataclass(frozen=True)
 class GateDraw:
     layer: int
     kind: str
     wires: tuple[int, ...]
+    tags: tuple[str, ...] = ()
+
+def _get_gate_label(gate: GateDraw) -> str:
+    """Generate a label for a gate that includes type information from tags."""
+    # Prefer explicit labels from tags
+    if "T-gate" in gate.tags:
+        return "T"
+    if "clifford" in gate.tags:
+        return "C"
+    # Fallback to gate kind
+    return gate.kind[:1].upper() if gate.kind else "U"
 
 
 def _collect_gates_by_layer(spec: CircuitSpec) -> dict[int, list[GateDraw]]:
     if not spec.gates:
         raise ValueError(
             "CircuitSpec.gates is empty. Visualizer requires a *materialized* circuit. "
-            "Call your Family.gates(spec) and set spec.gates before plotting."
+            "Call your Family.gates(spec) and set spec.gates before plotting.",
         )
 
     by_layer: dict[int, list[GateDraw]] = {}
@@ -45,9 +102,9 @@ def _collect_gates_by_layer(spec: CircuitSpec) -> dict[int, list[GateDraw]]:
         if L is None:
             raise ValueError(
                 f"Gate {g.kind} on wires={g.wires} is missing a layer tag (expected 'Lk'). "
-                f"Tags were: {g.tags}"
+                f"Tags were: {g.tags}",
             )
-        by_layer.setdefault(L, []).append(GateDraw(layer=L, kind=g.kind, wires=g.wires))
+        by_layer.setdefault(L, []).append(GateDraw(layer=L, kind=g.kind, wires=g.wires, tags=g.tags))
 
     return by_layer
 
@@ -60,8 +117,7 @@ def plot_circuit_diagram(
     show: bool = True,
     figsize_per_layer: float = 1.2,
 ) -> None:
-    """
-    Draw a circuit diagram: qubit wires vs layers, with gate symbols placed per layer.
+    """Draw a circuit diagram: qubit wires vs layers, with gate symbols placed per layer.
 
     - 1-qubit gates: box with label (e.g. T)
     - 2-qubit gates: vertical connector + two boxes (or a single label at midpoint)
@@ -128,11 +184,13 @@ def plot_circuit_diagram(
             si = allocate_slot(g.wires)
             x = layer + (si - 0.5 * (len(slots) - 1)) * 0.18  # spread within layer
 
+            label = _get_gate_label(g)
+
             if len(g.wires) == 1:
-                draw_1q_gate(x, g.wires[0], g.kind)
+                draw_1q_gate(x, g.wires[0], label)
             elif len(g.wires) == 2:
                 a, b = g.wires
-                draw_2q_gate(x, a, b, g.kind)
+                draw_2q_gate(x, a, b, label)
             else:
                 # if you ever add k-qubit gates, you can generalize later
                 raise NotImplementedError(f"Cannot draw gate with wires={g.wires}")

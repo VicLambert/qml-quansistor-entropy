@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Iterable
 
-from rng.seeds import gate_seed, spawn_seed
+from src.rng.seeds import gate_seed, spawn_seed
 
 from ..spec import CircuitSpec, GateSpec
 from .pattern.brickwork import brickwork_pattern

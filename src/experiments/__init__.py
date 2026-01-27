@@ -5,17 +5,11 @@ and visualizing results from different backends.
 """
 
 from src.experiments.visualizer import (
-    CliffordCircuitVisualizer,
-    QuimbCircuitVisualizer,
-    demo_pennylane_clifford,
-    demo_quimb_clifford_dense,
-    demo_quimb_clifford_mps,
+    plot_circuit_diagram,
+    plot_state_probabilities_dense,
 )
 
 __all__ = [
-    "CliffordCircuitVisualizer",
-    "QuimbCircuitVisualizer",
-    "demo_pennylane_clifford",
-    "demo_quimb_clifford_dense",
-    "demo_quimb_clifford_mps",
+    "plot_circuit_diagram",
+    "plot_state_probabilities_dense",
 ]

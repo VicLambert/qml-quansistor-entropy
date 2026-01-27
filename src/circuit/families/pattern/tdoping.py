@@ -25,13 +25,15 @@ class TdopingRules:
         if n_qubits < 1:
             raise ValueError("Number of qubits must be >= 1.")
 
-        if n_layers < 1 or self.count <= 0:
+        if n_layers < 2 or self.count <= 0:
             return set()
 
         if self.per_layer < 1:
             raise ValueError("per_layer must be >= 1.")
 
-        max_tgates = n_layers * min(self.per_layer, n_qubits)
+        # Exclude the last layer from T-gate placement
+        available_layers = n_layers - 1
+        max_tgates = available_layers * min(self.per_layer, n_qubits)
         if self.count > max_tgates:
             raise ValueError(f"Requested T-gates ({self.count}) exceed maximum possible ({max_tgates}).")
 
@@ -94,8 +96,10 @@ class TdopingRules:
         remaining = self.count
         t_gate_per_layer = np.zeros(n_layers, dtype=int)
 
-        n_distinct = min(remaining, n_layers)
-        chosen_layers = rng.choice(n_layers, size=n_distinct, replace=False)
+        # Only choose from layers excluding the last one
+        available_layers = n_layers - 1
+        n_distinct = min(remaining, available_layers)
+        chosen_layers = rng.choice(available_layers, size=n_distinct, replace=False)
 
         t_gate_per_layer[chosen_layers] += 1
         remaining -= n_distinct

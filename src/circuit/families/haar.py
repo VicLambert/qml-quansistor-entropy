@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from rng.seeds import gate_seed
+from src.rng.seeds import gate_seed
 
 from ..spec import CircuitSpec, GateSpec
 from .pattern.brickwork import brickwork_pattern

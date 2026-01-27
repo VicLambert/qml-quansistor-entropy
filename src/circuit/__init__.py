@@ -1,4 +1,4 @@
-from circuit import families, spec
+from src.circuit import families, spec
 
 __all__ = [
     "families",

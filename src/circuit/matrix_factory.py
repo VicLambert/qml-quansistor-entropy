@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from circuit.spec import GateSpec
-from circuit.families.gates import haar_unitary_gate, random_quansistor_gate, clifford_recipe_unitary
+from src.circuit.spec import GateSpec
+from src.circuit.families.gates import haar_unitary_gate, random_quansistor_gate, clifford_recipe_unitary
 
 def _T_matrix() -> np.ndarray:
     return np.array([[1, 0], [0, np.exp(1j * np.pi / 4)]], dtype=complex)

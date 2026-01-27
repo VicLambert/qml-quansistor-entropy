@@ -1,113 +1,147 @@
-"""Example script demonstrating the visualization module.
 
-This script shows how to use the CliffordCircuitVisualizer and QuimbCircuitVisualizer
-to create, simulate, and visualize Clifford quantum circuits.
+"""
+Example script demonstrating circuit visualization with real backends.
 """
 
-from src.experiments import (
-    CliffordCircuitVisualizer,
-    QuimbCircuitVisualizer,
+from pathlib import Path
+
+from src.circuit.spec import CircuitSpec
+from src.circuit.families.clifford import CliffordBrickwork
+from src.backend.pennylane_backend import PennylaneBackend
+from src.backend.quimb_backend import QuimbBackend
+
+from src.circuit.families.pattern.tdoping import TdopingRules
+
+from src.experiments.visualizer import (
+    plot_circuit_diagram,
+    plot_state_probabilities_dense,
+    plot_pennylane_circuit,
 )
 
 
+OUT = Path("example_outputs")
+OUT.mkdir(exist_ok=True)
+from dataclasses import replace
+
+def materialize_spec(spec: CircuitSpec, family) -> CircuitSpec:
+    return replace(spec, gates=tuple(family.gates(spec)))
+
 def example_pennylane():
-    """Example 1: Visualize a Clifford circuit with PennyLane backend."""
-    print("Example 1: PennyLane Clifford Circuit Visualization")
+    print("Example 1: PennyLane Clifford Circuit")
     print("-" * 50)
 
-    # Create visualizer with 4 qubits, 3 layers, 10% T-gate doping
-    visualizer = CliffordCircuitVisualizer(
-        n_qubits=4,
-        n_layers=3,
-        global_seed=42,
-        tdoping=0.1,
+    family = CliffordBrickwork(tdoping=TdopingRules(
+        count=48,
+        placement="center_pair",
+        per_layer=2,
+    ))
+
+    spec = family.make_spec(
+        n_qubits=10,
+        n_layers=25,
+        d=2,
+        seed=42,
     )
+    spec = materialize_spec(spec, family)
+    # IMPORTANT: materialize gates
+    # spec.gates = list(family.gates(spec))
 
-    # Create the circuit specification
-    visualizer.create_circuit()
+    backend = PennylaneBackend()
+    # state = backend.simulate(spec)
 
-    # Simulate using PennyLane backend
-    visualizer.simulate()
+    plot_pennylane_circuit(
+        spec,
+        save_path=OUT / "pennylane_circuit.png",
+    )
+    # plot_circuit_diagram(
+    #     spec,
+    #     title="PennyLane Clifford Circuit",
+    #     save_path=OUT / "pennylane_circuit.png",
+    # )
 
-    # Plot circuit structure (gate layers and connectivity)
-    print("\nGenerating circuit structure plot...")
-    visualizer.plot_circuit_structure(save_path="pennylane_circuit.png")
+    # plot_state_probabilities_dense(
+    #     state,
+    #     top_k=10,
+    #     save_path=OUT / "pennylane_state.png",
+    # )
 
-    # Plot state probabilities (top 10 basis states)
-    print("Generating state probability plot...")
-    visualizer.plot_state_probabilities(top_k=10, save_path="pennylane_state.png")
-
-    print("\nDone! Plots saved to pennylane_circuit.png and pennylane_state.png")
+    print("Saved PennyLane plots.\n")
 
 
 def example_quimb_dense():
-    """Example 2: Visualize a Clifford circuit with Quimb backend (dense)."""
-    print("\n\nExample 2: Quimb Clifford Circuit Visualization (Dense)")
+    print("Example 2: Quimb Clifford Circuit (Dense)")
     print("-" * 50)
 
-    # Create visualizer with dense state representation
-    visualizer = QuimbCircuitVisualizer(
-        n_qubits=5,
-        n_layers=3,
-        global_seed=123,
-        tdoping=0.15,
-        state_type="dense",
+    family = CliffordBrickwork(tdoping=TdopingRules(
+        count=4,
+        placement="center_pair",
+        per_layer=2,
+    ))
+
+    spec = family.make_spec(
+        n_qubits=4,
+        n_layers=6,
+        d=2,
+        seed=42,
     )
 
-    # Create and simulate
-    visualizer.create_circuit()
-    visualizer.simulate()
+    spec = materialize_spec(spec, family)
 
-    # Generate plots
-    print("\nGenerating circuit structure plot...")
-    visualizer.plot_circuit_structure(save_path="quimb_dense_circuit.png")
+    backend = QuimbBackend()
+    state = backend.simulate(spec, state_type="dense")
 
-    print("Generating state probability plot...")
-    visualizer.plot_state_probabilities(top_k=10, save_path="quimb_dense_state.png")
+    plot_circuit_diagram(
+        spec,
+        title="Quimb Clifford Circuit (Dense)",
+        save_path=OUT / "quimb_dense_circuit.png",
+    )
 
-    print("\nDone! Plots saved to quimb_dense_circuit.png and quimb_dense_state.png")
+    plot_state_probabilities_dense(
+        state,
+        top_k=10,
+        save_path=OUT / "quimb_dense_state.png",
+    )
+
+    print("Saved Quimb dense plots.\n")
 
 
 def example_quimb_mps():
-    """Example 3: Visualize a Clifford circuit with Quimb backend (MPS)."""
-    print("\n\nExample 3: Quimb Clifford Circuit Visualization (MPS)")
+    print("Example 3: Quimb Clifford Circuit (MPS)")
     print("-" * 50)
 
-    # Create visualizer with MPS (matrix product state) representation
-    visualizer = QuimbCircuitVisualizer(
-        n_qubits=8,  # Larger system for MPS benefit
+    family = CliffordBrickwork(tdoping=0.2)
+
+    spec = family.make_spec(
+        n_qubits=8,
         n_layers=4,
-        global_seed=456,
-        tdoping=0.2,
-        state_type="mps",
-        max_bond=64,  # Limit bond dimension for efficiency
+        d=2,
+        seed=456,
     )
 
-    # Create and simulate
-    visualizer.create_circuit()
-    visualizer.simulate()
+    spec.gates = list(family.gates(spec))
 
-    # Generate plots
-    print("\nGenerating circuit structure plot...")
-    visualizer.plot_circuit_structure(save_path="quimb_mps_circuit.png")
+    backend = QuimbBackend()
+    state = backend.simulate(
+        spec,
+        state_type="mps",
+        max_bond=64,
+    )
 
-    print("Generating MPS state information plot...")
-    visualizer.plot_state_probabilities(save_path="quimb_mps_state.png")
+    plot_circuit_diagram(
+        spec,
+        title="Quimb Clifford Circuit (MPS)",
+        save_path=OUT / "quimb_mps_circuit.png",
+    )
 
-    print("\nDone! Plots saved to quimb_mps_circuit.png and quimb_mps_state.png")
+    # Visualization module works on DenseState,
+    # so explicitly convert
+    plot_state_probabilities_dense(
+        state.mps.to_dense(),
+        top_k=10,
+        save_path=OUT / "quimb_mps_state.png",
+    )
 
-
-def example_quick_check():
-    """Quick example: Use visualize_all() for a complete workflow."""
-    print("\n\nExample 4: Quick Check with visualize_all()")
-    print("-" * 50)
-
-    visualizer = CliffordCircuitVisualizer(n_qubits=4, n_layers=2, global_seed=789)
-
-    # This method creates circuit, simulates, and generates all plots at once
-    visualizer.visualize_all(output_dir="quick_check_output")
-
-    print("\nDone! All plots saved to quick_check_output/ directory")
+    print("Saved Quimb MPS plots.\n")
 
 
 if __name__ == "__main__":
@@ -115,13 +149,10 @@ if __name__ == "__main__":
     print("Quantum Circuit Visualization Examples")
     print("=" * 60)
 
-    # Uncomment the example(s) you want to run:
-
     example_pennylane()
     # example_quimb_dense()
     # example_quimb_mps()
-    # example_quick_check()
 
-    print("\n" + "=" * 60)
+    print("=" * 60)
     print("All examples completed!")
     print("=" * 60)
