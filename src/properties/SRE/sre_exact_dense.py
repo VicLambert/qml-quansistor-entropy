@@ -52,9 +52,15 @@ def fast_kron(mats, vec):
 
 
 def pauli_expval_fast_kron(state, label, dim: int | None = None):
-    """Compute the expectation value of a multi-qudit Pauli operator."""
-    # pauli_ops = make_qudit_ops(dim=dim)
-    pauli_ops = qubit_pauli_ops()
+    """Compute the expectation value of a multi-qudit Pauli/Weyl operator."""
+    # Use qubit Pauli operators by default or when dim == 2, to preserve
+    # existing behavior. For higher dimensions, use generalized qudit ops.
+    if dim is None or dim == 2:
+        pauli_ops = qubit_pauli_ops()
+    else:
+        pauli_ops_dict = make_qudit_ops(dim=dim)
+        # Convert dict {idx: op} to list ordered by idx for consistent indexing
+        pauli_ops = [pauli_ops_dict[i] for i in range(dim * dim)]
     mats = [pauli_ops[int(idx)] for idx in label]
     v = fast_kron(mats, state)
     return np.vdot(state, v)

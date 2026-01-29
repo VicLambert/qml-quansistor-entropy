@@ -1,6 +1,6 @@
 
 import logging
-
+import logging.handlers
 
 def configure_logger(console_level, file_level, path="qml-quansistor-entropy/logs/app.log"):
     logger = logging.getLogger()

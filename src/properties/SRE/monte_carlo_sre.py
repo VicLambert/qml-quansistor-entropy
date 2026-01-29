@@ -13,7 +13,7 @@ from .sre_exact_dense import pauli_expval_fast_kron
 if TYPE_CHECKING:
     from states.types import DenseState
 
-def compute(state: DenseState, *, seed:int, n_samples: int = 20000, batch_size: int = 500) -> PropertyResult:
+def compute(state: DenseState, *, seed: int, n_samples: int = 20000, batch_size: int = 500) -> PropertyResult:
     n = state.n_qubits
     psi = np.asarray(state.vector, dtype=complex).reshape(-1)
 

@@ -70,7 +70,7 @@ def W_from_mps(B: np.ndarray):
         W[:, id, id, :] = B[:, id, :]
     return W
 
-def apply_W(psi_mps, W, site: int):
+def apply_W(psi_mps: MPSState, W: np.ndarray, site: int) -> MPSState:
     """Apply W tensor to MPS state at specified site.
 
     Args:
@@ -103,4 +103,4 @@ def compute(state: MPSState, params: ReplicaMPSParams) -> PropertyResult:
         PropertyResult: The computed SRE property result.
     """
     #TODO Implement Replica MPS based method?
-    return PropertyResult(name="mps", value=0.0, meta = {})
+    return PropertyResult(name="mps", value=0.0, meta={})

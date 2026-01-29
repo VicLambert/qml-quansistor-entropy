@@ -1,5 +1,5 @@
 
-from io import cache, logging, serialize
+from . import cache, logging, serialize
 
 __all__ =[
     "cache",
