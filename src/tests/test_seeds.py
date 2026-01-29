@@ -3,15 +3,8 @@
 import numpy as np
 import pytest
 
-from rng.seeds import (
-    SeedSchedule,
-    _encode_str,
-    _normalize_wires,
-    _u64_to_bytes,
-    gate_seed,
-    rng_from_gate,
-    spawn_seed,
-)
+from rng.seeds import (SeedSchedule, _encode_str, _normalize_wires,
+                       _u64_to_bytes, gate_seed, rng_from_gate, spawn_seed)
 
 
 class TestU64ToBytes:

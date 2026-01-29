@@ -2,12 +2,8 @@
 
 import numpy as np
 
-from properties.SRE.sre_exact_dense import (
-    compute,
-    fast_kron,
-    make_qudit_ops,
-    pauli_expval_fast_kron,
-)
+from properties.SRE.sre_exact_dense import (compute, fast_kron, make_qudit_ops,
+                                            pauli_expval_fast_kron)
 from states.types import DenseState
 
 

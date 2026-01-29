@@ -5,7 +5,7 @@ with configurable brickwork patterns and optional T-gate doping.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Iterable
 
 from src.rng.seeds import gate_seed, spawn_seed
@@ -58,7 +58,7 @@ class CliffordBrickwork:
         """
         params = dict(kwargs)
         params["tdoping"] = None if self.tdoping is None else self.tdoping
-        return CircuitSpec(
+        spec = CircuitSpec(
             n_qubits=n_qubits,
             n_layers=n_layers,
             d=d,
@@ -68,6 +68,7 @@ class CliffordBrickwork:
             pattern=pattern,
             params=params,
         )
+        return replace(spec, gates=tuple(self.gates(spec)))
 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         tdoping = spec.params.get("tdoping", None)

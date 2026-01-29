@@ -3,7 +3,7 @@
 This package provides circuit families and specifications for quantum computing.
 """
 
-from src.circuit import families, spec
+from circuit import families, spec
 
 __all__ = [
     "families",

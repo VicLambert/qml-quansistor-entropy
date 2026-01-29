@@ -4,10 +4,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
-
 if TYPE_CHECKING:
     import numpy as np
-
     from quimb.tensor.tensor_arbgeom import tensor_network_apply_op_vec
 
     from properties.results import PropertyResult
@@ -57,7 +55,7 @@ def pauli_mps_site(A: np.ndarray, pauli_op: list[tuple[int, int]]) -> np.ndarray
     return B_i
 
 
-def W_from_mps(B: np.ndarray) -> np.ndarray:
+def W_from_mps(B: np.ndarray):
     """Construct the W tensor from the MPS tensor B.
 
     Args:
@@ -72,7 +70,7 @@ def W_from_mps(B: np.ndarray) -> np.ndarray:
         W[:, id, id, :] = B[:, id, :]
     return W
 
-def apply_W(psi_mps, W: np.ndarray, site: int):
+def apply_W(psi_mps, W, site: int):
     """Apply W tensor to MPS state at specified site.
 
     Args:
@@ -90,7 +88,7 @@ def apply_W(psi_mps, W: np.ndarray, site: int):
             x=psi_mps,
             max_bond=psi_mps.max_bond,
             contract=False,
-            compress=False
+            compress=False,
         )
 
 
@@ -100,8 +98,9 @@ def compute(state: MPSState, params: ReplicaMPSParams) -> PropertyResult:
     Args:
         state: The MPS quantum state.
         params: Parameters for the replica MPS computation.
-    
+
     Returns:
         PropertyResult: The computed SRE property result.
     """
-
+    #TODO Implement Replica MPS based method?
+    return PropertyResult(name="mps", value=0.0, meta = {})

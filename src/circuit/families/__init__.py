@@ -3,12 +3,15 @@
 This package provides different families of quantum circuits including
 Haar random, Clifford, and Quansistor brickwork patterns.
 """
-from src.circuit.families.clifford import CliffordBrickwork
-from src.circuit.families.haar import HaarBrickwork
-from src.circuit.families.quansistor import QuansistorBrickwork
+from .clifford import CliffordBrickwork
+from .haar import HaarBrickwork
+from .pattern.tdoping import TdopingRules
+from .quansistor import QuansistorBrickwork
 
-FAMILY_REGISTRY = {
-    "haar": HaarBrickwork(),
-    "clifford": CliffordBrickwork(),
-    "quansistor": QuansistorBrickwork(),
-}
+__all__ = [
+    "CliffordBrickwork",
+    "HaarBrickwork",
+    "QuansistorBrickwork",
+    "TdopingRules",
+]
+

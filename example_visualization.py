@@ -1,29 +1,22 @@
-
-"""
-Example script demonstrating circuit visualization with real backends.
-"""
+"""Example script demonstrating circuit visualization with real backends."""
 
 from pathlib import Path
 
-from src.circuit.spec import CircuitSpec
-from src.circuit.families.clifford import CliffordBrickwork
-from src.circuit.families.haar import HaarBrickwork
-from src.circuit.families.quansistor import QuansistorBrickwork
 from src.backend.pennylane_backend import PennylaneBackend
 from src.backend.quimb_backend import QuimbBackend
-
+from src.circuit.families.clifford import CliffordBrickwork
+from src.circuit.families.haar import HaarBrickwork
 from src.circuit.families.pattern.tdoping import TdopingRules
-
-from src.experiments.visualizer import (
-    plot_circuit_diagram,
-    plot_state_probabilities_dense,
-    plot_pennylane_circuit,
-)
-
+from src.circuit.families.quansistor import QuansistorBrickwork
+from src.circuit.spec import CircuitSpec
+from src.experiments.visualizer import (plot_circuit_diagram,
+                                        plot_pennylane_circuit,
+                                        plot_state_probabilities_dense)
 
 OUT = Path("circuit_outputs")
 OUT.mkdir(exist_ok=True)
 from dataclasses import replace
+
 
 def materialize_spec(spec: CircuitSpec, family) -> CircuitSpec:
     return replace(spec, gates=tuple(family.gates(spec)))

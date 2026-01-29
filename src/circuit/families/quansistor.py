@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Iterable, Set, Tuple
 
 from src.rng.seeds import gate_seed
+
 from ..spec import CircuitSpec, GateSpec
 
 
@@ -58,7 +59,7 @@ class QuansistorBrickwork:
         pattern: str = "brickwork",
         **kwargs: Any,
     ) -> CircuitSpec:
-        return CircuitSpec(
+        spec = CircuitSpec(
             n_qubits=n_qubits,
             n_layers=n_layers,
             d=d,
@@ -68,6 +69,7 @@ class QuansistorBrickwork:
             pattern=pattern,
             params={},
         )
+        return replace(spec, gates=tuple(self.gates(spec)))
 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         for layer in range(spec.n_layers):
@@ -111,7 +113,7 @@ class QuansistorBrickwork:
                         d=spec.d,
                         seed=s,
                         tags=("layer", f"L{layer}", "block", f"B{block_idx}", "step", f"S{step_idx}"),
-                        meta={"block": (q0, q1, q2, q3), "step": step_idx},
+                        params=(("block", (q0, q1, q2, q3)), ("step", step_idx)),
                     )
 
             # ---- leftover nearest-neighbor pairs
@@ -132,5 +134,5 @@ class QuansistorBrickwork:
                         d=spec.d,
                         seed=s,
                         tags=("layer", f"L{layer}", "leftover", f"p{j}"),
-                        meta={"leftover": True},
+                        params=("leftover", True),
                     )

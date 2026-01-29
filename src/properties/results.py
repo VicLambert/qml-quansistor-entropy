@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any, Union
 
 import numpy as np
 
-Value = Union[float, np.ndarray]
+Value = Union[float, np.ndarray, np.floating]
 
 @dataclass(frozen=True)
 class PropertyResult:

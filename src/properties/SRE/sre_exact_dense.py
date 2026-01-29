@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import itertools
-
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
@@ -12,6 +11,13 @@ from properties.results import PropertyResult
 if TYPE_CHECKING:
     from states.types import DenseState
 
+
+def qubit_pauli_ops():
+    I = np.array([[1, 0], [0, 1]], dtype=complex)
+    X = np.array([[0, 1], [1, 0]], dtype=complex)
+    Y = np.array([[0, -1j], [1j, 0]], dtype=complex)
+    Z = np.array([[1, 0], [0, -1]], dtype=complex)
+    return [I, X, Y, Z]
 
 def make_qudit_ops(dim):
     """Return {idx: W_{a,b}} where W_{a,b} = Z^a X^b, idx = a*dim + b."""
@@ -45,9 +51,10 @@ def fast_kron(mats, vec):
     return y.reshape(-1)
 
 
-def pauli_expval_fast_kron(state, label, dim):
+def pauli_expval_fast_kron(state, label, dim: int | None = None):
     """Compute the expectation value of a multi-qudit Pauli operator."""
-    pauli_ops = make_qudit_ops(dim=dim)
+    # pauli_ops = make_qudit_ops(dim=dim)
+    pauli_ops = qubit_pauli_ops()
     mats = [pauli_ops[int(idx)] for idx in label]
     v = fast_kron(mats, state)
     return np.vdot(state, v)
@@ -63,12 +70,20 @@ def compute(state: DenseState, **kwargs: Any) -> PropertyResult:
         PropertyResult: The computed SRE property result.
     """
     n_qubits = state.n_qubits
+    ops_1 = qubit_pauli_ops()
+    psi = np.asarray(state.vector, dtype=complex).reshape(-1)
+
     pauli_list = list(range(state.d ** 2))  # All single-qudit Pauli operators
 
     res = 0.0
+    norm_factor = state.d ** (n_qubits / 2)
     for label in itertools.product(pauli_list, repeat=n_qubits):
-        expval = pauli_expval_fast_kron(state.vector, label, state.d)
-        res += np.abs(expval) ** 4
+        mats = [ops_1[idx] for idx in label]
+        v = fast_kron(mats, psi)
+        expval = np.vdot(psi, v) / norm_factor
+        res += (np.abs(expval) ** 4)
+        # expval = pauli_expval_fast_kron(state.vector, label, state.d)
+        # res += np.abs(expval) ** 4
 
     phys_dim = state.d ** n_qubits
     sre = -np.log2(res * phys_dim)

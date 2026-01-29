@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from dataclasses import dataclass, replace
+from typing import TYPE_CHECKING, Any
 
 from src.rng.seeds import gate_seed
 
@@ -35,7 +35,7 @@ class HaarBrickwork:
         pattern: str = "brickwork",
         **kwargs: Any,
     ) -> CircuitSpec:
-        return CircuitSpec(
+        spec = CircuitSpec(
             n_qubits=n_qubits,
             n_layers=n_layers,
             d=d,
@@ -45,6 +45,7 @@ class HaarBrickwork:
             pattern=pattern,
             params={},
         )
+        return replace(spec, gates=tuple(self.gates(spec)))
 
     def gates(self, spec: CircuitSpec) -> Generator[GateSpec]:
         for layer in range(spec.n_layers):

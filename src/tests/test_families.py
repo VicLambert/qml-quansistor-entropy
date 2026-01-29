@@ -3,11 +3,8 @@
 from circuit.families import FAMILY_REGISTRY
 from circuit.families.clifford import CliffordBrickwork
 from circuit.families.haar import HaarBrickwork
-from circuit.families.quansistor import (
-    QuansistorBrickwork,
-    leftover_pairs,
-    quansistor_block,
-)
+from circuit.families.quansistor import (QuansistorBrickwork, leftover_pairs,
+                                         quansistor_block)
 from circuit.spec import CircuitSpec, GateSpec
 
 

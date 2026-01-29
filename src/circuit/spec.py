@@ -6,7 +6,9 @@ including gate specifications and circuit configurations.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import hashlib
+import json
+from dataclasses import asdict, dataclass, field
 from typing import Any
 
 Wires = tuple[int, ...]
@@ -35,7 +37,7 @@ class GateSpec:
     d: int
     seed: int | None = None
     tags: tuple[str, ...] = ()
-    meta: dict[str, Any] = field(default_factory=dict)
+    params: tuple[Any, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -72,3 +74,29 @@ class CircuitSpec:
     global_seed: int
     gates: tuple[GateSpec, ...] = ()
     params: dict[str, Any] = field(default_factory=dict)
+
+    def spec_id(self) -> str:
+        """Deterministic identifier for this circuit spec."""
+        payload = {
+            "n_qubits": self.n_qubits,
+            "n_layers": self.n_layers,
+            "d": self.d,
+            "family": self.family,
+            "connectivity": self.connectivity,
+            "pattern": self.pattern,
+            "global_seed": self.global_seed,
+            "params": self.params,
+            "gates": [
+                {
+                    "kind": g.kind,
+                    "wires": g.wires,
+                    "params": g.params,
+                    "seed": g.seed,
+                    "tags": g.tags,
+                }
+                for g in self.gates
+            ],
+        }
+
+        glob = json.dumps(payload, sort_keys=True)
+        return hashlib.sha256(glob.encode()).hexdigest()[:16]

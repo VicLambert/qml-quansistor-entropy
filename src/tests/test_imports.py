@@ -1,5 +1,7 @@
 import pytest
+
 from rng.seeds import gate_seed
+
 
 def test_registry_smoke():
     from circuit.families import FAMILY_REGISTRY

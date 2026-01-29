@@ -27,7 +27,10 @@ def compute(state: DenseState, subsysA_size: int | None = None) -> PropertyResul
     ket = ket / max(np.linalg.norm(ket), 1e-16)
     rho_A = ket * ket
     rho_A = rho_A[rho_A > 0]
-    S = float(-np.sum(rho_A * np.log2(rho_A)))
+    rho_A = rho_A / rho_A.sum()
+
+    trace = float(np.sum(rho_A ** 2))
+    S = float(-(np.log(trace) / np.log(2)))
 
     details = {
         "n_qubits": n_qubits,

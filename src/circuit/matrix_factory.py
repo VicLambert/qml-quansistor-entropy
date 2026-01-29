@@ -10,11 +10,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from src.circuit.families.gates import (
-    clifford_recipe_unitary,
-    haar_unitary_gate,
-    random_quansistor_gate,
-)
+from src.circuit.families.gates import (clifford_recipe_unitary,
+                                        haar_unitary_gate,
+                                        random_quansistor_gate)
 from src.circuit.spec import GateSpec
 
 
