@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 _global_client: Client | None = None
 
 
-def get_client() -> Client:
+def get_client() -> Client | None:
     return _global_client
 
 
-def set_global_client(client: Client) -> None:
+def set_global_client(client: Client | None) -> None:
     global _global_client
     _global_client = client
 
@@ -174,6 +174,3 @@ def dask_client(
         if cluster is not None:
             cluster.close()
         logger.info("Dask client and cluster closed.")
-
-
-

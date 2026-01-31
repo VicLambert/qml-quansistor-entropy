@@ -1,17 +1,28 @@
+"""Module for generating experiment configurations and aggregating results.
+
+This module provides utilities for sweeping over parameter spaces, generating experiment jobs,
+and aggregating results for quantum circuit experiments.
+"""
 
 from __future__ import annotations
 
 import hashlib
 import json
+
+import dataclasses
 from dataclasses import dataclass, replace
 from itertools import product
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 import numpy as np
 
+from src.experiments.runner_config import BackendConfig, ExperimentConfig
+from src.properties.request import PropertyRequest
+from utils.serialize import _to_jsonable
+
 
 @dataclass(frozen=True)
-class ExperimentConfig:
+class JobConfig:
     circuit_family: str
     n_qubits: int
     n_layers: int
@@ -30,18 +41,34 @@ class ExperimentConfig:
 
     tags: dict[str, Any]
 
+
 def _hash_job(obj: Any, bits: int = 32) -> int:
-    s = json.dumps(obj, sort_keys=True, separators=(",", ":"))
+    jsonable_obj = _to_jsonable(obj)
+    s = json.dumps(jsonable_obj, sort_keys=True, separators=(",", ":"))
     h = hashlib.blake2b(s.encode("utf-8"), digest_size=8).digest()
-    x = int.from_bytes(h,"little")
+    x = int.from_bytes(h, "little")
     if bits == 32:
         return x & 0xFFFFFFFF
     return x
 
-def apply_nested_sweep_keys(cfg: ExperimentConfig, cond: Mapping[str, Any]) -> ExperimentConfig:
-    backend_params = dict(cfg.backend_params)
-    family_params = dict(cfg.family_params)
-    properties = [dict(p) for p in cfg.properties]
+def derive_run_seed(base_seed: int, condition: Mapping[str, Any], replicate: int) -> int:
+    payload = {"base_seed": base_seed, "condition": dict(condition), "replicate": replicate}
+    return _hash_job(payload, bits=32)
+
+
+def generate_cond(axes: Mapping[str, Sequence[Any]]) -> list[dict[str, Any]]:
+    keys = list(axes.keys())
+    values = [axes[k] for k in keys]
+    return [dict(zip(keys, prod)) for prod in product(*values)]
+
+
+def apply_nested_sweep_keys(
+    job: JobConfig,
+    cond: Mapping[str, Any],
+) -> JobConfig:
+    backend_params = dict(job.backend_params)
+    family_params = dict(job.family_params)
+    properties = [dict(p) for p in job.properties]
 
     for k, v in cond.items():
         if k.startswith("backend."):
@@ -55,62 +82,102 @@ def apply_nested_sweep_keys(cfg: ExperimentConfig, cond: Mapping[str, Any]) -> E
                 if p.get("name") == prop_name:
                     p.setdefault("params", {})[prop_key] = v
 
-    return replace(cfg, backend_params=backend_params, family_params=family_params, properties=properties)
+    return replace(
+        job,
+        backend_params=backend_params,
+        family_params=family_params,
+        properties=properties,
+    )
 
-def derive_run_seed(base_seed: int, condition: Mapping[str, Any], replicate: int) -> int:
-    payload = {"base_seed": base_seed, "condition": dict(condition), "replicate": replicate}
-    return _hash_job(payload, bits=32)
-
-def generate_cond(axes: Mapping[str, Sequence[Any]]) -> list[dict[str, Any]]:
-    keys = list(axes.keys())
-    values = [axes[k] for k in keys]
-    conds = []
-    for prod in product(*values):
-        conds.append({k: v for k, v in zip(keys, prod)})
-    return conds
 
 def generate_jobs(
-    base_cfg: ExperimentConfig,
+    base_job: JobConfig,
     axes: Mapping[str, Sequence[Any]],
     repeats: int,
     *,
     seed_key: str = "base_seed",
-) -> list[ExperimentConfig]:
+) -> list[JobConfig]:
     conditions = generate_cond(axes)
-    jobs : list[ExperimentConfig] = []
+    jobs: list[JobConfig] = []
 
     for cond in conditions:
         cond_fingerprint = {
-            "circuit_family": base_cfg.circuit_family,
-            "d": base_cfg.d,
+            "circuit_family": base_job.circuit_family,
+            "d": base_job.d,
             **cond,
-            "family_params": base_cfg.family_params,
-            "backend_name": base_cfg.backend,
-            "backend_params": base_cfg.backend_params,
-            "properties": base_cfg.properties,
+            "family_params": base_job.family_params,
+            "backend_name": base_job.backend,
+            "backend_params": base_job.backend_params,
+            "properties": base_job.properties,
         }
         for r in range(repeats):
-            run_seed = derive_run_seed(base_cfg.base_seed, cond_fingerprint, r)
-            cfg = replace(
-                base_cfg,
+            run_seed = derive_run_seed(base_job.base_seed, cond_fingerprint, r)
+            job = replace(
+                base_job,
                 replicate=r,
                 run_seed=run_seed,
-                tags={**(base_cfg.tags or {}), **cond, "replicate": r},
+                tags={**(base_job.tags or {}), **cond, "replicate": r},
             )
 
-            copy_dict = cfg.__dict__.copy()
+            copy_dict = job.__dict__.copy()
             for k, v in cond.items():
                 if k in copy_dict:
                     copy_dict[k] = v
                 else:
                     pass
 
-            cfg = ExperimentConfig(**copy_dict)
+            cfg = JobConfig(**copy_dict)
             cfg = apply_nested_sweep_keys(cfg, cond)
 
             jobs.append(cfg)
 
     return jobs
+
+def compile_job(
+    job: JobConfig,
+    *,
+    family_registry: dict[str, Any],
+) -> ExperimentConfig:
+    if job.circuit_family not in family_registry:
+        msg = (
+            f"Unknown circuit family '{job.circuit_family}'. "
+            f"Available: {list(family_registry.keys())}"
+        )
+    family_cls = family_registry[job.circuit_family]
+    family_cls = family_registry[job.circuit_family](job.family_params or {})
+    spec = family_cls.make_spec(
+        n_qubits=job.n_qubits,
+        n_layers=job.n_layers,
+        d=job.d,
+        seed=job.run_seed,
+        **job.family_params,
+    )
+    backend_cfg = BackendConfig(
+        name=job.backend,
+        representation=job.backend_params.get("representation", "dense"),
+        params={k: v for k, v in (job.backend_params or {}).items() if k != "representation"},
+    )
+
+    props_reqs: list[PropertyRequest] = [
+        PropertyRequest(
+            name=p["name"],
+            method=p.get("method", "default"),
+            params=p.get("params", {}),
+        )
+        for p in job.properties
+    ]
+
+    meta= dict(job.tags or {})
+    meta.update({"run_seed": job.run_seed, "replicate": job.replicate})
+
+    return ExperimentConfig(
+        spec=spec,
+        backend=backend_cfg,
+        properties=props_reqs,
+        meta_data=meta,
+    )
+
+
 
 
 @dataclass(frozen=True)
@@ -120,29 +187,40 @@ class AggregateResults:
     stderr: float
     n: int
 
+
 def aggregate_by_cond(
     job_results: list[dict[str, Any]],
     *,
     group_keys: Sequence[str],
     value_path: tuple[str, ...] = ("results", "SRE", "value"),
 ) -> dict[tuple[Any, ...], AggregateResults]:
-    groups = dict[tuple[Any, ...], list[float]] = {}
+    groups: dict[tuple[Any, ...], list[float]] = {}
 
     for output in job_results:
-        tags = output.get("tags", {})
-        g_key = tuple(tags[k] for k in group_keys)
+        tags = output.get("meta_data") or {}
+        tags = output.get("tags") or output.get("meta_data") or {}
+        g_key_values = [tags.get(k) for k in group_keys]
+        # Skip outputs missing any required grouping tag to avoid None in grouping keys
+        if any(v is None for v in g_key_values):
+            continue
+        g_key = tuple(g_key_values)
 
-        x = output
-        for p in value_path:
-            x = x[p]
-        val = float(x)
+        try:
+            current = output
+            for p in value_path:
+                current = current[p]
+            val = float(current)
+        except Exception:
+            # Skip outputs where the value_path cannot be fully resolved or cast to float
+            continue
 
         groups.setdefault(g_key, []).append(val)
+
     stats: dict[tuple[Any, ...], AggregateResults] = {}
     for k, vals in groups.items():
         arr = np.asarray(vals, dtype=float)
         n = arr.size
-        mean=float(arr.mean())
+        mean = float(arr.mean())
         std = float(arr.std(ddof=1)) if n > 1 else 0.0
         stderr = float(std / np.sqrt(n)) if n > 1 else 0.0
         stats[k] = AggregateResults(mean=mean, std=std, stderr=stderr, n=n)

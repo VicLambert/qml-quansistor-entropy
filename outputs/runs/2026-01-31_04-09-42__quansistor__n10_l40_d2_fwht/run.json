@@ -1,0 +1,22 @@
+{
+  "circuit_family": "quansistor",
+  "backend": "quimb",
+  "axes": {
+    "n_qubits": [
+      6,
+      8,
+      10
+    ]
+  },
+  "repeats": 5,
+  "properties": [
+    {
+      "name": "SRE",
+      "method": "fwht"
+    }
+  ],
+  "base_seed": 33,
+  "created_at": "2026-01-31T04:09:42+00:00",
+  "pid": 49340,
+  "host": "Vics_Laptop"
+}

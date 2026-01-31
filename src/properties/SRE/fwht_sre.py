@@ -41,4 +41,4 @@ def compute(state: DenseState) -> PropertyResult:
     sre = -np.log2(acc/(2**n))
 
     details = {"method":"FWHT", "n_qubits":n}
-    return PropertyResult(name="SRE_FWHT", value=sre, meta=details)
+    return PropertyResult(name="SRE", value=sre, meta=details)

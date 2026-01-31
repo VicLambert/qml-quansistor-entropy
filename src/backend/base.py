@@ -41,6 +41,7 @@ class BaseBackend(ABC):
             The final state after simulation.
         """
         raise NotImplementedError
+
     def _validate_materialized(self, spec: CircuitSpec) -> None:
         if not spec.gates:
             msg = "CircuitSpec.gates is empty. Initialize the circuit first before simulating."

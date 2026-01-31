@@ -8,10 +8,21 @@ from __future__ import annotations
 
 import hashlib
 import json
+
+import dataclasses
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
 Wires = tuple[int, ...]
+
+def _to_jsonable(obj: Any):
+    if dataclasses.is_dataclass(obj):
+        return {k: _to_jsonable(v) for k, v in dataclasses.asdict(obj).items()}
+    if isinstance(obj, dict):
+        return {k: _to_jsonable(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_to_jsonable(v) for v in obj]
+    return obj
 
 @dataclass(frozen=True)
 class GateSpec:
@@ -85,12 +96,12 @@ class CircuitSpec:
             "connectivity": self.connectivity,
             "pattern": self.pattern,
             "global_seed": self.global_seed,
-            "params": self.params,
+            "params": _to_jsonable(self.params),
             "gates": [
                 {
                     "kind": g.kind,
                     "wires": g.wires,
-                    "params": g.params,
+                    "params": _to_jsonable(g.params),
                     "seed": g.seed,
                     "tags": g.tags,
                 }

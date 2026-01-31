@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import itertools
+
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -20,7 +21,7 @@ def compute(state: DenseState, *, seed: int, n_samples: int = 20000, batch_size:
     norm = np.vdot(psi, psi).real
     if not np.isclose(norm, 1.0, atol=1e-10):
         psi = psi / np.sqrt(norm)
-    
+
     rng = np.random.default_rng(seed)
     labels = rng.integers(0, 4, size=(n_samples, n), dtype=np.int64)
 
@@ -44,7 +45,7 @@ def compute(state: DenseState, *, seed: int, n_samples: int = 20000, batch_size:
         se_sre = float(np.sqrt(var_mean_y) / (mean * np.log(2)))
 
     details = {
-        "method": "uniform_pauli_sampling",
+        "method": "sampling",
         "n_qubits": n,
         "d": state.d,
         "n_samples": n_samples,
@@ -53,7 +54,7 @@ def compute(state: DenseState, *, seed: int, n_samples: int = 20000, batch_size:
         "mean_abs_expval4": mean,
         "se_sre_approx": se_sre,
     }
-    return PropertyResult(name="SRE_uniform", value=sre, meta=details)
+    return PropertyResult(name="SRE", value=sre, meta=details)
 
 
 
