@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 
 import dataclasses
 from dataclasses import dataclass, replace
@@ -16,9 +17,12 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
+from circuit.families.pattern.tdoping import TdopingRules
 from src.experiments.runner_config import BackendConfig, ExperimentConfig
 from src.properties.request import PropertyRequest
 from utils.serialize import _to_jsonable
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -99,6 +103,8 @@ def generate_jobs(
 ) -> list[JobConfig]:
     conditions = generate_cond(axes)
     jobs: list[JobConfig] = []
+    fields = set(base_job.__dataclass_fields__.keys())
+
 
     for cond in conditions:
         cond_fingerprint = {
@@ -112,6 +118,7 @@ def generate_jobs(
         }
         for r in range(repeats):
             run_seed = derive_run_seed(base_job.base_seed, cond_fingerprint, r)
+
             job = replace(
                 base_job,
                 replicate=r,
@@ -119,17 +126,26 @@ def generate_jobs(
                 tags={**(base_job.tags or {}), **cond, "replicate": r},
             )
 
-            copy_dict = job.__dict__.copy()
-            for k, v in cond.items():
-                if k in copy_dict:
-                    copy_dict[k] = v
-                else:
-                    pass
+            direct_updates = {k: v for k, v in cond.items() if k in fields}
+            if direct_updates:
+                job = replace(job, **direct_updates)
+            core_tags = {
+                "circuit_family": job.circuit_family,
+                "backend": job.backend,
+                "n_qubits": job.n_qubits,
+                "n_layers": job.n_layers,
+                "d": job.d,
+                "replicate": job.replicate,
+                "run_seed": job.run_seed,
+            }
 
-            cfg = JobConfig(**copy_dict)
-            cfg = apply_nested_sweep_keys(cfg, cond)
+            # cfg = JobConfig(**copy_dict)
+            cfg = apply_nested_sweep_keys(job, cond)
 
-            jobs.append(cfg)
+            tags = {**(base_job.tags or {}), **cond, **core_tags}
+
+            job = replace(job, tags=tags)
+            jobs.append(job)
 
     return jobs
 
@@ -143,29 +159,47 @@ def compile_job(
             f"Unknown circuit family '{job.circuit_family}'. "
             f"Available: {list(family_registry.keys())}"
         )
+    family_params = dict(job.family_params or {})
+
+    if job.circuit_family == "clifford":
+        tcount = int(family_params.pop("tcount", 0))  # remove it so it doesn't get forwarded blindly
+        # keep any explicit tdoping if user already provided one
+        if "tdoping" not in family_params:
+            family_params["tdoping"] = TdopingRules(
+                count=tcount,
+                placement="center_pair",
+                per_layer=2,
+            )
+
     family_cls = family_registry[job.circuit_family]
-    family_cls = family_registry[job.circuit_family](job.family_params or {})
-    spec = family_cls.make_spec(
+    family = family_cls(**family_params) if callable(family_cls) else family_cls
+    spec = family.make_spec(
         n_qubits=job.n_qubits,
         n_layers=job.n_layers,
         d=job.d,
         seed=job.run_seed,
-        **job.family_params,
+        **(family_params or {}),
     )
+
     backend_cfg = BackendConfig(
         name=job.backend,
         representation=job.backend_params.get("representation", "dense"),
         params={k: v for k, v in (job.backend_params or {}).items() if k != "representation"},
     )
 
-    props_reqs: list[PropertyRequest] = [
-        PropertyRequest(
-            name=p["name"],
-            method=p.get("method", "default"),
-            params=p.get("params", {}),
-        )
-        for p in job.properties
-    ]
+    props_reqs: list[PropertyRequest] = []
+    for p in job.properties:
+        params = dict(p.get("params", {}))
+
+        method = (p.get("method", "default") or "default").lower()
+        name = p["name"]
+
+        # Auto-seed stochastic methods
+        if method == "sampling":
+            params.setdefault("seed", job.run_seed)
+            params.setdefault("n_samples", 10000)   # choose your default
+
+        props_reqs.append(PropertyRequest(name=name, method=method, params=params))
 
     meta= dict(job.tags or {})
     meta.update({"run_seed": job.run_seed, "replicate": job.replicate})

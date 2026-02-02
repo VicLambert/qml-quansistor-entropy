@@ -1,0 +1,19 @@
+{
+  "_schema": {
+    "type": "property_result",
+    "version": 1
+  },
+  "value": 6.348059575772901,
+  "error": null,
+  "meta": {
+    "method": "sampling",
+    "n_qubits": 8,
+    "d": 2,
+    "n_samples": 10000,
+    "batch_size": 500,
+    "acc_hat": 3.142560292658016,
+    "mean_abs_expval4": 4.7951664621856935e-05,
+    "se_sre_approx": 0.029485017941627105,
+    "compute_time": 0.8730146884918213
+  }
+}

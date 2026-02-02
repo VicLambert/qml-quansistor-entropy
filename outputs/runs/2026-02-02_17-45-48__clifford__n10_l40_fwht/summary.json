@@ -1,0 +1,8 @@
+{
+  "group_keys": [
+    "circuit_family",
+    "n_qubits",
+    "family_params.tcount"
+  ],
+  "stats": {}
+}

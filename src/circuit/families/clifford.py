@@ -57,7 +57,9 @@ class CliffordBrickwork:
             A circuit specification object with the given parameters.
         """
         params = dict(kwargs)
-        params["tdoping"] = None if self.tdoping is None else self.tdoping
+        tdoping = params.get("tdoping", self.tdoping)
+
+        params["tdoping"] = tdoping
         spec = CircuitSpec(
             n_qubits=n_qubits,
             n_layers=n_layers,
