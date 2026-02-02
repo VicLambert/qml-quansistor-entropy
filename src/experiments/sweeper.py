@@ -78,6 +78,8 @@ def apply_nested_sweep_keys(
         if k.startswith("backend."):
             backend_params[k.split(".", 1)[1]] = v
         elif k.startswith("family."):
+            if job.circuit_family != "clifford":
+                continue
             family_params[k.split(".", 1)[1]] = v
         elif k.startswith("prop."):
             # Example: "prop.sre.chiP_max"
@@ -139,10 +141,11 @@ def generate_jobs(
                 "run_seed": job.run_seed,
             }
 
-            # cfg = JobConfig(**copy_dict)
-            cfg = apply_nested_sweep_keys(job, cond)
+            job = apply_nested_sweep_keys(job, cond)
 
             tags = {**(base_job.tags or {}), **cond, **core_tags}
+            if job.circuit_family != "clifford":
+                tags.pop("family.tcount", None)
 
             job = replace(job, tags=tags)
             jobs.append(job)

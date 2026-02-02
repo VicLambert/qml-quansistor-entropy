@@ -3336,3 +3336,73 @@ NameError: name 'logger' is not defined
 2026-02-02 13:59:10,548 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
 2026-02-02 13:59:33,261 - parallel.client - INFO - Dask client and cluster closed.
 2026-02-02 13:59:33,266 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_18-59-02__clifford__n10_l40_fwht
+2026-02-02 14:15:00,069 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:15:00,093 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:15:08,496 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:15:08,497 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:15:11,868 - __main__ - ERROR - Job failed
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\main.py", line 171, in <module>
+    out = fut.result()
+  File "C:\Users\victo\miniconda3\Lib\site-packages\distributed\client.py", line 406, in result
+    return self.client.sync(self._result, callback_timeout=timeout)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\main.py", line 52, in run_jobs
+    cfg = compile_job(
+      ^^^^^^^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\src\experiments\sweeper.py", line 174, in compile_job
+    family = family_cls(**family_params) if callable(family_cls) else family_cls
+      ^^^^^^^^^^^^^^^^^
+TypeError: HaarBrickwork.__init__() got an unexpected keyword argument 'tcount'
+2026-02-02 14:15:13,169 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:15:13,174 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-15-00__clifford__n10_l40_fwht
+2026-02-02 14:17:47,375 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:17:47,393 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:17:55,540 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:17:55,541 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:19:06,610 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:19:06,617 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-17-47__clifford__n10_l40_fwht
+2026-02-02 14:23:42,517 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:23:42,575 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:23:55,241 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:23:55,243 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:25:48,288 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:25:48,296 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-23-42__clifford__n10_l40_fwht
+2026-02-02 14:26:40,601 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:26:40,636 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:26:49,796 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:26:49,797 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:27:31,617 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:27:31,629 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-26-40__clifford__n10_l40_fwht
+2026-02-02 14:35:12,503 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:35:12,539 - __main__ - INFO - ['haar', 'clifford', 'quansistor']
+2026-02-02 14:35:12,539 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:35:20,373 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:35:20,374 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:36:00,932 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:36:00,945 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-35-12__clifford__n10_l40_fwht
+2026-02-02 14:40:26,219 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:40:26,229 - __main__ - INFO - ['haar', 'clifford', 'quansistor']
+2026-02-02 14:40:26,230 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:40:36,250 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:40:36,252 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:41:30,237 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:41:30,243 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-40-26__clifford__n10_l40_fwht
+2026-02-02 14:42:25,954 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:42:25,970 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:42:33,649 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:42:33,650 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:42:42,225 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:42:42,235 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-42-25__clifford__n10_l40_fwht
+2026-02-02 14:43:46,927 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:43:46,942 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:43:54,674 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:43:54,676 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:44:03,233 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:44:03,238 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-43-46__clifford__n10_l40_fwht
+2026-02-02 14:44:44,107 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 40 layers, d=2.
+2026-02-02 14:44:44,118 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-02 14:44:52,208 - parallel.client - INFO - Dask client created successfully.
+2026-02-02 14:44:52,208 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-02 14:45:01,000 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-02 14:45:01,008 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-02_19-44-44__clifford__n10_l40_fwht

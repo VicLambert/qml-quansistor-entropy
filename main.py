@@ -85,7 +85,7 @@ if __name__ == "__main__":
     d = 2
     n_layers = 40
     seed = 33
-    tcount = 0
+    tcount = 38
     method = "fwht"
     repeat = 10
 
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     axes = {
         "circuit_family": ["haar", "clifford", "quansistor"],
         "n_qubits": list(range(6, n_qubits + 1, 2)),
-        "family.tcount": [0, 20, 38],
+        "family.tcount": [tcount],
     }
 
     run_store.write_run_header(
@@ -146,6 +146,7 @@ if __name__ == "__main__":
     outputs = []
 
     jobs = generate_jobs(experiment, axes, repeats=repeat)
+
     with dask_client(
             mode="local",
             n_workers=4,
@@ -178,11 +179,11 @@ if __name__ == "__main__":
 
     stats = aggregate_by_cond(
         outputs,
-        group_keys=("circuit_family", "n_qubits", "family.tcount"),
+        group_keys=("circuit_family", "n_qubits"),
         value_path=("results", "SRE", "value"),
     )
     summary = {
-        "group_keys": ["circuit_family", "n_qubits", "family.tcount"],
+        "group_keys": ["circuit_family", "n_qubits"],
         "stats": {
             str(k): {"mean": s.mean, "std": s.std, "stderr": s.stderr, "n": s.n}
             for k, s in stats.items()
