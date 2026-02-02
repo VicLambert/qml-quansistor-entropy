@@ -126,6 +126,8 @@ if __name__ == "__main__":
         tags={},
     )
 
+    # Define sweep axes
+    # To vary tcount use only Clifford family
     axes = {
         "circuit_family": ["haar", "clifford", "quansistor"],
         "n_qubits": list(range(6, n_qubits + 1, 2)),
