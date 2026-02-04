@@ -1,0 +1,13 @@
+{
+  "_schema": {
+    "type": "property_result",
+    "version": 1
+  },
+  "value": 3.303661998316386,
+  "error": null,
+  "meta": {
+    "method": "FWHT",
+    "n_qubits": 6,
+    "compute_time": 0.020880460739135742
+  }
+}

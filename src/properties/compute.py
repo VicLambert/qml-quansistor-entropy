@@ -15,7 +15,7 @@ PropertyFn = Callable[..., PropertyResult]
 PROPERTY_REGISTRY: dict[str, dict[str, PropertyFn]] = {
     "SRE": {
         "fwht": sre_fwht,
-        "exact_dense": sre_exact,
+        "exact": sre_exact,
         "sampling": sre_sampled,
         # add others here
     },

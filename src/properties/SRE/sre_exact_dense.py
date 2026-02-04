@@ -94,5 +94,5 @@ def compute(state: DenseState, **kwargs: Any) -> PropertyResult:
     phys_dim = state.d ** n_qubits
     sre = -np.log2(res * phys_dim)
 
-    details={"method":"exact_dense", "n_qubits": n_qubits}
+    details={"method":"exact", "n_qubits": n_qubits}
     return PropertyResult(name="SRE", value=sre, meta=details)

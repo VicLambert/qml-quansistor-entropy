@@ -8,7 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import Any, Iterable
 
-from src.rng.seeds import gate_seed, spawn_seed
+from rng.seeds import gate_seed, spawn_seed
 
 from ..spec import CircuitSpec, GateSpec
 from .pattern.brickwork import brickwork_pattern

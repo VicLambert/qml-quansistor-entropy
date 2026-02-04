@@ -1,0 +1,31 @@
+{
+  "circuit_family": "clifford",
+  "backend": "quimb",
+  "axes": {
+    "circuit_family": [
+      "haar",
+      "clifford",
+      "quansistor"
+    ],
+    "n_qubits": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "family.tcount": [
+      38
+    ]
+  },
+  "repeats": 10,
+  "properties": [
+    {
+      "name": "SRE",
+      "method": "fwht"
+    }
+  ],
+  "base_seed": 33,
+  "created_at": "2026-02-03T19:17:41+00:00",
+  "pid": 48764,
+  "host": "Vics_Laptop"
+}

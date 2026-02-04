@@ -222,8 +222,7 @@ class AggregateResults:
     mean: float
     std: float
     stderr: float
-    n: int
-
+    repeat: int
 
 def aggregate_by_cond(
     job_results: list[dict[str, Any]],
@@ -246,6 +245,7 @@ def aggregate_by_cond(
             current = output
             for p in value_path:
                 current = current[p]
+            assert isinstance(current, float), "Expected numeric value at specified value_path"
             val = float(current)
         except Exception:
             # Skip outputs where the value_path cannot be fully resolved or cast to float
@@ -256,9 +256,9 @@ def aggregate_by_cond(
     stats: dict[tuple[Any, ...], AggregateResults] = {}
     for k, vals in groups.items():
         arr = np.asarray(vals, dtype=float)
-        n = arr.size
+        size = arr.size
         mean = float(arr.mean())
-        std = float(arr.std(ddof=1)) if n > 1 else 0.0
-        stderr = float(std / np.sqrt(n)) if n > 1 else 0.0
-        stats[k] = AggregateResults(mean=mean, std=std, stderr=stderr, n=n)
+        std = float(arr.std(ddof=1)) if size > 1 else 0.0
+        stderr = float(std / np.sqrt(size)) if size > 1 else 0.0
+        stats[k] = AggregateResults(mean=mean, std=std, stderr=stderr, repeat=size)
     return stats

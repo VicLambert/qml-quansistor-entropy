@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Any
 
+import ast
 import matplotlib.pyplot as plt
 import numpy as np
 import pennylane as qml
@@ -12,6 +14,7 @@ from src.circuit.matrix_factory import gate_unitary
 from src.circuit.spec import CircuitSpec
 from src.states.types import DenseState
 
+logger = logging.getLogger(__name__)
 
 def _layer_from_tags(tags: tuple[str, ...]) -> int | None:
     # Expected tags include "L0", "L1", ... OR ("layer","L0",...)
@@ -25,6 +28,7 @@ def _layer_from_tags(tags: tuple[str, ...]) -> int | None:
             if isinstance(nxt, str) and nxt.startswith("L") and nxt[1:].isdigit():
                 return int(nxt[1:])
     return None
+
 
 def plot_pennylane_circuit(
     spec: CircuitSpec,
@@ -73,12 +77,14 @@ def plot_pennylane_circuit(
 
     return fig
 
+
 @dataclass(frozen=True)
 class GateDraw:
     layer: int
     kind: str
     wires: tuple[int, ...]
     tags: tuple[str, ...] = ()
+
 
 def _get_gate_label(gate: GateDraw) -> str:
     """Generate a label for a gate that includes type information from tags."""
@@ -106,7 +112,9 @@ def _collect_gates_by_layer(spec: CircuitSpec) -> dict[int, list[GateDraw]]:
                 f"Gate {g.kind} on wires={g.wires} is missing a layer tag (expected 'Lk'). "
                 f"Tags were: {g.tags}",
             )
-        by_layer.setdefault(L, []).append(GateDraw(layer=L, kind=g.kind, wires=g.wires, tags=g.tags))
+        by_layer.setdefault(L, []).append(
+            GateDraw(layer=L, kind=g.kind, wires=g.wires, tags=g.tags)
+        )
 
     return by_layer
 
@@ -114,8 +122,8 @@ def _collect_gates_by_layer(spec: CircuitSpec) -> dict[int, list[GateDraw]]:
 def plot_circuit_diagram(
     spec: CircuitSpec,
     *,
-    title: Optional[str] = None,
-    save_path: Optional[str] = None,
+    title: str | None = None,
+    save_path: str | None = None,
     show: bool = True,
     figsize_per_layer: float = 1.2,
 ) -> None:
@@ -224,9 +232,9 @@ def plot_state_probabilities_dense(
     state: DenseState,
     *,
     top_k: int = 10,
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
     show: bool = True,
-    title: Optional[str] = None,
+    title: str | None = None,
 ) -> None:
     vec = np.asarray(state.vector).reshape(-1)
     probs = np.abs(vec) ** 2
@@ -239,8 +247,14 @@ def plot_state_probabilities_dense(
     bars = ax.bar(range(top_k), top_probs)
 
     for bar, p in zip(bars, top_probs):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f"{p:.4f}",
-                ha="center", va="bottom", fontsize=9)
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height(),
+            f"{p:.4f}",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+        )
 
     ax.set_xticks(range(top_k))
     ax.set_xticklabels(basis, rotation=45, ha="right")
@@ -256,6 +270,200 @@ def plot_state_probabilities_dense(
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=200, bbox_inches="tight")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)
+
+
+def plot_sre_v_qubits(
+    results: dict[str, Any],
+    *,
+    save_path: str | None = None,
+    show: bool = True,
+    title: str | None = None,
+) -> None:
+    """Plot SRE (Structural Rényi Entropy) versus number of qubits.
+
+    Parameters
+    ----------
+    results : dict[str, Any]
+        Dictionary containing statistics with keys as (family, n_qubits) tuples.
+    save_path : str | None, optional
+        Path to save the plot. If None, plot is not saved.
+    show : bool, optional
+        Whether to display the plot. Default is True.
+    title : str | None, optional
+        Title for the plot. If None, a default title is used.
+    """
+    stats = results.get("stats", results)
+
+    parsed: list[tuple[str, int, dict[str, Any]]] = []
+    for key, value in stats.items():
+        family = None
+        n_qubits = None
+
+        if isinstance(key, tuple) and len(key) == 2:
+            family, n_qubits = key
+
+        elif isinstance(key, str):
+            # Handles keys like "('haar', 6)"
+            try:
+                k = ast.literal_eval(key)
+            except (ValueError, SyntaxError):
+                continue
+            if isinstance(k, tuple) and len(k) == 2:
+                family, n_qubits = k
+
+        if family is None or n_qubits is None:
+            continue
+
+        parsed.append((str(family), int(n_qubits), value))
+
+    if not parsed:
+        msg = (
+            "No valid (family, n_qubits) keys found in stats. "
+            "Keys must be tuples like ('haar', 6) or strings like \"('haar', 6)\","
+        )
+        raise ValueError(msg)
+
+    families: dict[str, list[tuple[int, float, float]]] = {}
+    for family, n_qubits, value in parsed:
+        sre = float(value["mean"])
+        err = float(value["stderr"])
+        families.setdefault(family, []).append((n_qubits, sre, err))
+
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
+    for family, rows in sorted(families.items(), key=lambda x: x[0]):
+        rows.sort(key=lambda x: x[0])
+        xs = [r[0] for r in rows]
+        ys = [r[1] for r in rows]
+        es = [r[2] for r in rows]
+        ax.errorbar(xs, ys, yerr=es, label=family, marker="o", capsize=3)
+
+    ax.set_xlabel("Number of qubits")
+    ax.set_ylabel("SRE")
+    ax.grid(alpha=0.3)
+    ax.legend(title="Circuit Family")
+    ax.set_title(title or "SRE vs Number of Qubits", fontweight="bold")
+    plt.tight_layout()
+
+    if save_path:
+        Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=200, bbox_inches="tight")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)
+
+
+def _gse(d: int, n_qubits: int, q: int) -> float:
+    phys_dim = d ** n_qubits
+    f = (-4 + 3 * (phys_dim**2 -phys_dim)) / (4 * (phys_dim**2 - 1))
+
+    num = np.asarray( 4 +(phys_dim - 1) * f ** (n_qubits*q), dtype=float)
+    return -np.log2(num / (3 + phys_dim))
+
+    # term1 = 3 / (d**n_qubits + 2)
+    # term2 = (d**n_qubits - 1) / (d**n_qubits + 2)
+    # inner = (2/d * d**(2*n_qubits) - (d-2) * 2/d * d**n_qubits - 1) / (d**(2*n_qubits) - 1)
+    # return -np.log2(term1 + term2 * inner**(q*n_qubits))
+
+def plot_sredensity_v_tcount(
+    results: dict[str, Any],
+    *,
+    save_path: str | None = None,
+    show: bool = True,
+    title: str | None = None,
+) -> None:
+    """Plot SRE (Structural Rényi Entropy) versus number of qubits.
+
+    Parameters
+    ----------
+    results : dict[str, Any]
+        Dictionary containing statistics with keys as (n_qubits, tcount) tuples.
+    save_path : str | None, optional
+        Path to save the plot. If None, plot is not saved.
+    show : bool, optional
+        Whether to display the plot. Default is True.
+    title : str | None, optional
+        Title for the plot. If None, a default title is used.
+    """
+    stats = results.get("stats", results)
+
+    parsed: list[tuple[int, int, float, float]] = []  # (n_qubits, tcount, mean, stderr)
+
+    for key, value in stats.items():
+        # Parse key: either tuple (n_qubits, tcount) or string "(n_qubits, tcount)"
+        if isinstance(key, tuple) and len(key) == 2:
+            n_qubits, tcount = key
+        elif isinstance(key, str):
+            try:
+                k = ast.literal_eval(key)
+            except (ValueError, SyntaxError):
+                continue
+            if not (isinstance(k, tuple) and len(k) == 2):
+                continue
+            n_qubits, tcount = k
+        else:
+            continue
+
+        try:
+            n_qubits_i = int(n_qubits)
+            tcount_i = int(tcount)
+            mean_f = float(value["mean"])
+            stderr_f = float(value.get("stderr", 0.0))
+        except (TypeError, ValueError, KeyError):
+            continue
+
+        parsed.append((n_qubits_i, tcount_i, mean_f, stderr_f))
+
+    if not parsed:
+        msg = (
+            "No valid (n_qubits, tcount) keys found in stats. "
+            "Expected keys like (6, 38) or '(6, 38)'."
+        )
+        raise ValueError(msg)
+
+    # Group by n_qubits (one curve per n_qubits)
+    curves: dict[int, list[tuple[int, float, float]]] = {}
+    for n_qubits, tcount, mean, stderr in parsed:
+        curves.setdefault(n_qubits, []).append((tcount, mean, stderr))
+
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
+
+    for n_qubits, rows in sorted(curves.items(), key=lambda x: x[0]):
+        rows.sort(key=lambda r: r[0])  # sort by tcount
+        xs = [r[0] / n_qubits for r in rows]
+        ys = [r[1] / n_qubits for r in rows]
+        es = [r[2] / n_qubits for r in rows]
+        ax.errorbar(xs, ys, yerr=es, label=f"n={n_qubits}", marker="o", capsize=3)
+
+    q = np.linspace(0, 38, 1000)
+    ns = [6, 8, 10]
+    for j, n_qubits in enumerate(ns):
+        alpha = 0.2 + 0.8 * j / (len(ns) - 1)
+        alpha = min(1, max(0, alpha))
+        xs = q/n_qubits
+        gsre = _gse(2, n_qubits, xs)
+        ax.plot(xs, gsre/n_qubits, linestyle="-", alpha=alpha, label=f"GSE n={n_qubits}")
+    M_max = np.log(2**ns[-1])
+    plt.axhline(y=(M_max)/ns[-1], linestyle="--", alpha=0.7)
+    q_c = np.log(2) / np.log(4/3)
+    plt.axvline(x=q_c,  linestyle=":", alpha=0.7)
+
+    ax.set_xlabel("t-count")
+    ax.set_ylabel(r"$m_2$")
+    ax.grid(alpha=0.3)
+    ax.legend(title="Number of qubits")
+    ax.set_title(title or r"$m_2$ vs t-count", fontweight="bold")
+    plt.tight_layout()
+
+    if save_path:
+        Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=200, bbox_inches="tight")
 
     if show:
         plt.show()

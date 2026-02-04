@@ -1,0 +1,47 @@
+{
+  "circuit_family": "clifford",
+  "backend": "pennylane",
+  "axes": {
+    "circuit_family": [
+      "clifford"
+    ],
+    "n_qubits": [
+      6,
+      8,
+      10
+    ],
+    "family.tcount": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38
+    ]
+  },
+  "repeats": 10,
+  "properties": [
+    {
+      "name": "SRE",
+      "method": "exact"
+    }
+  ],
+  "base_seed": 33,
+  "created_at": "2026-02-03T21:15:58+00:00",
+  "pid": 16284,
+  "host": "Vics_Laptop"
+}
