@@ -6,33 +6,37 @@ and computes their stabilizer Rényi entropy (SRE) using different methods.
 
 from __future__ import annotations
 
-import logging
-import typer
 import json
+import logging
 
 from pathlib import Path
 from typing import Any
-import numpy as np
 
-from dask.distributed import Client, as_completed
+import numpy as np
+import typer
+
+from dask.distributed import as_completed
 from tqdm import tqdm
 
-from backend import PennylaneBackend, QuimbBackend
-from circuit.families import (
+from qqe.backend import PennylaneBackend, QuimbBackend
+from qqe.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
 )
-from experiments.runner import run_experiment
-from experiments.sweeper import (
+from qqe.experiments.core import run_experiment
+from qqe.experiments.sweeper import (
     JobConfig,
+    aggregate_by_cond,
     compile_job,
     generate_jobs,
-    aggregate_by_cond,
 )
-from experiments.visualizer import plot_pennylane_circuit, plot_sre_v_qubits, plot_sredensity_v_tcount
-from utils import FileCache, RunStore, configure_logger, make_run_id
-from parallel import dask_client
+from qqe.experiments.plotting import (
+    plot_sre_v_qubits,
+    plot_sredensity_v_tcount,
+)
+from qqe.parallel import dask_client
+from qqe.utils import FileCache, RunStore, configure_logger, make_run_id
 
 logger = logging.getLogger(__name__)
 
@@ -80,8 +84,17 @@ def run_jobs(
         "results": {k: {"value": v.value, "meta": v.meta} for k, v in out.results.items()},
     }
 
+def _plot():
+    raise NotImplementedError("To do.")
+
+def _run_once():
+    raise NotImplementedError("To do.")
+
+def _sweep_jobs():
+    raise NotImplementedError("To do.")
+
 def main(
-    run: str,           #run_once, sweep, plot...
+    run: str,                               #run_once, sweep, plot...
     n_qubits: int,
     n_layers: int,
     *,
@@ -91,16 +104,17 @@ def main(
     method: str = "fwht",
     repeat: int = 5,
     seed: int = 42,
-    sweep_type: str | None = None,
+    sweep_type: str | None = None,          #n_qubits, n_layers, tcount
     results_path: str | None = None,
 ) -> None:
     """Main function to run simulations and compute SRE properties.
 
     Args:
-        run: Type of run to perform ('run one experiment', 'sweep', 'plot').
+        run: Type of run to perform ('run_once', 'sweep', 'plot').
         n_qubits: Number of qubits in the circuit.
         n_layers: Number of layers in the circuit.
         circuit_family: Circuit family to simulate ('haar', 'clifford', 'quansistor').
+        quantity: Quantity to compute ('SRE').
         backend: Backend to use for simulation ('pennylane' or 'quimb').
         method: Method to compute SRE ('fwht', 'exact', etc.).
         repeat: Number of repetitions for averaging results.

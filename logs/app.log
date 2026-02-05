@@ -79,3 +79,10 @@ ValueError: Requested T-gates (33) exceed maximum possible (2).
 2026-02-04 11:00:54,183 - parallel.client - INFO - Dask client and cluster closed.
 2026-02-04 11:00:54,556 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
 2026-02-04 11:00:54,561 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-04_16-00-43__SRE_sweep_n_qubits_fwht
+2026-02-04 18:28:21,224 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
+2026-02-04 18:28:21,250 - parallel.client - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-04 18:28:32,166 - parallel.client - INFO - Dask client created successfully.
+2026-02-04 18:28:32,167 - parallel.client - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-04 18:28:49,605 - parallel.client - INFO - Dask client and cluster closed.
+2026-02-04 18:28:50,413 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
+2026-02-04 18:28:50,419 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-04_23-28-21__SRE_sweep_n_qubits_fwht

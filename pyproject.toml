@@ -37,17 +37,13 @@ docs = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
 
 [tool.black]
 line-length = 95
 
 [tool.isort]
 profile = "black"
-known_first_party = ["src", "circuit", "backend", "properties", "states", "experiments", "io", "rng"]
+known_first_party = ["qqe"]
 
 
 [tool.ruff.lint]
@@ -98,7 +94,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["src"]
+known-first-party = ["qqe"]
 combine-as-imports = true
 force-single-line = false
 lines-between-types = 1
