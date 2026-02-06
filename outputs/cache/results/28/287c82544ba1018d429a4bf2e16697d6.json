@@ -1,0 +1,13 @@
+{
+  "_schema": {
+    "type": "property_result",
+    "version": 1
+  },
+  "value": 6.803214101419466,
+  "error": null,
+  "meta": {
+    "n_qubits": 16,
+    "subsystem_size": 8,
+    "compute_time": 0.0257565975189209
+  }
+}

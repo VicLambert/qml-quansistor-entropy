@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pennylane as qml
 
-from qqe.circuit.matrix_factory import gate_unitary
+from qqe.circuit.gates import gate_unitary
 from qqe.circuit.spec import CircuitSpec
 from qqe.states.types import DenseState
 
@@ -277,9 +277,10 @@ def plot_state_probabilities_dense(
     plt.close(fig)
 
 
-def plot_sre_v_qubits(
+def plot_sre(
     results: dict[str, Any],
     *,
+    quantity: str = "SRE",
     save_path: str | None = None,
     show: bool = True,
     title: str | None = None,
@@ -298,6 +299,8 @@ def plot_sre_v_qubits(
         Title for the plot. If None, a default title is used.
     """
     stats = results.get("stats", results)
+    label = results.get("group_keys", ["n_layers", "n_qubits"])[1]
+    print("label", label)
 
     parsed: list[tuple[str, int, dict[str, Any]]] = []
     for key, value in stats.items():
@@ -342,11 +345,12 @@ def plot_sre_v_qubits(
         es = [r[2] for r in rows]
         ax.errorbar(xs, ys, yerr=es, label=family, marker="o", capsize=3)
 
-    ax.set_xlabel("Number of qubits")
-    ax.set_ylabel("SRE")
+    xlabel = "Number of qubits" if label == "n_qubits" else "Number of layers"
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(quantity)
     ax.grid(alpha=0.3)
     ax.legend(title="Circuit Family")
-    ax.set_title(title or "SRE vs Number of Qubits", fontweight="bold")
+    ax.set_title(title or f"{quantity} vs {xlabel}", fontweight="bold")
     plt.tight_layout()
 
     if save_path:

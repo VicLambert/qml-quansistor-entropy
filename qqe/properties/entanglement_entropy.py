@@ -4,9 +4,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
+from qqe.properties.results import PropertyResult
 
-from qqe.properties.compute import PropertyResult
-from qqe.states.types import DenseState
+if TYPE_CHECKING:
+    from qqe.states.types import DenseState
 
 
 # ----------- Rényi -----------

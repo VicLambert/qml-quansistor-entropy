@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING, Any
 import quimb.tensor as qtn
 
 from qqe.backend.base import BaseBackend, State
-from qqe.circuit.matrix_factory import gate_unitary
+from qqe.circuit.gates import gate_unitary
 from qqe.states.types import DenseState, MPSState
 
 if TYPE_CHECKING:

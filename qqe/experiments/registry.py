@@ -3,11 +3,9 @@
 from __future__ import annotations
 
 from qqe.backend.pennylane import PennylaneBackend
-from qqe.circuit.families.clifford import CliffordBrickwork
-from qqe.circuit.families.haar import HaarBrickwork
-from qqe.circuit.families.quansistor import QuansistorBrickwork
-from qqe.properties.SRE.fwht_sre import compute as sre_fwht
-from qqe.properties.SRE.sre_exact_dense import compute as sre_exact
+from qqe.circuit.families import CliffordBrickwork, HaarBrickwork, QuansistorBrickwork
+from qqe.properties.SRE import sre_fwht
+from qqe.properties.SRE import sre_exact
 
 
 def default_backend_registry():

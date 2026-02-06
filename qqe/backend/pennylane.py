@@ -14,7 +14,7 @@ import numpy as np
 import pennylane as qml
 
 from qqe.backend.base import BaseBackend, State, StateType
-from qqe.circuit.matrix_factory import gate_unitary
+from qqe.circuit.gates import gate_unitary
 from qqe.circuit.spec import CircuitSpec
 from qqe.states.types import DenseState
 

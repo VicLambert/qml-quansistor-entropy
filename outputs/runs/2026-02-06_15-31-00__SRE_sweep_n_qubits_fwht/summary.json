@@ -1,0 +1,62 @@
+{
+  "group_keys": [
+    "circuit_family",
+    "n_qubits"
+  ],
+  "stats": {
+    "('haar', 6)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('haar', 8)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('clifford', 6)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('clifford', 8)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('haar', 10)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('clifford', 10)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('quansistor', 6)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('quansistor', 8)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    },
+    "('quansistor', 10)": {
+      "mean": NaN,
+      "std": NaN,
+      "stderr": NaN,
+      "n": 5
+    }
+  }
+}

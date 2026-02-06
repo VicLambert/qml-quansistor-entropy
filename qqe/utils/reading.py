@@ -16,8 +16,8 @@ from typing import Any, Iterator
 
 import numpy as np
 
-from qqe.experiments.core import BackendConfig
-from qqe.properties.request import PropertyRequest
+from qqe.properties.results import PropertyRequest
+from qqe.states.types import BackendConfig
 
 logger = logging.getLogger(__name__)
 

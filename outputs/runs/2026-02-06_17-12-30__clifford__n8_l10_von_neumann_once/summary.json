@@ -1,0 +1,15 @@
+{
+  "group_keys": [
+    "circuit_family",
+    "n_qubits",
+    "n_layers"
+  ],
+  "stats": {
+    "('clifford', 8, 10)": {
+      "mean": 2.181701111887243,
+      "std": 0.5212451102152964,
+      "stderr": 0.13458490874372617,
+      "n": 15
+    }
+  }
+}

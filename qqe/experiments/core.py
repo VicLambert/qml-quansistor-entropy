@@ -4,22 +4,20 @@ import contextlib
 import time
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from qqe.circuit.DAG import circuit_spec_to_dag
-from qqe.circuit.spec import CircuitSpec
-from qqe.properties.compute import compute_property
-from qqe.properties.request import PropertyRequest
-from qqe.properties.results import PropertyResult
-from qqe.states.types import DenseState, MPSState
+# from qqe.circuit.DAG import circuit_spec_to_dag
+from qqe.properties.compute import (
+    PropertyRequest,
+    PropertyResult,
+    compute_property,
+)
+from qqe.states.types import BackendConfig, DenseState, MPSState
 from qqe.utils.reading import FileCache, cache_lock, make_property_cache_key
 
+if TYPE_CHECKING:
+    from qqe.circuit.spec import CircuitSpec
 
-@dataclass(frozen=True)
-class BackendConfig:
-    name: str               # "quimb" or "pennylane"
-    representation: str     # "dense" or "mps"...
-    params: dict[str, Any] = field(default_factory=dict)
 
 @dataclass(frozen=True)
 class ExperimentConfig:
@@ -97,7 +95,7 @@ def run_experiment(
         )
         sim_second = time.time() - t_sim
 
-    dag = circuit_spec_to_dag(cfg.spec)
+    # dag = circuit_spec_to_dag(cfg.spec)
 
     state_info = _summarize_state(state)
     if sim_second is not None:

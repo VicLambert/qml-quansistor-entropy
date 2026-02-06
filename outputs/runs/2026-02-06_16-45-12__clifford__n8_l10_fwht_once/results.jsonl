@@ -1,0 +1,1 @@
+{"tags":{"circuit_family":"clifford","n_qubits":8,"n_layers":10,"family.tcount":9,"backend":"pennylane","d":2,"replicate":0,"run_seed":3374353430},"results":{"SRE":{"value":2.490224995673074,"meta":{"method":"FWHT","n_qubits":8}}}}

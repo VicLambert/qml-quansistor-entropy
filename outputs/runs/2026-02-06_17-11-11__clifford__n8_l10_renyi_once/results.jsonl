@@ -1,0 +1,1 @@
+{"tags":{"circuit_family":"clifford","n_qubits":8,"n_layers":10,"family.tcount":9,"backend":"pennylane","d":2,"replicate":0,"run_seed":2348061902},"results":{"entanglement_entropy":{"value":2.415037499278844,"meta":{"n_qubits":8,"subsystem_size":4}}}}
