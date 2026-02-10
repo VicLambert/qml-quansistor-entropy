@@ -47,6 +47,20 @@ RUNS_ROOT.mkdir(parents=True, exist_ok=True)
 cache = FileCache(PROJECT_ROOT / "outputs" / "cache")
 
 
+def calculate_tcount(n_layers: int, per_layer: int = 2) -> int:
+    """Calculate the number of t gates for a given number of layers.
+
+    Args:
+        n_layers: Number of layers in the circuit.
+        per_layer: Number of t gates per layer (default: 2).
+
+    Returns:
+        Total t gate count: per_layer × (n_layers - 1)
+        (Last layer is excluded from t-gate placement)
+    """
+    return per_layer * max(0, n_layers - 1)
+
+
 def run_jobs(
     job: JobConfig,
     *,
@@ -84,6 +98,7 @@ def run_jobs(
         "results": {k: {"value": v.value, "meta": v.meta} for k, v in out.results.items()},
     }
 
+
 def _plot(
     results_path: str | None,
     quantity: str,
@@ -110,13 +125,13 @@ def _plot(
         plot_sre(
             results=summary,
             quantity=quantity,
-            save_path= f"outputs/figures/sre_vs_nqubits_{method}_{n_layers}l.png",
+            save_path=f"outputs/figures/sre_vs_nqubits_{method}_{n_layers}l.png",
             show=True,
         )
     elif group_keys == ["n_qubits", "family.tcount"]:
         plot_sredensity_v_tcount(
             results=summary,
-            save_path= f"outputs/figures/sredensity_vs_tcount_{method}_{n_layers}l.png",
+            save_path=f"outputs/figures/sredensity_vs_tcount_{method}_{n_layers}l.png",
             show=True,
         )
     else:
@@ -149,7 +164,9 @@ def _run_once(
     outputs: list[dict[str, Any]] = []
     jobs = generate_jobs(experiment, axes, repeats=repeat)
 
-    with dask_client(mode="local", n_workers=4, threads_per_worker=1, dashboard=True) as client:
+    with dask_client(
+        mode="local", n_workers=4, threads_per_worker=1, dashboard=True
+    ) as client:
         for job in jobs:
             run_store.log_job(job)
 
@@ -166,7 +183,9 @@ def _run_once(
         ]
 
         try:
-            for fut in tqdm(as_completed(futures), total=len(futures), desc="Running jobs", unit="job"):
+            for fut in tqdm(
+                as_completed(futures), total=len(futures), desc="Running jobs", unit="job"
+            ):
                 out = fut.result()
                 run_store.log_result(out)
                 outputs.append(out)
@@ -174,6 +193,7 @@ def _run_once(
             logger.exception("Job failed")
             run_store.log_error({"error": str(e)})
     return outputs, run_store
+
 
 def _sweep_jobs(
     experiment: JobConfig,
@@ -189,7 +209,27 @@ def _sweep_jobs(
         logger.error("Invalid or missing sweep_type: %s", sweep_type)
         raise ValueError(f"Invalid sweep_type: {sweep_type}")
 
-    axes = sweep_axes[sweep_type]
+    # Special handling for n_layers sweep to pair (n_layers, tcount)
+    if sweep_type == "n_layers":
+        axes = sweep_axes[sweep_type]
+        n_layers_range = axes["n_layers"]
+
+        # Create paired jobs for each n_layers value with its corresponding tcount
+        all_jobs = []
+        for nl in n_layers_range:
+            paired_axes = {
+                "circuit_family": axes["circuit_family"],
+                "n_layers": [nl],
+                "family.tcount": [calculate_tcount(nl, per_layer=2)],
+            }
+            all_jobs.extend(generate_jobs(experiment, paired_axes, repeats=repeat))
+        jobs = all_jobs
+        axes_for_header = axes  # Keep original for header
+    else:
+        axes = sweep_axes[sweep_type]
+        axes_for_header = axes
+        jobs = generate_jobs(experiment, axes, repeats=repeat)
+
     run_label = f"{quantity}_sweep_{sweep_type}_{method}"
     run_id = make_run_id(label=run_label)
     run_store = RunStore(RUNS_ROOT, run_id)
@@ -197,7 +237,7 @@ def _sweep_jobs(
     run_store.write_run_header(
         {
             "backend": experiment.backend,
-            "axes": axes,
+            "axes": axes_for_header,
             "repeats": repeat,
             "properties": experiment.properties,
             "base_seed": experiment.base_seed,
@@ -205,9 +245,10 @@ def _sweep_jobs(
     )
 
     outputs: list[dict[str, Any]] = []
-    jobs = generate_jobs(experiment, axes, repeats=repeat)
 
-    with dask_client(mode="local", n_workers=4, threads_per_worker=1, dashboard=True) as client:
+    with dask_client(
+        mode="local", n_workers=4, threads_per_worker=1, dashboard=True
+    ) as client:
         for job in jobs:
             run_store.log_job(job)
 
@@ -224,7 +265,9 @@ def _sweep_jobs(
         ]
 
         try:
-            for fut in tqdm(as_completed(futures), total=len(futures), desc="Running jobs", unit="job"):
+            for fut in tqdm(
+                as_completed(futures), total=len(futures), desc="Running jobs", unit="job"
+            ):
                 out = fut.result()
                 run_store.log_result(out)
                 outputs.append(out)
@@ -237,18 +280,19 @@ def _sweep_jobs(
         group_keys = ["n_qubits", "family.tcount"]
     return outputs, run_store, group_keys
 
+
 def main(
-    run: str,                               #run_once, sweep, plot...
+    run: str,  # run_once, sweep, plot...
     n_qubits: int,
     n_layers: int,
-    circuit_family: str = "clifford",
     *,
-    quantity: str = "SRE",                  #SRE, entanglement_entropy...
+    circuit_family: str = "clifford",
+    quantity: str = "SRE",  # SRE, entanglement_entropy...
     backend: str = "quimb",
     method: str = "fwht",
     repeat: int = 5,
     seed: int = 42,
-    sweep_type: str | None = None,          #n_qubits, n_layers, tcount
+    sweep_type: str | None = None,  # n_qubits, n_layers, tcount
     results_path: str | None = None,
 ) -> None:
     """Main function to run simulations and compute SRE properties.
@@ -307,26 +351,26 @@ def main(
         run_seed=int(rng.integers(0, 2**32 - 1)),
         tags={},
     )
-    tcount_default = n_layers - 1
-    tcount_max = int(getattr(experiment, "family_params", {}).get("tcount", 0) or 0)
-    if tcount_max == 0:
-        tcount_max = min(2 * n_layers, 2 * n_qubits * n_layers)
+    # Calculate default tcount: 2 t-gates per layer (excluding last layer)
+    tcount_default = calculate_tcount(n_layers, per_layer=2)
+    tcount_max = min(2 * n_layers, 2 * n_qubits * (n_layers - 1))
 
     sweep_axes = {
         "n_qubits": {
             "circuit_family": ["haar", "clifford", "quansistor"],
             "n_qubits": list(range(4, n_qubits + 1, 2)),
-            "family.tcount": [tcount_default],
+            "family.tcount": [calculate_tcount(n_layers, per_layer=2)],
         },
         "n_layers": {
-            "circuit_family": ["haar", "quansistor"],
-            "n_layers": list(range(1, n_layers + 1, 1)),
-            "family.tcount": [tcount_default],
+            "circuit_family": ["haar", "clifford", "quansistor"],
+            "n_layers": list(range(1, n_layers + 1, 2)),
+            # tcount is paired per n_layers in _sweep_jobs() - placeholder here
+            "family.tcount": [0],
         },
         "tcount": {
             "circuit_family": ["clifford"],
             "n_qubits": list(range(4, n_qubits + 1, 2)),
-            "family.tcount": list(range(0, tcount_default + 1, 2)),
+            "family.tcount": list(range(0, tcount_max + 1, 2)),
         },
     }
 
@@ -335,8 +379,12 @@ def main(
             "circuit_family": [circuit_family],
             "n_qubits": [n_qubits],
             "n_layers": [n_layers],
-            # use default tcount for clifford-like; None for others
-            "family.tcount": [tcount_default] if circuit_family == "clifford" else [None],
+            # use calculated tcount (2 per layer) for clifford; None for others
+            "family.tcount": (
+                [calculate_tcount(n_layers, per_layer=2)]
+                if circuit_family == "clifford"
+                else [None]
+            ),
         }
         run_label = f"{circuit_family}__n{n_qubits}_l{n_layers}_{method}_once"
         outputs, run_store = _run_once(
@@ -366,7 +414,7 @@ def main(
 
     stats = aggregate_by_cond(
         outputs,
-        group_keys=tuple(group_keys),       #TODO implement automatic detection of grouping keys
+        group_keys=tuple(group_keys),  # TODO implement automatic detection of grouping keys
         value_path=("results", quantity, "value"),
     )
 
@@ -383,21 +431,21 @@ def main(
     if run == "sweep" and sweep_type == "tcount":
         plot_sredensity_v_tcount(
             results=summary,
-            save_path= str(fig_dir / f"sredensity_vs_tcount_{method}_{n_layers}l.png"),
+            save_path=str(fig_dir / f"sredensity_vs_tcount_{method}_{n_layers}l.png"),
             show=False,
         )
     elif run == "sweep" and sweep_type == "n_qubits":
         plot_sre(
             results=summary,
             quantity=quantity,
-            save_path= str(fig_dir / f"{quantity}_vs_nqubits_{method}_{n_layers}l.png"),
+            save_path=str(fig_dir / f"{quantity}_vs_nqubits_{method}_{n_layers}l.png"),
             show=False,
         )
     elif run == "sweep" and sweep_type == "n_layers":
         plot_sre(
             results=summary,
             quantity=quantity,
-            save_path= str(fig_dir / f"{quantity}_vs_nlayers_{method}_{n_qubits}q.png"),
+            save_path=str(fig_dir / f"{quantity}_vs_nlayers_{method}_{n_qubits}q.png"),
             show=False,
         )
     else:
@@ -407,7 +455,6 @@ def main(
 
     run_store.write_summary(summary)
     logger.info("Saved run to: %s", run_store.dir)
-
 
 
 if __name__ == "__main__":

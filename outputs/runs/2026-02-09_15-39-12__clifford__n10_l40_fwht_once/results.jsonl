@@ -1,0 +1,5 @@
+{"tags":{"circuit_family":"clifford","n_qubits":10,"n_layers":40,"family.tcount":78,"backend":"quimb","d":2,"replicate":2,"run_seed":39790547},"results":{"SRE":{"value":7.618011095215163,"meta":{"method":"FWHT","n_qubits":10}}}}
+{"tags":{"circuit_family":"clifford","n_qubits":10,"n_layers":40,"family.tcount":78,"backend":"quimb","d":2,"replicate":1,"run_seed":1425823832},"results":{"SRE":{"value":7.94466355351013,"meta":{"method":"FWHT","n_qubits":10}}}}
+{"tags":{"circuit_family":"clifford","n_qubits":10,"n_layers":40,"family.tcount":78,"backend":"quimb","d":2,"replicate":0,"run_seed":2474066231},"results":{"SRE":{"value":7.748340302880705,"meta":{"method":"FWHT","n_qubits":10}}}}
+{"tags":{"circuit_family":"clifford","n_qubits":10,"n_layers":40,"family.tcount":78,"backend":"quimb","d":2,"replicate":3,"run_seed":897556209},"results":{"SRE":{"value":7.076115564200744,"meta":{"method":"FWHT","n_qubits":10}}}}
+{"tags":{"circuit_family":"clifford","n_qubits":10,"n_layers":40,"family.tcount":78,"backend":"quimb","d":2,"replicate":4,"run_seed":3286325853},"results":{"SRE":{"value":7.559145694229337,"meta":{"method":"FWHT","n_qubits":10}}}}
