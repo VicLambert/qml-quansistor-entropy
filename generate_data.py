@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import typer
 
 from pathlib import Path
 from typing import Any
@@ -68,23 +69,22 @@ def is_valid_config(n_qubits, n_layers, tcount) -> bool:
 def make_cid(family, n_qubits, n_layers, seed) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
 
-params = list(itertools.product(qubits_range, layers_range))
-valid_params = []
-for p in params:
-    n_qubits, n_layers = p
+def generate_data_params(qubits_range, layers_range, n_seeds):
+    params = list(itertools.product(qubits_range, layers_range))
+    data = []
+    for rep in range(n_seeds):
+        for n_qubits, n_layers in params:
+            seed = make_seed(n_qubits, n_layers, rep)
+            cid = make_cid("haar", n_qubits, n_layers, seed)
+            data.append([cid, "haar", n_qubits, n_layers, seed, None, None, None])
+    return data
 
-    # if is_valid_config(n_qubits, n_layers, calculate_tcount(n_layers)):
-    #     valid_params.append(p)
+def main():
+    data = generate_data_params(qubits_range, layers_range, n_seeds)
+    for row in data:
+        print(", ".join(str(x) for x in row))
+    print(len(data))
 
-for rep in range(n_seeds):
-    for n_qubits, n_layers in params:
-        seed = make_seed(n_qubits, n_layers, rep)
-        cid = make_cid("haar", n_qubits, n_layers, seed)
-        data.append([cid, "haar", n_qubits, n_layers, seed, None, None, None])
-
-for row in data:
-    print(", ".join(str(x) for x in row))
-print(len(data)-1)
-
-# for row in data:
-#     print(", ".join(str(x) for x in row))
+if __name__ == "__main__":
+    configure_logger(logging.INFO, logging.INFO)
+    typer.run(main)

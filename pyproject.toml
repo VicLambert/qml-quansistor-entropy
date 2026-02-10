@@ -21,6 +21,9 @@ dependencies = [
     "matplotlib>=3.4.0",
     "quimb>=1.5.0",
     "dask>=2021.10.0",
+    "tqdm>=4.67.1",
+    "typer>=0.21.1",
+    "networkx>=3.6.1",
 ]
 
 [project.optional-dependencies]
