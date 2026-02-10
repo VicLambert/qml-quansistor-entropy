@@ -221,7 +221,7 @@ for layer, x in layer_positions.items():
 
 plt.title("Quantum Circuit DAG (Layers × Qubits Layout)", fontsize=14, fontweight="bold")
 # plt.tight_layout()
-plt.savefig(f"DAG_{circuit.name}.png", dpi=150, bbox_inches="tight")
+plt.savefig(f"circuit_outputs/DAG_{circuit.name}.png", dpi=150, bbox_inches="tight")
 plt.show()
 
 
