@@ -9,8 +9,9 @@ from __future__ import annotations
 
 import logging
 
+from collections.abc import Iterable
 from dataclasses import dataclass, replace
-from typing import TYPE_CHECKING, Any, Iterable, Protocol
+from typing import TYPE_CHECKING, Any, Protocol
 
 import numpy as np
 
@@ -60,7 +61,7 @@ def leftover_pairs(n_qubits: int, used: set[int], connectivity: str) -> list[tup
     leftover = set(left)
 
     pairs: list[tuple[int, int]] = []
-    used: set[int] = set()
+    used = set()
 
     for i in range(n_qubits - 1):
         a, b = i, i + 1

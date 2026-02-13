@@ -164,19 +164,22 @@ def make_property_cache_key(
     }
     return hash_key(payload)
 
-
 def _to_jsonable(x: Any) -> Any:
+    """Convert an object to a JSON-serializable format."""
+    if x is None:
+        return None
+    if isinstance(x, (str, int, float, bool)):
+        return x
+    if isinstance(x, (list, tuple)):
+        return [_to_jsonable(item) for item in x]
+    if isinstance(x, dict):
+        return {k: _to_jsonable(v) for k, v in x.items()}
     if is_dataclass(x) and not isinstance(x, type):
-        return asdict(x)
-    if isinstance(x, Path):
-        return str(x)
-    # numpy scalars
-    try:
-        if isinstance(x, (np.integer, np.floating)):
-            return x.item()
-    except Exception:
-        pass
-    return x
+        return asdict(x)  # Convert dataclass to dict
+    if hasattr(x, "__dict__"):
+        return _to_jsonable(x.__dict__)
+    # Fallback: convert to string
+    return str(x)
 
 
 def make_run_id(*, label: str = "run") -> str:
