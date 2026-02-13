@@ -165,7 +165,7 @@ def _run_once(
     jobs = generate_jobs(experiment, axes, repeats=repeat)
 
     with dask_client(
-        mode="local", n_workers=4, threads_per_worker=1, dashboard=True
+        mode="local", n_workers=4, threads_per_worker=1, dashboard=True,
     ) as client:
         for job in jobs:
             run_store.log_job(job)
@@ -184,7 +184,7 @@ def _run_once(
 
         try:
             for fut in tqdm(
-                as_completed(futures), total=len(futures), desc="Running jobs", unit="job"
+                as_completed(futures), total=len(futures), desc="Running jobs", unit="job",
             ):
                 out = fut.result()
                 run_store.log_result(out)
@@ -207,7 +207,8 @@ def _sweep_jobs(
 ) -> tuple[list[dict[str, Any]], RunStore, list[str]]:
     if sweep_type not in sweep_axes:
         logger.error("Invalid or missing sweep_type: %s", sweep_type)
-        raise ValueError(f"Invalid sweep_type: {sweep_type}")
+        msg = f"Invalid sweep_type: {sweep_type}"
+        raise ValueError(msg)
 
     # Special handling for n_layers sweep to pair (n_layers, tcount)
     if sweep_type == "n_layers":
@@ -247,7 +248,7 @@ def _sweep_jobs(
     outputs: list[dict[str, Any]] = []
 
     with dask_client(
-        mode="local", n_workers=4, threads_per_worker=1, dashboard=True
+        mode="slurm", n_workers=15, threads_per_worker=4, memory_per_worker="64GiB", dashboard=True, walltime="0-0:25:00",
     ) as client:
         for job in jobs:
             run_store.log_job(job)
@@ -266,7 +267,7 @@ def _sweep_jobs(
 
         try:
             for fut in tqdm(
-                as_completed(futures), total=len(futures), desc="Running jobs", unit="job"
+                as_completed(futures), total=len(futures), desc="Running jobs", unit="job",
             ):
                 out = fut.result()
                 run_store.log_result(out)

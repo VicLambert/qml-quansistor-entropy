@@ -22,6 +22,8 @@ dependencies = [
     "matplotlib",
     "quimb>=1.7.0",
     "dask",
+    "dask_distributed",
+    "dask_jobqueue",
     "tqdm",
     "typer",
     "networkx",

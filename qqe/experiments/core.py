@@ -22,14 +22,17 @@ if TYPE_CHECKING:
 @dataclass(frozen=True)
 class ExperimentConfig:
     """Defines the parameters for the run."""
+
     spec: CircuitSpec
     backend: BackendConfig
     properties: list[PropertyRequest]
     meta_data: dict[str, Any] = field(default_factory=dict)
 
+
 @dataclass(frozen=True)
 class ExperimentRun:
     """Defines what to run."""
+
     spec_id: str
     backend: BackendConfig
     results: dict[str, PropertyResult]
@@ -83,7 +86,7 @@ def run_experiment(
         )
         raise KeyError(msg)
     backend_obj = backend_registry[cfg.backend.name]
-    backend = backend_obj() if callable(backend_obj) else backend_obj
+    backend: Any = backend_obj() if callable(backend_obj) else backend_obj
 
     sim_second = None
     if state is None:
@@ -109,7 +112,9 @@ def run_experiment(
         cache_key = None
         if cache is not None:
             cache_key = make_property_cache_key(
-                spec_id=spec_id, backend_cfg=cfg.backend, req=req,
+                spec_id=spec_id,
+                backend_cfg=cfg.backend,
+                req=req,
             )
 
             cached = cache.load_json(cache_key)

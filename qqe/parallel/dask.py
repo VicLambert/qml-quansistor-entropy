@@ -8,6 +8,7 @@ from contextlib import contextmanager
 from typing import Generator, Literal, Sequence, Any
 
 from dask.distributed import Client, LocalCluster, performance_report, as_completed
+from dask_jobqueue import SLURMCluster
 
 from qqe.experiments.core import run_experiment
 from qqe.experiments.sweeper import ExperimentConfig
@@ -26,6 +27,15 @@ class DaskConfig:
     memory_per_worker: str | None = None
     scheduler_address: str | None = None
     dashboard: bool = True
+
+@dataclass
+class SLURMConfig:
+    account: str
+    n_workers: int
+    processes: int
+    cores_per_worker: int
+    memory_per_worker: str | None = "4GB"
+
 
 def get_client() -> Client | None:
     return _global_client
@@ -69,6 +79,43 @@ def create_local_cluster(
         dashboard_address=dashboard_address if dashboard else None,
     )
 
+def create_slurm_cluster(
+    account: str,
+    n_workers: int,
+    processes: int,
+    cores_per_worker: int,
+    memory_per_worker: str | None = "4GB",
+    walltime: str = "0-1:00:00",
+    dashboard: bool = True,
+    dashboard_address: str = "127.0.0.1:8787",
+) -> SLURMCluster:
+    """Create a Dask cluster using SLURM for job scheduling."""
+    logger.info(
+        "Creating SLURM Dask cluster with %d workers, %d cores per worker.",
+        n_workers,
+        cores_per_worker,
+    )
+
+    return SLURMCluster(
+        account=account,
+        n_workers=n_workers,
+        walltime=walltime,
+        cores=cores_per_worker,
+        memory=memory_per_worker,
+        processes=processes,
+        log_directory="logs/workers/",
+        job_script_prologue=[
+                "module load python scipy-stack",
+                "export OMP_NUM_THREADS=1",
+                "export OPENBLAS_NUM_THREADS=1",
+                "export MKL_NUM_THREADS=1",
+                "source /project/6099921/NDOT/QML-gates-tests/qqe/.venv/bin/activate",
+            ],
+        scheduler_options={
+            "host": "0.0.0.0",
+            "dashboard_address":":8787",
+        }
+    )
 
 def create_distributed_client(
     scheduler_address: str,
@@ -95,13 +142,14 @@ def create_distributed_client(
     return client
 
 def create_client(
-    mode: Literal["local", "distributed", "threaded", "synchronous"] = "local",
+    mode: Literal["local", "distributed", "threaded", "synchronous", "slurm"] = "local",
     *,
     n_workers: int | None = None,
     threads_per_worker: int = 1,
     memory_per_worker: str | None = None,
     scheduler_address: str | None = None,
     dashboard: bool = True,
+    walltime: str = "0-1:00:00",
     silence_logs: int = logging.WARNING,
 ) -> Client:
     if mode == "synchronous":
@@ -132,6 +180,17 @@ def create_client(
             scheduler_address=scheduler_address,
             silence_logs=silence_logs,
         )
+    elif mode == "slurm":
+        cluster = create_slurm_cluster(
+            account="def-boudrea1",
+            walltime=walltime,
+            n_workers=n_workers,
+            processes=1,
+            cores_per_worker=threads_per_worker,
+            memory_per_worker=memory_per_worker,
+            dashboard=dashboard,
+        )
+        client = Client(cluster)
     else:
         msg = f"Unknown mode: {mode}"
         raise ValueError(msg)
@@ -143,13 +202,14 @@ def create_client(
 
 @contextmanager
 def dask_client(
-    mode: Literal["local", "distributed", "threaded", "synchronous"] = "local",
+    mode: Literal["local", "distributed", "threaded", "synchronous", "slurm"] = "local",
     *,
     n_workers: int | None = None,
     threads_per_worker: int = 1,
     memory_per_worker: str | None = None,
     scheduler_address: str | None = None,
     dashboard: bool = True,
+    walltime: str = "0-1:00:00",
     performance_report_file: str | None = None,
     silence_logs: int = logging.WARNING,
     set_global: bool = False,
@@ -162,6 +222,7 @@ def dask_client(
         memory_per_worker=memory_per_worker,
         scheduler_address=scheduler_address,
         dashboard=dashboard,
+        walltime=walltime,
         silence_logs=silence_logs,
     )
 

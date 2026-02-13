@@ -224,7 +224,7 @@ def sre_fwht(state: DenseState) -> PropertyResult:
         A = np.conjugate(psi[idx ^ k]) * psi   # shape (N,)
         in_place_FHWT(A)
         acc += np.sum(np.abs(A)**4)
-    sre = -np.log2(acc/(2**n))
+    sre = -np.log2(acc/(state.d**n))
 
     details = {"method":"FWHT", "n_qubits":n}
     return PropertyResult(name="SRE", value=sre, meta=details)

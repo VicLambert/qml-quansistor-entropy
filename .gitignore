@@ -1,3 +1,7 @@
 *.md
 
 example_visualization.py
+
+logs/workers
+outputs/cache
+outputs/runs

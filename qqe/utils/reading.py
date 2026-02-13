@@ -166,8 +166,7 @@ def make_property_cache_key(
 
 
 def _to_jsonable(x: Any) -> Any:
-    # small, practical converter; you can replace with your serialize.py later
-    if is_dataclass(x):
+    if is_dataclass(x) and not isinstance(x, type):
         return asdict(x)
     if isinstance(x, Path):
         return str(x)
@@ -236,15 +235,6 @@ class RunStore:
         with open(self.summary_path, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2, default=_to_jsonable)
 
-
-def _to_jsonable(obj: Any) -> Any:
-    if dataclasses.is_dataclass(obj):
-        return {k: _to_jsonable(v) for k, v in dataclasses.asdict(obj).items()}
-    if isinstance(obj, dict):
-        return {k: _to_jsonable(v) for k, v in obj.items()}
-    if isinstance(obj, (list, tuple)):
-        return [_to_jsonable(v) for v in obj]
-    return obj
 
 
 def write_json(path: str | Path, obj: Any, *, indent: int = 2, compress: bool = False) -> None:

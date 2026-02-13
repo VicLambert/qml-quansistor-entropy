@@ -1,0 +1,12 @@
+2026-02-12 12:36:35,359 - __main__ - INFO - Starting data generation...
+2026-02-12 12:36:35,364 - __main__ - INFO - Generated 5000 configurations
+2026-02-12 12:36:35,364 - __main__ - INFO - Computing SRE using backend=quimb, method=fwht, parallel=True
+2026-02-12 12:36:35,364 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
+2026-02-12 12:36:38,060 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-12 12:36:38,060 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.37:8787/status
+2026-02-12 12:36:56,973 - __main__ - INFO - Dask dashboard: http://172.26.44.37:8787/status
+2026-02-12 12:36:56,974 - __main__ - INFO - Workers connected: 5
+Computing SRE (parallel):   0%|          | 0/5000 [00:00<?, ?it/s]Computing SRE (parallel):   0%|          | 1/5000 [00:12<17:30:43, 12.61s/it]Computing SRE (parallel):   0%|          | 23/5000 [00:12<32:38,  2.54it/s]  Computing SRE (parallel):   1%|▏         | 73/5000 [00:12<07:55, 10.37it/s]Computing SRE (parallel):   2%|▏         | 122/5000 [00:12<03:53, 20.91it/s]Computing SRE (parallel):   3%|▎         | 170/5000 [00:13<02:18, 34.87it/s]Computing SRE (parallel):   4%|▍         | 200/5000 [00:13<05:14, 15.29it/s]
+2026-02-12 12:37:10,296 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-12 12:37:10,299 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_exact.json
+2026-02-12 12:37:10,299 - __main__ - INFO - Completed 200 SRE computations
