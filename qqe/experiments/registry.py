@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from qqe.backend.pennylane import PennylaneBackend
+from qqe.backend.pennylane_backend import PennylaneBackend
 from qqe.circuit.families import CliffordBrickwork, HaarBrickwork, QuansistorBrickwork
 from qqe.properties.SRE import sre_fwht
 from qqe.properties.SRE import sre_exact

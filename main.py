@@ -23,6 +23,7 @@ from qqe.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
+    RandomCircuit,
 )
 from qqe.experiments.core import run_experiment
 from qqe.experiments.plotting import (
@@ -131,6 +132,7 @@ def _plot(
     elif group_keys == ["n_qubits", "family.tcount"]:
         plot_sredensity_v_tcount(
             results=summary,
+            n_layers=n_layers,
             save_path=f"outputs/figures/sredensity_vs_tcount_{method}_{n_layers}l.png",
             show=True,
         )

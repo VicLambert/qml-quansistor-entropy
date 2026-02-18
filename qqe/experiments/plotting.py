@@ -369,9 +369,9 @@ def plot_sre(
     plt.close(fig)
 
 
-def _gse(d: int, n_qubits: int, q: int) -> float:
+def _gse(d: int, n_qubits: Any, q: Any) -> float:
     phys_dim = d ** n_qubits
-    f = (-4 + 3 * (phys_dim**2 -phys_dim)) / (4 * (phys_dim**2 - 1))
+    f = (-4 + 3 * (phys_dim**2 - phys_dim)) / (4 * (phys_dim**2 - 1))
 
     num = np.asarray( 4 +(phys_dim - 1) * f ** (n_qubits*q), dtype=float)
     return -np.log2(num / (3 + phys_dim))
@@ -379,7 +379,7 @@ def _gse(d: int, n_qubits: int, q: int) -> float:
     # term1 = 3 / (d**n_qubits + 2)
     # term2 = (d**n_qubits - 1) / (d**n_qubits + 2)
     # inner = (2/d * d**(2*n_qubits) - (d-2) * 2/d * d**n_qubits - 1) / (d**(2*n_qubits) - 1)
-    # return -np.log2(term1 + term2 * inner**(q*n_qubits))
+    # return -np.log(term1 + term2 * inner**(q*n_qubits))
 
 def plot_sredensity_v_tcount(
     results: dict[str, Any],
