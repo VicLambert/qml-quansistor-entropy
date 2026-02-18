@@ -144,7 +144,7 @@ def create_distributed_client(
 def create_client(
     mode: Literal["local", "distributed", "threaded", "synchronous", "slurm"] = "local",
     *,
-    n_workers: int | None = None,
+    n_workers: int,
     threads_per_worker: int = 1,
     memory_per_worker: str | None = None,
     scheduler_address: str | None = None,
