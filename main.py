@@ -248,7 +248,7 @@ def _sweep_jobs(
     outputs: list[dict[str, Any]] = []
 
     with dask_client(
-        mode="slurm", n_workers=15, threads_per_worker=4, memory_per_worker="64GiB", dashboard=True, walltime="0-0:25:00",
+        mode="local", n_workers=4, threads_per_worker=1, dashboard=True,
     ) as client:
         for job in jobs:
             run_store.log_job(job)
@@ -432,6 +432,7 @@ def main(
     if run == "sweep" and sweep_type == "tcount":
         plot_sredensity_v_tcount(
             results=summary,
+            n_layers=n_layers,
             save_path=str(fig_dir / f"sredensity_vs_tcount_{method}_{n_layers}l.png"),
             show=False,
         )

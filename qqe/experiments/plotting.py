@@ -383,6 +383,7 @@ def _gse(d: int, n_qubits: int, q: int) -> float:
 
 def plot_sredensity_v_tcount(
     results: dict[str, Any],
+    n_layers: int,
     *,
     save_path: str | None = None,
     show: bool = True,
@@ -447,19 +448,19 @@ def plot_sredensity_v_tcount(
     for n_qubits, rows in sorted(curves.items(), key=lambda x: x[0]):
         ns.append(int(n_qubits))
         rows.sort(key=lambda r: r[0])  # sort by tcount
-        xs = [r[0] / n_qubits for r in rows]
-        ys = [r[1] / n_qubits for r in rows]
-        es = [r[2] / n_qubits for r in rows]
-        ax.errorbar(xs, ys, yerr=es, label=f"n={n_qubits}", marker="o", capsize=3)
+        xs = np.array([r[0] for r in rows])
+        ys = np.array([r[1] for r in rows])
+        es = np.array([r[2] for r in rows])
+        ax.errorbar(xs, ys/n_qubits, yerr=es/n_qubits, label=f"n={n_qubits}", marker="o", capsize=3)
 
-    q = np.linspace(0, 38, 1000)
+    NT = np.linspace(0, 2*n_layers, 1000, dtype=float)
 
     for j, n_qubits in enumerate(ns):
         alpha = 0.2 + 0.8 * j / (len(ns) - 1)
         alpha = min(1, max(0, alpha))
-        xs = q/n_qubits
-        gsre = _gse(2, n_qubits, xs)
-        ax.plot(xs, gsre/n_qubits, linestyle="-", alpha=alpha, label=f"GSE n={n_qubits}")
+        q = NT/n_qubits
+        gsre = _gse(2, n_qubits, q)/n_qubits
+        ax.plot(q, gsre, linestyle="-", color="black", alpha=alpha, label=f"GSE n={n_qubits}")
     M_max = np.log2(2**ns[-1])
     plt.axhline(y=(M_max)/ns[-1], linestyle="--", alpha=0.7)
     q_c = np.log2(2) / np.log2(4/3)
