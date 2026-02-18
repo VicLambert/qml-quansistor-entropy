@@ -8,12 +8,13 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+import pandas as pd
 import typer
 
 from dask.distributed import as_completed
 from tqdm import tqdm
 
-from qqe.backend import PennylaneBackend, QuimbBackend
+from qqe.backend import PennylaneBackend, QuimbBackend, BaseBackend
 from qqe.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
@@ -33,17 +34,15 @@ data = [
         "n_qubits",
         "n_layers",
         "seed",
-        "state_vector",
         "SRE",
-        "SRE_std",
     ],  # state_vector
 ]
 
-n_seeds = 50
+n_seeds = 100
 
 qubits_range = np.arange(4, 11, 2)
-layers_range = np.arange(1, 51, 2)
-tcount_range = np.arange(0, 100, 2)
+layers_range = np.arange(1, 101, 2)
+tcount_range = np.arange(0, 200, 2)
 
 # Backend and family registries
 BACKEND_REGISTRY = {
@@ -96,7 +95,7 @@ def generate_data_params(qubits_range, layers_range, n_seeds):
         for n_qubits, n_layers in params:
             seed = make_seed(n_qubits, n_layers, rep)
             cid = make_cid("haar", n_qubits, n_layers, seed)
-            data.append([cid, "haar", n_qubits, n_layers, seed, None, None, None])
+            data.append([cid, "haar", n_qubits, n_layers, seed, None, None])
     return data
 
 
@@ -109,7 +108,7 @@ def compute_sre_for_row(
     backend: str = "quimb",
     method: str = "exact",
     representation: str = "dense",
-) -> tuple[float | None, float | None, list | None]:
+) -> float | None:
     """Compute SRE and state_vector for a single configuration.
 
     Args:
@@ -123,13 +122,17 @@ def compute_sre_for_row(
         representation: State representation ('dense' or 'mps')
 
     Returns:
-        Tuple of (SRE_value, SRE_std, state_vector) where SRE_std is None for deterministic methods
+        SRE value (float) or None if computation fails
     """
     from qqe.experiments.core import ExperimentConfig
     from qqe.properties.compute import PropertyRequest
     from qqe.states.types import DenseState
 
     try:
+        n_qubits = int(n_qubits)
+        n_layers = int(n_layers)
+        seed = int(seed)
+        d = int(d)
         # Get circuit specification
         family_cls = FAMILY_REGISTRY[family]
         family_obj = family_cls()
@@ -162,44 +165,50 @@ def compute_sre_for_row(
             properties=[property_request],
         )
 
-        # Run experiment
+        # Simulate once so the final state is available here.
+        backend_factory = BACKEND_REGISTRY[backend]
+        backend_instance = backend_factory() if callable(backend_factory) else backend_factory
+        state = backend_instance.simulate(
+            spec,
+            representation=representation,
+            **backend_config.params,
+        )
+
+        # Run experiment using the precomputed state
         result = run_experiment(
             exp_config,
             backend_registry=BACKEND_REGISTRY,
+            state=state,
             cache=cache,
         )
 
         # Extract SRE value
         sre_result = result.results.get("SRE")
         sre_value = sre_result.value if sre_result else None
-        sre_std = sre_result.meta.get("std") if sre_result else None
+
 
         # Extract state vector (only for dense representation)
         state_vector_list = None
         if representation == "dense":
             try:
-                # Try to access state vector through public interface
-                if hasattr(result, "state_info") and result.state_info is not None:
-                    state_vec = result.state_info.get("state_vector")
-                    logger.info("Accessed state vector")
-                    if isinstance(state_vec, DenseState):
-                        state_vector_list = state_vec.vector.tolist()
-                    else:
-                        state_vector_list = np.asarray(state_vec).tolist()
+                if isinstance(state, DenseState):
+                    state_vector_list = state.vector.tolist()
+                elif hasattr(state, "vector"):
+                    state_vector_list = np.asarray(state.vector).tolist()
+                else:
+                    state_vector_list = np.asarray(state).tolist()
             except (AttributeError, TypeError, ValueError):
-                pass  # If state extraction fails, just skip it
+                state_vector_list = None
 
         # Convert numpy types to native Python floats for JSON serialization
         if sre_value is not None:
             sre_value = float(sre_value)
-        if sre_std is not None:
-            sre_std = float(sre_std)
-
-        return sre_value, sre_std, state_vector_list
 
     except Exception:
         logger.exception("Error computing SRE for Q%s_L%s_S%s", n_qubits, n_layers, seed)
-        return None, None, None
+        return None
+    else:
+        return sre_value
 
 
 def compute_all_sre(
@@ -233,10 +242,10 @@ def compute_all_sre_sequential(
     updated_rows = []
 
     for row in tqdm(data_rows, desc="Computing SRE"):
-        cid, family, n_qubits, n_layers, seed, state_vector, sre, sre_std = row
+        cid, family, n_qubits, n_layers, seed, sre = row
 
         # Compute SRE, SRE_std, and state_vector
-        sre_value, sre_std_value, state_vec = compute_sre_for_row(
+        sre_value = compute_sre_for_row(
             family=family,
             n_qubits=n_qubits,
             n_layers=n_layers,
@@ -244,7 +253,7 @@ def compute_all_sre_sequential(
             backend=backend,
             method=method,
         )
-        logger.info(f"Computed SRE for {cid}: SRE={sre_value}, SRE_std={sre_std_value}")
+        logger.info(f"Computed SRE for {cid}: SRE={sre_value}")
 
         # Update row with results
         updated_row = [
@@ -253,9 +262,7 @@ def compute_all_sre_sequential(
             n_qubits,
             n_layers,
             seed,
-            state_vec,
             sre_value,
-            sre_std_value,
         ]
         updated_rows.append(updated_row)
 
@@ -273,7 +280,7 @@ def compute_all_sre_parallel(data_rows, backend, method) -> list[list[Any]]:
         threads_per_worker=1,  # important (see next section)
         memory_per_worker="64GiB",
         dashboard=True,
-        walltime="0-0:30:00",
+        walltime="0-2:30:00",
     ) as client:
 
         client.wait_for_workers(1)
@@ -281,6 +288,7 @@ def compute_all_sre_parallel(data_rows, backend, method) -> list[list[Any]]:
         logger.info(f"Workers connected: {len(client.scheduler_info()['workers'])}")
 
         inflight = {}
+        ac = as_completed()
         max_inflight = 200  # tune this (start 50–200)
 
         it = iter(enumerate(data_rows))
@@ -298,6 +306,7 @@ def compute_all_sre_parallel(data_rows, backend, method) -> list[list[Any]]:
                 pure=False,
             )
             inflight[fut] = (i, row)
+            ac.add(fut)
 
         # prime
         for _ in range(min(max_inflight, len(data_rows))):
@@ -306,12 +315,10 @@ def compute_all_sre_parallel(data_rows, backend, method) -> list[list[Any]]:
                 break
             submit_one(i, row)
 
-        ac = as_completed(inflight)
-
         for fut in tqdm(ac, total=len(data_rows), desc="Computing SRE (parallel)"):
             i, row = inflight.pop(fut)
             try:
-                sre_value, sre_std_value, state_vec = fut.result()
+                sre_value = fut.result()
                 cid, family, n_qubits, n_layers, seed, *_ = row
                 updated_rows[i] = [
                     cid,
@@ -319,9 +326,7 @@ def compute_all_sre_parallel(data_rows, backend, method) -> list[list[Any]]:
                     n_qubits,
                     n_layers,
                     seed,
-                    state_vec,
                     sre_value,
-                    sre_std_value,
                 ]
             except Exception as e:
                 logger.error(f"Failed row {i}: {e}")
@@ -339,7 +344,9 @@ def main(
     backend: str = typer.Option("quimb", help="Backend to use (quimb or pennylane)"),
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
     use_dask: bool = typer.Option(True, help="Use Dask for parallel computation"),
-    output_file: str = typer.Option("qqe/data/sre_data_quimb_exact.json", help="Output file for results"),
+    output_file: str = typer.Option(
+        "qqe/data/", help="Output file for results"
+    ),
 ):
     """Generate and compute SRE data for Haar circuits."""
     # Generate parameter configurations
@@ -349,11 +356,14 @@ def main(
     # Compute SRE for all rows
     logger.info(f"Computing SRE using backend={backend}, method={method}, parallel={use_dask}")
     updated_rows = compute_all_sre(
-        data_rows, backend=backend, method=method, use_dask=use_dask
+        data_rows,
+        backend=backend,
+        method=method,
+        use_dask=use_dask,
     )
 
     # Save results
-    output_path = PROJECT_ROOT / output_file
+    output_path = PROJECT_ROOT / output_file / f"sre_data_{backend}_{method}"
     results_data = {
         "header": [
             "cid",
@@ -361,9 +371,7 @@ def main(
             "n_qubits",
             "n_layers",
             "seed",
-            "state_vector",
             "SRE",
-            "SRE_std",
         ],
         "data": updated_rows,
         "metadata": {
@@ -374,9 +382,16 @@ def main(
             "layers_range": layers_range.tolist(),
         },
     }
+    logger.info(len(updated_rows))
 
-    with output_path.open("w") as f:
-        json.dump(results_data, f, indent=2, default=str)
+    results = pd.DataFrame(
+        results_data["data"],
+        columns=results_data["header"],
+    )
+
+    results.to_json(output_path.with_suffix(".json"), index=False)
+    # with output_path.open("w") as f:
+    #     json.dump(results_data, f, indent=2, default=str)
 
     logger.info(f"Results saved to {output_path}")
     logger.info(f"Completed {len(updated_rows)} SRE computations")

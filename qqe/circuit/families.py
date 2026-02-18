@@ -148,25 +148,38 @@ class CliffordBrickwork:
         )
         return replace(spec, gates=tuple(self.gates(spec)))
 
+    # 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         tdoping = spec.params.get("tdoping", None)
         logger.info(f"Generating gates for CliffordBrickwork with tdoping={tdoping}")
 
         # Prepare T-gate placement for all layers upfront
         t_wires_per_layer = {}
-        if tdoping is not None:
+        if tdoping is not None and tdoping.count > 0:
             # Determine center qubits based on circuit size
             if spec.n_qubits % 2 == 0:
                 center_wires = (spec.n_qubits // 2 - 1, spec.n_qubits // 2)
             else:
                 center_wires = (spec.n_qubits // 2,)
 
-            # Prepare T-gate wire selections for all layers except the last
-            n_t_gates = min(tdoping.per_layer, len(center_wires))
+            # Distribute tdoping.count T-gates across layers (excluding last layer)
+            total_t_gates = tdoping.count
+            n_available_layers = spec.n_layers - 1  # exclude last layer
 
-            for layer in range(spec.n_layers - 1):
-                # Always use the same centered wires for each layer
-                t_wires_per_layer[layer] = list(center_wires[:n_t_gates])
+            if n_available_layers > 0:
+                # Calculate how many T-gates per layer
+                t_gates_per_layer = total_t_gates // n_available_layers
+                remainder = total_t_gates % n_available_layers
+
+                for layer in range(n_available_layers):
+                    # Distribute the remainder across first few layers
+                    n_t_this_layer = t_gates_per_layer + (1 if layer < remainder else 0)
+
+                    # Limit by available center wires and per_layer setting
+                    n_t_this_layer = min(n_t_this_layer, tdoping.per_layer, len(center_wires))
+
+                    if n_t_this_layer > 0:
+                        t_wires_per_layer[layer] = list(center_wires[:n_t_this_layer])
 
         # Yield gates layer by layer: Clifford gates, then T-gates
         for layer in range(spec.n_layers):
@@ -202,7 +215,7 @@ class CliffordBrickwork:
                 )
 
             # Yield T-gates for this layer (only if not the last layer)
-            if layer < spec.n_layers - 1 and layer in t_wires_per_layer:
+            if layer in t_wires_per_layer:
                 for wire in t_wires_per_layer[layer]:
                     yield GateSpec(
                         kind="T",
@@ -379,24 +392,69 @@ class QuansistorBrickwork:
                             f"wire_{a}_{b}",
                         ),
                     )
+@dataclass(frozen=True)
+class RandomCircuit:
+    name: str = "random"
+    p_cnot: float = 0.5
+    rot_set: tuple[str, ...] = ("RX", "RY", "RZ")
 
-            # ---- leftover nearest-neighbor pairs
-            # pairs = leftover_pairs(spec.n_qubits, used, spec.connectivity)
-            # for j, (a, b) in enumerate(pairs):
-            #     for _ in range(2):
-            #         s = gate_seed(
-            #             spec.global_seed,
-            #             kind="quansistor",
-            #             layer=layer,
-            #             slot=1000 + 10 * j + _,
-            #             wires=(a, b),
-            #             ordered_wires=True,
-            #         )
-            #         yield GateSpec(
-            #             kind="quansistor",
-            #             wires=(a, b),
-            #             d=spec.d,
-            #             seed=s,
-            #             tags=("layer", f"L{layer}", "leftover", f"p{j}"),
-            #             params=("leftover", True),
-            #         )
+    def make_spec(
+        self,
+        n_qubits: int,
+        n_layers: int,
+        d: int,
+        seed: int,
+        *,
+        connectivity: str = "line",
+        pattern: str = "random",
+        **kwargs: Any,
+    ) -> CircuitSpec:
+        spec = CircuitSpec(
+            n_qubits=n_qubits,
+            n_layers=n_layers,
+            d=d,
+            global_seed=seed,
+            family=self.name,
+            connectivity=connectivity,
+            pattern=pattern,
+            params={},
+        )
+        return replace(spec, gates=tuple(self.gates(spec)))
+
+    def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
+        rng_global = np.random.default_rng(spec.global_seed)
+        p_cnot = float(spec.params.get("p_cnot", 0.5))
+        rot_set = tuple(spec.params.get("rot_set", ("RX","RY","RZ")))
+
+        for layer in range(spec.n_layers):
+            for wire in range(spec.n_qubits):
+                    s = gate_seed(spec.global_seed, layer=layer, slot=wire, wires=(wire,), kind="rot", ordered_wires=True)
+                    rng = np.random.default_rng(s)
+                    kind = rng.choice(rot_set)
+                    theta = float(rng.uniform(0, 2*np.pi))
+
+                    yield GateSpec(
+                        kind="random",          # "RX"/"RY"/"RZ"
+                        wires=(wire,),
+                        d=spec.d,
+                        seed=s,
+                        params=(theta,),
+                        tags=("layer", f"L{wire}", "1q", kind),
+                    )
+
+                # 2q brickwork: sometimes CNOT
+                    pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
+                    for slot, (a, b) in enumerate(pairs):
+                        s2 = gate_seed(spec.global_seed, layer=layer, slot=slot, wires=(a,b), kind="cnot", ordered_wires=True)
+                        rng2 = np.random.default_rng(s2)
+                        if rng2.random() < p_cnot:
+                            # random direction
+                            ctrl, tgt = (a, b) if rng2.random() < 0.5 else (b, a)
+                            yield GateSpec(
+                                kind="CNOT",
+                                wires=(ctrl, tgt),
+                                d=spec.d,
+                                seed=s2,
+                                params=(),
+                                tags=("layer", f"L{layer}", "2q", "CNOT"),
+                            )

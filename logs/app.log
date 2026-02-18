@@ -1,60 +1,57 @@
-2026-02-12 06:56:34,666 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
-2026-02-12 06:56:34,708 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
-2026-02-12 06:56:49,139 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 06:56:49,140 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.37:8787/status
-2026-02-12 06:58:12,789 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 06:58:14,683 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-12 06:58:14,685 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-12_14-56-34__SRE_sweep_tcount_fwht
-2026-02-12 09:26:54,507 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
-2026-02-12 09:26:54,571 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
-2026-02-12 09:27:09,220 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 09:27:09,220 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.72:8787/status
-2026-02-12 09:27:47,790 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 09:27:49,228 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-12 09:27:49,230 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-12_17-26-54__SRE_sweep_tcount_fwht
-2026-02-12 09:46:26,187 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-12 09:46:26,232 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
-2026-02-12 09:46:36,346 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 09:46:36,346 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.50:8787/status
-2026-02-12 09:47:28,286 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 09:47:29,461 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-12 09:47:29,487 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-12_17-46-26__SRE_sweep_tcount_fwht
-2026-02-12 10:16:23,930 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-12 10:16:23,973 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
-2026-02-12 10:16:36,917 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 10:16:36,918 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.56:8787/status
-2026-02-12 10:17:44,843 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 11:51:55,233 - __main__ - INFO - Starting data generation...
-2026-02-12 12:16:11,155 - __main__ - INFO - Starting data generation...
-2026-02-12 12:16:11,160 - __main__ - INFO - Generated 5000 configurations
-2026-02-12 12:16:11,160 - __main__ - INFO - Computing SRE using backend=quimb, method=fwht, parallel=True
-2026-02-12 12:16:11,160 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
-2026-02-12 12:16:19,370 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 12:16:19,370 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.43.61:8787/status
-2026-02-12 12:16:51,932 - __main__ - INFO - Dask dashboard: http://172.26.43.61:8787/status
-2026-02-12 12:16:51,932 - __main__ - INFO - Workers connected: 5
-2026-02-12 12:17:12,324 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 12:17:12,360 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_exact.json
-2026-02-12 12:17:12,360 - __main__ - INFO - Completed 200 SRE computations
-2026-02-12 12:31:37,171 - __main__ - INFO - Starting data generation...
-2026-02-12 12:31:37,176 - __main__ - INFO - Generated 5000 configurations
-2026-02-12 12:31:37,176 - __main__ - INFO - Computing SRE using backend=quimb, method=fwht, parallel=True
-2026-02-12 12:31:37,176 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
-2026-02-12 12:31:46,373 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 12:31:46,373 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.44:8787/status
-2026-02-12 12:33:26,494 - __main__ - INFO - Dask dashboard: http://172.26.44.44:8787/status
-2026-02-12 12:33:26,497 - __main__ - INFO - Workers connected: 5
-2026-02-12 12:33:37,878 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 12:33:37,891 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_exact.json
-2026-02-12 12:33:37,891 - __main__ - INFO - Completed 200 SRE computations
-2026-02-12 12:36:35,359 - __main__ - INFO - Starting data generation...
-2026-02-12 12:36:35,364 - __main__ - INFO - Generated 5000 configurations
-2026-02-12 12:36:35,364 - __main__ - INFO - Computing SRE using backend=quimb, method=fwht, parallel=True
-2026-02-12 12:36:35,364 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
-2026-02-12 12:36:38,060 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 12:36:38,060 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.37:8787/status
-2026-02-12 12:36:56,973 - __main__ - INFO - Dask dashboard: http://172.26.44.37:8787/status
-2026-02-12 12:36:56,974 - __main__ - INFO - Workers connected: 5
-2026-02-12 12:37:10,296 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-12 12:37:10,299 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_exact.json
-2026-02-12 12:37:10,299 - __main__ - INFO - Completed 200 SRE computations
+2026-02-17 06:31:06,451 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
+2026-02-17 06:31:06,536 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
+2026-02-17 06:31:22,218 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 06:31:22,218 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.43.44:8787/status
+2026-02-17 06:32:58,214 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 06:32:59,480 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
+2026-02-17 06:32:59,482 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-17_14-31-06__SRE_sweep_tcount_fwht
+2026-02-17 08:16:26,567 - __main__ - INFO - Starting data generation...
+2026-02-17 08:16:26,603 - __main__ - INFO - Generated 5000 configurations
+2026-02-17 08:16:26,603 - __main__ - INFO - Computing SRE using backend=quimb, method=exact, parallel=True
+2026-02-17 08:16:26,603 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
+2026-02-17 08:16:40,825 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 08:16:40,825 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.42.44:8787/status
+2026-02-17 08:16:46,890 - __main__ - INFO - Dask dashboard: http://172.26.42.44:8787/status
+2026-02-17 08:16:46,890 - __main__ - INFO - Workers connected: 5
+2026-02-17 08:17:49,991 - __main__ - INFO - Starting data generation...
+2026-02-17 08:17:49,995 - __main__ - INFO - Generated 5000 configurations
+2026-02-17 08:17:49,995 - __main__ - INFO - Computing SRE using backend=quimb, method=fwht, parallel=True
+2026-02-17 08:17:49,995 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
+2026-02-17 08:17:51,517 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 08:17:51,517 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.12:8787/status
+2026-02-17 08:18:15,595 - __main__ - INFO - Dask dashboard: http://172.26.44.12:8787/status
+2026-02-17 08:18:15,596 - __main__ - INFO - Workers connected: 5
+2026-02-17 08:18:33,860 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 08:18:33,860 - __main__ - INFO - 5000
+2026-02-17 08:18:34,555 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_fwht
+2026-02-17 08:18:34,556 - __main__ - INFO - Completed 5000 SRE computations
+2026-02-17 08:19:24,976 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 08:19:24,977 - __main__ - INFO - 5000
+2026-02-17 08:19:25,064 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_exact
+2026-02-17 08:19:25,065 - __main__ - INFO - Completed 5000 SRE computations
+2026-02-17 11:39:51,912 - __main__ - INFO - Starting data generation...
+2026-02-17 11:39:51,931 - __main__ - INFO - Generated 20000 configurations
+2026-02-17 11:39:51,931 - __main__ - INFO - Computing SRE using backend=quimb, method=fwht, parallel=True
+2026-02-17 11:39:51,931 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
+2026-02-17 11:40:05,994 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 11:40:05,995 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.45.41:8787/status
+2026-02-17 11:40:30,078 - __main__ - INFO - Dask dashboard: http://172.26.45.41:8787/status
+2026-02-17 11:40:30,078 - __main__ - INFO - Workers connected: 5
+2026-02-17 11:44:44,524 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 11:44:44,525 - __main__ - INFO - 20000
+2026-02-17 11:44:45,198 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_fwht
+2026-02-17 11:44:45,198 - __main__ - INFO - Completed 20000 SRE computations
+2026-02-17 13:05:35,769 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
+2026-02-17 13:05:35,907 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
+2026-02-17 13:05:51,934 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 13:05:51,934 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.43.22:8787/status
+2026-02-17 13:07:08,939 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 13:07:10,563 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
+2026-02-17 13:07:10,577 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-17_21-05-35__SRE_sweep_tcount_fwht
+2026-02-17 13:12:09,995 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
+2026-02-17 13:12:10,166 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
+2026-02-17 13:12:14,149 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 13:12:14,149 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.67:8787/status
+2026-02-17 13:13:48,169 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 13:13:48,810 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
+2026-02-17 13:13:48,832 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-17_21-12-10__SRE_sweep_tcount_fwht

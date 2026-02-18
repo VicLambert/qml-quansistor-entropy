@@ -1,627 +1,8 @@
-2026-02-12 10:16:23,930 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-12 10:16:23,973 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
-2026-02-12 10:16:36,917 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-12 10:16:36,918 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.56:8787/status
-Running jobs:   0%|          | 0/585 [00:00<?, ?job/s]Running jobs:   0%|          | 1/585 [00:32<5:18:20, 32.71s/job]Running jobs:   1%|          | 6/585 [00:37<46:07,  4.78s/job]  Running jobs:   1%|          | 7/585 [00:37<37:17,  3.87s/job]Running jobs:   1%|▏         | 8/585 [00:37<29:14,  3.04s/job]Running jobs:   2%|▏         | 9/585 [00:37<22:40,  2.36s/job]Running jobs:   2%|▏         | 11/585 [00:37<13:35,  1.42s/job]Running jobs:   2%|▏         | 14/585 [00:37<07:24,  1.28job/s]Running jobs:   3%|▎         | 16/585 [00:38<05:38,  1.68job/s]Running jobs:   4%|▍         | 22/585 [00:38<02:35,  3.61job/s]Running jobs:   6%|▋         | 37/585 [00:38<00:52, 10.42job/s]Running jobs:   8%|▊         | 46/585 [00:38<00:35, 15.28job/s]Running jobs:   9%|▉         | 53/585 [00:41<01:31,  5.80job/s]Running jobs:  10%|▉         | 58/585 [00:42<01:21,  6.46job/s]Running jobs:  11%|█         | 62/585 [00:42<01:07,  7.75job/s]Running jobs:  11%|█▏        | 66/585 [00:42<00:54,  9.46job/s]Running jobs:  12%|█▏        | 70/585 [00:42<00:44, 11.56job/s]Running jobs:  14%|█▎        | 80/585 [00:42<00:25, 19.68job/s]Running jobs:  16%|█▋        | 96/585 [00:42<00:13, 35.90job/s]Running jobs:  19%|█▉        | 114/585 [00:42<00:08, 55.72job/s]Running jobs:  22%|██▏       | 126/585 [00:43<00:07, 62.32job/s]Running jobs:  23%|██▎       | 137/585 [00:45<00:35, 12.54job/s]Running jobs:  25%|██▍       | 145/585 [00:46<00:34, 12.60job/s]Running jobs:  26%|██▌       | 151/585 [00:46<00:29, 14.54job/s]Running jobs:  27%|██▋       | 157/585 [00:46<00:24, 17.32job/s]Running jobs:  29%|██▉       | 170/585 [00:46<00:15, 26.13job/s]Running jobs:  32%|███▏      | 185/585 [00:46<00:10, 38.76job/s]Running jobs:  33%|███▎      | 194/585 [00:46<00:09, 39.85job/s]Running jobs:  35%|███▍      | 202/585 [00:47<00:09, 42.47job/s]Running jobs:  36%|███▌      | 209/585 [00:47<00:08, 42.40job/s]Running jobs:  37%|███▋      | 216/585 [00:47<00:07, 46.21job/s]Running jobs:  38%|███▊      | 223/585 [00:47<00:11, 32.49job/s]Running jobs:  39%|███▉      | 228/585 [00:49<00:38,  9.39job/s]Running jobs:  40%|███▉      | 232/585 [00:50<00:37,  9.47job/s]Running jobs:  40%|████      | 235/585 [00:50<00:33, 10.52job/s]Running jobs:  41%|████      | 238/585 [00:50<00:29, 11.86job/s]Running jobs:  41%|████▏     | 242/585 [00:50<00:24, 13.88job/s]Running jobs:  42%|████▏     | 246/585 [00:50<00:20, 16.54job/s]Running jobs:  43%|████▎     | 254/585 [00:50<00:13, 25.38job/s]Running jobs:  46%|████▌     | 268/585 [00:50<00:07, 43.71job/s]Running jobs:  47%|████▋     | 276/585 [00:51<00:06, 48.83job/s]Running jobs:  48%|████▊     | 283/585 [00:51<00:08, 37.00job/s]Running jobs:  49%|████▉     | 289/585 [00:51<00:09, 32.33job/s]Running jobs:  50%|█████     | 294/585 [00:51<00:09, 32.28job/s]Running jobs:  51%|█████     | 299/585 [00:51<00:09, 31.25job/s]Running jobs:  52%|█████▏    | 303/585 [00:52<00:09, 29.83job/s]Running jobs:  53%|█████▎    | 308/585 [00:52<00:10, 27.44job/s]Running jobs:  53%|█████▎    | 312/585 [00:52<00:10, 25.63job/s]Running jobs:  54%|█████▍    | 315/585 [00:52<00:10, 25.42job/s]Running jobs:  54%|█████▍    | 318/585 [00:53<00:34,  7.82job/s]Running jobs:  55%|█████▍    | 320/585 [00:54<00:31,  8.49job/s]Running jobs:  55%|█████▌    | 322/585 [00:54<00:29,  8.92job/s]Running jobs:  55%|█████▌    | 324/585 [00:54<00:26,  9.96job/s]Running jobs:  56%|█████▋    | 330/585 [00:54<00:16, 15.42job/s]Running jobs:  57%|█████▋    | 333/585 [00:54<00:14, 16.88job/s]Running jobs:  58%|█████▊    | 339/585 [00:54<00:11, 22.00job/s]Running jobs:  59%|█████▉    | 344/585 [00:54<00:09, 26.74job/s]Running jobs:  60%|█████▉    | 349/585 [00:55<00:07, 31.31job/s]Running jobs:  62%|██████▏   | 360/585 [00:55<00:04, 47.44job/s]Running jobs:  63%|██████▎   | 366/585 [00:55<00:04, 44.93job/s]Running jobs:  64%|██████▎   | 372/585 [00:55<00:07, 27.35job/s]Running jobs:  64%|██████▍   | 376/585 [00:55<00:08, 25.23job/s]Running jobs:  65%|██████▍   | 380/585 [00:56<00:10, 19.02job/s]Running jobs:  65%|██████▌   | 383/585 [00:56<00:11, 17.28job/s]Running jobs:  66%|██████▌   | 386/585 [00:56<00:10, 19.01job/s]Running jobs:  67%|██████▋   | 390/585 [00:56<00:08, 22.24job/s]Running jobs:  67%|██████▋   | 393/585 [00:56<00:08, 21.51job/s]Running jobs:  68%|██████▊   | 396/585 [00:57<00:08, 21.16job/s]Running jobs:  69%|██████▊   | 401/585 [00:57<00:06, 26.38job/s]Running jobs:  69%|██████▉   | 405/585 [00:57<00:06, 26.48job/s]Running jobs:  70%|██████▉   | 408/585 [00:58<00:15, 11.36job/s]Running jobs:  70%|███████   | 411/585 [00:58<00:14, 12.09job/s]Running jobs:  71%|███████   | 413/585 [00:58<00:13, 13.09job/s]Running jobs:  71%|███████   | 416/585 [00:58<00:10, 15.38job/s]Running jobs:  72%|███████▏  | 419/585 [00:58<00:10, 16.52job/s]Running jobs:  72%|███████▏  | 423/585 [00:58<00:07, 20.80job/s]Running jobs:  73%|███████▎  | 426/585 [00:58<00:07, 20.06job/s]Running jobs:  74%|███████▎  | 430/585 [00:59<00:07, 20.11job/s]Running jobs:  75%|███████▍  | 436/585 [00:59<00:05, 27.73job/s]Running jobs:  76%|███████▌  | 443/585 [00:59<00:03, 36.70job/s]Running jobs:  78%|███████▊  | 454/585 [00:59<00:02, 53.08job/s]Running jobs:  79%|███████▉  | 461/585 [00:59<00:04, 27.50job/s]Running jobs:  80%|███████▉  | 466/585 [01:00<00:05, 19.93job/s]Running jobs:  80%|████████  | 470/585 [01:00<00:06, 18.03job/s]Running jobs:  81%|████████  | 473/585 [01:00<00:05, 18.87job/s]Running jobs:  81%|████████▏ | 476/585 [01:00<00:05, 20.08job/s]Running jobs:  82%|████████▏ | 479/585 [01:01<00:06, 15.29job/s]Running jobs:  82%|████████▏ | 482/585 [01:01<00:06, 15.81job/s]Running jobs:  83%|████████▎ | 485/585 [01:01<00:05, 17.29job/s]Running jobs:  84%|████████▎ | 489/585 [01:01<00:04, 20.86job/s]Running jobs:  84%|████████▍ | 492/585 [01:01<00:04, 22.08job/s]Running jobs:  85%|████████▍ | 495/585 [01:02<00:04, 18.21job/s]Running jobs:  85%|████████▌ | 498/585 [01:02<00:04, 18.68job/s]Running jobs:  86%|████████▌ | 502/585 [01:02<00:03, 22.91job/s]Running jobs:  86%|████████▋ | 505/585 [01:02<00:03, 22.64job/s]Running jobs:  87%|████████▋ | 508/585 [01:02<00:03, 22.15job/s]Running jobs:  87%|████████▋ | 511/585 [01:02<00:03, 23.51job/s]Running jobs:  88%|████████▊ | 514/585 [01:02<00:03, 23.15job/s]Running jobs:  88%|████████▊ | 517/585 [01:03<00:04, 15.65job/s]Running jobs:  89%|████████▊ | 519/585 [01:03<00:04, 14.38job/s]Running jobs:  90%|█████████ | 528/585 [01:03<00:02, 24.30job/s]Running jobs:  91%|█████████ | 531/585 [01:03<00:02, 19.69job/s]Running jobs:  91%|█████████▏| 534/585 [01:03<00:02, 18.25job/s]Running jobs:  92%|█████████▏| 536/585 [01:04<00:04, 10.42job/s]Running jobs:  92%|█████████▏| 539/585 [01:04<00:03, 12.62job/s]Running jobs:  93%|█████████▎| 543/585 [01:04<00:02, 16.26job/s]Running jobs:  93%|█████████▎| 546/585 [01:04<00:02, 16.81job/s]Running jobs:  94%|█████████▍| 549/585 [01:05<00:02, 16.19job/s]Running jobs:  94%|█████████▍| 551/585 [01:05<00:02, 15.80job/s]Running jobs:  95%|█████████▍| 555/585 [01:05<00:01, 18.44job/s]Running jobs:  96%|█████████▌| 559/585 [01:05<00:01, 21.88job/s]Running jobs:  97%|█████████▋| 565/585 [01:05<00:00, 29.85job/s]Running jobs:  97%|█████████▋| 569/585 [01:05<00:00, 25.16job/s]Running jobs:  98%|█████████▊| 572/585 [01:06<00:00, 23.32job/s]Running jobs:  98%|█████████▊| 575/585 [01:06<00:00, 21.29job/s]Running jobs:  99%|█████████▉| 578/585 [01:06<00:00, 21.81job/s]Running jobs:  99%|█████████▉| 582/585 [01:06<00:00, 25.15job/s]Running jobs: 100%|██████████| 585/585 [01:07<00:00,  8.85job/s]Running jobs: 100%|██████████| 585/585 [01:07<00:00,  8.68job/s]
-2026-02-12 10:17:44,843 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /project/6099921/NDOT/QML-gates-tests/qqe/main.py:445 in main                │
-│                                                                              │
-│   442 │   │   │   show=False,                                                │
-│   443 │   │   )                                                              │
-│   444 │   elif run == "sweep" and sweep_type == "n_layers":                  │
-│ ❱ 445 │   │   plot_sredensity_v_tcount(                                      │
-│   446 │   │   │   results=summary,                                           │
-│   447 │   │   │   save_path=str(fig_dir / f"sredensity_vs_nlayers_{method}_{ │
-│   448 │   │   │   show=False,                                                │
-│                                                                              │
-│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
-│ │          backend = 'quimb'                                               │ │
-│ │ backend_registry = {                                                     │ │
-│ │                    │   'pennylane': <function main.<locals>.<lambda> at  │ │
-│ │                    0x14dfbb6dbec0>,                                      │ │
-│ │                    │   'quimb': <function main.<locals>.<lambda> at      │ │
-│ │                    0x14dfafc97560>                                       │ │
-│ │                    }                                                     │ │
-│ │   circuit_family = 'clifford'                                            │ │
-│ │       experiment = JobConfig(                                            │ │
-│ │                    │   circuit_family='clifford',                        │ │
-│ │                    │   n_qubits=10,                                      │ │
-│ │                    │   n_layers=25,                                      │ │
-│ │                    │   d=2,                                              │ │
-│ │                    │   family_params={},                                 │ │
-│ │                    │   backend='quimb',                                  │ │
-│ │                    │   backend_params={},                                │ │
-│ │                    │   properties=[{'name': 'SRE', 'method': 'fwht'}],   │ │
-│ │                    │   base_seed=42,                                     │ │
-│ │                    │   replicate=15,                                     │ │
-│ │                    │   run_seed=383329927,                               │ │
-│ │                    │   tags={}                                           │ │
-│ │                    )                                                     │ │
-│ │  family_registry = {                                                     │ │
-│ │                    │   'haar': <class                                    │ │
-│ │                    'qqe.circuit.families.HaarBrickwork'>,                │ │
-│ │                    │   'clifford': <class                                │ │
-│ │                    'qqe.circuit.families.CliffordBrickwork'>,            │ │
-│ │                    │   'quansistor': <class                              │ │
-│ │                    'qqe.circuit.families.QuansistorBrickwork'>           │ │
-│ │                    }                                                     │ │
-│ │          fig_dir = PosixPath('/project/6099921/NDOT/QML-gates-tests/qqe… │ │
-│ │       group_keys = ['circuit_family', 'n_layers']                        │ │
-│ │           method = 'fwht'                                                │ │
-│ │         n_layers = 25                                                    │ │
-│ │         n_qubits = 10                                                    │ │
-│ │          outputs = [                                                     │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'haar',                 │ │
-│ │                    │   │   │   'n_layers': 1,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 3,                           │ │
-│ │                    │   │   │   'run_seed': 6172474,                      │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value': 4.236032501991148,           │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10,                   │ │
-│ │                    │   │   │   │   │   'compute_time': 6.392931699752808 │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'haar',                 │ │
-│ │                    │   │   │   'n_layers': 1,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 1,                           │ │
-│ │                    │   │   │   'run_seed': 2636586012,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value': 3.937638257495298,           │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10,                   │ │
-│ │                    │   │   │   │   │   'compute_time': 6.371454477310181 │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'haar',                 │ │
-│ │                    │   │   │   'n_layers': 1,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 0,                           │ │
-│ │                    │   │   │   'run_seed': 1337403889,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value': 3.4434358758434356,          │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10,                   │ │
-│ │                    │   │   │   │   │   'compute_time': 6.503693103790283 │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'haar',                 │ │
-│ │                    │   │   │   'n_layers': 1,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 2,                           │ │
-│ │                    │   │   │   'run_seed': 1336228523,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value': 4.17582347736211,            │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10,                   │ │
-│ │                    │   │   │   │   │   'compute_time': 6.380686044692993 │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'haar',                 │ │
-│ │                    │   │   │   'n_layers': 1,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 4,                           │ │
-│ │                    │   │   │   'run_seed': 822138856,                    │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value': 4.170832308254486,           │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10,                   │ │
-│ │                    │   │   │   │   │   'compute_time': 5.440061807632446 │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'quansistor',           │ │
-│ │                    │   │   │   'n_layers': 3,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 1,                           │ │
-│ │                    │   │   │   'run_seed': 533854988,                    │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value':                              │ │
-│ │                    np.float64(5.673526356855068),                        │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10                    │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'quansistor',           │ │
-│ │                    │   │   │   'n_layers': 3,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 3,                           │ │
-│ │                    │   │   │   'run_seed': 2339771234,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value':                              │ │
-│ │                    np.float64(6.014871674536935),                        │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10                    │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'quansistor',           │ │
-│ │                    │   │   │   'n_layers': 3,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 2,                           │ │
-│ │                    │   │   │   'run_seed': 1389628042,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value':                              │ │
-│ │                    np.float64(5.383561734571431),                        │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10                    │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'quansistor',           │ │
-│ │                    │   │   │   'n_layers': 3,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 0,                           │ │
-│ │                    │   │   │   'run_seed': 2654147097,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value':                              │ │
-│ │                    np.float64(5.937951647242473),                        │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10                    │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   {                                                 │ │
-│ │                    │   │   'tags': {                                     │ │
-│ │                    │   │   │   'circuit_family': 'haar',                 │ │
-│ │                    │   │   │   'n_layers': 1,                            │ │
-│ │                    │   │   │   'backend': 'quimb',                       │ │
-│ │                    │   │   │   'n_qubits': 10,                           │ │
-│ │                    │   │   │   'd': 2,                                   │ │
-│ │                    │   │   │   'replicate': 6,                           │ │
-│ │                    │   │   │   'run_seed': 1661778768,                   │ │
-│ │                    │   │   │   'family.tcount': None                     │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   'results': {                                  │ │
-│ │                    │   │   │   'SRE': {                                  │ │
-│ │                    │   │   │   │   'value': 4.22820698325626,            │ │
-│ │                    │   │   │   │   'meta': {                             │ │
-│ │                    │   │   │   │   │   'method': 'FWHT',                 │ │
-│ │                    │   │   │   │   │   'n_qubits': 10,                   │ │
-│ │                    │   │   │   │   │   'compute_time': 5.291041851043701 │ │
-│ │                    │   │   │   │   }                                     │ │
-│ │                    │   │   │   }                                         │ │
-│ │                    │   │   }                                             │ │
-│ │                    │   },                                                │ │
-│ │                    │   ... +575                                          │ │
-│ │                    ]                                                     │ │
-│ │         quantity = 'SRE'                                                 │ │
-│ │           repeat = 15                                                    │ │
-│ │     results_path = None                                                  │ │
-│ │              rng = Generator(PCG64) at 0x14DFAFE37BC0                    │ │
-│ │              run = 'sweep'                                               │ │
-│ │        run_store = <qqe.utils.reading.RunStore object at 0x14dfafd2ef50> │ │
-│ │             seed = 42                                                    │ │
-│ │            stats = {                                                     │ │
-│ │                    │   ('haar', 1): AggregateResults(                    │ │
-│ │                    │   │   mean=3.9263791065863343,                      │ │
-│ │                    │   │   std=0.491394569323189,                        │ │
-│ │                    │   │   stderr=0.1268775322270318,                    │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('quansistor', 3): AggregateResults(              │ │
-│ │                    │   │   mean=5.534668827013215,                       │ │
-│ │                    │   │   std=0.3403092978591076,                       │ │
-│ │                    │   │   stderr=0.08786748287785753,                   │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('haar', 5): AggregateResults(                    │ │
-│ │                    │   │   mean=7.124771082845275,                       │ │
-│ │                    │   │   std=0.27112372835219284,                      │ │
-│ │                    │   │   stderr=0.0700038456446471,                    │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('haar', 3): AggregateResults(                    │ │
-│ │                    │   │   mean=6.138368211918842,                       │ │
-│ │                    │   │   std=0.39664047100630934,                      │ │
-│ │                    │   │   stderr=0.10241212924262012,                   │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('clifford', 1): AggregateResults(                │ │
-│ │                    │   │   mean=1.84624147503201e-14,                    │ │
-│ │                    │   │   std=5.267061497791864e-15,                    │ │
-│ │                    │   │   stderr=1.3599494309598787e-15,                │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('clifford', 5): AggregateResults(                │ │
-│ │                    │   │   mean=1.1646582644604135,                      │ │
-│ │                    │   │   std=0.41514496117926963,                      │ │
-│ │                    │   │   stderr=0.10718996806061572,                   │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('quansistor', 1): AggregateResults(              │ │
-│ │                    │   │   mean=4.158271162889653,                       │ │
-│ │                    │   │   std=0.38203188850380726,                      │ │
-│ │                    │   │   stderr=0.09864020945969428,                   │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('quansistor', 5): AggregateResults(              │ │
-│ │                    │   │   mean=6.241974922745023,                       │ │
-│ │                    │   │   std=0.3946900010875196,                       │ │
-│ │                    │   │   stderr=0.10190852007510338,                   │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('clifford', 3): AggregateResults(                │ │
-│ │                    │   │   mean=0.5424516166977674,                      │ │
-│ │                    │   │   std=0.41472766449677895,                      │ │
-│ │                    │   │   stderr=0.10708222252050145,                   │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ('haar', 7): AggregateResults(                    │ │
-│ │                    │   │   mean=7.757718609057492,                       │ │
-│ │                    │   │   std=0.12565650649154164,                      │ │
-│ │                    │   │   stderr=0.032444370465623,                     │ │
-│ │                    │   │   repeat=15                                     │ │
-│ │                    │   ),                                                │ │
-│ │                    │   ... +29                                           │ │
-│ │                    }                                                     │ │
-│ │          summary = {                                                     │ │
-│ │                    │   'group_keys': ['circuit_family', 'n_layers'],     │ │
-│ │                    │   'stats': {                                        │ │
-│ │                    │   │   "('haar', 1)": {                              │ │
-│ │                    │   │   │   'mean': 3.9263791065863343,               │ │
-│ │                    │   │   │   'std': 0.491394569323189,                 │ │
-│ │                    │   │   │   'stderr': 0.1268775322270318,             │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('quansistor', 3)": {                        │ │
-│ │                    │   │   │   'mean': 5.534668827013215,                │ │
-│ │                    │   │   │   'std': 0.3403092978591076,                │ │
-│ │                    │   │   │   'stderr': 0.08786748287785753,            │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('haar', 5)": {                              │ │
-│ │                    │   │   │   'mean': 7.124771082845275,                │ │
-│ │                    │   │   │   'std': 0.27112372835219284,               │ │
-│ │                    │   │   │   'stderr': 0.0700038456446471,             │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('haar', 3)": {                              │ │
-│ │                    │   │   │   'mean': 6.138368211918842,                │ │
-│ │                    │   │   │   'std': 0.39664047100630934,               │ │
-│ │                    │   │   │   'stderr': 0.10241212924262012,            │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('clifford', 1)": {                          │ │
-│ │                    │   │   │   'mean': 1.84624147503201e-14,             │ │
-│ │                    │   │   │   'std': 5.267061497791864e-15,             │ │
-│ │                    │   │   │   'stderr': 1.3599494309598787e-15,         │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('clifford', 5)": {                          │ │
-│ │                    │   │   │   'mean': 1.1646582644604135,               │ │
-│ │                    │   │   │   'std': 0.41514496117926963,               │ │
-│ │                    │   │   │   'stderr': 0.10718996806061572,            │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('quansistor', 1)": {                        │ │
-│ │                    │   │   │   'mean': 4.158271162889653,                │ │
-│ │                    │   │   │   'std': 0.38203188850380726,               │ │
-│ │                    │   │   │   'stderr': 0.09864020945969428,            │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('quansistor', 5)": {                        │ │
-│ │                    │   │   │   'mean': 6.241974922745023,                │ │
-│ │                    │   │   │   'std': 0.3946900010875196,                │ │
-│ │                    │   │   │   'stderr': 0.10190852007510338,            │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('clifford', 3)": {                          │ │
-│ │                    │   │   │   'mean': 0.5424516166977674,               │ │
-│ │                    │   │   │   'std': 0.41472766449677895,               │ │
-│ │                    │   │   │   'stderr': 0.10708222252050145,            │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   "('haar', 7)": {                              │ │
-│ │                    │   │   │   'mean': 7.757718609057492,                │ │
-│ │                    │   │   │   'std': 0.12565650649154164,               │ │
-│ │                    │   │   │   'stderr': 0.032444370465623,              │ │
-│ │                    │   │   │   'n': 15                                   │ │
-│ │                    │   │   },                                            │ │
-│ │                    │   │   ... +29                                       │ │
-│ │                    │   }                                                 │ │
-│ │                    }                                                     │ │
-│ │       sweep_axes = {                                                     │ │
-│ │                    │   'n_qubits': {                                     │ │
-│ │                    │   │   'circuit_family': [                           │ │
-│ │                    │   │   │   'haar',                                   │ │
-│ │                    │   │   │   'clifford',                               │ │
-│ │                    │   │   │   'quansistor'                              │ │
-│ │                    │   │   ],                                            │ │
-│ │                    │   │   'n_qubits': [4, 6, 8, 10],                    │ │
-│ │                    │   │   'family.tcount': [48]                         │ │
-│ │                    │   },                                                │ │
-│ │                    │   'n_layers': {                                     │ │
-│ │                    │   │   'circuit_family': [                           │ │
-│ │                    │   │   │   'haar',                                   │ │
-│ │                    │   │   │   'clifford',                               │ │
-│ │                    │   │   │   'quansistor'                              │ │
-│ │                    │   │   ],                                            │ │
-│ │                    │   │   'n_layers': [                                 │ │
-│ │                    │   │   │   1,                                        │ │
-│ │                    │   │   │   3,                                        │ │
-│ │                    │   │   │   5,                                        │ │
-│ │                    │   │   │   7,                                        │ │
-│ │                    │   │   │   9,                                        │ │
-│ │                    │   │   │   11,                                       │ │
-│ │                    │   │   │   13,                                       │ │
-│ │                    │   │   │   15,                                       │ │
-│ │                    │   │   │   17,                                       │ │
-│ │                    │   │   │   19,                                       │ │
-│ │                    │   │   │   ... +3                                    │ │
-│ │                    │   │   ],                                            │ │
-│ │                    │   │   'family.tcount': [0]                          │ │
-│ │                    │   },                                                │ │
-│ │                    │   'tcount': {                                       │ │
-│ │                    │   │   'circuit_family': ['clifford'],               │ │
-│ │                    │   │   'n_qubits': [4, 6, 8, 10],                    │ │
-│ │                    │   │   'family.tcount': [                            │ │
-│ │                    │   │   │   0,                                        │ │
-│ │                    │   │   │   2,                                        │ │
-│ │                    │   │   │   4,                                        │ │
-│ │                    │   │   │   6,                                        │ │
-│ │                    │   │   │   8,                                        │ │
-│ │                    │   │   │   10,                                       │ │
-│ │                    │   │   │   12,                                       │ │
-│ │                    │   │   │   14,                                       │ │
-│ │                    │   │   │   16,                                       │ │
-│ │                    │   │   │   18,                                       │ │
-│ │                    │   │   │   ... +16                                   │ │
-│ │                    │   │   ]                                             │ │
-│ │                    │   }                                                 │ │
-│ │                    }                                                     │ │
-│ │       sweep_type = 'n_layers'                                            │ │
-│ │   tcount_default = 48                                                    │ │
-│ │       tcount_max = 50                                                    │ │
-│ ╰──────────────────────────────────────────────────────────────────────────╯ │
-│                                                                              │
-│ /project/6099921/NDOT/QML-gates-tests/qqe/qqe/experiments/plotting.py:432 in │
-│ plot_sredensity_v_tcount                                                     │
-│                                                                              │
-│   429 │   │   │   "No valid (n_qubits, tcount) keys found in stats. "        │
-│   430 │   │   │   "Expected keys like (6, 38) or '(6, 38)'."                 │
-│   431 │   │   )                                                              │
-│ ❱ 432 │   │   raise ValueError(msg)                                          │
-│   433 │                                                                      │
-│   434 │   # Group by n_qubits (one curve per n_qubits)                       │
-│   435 │   curves: dict[int, list[tuple[int, float, float]]] = {}             │
-│                                                                              │
-│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
-│ │         k = ('clifford', 25)                                             │ │
-│ │       key = "('clifford', 25)"                                           │ │
-│ │       msg = "No valid (n_qubits, tcount) keys found in stats. Expected   │ │
-│ │             keys like (6, 38) or '"+9                                    │ │
-│ │  n_qubits = 'clifford'                                                   │ │
-│ │    parsed = []                                                           │ │
-│ │   results = {                                                            │ │
-│ │             │   'group_keys': ['circuit_family', 'n_layers'],            │ │
-│ │             │   'stats': {                                               │ │
-│ │             │   │   "('haar', 1)": {                                     │ │
-│ │             │   │   │   'mean': 3.9263791065863343,                      │ │
-│ │             │   │   │   'std': 0.491394569323189,                        │ │
-│ │             │   │   │   'stderr': 0.1268775322270318,                    │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('quansistor', 3)": {                               │ │
-│ │             │   │   │   'mean': 5.534668827013215,                       │ │
-│ │             │   │   │   'std': 0.3403092978591076,                       │ │
-│ │             │   │   │   'stderr': 0.08786748287785753,                   │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('haar', 5)": {                                     │ │
-│ │             │   │   │   'mean': 7.124771082845275,                       │ │
-│ │             │   │   │   'std': 0.27112372835219284,                      │ │
-│ │             │   │   │   'stderr': 0.0700038456446471,                    │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('haar', 3)": {                                     │ │
-│ │             │   │   │   'mean': 6.138368211918842,                       │ │
-│ │             │   │   │   'std': 0.39664047100630934,                      │ │
-│ │             │   │   │   'stderr': 0.10241212924262012,                   │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('clifford', 1)": {                                 │ │
-│ │             │   │   │   'mean': 1.84624147503201e-14,                    │ │
-│ │             │   │   │   'std': 5.267061497791864e-15,                    │ │
-│ │             │   │   │   'stderr': 1.3599494309598787e-15,                │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('clifford', 5)": {                                 │ │
-│ │             │   │   │   'mean': 1.1646582644604135,                      │ │
-│ │             │   │   │   'std': 0.41514496117926963,                      │ │
-│ │             │   │   │   'stderr': 0.10718996806061572,                   │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('quansistor', 1)": {                               │ │
-│ │             │   │   │   'mean': 4.158271162889653,                       │ │
-│ │             │   │   │   'std': 0.38203188850380726,                      │ │
-│ │             │   │   │   'stderr': 0.09864020945969428,                   │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('quansistor', 5)": {                               │ │
-│ │             │   │   │   'mean': 6.241974922745023,                       │ │
-│ │             │   │   │   'std': 0.3946900010875196,                       │ │
-│ │             │   │   │   'stderr': 0.10190852007510338,                   │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('clifford', 3)": {                                 │ │
-│ │             │   │   │   'mean': 0.5424516166977674,                      │ │
-│ │             │   │   │   'std': 0.41472766449677895,                      │ │
-│ │             │   │   │   'stderr': 0.10708222252050145,                   │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   "('haar', 7)": {                                     │ │
-│ │             │   │   │   'mean': 7.757718609057492,                       │ │
-│ │             │   │   │   'std': 0.12565650649154164,                      │ │
-│ │             │   │   │   'stderr': 0.032444370465623,                     │ │
-│ │             │   │   │   'n': 15                                          │ │
-│ │             │   │   },                                                   │ │
-│ │             │   │   ... +29                                              │ │
-│ │             │   }                                                        │ │
-│ │             }                                                            │ │
-│ │ save_path = '/project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures/… │ │
-│ │      show = False                                                        │ │
-│ │     stats = {                                                            │ │
-│ │             │   "('haar', 1)": {                                         │ │
-│ │             │   │   'mean': 3.9263791065863343,                          │ │
-│ │             │   │   'std': 0.491394569323189,                            │ │
-│ │             │   │   'stderr': 0.1268775322270318,                        │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('quansistor', 3)": {                                   │ │
-│ │             │   │   'mean': 5.534668827013215,                           │ │
-│ │             │   │   'std': 0.3403092978591076,                           │ │
-│ │             │   │   'stderr': 0.08786748287785753,                       │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('haar', 5)": {                                         │ │
-│ │             │   │   'mean': 7.124771082845275,                           │ │
-│ │             │   │   'std': 0.27112372835219284,                          │ │
-│ │             │   │   'stderr': 0.0700038456446471,                        │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('haar', 3)": {                                         │ │
-│ │             │   │   'mean': 6.138368211918842,                           │ │
-│ │             │   │   'std': 0.39664047100630934,                          │ │
-│ │             │   │   'stderr': 0.10241212924262012,                       │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('clifford', 1)": {                                     │ │
-│ │             │   │   'mean': 1.84624147503201e-14,                        │ │
-│ │             │   │   'std': 5.267061497791864e-15,                        │ │
-│ │             │   │   'stderr': 1.3599494309598787e-15,                    │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('clifford', 5)": {                                     │ │
-│ │             │   │   'mean': 1.1646582644604135,                          │ │
-│ │             │   │   'std': 0.41514496117926963,                          │ │
-│ │             │   │   'stderr': 0.10718996806061572,                       │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('quansistor', 1)": {                                   │ │
-│ │             │   │   'mean': 4.158271162889653,                           │ │
-│ │             │   │   'std': 0.38203188850380726,                          │ │
-│ │             │   │   'stderr': 0.09864020945969428,                       │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('quansistor', 5)": {                                   │ │
-│ │             │   │   'mean': 6.241974922745023,                           │ │
-│ │             │   │   'std': 0.3946900010875196,                           │ │
-│ │             │   │   'stderr': 0.10190852007510338,                       │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('clifford', 3)": {                                     │ │
-│ │             │   │   'mean': 0.5424516166977674,                          │ │
-│ │             │   │   'std': 0.41472766449677895,                          │ │
-│ │             │   │   'stderr': 0.10708222252050145,                       │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   "('haar', 7)": {                                         │ │
-│ │             │   │   'mean': 7.757718609057492,                           │ │
-│ │             │   │   'std': 0.12565650649154164,                          │ │
-│ │             │   │   'stderr': 0.032444370465623,                         │ │
-│ │             │   │   'n': 15                                              │ │
-│ │             │   },                                                       │ │
-│ │             │   ... +29                                                  │ │
-│ │             }                                                            │ │
-│ │    tcount = 25                                                           │ │
-│ │     title = None                                                         │ │
-│ │     value = {                                                            │ │
-│ │             │   'mean': 5.2180152847536885,                              │ │
-│ │             │   'std': 1.3261559011570168,                               │ │
-│ │             │   'stderr': 0.3424119813103877,                            │ │
-│ │             │   'n': 15                                                  │ │
-│ │             }                                                            │ │
-│ ╰──────────────────────────────────────────────────────────────────────────╯ │
-╰──────────────────────────────────────────────────────────────────────────────╯
-ValueError: No valid (n_qubits, tcount) keys found in stats. Expected keys like 
-(6, 38) or '(6, 38)'.
+2026-02-13 07:38:47,365 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
+2026-02-13 07:38:47,425 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 15 workers, 4 cores per worker.
+2026-02-13 07:39:01,192 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-13 07:39:01,193 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.44.61:8787/status
+Running jobs:   0%|          | 0/1560 [00:00<?, ?job/s]Running jobs:   0%|          | 1/1560 [00:24<10:43:06, 24.75s/job]Running jobs:   1%|          | 11/1560 [00:24<42:05,  1.63s/job]  Running jobs:   2%|▏         | 29/1560 [00:24<12:20,  2.07job/s]Running jobs:   3%|▎         | 42/1560 [00:25<07:09,  3.53job/s]Running jobs:   4%|▎         | 55/1560 [00:25<04:30,  5.56job/s]Running jobs:   5%|▍         | 72/1560 [00:25<02:40,  9.26job/s]Running jobs:   6%|▌         | 89/1560 [00:25<01:43, 14.23job/s]Running jobs:   7%|▋         | 104/1560 [00:25<01:13, 19.74job/s]Running jobs:   8%|▊         | 118/1560 [00:25<00:56, 25.50job/s]Running jobs:   8%|▊         | 132/1560 [00:25<00:42, 33.63job/s]Running jobs:   9%|▉         | 145/1560 [00:25<00:34, 41.21job/s]Running jobs:  10%|█         | 157/1560 [00:26<00:29, 47.01job/s]Running jobs:  11%|█         | 168/1560 [00:26<00:29, 47.43job/s]Running jobs:  11%|█▏        | 177/1560 [00:26<00:37, 36.73job/s]Running jobs:  12%|█▏        | 184/1560 [00:26<00:36, 37.46job/s]Running jobs:  12%|█▏        | 190/1560 [00:27<00:47, 28.99job/s]Running jobs:  12%|█▎        | 195/1560 [00:27<00:44, 30.94job/s]Running jobs:  13%|█▎        | 200/1560 [00:27<00:50, 26.68job/s]Running jobs:  13%|█▎        | 204/1560 [00:27<00:48, 27.90job/s]Running jobs:  13%|█▎        | 208/1560 [00:28<00:53, 25.14job/s]Running jobs:  14%|█▎        | 212/1560 [00:28<00:57, 23.52job/s]Running jobs:  14%|█▍        | 217/1560 [00:28<00:48, 27.63job/s]Running jobs:  14%|█▍        | 222/1560 [00:28<00:42, 31.13job/s]Running jobs:  15%|█▍        | 227/1560 [00:28<00:38, 35.00job/s]Running jobs:  15%|█▍        | 232/1560 [00:28<00:41, 32.01job/s]Running jobs:  15%|█▌        | 237/1560 [00:28<00:39, 33.68job/s]Running jobs:  16%|█▌        | 250/1560 [00:29<00:24, 52.40job/s]Running jobs:  17%|█▋        | 266/1560 [00:29<00:17, 73.70job/s]Running jobs:  18%|█▊        | 279/1560 [00:29<00:14, 86.24job/s]Running jobs:  19%|█▉        | 297/1560 [00:29<00:11, 109.08job/s]Running jobs:  20%|██        | 317/1560 [00:29<00:09, 132.68job/s]Running jobs:  21%|██▏       | 332/1560 [00:29<00:09, 132.04job/s]Running jobs:  22%|██▏       | 348/1560 [00:29<00:08, 138.33job/s]Running jobs:  23%|██▎       | 364/1560 [00:29<00:08, 142.36job/s]Running jobs:  25%|██▍       | 385/1560 [00:29<00:07, 160.55job/s]Running jobs:  26%|██▌       | 402/1560 [00:30<00:07, 147.34job/s]Running jobs:  27%|██▋       | 419/1560 [00:30<00:07, 153.09job/s]Running jobs:  28%|██▊       | 435/1560 [00:30<00:08, 128.97job/s]Running jobs:  29%|██▉       | 452/1560 [00:30<00:08, 128.87job/s]Running jobs:  30%|██▉       | 466/1560 [00:30<00:09, 113.20job/s]Running jobs:  31%|███       | 482/1560 [00:30<00:08, 122.84job/s]Running jobs:  32%|███▏      | 501/1560 [00:30<00:07, 138.63job/s]Running jobs:  33%|███▎      | 517/1560 [00:30<00:07, 138.95job/s]Running jobs:  34%|███▍      | 532/1560 [00:31<00:07, 129.59job/s]Running jobs:  35%|███▌      | 549/1560 [00:31<00:07, 139.91job/s]Running jobs:  36%|███▌      | 564/1560 [00:31<00:07, 128.05job/s]Running jobs:  37%|███▋      | 578/1560 [00:31<00:07, 124.24job/s]Running jobs:  38%|███▊      | 591/1560 [00:31<00:08, 112.57job/s]Running jobs:  39%|███▉      | 605/1560 [00:31<00:08, 118.54job/s]Running jobs:  40%|████      | 624/1560 [00:31<00:06, 136.32job/s]Running jobs:  41%|████▏     | 644/1560 [00:31<00:05, 152.71job/s]Running jobs:  42%|████▏     | 660/1560 [00:32<00:07, 116.86job/s]Running jobs:  43%|████▎     | 678/1560 [00:32<00:06, 130.96job/s]Running jobs:  45%|████▍     | 697/1560 [00:32<00:05, 143.91job/s]Running jobs:  46%|████▌     | 718/1560 [00:32<00:05, 159.06job/s]Running jobs:  47%|████▋     | 735/1560 [00:32<00:05, 146.74job/s]Running jobs:  48%|████▊     | 755/1560 [00:32<00:05, 160.16job/s]Running jobs:  50%|████▉     | 773/1560 [00:32<00:05, 146.46job/s]Running jobs:  51%|█████     | 789/1560 [00:32<00:06, 118.73job/s]Running jobs:  51%|█████▏    | 803/1560 [00:33<00:06, 111.75job/s]Running jobs:  52%|█████▏    | 817/1560 [00:33<00:06, 111.80job/s]Running jobs:  53%|█████▎    | 830/1560 [00:33<00:06, 115.67job/s]Running jobs:  54%|█████▍    | 843/1560 [00:33<00:07, 101.65job/s]Running jobs:  55%|█████▍    | 856/1560 [00:33<00:06, 101.99job/s]Running jobs:  56%|█████▌    | 876/1560 [00:33<00:05, 123.97job/s]Running jobs:  57%|█████▋    | 892/1560 [00:33<00:05, 132.38job/s]Running jobs:  58%|█████▊    | 906/1560 [00:33<00:05, 128.16job/s]Running jobs:  59%|█████▉    | 920/1560 [00:34<00:04, 129.03job/s]Running jobs:  60%|██████    | 940/1560 [00:34<00:04, 148.02job/s]Running jobs:  61%|██████▏   | 956/1560 [00:34<00:04, 143.30job/s]Running jobs:  62%|██████▏   | 971/1560 [00:34<00:04, 127.59job/s]Running jobs:  63%|██████▎   | 985/1560 [00:34<00:04, 126.13job/s]Running jobs:  64%|██████▍   | 1006/1560 [00:34<00:03, 146.35job/s]Running jobs:  66%|██████▌   | 1022/1560 [00:34<00:03, 147.83job/s]Running jobs:  67%|██████▋   | 1038/1560 [00:34<00:04, 129.83job/s]Running jobs:  67%|██████▋   | 1052/1560 [00:35<00:04, 106.17job/s]Running jobs:  68%|██████▊   | 1065/1560 [00:35<00:04, 108.72job/s]Running jobs:  69%|██████▉   | 1082/1560 [00:35<00:03, 122.73job/s]Running jobs:  70%|███████   | 1098/1560 [00:35<00:03, 130.47job/s]Running jobs:  71%|███████▏  | 1112/1560 [00:35<00:03, 121.32job/s]Running jobs:  73%|███████▎  | 1135/1560 [00:35<00:02, 148.96job/s]Running jobs:  74%|███████▍  | 1151/1560 [00:35<00:02, 149.00job/s]Running jobs:  75%|███████▍  | 1167/1560 [00:35<00:02, 145.91job/s]Running jobs:  76%|███████▌  | 1183/1560 [00:36<00:02, 140.19job/s]Running jobs:  77%|███████▋  | 1200/1560 [00:36<00:02, 147.05job/s]Running jobs:  78%|███████▊  | 1216/1560 [00:36<00:02, 124.06job/s]Running jobs:  79%|███████▉  | 1230/1560 [00:36<00:02, 114.55job/s]Running jobs:  80%|███████▉  | 1243/1560 [00:36<00:05, 58.25job/s] Running jobs:  80%|████████  | 1253/1560 [00:37<00:05, 54.82job/s]Running jobs:  81%|████████  | 1261/1560 [00:37<00:05, 56.14job/s]Running jobs:  81%|████████▏ | 1269/1560 [00:37<00:09, 32.30job/s]Running jobs:  82%|████████▏ | 1275/1560 [00:38<00:08, 31.69job/s]Running jobs:  82%|████████▏ | 1280/1560 [00:38<00:08, 32.82job/s]Running jobs:  82%|████████▏ | 1285/1560 [00:38<00:11, 23.64job/s]Running jobs:  83%|████████▎ | 1289/1560 [00:39<00:13, 19.94job/s]Running jobs:  83%|████████▎ | 1292/1560 [00:40<00:38,  6.93job/s]Running jobs:  83%|████████▎ | 1298/1560 [00:41<00:29,  8.96job/s]Running jobs:  84%|████████▍ | 1311/1560 [00:41<00:14, 16.86job/s]Running jobs:  84%|████████▍ | 1317/1560 [00:41<00:12, 19.94job/s]Running jobs:  85%|████████▍ | 1322/1560 [00:41<00:13, 17.39job/s]Running jobs:  85%|████████▌ | 1326/1560 [00:42<00:15, 14.93job/s]Running jobs:  85%|████████▌ | 1329/1560 [00:42<00:17, 12.83job/s]Running jobs:  85%|████████▌ | 1332/1560 [00:42<00:19, 11.88job/s]Running jobs:  86%|████████▌ | 1337/1560 [00:43<00:14, 15.45job/s]Running jobs:  86%|████████▌ | 1343/1560 [00:43<00:13, 15.63job/s]Running jobs:  86%|████████▋ | 1346/1560 [00:43<00:14, 14.32job/s]Running jobs:  86%|████████▋ | 1348/1560 [00:43<00:15, 14.06job/s]Running jobs:  87%|████████▋ | 1350/1560 [00:44<00:21,  9.97job/s]Running jobs:  87%|████████▋ | 1352/1560 [00:44<00:31,  6.60job/s]Running jobs:  87%|████████▋ | 1355/1560 [00:45<00:23,  8.71job/s]Running jobs:  87%|████████▋ | 1362/1560 [00:45<00:12, 15.37job/s]Running jobs:  88%|████████▊ | 1367/1560 [00:45<00:10, 18.57job/s]Running jobs:  88%|████████▊ | 1371/1560 [00:45<00:09, 19.40job/s]Running jobs:  88%|████████▊ | 1379/1560 [00:45<00:09, 19.49job/s]Running jobs:  89%|████████▊ | 1383/1560 [00:46<00:08, 19.88job/s]Running jobs:  89%|████████▉ | 1386/1560 [00:47<00:18,  9.23job/s]Running jobs:  89%|████████▉ | 1389/1560 [00:47<00:15, 10.83job/s]Running jobs:  89%|████████▉ | 1392/1560 [00:47<00:17,  9.63job/s]Running jobs:  90%|████████▉ | 1401/1560 [00:47<00:10, 15.50job/s]Running jobs:  90%|█████████ | 1404/1560 [00:48<00:14, 10.99job/s]Running jobs:  90%|█████████ | 1407/1560 [00:48<00:12, 12.21job/s]Running jobs:  90%|█████████ | 1409/1560 [00:48<00:12, 11.62job/s]Running jobs:  90%|█████████ | 1411/1560 [00:49<00:15,  9.52job/s]Running jobs:  91%|█████████▏| 1424/1560 [00:49<00:06, 20.96job/s]Running jobs:  92%|█████████▏| 1430/1560 [00:49<00:05, 25.95job/s]Running jobs:  92%|█████████▏| 1437/1560 [00:49<00:03, 31.83job/s]Running jobs:  92%|█████████▏| 1442/1560 [00:50<00:07, 15.80job/s]Running jobs:  93%|█████████▎| 1446/1560 [00:51<00:11,  9.85job/s]Running jobs:  93%|█████████▎| 1449/1560 [00:51<00:13,  8.53job/s]Running jobs:  93%|█████████▎| 1451/1560 [00:52<00:11,  9.19job/s]Running jobs:  93%|█████████▎| 1455/1560 [00:52<00:09, 10.55job/s]Running jobs:  94%|█████████▎| 1460/1560 [00:52<00:07, 14.22job/s]Running jobs:  94%|█████████▍| 1463/1560 [00:52<00:07, 12.75job/s]Running jobs:  94%|█████████▍| 1465/1560 [00:53<00:09, 10.04job/s]Running jobs:  94%|█████████▍| 1470/1560 [00:53<00:06, 14.47job/s]Running jobs:  95%|█████████▍| 1476/1560 [00:53<00:04, 20.80job/s]Running jobs:  95%|█████████▌| 1483/1560 [00:53<00:02, 28.16job/s]Running jobs:  95%|█████████▌| 1488/1560 [00:53<00:02, 31.16job/s]Running jobs:  96%|█████████▌| 1493/1560 [00:53<00:01, 34.23job/s]Running jobs:  96%|█████████▌| 1498/1560 [00:54<00:03, 19.01job/s]Running jobs:  96%|█████████▋| 1502/1560 [00:54<00:03, 15.41job/s]Running jobs:  96%|█████████▋| 1505/1560 [00:55<00:04, 11.76job/s]Running jobs:  97%|█████████▋| 1508/1560 [00:55<00:04, 10.51job/s]Running jobs:  97%|█████████▋| 1510/1560 [00:55<00:05,  9.85job/s]Running jobs:  97%|█████████▋| 1512/1560 [00:56<00:05,  8.49job/s]Running jobs:  97%|█████████▋| 1514/1560 [00:56<00:04,  9.58job/s]Running jobs:  97%|█████████▋| 1516/1560 [00:56<00:04, 10.52job/s]Running jobs:  97%|█████████▋| 1520/1560 [00:56<00:02, 14.86job/s]Running jobs:  98%|█████████▊| 1524/1560 [00:56<00:01, 18.50job/s]Running jobs:  98%|█████████▊| 1527/1560 [00:56<00:01, 20.31job/s]Running jobs:  98%|█████████▊| 1531/1560 [00:56<00:01, 21.55job/s]Running jobs:  98%|█████████▊| 1534/1560 [00:57<00:01, 19.73job/s]Running jobs:  99%|█████████▊| 1540/1560 [00:57<00:00, 26.59job/s]Running jobs:  99%|█████████▉| 1547/1560 [00:57<00:00, 34.70job/s]Running jobs: 100%|█████████▉| 1556/1560 [00:57<00:00, 24.84job/s]Running jobs: 100%|██████████| 1560/1560 [00:58<00:00, 13.09job/s]Running jobs: 100%|██████████| 1560/1560 [00:58<00:00, 26.61job/s]
+2026-02-13 07:40:00,989 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-13 07:40:02,459 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
+2026-02-13 07:40:02,478 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-13_15-38-47__SRE_sweep_tcount_fwht
