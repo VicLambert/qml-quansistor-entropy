@@ -327,6 +327,7 @@ def main(
         "haar": HaarBrickwork,
         "clifford": CliffordBrickwork,
         "quansistor": QuansistorBrickwork,
+        "random": RandomCircuit,
     }
     backend_registry: dict[str, Any] = {
         "pennylane": lambda: PennylaneBackend(),
@@ -360,12 +361,12 @@ def main(
 
     sweep_axes = {
         "n_qubits": {
-            "circuit_family": ["haar", "clifford", "quansistor"],
+            "circuit_family": ["haar", "clifford", "quansistor", "random"],
             "n_qubits": list(range(4, n_qubits + 1, 2)),
             "family.tcount": [calculate_tcount(n_layers, per_layer=2)],
         },
         "n_layers": {
-            "circuit_family": ["haar", "clifford", "quansistor"],
+            "circuit_family": ["haar", "clifford", "quansistor", "random"],
             "n_layers": list(range(1, n_layers + 1, 2)),
             # tcount is paired per n_layers in _sweep_jobs() - placeholder here
             "family.tcount": [0],
@@ -417,7 +418,7 @@ def main(
 
     stats = aggregate_by_cond(
         outputs,
-        group_keys=tuple(group_keys),  # TODO implement automatic detection of grouping keys
+        group_keys=tuple(group_keys),
         value_path=("results", quantity, "value"),
     )
 

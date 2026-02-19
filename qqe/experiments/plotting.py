@@ -75,9 +75,6 @@ def plot_pennylane_circuit(
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(save_path, dpi=200, bbox_inches="tight")
 
-    if show:
-        plt.show()
-
     return fig
 
 
@@ -451,8 +448,9 @@ def plot_sredensity_v_tcount(
         xs = np.array([r[0] for r in rows])
         ys = np.array([r[1] for r in rows])
         es = np.array([r[2] for r in rows])
-        ax.errorbar(xs, ys/n_qubits, yerr=es/n_qubits, label=f"n={n_qubits}", marker="o", capsize=3)
+        ax.errorbar(xs/(2*n_qubits), ys/n_qubits, yerr=es/n_qubits, label=f"n={n_qubits}", marker="o", capsize=3)
 
+    
     NT = np.linspace(0, 2*n_layers, 1000, dtype=float)
 
     for j, n_qubits in enumerate(ns):
@@ -460,7 +458,7 @@ def plot_sredensity_v_tcount(
         alpha = min(1, max(0, alpha))
         q = NT/n_qubits
         gsre = _gse(2, n_qubits, q)/n_qubits
-        ax.plot(q, gsre, linestyle="-", color="black", alpha=alpha, label=f"GSE n={n_qubits}")
+        ax.plot(2*q, gsre, linestyle="-", color="black", alpha=alpha, label=f"GSE n={n_qubits}")
     M_max = np.log2(2**ns[-1])
     plt.axhline(y=(M_max)/ns[-1], linestyle="--", alpha=0.7)
     q_c = np.log2(2) / np.log2(4/3)

@@ -395,7 +395,7 @@ class QuansistorBrickwork:
 @dataclass(frozen=True)
 class RandomCircuit:
     name: str = "random"
-    p_cnot: float = 0.5
+    p_cnot: float = 0.1
     rot_set: tuple[str, ...] = ("RX", "RY", "RZ")
 
     def make_spec(

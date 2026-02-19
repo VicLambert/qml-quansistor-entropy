@@ -14,11 +14,12 @@ import typer
 from dask.distributed import as_completed
 from tqdm import tqdm
 
-from qqe.backend import PennylaneBackend, QuimbBackend, BaseBackend
+from qqe.backend import PennylaneBackend, QuimbBackend
 from qqe.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
+    RandomCircuit,
 )
 from qqe.experiments.core import run_experiment
 from qqe.parallel import dask_client
@@ -38,7 +39,7 @@ data = [
     ],  # state_vector
 ]
 
-n_seeds = 100
+n_seeds = 50
 
 qubits_range = np.arange(4, 11, 2)
 layers_range = np.arange(1, 101, 2)
@@ -54,6 +55,7 @@ FAMILY_REGISTRY = {
     "haar": HaarBrickwork,
     "clifford": CliffordBrickwork,
     "quansistor": QuansistorBrickwork,
+    "random": RandomCircuit,
 }
 
 # Initialize cache for results

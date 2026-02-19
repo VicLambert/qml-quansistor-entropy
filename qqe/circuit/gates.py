@@ -194,11 +194,13 @@ def _T_matrix() -> np.ndarray:
 
 
 def random_rot_gate(seed: int | None = None) -> np.ndarray:
-    basis = ["RX", "RY", "RZ", "CNOT"]
+    basis = ["RX", "RY", "RZ", "H", "S"]
     rng = np.random.default_rng(seed)
     gate = rng.choice(basis)
-    theta = rng.uniform(0, 2 * np.pi)
-    return _ONEQ[gate](theta)
+    if gate in ["RX", "RY", "RZ"]:
+        theta = rng.uniform(0, 2 * np.pi)
+        return _ONEQ[gate](theta)
+    return _ONEQ[gate]
 
 
 
