@@ -30,3 +30,15 @@
 2026-02-19 08:52:23,230 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
 2026-02-19 08:52:37,467 - qqe.parallel.dask - INFO - Dask client created successfully.
 2026-02-19 08:52:37,468 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-19 09:28:04,318 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
+2026-02-19 09:28:04,358 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-19 09:28:17,399 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-19 09:28:17,399 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-19 09:58:27,427 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
+2026-02-19 09:58:27,520 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-19 09:58:38,098 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-19 09:58:38,099 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-19 13:06:55,078 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
+2026-02-19 13:06:55,131 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-19 13:07:13,255 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-19 13:07:13,255 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status

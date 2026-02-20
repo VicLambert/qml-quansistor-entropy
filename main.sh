@@ -5,7 +5,7 @@
 #SBATCH --mem=0
 #SBATCH --output=logs/tcount_sweep.out
 #SBATCH --error=logs/tcount_sweep.err
-#SBATCH --time=0-0:30:00
+#SBATCH --time=0-1:30:00
 
 module load python scipy-stack
 source /project/6099921/NDOT/QML-gates-tests/qqe/.venv/bin/activate
