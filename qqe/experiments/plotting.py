@@ -366,17 +366,17 @@ def plot_sre(
     plt.close(fig)
 
 
-def _gse(d: int, n_qubits: Any, q: Any) -> float:
+def _gse(d: int, n_qubits: Any, NT: Any) -> float:
     phys_dim = d ** n_qubits
-    f = (-4 + 3 * (phys_dim**2 - phys_dim)) / (4 * (phys_dim**2 - 1))
+    f = (-4 + 3 * (2*phys_dim - phys_dim)) / (4 * (2*phys_dim - 1))
 
-    num = np.asarray( 4 +(phys_dim - 1) * f ** (n_qubits*q), dtype=float)
+    num = np.asarray( 4 +(phys_dim - 1) * f ** (NT), dtype=float)
     return -np.log2(num / (3 + phys_dim))
 
     # term1 = 3 / (d**n_qubits + 2)
     # term2 = (d**n_qubits - 1) / (d**n_qubits + 2)
     # inner = (2/d * d**(2*n_qubits) - (d-2) * 2/d * d**n_qubits - 1) / (d**(2*n_qubits) - 1)
-    # return -np.log(term1 + term2 * inner**(q*n_qubits))
+    # return -np.log2(term1 + term2 * inner**(q*n_qubits))
 
 def plot_sredensity_v_tcount(
     results: dict[str, Any],
@@ -448,17 +448,16 @@ def plot_sredensity_v_tcount(
         xs = np.array([r[0] for r in rows])
         ys = np.array([r[1] for r in rows])
         es = np.array([r[2] for r in rows])
-        ax.errorbar(xs/(2*n_qubits), ys/n_qubits, yerr=es/n_qubits, label=f"n={n_qubits}", marker="o", capsize=3)
+        ax.errorbar(xs/(n_qubits), ys/n_qubits, yerr=es/n_qubits, label=f"n={n_qubits}", marker="o", capsize=3)
 
-    
     NT = np.linspace(0, 2*n_layers, 1000, dtype=float)
 
     for j, n_qubits in enumerate(ns):
         alpha = 0.2 + 0.8 * j / (len(ns) - 1)
         alpha = min(1, max(0, alpha))
-        q = NT/n_qubits
-        gsre = _gse(2, n_qubits, q)/n_qubits
-        ax.plot(2*q, gsre, linestyle="-", color="black", alpha=alpha, label=f"GSE n={n_qubits}")
+        q = NT
+        gsre = _gse(2, n_qubits, NT)
+        ax.plot(NT/n_qubits, gsre/n_qubits, linestyle="-", color="black", alpha=alpha, label=f"GSE n={n_qubits}")
     M_max = np.log2(2**ns[-1])
     plt.axhline(y=(M_max)/ns[-1], linestyle="--", alpha=0.7)
     q_c = np.log2(2) / np.log2(4/3)

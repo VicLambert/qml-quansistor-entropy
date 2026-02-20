@@ -420,41 +420,52 @@ class RandomCircuit:
             params={},
         )
         return replace(spec, gates=tuple(self.gates(spec)))
+    
+    def _allowed_pairs(self, n: int, connectivity: str) -> list[tuple[int,int]]:
+        if connectivity == "all":
+            return [(i, j) for i in range(n) for j in range(i+1, n)]
+        if connectivity == "line":
+            return [(i, i+1) for i in range(n-1)]
+        if connectivity == "ring":
+            return [(i, (i+1) % n) for i in range(n)]
+        raise ValueError(f"Unknown connectivity={connectivity}")
 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
-        rng_global = np.random.default_rng(spec.global_seed)
-        p_cnot = float(spec.params.get("p_cnot", 0.5))
-        rot_set = tuple(spec.params.get("rot_set", ("RX","RY","RZ")))
+        p_cnot = float(spec.params.get("p_cnot", self.p_cnot))
+        rot_set = tuple(spec.params.get("rot_set", self.rot_set))
+        pairs = self._allowed_pairs(spec.n_qubits, spec.connectivity)
 
-        for layer in range(spec.n_layers):
-            for wire in range(spec.n_qubits):
-                    s = gate_seed(spec.global_seed, layer=layer, slot=wire, wires=(wire,), kind="rot", ordered_wires=True)
-                    rng = np.random.default_rng(s)
-                    kind = rng.choice(rot_set)
-                    theta = float(rng.uniform(0, 2*np.pi))
-
-                    yield GateSpec(
-                        kind="random",          # "RX"/"RY"/"RZ"
-                        wires=(wire,),
-                        d=spec.d,
-                        seed=s,
-                        params=(theta,),
-                        tags=("layer", f"L{wire}", "1q", kind),
-                    )
-
-                # 2q brickwork: sometimes CNOT
-                    pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
-                    for slot, (a, b) in enumerate(pairs):
-                        s2 = gate_seed(spec.global_seed, layer=layer, slot=slot, wires=(a,b), kind="cnot", ordered_wires=True)
-                        rng2 = np.random.default_rng(s2)
-                        if rng2.random() < p_cnot:
-                            # random direction
-                            ctrl, tgt = (a, b) if rng2.random() < 0.5 else (b, a)
-                            yield GateSpec(
-                                kind="CNOT",
-                                wires=(ctrl, tgt),
-                                d=spec.d,
-                                seed=s2,
-                                params=(),
-                                tags=("layer", f"L{layer}", "2q", "CNOT"),
-                            )
+        for step in range(spec.n_layers):
+            # one seed per "step" so the sampling matches "one random gate per step"
+            s = gate_seed(
+                spec.global_seed,
+                layer=step,
+                slot=0,
+                wires=(),
+                kind="step",
+                ordered_wires=True,
+            )
+            rng = np.random.default_rng(s)
+            if rng.random() < p_cnot:
+                a, b = pairs[int(rng.integers(0, len(pairs)))]
+                ctrl, tgt = (a, b) if rng.random() < 0.5 else (b, a)
+                yield GateSpec(
+                    kind="CNOT",
+                    wires=(ctrl, tgt),
+                    d=spec.d,
+                    seed=s,
+                    params=(),
+                    tags=("step", f"S{step}", "2q", "CNOT"),
+                )
+            else:
+                wire = int(rng.integers(0, spec.n_qubits))
+                kind = str(rng.choice(rot_set))
+                theta = float(rng.uniform(0, 2*np.pi))
+                yield GateSpec(
+                    kind=kind,                 # "RX"/"RY"/"RZ"
+                    wires=(wire,),
+                    d=spec.d,
+                    seed=s,
+                    params=(theta,),
+                    tags=("step", f"S{step}", "1q", kind),
+                )

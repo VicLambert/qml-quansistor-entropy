@@ -1,44 +1,4 @@
-2026-02-19 07:27:01,773 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
-2026-02-19 07:27:01,876 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 07:27:13,551 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 07:27:13,552 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 07:29:22,145 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-19 07:29:23,126 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-19 07:29:23,129 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-19_15-27-01__SRE_sweep_tcount_fwht
-2026-02-19 07:37:24,604 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
-2026-02-19 07:37:24,719 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 07:37:38,927 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 07:37:38,927 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 07:40:08,080 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-19 07:40:09,256 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-19 07:40:09,258 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-19_15-37-24__SRE_sweep_tcount_fwht
-2026-02-19 07:43:03,636 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
-2026-02-19 07:43:03,705 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 07:43:13,699 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 07:43:13,699 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 07:45:19,148 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-19 07:45:19,974 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-19 07:45:20,018 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-19_15-43-03__SRE_sweep_tcount_fwht
-2026-02-19 08:39:13,239 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 45 layers, d=2.
-2026-02-19 08:39:13,308 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 08:39:31,837 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 08:39:31,838 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 08:41:40,332 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-02-19 08:41:41,972 - __main__ - INFO - Saved figures to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/figures
-2026-02-19 08:41:41,974 - __main__ - INFO - Saved run to: /project/6099921/NDOT/QML-gates-tests/qqe/outputs/runs/2026-02-19_16-39-13__SRE_sweep_tcount_fwht
-2026-02-19 08:52:23,191 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-19 08:52:23,230 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 08:52:37,467 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 08:52:37,468 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 09:28:04,318 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-19 09:28:04,358 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 09:28:17,399 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 09:28:17,399 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 09:58:27,427 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-19 09:58:27,520 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 09:58:38,098 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 09:58:38,099 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-02-19 13:06:55,078 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 25 layers, d=2.
-2026-02-19 13:06:55,131 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-02-19 13:07:13,255 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-02-19 13:07:13,255 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-20 10:08:18,628 - __main__ - INFO - Plotting completed.
+2026-02-20 10:09:32,080 - __main__ - INFO - Plotting completed.
+2026-02-20 10:10:17,078 - __main__ - INFO - Plotting completed.
+2026-02-20 10:10:35,610 - __main__ - INFO - Plotting completed.
