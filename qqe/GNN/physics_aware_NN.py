@@ -21,3 +21,6 @@ class Parameters_Net(nn.Module):
         h = self.relu(h)
         h = self.linear3(h)
         return h
+
+
+class GNN(nn.Module):...
