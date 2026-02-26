@@ -2,3 +2,43 @@
 2026-02-20 10:09:32,080 - __main__ - INFO - Plotting completed.
 2026-02-20 10:10:17,078 - __main__ - INFO - Plotting completed.
 2026-02-20 10:10:35,610 - __main__ - INFO - Plotting completed.
+2026-02-20 14:46:30,802 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
+2026-02-20 14:46:30,886 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-20 14:46:46,066 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-20 14:46:46,068 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:49373/status
+2026-02-20 15:16:07,063 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-20 15:16:15,980 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
+2026-02-20 15:16:16,000 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-20 15:16:20,198 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-20 15:16:20,200 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:60557/status
+2026-02-20 15:18:18,815 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-20 15:18:20,419 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
+2026-02-20 15:18:20,427 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-20_20-16-15__SRE_sweep_n_qubits_fwht
+2026-02-20 15:27:54,162 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
+2026-02-20 15:27:54,177 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-20 15:27:58,093 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-20 15:27:58,094 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:63146/status
+2026-02-20 15:28:11,647 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-20 15:28:12,034 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
+2026-02-20 15:28:12,040 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-20_20-27-54__SRE_sweep_n_qubits_fwht
+2026-02-20 15:29:16,773 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
+2026-02-20 15:29:16,936 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-20 15:29:20,769 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-20 15:29:20,769 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:59368/status
+2026-02-20 15:37:16,824 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-20 15:37:17,716 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
+2026-02-20 15:37:17,723 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-20_20-29-16__SRE_sweep_tcount_fwht
+2026-02-20 15:38:38,849 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 35 layers, d=2.
+2026-02-20 15:38:38,887 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-20 15:38:43,125 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-20 15:38:43,126 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-20 15:49:49,298 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-20 15:49:49,788 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
+2026-02-20 15:49:49,796 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-20_20-38-38__SRE_sweep_n_layers_fwht
+2026-02-20 16:03:49,058 - __main__ - INFO - Simulating clifford circuit with 10 qubits, 75 layers, d=2.
+2026-02-20 16:03:49,230 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-02-20 16:03:53,182 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-20 16:03:53,182 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-02-20 16:24:51,715 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-20 16:24:53,129 - __main__ - INFO - Saved figures to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\figures
+2026-02-20 16:24:53,143 - __main__ - INFO - Saved run to: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\runs\2026-02-20_21-03-49__SRE_sweep_n_layers_fwht

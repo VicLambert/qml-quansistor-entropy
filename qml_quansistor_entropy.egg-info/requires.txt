@@ -6,8 +6,8 @@ pennylane
 matplotlib
 quimb>=1.7.0
 dask
-dask_distributed>=2021.6.0
-dask_jobqueue>=2021.6.0
+distributed>=2021.6.0
+dask-jobqueue>=0.8.0
 tqdm
 typer
 networkx

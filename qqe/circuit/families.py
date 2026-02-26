@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Any, Protocol
 
 import numpy as np
 
-from qqe.circuit.gates import clifford_recipe_unitary
+from qqe.circuit.gates import clifford_recipe_unitary, clifford_recipe_unitary
 from qqe.circuit.patterns import TdopingRules, brickwork_pattern
 from qqe.circuit.spec import CircuitSpec, GateSpec
 from qqe.rng.seeds import gate_seed
@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from collections.abc import Generator
 
 logger = logging.getLogger(__name__)
+
 
 
 class Family(Protocol):
@@ -74,6 +75,7 @@ def leftover_pairs(n_qubits: int, used: set[int], connectivity: str) -> list[tup
             pairs.append((a, b))
             used.update((a, b))
     return pairs
+
 
 
 def kv(**kwargs) -> tuple[str, ...]:
@@ -148,7 +150,7 @@ class CliffordBrickwork:
         )
         return replace(spec, gates=tuple(self.gates(spec)))
 
-    # 
+    #
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         tdoping = spec.params.get("tdoping", None)
         logger.info(f"Generating gates for CliffordBrickwork with tdoping={tdoping}")
@@ -199,20 +201,29 @@ class CliffordBrickwork:
                 # Get the actual Clifford decomposition
                 u_a, u_b, _ = clifford_recipe_unitary(s)
                 decomp = f"{u_a}⊗{u_b}+CNOT"
+                yield GateSpec(kind=u_a, wires=(a,), d=spec.d, seed=s,
+                                tags=("layer", f"L{layer}", "clifford_1q", f"wire_{a}", f"ua_{u_a}"))
 
-                yield GateSpec(
-                    kind="clifford",
-                    wires=(a, b),
-                    d=spec.d,
-                    seed=s,
-                    tags=(
-                        "layer",
-                        f"L{layer}",
-                        "clifford",
-                        f"wire_{a}_{b}",
-                        f"decomp_{decomp}",
-                    ),
-                )
+                # 1q gate on wire b
+                yield GateSpec(kind=u_b, wires=(b,), d=spec.d, seed=s,
+                                tags=("layer", f"L{layer}", "clifford_1q", f"wire_{b}", f"ub_{u_b}"))
+
+                # entangler
+                yield GateSpec(kind="CNOT", wires=(a, b), d=spec.d, seed=s,
+                            tags=("layer", f"L{layer}", "clifford_2q", f"wire_{a}_{b}"))
+                # yield GateSpec(
+                #     kind="clifford",
+                #     wires=(a, b),
+                #     d=spec.d,
+                #     seed=s,
+                #     tags=(
+                #         "layer",
+                #         f"L{layer}",
+                #         "clifford",
+                #         f"wire_{a}_{b}",
+                #         f"decomp_{decomp}",
+                #     ),
+                # )
 
             # Yield T-gates for this layer (only if not the last layer)
             if layer in t_wires_per_layer:
@@ -277,6 +288,7 @@ class HaarBrickwork:
                     d=spec.d,
                     seed=s,
                     tags=("layer", f"L{layer}", "haar"),
+                    params=(s,),
                 )
 
 
@@ -377,8 +389,10 @@ class QuansistorBrickwork:
                         wires=(a, b),
                         kind="quansistor",
                     )
-                    axis = _axis_from_seed(s)
-
+                    rng = np.random.default_rng(s)
+                    a_, b_, g_ = rng.standard_normal(3)
+                    axis = rng.choice(["X","Y"])
+                    params=(float(a_), float(b_), float(g_), str(axis))
                     yield GateSpec(
                         kind="quansistor",
                         wires=(a, b),
@@ -391,11 +405,12 @@ class QuansistorBrickwork:
                             f"axis_{axis}",
                             f"wire_{a}_{b}",
                         ),
+                        params=params,
                     )
 @dataclass(frozen=True)
 class RandomCircuit:
     name: str = "random"
-    p_cnot: float = 0.1
+    p_cnot: float = 0.8
     rot_set: tuple[str, ...] = ("RX", "RY", "RZ")
 
     def make_spec(
@@ -420,52 +435,105 @@ class RandomCircuit:
             params={},
         )
         return replace(spec, gates=tuple(self.gates(spec)))
-    
-    def _allowed_pairs(self, n: int, connectivity: str) -> list[tuple[int,int]]:
-        if connectivity == "all":
-            return [(i, j) for i in range(n) for j in range(i+1, n)]
+
+    def _allowed_edges(self, n: int, connectivity: str) -> list[tuple[int, int]]:
         if connectivity == "line":
-            return [(i, i+1) for i in range(n-1)]
+            return [(i, i + 1) for i in range(n - 1)]
         if connectivity == "ring":
-            return [(i, (i+1) % n) for i in range(n)]
+            return [(i, (i + 1) % n) for i in range(n)]
+        if connectivity == "all":
+            return [(i, j) for i in range(n) for j in range(i + 1, n)]
         raise ValueError(f"Unknown connectivity={connectivity}")
+
+    def _random_disjoint_pairs(
+        self, n: int, rng: np.random.Generator,
+    ) -> list[tuple[int, int]]:
+        """Random perfect-ish matching on vertices (ignores hardware edges)."""
+        perm = rng.permutation(n).tolist()
+        return [(perm[i], perm[i + 1]) for i in range(0, n - 1, 2)]
+
+    def _random_disjoint_pairs_on_edges(
+        self, n: int, edges: list[tuple[int, int]], rng: np.random.Generator,
+    ) -> list[tuple[int, int]]:
+        """Random maximal matching restricted to a given edge set.
+        Greedy: shuffle edges, take if both endpoints unused.
+        """
+        edges_shuffled = edges.copy()
+        rng.shuffle(edges_shuffled)
+
+        used = set()
+        pairs: list[tuple[int, int]] = []
+        for a, b in edges_shuffled:
+            if a in used or b in used:
+                continue
+            used.add(a); used.add(b)
+            pairs.append((a, b))
+        return pairs
 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         p_cnot = float(spec.params.get("p_cnot", self.p_cnot))
         rot_set = tuple(spec.params.get("rot_set", self.rot_set))
-        pairs = self._allowed_pairs(spec.n_qubits, spec.connectivity)
+        n = spec.n_qubits
+
+        allowed_edges = self._allowed_edges(n, spec.connectivity)
+
 
         for step in range(spec.n_layers):
             # one seed per "step" so the sampling matches "one random gate per step"
-            s = gate_seed(
+            for wire in range(n):
+                s1 = gate_seed(
+                    spec.global_seed,
+                    layer=step,
+                    slot=wire,
+                    wires=(wire,),
+                    kind="random",
+                )
+                rng1 = np.random.default_rng(s1)
+                kind = str(rng1.choice(rot_set))
+                theta = rng1.uniform(0, 2 * np.pi)
+                yield GateSpec(
+                    kind=kind,
+                    wires=(wire,),
+                    d=spec.d,
+                    seed=s1,
+                    params=(theta,),
+                    tags=(
+                        "layer",
+                        f"L{step}",
+                        "1q",
+                        kind,
+                    ),
+                )
+            s2 = gate_seed(
                 spec.global_seed,
                 layer=step,
                 slot=0,
                 wires=(),
-                kind="step",
+                kind="pairing",
                 ordered_wires=True,
             )
-            rng = np.random.default_rng(s)
-            if rng.random() < p_cnot:
-                a, b = pairs[int(rng.integers(0, len(pairs)))]
-                ctrl, tgt = (a, b) if rng.random() < 0.5 else (b, a)
-                yield GateSpec(
-                    kind="CNOT",
-                    wires=(ctrl, tgt),
-                    d=spec.d,
-                    seed=s,
-                    params=(),
-                    tags=("step", f"S{step}", "2q", "CNOT"),
+            rng2 = np.random.default_rng(s2)
+            pairs = self._random_disjoint_pairs_on_edges(n, allowed_edges, rng2)
+            for slot, (a, b) in enumerate(pairs):
+                s3 = gate_seed(
+                    spec.global_seed,
+                    layer=step,
+                    slot=slot,
+                    wires=(a, b),
+                    kind="cnot",
+                    ordered_wires=True,
                 )
-            else:
-                wire = int(rng.integers(0, spec.n_qubits))
-                kind = str(rng.choice(rot_set))
-                theta = float(rng.uniform(0, 2*np.pi))
-                yield GateSpec(
-                    kind=kind,                 # "RX"/"RY"/"RZ"
-                    wires=(wire,),
-                    d=spec.d,
-                    seed=s,
-                    params=(theta,),
-                    tags=("step", f"S{step}", "1q", kind),
-                )
+                rng3 = np.random.default_rng(s3)
+
+                if rng3.random() < p_cnot:
+                    ctrl, tgt = (a, b) if rng3.random() < 0.5 else (b, a)
+                    yield GateSpec(
+                        kind="CNOT",
+                        wires=(ctrl, tgt),
+                        d=spec.d,
+                        seed=s3,
+                        params=(),
+                        tags=("layer", f"L{step}", "2q", "CNOT"),
+                    )
+
+

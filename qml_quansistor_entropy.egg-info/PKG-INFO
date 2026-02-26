@@ -14,8 +14,8 @@ Requires-Dist: pennylane
 Requires-Dist: matplotlib
 Requires-Dist: quimb>=1.7.0
 Requires-Dist: dask
-Requires-Dist: dask_distributed>=2021.6.0
-Requires-Dist: dask_jobqueue>=2021.6.0
+Requires-Dist: distributed>=2021.6.0
+Requires-Dist: dask-jobqueue>=0.8.0
 Requires-Dist: tqdm
 Requires-Dist: typer
 Requires-Dist: networkx

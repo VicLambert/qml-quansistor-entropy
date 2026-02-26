@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
+from qqe.circuit.spec import CircuitSpec, GateSpec
+
 import numpy as np
 
 Placement = Literal["center_pair", "center_wire", "random_wires"]
@@ -150,3 +152,49 @@ def brickwork_pattern(
         raise NotImplementedError
 
     return pairs
+
+def to_qasm(spec: CircuitSpec, gates: tuple[GateSpec] | None) -> str:
+    lines = []
+    lines.append("OPENQASM 2.0;")
+    lines.append('include "qelib1.inc";')
+
+    lines.append("opaque qx(a,b,g) q0,q1;")
+    lines.append("opaque qy(a,b,g) q0,q1;")
+    lines.append("opaque haar(s) q0,q1;")
+    lines.append(f"qreg q[{spec.n_qubits}];")
+
+    if gates is None:
+        return "\n".join(lines) + "\n"
+
+    for gate in gates:
+        k = gate.kind
+        if k == "H":
+            lines.append(f"h q[{gate.wires[0]}];")
+        elif k == "S":
+            lines.append(f"s q[{gate.wires[0]}];")
+        elif k == "T":
+            lines.append(f"t q[{gate.wires[0]}];")
+        elif k == "I":
+            lines.append(f"id q[{gate.wires[0]}];")
+        elif k == "CNOT":
+            lines.append(f"cx q[{gate.wires[0]}],q[{gate.wires[1]}];")
+        elif k == "RX":
+            lines.append(f"rx({float(gate.params[0])}) q[{gate.wires[0]}];")
+        elif k == "RY":
+            lines.append(f"ry({float(gate.params[0])}) q[{gate.wires[0]}];")
+        elif k == "RZ":
+            lines.append(f"rz({float(gate.params[0])}) q[{gate.wires[0]}];")
+
+        elif k == "quansistor":
+            a, b, g, axis = gate.params
+            fn = "qx" if str(axis) == "X" else "qy"
+            lines.append(f"{fn}({float(a)},{float(b)},{float(g)}) q[{gate.wires[0]}],q[{gate.wires[1]}];")
+
+        elif k == "haar":
+            lines.append(f"haar({gate.params[0]}) q[{gate.wires[0]}], q[{gate.wires[1]}];")
+        else:
+            msg = f"Unsupported gate: {gate.kind}"
+            raise ValueError(msg)
+    return "\n".join(lines) + "\n"
+
+
