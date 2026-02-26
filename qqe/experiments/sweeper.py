@@ -17,9 +17,9 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from qqe.circuit.families.pattern.tdoping import TdopingRules
+from qqe.circuit.patterns import TdopingRules
 from qqe.experiments.core import BackendConfig, ExperimentConfig
-from qqe.properties.request import PropertyRequest
+from qqe.properties.compute import PropertyRequest
 from qqe.utils.reading import _to_jsonable
 
 logger = logging.getLogger(__name__)

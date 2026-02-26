@@ -17,7 +17,7 @@ from typing import Any, Iterator
 import numpy as np
 
 from qqe.experiments.core import BackendConfig
-from qqe.properties.request import PropertyRequest
+from qqe.properties.compute import PropertyRequest
 
 logger = logging.getLogger(__name__)
 

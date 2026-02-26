@@ -25,17 +25,17 @@ from qqe.circuit.families import (
     QuansistorBrickwork,
 )
 from qqe.experiments.core import run_experiment
+from qqe.experiments.plotting import (
+    plot_sre_v_qubits,
+    plot_sredensity_v_tcount,
+)
 from qqe.experiments.sweeper import (
     JobConfig,
     aggregate_by_cond,
     compile_job,
     generate_jobs,
 )
-from qqe.experiments.plotting import (
-    plot_sre_v_qubits,
-    plot_sredensity_v_tcount,
-)
-from qqe.parallel import dask_client
+from qqe.parallel import dask
 from qqe.utils import FileCache, RunStore, configure_logger, make_run_id
 
 logger = logging.getLogger(__name__)
@@ -251,7 +251,7 @@ def main(
     outputs: list[dict[str, Any]] = []
     jobs = generate_jobs(experiment, axes, repeats=repeat)
 
-    with dask_client(mode="local", n_workers=4, threads_per_worker=1, dashboard=True) as client:
+    with dask.dask_client(mode="local", n_workers=4, threads_per_worker=1, dashboard=True) as client:
         for job in jobs:
             run_store.log_job(job)
 

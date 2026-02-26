@@ -5,15 +5,13 @@ import logging
 import os
 
 from contextlib import contextmanager
-from typing import Generator, Literal, Sequence, Any
+from dataclasses import dataclass
+from typing import Any, Generator, Literal, Sequence
 
-from dask.distributed import Client, LocalCluster, performance_report, as_completed
+from dask.distributed import Client, LocalCluster, as_completed, performance_report
 
 from qqe.experiments.core import run_experiment
 from qqe.experiments.sweeper import ExperimentConfig
-
-from dataclasses import dataclass
-from typing import Literal
 
 logger = logging.getLogger(__name__)
 _global_client: Client | None = None
@@ -66,7 +64,7 @@ def create_local_cluster(
         scheduler_port=0,
         silence_logs=silence_logs,
         processes=processes,
-        dashboard_address=dashboard_address if dashboard else None,
+        dashboard_address=dashboard_address if dashboard else ":8787",
     )
 
 

@@ -21,6 +21,7 @@ dependencies = [
     "matplotlib>=3.4.0",
     "quimb>=1.5.0",
     "dask>=2021.10.0",
+    "typer>=0.20.0",
 ]
 
 [project.optional-dependencies]
@@ -37,6 +38,7 @@ docs = [
 ]
 
 [tool.setuptools]
+packages = ["qqe"]
 
 [tool.black]
 line-length = 95

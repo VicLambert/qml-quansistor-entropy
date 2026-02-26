@@ -1,11 +1,8 @@
 
-from qqe.parallel.client import create_client, dask_client
-from qqe.parallel.dask_config import DaskConfig
-from qqe.parallel.executor import run_dask_experiments
+
+from qqe.parallel import dask
+from qqe.parallel.dask import DaskConfig, create_local_cluster, get_client, set_global_client, dask_client
 
 __all__ = [
-    "DaskConfig",
-    "create_client",
-    "dask_client",
-    "run_dask_experiments",
+    "dask",
 ]
