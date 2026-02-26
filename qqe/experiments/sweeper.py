@@ -6,11 +6,11 @@ and aggregating results for quantum circuit experiments.
 
 from __future__ import annotations
 
+import dataclasses
 import hashlib
 import json
 import logging
 
-import dataclasses
 from dataclasses import dataclass, replace
 from itertools import product
 from typing import Any, Mapping, Sequence
@@ -18,8 +18,9 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 
 from qqe.circuit.patterns import TdopingRules
-from qqe.experiments.core import BackendConfig, ExperimentConfig
+from qqe.experiments.core import ExperimentConfig
 from qqe.properties.compute import PropertyRequest
+from qqe.states.types import BackendConfig
 from qqe.utils.reading import _to_jsonable
 
 logger = logging.getLogger(__name__)

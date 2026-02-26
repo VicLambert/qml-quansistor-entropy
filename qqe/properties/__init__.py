@@ -1,16 +1,16 @@
 
-from qqe.properties import compute, registry, request, results
-from qqe.properties.entanglement import entanglement_entropy_dense, renyi_entanglement
-from qqe.properties.SRE import fwht_sre, monte_carlo_sre, sre_exact_dense
+from qqe.properties.compute import compute_property
+from qqe.properties.entanglement_entropy import von_neumann_ee, renyi_ee
+from qqe.properties.SRE import sre_fwht, sre_mcmc, sre_exact
+from qqe.properties.results import PropertyRequest, PropertyResult, registry, get
 
 __all__ = [
-    "compute",
-    "entanglement_entropy_dense",
-    "fwht_sre",
-    "monte_carlo_sre",
+    "compute_property",
     "registry",
-    "renyi_entanglement",
-    "request",
-    "results",
-    "sre_exact_dense",
+    "renyi_ee",
+    "sre_exact",
+    "sre_fwht",
+    "sre_mcmc",
+    "von_neumann_ee",
+    "get",
 ]

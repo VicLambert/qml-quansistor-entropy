@@ -1,0 +1,51 @@
+{
+  "backend": "quimb",
+  "axes": {
+    "circuit_family": [
+      "haar",
+      "clifford",
+      "quansistor"
+    ],
+    "n_layers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "family.tcount": [
+      null
+    ]
+  },
+  "repeats": 1,
+  "properties": [
+    {
+      "name": "SRE",
+      "method": "fwht"
+    }
+  ],
+  "base_seed": 42,
+  "created_at": "2026-02-06T19:16:49+00:00",
+  "pid": 12940,
+  "host": "Vics_Laptop"
+}

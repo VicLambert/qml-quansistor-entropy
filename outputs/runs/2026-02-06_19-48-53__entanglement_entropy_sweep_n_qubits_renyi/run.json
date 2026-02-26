@@ -1,0 +1,34 @@
+{
+  "backend": "quimb",
+  "axes": {
+    "circuit_family": [
+      "haar",
+      "clifford",
+      "quansistor"
+    ],
+    "n_qubits": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18
+    ],
+    "family.tcount": [
+      29
+    ]
+  },
+  "repeats": 15,
+  "properties": [
+    {
+      "name": "entanglement_entropy",
+      "method": "renyi"
+    }
+  ],
+  "base_seed": 42,
+  "created_at": "2026-02-06T19:48:53+00:00",
+  "pid": 57004,
+  "host": "Vics_Laptop"
+}

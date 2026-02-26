@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,21 +7,27 @@ name = "qml-quansistor-entropy"
 version = "0.1.0"
 description = "Quantum machine learning with quansistor and entropy analysis"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11,<3.14"
 authors = [
     {name = "Victor Lambert", email = "victor.lambert@umontreal.ca"}
 ]
 keywords = ["quantum", "machine-learning", "entropy"]
 
 dependencies = [
-    "numpy>=1.20.0",
-    "pandas>=1.3.0",
-    "scikit-learn>=0.24.0",
-    "pennylane>=0.24.0",
-    "matplotlib>=3.4.0",
-    "quimb>=1.5.0",
-    "dask>=2021.10.0",
-    "typer>=0.20.0",
+    "numpy",
+    "numba>=0.55.0",
+    "pandas",
+    "scikit-learn",
+    "pennylane",
+    "matplotlib",
+    "quimb>=1.7.0",
+    "dask",
+    "distributed>=2021.6.0",
+    "dask-jobqueue>=0.8.0",
+    "tqdm",
+    "typer",
+    "networkx",
+    "pytest>=9.0.2",
 ]
 
 [project.optional-dependencies]
@@ -37,8 +43,9 @@ docs = [
     "sphinx-rtd-theme>=1.0.0",
 ]
 
-[tool.setuptools]
-packages = ["qqe"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["qqe"]
 
 [tool.black]
 line-length = 95

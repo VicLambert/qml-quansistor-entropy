@@ -1,18 +1,16 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-
 import itertools
+
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
-from qqe.properties.compute import PropertyResult
-
-if TYPE_CHECKING:
-    from qqe.states.types import DenseState, MPSState
-    from quimb.tensor.tensor_arbgeom import tensor_network_apply_op_vec
+# from quimb.tensor.tensor_arbgeom import tensor_network_apply_op_vec
+from qqe.properties.results import PropertyResult
+from qqe.states.types import DenseState, MPSState
 
 
 @dataclass
@@ -112,90 +110,91 @@ def sre_exact(state: DenseState, **kwargs: Any) -> PropertyResult:
     return PropertyResult(name="SRE", value=sre, meta=details)
 
 # ----------- MPS ------------
-def pauli_mps_site(A: np.ndarray, pauli_op: list[tuple[int, int]]) -> np.ndarray:
-    """Apply single-site Pauli operator to MPS tensor A.
+# def pauli_mps_site(A: np.ndarray, pauli_op: list[tuple[int, int]]) -> np.ndarray:
+#     """Apply single-site Pauli operator to MPS tensor A.
 
-    Args:
-        A: MPS tensor of shape (d, chi_left, chi_right).
-        pauli_op: Single-site Pauli operator of shape (d, d).
+#     Args:
+#         A: MPS tensor of shape (d, chi_left, chi_right).
+#         pauli_op: Single-site Pauli operator of shape (d, d).
 
-    Returns:
-        np.ndarray: Transformed MPS tensor after applying Pauli operator.
-    """
-    dL, d, dR = A.shape
-    d2 = len(pauli_op)
+#     Returns:
+#         np.ndarray: Transformed MPS tensor after applying Pauli operator.
+#     """
+#     dL, d, dR = A.shape
+#     d2 = len(pauli_op)
 
-    assert d == d2, "Pauli operator dimension must match MPS physical dimension."
+#     assert d == d2, "Pauli operator dimension must match MPS physical dimension."
 
-    dL2 = dL * dL
-    dR2 = dR * dR
+#     dL2 = dL * dL
+#     dR2 = dR * dR
 
-    A_op = [A[:, s, :] for s in range(d)]
-    B_i = np.zeros(shape=(dL2, dR2), dtype=complex)
+#     A_op = [A[:, s, :] for s in range(d)]
+#     B_i = np.zeros(shape=(dL2, dR2), dtype=complex)
 
-    for id, pauli in enumerate(pauli_op):
-        acc = np.zeros(shape=(dL2, dR2), dtype=complex)
-        for i in range(d):
-            for j in range(d):
-                coeff = pauli[i, j] / np.sqrt(d)
-                if coeff != 0:
-                    Ai = A_op[i]
-                    Aj = A_op[j]
-                    kron_prod = np.kron(Ai, np.conj(Aj))
-                    acc += coeff * kron_prod
-        B_i[:, id, :] = acc
-    return B_i
-
-
-def W_from_mps(B: np.ndarray):
-    """Construct the W tensor from the MPS tensor B.
-
-    Args:
-        B: MPS tensor after applying Pauli operators, shape (dL^2, d2, dR^2).
-
-    Returns:
-        np.ndarray: W tensor of shape (dL^2, dR^2, d2).
-    """
-    dL2, d2, dR2 = B.shape
-    W = np.zeros(shape=(dL2, d2, d2, dR2), dtype=complex)
-    for id in range(d2):
-        W[:, id, id, :] = B[:, id, :]
-    return W
-
-def apply_W(psi_mps: MPSState, W: np.ndarray, site: int) -> MPSState:
-    """Apply W tensor to MPS state at specified site.
-
-    Args:
-        psi_mps: Original MPS state.
-        W: W tensor to apply.
-        site: Site index to apply W.
-
-    Returns:
-        MPSState: New MPS state after applying W.
-    """
-    new_mps = psi_mps.mps.copy()
-    for _ in range(psi_mps.n_qubits):
-        psi = tensor_network_apply_op_vec(
-            A=W,
-            x=psi_mps,
-            max_bond=psi_mps.max_bond,
-            contract=False,
-            compress=False,
-        )
+#     for id, pauli in enumerate(pauli_op):
+#         acc = np.zeros(shape=(dL2, dR2), dtype=complex)
+#         for i in range(d):
+#             for j in range(d):
+#                 coeff = pauli[i, j] / np.sqrt(d)
+#                 if coeff != 0:
+#                     Ai = A_op[i]
+#                     Aj = A_op[j]
+#                     kron_prod = np.kron(Ai, np.conj(Aj))
+#                     acc += coeff * kron_prod
+#         B_i[:, id, :] = acc
+#     return B_i
 
 
-def sre_mps(state: MPSState, params: ReplicaMPSParams) -> PropertyResult:
-    """Computes the SRE for an MPS state using replica method.
+# def W_from_mps(B: np.ndarray):
+#     """Construct the W tensor from the MPS tensor B.
 
-    Args:
-        state: The MPS quantum state.
-        params: Parameters for the replica MPS computation.
+#     Args:
+#         B: MPS tensor after applying Pauli operators, shape (dL^2, d2, dR^2).
 
-    Returns:
-        PropertyResult: The computed SRE property result.
-    """
-    #TODO Implement Replica MPS based method?
-    return PropertyResult(name="mps", value=0.0, meta={})
+#     Returns:
+#         np.ndarray: W tensor of shape (dL^2, dR^2, d2).
+#     """
+#     dL2, d2, dR2 = B.shape
+#     W = np.zeros(shape=(dL2, d2, d2, dR2), dtype=complex)
+#     for id in range(d2):
+#         W[:, id, id, :] = B[:, id, :]
+#     return W
+
+# def apply_W(psi_mps: MPSState, W: np.ndarray, site: int) -> MPSState:
+#     """Apply W tensor to MPS state at specified site.
+
+#     Args:
+#         psi_mps: Original MPS state.
+#         W: W tensor to apply.
+#         site: Site index to apply W.
+
+#     Returns:
+#         MPSState: New MPS state after applying W.
+#     """
+#     new_mps = psi_mps.mps.copy()
+#     for _ in range(psi_mps.n_qubits):
+#         psi = tensor_network_apply_op_vec(
+#             A=W,
+#             x=psi_mps,
+#             max_bond=psi_mps.max_bond,
+#             contract=False,
+#             compress=False,
+#         )
+#     return MPSState(mps=new_mps, n_qubits=psi_mps.n_qubits, d=psi_mps.d, backend=psi_mps.backend)
+
+
+# def sre_mps(state: MPSState, params: ReplicaMPSParams) -> PropertyResult:
+#     """Computes the SRE for an MPS state using replica method.
+
+#     Args:
+#         state: The MPS quantum state.
+#         params: Parameters for the replica MPS computation.
+
+#     Returns:
+#         PropertyResult: The computed SRE property result.
+#     """
+#     #TODO Implement Replica MPS based method?
+#     return PropertyResult(name="mps", value=0.0, meta={})
 
 # ----------- FWHT -----------
 def in_place_FHWT(arr: np.ndarray):
@@ -225,7 +224,7 @@ def sre_fwht(state: DenseState) -> PropertyResult:
         A = np.conjugate(psi[idx ^ k]) * psi   # shape (N,)
         in_place_FHWT(A)
         acc += np.sum(np.abs(A)**4)
-    sre = -np.log2(acc/(2**n))
+    sre = -np.log2(acc/(state.d**n))
 
     details = {"method":"FWHT", "n_qubits":n}
     return PropertyResult(name="SRE", value=sre, meta=details)

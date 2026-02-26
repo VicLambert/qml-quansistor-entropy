@@ -1,11 +1,18 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     import numpy as np
+
+
+@dataclass(frozen=True)
+class BackendConfig:
+    name: str               # "quimb" or "pennylane"
+    representation: str     # "dense" or "mps"...
+    params: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass

@@ -1,0 +1,1 @@
+{"error":"Unable to allocate 4.00 GiB for an array with shape (262144, 1024) and data type complex128"}

@@ -5,3 +5,11 @@ qml_quansistor_entropy.egg-info/dependency_links.txt
 qml_quansistor_entropy.egg-info/requires.txt
 qml_quansistor_entropy.egg-info/top_level.txt
 qqe/__init__.py
+tests/test_brickwork.py
+tests/test_families.py
+tests/test_gates.py
+tests/test_imports.py
+tests/test_integration.py
+tests/test_seeds.py
+tests/test_specs.py
+tests/test_sre_exact_dense.py

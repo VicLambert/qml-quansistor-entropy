@@ -16,8 +16,8 @@ from typing import Any, Iterator
 
 import numpy as np
 
-from qqe.experiments.core import BackendConfig
-from qqe.properties.compute import PropertyRequest
+from qqe.properties.results import PropertyRequest
+from qqe.states.types import BackendConfig
 
 logger = logging.getLogger(__name__)
 
@@ -164,20 +164,22 @@ def make_property_cache_key(
     }
     return hash_key(payload)
 
-
 def _to_jsonable(x: Any) -> Any:
-    # small, practical converter; you can replace with your serialize.py later
-    if is_dataclass(x):
-        return asdict(x)
-    if isinstance(x, Path):
-        return str(x)
-    # numpy scalars
-    try:
-        if isinstance(x, (np.integer, np.floating)):
-            return x.item()
-    except Exception:
-        pass
-    return x
+    """Convert an object to a JSON-serializable format."""
+    if x is None:
+        return None
+    if isinstance(x, (str, int, float, bool)):
+        return x
+    if isinstance(x, (list, tuple)):
+        return [_to_jsonable(item) for item in x]
+    if isinstance(x, dict):
+        return {k: _to_jsonable(v) for k, v in x.items()}
+    if is_dataclass(x) and not isinstance(x, type):
+        return asdict(x)  # Convert dataclass to dict
+    if hasattr(x, "__dict__"):
+        return _to_jsonable(x.__dict__)
+    # Fallback: convert to string
+    return str(x)
 
 
 def make_run_id(*, label: str = "run") -> str:
@@ -236,15 +238,6 @@ class RunStore:
         with open(self.summary_path, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2, default=_to_jsonable)
 
-
-def _to_jsonable(obj: Any) -> Any:
-    if dataclasses.is_dataclass(obj):
-        return {k: _to_jsonable(v) for k, v in dataclasses.asdict(obj).items()}
-    if isinstance(obj, dict):
-        return {k: _to_jsonable(v) for k, v in obj.items()}
-    if isinstance(obj, (list, tuple)):
-        return [_to_jsonable(v) for v in obj]
-    return obj
 
 
 def write_json(path: str | Path, obj: Any, *, indent: int = 2, compress: bool = False) -> None:

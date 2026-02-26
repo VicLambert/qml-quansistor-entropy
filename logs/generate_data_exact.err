@@ -1,0 +1,109 @@
+2026-02-17 08:16:26,567 - __main__ - INFO - Starting data generation...
+2026-02-17 08:16:26,603 - __main__ - INFO - Generated 5000 configurations
+2026-02-17 08:16:26,603 - __main__ - INFO - Computing SRE using backend=quimb, method=exact, parallel=True
+2026-02-17 08:16:26,603 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 30 workers, 1 cores per worker.
+2026-02-17 08:16:40,825 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-02-17 08:16:40,825 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.42.44:8787/status
+2026-02-17 08:16:46,890 - __main__ - INFO - Dask dashboard: http://172.26.42.44:8787/status
+2026-02-17 08:16:46,890 - __main__ - INFO - Workers connected: 5
+Computing SRE (parallel):   0%|          | 0/5000 [00:00<?, ?it/s]Computing SRE (parallel):   0%|          | 1/5000 [00:11<15:42:29, 11.31s/it]Computing SRE (parallel):   0%|          | 22/5000 [00:11<31:09,  2.66it/s]  Computing SRE (parallel):   1%|          | 55/5000 [00:11<09:55,  8.30it/s]Computing SRE (parallel):   2%|▏         | 97/5000 [00:11<04:29, 18.18it/s]Computing SRE (parallel):   3%|▎         | 133/5000 [00:11<02:44, 29.50it/s]Computing SRE (parallel):   3%|▎         | 167/5000 [00:11<01:53, 42.67it/s]Computing SRE (parallel):   4%|▍         | 208/5000 [00:12<01:14, 64.50it/s]Computing SRE (parallel):   5%|▍         | 248/5000 [00:12<00:52, 90.75it/s]Computing SRE (parallel):   6%|▌         | 291/5000 [00:12<00:37, 124.75it/s]Computing SRE (parallel):   7%|▋         | 333/5000 [00:12<00:28, 161.71it/s]Computing SRE (parallel):   7%|▋         | 374/5000 [00:12<00:23, 198.92it/s]Computing SRE (parallel):   8%|▊         | 418/5000 [00:12<00:19, 240.80it/s]Computing SRE (parallel):   9%|▉         | 459/5000 [00:12<00:16, 269.53it/s]Computing SRE (parallel):  10%|█         | 501/5000 [00:12<00:15, 299.57it/s]Computing SRE (parallel):  11%|█         | 544/5000 [00:12<00:13, 330.56it/s]Computing SRE (parallel):  12%|█▏        | 585/5000 [00:13<00:16, 262.44it/s]Computing SRE (parallel):  13%|█▎        | 628/5000 [00:13<00:14, 297.96it/s]Computing SRE (parallel):  13%|█▎        | 670/5000 [00:13<00:13, 325.38it/s]Computing SRE (parallel):  14%|█▍        | 713/5000 [00:13<00:12, 344.64it/s]Computing SRE (parallel):  15%|█▌        | 758/5000 [00:13<00:11, 371.49it/s]Computing SRE (parallel):  16%|█▌        | 803/5000 [00:13<00:10, 390.87it/s]Computing SRE (parallel):  17%|█▋        | 845/5000 [00:13<00:10, 397.61it/s]Computing SRE (parallel):  18%|█▊        | 889/5000 [00:13<00:10, 408.98it/s]Computing SRE (parallel):  19%|█▊        | 933/5000 [00:13<00:09, 414.65it/s]Computing SRE (parallel):  20%|█▉        | 976/5000 [00:14<00:09, 415.30it/s]Computing SRE (parallel):  20%|██        | 1021/5000 [00:14<00:09, 425.04it/s]Computing SRE (parallel):  21%|██▏       | 1064/5000 [00:14<00:09, 418.37it/s]Computing SRE (parallel):  22%|██▏       | 1107/5000 [00:14<00:09, 415.56it/s]Computing SRE (parallel):  23%|██▎       | 1150/5000 [00:14<00:09, 418.56it/s]Computing SRE (parallel):  24%|██▍       | 1194/5000 [00:14<00:08, 423.51it/s]Computing SRE (parallel):  25%|██▍       | 1237/5000 [00:14<00:09, 417.65it/s]Computing SRE (parallel):  26%|██▌       | 1280/5000 [00:14<00:08, 421.19it/s]Computing SRE (parallel):  26%|██▋       | 1323/5000 [00:14<00:09, 405.98it/s]Computing SRE (parallel):  27%|██▋       | 1364/5000 [00:15<00:12, 299.25it/s]Computing SRE (parallel):  28%|██▊       | 1405/5000 [00:15<00:11, 324.67it/s]Computing SRE (parallel):  29%|██▉       | 1442/5000 [00:15<00:17, 206.59it/s]Computing SRE (parallel):  29%|██▉       | 1471/5000 [00:15<00:19, 180.09it/s]Computing SRE (parallel):  30%|███       | 1512/5000 [00:15<00:15, 218.84it/s]Computing SRE (parallel):  31%|███       | 1541/5000 [00:16<00:18, 185.99it/s]Computing SRE (parallel):  31%|███▏      | 1571/5000 [00:16<00:18, 181.24it/s]Computing SRE (parallel):  32%|███▏      | 1609/5000 [00:16<00:19, 170.48it/s]Computing SRE (parallel):  33%|███▎      | 1644/5000 [00:16<00:16, 200.51it/s]Computing SRE (parallel):  33%|███▎      | 1669/5000 [00:16<00:19, 171.66it/s]Computing SRE (parallel):  34%|███▍      | 1701/5000 [00:17<00:18, 179.15it/s]Computing SRE (parallel):  34%|███▍      | 1722/5000 [00:17<00:20, 157.67it/s]Computing SRE (parallel):  35%|███▌      | 1751/5000 [00:17<00:18, 179.03it/s]Computing SRE (parallel):  36%|███▌      | 1792/5000 [00:17<00:17, 178.61it/s]Computing SRE (parallel):  37%|███▋      | 1836/5000 [00:17<00:13, 228.01it/s]Computing SRE (parallel):  38%|███▊      | 1882/5000 [00:17<00:11, 276.94it/s]Computing SRE (parallel):  38%|███▊      | 1915/5000 [00:18<00:15, 205.38it/s]Computing SRE (parallel):  39%|███▉      | 1943/5000 [00:18<00:16, 186.62it/s]Computing SRE (parallel):  40%|███▉      | 1991/5000 [00:18<00:12, 241.39it/s]Computing SRE (parallel):  41%|████      | 2037/5000 [00:18<00:10, 286.34it/s]Computing SRE (parallel):  41%|████▏     | 2072/5000 [00:18<00:12, 234.10it/s]Computing SRE (parallel):  42%|████▏     | 2110/5000 [00:18<00:14, 205.34it/s]Computing SRE (parallel):  43%|████▎     | 2157/5000 [00:19<00:11, 253.49it/s]Computing SRE (parallel):  44%|████▍     | 2189/5000 [00:19<00:13, 211.17it/s]Computing SRE (parallel):  45%|████▍     | 2239/5000 [00:19<00:10, 265.52it/s]Computing SRE (parallel):  46%|████▌     | 2285/5000 [00:19<00:08, 306.56it/s]Computing SRE (parallel):  47%|████▋     | 2334/5000 [00:19<00:07, 348.01it/s]Computing SRE (parallel):  48%|████▊     | 2384/5000 [00:19<00:06, 383.75it/s]Computing SRE (parallel):  49%|████▊     | 2433/5000 [00:19<00:06, 409.47it/s]Computing SRE (parallel):  50%|████▉     | 2479/5000 [00:19<00:05, 421.71it/s]Computing SRE (parallel):  50%|█████     | 2524/5000 [00:19<00:05, 429.47it/s]Computing SRE (parallel):  51%|█████▏    | 2572/5000 [00:20<00:05, 439.26it/s]Computing SRE (parallel):  52%|█████▏    | 2618/5000 [00:20<00:06, 387.97it/s]Computing SRE (parallel):  53%|█████▎    | 2659/5000 [00:20<00:06, 352.24it/s]Computing SRE (parallel):  54%|█████▍    | 2697/5000 [00:20<00:06, 331.74it/s]Computing SRE (parallel):  55%|█████▍    | 2736/5000 [00:20<00:06, 335.80it/s]Computing SRE (parallel):  55%|█████▌    | 2771/5000 [00:20<00:07, 311.76it/s]Computing SRE (parallel):  56%|█████▌    | 2806/5000 [00:20<00:06, 314.88it/s]Computing SRE (parallel):  57%|█████▋    | 2840/5000 [00:20<00:06, 320.73it/s]Computing SRE (parallel):  57%|█████▋    | 2873/5000 [00:21<00:07, 293.87it/s]Computing SRE (parallel):  58%|█████▊    | 2912/5000 [00:21<00:06, 318.13it/s]Computing SRE (parallel):  59%|█████▉    | 2945/5000 [00:21<00:06, 318.40it/s]Computing SRE (parallel):  60%|█████▉    | 2978/5000 [00:21<00:06, 313.00it/s]Computing SRE (parallel):  60%|██████    | 3015/5000 [00:21<00:06, 327.61it/s]Computing SRE (parallel):  61%|██████    | 3049/5000 [00:21<00:05, 325.91it/s]Computing SRE (parallel):  62%|██████▏   | 3082/5000 [00:21<00:08, 213.74it/s]Computing SRE (parallel):  63%|██████▎   | 3127/5000 [00:21<00:07, 262.55it/s]Computing SRE (parallel):  63%|██████▎   | 3173/5000 [00:22<00:05, 306.03it/s]Computing SRE (parallel):  64%|██████▍   | 3209/5000 [00:22<00:05, 311.92it/s]Computing SRE (parallel):  65%|██████▍   | 3244/5000 [00:22<00:05, 315.83it/s]Computing SRE (parallel):  66%|██████▌   | 3279/5000 [00:22<00:05, 305.71it/s]Computing SRE (parallel):  66%|██████▌   | 3312/5000 [00:22<00:05, 309.49it/s]Computing SRE (parallel):  67%|██████▋   | 3348/5000 [00:22<00:05, 320.84it/s]Computing SRE (parallel):  68%|██████▊   | 3382/5000 [00:22<00:05, 309.18it/s]Computing SRE (parallel):  68%|██████▊   | 3420/5000 [00:22<00:04, 327.68it/s]Computing SRE (parallel):  69%|██████▉   | 3454/5000 [00:22<00:04, 323.75it/s]Computing SRE (parallel):  70%|██████▉   | 3487/5000 [00:23<00:04, 306.55it/s]Computing SRE (parallel):  70%|███████   | 3519/5000 [00:23<00:04, 309.87it/s]Computing SRE (parallel):  71%|███████   | 3553/5000 [00:23<00:04, 317.62it/s]Computing SRE (parallel):  72%|███████▏  | 3586/5000 [00:23<00:04, 304.62it/s]Computing SRE (parallel):  72%|███████▏  | 3623/5000 [00:23<00:04, 321.77it/s]Computing SRE (parallel):  73%|███████▎  | 3656/5000 [00:23<00:04, 318.72it/s]Computing SRE (parallel):  74%|███████▍  | 3689/5000 [00:23<00:04, 304.64it/s]Computing SRE (parallel):  75%|███████▍  | 3728/5000 [00:23<00:03, 327.92it/s]Computing SRE (parallel):  75%|███████▌  | 3762/5000 [00:23<00:03, 312.56it/s]Computing SRE (parallel):  76%|███████▌  | 3794/5000 [00:24<00:03, 308.35it/s]Computing SRE (parallel):  77%|███████▋  | 3829/5000 [00:24<00:03, 318.91it/s]Computing SRE (parallel):  77%|███████▋  | 3862/5000 [00:24<00:03, 308.42it/s]Computing SRE (parallel):  78%|███████▊  | 3897/5000 [00:24<00:03, 319.56it/s]Computing SRE (parallel):  79%|███████▊  | 3934/5000 [00:24<00:03, 330.56it/s]Computing SRE (parallel):  79%|███████▉  | 3968/5000 [00:24<00:03, 306.56it/s]Computing SRE (parallel):  80%|████████  | 4001/5000 [00:24<00:03, 312.65it/s]Computing SRE (parallel):  81%|████████  | 4038/5000 [00:24<00:03, 318.45it/s]Computing SRE (parallel):  81%|████████▏ | 4071/5000 [00:24<00:02, 319.23it/s]Computing SRE (parallel):  82%|████████▏ | 4104/5000 [00:25<00:02, 319.02it/s]Computing SRE (parallel):  83%|████████▎ | 4137/5000 [00:25<00:02, 321.83it/s]Computing SRE (parallel):  83%|████████▎ | 4170/5000 [00:25<00:02, 309.67it/s]Computing SRE (parallel):  84%|████████▍ | 4205/5000 [00:25<00:02, 320.87it/s]Computing SRE (parallel):  85%|████████▍ | 4238/5000 [00:25<00:02, 321.78it/s]Computing SRE (parallel):  85%|████████▌ | 4271/5000 [00:25<00:02, 292.59it/s]Computing SRE (parallel):  86%|████████▋ | 4313/5000 [00:25<00:02, 325.68it/s]Computing SRE (parallel):  87%|████████▋ | 4347/5000 [00:26<00:03, 204.97it/s]Computing SRE (parallel):  88%|████████▊ | 4393/5000 [00:26<00:02, 254.89it/s]Computing SRE (parallel):  89%|████████▉ | 4445/5000 [00:26<00:01, 312.80it/s]Computing SRE (parallel):  90%|████████▉ | 4483/5000 [00:26<00:01, 309.38it/s]Computing SRE (parallel):  90%|█████████ | 4524/5000 [00:26<00:01, 332.22it/s]Computing SRE (parallel):  91%|█████████ | 4561/5000 [00:26<00:01, 324.89it/s]Computing SRE (parallel):  92%|█████████▏| 4597/5000 [00:26<00:01, 322.92it/s]Computing SRE (parallel):  93%|█████████▎| 4632/5000 [00:27<00:01, 194.85it/s]Computing SRE (parallel):  94%|█████████▎| 4680/5000 [00:27<00:01, 245.13it/s]Computing SRE (parallel):  94%|█████████▍| 4713/5000 [00:27<00:01, 214.76it/s]Computing SRE (parallel):  95%|█████████▌| 4751/5000 [00:27<00:01, 209.32it/s]Computing SRE (parallel):  96%|█████████▌| 4777/5000 [00:27<00:01, 182.56it/s]Computing SRE (parallel):  97%|█████████▋| 4836/5000 [00:27<00:00, 257.45it/s]Computing SRE (parallel):  99%|█████████▉| 4939/5000 [00:27<00:00, 418.17it/s]Computing SRE (parallel):  99%|█████████▉| 4939/5000 [00:40<00:00, 418.17it/s]Computing SRE (parallel): 100%|█████████▉| 4989/5000 [02:23<00:06,  1.64it/s] Computing SRE (parallel): 100%|█████████▉| 4991/5000 [02:24<00:05,  1.66it/s]Computing SRE (parallel): 100%|██████████| 5000/5000 [02:37<00:00, 31.67it/s]
+2026-02-17 08:19:24,976 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-02-17 08:19:24,977 - __main__ - INFO - 5000
+--- Logging error ---
+Traceback (most recent call last):
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 1110, in emit
+    msg = self.format(record)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 953, in format
+    return fmt.format(record)
+           ^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 687, in format
+    record.message = record.getMessage()
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 377, in getMessage
+    msg = msg % self.args
+          ~~~~^~~~~~~~~~~
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/generate_data.py", line 406, in <module>
+    typer.run(main)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/main.py", line 1092, in run
+    app()
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/main.py", line 319, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/core.py", line 726, in main
+    return _main(
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/core.py", line 190, in _main
+    rv = self.invoke(ctx)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/main.py", line 706, in wrapper
+    return callback(**use_params)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/generate_data.py", line 392, in main
+    logger.info("\n", results.head(10))
+Message: '\n'
+Arguments: (                       cid family  n_qubits  n_layers        seed       SRE
+0   haar_Q4_L1_S2528957426   haar         4         1  2528957426  1.341156
+1    haar_Q4_L3_S198578551   haar         4         3   198578551  2.264186
+2   haar_Q4_L5_S2968487822   haar         4         5  2968487822  2.368156
+3    haar_Q4_L7_S638108947   haar         4         7   638108947  2.256927
+4   haar_Q4_L9_S3408018218   haar         4         9  3408018218  2.405952
+5  haar_Q4_L11_S4078061854   haar         4        11  4078061854  2.361184
+6  haar_Q4_L13_S2553003829   haar         4        13  2553003829  2.181122
+7   haar_Q4_L15_S222624954   haar         4        15   222624954  2.127479
+8  haar_Q4_L17_S2992534225   haar         4        17  2992534225  2.468326
+9   haar_Q4_L19_S662155350   haar         4        19   662155350  2.358732,)
+--- Logging error ---
+Traceback (most recent call last):
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 1110, in emit
+    msg = self.format(record)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 953, in format
+    return fmt.format(record)
+           ^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 687, in format
+    record.message = record.getMessage()
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/lib/python3.11/logging/__init__.py", line 377, in getMessage
+    msg = msg % self.args
+          ~~~~^~~~~~~~~~~
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/generate_data.py", line 406, in <module>
+    typer.run(main)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/main.py", line 1092, in run
+    app()
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/main.py", line 319, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/core.py", line 726, in main
+    return _main(
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/core.py", line 190, in _main
+    rv = self.invoke(ctx)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/typer/main.py", line 706, in wrapper
+    return callback(**use_params)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/generate_data.py", line 392, in main
+    logger.info("\n", results.head(10))
+Message: '\n'
+Arguments: (                       cid family  n_qubits  n_layers        seed       SRE
+0   haar_Q4_L1_S2528957426   haar         4         1  2528957426  1.341156
+1    haar_Q4_L3_S198578551   haar         4         3   198578551  2.264186
+2   haar_Q4_L5_S2968487822   haar         4         5  2968487822  2.368156
+3    haar_Q4_L7_S638108947   haar         4         7   638108947  2.256927
+4   haar_Q4_L9_S3408018218   haar         4         9  3408018218  2.405952
+5  haar_Q4_L11_S4078061854   haar         4        11  4078061854  2.361184
+6  haar_Q4_L13_S2553003829   haar         4        13  2553003829  2.181122
+7   haar_Q4_L15_S222624954   haar         4        15   222624954  2.127479
+8  haar_Q4_L17_S2992534225   haar         4        17  2992534225  2.468326
+9   haar_Q4_L19_S662155350   haar         4        19   662155350  2.358732,)
+2026-02-17 08:19:25,064 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/sre_data_quimb_exact
+2026-02-17 08:19:25,065 - __main__ - INFO - Completed 5000 SRE computations

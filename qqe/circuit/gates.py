@@ -1,5 +1,6 @@
 
 from __future__ import annotations
+from typing import Literal
 
 import numpy as np
 from qqe.circuit.spec import GateSpec
@@ -109,14 +110,14 @@ def haar_unitary_gate(d, rng):
     return np.dot(Q, Lambda)
 
 
-def random_quansistor_gate(rng):
+def random_quansistor_gate(a, b, g, axis):
     """Generate a random quansistor gate from symmetry class X or Y.
-    
+
     @param rng: Random number generator.
     @return: Random quansistor gate matrix.
     """
-    a, b, g = rng.standard_normal(3)
-    return circ_X(a, b, g) if rng.choice(["X", "Y"]) == "X" else circ_Y(a, b, g)
+    #a, b, g = rng.standard_normal(3)
+    return circ_X(a, b, g) if axis == "X" else circ_Y(a, b, g)
 
 
 def _I() -> np.ndarray:
@@ -130,16 +131,48 @@ def _H() -> np.ndarray:
 def _S() -> np.ndarray:
     return np.array([[1, 0], [0, 1j]], dtype=complex)
 
+def _Rx(theta: float) -> np.ndarray:
+    c = np.cos(theta / 2)
+    s = np.sin(theta / 2)
+    return np.array([
+                    [c, -1j * s],
+                    [-1j * s, c]],
+                dtype=complex)
+
+def _Ry(theta: float) -> np.ndarray:
+    c = np.cos(theta / 2)
+    s = np.sin(theta / 2)
+    return np.array([
+                [c, -s],
+                [s, c],
+            ],
+            dtype=complex)
+
+def _Rz(theta: float) -> np.ndarray:
+    return np.array([
+                [np.exp(-1j * theta / 2), 0],
+                [0, np.exp(1j * theta / 2)],
+            ],
+            dtype=complex)
 
 def _CNOT() -> np.ndarray:
     # control = first qubit, target = second qubit, basis |00>,|01>,|10>,|11>
-    return np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]], dtype=complex)
+    return np.array([
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 0, 1],
+                [0, 0, 1, 0]],
+            dtype=complex)
 
 
 _ONEQ = {
     "I": _I(),
     "H": _H(),
     "S": _S(),
+    "RX": _Rx,
+    "RY": _Ry,
+    "RZ": _Rz,
+    "CNOT": _CNOT(),
 }
 
 def kron2(A: np.ndarray, B: np.ndarray) -> np.ndarray:
@@ -167,6 +200,15 @@ def _T_matrix() -> np.ndarray:
     return np.array([[1, 0], [0, np.exp(1j * np.pi / 4)]], dtype=complex)
 
 
+def random_rot_gate(seed: int | None = None, rot_set=("RX", "RY", "RZ")) -> np.ndarray:
+    """Sample a random 1-qubit rotation gate unitary from rot_set with angle in [0, 2π)."""
+    rng = np.random.default_rng(seed)
+    gate = rng.choice(rot_set)
+    theta = float(rng.uniform(0.0, 2.0 * np.pi))
+    return _ONEQ[gate](theta)
+
+
+
 def gate_unitary(gate: GateSpec) -> np.ndarray:
     """Generate the unitary matrix for a quantum gate.
 
@@ -190,14 +232,14 @@ def gate_unitary(gate: GateSpec) -> np.ndarray:
         If the gate kind is not recognized.
     """
     kind = gate.kind
+    if kind == "I":
+        return _I()
 
-    if kind in ("unitary1", "unitary2"):
-        try:
-            U = gate.params["matrix"]
-        except KeyError as e:
-            msg = f"{kind} requires gate.params['matrix']"
-            raise KeyError(msg) from e
-        return np.asarray(U, dtype=complex)
+    if kind == "H":
+        return _H()
+
+    if kind == "S":
+        return _S()
 
     if kind == "T":
         return _T_matrix()
@@ -207,22 +249,62 @@ def gate_unitary(gate: GateSpec) -> np.ndarray:
             msg = "Haar gate requires a seed."
             raise ValueError(msg)
         rng = np.random.default_rng(gate.seed)
-        return haar_unitary_gate(d=gate.d ** len(gate.wires), rng=rng)
+        U = haar_unitary_gate(d=gate.d ** len(gate.wires), rng=rng)
+        U = np.asarray(U, dtype=complex)
+        expected = (gate.d ** len(gate.wires), gate.d ** len(gate.wires))
+        if U.shape != expected:
+            msg = (
+                f"gate_unitary returned {U.shape} for kind={gate.kind} wires={gate.wires}, "
+                f"expected {expected}"
+            )
+            raise ValueError(msg)
+        return U
 
     if kind == "quansistor":
         if gate.seed is None:
             msg = "Quansistor gate requires a seed."
             raise ValueError(msg)
         rng = np.random.default_rng(gate.seed)
-        U = random_quansistor_gate(rng)
-        return np.asarray(U, dtype=complex)
+        a, b, g, _ = gate.params if gate.params else rng.standard_normal(3)
+        axis = rng.choice(["X", "Y"])
+        U = random_quansistor_gate(a, b, g, axis)
+        U = np.asarray(U, dtype=complex)
+        expected = (gate.d ** len(gate.wires), gate.d ** len(gate.wires))
+        if U.shape != expected:
+            msg = (
+                f"gate_unitary returned {U.shape} for kind={gate.kind} wires={gate.wires}, "
+                f"expected {expected}"
+            )
+            raise ValueError(msg)
+        return U
+
+
 
     if kind == "clifford":
         if gate.seed is None:
             msg = "Clifford 2x2 gate requires a seed"
             raise ValueError(msg)
-        _, _, U = clifford_recipe_unitary(gate.seed)
+        u_a, u_b, U = clifford_recipe_unitary(gate.seed)
+        U = np.asarray(U, dtype=complex)
+        expected = (gate.d ** len(gate.wires), gate.d ** len(gate.wires))
+        if U.shape != expected:
+            msg = (
+                f"gate_unitary returned {U.shape} for kind={gate.kind} wires={gate.wires}, "
+                f"expected {expected}"
+            )
+            raise ValueError(msg)
         return U
+
+    if kind in ("RX", "RY", "RZ"):
+        # Prefer explicit rotation gates when params are provided
+        if not gate.params or len(gate.params) != 1:
+            msg = f"{kind} gate requires params=(theta,), got {gate.params}"
+            raise ValueError(msg)
+        theta = float(gate.params[0])
+        return _ONEQ[kind](theta)
+
+    if kind == "CNOT":
+        return _CNOT()
 
     msg = f"Unknown gate kind: {kind!r}"
     raise NotImplementedError(msg)

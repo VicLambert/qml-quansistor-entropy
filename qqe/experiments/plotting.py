@@ -1,16 +1,19 @@
 from __future__ import annotations
 
+import ast
 import logging
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-import ast
 import matplotlib.pyplot as plt
 import numpy as np
 import pennylane as qml
 
-from qqe.circuit.matrix_factory import gate_unitary
+from matplotlib.patches import Rectangle
+
+from qqe.circuit.gates import gate_unitary
 from qqe.circuit.spec import CircuitSpec
 from qqe.states.types import DenseState
 
@@ -66,14 +69,11 @@ def plot_pennylane_circuit(
 
     if title is None:
         title = f"PennyLane circuit ({spec.family}), n={spec.n_qubits}, L={spec.n_layers}"
-    ax.set_title(title, fontsize=12, fontweight="bold")
+    plt.title(title, fontsize=12, fontweight="bold")
 
     if save_path:
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(save_path, dpi=200, bbox_inches="tight")
-
-    if show:
-        fig.show()
+        plt.savefig(save_path, dpi=200, bbox_inches="tight")
 
     return fig
 
@@ -99,21 +99,23 @@ def _get_gate_label(gate: GateDraw) -> str:
 
 def _collect_gates_by_layer(spec: CircuitSpec) -> dict[int, list[GateDraw]]:
     if not spec.gates:
-        raise ValueError(
+        msg = (
             "CircuitSpec.gates is empty. Visualizer requires a *materialized* circuit. "
-            "Call your Family.gates(spec) and set spec.gates before plotting.",
+            "Call your Family.gates(spec) and set spec.gates before plotting."
         )
+        raise ValueError(msg)
 
     by_layer: dict[int, list[GateDraw]] = {}
     for g in spec.gates:
         L = _layer_from_tags(g.tags)
         if L is None:
-            raise ValueError(
+            msg = (
                 f"Gate {g.kind} on wires={g.wires} is missing a layer tag (expected 'Lk'). "
-                f"Tags were: {g.tags}",
+                f"Tags were: {g.tags}"
             )
+            raise ValueError(msg)
         by_layer.setdefault(L, []).append(
-            GateDraw(layer=L, kind=g.kind, wires=g.wires, tags=g.tags)
+            GateDraw(layer=L, kind=g.kind, wires=g.wires, tags=g.tags),
         )
 
     return by_layer
@@ -152,7 +154,7 @@ def plot_circuit_diagram(
     def draw_1q_gate(x: float, q: int, label: str):
         y = (n - 1) - q
         w, h = 0.55, 0.42
-        rect = plt.Rectangle((x - w / 2, y - h / 2), w, h, fill=False, linewidth=1.5)
+        rect = Rectangle((x - w / 2, y - h / 2), w, h, fill=False, linewidth=1.5)
         ax.add_patch(rect)
         ax.text(x, y, label, ha="center", va="center", fontsize=10)
 
@@ -203,7 +205,8 @@ def plot_circuit_diagram(
                 draw_2q_gate(x, a, b, label)
             else:
                 # if you ever add k-qubit gates, you can generalize later
-                raise NotImplementedError(f"Cannot draw gate with wires={g.wires}")
+                msg = f"Cannot draw gate with wires={g.wires}"
+                raise NotImplementedError(msg)
 
         # layer label at bottom
         ax.text(layer, -0.7, f"L{layer}", ha="center", va="top", fontsize=10)
@@ -246,7 +249,7 @@ def plot_state_probabilities_dense(
     fig, ax = plt.subplots(figsize=(max(8, 0.7 * top_k), 4.5))
     bars = ax.bar(range(top_k), top_probs)
 
-    for bar, p in zip(bars, top_probs):
+    for bar, p in zip(bars, top_probs, strict=False):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height(),
@@ -277,9 +280,10 @@ def plot_state_probabilities_dense(
     plt.close(fig)
 
 
-def plot_sre_v_qubits(
+def plot_sre(
     results: dict[str, Any],
     *,
+    quantity: str = "SRE",
     save_path: str | None = None,
     show: bool = True,
     title: str | None = None,
@@ -298,6 +302,8 @@ def plot_sre_v_qubits(
         Title for the plot. If None, a default title is used.
     """
     stats = results.get("stats", results)
+    label = results.get("group_keys", ["n_layers", "n_qubits"])[1]
+    print("label", label)
 
     parsed: list[tuple[str, int, dict[str, Any]]] = []
     for key, value in stats.items():
@@ -342,11 +348,12 @@ def plot_sre_v_qubits(
         es = [r[2] for r in rows]
         ax.errorbar(xs, ys, yerr=es, label=family, marker="o", capsize=3)
 
-    ax.set_xlabel("Number of qubits")
-    ax.set_ylabel("SRE")
+    xlabel = "Number of qubits" if label == "n_qubits" else "Number of layers"
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(quantity)
     ax.grid(alpha=0.3)
     ax.legend(title="Circuit Family")
-    ax.set_title(title or "SRE vs Number of Qubits", fontweight="bold")
+    ax.set_title(title or f"{quantity} vs {xlabel}", fontweight="bold")
     plt.tight_layout()
 
     if save_path:
@@ -359,11 +366,11 @@ def plot_sre_v_qubits(
     plt.close(fig)
 
 
-def _gse(d: int, n_qubits: int, q: int) -> float:
+def _gse(d: int, n_qubits: Any, NT: Any) -> float:
     phys_dim = d ** n_qubits
-    f = (-4 + 3 * (phys_dim**2 -phys_dim)) / (4 * (phys_dim**2 - 1))
+    f = (-4 + 3 * (2*phys_dim - phys_dim)) / (4 * (2*phys_dim - 1))
 
-    num = np.asarray( 4 +(phys_dim - 1) * f ** (n_qubits*q), dtype=float)
+    num = np.asarray( 4 +(phys_dim - 1) * f ** (NT), dtype=float)
     return -np.log2(num / (3 + phys_dim))
 
     # term1 = 3 / (d**n_qubits + 2)
@@ -373,6 +380,7 @@ def _gse(d: int, n_qubits: int, q: int) -> float:
 
 def plot_sredensity_v_tcount(
     results: dict[str, Any],
+    n_layers: int,
     *,
     save_path: str | None = None,
     show: bool = True,
@@ -433,32 +441,33 @@ def plot_sredensity_v_tcount(
         curves.setdefault(n_qubits, []).append((tcount, mean, stderr))
 
     fig, ax = plt.subplots(figsize=(7.5, 4.5))
-
+    ns = []
     for n_qubits, rows in sorted(curves.items(), key=lambda x: x[0]):
+        ns.append(int(n_qubits))
         rows.sort(key=lambda r: r[0])  # sort by tcount
-        xs = [r[0] / n_qubits for r in rows]
-        ys = [r[1] / n_qubits for r in rows]
-        es = [r[2] / n_qubits for r in rows]
-        ax.errorbar(xs, ys, yerr=es, label=f"n={n_qubits}", marker="o", capsize=3)
+        xs = np.array([r[0] for r in rows])
+        ys = np.array([r[1] for r in rows])
+        es = np.array([r[2] for r in rows])
+        ax.errorbar(xs/(n_qubits), ys/n_qubits, yerr=es/n_qubits, label=f"n={n_qubits}", marker="o", capsize=3)
 
-    q = np.linspace(0, 38, 1000)
-    ns = [6, 8, 10]
+    NT = np.linspace(0, 2*n_layers, 1000, dtype=float)
+
     for j, n_qubits in enumerate(ns):
         alpha = 0.2 + 0.8 * j / (len(ns) - 1)
         alpha = min(1, max(0, alpha))
-        xs = q/n_qubits
-        gsre = _gse(2, n_qubits, xs)
-        ax.plot(xs, gsre/n_qubits, linestyle="-", alpha=alpha, label=f"GSE n={n_qubits}")
-    M_max = np.log(2**ns[-1])
+        q = NT
+        gsre = _gse(2, n_qubits, NT)
+        ax.plot(NT/n_qubits, gsre/n_qubits, linestyle="-", color="black", alpha=alpha, label=f"GSE n={n_qubits}")
+    M_max = np.log2(2**ns[-1])
     plt.axhline(y=(M_max)/ns[-1], linestyle="--", alpha=0.7)
-    q_c = np.log(2) / np.log(4/3)
+    q_c = np.log2(2) / np.log2(4/3)
     plt.axvline(x=q_c,  linestyle=":", alpha=0.7)
 
-    ax.set_xlabel("t-count")
-    ax.set_ylabel(r"$m_2$")
+    ax.set_xlabel("q (T-count per qubit)")
+    ax.set_ylabel(r"$m_2$ (SRE per qubit)")
     ax.grid(alpha=0.3)
     ax.legend(title="Number of qubits")
-    ax.set_title(title or r"$m_2$ vs t-count", fontweight="bold")
+    ax.set_title(title or r"$m_2$ vs q", fontweight="bold")
     plt.tight_layout()
 
     if save_path:
