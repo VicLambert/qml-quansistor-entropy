@@ -20,6 +20,10 @@ Requires-Dist: tqdm
 Requires-Dist: typer
 Requires-Dist: networkx
 Requires-Dist: pytest>=9.0.2
+Requires-Dist: torch>=2.10.0
+Requires-Dist: torch-geometric>=2.7.0
+Requires-Dist: qiskit>=2.3.0
+Requires-Dist: ipywidgets>=8.1.8
 Provides-Extra: dev
 Requires-Dist: black>=23.0.0; extra == "dev"
 Requires-Dist: ruff>=0.1.0; extra == "dev"
