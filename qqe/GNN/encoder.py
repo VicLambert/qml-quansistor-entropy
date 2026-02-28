@@ -305,11 +305,11 @@ def _encode_node_feature(
         "input", "measurement",
         "h", "s", "t", "id",
         "rx", "ry", "rz",
-        "cx", "cnot",
+        "cx",
         "qx", "qy", "haar",
     ]
     gate_idx = gate_types.index(gate_type) if gate_type in gate_types else len(gate_types)
-    gate_onehot = torch.zeros(len(gate_types) + 1)
+    gate_onehot = torch.zeros(len(gate_types))
     gate_onehot[gate_idx] = 1.0
 
     # Qubit mask (which qubits this gate acts on)
@@ -320,13 +320,7 @@ def _encode_node_feature(
         for q in qubits:
             qubit_mask[q] = 1.0
 
-    # Parameter features (pad to max 4 params)
-    param_feats = torch.zeros(4)
-    if params:
-        for i, p in enumerate(params[:4]):
-            param_feats[i] = float(p)
-
-    return torch.cat([gate_onehot, qubit_mask, param_feats])
+    return torch.cat([gate_onehot, qubit_mask])
 
 
 def _get_node_feature_dim() -> int:

@@ -1,5 +1,9 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+from torch.amp.autocast_mode import autocast
+
+_AMP_DEVICE_TYPE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 class Parameters_Net(nn.Module):
@@ -79,7 +83,7 @@ class GNN(nn.Module):
         super().__init__()
         from torch_geometric.nn import TransformerConv, global_mean_pool
 
-        elf.global_mean_pool = global_mean_pool
+        self.global_mean_pool = global_mean_pool
 
         if num_layers < 1:
             raise ValueError("num_layers must be >= 1")
@@ -112,5 +116,42 @@ class GNN(nn.Module):
 
 
     def forward(self, data) -> torch.Tensor:
-        x, edge_index, batch = 
+        x, edge_index = data.x, data.edge_index
+        if  hasattr(data, "batch") and data.batch is not None:
+            batch = data.batch
+            num_graphs = int(batch.max().item() + 1) if batch.numel() > 0 else 1
+
+        else:
+            batch = torch.zeros(x.size(0), dtype=torch.long, device=x.device)
+            num_graphs = 1
+
+        if x is None or x.size(0) == 0:
+            x_pool = torch.zeros((num_graphs, self.gnn_hidden * self.gnn_heads), device=x.device, dtype=torch.float)
+        else:
+            with autocast(_AMP_DEVICE_TYPE, enabled=False):
+                h = x.float()
+                for conv in self.conv_layers:
+                    h = conv(h, edge_index)
+                    h = F.relu(h)
+                    if self.dropout_rate > 0.0:
+                        h = F.dropout(h, p=self.dropout_rate, training=self.training)
+                x_pool = self.global_mean_pool(h, batch)
+        g_raw = data.global_features
+        if g_raw.dim() == 1:
+            if num_graphs == 1:
+                g_raw = g_raw.view(1, -1)
+            else:
+                assert g_raw.numel() % num_graphs == 0, "global_features length must be divisible by number of graphs"
+                gdim = g_raw.numel() // num_graphs
+                g_raw = g_raw.view(num_graphs, gdim)
+        elif g_raw.dim() == 2:
+            assert g_raw.size(0) == num_graphs, "global_features first dimension must match number of graphs"
+        else:
+            raise ValueError("global_features must be 1D or 2D tensor")
+        g_feat = self.global_mlp(g_raw.float())
+        assert x_pool.size(0) == g_feat.size(0), "Batch size of node features and global features must match"
+
+        h = torch.cat([x_pool, g_feat], dim=-1)
+        out = self.regressor(h)
+        return out.view(-1)
 
