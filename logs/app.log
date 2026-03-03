@@ -3401,3 +3401,77 @@ NotImplementedError
 2026-03-03 11:26:51,698 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
 2026-03-03 11:26:51,701 - distributed.scheduler - INFO - Scheduler closing all comms
 2026-03-03 11:26:51,711 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-03 10:38:46,192 - __main__ - INFO - Starting data generation...
+2026-03-03 10:38:46,218 - __main__ - INFO - Generated 40000 circuit configurations
+2026-03-03 10:38:51,994 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 4 workers, 1 cores per worker.
+2026-03-03 10:43:29,875 - __main__ - INFO - Starting data generation...
+2026-03-03 10:43:29,903 - __main__ - INFO - Generated 40000 circuit configurations
+2026-03-03 10:43:30,880 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 4 workers, 1 cores per worker.
+2026-03-03 10:43:41,325 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-03 10:43:41,439 - distributed.scheduler - INFO - State start
+2026-03-03 10:43:41,441 - distributed.scheduler - INFO -   Scheduler at:  tcp://172.26.45.26:41725
+2026-03-03 10:43:41,441 - distributed.scheduler - INFO -   dashboard at:  http://172.26.45.26:8787/status
+2026-03-03 10:43:41,441 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-03 10:43:41,671 - distributed.scheduler - INFO - Receive client connection: Client-e6468287-1730-11f1-bac6-8c3b4adbec5e
+2026-03-03 10:43:41,671 - distributed.core - INFO - Starting established connection to tcp://172.26.45.26:44580
+2026-03-03 10:43:41,671 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-03 10:43:41,672 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.45.26:8787/status
+2026-03-03 10:43:54,856 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.118.7:45229 name: SLURMCluster-1
+2026-03-03 10:43:54,857 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.118.7:45229
+2026-03-03 10:43:54,857 - distributed.core - INFO - Starting established connection to tcp://172.26.118.7:56758
+2026-03-03 10:43:54,938 - __main__ - INFO - Dask dashboard: http://172.26.45.26:8787/status
+2026-03-03 10:43:54,939 - __main__ - INFO - Workers connected: 1
+2026-03-03 10:46:33,470 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.118.7:37947 name: SLURMCluster-2
+2026-03-03 10:46:33,473 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.118.7:37947
+2026-03-03 10:46:33,473 - distributed.core - INFO - Starting established connection to tcp://172.26.118.7:39646
+2026-03-03 10:46:33,585 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.118.7:40583 name: SLURMCluster-0
+2026-03-03 10:46:33,585 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.118.7:40583
+2026-03-03 10:46:33,585 - distributed.core - INFO - Starting established connection to tcp://172.26.118.7:39648
+2026-03-03 10:46:33,608 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.118.7:37697 name: SLURMCluster-3
+2026-03-03 10:46:33,608 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.118.7:37697
+2026-03-03 10:46:33,608 - distributed.core - INFO - Starting established connection to tcp://172.26.118.7:39664
+2026-03-03 11:07:58,008 - __main__ - INFO - Starting data generation...
+2026-03-03 11:07:58,037 - __main__ - INFO - Generated 12000 circuit configurations
+2026-03-03 11:08:04,295 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 4 workers, 1 cores per worker.
+2026-03-03 11:08:12,795 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-03 11:08:12,997 - distributed.scheduler - INFO - State start
+2026-03-03 11:08:12,998 - distributed.scheduler - INFO -   Scheduler at:  tcp://172.26.45.11:43895
+2026-03-03 11:08:12,999 - distributed.scheduler - INFO -   dashboard at:  http://172.26.45.11:8787/status
+2026-03-03 11:08:12,999 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-03 11:08:13,360 - distributed.scheduler - INFO - Receive client connection: Client-5364656c-1734-11f1-ad7d-8c3b4adbee80
+2026-03-03 11:08:13,360 - distributed.core - INFO - Starting established connection to tcp://172.26.45.11:52014
+2026-03-03 11:08:13,361 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-03 11:08:13,361 - qqe.parallel.dask - INFO - Client dashboard available at: http://172.26.45.11:8787/status
+2026-03-03 11:08:24,440 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.118.5:38013 name: SLURMCluster-3
+2026-03-03 11:08:24,440 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.118.5:38013
+2026-03-03 11:08:24,440 - distributed.core - INFO - Starting established connection to tcp://172.26.118.5:44556
+2026-03-03 11:08:24,496 - __main__ - INFO - Dask dashboard: http://172.26.45.11:8787/status
+2026-03-03 11:08:24,497 - __main__ - INFO - Workers connected: 1
+2026-03-03 11:08:55,196 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.75.19:42275 name: SLURMCluster-2
+2026-03-03 11:08:55,196 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.75.19:42275
+2026-03-03 11:08:55,196 - distributed.core - INFO - Starting established connection to tcp://172.26.75.19:40852
+2026-03-03 11:08:55,196 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.75.19:39611 name: SLURMCluster-1
+2026-03-03 11:08:55,196 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.75.19:39611
+2026-03-03 11:08:55,196 - distributed.core - INFO - Starting established connection to tcp://172.26.75.19:40850
+2026-03-03 11:08:55,197 - distributed.scheduler - INFO - Register worker addr: tcp://172.26.75.19:35035 name: SLURMCluster-0
+2026-03-03 11:08:55,197 - distributed.scheduler - INFO - Starting worker compute stream, tcp://172.26.75.19:35035
+2026-03-03 11:08:55,197 - distributed.core - INFO - Starting established connection to tcp://172.26.75.19:40864
+2026-03-03 11:28:00,188 - distributed.scheduler - INFO - Remove client Client-5364656c-1734-11f1-ad7d-8c3b4adbee80
+2026-03-03 11:28:00,202 - distributed.core - INFO - Received 'close-stream' from tcp://172.26.45.11:52014; closing.
+2026-03-03 11:28:00,202 - distributed.scheduler - INFO - Remove client Client-5364656c-1734-11f1-ad7d-8c3b4adbee80
+2026-03-03 11:28:00,203 - distributed.scheduler - INFO - Close client connection: Client-5364656c-1734-11f1-ad7d-8c3b4adbee80
+2026-03-03 11:28:00,204 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772566080.2045178') ('SLURMCluster-0', 'SLURMCluster-2', 'SLURMCluster-3', 'SLURMCluster-1')
+2026-03-03 11:28:00,238 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-03 11:28:00,238 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-03 11:28:00,239 - distributed.core - INFO - Connection to tcp://172.26.118.5:44556 has been closed.
+2026-03-03 11:28:00,239 - distributed.scheduler - INFO - Remove worker addr: tcp://172.26.118.5:38013 name: SLURMCluster-3 (stimulus_id='handle-worker-cleanup-1772566080.2393134')
+2026-03-03 11:28:00,239 - distributed.core - INFO - Connection to tcp://172.26.75.19:40852 has been closed.
+2026-03-03 11:28:00,239 - distributed.scheduler - INFO - Remove worker addr: tcp://172.26.75.19:42275 name: SLURMCluster-2 (stimulus_id='handle-worker-cleanup-1772566080.2395394')
+2026-03-03 11:28:00,239 - distributed.core - INFO - Connection to tcp://172.26.75.19:40850 has been closed.
+2026-03-03 11:28:00,239 - distributed.scheduler - INFO - Remove worker addr: tcp://172.26.75.19:39611 name: SLURMCluster-1 (stimulus_id='handle-worker-cleanup-1772566080.2397158')
+2026-03-03 11:28:00,239 - distributed.core - INFO - Connection to tcp://172.26.75.19:40864 has been closed.
+2026-03-03 11:28:00,239 - distributed.scheduler - INFO - Remove worker addr: tcp://172.26.75.19:35035 name: SLURMCluster-0 (stimulus_id='handle-worker-cleanup-1772566080.2398574')
+2026-03-03 11:28:00,239 - distributed.scheduler - INFO - Lost all workers
+2026-03-03 11:28:00,240 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-03 11:28:28,066 - __main__ - INFO - Results saved to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_quimb_fwht.json
+2026-03-03 11:28:28,067 - __main__ - INFO - Completed 12000 dataset entries
