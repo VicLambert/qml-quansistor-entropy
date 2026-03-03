@@ -4,11 +4,13 @@ import itertools
 import json
 import logging
 import os
+import hashlib
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
+import torch
 import typer
 
 from tqdm import tqdm
@@ -52,12 +54,16 @@ FAMILY_REGISTRY = {
 
 # Initialize cache for results
 PROJECT_ROOT = Path(__file__).resolve().parent
+DATASET_DIR = PROJECT_ROOT / "outputs" / "gnn_graphs"
+DATASET_DIR.mkdir(parents=True, exist_ok=True)
 cache = FileCache(PROJECT_ROOT / "outputs" / "cache")
 
 
+# def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
+#     return hash((family, n_qubits, n_layers, rep)) % (2**32)
 def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
-    return hash((family, n_qubits, n_layers, rep)) % (2**32)
-
+    s = f"{family}|{n_qubits}|{n_layers}|{rep}".encode()
+    return int.from_bytes(hashlib.blake2b(s, digest_size=4).digest(), "little")
 
 def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
@@ -173,12 +179,12 @@ def compute_entry_for_config(
         sre_result = result.results.get("SRE")
         sre_value = float(sre_result.value) if sre_result is not None else None
 
-        entry: dict[str, Any] = {
+        graph_path = DATASET_DIR / f"{cid}.pt"
+        torch.save(graph_data, graph_path)   # graph_data already has x, edge_index, global_features
+
+        entry = {
             "sre": sre_value,
-            "data": {
-                "x": x_np.tolist(),
-                "edge_index": edge_index_np.tolist(),
-            },
+            "graph_path": str(graph_path),
             "gate_counts": _safe_gate_counts(gate_counts),
         }
 
@@ -205,7 +211,7 @@ def compute_all_entries(
     *,
     use_dask: bool = False,
     n_bins_value: int = 50,
-    dask_n_workers: int = 4,
+    dask_n_workers: int = 20,
 ) -> list[dict[str, Any]]:
     if use_dask:
         return compute_all_entries_parallel(
@@ -272,10 +278,10 @@ def compute_all_entries_parallel(
     safe_workers = max(1, min(dask_n_workers, cpu_count))
 
     with dask_client(
-        mode="local",
+        mode="slurm",
         n_workers=safe_workers,
         threads_per_worker=1,
-        memory_per_worker="auto",
+        memory_per_worker="64GiB",
         dashboard=True,
         walltime="0-2:30:00",
     ) as client:
@@ -339,7 +345,7 @@ def main(
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
-        50,
+        15,
         help="Number of seeds per (family, qubits, layers)",
     ),
     qubits_min: int = typer.Option(4, help="Minimum number of qubits"),
