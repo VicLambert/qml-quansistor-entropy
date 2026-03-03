@@ -347,7 +347,7 @@ def main(
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
     use_dask: bool = typer.Option(True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
-        "qqe/data/", help="Output file for results"
+        "qqe/data/", help="Output file for results",
     ),
 ):
     """Generate and compute SRE data for Haar circuits."""

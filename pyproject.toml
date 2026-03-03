@@ -33,6 +33,7 @@ dependencies = [
     "qiskit>=2.3.0",
     "ipywidgets>=8.1.8",
     "pylatexenc>=2.10",
+    "bokeh>=3.8.2",
 ]
 
 [project.optional-dependencies]
