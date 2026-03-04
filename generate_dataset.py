@@ -4,12 +4,15 @@ import itertools
 import json
 import logging
 import os
+import hashlib
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
+import torch
 import typer
+import gc
 
 from tqdm import tqdm
 
@@ -52,12 +55,16 @@ FAMILY_REGISTRY = {
 
 # Initialize cache for results
 PROJECT_ROOT = Path(__file__).resolve().parent
+DATASET_DIR = PROJECT_ROOT / "outputs" / "gnn_graphs"
+DATASET_DIR.mkdir(parents=True, exist_ok=True)
 cache = FileCache(PROJECT_ROOT / "outputs" / "cache")
 
 
+# def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
+#     return hash((family, n_qubits, n_layers, rep)) % (2**32)
 def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
-    return hash((family, n_qubits, n_layers, rep)) % (2**32)
-
+    s = f"{family}|{n_qubits}|{n_layers}|{rep}".encode()
+    return int.from_bytes(hashlib.blake2b(s, digest_size=4).digest(), "little")
 
 def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
@@ -100,6 +107,7 @@ def _safe_gate_counts(gate_counts: Any) -> dict[str, int]:
 
 
 def compute_entry_for_config(
+    cid: str,
     family: str,
     n_qubits: int,
     n_layers: int,
@@ -108,12 +116,22 @@ def compute_entry_for_config(
     method: str = "fwht",
     representation: str = "dense",
     n_bins_value: int = 50,
+    output_dir: Path | None = None,
 ) -> dict[str, Any] | None:
     from qqe.experiments.core import ExperimentConfig
     from qqe.properties.compute import PropertyRequest
     from qqe.states.types import BackendConfig
 
     try:
+        # Resolve output path + ensure dir exists
+        base_dir = output_dir if output_dir is not None else DATASET_DIR
+        base_dir.mkdir(parents=True, exist_ok=True)
+        path = base_dir / f"{cid}.pt"
+        tmp_path = path.with_suffix(".pt.tmp")
+
+        if path.exists():
+            return {"cid": cid, "path": str(path), "cached": True}
+
         family_cls = FAMILY_REGISTRY[family]
         family_obj = family_cls()
 
@@ -136,9 +154,6 @@ def compute_entry_for_config(
             global_feature_variant="binned",
         )
 
-        x_np = graph_data.x.detach().cpu().numpy()
-        edge_index_np = graph_data.edge_index.detach().cpu().numpy()
-
         backend_config = BackendConfig(
             name=backend,
             representation=representation,
@@ -157,6 +172,7 @@ def compute_entry_for_config(
 
         backend_factory = BACKEND_REGISTRY[backend]
         backend_instance = backend_factory() if callable(backend_factory) else backend_factory
+
         state = backend_instance.simulate(
             spec,
             representation=representation,
@@ -173,17 +189,44 @@ def compute_entry_for_config(
         sre_result = result.results.get("SRE")
         sre_value = float(sre_result.value) if sre_result is not None else None
 
-        entry: dict[str, Any] = {
-            "sre": sre_value,
-            "data": {
-                "x": x_np.tolist(),
-                "edge_index": edge_index_np.tolist(),
-            },
+        # ---- compact storage ----
+        x = graph_data.x.detach().cpu()
+        # Only uint8 if binary
+        if x.numel() > 0 and x.min().item() >= 0 and x.max().item() <= 1:
+            x = x.to(torch.uint8)
+        else:
+            x = x.to(torch.float16)
+
+        edge_index = graph_data.edge_index.detach().cpu().to(torch.int32)
+        global_features = graph_data.global_features.detach().cpu().to(torch.float32)
+
+        payload = {
+            "x": x,
+            "edge_index": edge_index,
+            "global_features": global_features,
             "gate_counts": _safe_gate_counts(gate_counts),
+            "sre": sre_value,
+            "meta": {
+                "cid": cid,
+                "family": family,
+                "n_qubits": int(n_qubits),
+                "n_layers": int(n_layers),
+                "seed": int(seed),
+                "backend": backend,
+                "method": method,
+                "representation": representation,
+                "n_bins": int(n_bins_value),
+            },
         }
 
-        if hasattr(graph_data, "u") and graph_data.u is not None:
-            entry["data"]["u"] = graph_data.u.detach().cpu().numpy().tolist()
+        torch.save(payload, tmp_path)
+        tmp_path.replace(path)
+
+        # Free memory aggressively on worker
+        del state, result, graph_data, payload, x, edge_index, global_features
+        gc.collect()
+
+        return {"cid": cid, "sre": sre_value, "path": str(path)}
 
     except Exception:
         logger.exception(
@@ -194,9 +237,6 @@ def compute_entry_for_config(
             seed,
         )
         return None
-    else:
-        return entry
-
 
 def compute_all_entries(
     params: list[dict[str, Any]],
@@ -205,7 +245,9 @@ def compute_all_entries(
     *,
     use_dask: bool = False,
     n_bins_value: int = 50,
-    dask_n_workers: int = 4,
+    dask_n_workers: int = 20,
+    # NEW: where individual .pt samples + index files go
+    output_dir: Path | None = None,
 ) -> list[dict[str, Any]]:
     if use_dask:
         return compute_all_entries_parallel(
@@ -214,12 +256,14 @@ def compute_all_entries(
             method=method,
             n_bins_value=n_bins_value,
             dask_n_workers=dask_n_workers,
+            output_dir=output_dir,
         )
     return compute_all_entries_sequential(
         params,
         backend=backend,
         method=method,
         n_bins_value=n_bins_value,
+        output_dir=output_dir,
     )
 
 
@@ -228,30 +272,43 @@ def compute_all_entries_sequential(
     backend: str,
     method: str,
     n_bins_value: int,
+    output_dir: Path | None,
 ) -> list[dict[str, Any]]:
+    """
+    Sequential version:
+    - Writes each sample to disk inside compute_entry_for_config(...)
+    - Appends results to index.jsonl to keep RAM flat
+    - Returns a *small* list of {"cid","sre","path"} rows (optional)
+    """
+    base_dir = output_dir if output_dir is not None else DATASET_DIR
+    base_dir.mkdir(parents=True, exist_ok=True)
+
+    index_path = base_dir / "index.jsonl"
     entries: list[dict[str, Any]] = []
 
-    for row in tqdm(params, desc="Computing dataset entries"):
-        cid = row["cid"]
-        family = row["family"]
-        n_qubits = row["n_qubits"]
-        n_layers = row["n_layers"]
-        seed = row["seed"]
+    with index_path.open("a", encoding="utf-8") as f:
+        for row in tqdm(params, desc="Computing dataset entries (sequential)"):
+            cid = row["cid"]
+            entry = compute_entry_for_config(
+                cid=cid,
+                family=row["family"],
+                n_qubits=row["n_qubits"],
+                n_layers=row["n_layers"],
+                seed=row["seed"],
+                backend=backend,
+                method=method,
+                n_bins_value=n_bins_value,
+                output_dir=base_dir,
+            )
+            if entry is None:
+                continue
 
-        entry = compute_entry_for_config(
-            family=family,
-            n_qubits=n_qubits,
-            n_layers=n_layers,
-            seed=seed,
-            backend=backend,
-            method=method,
-            n_bins_value=n_bins_value,
-        )
-        if entry is None:
-            continue
+            # stream to disk immediately (low RAM)
+            f.write(json.dumps(entry) + "\n")
+            f.flush()
 
-        entries.append({"cid": cid, **entry})
-        logger.info("Computed %s: SRE=%s", cid, entry.get("sre"))
+            entries.append(entry)
+            logger.info("Computed %s: SRE=%s", cid, entry.get("sre"))
 
     return entries
 
@@ -262,14 +319,30 @@ def compute_all_entries_parallel(
     method: str,
     n_bins_value: int,
     dask_n_workers: int,
+    output_dir: Path | None,
 ) -> list[dict[str, Any]]:
+    """
+    Parallel version (Dask):
+    - Caps in-flight tasks aggressively to avoid worker OOM
+    - Each task writes its own .pt file to output_dir
+    - The driver appends small results to index.jsonl as futures finish
+    - Returns only small rows (cid/sre/path), not the whole dataset content
+    """
     from dask.distributed import as_completed
-
     from qqe.parallel import dask_client
 
-    updated_rows: list[dict[str, Any] | None] = [None] * len(params)
+    base_dir = output_dir if output_dir is not None else DATASET_DIR
+    base_dir.mkdir(parents=True, exist_ok=True)
+    index_path = base_dir / "index.jsonl"
+
     cpu_count = os.cpu_count() or 2
-    safe_workers = max(1, min(dask_n_workers, cpu_count))
+    safe_workers = max(1, min(int(dask_n_workers), cpu_count))
+
+    # IMPORTANT: keep this LOW for memory-heavy Quimb dense sims
+    # Start conservative; increase only if stable.
+    max_inflight = max(1, safe_workers)  # NOT 4*workers
+
+    rows_out: list[dict[str, Any]] = []
 
     with dask_client(
         mode="local",
@@ -283,14 +356,14 @@ def compute_all_entries_parallel(
         logger.info("Dask dashboard: %s", client.dashboard_link)
         logger.info("Workers connected: %s", len(client.scheduler_info()["workers"]))
 
-        inflight: dict[Any, tuple[int, dict[str, Any]]] = {}
         ac = as_completed()
-        max_inflight = min(max(8, 4 * safe_workers), 64)
-        it = iter(enumerate(params))
+        inflight: dict[Any, dict[str, Any]] = {}
+        it = iter(params)
 
-        def submit_one(i: int, row: dict[str, Any]) -> None:
+        def submit_one(row: dict[str, Any]) -> None:
             fut = client.submit(
                 compute_entry_for_config,
+                cid=row["cid"],
                 family=row["family"],
                 n_qubits=row["n_qubits"],
                 n_layers=row["n_layers"],
@@ -298,31 +371,39 @@ def compute_all_entries_parallel(
                 backend=backend,
                 method=method,
                 n_bins_value=n_bins_value,
+                output_dir=base_dir,   # <- key change
                 pure=False,
             )
-            inflight[fut] = (i, row)
+            inflight[fut] = row
             ac.add(fut)
 
+        # Prime the queue
         for _ in range(min(max_inflight, len(params))):
-            i, row = next(it, (None, None))
-            if row is None or i is None:
+            row = next(it, None)
+            if row is None:
                 break
-            submit_one(i, row)
+            submit_one(row)
 
-        for fut in tqdm(ac, total=len(params), desc="Computing entries (parallel)"):
-            i, row = inflight.pop(fut)
-            try:
-                entry = fut.result()
-                if entry is not None:
-                    updated_rows[i] = {"cid": row["cid"], **entry}
-            except Exception as exc:
-                logger.error("Failed row %s (%s): %s", i, row["cid"], exc)
+        # Stream results to disk as they complete
+        with index_path.open("a", encoding="utf-8") as f:
+            for fut in tqdm(ac, total=len(params), desc="Computing entries (parallel)"):
+                row = inflight.pop(fut, None)
+                try:
+                    entry = fut.result()
+                    if entry is not None:
+                        f.write(json.dumps(entry) + "\n")
+                        f.flush()
+                        rows_out.append(entry)
+                except Exception as exc:
+                    cid = row["cid"] if row else "unknown"
+                    logger.error("Failed (%s): %s", cid, exc)
 
-            j, next_row = next(it, (None, None))
-            if next_row is not None and j is not None:
-                submit_one(j, next_row)
+                # Keep the pipeline full but capped
+                next_row = next(it, None)
+                if next_row is not None:
+                    submit_one(next_row)
 
-    return [row for row in updated_rows if row is not None]
+    return rows_out
 
 
 def main(
@@ -335,11 +416,11 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "haar,clifford,quansistor,random",
+        "haar",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
-        50,
+        15,
         help="Number of seeds per (family, qubits, layers)",
     ),
     qubits_min: int = typer.Option(4, help="Minimum number of qubits"),
@@ -373,6 +454,9 @@ def main(
         params = params[:max_configs]
     logger.info("Generated %s circuit configurations", len(params))
 
+    output_dir = (PROJECT_ROOT / output_file / f"encoding_data_{backend}_{method}")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     entries = compute_all_entries(
         params,
         backend=backend,
@@ -380,31 +464,33 @@ def main(
         use_dask=use_dask,
         n_bins_value=n_bins_option,
         dask_n_workers=dask_n_workers,
+        output_dir=output_dir,
     )
 
-    output_path = PROJECT_ROOT / output_file / f"encoding_data_{backend}_{method}"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    payload = {
-        "metadata": {
-            "backend": backend,
-            "method": method,
-            "n_bins": n_bins_option,
-            "n_seeds": n_seeds_option,
-            "families": selected_families,
-            "qubits_range": qubits_values.tolist(),
-            "layers_range": layers_values.tolist(),
-            "entries": len(entries),
-            "use_dask": use_dask,
-        },
-        "data": entries,
+    meta_path = output_dir / "metadata.json"
+    metadata = {
+        "backend": backend,
+        "method": method,
+        "n_bins": n_bins_option,
+        "n_seeds": n_seeds_option,
+        "families": selected_families,
+        "qubits_range": qubits_values.tolist(),
+        "layers_range": layers_values.tolist(),
+        "entries_completed": len(entries),
+        "use_dask": use_dask,
+        "index_file": "index.jsonl",
     }
+    meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
-    with output_path.with_suffix(".json").open("w") as f:
-        json.dump(payload, f)
+    logger.info("Wrote metadata to %s", meta_path)
+    logger.info("Wrote index to %s", output_dir / "index.jsonl")
+    logger.info("Samples saved under %s", output_dir)
 
-    logger.info("Results saved to %s", output_path.with_suffix(".json"))
-    logger.info("Completed %s dataset entries", len(entries))
+    # with output_path.with_suffix(".json").open("w") as f:
+    #     json.dump(payload, f)
+
+    # logger.info("Results saved to %s", output_path.with_suffix(".json"))
+    # logger.info("Completed %s dataset entries", len(entries))
 
 
 if __name__ == "__main__":

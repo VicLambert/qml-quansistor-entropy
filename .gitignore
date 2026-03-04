@@ -1,4 +1,5 @@
 *.md
+*.pt
 
 example_visualization.py
 

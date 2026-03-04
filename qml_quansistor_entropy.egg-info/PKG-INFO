@@ -26,6 +26,7 @@ Requires-Dist: qiskit>=2.3.0
 Requires-Dist: ipywidgets>=8.1.8
 Requires-Dist: pylatexenc>=2.10
 Requires-Dist: bokeh>=3.8.2
+Requires-Dist: tensorboard>=2.20.0
 Provides-Extra: dev
 Requires-Dist: black>=23.0.0; extra == "dev"
 Requires-Dist: ruff>=0.1.0; extra == "dev"

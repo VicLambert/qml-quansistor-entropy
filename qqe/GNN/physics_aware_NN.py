@@ -71,7 +71,7 @@ class Regressor(nn.Module):
 class GNN(nn.Module):
     def __init__(
         self,
-        node_in_dim: int = 13,
+        node_in_dim: int = 23,
         gnn_hidden: int = GNN_HIDDEN,
         gnn_heads: int = GNN_HEADS,
         global_in_dim: int = 8,
@@ -117,41 +117,30 @@ class GNN(nn.Module):
 
     def forward(self, data) -> torch.Tensor:
         x, edge_index = data.x, data.edge_index
-        if  hasattr(data, "batch") and data.batch is not None:
-            batch = data.batch
-            num_graphs = int(batch.max().item() + 1) if batch.numel() > 0 else 1
+        batch = getattr(data, "batch", None)
+        if batch is None:
+            batch = x.new_zeros(x.size(0), dtype=torch.long)
+        num_graphs = int(batch.max().item() + 1) if batch.numel() else 1
 
-        else:
-            batch = torch.zeros(x.size(0), dtype=torch.long, device=x.device)
-            num_graphs = 1
-
+        # GNN branch
         if x is None or x.size(0) == 0:
-            x_pool = torch.zeros((num_graphs, self.gnn_hidden * self.gnn_heads), device=x.device, dtype=torch.float)
+            x_pool = x.new_zeros((num_graphs, self.gnn_hidden * self.gnn_heads), dtype=torch.float32)
         else:
             with autocast(_AMP_DEVICE_TYPE, enabled=False):
                 h = x.float()
                 for conv in self.conv_layers:
-                    h = conv(h, edge_index)
-                    h = F.relu(h)
-                    if self.dropout_rate > 0.0:
+                    h = F.relu(conv(h, edge_index))
+                    if self.dropout_rate:
                         h = F.dropout(h, p=self.dropout_rate, training=self.training)
                 x_pool = self.global_mean_pool(h, batch)
-        g_raw = data.global_features
-        if g_raw.dim() == 1:
-            if num_graphs == 1:
-                g_raw = g_raw.view(1, -1)
-            else:
-                assert g_raw.numel() % num_graphs == 0, "global_features length must be divisible by number of graphs"
-                gdim = g_raw.numel() // num_graphs
-                g_raw = g_raw.view(num_graphs, gdim)
-        elif g_raw.dim() == 2:
-            assert g_raw.size(0) == num_graphs, "global_features first dimension must match number of graphs"
-        else:
-            raise ValueError("global_features must be 1D or 2D tensor")
-        g_feat = self.global_mlp(g_raw.float())
-        assert x_pool.size(0) == g_feat.size(0), "Batch size of node features and global features must match"
 
-        h = torch.cat([x_pool, g_feat], dim=-1)
-        out = self.regressor(h)
+        # Global branch
+        g = data.global_features
+        if g.dim() == 1:
+            g = g.view(num_graphs, -1)  # requires fixed global_dim across dataset
+        g_feat = self.global_mlp(g.float())
+
+        # Combine
+        out = self.regressor(torch.cat([x_pool, g_feat], dim=-1))
         return out.view(-1)
 
