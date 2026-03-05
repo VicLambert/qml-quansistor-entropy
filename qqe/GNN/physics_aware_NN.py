@@ -3,6 +3,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.amp.autocast_mode import autocast
 
+from torch_geometric.data import Data, Dataset as PyGDataset
+
 _AMP_DEVICE_TYPE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
@@ -143,4 +145,74 @@ class GNN(nn.Module):
         # Combine
         out = self.regressor(torch.cat([x_pool, g_feat], dim=-1))
         return out.view(-1)
+
+class QuantumCircuitGraphDataset(PyGDataset):
+    """Loads per-circuit .pt files produced by compute_entry_for_config.
+
+    Each sample file is expected to contain:
+      - x: Tensor [N, node_dim]
+      - edge_index: Tensor [2, E]
+      - global_features: Tensor [G]
+      - sre: float (label)
+      - gate_counts: dict (optional, carried along)
+      - meta: dict (optional)
+    """
+
+    def __init__(
+        self,
+        root: str,
+        pt_paths: list[str],
+        global_feature_variant: str = "baseline",
+        node_feature_backend_variant: str | None = None,
+        transform=None,
+        pre_transform=None,
+    ):
+        self.pt_paths = [str(p) for p in pt_paths]
+        self.global_feature_variant = global_feature_variant
+        self.node_feature_backend_variant = node_feature_backend_variant
+        super().__init__(root=root, transform=transform, pre_transform=pre_transform)
+
+    @property
+    def raw_file_names(self) -> list[str]:
+        # Not used (we bypass PyG raw/processed system), but required by base class.
+        return []
+
+    @property
+    def processed_file_names(self) -> list[str]:
+        return []
+    def len(self) -> int:
+        return len(self.pt_paths)
+
+    def get(self, idx: int) -> Data:
+        obj = torch.load(self.pt_paths[idx], map_location="cpu")
+
+        x = obj["x"]
+        edge_index = obj["edge_index"]
+        g = obj["global_features"]
+        y_val = obj.get("sre", None)
+
+        # Dtypes for model
+        if x.dtype != torch.float32:
+            x = x.to(torch.float32)
+        if edge_index.dtype != torch.long:
+            edge_index = edge_index.to(torch.long)
+        if g.dtype != torch.float32:
+            g = g.to(torch.float32)
+
+        # label
+        if y_val is None:
+            y = torch.tensor([float("nan")], dtype=torch.float32)
+        else:
+            y = torch.tensor([float(y_val)], dtype=torch.float32)
+
+        data = Data(x=x, edge_index=edge_index, y=y)
+        data.global_features = g
+        data.num_qubits = int(obj.get("meta", {}).get("n_qubits", 0))
+
+        # Keep for debugging / analysis (won't hurt)
+        data.gate_counts = obj.get("gate_counts", {})
+        data.meta = obj.get("meta", {})
+
+        return data
+
 

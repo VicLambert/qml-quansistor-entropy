@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import ctypes
+import gc
+import hashlib
 import itertools
 import json
 import logging
 import os
-import hashlib
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
@@ -12,7 +14,6 @@ from typing import TYPE_CHECKING, Any, cast
 import numpy as np
 import torch
 import typer
-import gc
 
 from tqdm import tqdm
 
@@ -66,6 +67,7 @@ def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
     s = f"{family}|{n_qubits}|{n_layers}|{rep}".encode()
     return int.from_bytes(hashlib.blake2b(s, digest_size=4).digest(), "little")
 
+
 def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
 
@@ -104,6 +106,31 @@ def _safe_gate_counts(gate_counts: Any) -> dict[str, int]:
     for key, value in gate_counts.items():
         safe[str(key)] = int(value)
     return safe
+
+
+def _trim_process_memory() -> None:
+    """Best-effort memory release to keep Dask worker RSS under control."""
+    try:
+        gc.collect()
+    except Exception:
+        pass
+
+    try:
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+    except Exception:
+        pass
+
+    try:
+        if os.name == "nt":
+            process_handle = ctypes.windll.kernel32.GetCurrentProcess()
+            ctypes.windll.psapi.EmptyWorkingSet(process_handle)
+        else:
+            libc = ctypes.CDLL("libc.so.6")
+            libc.malloc_trim(0)
+    except Exception:
+        # APIs are platform-dependent; ignore if unavailable.
+        pass
 
 
 def compute_entry_for_config(
@@ -222,10 +249,6 @@ def compute_entry_for_config(
         torch.save(payload, tmp_path)
         tmp_path.replace(path)
 
-        # Free memory aggressively on worker
-        del state, result, graph_data, payload, x, edge_index, global_features
-        gc.collect()
-
         return {"cid": cid, "sre": sre_value, "path": str(path)}
 
     except Exception:
@@ -237,6 +260,9 @@ def compute_entry_for_config(
             seed,
         )
         return None
+    finally:
+        _trim_process_memory()
+
 
 def compute_all_entries(
     params: list[dict[str, Any]],
@@ -246,6 +272,7 @@ def compute_all_entries(
     use_dask: bool = False,
     n_bins_value: int = 50,
     dask_n_workers: int = 20,
+    dask_memory_per_worker: str | None = "auto",
     # NEW: where individual .pt samples + index files go
     output_dir: Path | None = None,
 ) -> list[dict[str, Any]]:
@@ -256,6 +283,7 @@ def compute_all_entries(
             method=method,
             n_bins_value=n_bins_value,
             dask_n_workers=dask_n_workers,
+            dask_memory_per_worker=dask_memory_per_worker,
             output_dir=output_dir,
         )
     return compute_all_entries_sequential(
@@ -274,8 +302,7 @@ def compute_all_entries_sequential(
     n_bins_value: int,
     output_dir: Path | None,
 ) -> list[dict[str, Any]]:
-    """
-    Sequential version:
+    """Sequential version:
     - Writes each sample to disk inside compute_entry_for_config(...)
     - Appends results to index.jsonl to keep RAM flat
     - Returns a *small* list of {"cid","sre","path"} rows (optional)
@@ -320,15 +347,16 @@ def compute_all_entries_parallel(
     n_bins_value: int,
     dask_n_workers: int,
     output_dir: Path | None,
+    dask_memory_per_worker: str | None = "auto",
 ) -> list[dict[str, Any]]:
-    """
-    Parallel version (Dask):
+    """Parallel version (Dask):
     - Caps in-flight tasks aggressively to avoid worker OOM
     - Each task writes its own .pt file to output_dir
     - The driver appends small results to index.jsonl as futures finish
     - Returns only small rows (cid/sre/path), not the whole dataset content
     """
     from dask.distributed import as_completed
+
     from qqe.parallel import dask_client
 
     base_dir = output_dir if output_dir is not None else DATASET_DIR
@@ -348,7 +376,7 @@ def compute_all_entries_parallel(
         mode="local",
         n_workers=safe_workers,
         threads_per_worker=1,
-        memory_per_worker="auto",
+        memory_per_worker=dask_memory_per_worker,
         dashboard=True,
         walltime="0-2:30:00",
     ) as client:
@@ -371,7 +399,7 @@ def compute_all_entries_parallel(
                 backend=backend,
                 method=method,
                 n_bins_value=n_bins_value,
-                output_dir=base_dir,   # <- key change
+                output_dir=base_dir,  # <- key change
                 pure=False,
             )
             inflight[fut] = row
@@ -397,6 +425,8 @@ def compute_all_entries_parallel(
                 except Exception as exc:
                     cid = row["cid"] if row else "unknown"
                     logger.error("Failed (%s): %s", cid, exc)
+                finally:
+                    fut.release()
 
                 # Keep the pipeline full but capped
                 next_row = next(it, None)
@@ -416,7 +446,7 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "haar",
+        "random",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
@@ -434,6 +464,10 @@ def main(
         help="Optional cap on number of generated configurations (useful for local smoke tests)",
     ),
     dask_n_workers: int = typer.Option(4, help="Number of local Dask workers when --use-dask"),
+    dask_memory_per_worker: str = typer.Option(
+        "auto",
+        help="Per-worker memory limit for Dask (for example: 6GB, 8000MB, auto)",
+    ),
 ):
     selected_families = [part.strip() for part in families.split(",") if part.strip()]
     invalid_families = [name for name in selected_families if name not in FAMILY_REGISTRY]
@@ -454,7 +488,7 @@ def main(
         params = params[:max_configs]
     logger.info("Generated %s circuit configurations", len(params))
 
-    output_dir = (PROJECT_ROOT / output_file / f"encoding_data_{backend}_{method}")
+    output_dir = PROJECT_ROOT / output_file / f"encoding_data_{backend}_{method}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     entries = compute_all_entries(
@@ -464,6 +498,7 @@ def main(
         use_dask=use_dask,
         n_bins_value=n_bins_option,
         dask_n_workers=dask_n_workers,
+        dask_memory_per_worker=dask_memory_per_worker,
         output_dir=output_dir,
     )
 
