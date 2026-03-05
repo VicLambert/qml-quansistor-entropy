@@ -3,6 +3,7 @@
 *.png
 
 example_visualization.py
+qqe/data/encoding_data_quimb_fwht.json
 
 /logs/workers
 /outputs/
