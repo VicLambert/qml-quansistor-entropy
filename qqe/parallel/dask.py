@@ -82,7 +82,7 @@ def create_slurm_cluster(
     n_workers: int,
     processes: int,
     cores_per_worker: int,
-    memory_per_worker: str | None = "4GB",
+    memory_per_worker: str | None = "4GiB",
     walltime: str = "0-1:20:00",
     dashboard: bool = True,
     dashboard_address: str = "127.0.0.1:8787",

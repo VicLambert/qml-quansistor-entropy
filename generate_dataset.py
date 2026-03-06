@@ -7,7 +7,6 @@ import itertools
 import json
 import logging
 import os
-import hashlib
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
@@ -303,7 +302,8 @@ def compute_all_entries_sequential(
     n_bins_value: int,
     output_dir: Path | None,
 ) -> list[dict[str, Any]]:
-    """Sequential version:
+    """Sequential version.
+
     - Writes each sample to disk inside compute_entry_for_config(...)
     - Appends results to index.jsonl to keep RAM flat
     - Returns a *small* list of {"cid","sre","path"} rows (optional)
@@ -311,7 +311,8 @@ def compute_all_entries_sequential(
     base_dir = output_dir if output_dir is not None else DATASET_DIR
     base_dir.mkdir(parents=True, exist_ok=True)
 
-    index_path = base_dir / "index.jsonl"
+    family = params[0]["family"] if params else "unknown"
+    index_path = base_dir / f"index_{family}.jsonl"
     entries: list[dict[str, Any]] = []
 
     with index_path.open("a", encoding="utf-8") as f:
@@ -350,11 +351,12 @@ def compute_all_entries_parallel(
     output_dir: Path | None,
     dask_memory_per_worker: str | None = "auto",
 ) -> list[dict[str, Any]]:
-    """Parallel version (Dask):
+    """Parallel version (Dask).
+
     - Caps in-flight tasks aggressively to avoid worker OOM
     - Each task writes its own .pt file to output_dir
     - The driver appends small results to index.jsonl as futures finish
-    - Returns only small rows (cid/sre/path), not the whole dataset content
+    - Returns only small rows (cid/sre/path), not the whole dataset content.
     """
     from dask.distributed import as_completed
 
@@ -362,22 +364,23 @@ def compute_all_entries_parallel(
 
     base_dir = output_dir if output_dir is not None else DATASET_DIR
     base_dir.mkdir(parents=True, exist_ok=True)
-    index_path = base_dir / "index.jsonl"
+    family = params[0]["family"] if params else "unknown"
+    index_path = base_dir / f"index_{family}.jsonl"
 
     cpu_count = os.cpu_count() or 2
     safe_workers = max(1, min(int(dask_n_workers), cpu_count))
 
     # IMPORTANT: keep this LOW for memory-heavy Quimb dense sims
     # Start conservative; increase only if stable.
-    max_inflight = max(1, safe_workers)  # NOT 4*workers
+    max_inflight = max(1, safe_workers//2)  # NOT 4*workers
 
     rows_out: list[dict[str, Any]] = []
 
     with dask_client(
-        mode="slurm",
+        mode="local",
         n_workers=safe_workers,
         threads_per_worker=1,
-        memory_per_worker=dask_memory_per_worker,
+        memory_per_worker=dask_memory_per_worker or "2GB",
         dashboard=True,
         walltime="0-2:30:00",
     ) as client:
@@ -400,7 +403,7 @@ def compute_all_entries_parallel(
                 backend=backend,
                 method=method,
                 n_bins_value=n_bins_value,
-                output_dir=base_dir,  # <- key change
+                output_dir=base_dir,
                 pure=False,
             )
             inflight[fut] = row
@@ -438,7 +441,7 @@ def compute_all_entries_parallel(
 
 
 def main(
-    backend: str = typer.Option("quimb", help="Backend to use (quimb or pennylane)"),
+    backend: str = typer.Option("pennylane", help="Backend to use (quimb or pennylane)"),
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
@@ -451,7 +454,6 @@ def main(
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
-        15,
         15,
         help="Number of seeds per (family, qubits, layers)",
     ),
@@ -467,7 +469,7 @@ def main(
     ),
     dask_n_workers: int = typer.Option(4, help="Number of local Dask workers when --use-dask"),
     dask_memory_per_worker: str = typer.Option(
-        "auto",
+        "64GiB",
         help="Per-worker memory limit for Dask (for example: 6GB, 8000MB, auto)",
     ),
 ):
@@ -504,7 +506,8 @@ def main(
         output_dir=output_dir,
     )
 
-    meta_path = output_dir / "metadata.json"
+    family = params[0]["family"] if params else "unknown"
+    meta_path = output_dir / f"metadata_{family}.json"
     metadata = {
         "backend": backend,
         "method": method,
@@ -515,12 +518,12 @@ def main(
         "layers_range": layers_values.tolist(),
         "entries_completed": len(entries),
         "use_dask": use_dask,
-        "index_file": "index.jsonl",
+        "index_file": f"index_{family}.jsonl",
     }
     meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
     logger.info("Wrote metadata to %s", meta_path)
-    logger.info("Wrote index to %s", output_dir / "index.jsonl")
+    logger.info("Wrote index to %s", output_dir / f"index_{family}.jsonl")
     logger.info("Samples saved under %s", output_dir)
 
     # with output_path.with_suffix(".json").open("w") as f:

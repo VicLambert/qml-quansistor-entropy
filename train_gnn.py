@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import sys
+import time
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -15,6 +17,7 @@ from torch.amp import GradScaler, autocast
 from torch.optim import Adam
 from torch.utils.data import random_split
 from torch_geometric.loader import DataLoader
+from tqdm import tqdm
 
 from qqe.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
 from qqe.utils import configure_logger
@@ -32,7 +35,7 @@ logger.info(f"AMP device type: {device_type}")
 def collect_pt_paths(dataset_dir: str) -> list[str]:
     d = Path(dataset_dir)
     # support either dataset_dir/*.pt or dataset_dir/samples/*.pt
-    paths = sorted((d / "encoding_data_quimb_fwht").glob("*.pt"))
+    paths = sorted((d / "encoding_data_pennylane_fwht").glob("*.pt"))
     if not paths:
         paths = sorted(d.glob("*.pt"))
     return [str(p) for p in paths]
@@ -136,7 +139,9 @@ def build_train_test_loaders(
 
     generator = torch.Generator().manual_seed(seed)
     train_ds, test_ds = random_split(
-        padded_dataset, [train_len, test_len], generator=generator
+        padded_dataset,
+        [train_len, test_len],
+        generator=generator,
     )
 
     pin_mem = torch.cuda.is_available()
@@ -269,12 +274,15 @@ def evaluate_loss(
     device: torch.device,
     loss_fn: nn.Module,
     use_amp: bool = True,
+    show_progress: bool = False,
 ) -> float:
     model.eval()
     total_loss = 0.0
     total_graphs = 0
 
-    for batch in loader:
+    loader_iter = tqdm(loader, desc="Validation", leave=False) if show_progress else loader
+
+    for batch in loader_iter:
         batch = batch.to(device, non_blocking=True)
         y = _safe_y(batch)
 
@@ -319,6 +327,11 @@ def train_model(
     early_stopping_min_delta: float = 0.0,
     use_amp: bool = True,
     scheduler: str = "none",  # "none" | "plateau"
+    show_progress: bool = True,
+    show_val_progress: bool = False,
+    log_every_n_batches: int = 20,
+    heartbeat_secs: float = 60.0,
+    epoch_time_warning_secs: float = 300.0,
 ) -> tuple[nn.Module, TrainHistory, torch.device]:
     dev = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
     model = model.to(dev)
@@ -353,12 +366,27 @@ def train_model(
     bad_epochs = 0
 
     for epoch in range(1, epochs + 1):
+        epoch_start_time = time.time()
         logger.info(f"-------- EPOCH : {epoch:03d} --------\n")
         model.train()
         total_loss = 0.0
         total_graphs = 0
 
-        for batch in train_loader:
+        # Prepare progress tracking
+        batch_count = 0
+        last_heartbeat = time.time()
+        train_start_time = time.time()
+
+        # Wrap loader with tqdm if progress is enabled
+        train_iter = tqdm(
+            train_loader,
+            desc=f"Epoch {epoch}/{epochs}",
+            leave=False,
+            disable=not show_progress,
+            file=sys.stdout,
+        )
+
+        for batch in train_iter:
             batch = batch.to(dev, non_blocking=True)
             y = _safe_y(batch)
 
@@ -385,9 +413,53 @@ def train_model(
 
             total_loss += float(loss.item()) * int(batch.num_graphs)
             total_graphs += int(batch.num_graphs)
+            batch_count += 1
 
+            # Update tqdm postfix with running metrics
+            if show_progress:
+                running_loss = total_loss / max(1, total_graphs)
+                train_iter.set_postfix(
+                    {
+                        "loss": f"{running_loss:.4f}",
+                        "graphs": total_graphs,
+                    }
+                )
+
+            # Periodic structured logging
+            if log_every_n_batches > 0 and batch_count % log_every_n_batches == 0:
+                running_loss = total_loss / max(1, total_graphs)
+                elapsed = time.time() - train_start_time
+                batches_per_sec = batch_count / max(elapsed, 0.001)
+                remaining_batches = len(train_loader) - batch_count
+                eta_secs = remaining_batches / max(batches_per_sec, 0.001)
+                logger.debug(
+                    f"Epoch {epoch} batch {batch_count}/{len(train_loader)} | "
+                    f"loss {running_loss:.6f} | elapsed {elapsed:.1f}s | "
+                    f"ETA {eta_secs:.1f}s | {batches_per_sec:.2f} batch/s",
+                )
+
+            # Heartbeat logging (wall-clock based)
+            if heartbeat_secs > 0:
+                now = time.time()
+                if now - last_heartbeat >= heartbeat_secs:
+                    running_loss = total_loss / max(1, total_graphs)
+                    elapsed = time.time() - train_start_time
+                    logger.info(
+                        f"[Heartbeat] Epoch {epoch} batch {batch_count}/{len(train_loader)} | "
+                        f"loss {running_loss:.6f} | elapsed {elapsed:.1f}s | graphs {total_graphs}",
+                    )
+                    last_heartbeat = now
+
+        train_time = time.time() - train_start_time
         train_loss = total_loss / max(1, total_graphs)
-        val_loss = evaluate_loss(model, val_loader, dev, loss_fn, use_amp=use_amp)
+
+        logger.info(f"Training phase complete ({train_time:.1f}s) | Running validation...")
+
+        val_start_time = time.time()
+        val_loss = evaluate_loss(
+            model, val_loader, dev, loss_fn, use_amp=use_amp, show_progress=show_val_progress
+        )
+        val_time = time.time() - val_start_time
 
         if sch is not None:
             sch.step(val_loss)
@@ -397,19 +469,34 @@ def train_model(
         hist.val_loss.append(float(val_loss))
         hist.lr.append(current_lr)
 
+        epoch_time = time.time() - epoch_start_time
+
         logger.info(
-            f"Losses | train {train_loss:.6f} | val {val_loss:.6f} | lr {current_lr:.2e}",
+            f"Losses | train {train_loss:.6f} | val {val_loss:.6f} | lr {current_lr:.2e} | "
+            f"time train={train_time:.1f}s val={val_time:.1f}s total={epoch_time:.1f}s",
         )
+
+        # Warn if epoch is unexpectedly slow
+        if epoch_time_warning_secs > 0 and epoch_time > epoch_time_warning_secs:
+            logger.warning(
+                f"Epoch {epoch} took {epoch_time:.1f}s (>{epoch_time_warning_secs:.0f}s threshold). "
+                f"This is expected for large models/datasets.",
+            )
 
         # Early stopping
         if val_loss + early_stopping_min_delta < best_val:
             best_val = val_loss
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
             bad_epochs = 0
+            logger.debug(f"New best validation loss: {best_val:.6f}")
         else:
             bad_epochs += 1
+            logger.debug(f"No improvement: patience {bad_epochs}/{early_stopping_patience}")
             if bad_epochs >= early_stopping_patience:
-                logger.info(f"Early stopping at epoch {epoch:03d} (best val {best_val:.6f})")
+                logger.info(
+                    f"Early stopping at epoch {epoch:03d} | best val {best_val:.6f} | "
+                    f"patience exhausted ({bad_epochs}/{early_stopping_patience})",
+                )
                 break
 
     if best_state is not None:
@@ -436,23 +523,49 @@ def plot_training_curves(
     plt.grid(True)
     plt.show()
 
-    if hist.lr:
-        plt.figure()
-        plt.plot(epochs, hist.lr, label="lr")
-        plt.xlabel("Epoch")
-        plt.ylabel("Learning rate")
-        plt.title("Learning rate")
-        plt.grid(True)
-        plt.show()
+    # if hist.lr:
+    #     plt.figure()
+    #     plt.plot(epochs, hist.lr, label="lr")
+    #     plt.xlabel("Epoch")
+    #     plt.ylabel("Learning rate")
+    #     plt.title("Learning rate")
+    #     plt.grid(True)
+    #     plt.show()
     if save_fig and fig_path is not None:
         plt.savefig(fig_path)
 
 
-def main():
-    EPOCHS = 10
-    l_r = 0.001
-    loss = "mse"
-    pt_paths = collect_pt_paths("qqe\\data")  # or .../samples
+def main(
+    epochs: int = typer.Option(10, help="Number of training epochs"),
+    lr: float = typer.Option(0.001, help="Learning rate"),
+    loss_type: str = typer.Option("mse", help="Loss function: mse or huber"),
+    show_progress: bool = typer.Option(True, help="Show progress bars during training"),
+    show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
+    log_every_n_batches: int = typer.Option(
+        5, help="Log training stats every N batches (0=disable)"
+    ),
+    heartbeat_secs: float = typer.Option(
+        60.0, help="Heartbeat log interval in seconds (0=disable)"
+    ),
+    epoch_time_warning_secs: float = typer.Option(
+        300.0, help="Warn if epoch exceeds N seconds (0=disable)"
+    ),
+):
+    pt_paths = collect_pt_paths("qqe/data")  # or .../samples
+    # logger.info(pt_paths[:5])
+    # global_feature_variant: str = "binned"
+    # node_feature_backend_variant: str | None = None
+    # suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
+    # root = _cache_root_for_paths(pt_paths, suffix=suffix)
+
+    # dataset = QuantumCircuitGraphDataset(
+    #     root=root,
+    #     pt_paths=pt_paths,
+    #     global_feature_variant=global_feature_variant,
+    #     node_feature_backend_variant=node_feature_backend_variant,
+    # )
+    # logger.info(dataset)
+    # logger.info(f"Dataset loaded with {len(dataset)} samples.")
     train_loader, val_loader, test_loader = build_train_val_test_loaders_two_stage(
         pt_paths,
         global_feature_variant="binned",
@@ -477,12 +590,17 @@ def main():
         model,
         train_loader,
         val_loader,
-        epochs=EPOCHS,
-        lr=l_r,
-        loss_type=loss,
+        epochs=epochs,
+        lr=lr,
+        loss_type=loss_type,
         huber_delta=1.0,
         early_stopping_patience=15,
         scheduler="plateau",
+        show_progress=show_progress,
+        show_val_progress=show_val_progress,
+        log_every_n_batches=log_every_n_batches,
+        heartbeat_secs=heartbeat_secs,
+        epoch_time_warning_secs=epoch_time_warning_secs,
     )
     plot_training_curves(
         hist,
