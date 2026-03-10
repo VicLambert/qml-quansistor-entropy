@@ -129,7 +129,7 @@ def main():
     print("=" * 60)
 
     # Setup
-    pt_paths = collect_pt_paths("qqe/data/")
+    pt_paths = collect_pt_paths("outputs/data/")
     print(f"\n📊 Dataset: {len(pt_paths)} samples")
 
     # Check sample data

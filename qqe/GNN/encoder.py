@@ -325,14 +325,14 @@ def _encode_node_feature(
 
 def _get_node_feature_dim() -> int:
     """Calculate node feature dimension."""
-    return 14 + 1 + 4  # gate_types + unknown + 4 params (will be + num_qubits dynamically)
+    return 14 + 1 + 4  # gate_types + unknown + 4 params (will be + num_qubits dynamically) #FIXME
 
 
 def _global_features_baseline(
     ops: list[tuple[str, list[float], int, int | None]],
     num_qubits: int,
 ) -> torch.Tensor:
-    """Compute baseline global features: [depth, num_param_gates, num_qubits, total_gates, rx, ry, rz, cx]"""
+    """Compute baseline global features: [depth, num_param_gates, num_qubits, total_gates, rx, ry, rz, cx]."""
     gate_counts = {"rx": 0, "ry": 0, "rz": 0, "cx": 0, "cnot": 0}
     depth = 0
     num_param_gates = 0

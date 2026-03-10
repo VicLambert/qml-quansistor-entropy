@@ -564,7 +564,7 @@ def main(
         300.0, help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
-    pt_paths = collect_pt_paths("qqe/data")  # or .../samples
+    pt_paths = collect_pt_paths("outputs/data")  # or .../samples
     # logger.info(pt_paths[:5])
     # global_feature_variant: str = "binned"
     # node_feature_backend_variant: str | None = None
@@ -641,7 +641,7 @@ def temp_main(
     heartbeat_secs: float = typer.Option(60.0, help="Heartbeat log interval in seconds (0=disable)"),
     epoch_time_warning_secs: float = typer.Option(300.0, help="Warn if epoch exceeds N seconds (0=disable)"),
 ):
-    data_paths = collect_pt_paths("qqe/data", family=family if training_mode == "per_family" else None)
+    data_paths = collect_pt_paths("outputs/data", family=family if training_mode == "per_family" else None)
     if not data_paths:
         logger.error("No data paths found. Check dataset directory and family name.")
         return
