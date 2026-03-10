@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import logging
 import sys
 import time
 
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -22,6 +24,14 @@ from tqdm import tqdm
 from qqe.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
 from qqe.utils import configure_logger
 
+# Family registry for validation
+FAMILY_REGISTRY = {
+    "haar": True,
+    "clifford": True,
+    "quansistor": True,
+    "random": True,
+}
+
 
 def _amp_device_type() -> str:
     return "cuda" if torch.cuda.is_available() else "cpu"
@@ -32,10 +42,13 @@ device_type = _amp_device_type()
 logger.info(f"AMP device type: {device_type}")
 
 
-def collect_pt_paths(dataset_dir: str) -> list[str]:
+def collect_pt_paths(dataset_dir: str, family: str | None = None) -> list[str]:
     d = Path(dataset_dir)
     # support either dataset_dir/*.pt or dataset_dir/samples/*.pt
-    paths = sorted((d / "encoding_data_pennylane_fwht").glob("*.pt"))
+    if family is not None:
+        paths = sorted((d / "encoding_data_pennylane" / family).glob("*.pt"))
+    else:
+        paths = sorted((d / "encoding_data_pennylane").glob("*.pt"))
     if not paths:
         paths = sorted(d.glob("*.pt"))
     return [str(p) for p in paths]
@@ -422,7 +435,7 @@ def train_model(
                     {
                         "loss": f"{running_loss:.4f}",
                         "graphs": total_graphs,
-                    }
+                    },
                 )
 
             # Periodic structured logging
@@ -457,7 +470,7 @@ def train_model(
 
         val_start_time = time.time()
         val_loss = evaluate_loss(
-            model, val_loader, dev, loss_fn, use_amp=use_amp, show_progress=show_val_progress
+            model, val_loader, dev, loss_fn, use_amp=use_amp, show_progress=show_val_progress,
         )
         val_time = time.time() - val_start_time
 
@@ -542,13 +555,13 @@ def main(
     show_progress: bool = typer.Option(True, help="Show progress bars during training"),
     show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
     log_every_n_batches: int = typer.Option(
-        5, help="Log training stats every N batches (0=disable)"
+        5, help="Log training stats every N batches (0=disable)",
     ),
     heartbeat_secs: float = typer.Option(
-        60.0, help="Heartbeat log interval in seconds (0=disable)"
+        60.0, help="Heartbeat log interval in seconds (0=disable)",
     ),
     epoch_time_warning_secs: float = typer.Option(
-        300.0, help="Warn if epoch exceeds N seconds (0=disable)"
+        300.0, help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
     pt_paths = collect_pt_paths("qqe/data")  # or .../samples
@@ -602,6 +615,10 @@ def main(
         heartbeat_secs=heartbeat_secs,
         epoch_time_warning_secs=epoch_time_warning_secs,
     )
+
+    test_loss = evaluate_loss(model, test_loader, dev, nn.MSELoss(), use_amp=True, show_progress=True)
+    logger.info(f"Final test loss: {test_loss:.6f}")
+
     plot_training_curves(
         hist,
         title="GNN SRE regression",
@@ -609,8 +626,75 @@ def main(
         fig_path="outputs/figures/training_curves.png",
     )
 
+    torch.save(model.state_dict(), "outputs/gnn_model.pt")
+
+
+def temp_main(
+    epochs: int = 15,
+    lr: float = 0.001,
+    loss_type: str = "mse",
+    training_mode: str = "global",     # "global" | "per_family"
+    family: str | None = None,
+    show_progress: bool = typer.Option(True, help="Show progress bars during training"),
+    show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
+    log_every_n_batches: int = typer.Option(5, help="Log training stats every N batches (0=disable)"),
+    heartbeat_secs: float = typer.Option(60.0, help="Heartbeat log interval in seconds (0=disable)"),
+    epoch_time_warning_secs: float = typer.Option(300.0, help="Warn if epoch exceeds N seconds (0=disable)"),
+):
+    data_paths = collect_pt_paths("qqe/data", family=family if training_mode == "per_family" else None)
+    if not data_paths:
+        logger.error("No data paths found. Check dataset directory and family name.")
+        return
+    train_loader, val_loader, test_loader = build_train_val_test_loaders_two_stage(
+        data_paths,
+        global_feature_variant="binned",
+        batch_size=32,
+    )
+
+    node_in_dim = get_node_feature_dim_from_sample(data_paths)
+    global_in_dim = get_global_feature_dim_from_sample(data_paths)
+
+    model = GNN(
+        node_in_dim=node_in_dim,
+        global_in_dim=global_in_dim,
+        gnn_hidden=32,
+        gnn_heads=8,
+        global_hidden=16,
+        reg_hidden=16,
+        num_layers=5,
+        dropout_rate=0.1,
+    )
+
+    model, hist, dev = train_model(
+        model,
+        train_loader,
+        val_loader,
+        epochs=epochs,
+        lr=lr,
+        loss_type=loss_type,
+        huber_delta=1.0,
+        early_stopping_patience=15,
+        scheduler="plateau",
+        show_progress=show_progress,
+        show_val_progress=show_val_progress,
+        log_every_n_batches=log_every_n_batches,
+        heartbeat_secs=heartbeat_secs,
+        epoch_time_warning_secs=epoch_time_warning_secs,
+    )
+
+    test_loss = evaluate_loss(model, test_loader, dev, nn.MSELoss(), use_amp=True, show_progress=True)
+    logger.info(f"Final test loss: {test_loss:.6f}")
+
+    plot_training_curves(
+        hist,
+        title="GNN SRE regression",
+        save_fig=True,
+        fig_path="outputs/figures/training_curves.png",
+    )
+
+    torch.save(model.state_dict(), "outputs/gnn_model.pt")
 
 if __name__ == "__main__":
     configure_logger(logging.INFO, logging.INFO)
     logger.info("Starting GNN training...")
-    typer.run(main)
+    typer.run(temp_main)

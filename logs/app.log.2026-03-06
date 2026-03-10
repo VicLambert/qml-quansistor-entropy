@@ -1,0 +1,530 @@
+2026-03-06 08:28:35,361 - __main__ - INFO - Starting GNN training...
+2026-03-06 08:29:22,496 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-06 08:30:23,262 - __main__ - INFO - [Heartbeat] Epoch 1 batch 48/68 | loss 8.206596 | elapsed 60.8s | graphs 1536
+2026-03-06 08:30:46,223 - __main__ - INFO - Training phase complete (83.7s) | Running validation...
+2026-03-06 08:30:49,211 - __main__ - INFO - Losses | train 6.267674 | val 1.205454 | lr 1.00e-03 | time train=83.7s val=3.0s total=86.7s
+2026-03-06 08:30:49,212 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-06 08:31:50,110 - __main__ - INFO - [Heartbeat] Epoch 2 batch 52/68 | loss 1.225676 | elapsed 60.9s | graphs 1664
+2026-03-06 08:32:07,502 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 08:32:10,501 - __main__ - INFO - Losses | train 1.245444 | val 0.681417 | lr 1.00e-03 | time train=78.3s val=3.0s total=81.3s
+2026-03-06 08:32:10,502 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-06 08:33:10,907 - __main__ - INFO - [Heartbeat] Epoch 3 batch 52/68 | loss 1.242055 | elapsed 60.4s | graphs 1664
+2026-03-06 08:33:29,041 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-06 08:33:31,898 - __main__ - INFO - Losses | train 1.091016 | val 1.344520 | lr 1.00e-03 | time train=78.5s val=2.9s total=81.4s
+2026-03-06 08:33:31,899 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-06 08:34:32,862 - __main__ - INFO - [Heartbeat] Epoch 4 batch 52/68 | loss 0.777406 | elapsed 61.0s | graphs 1664
+2026-03-06 08:34:50,134 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 08:34:52,952 - __main__ - INFO - Losses | train 0.754937 | val 0.461362 | lr 1.00e-03 | time train=78.2s val=2.8s total=81.1s
+2026-03-06 08:34:52,952 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-06 08:35:53,770 - __main__ - INFO - [Heartbeat] Epoch 5 batch 53/68 | loss 0.580880 | elapsed 60.8s | graphs 1696
+2026-03-06 08:36:11,008 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 08:36:13,847 - __main__ - INFO - Losses | train 0.567366 | val 0.256247 | lr 1.00e-03 | time train=78.1s val=2.8s total=80.9s
+2026-03-06 08:36:13,848 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-06 08:37:14,065 - __main__ - INFO - [Heartbeat] Epoch 6 batch 52/68 | loss 0.556802 | elapsed 60.2s | graphs 1664
+2026-03-06 08:37:31,927 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 08:37:34,732 - __main__ - INFO - Losses | train 0.546129 | val 1.349013 | lr 1.00e-03 | time train=78.1s val=2.8s total=80.9s
+2026-03-06 08:37:34,733 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-06 08:38:35,757 - __main__ - INFO - [Heartbeat] Epoch 7 batch 53/68 | loss 0.559909 | elapsed 61.0s | graphs 1696
+2026-03-06 08:38:52,873 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 08:38:55,688 - __main__ - INFO - Losses | train 0.566015 | val 0.446470 | lr 1.00e-03 | time train=78.1s val=2.8s total=81.0s
+2026-03-06 08:38:55,689 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-06 08:39:55,998 - __main__ - INFO - [Heartbeat] Epoch 8 batch 52/68 | loss 0.591316 | elapsed 60.3s | graphs 1664
+2026-03-06 08:40:14,020 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 08:40:17,414 - __main__ - INFO - Losses | train 0.560179 | val 0.974240 | lr 1.00e-03 | time train=78.3s val=3.4s total=81.7s
+2026-03-06 08:40:17,414 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-06 08:41:18,041 - __main__ - INFO - [Heartbeat] Epoch 9 batch 52/68 | loss 0.567967 | elapsed 60.6s | graphs 1664
+2026-03-06 08:41:36,257 - __main__ - INFO - Training phase complete (78.8s) | Running validation...
+2026-03-06 08:41:39,077 - __main__ - INFO - Losses | train 0.561271 | val 0.538113 | lr 1.00e-03 | time train=78.8s val=2.8s total=81.7s
+2026-03-06 08:41:39,077 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-06 08:42:40,033 - __main__ - INFO - [Heartbeat] Epoch 10 batch 53/68 | loss 0.492099 | elapsed 61.0s | graphs 1696
+2026-03-06 08:42:57,218 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 08:43:00,030 - __main__ - INFO - Losses | train 0.484518 | val 1.203949 | lr 1.00e-03 | time train=78.1s val=2.8s total=81.0s
+2026-03-06 08:43:00,030 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-06 08:44:00,044 - __main__ - INFO - [Heartbeat] Epoch 11 batch 52/68 | loss 0.547433 | elapsed 60.0s | graphs 1664
+2026-03-06 08:44:18,824 - __main__ - INFO - Training phase complete (78.8s) | Running validation...
+2026-03-06 08:44:22,301 - __main__ - INFO - Losses | train 0.550415 | val 0.101050 | lr 1.00e-03 | time train=78.8s val=3.5s total=82.3s
+2026-03-06 08:44:22,302 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-06 08:45:23,154 - __main__ - INFO - [Heartbeat] Epoch 12 batch 52/68 | loss 0.507848 | elapsed 60.9s | graphs 1664
+2026-03-06 08:45:41,173 - __main__ - INFO - Training phase complete (78.9s) | Running validation...
+2026-03-06 08:45:44,017 - __main__ - INFO - Losses | train 0.521129 | val 0.935748 | lr 1.00e-03 | time train=78.9s val=2.8s total=81.7s
+2026-03-06 08:45:44,017 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-06 08:46:44,199 - __main__ - INFO - [Heartbeat] Epoch 13 batch 52/68 | loss 0.612200 | elapsed 60.2s | graphs 1664
+2026-03-06 08:47:02,718 - __main__ - INFO - Training phase complete (78.7s) | Running validation...
+2026-03-06 08:47:05,537 - __main__ - INFO - Losses | train 0.587291 | val 0.770313 | lr 1.00e-03 | time train=78.7s val=2.8s total=81.5s
+2026-03-06 08:47:05,538 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-06 08:48:06,409 - __main__ - INFO - [Heartbeat] Epoch 14 batch 52/68 | loss 0.516015 | elapsed 60.9s | graphs 1664
+2026-03-06 08:48:24,775 - __main__ - INFO - Training phase complete (79.2s) | Running validation...
+2026-03-06 08:48:27,584 - __main__ - INFO - Losses | train 0.488979 | val 0.931921 | lr 1.00e-03 | time train=79.2s val=2.8s total=82.0s
+2026-03-06 08:48:27,584 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-06 08:49:28,481 - __main__ - INFO - [Heartbeat] Epoch 15 batch 52/68 | loss 0.557173 | elapsed 60.9s | graphs 1664
+2026-03-06 08:49:46,100 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-06 08:49:49,029 - __main__ - INFO - Losses | train 0.551452 | val 0.100557 | lr 1.00e-03 | time train=78.5s val=2.9s total=81.4s
+2026-03-06 08:49:49,030 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-06 08:50:49,571 - __main__ - INFO - [Heartbeat] Epoch 16 batch 52/68 | loss 0.461234 | elapsed 60.5s | graphs 1664
+2026-03-06 08:51:07,636 - __main__ - INFO - Training phase complete (78.6s) | Running validation...
+2026-03-06 08:51:10,659 - __main__ - INFO - Losses | train 0.452219 | val 0.678644 | lr 1.00e-03 | time train=78.6s val=3.0s total=81.6s
+2026-03-06 08:51:10,659 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-06 08:52:11,196 - __main__ - INFO - [Heartbeat] Epoch 17 batch 52/68 | loss 0.420830 | elapsed 60.5s | graphs 1664
+2026-03-06 08:52:29,666 - __main__ - INFO - Training phase complete (79.0s) | Running validation...
+2026-03-06 08:52:32,478 - __main__ - INFO - Losses | train 0.412060 | val 1.014920 | lr 1.00e-03 | time train=79.0s val=2.8s total=81.8s
+2026-03-06 08:52:32,478 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-06 08:53:32,627 - __main__ - INFO - [Heartbeat] Epoch 18 batch 51/68 | loss 0.466961 | elapsed 60.1s | graphs 1632
+2026-03-06 08:53:50,683 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 08:53:53,494 - __main__ - INFO - Losses | train 0.476597 | val 0.104398 | lr 1.00e-03 | time train=78.2s val=2.8s total=81.0s
+2026-03-06 08:53:53,494 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-06 08:54:53,972 - __main__ - INFO - [Heartbeat] Epoch 19 batch 52/68 | loss 0.474028 | elapsed 60.5s | graphs 1664
+2026-03-06 08:55:11,881 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 08:55:14,833 - __main__ - INFO - Losses | train 0.498027 | val 0.661196 | lr 1.00e-03 | time train=78.4s val=3.0s total=81.3s
+2026-03-06 08:55:14,834 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-06 08:56:14,931 - __main__ - INFO - [Heartbeat] Epoch 20 batch 52/68 | loss 0.434429 | elapsed 60.1s | graphs 1664
+2026-03-06 08:56:33,241 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 08:56:36,051 - __main__ - INFO - Losses | train 0.449616 | val 0.763470 | lr 1.00e-03 | time train=78.4s val=2.8s total=81.2s
+2026-03-06 08:56:36,051 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-06 08:57:36,576 - __main__ - INFO - [Heartbeat] Epoch 21 batch 52/68 | loss 0.468389 | elapsed 60.5s | graphs 1664
+2026-03-06 08:57:54,375 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 08:57:57,185 - __main__ - INFO - Losses | train 0.483228 | val 0.066203 | lr 1.00e-03 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 08:57:57,186 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-06 08:58:58,104 - __main__ - INFO - [Heartbeat] Epoch 22 batch 53/68 | loss 0.515459 | elapsed 60.9s | graphs 1696
+2026-03-06 08:59:15,662 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-06 08:59:18,599 - __main__ - INFO - Losses | train 0.521362 | val 0.583167 | lr 1.00e-03 | time train=78.5s val=2.9s total=81.4s
+2026-03-06 08:59:18,600 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-06 09:00:18,648 - __main__ - INFO - [Heartbeat] Epoch 23 batch 52/68 | loss 0.438624 | elapsed 60.0s | graphs 1664
+2026-03-06 09:00:36,986 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 09:00:39,791 - __main__ - INFO - Losses | train 0.421540 | val 0.174973 | lr 1.00e-03 | time train=78.4s val=2.8s total=81.2s
+2026-03-06 09:00:39,791 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-06 09:01:40,299 - __main__ - INFO - [Heartbeat] Epoch 24 batch 52/68 | loss 0.403271 | elapsed 60.5s | graphs 1664
+2026-03-06 09:01:58,153 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 09:02:00,961 - __main__ - INFO - Losses | train 0.385975 | val 0.914813 | lr 1.00e-03 | time train=78.4s val=2.8s total=81.2s
+2026-03-06 09:02:00,962 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-06 09:03:00,962 - __main__ - INFO - [Heartbeat] Epoch 25 batch 52/68 | loss 0.337613 | elapsed 60.0s | graphs 1664
+2026-03-06 09:03:19,263 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:03:22,077 - __main__ - INFO - Losses | train 0.364797 | val 0.323631 | lr 1.00e-03 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 09:12:10,711 - __main__ - INFO - Starting GNN training...
+2026-03-06 09:13:29,493 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-06 09:14:30,343 - __main__ - INFO - [Heartbeat] Epoch 1 batch 46/68 | loss 9.396358 | elapsed 60.8s | graphs 1472
+2026-03-06 09:14:55,042 - __main__ - INFO - Training phase complete (85.5s) | Running validation...
+2026-03-06 09:14:57,864 - __main__ - INFO - Losses | train 7.158459 | val 0.235090 | lr 1.00e-03 | time train=85.5s val=2.8s total=88.4s
+2026-03-06 09:14:57,865 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-06 09:15:58,638 - __main__ - INFO - [Heartbeat] Epoch 2 batch 53/68 | loss 1.371914 | elapsed 60.8s | graphs 1696
+2026-03-06 09:16:16,532 - __main__ - INFO - Training phase complete (78.7s) | Running validation...
+2026-03-06 09:16:19,351 - __main__ - INFO - Losses | train 1.365530 | val 1.117165 | lr 1.00e-03 | time train=78.7s val=2.8s total=81.5s
+2026-03-06 09:16:19,351 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-06 09:17:19,503 - __main__ - INFO - [Heartbeat] Epoch 3 batch 52/68 | loss 1.270954 | elapsed 60.2s | graphs 1664
+2026-03-06 09:17:37,614 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:17:40,507 - __main__ - INFO - Losses | train 1.342673 | val 0.537537 | lr 1.00e-03 | time train=78.3s val=2.9s total=81.2s
+2026-03-06 09:17:40,508 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-06 09:18:40,525 - __main__ - INFO - [Heartbeat] Epoch 4 batch 52/68 | loss 1.392749 | elapsed 60.0s | graphs 1664
+2026-03-06 09:18:58,712 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 09:19:01,567 - __main__ - INFO - Losses | train 1.306205 | val 0.073423 | lr 1.00e-03 | time train=78.2s val=2.9s total=81.1s
+2026-03-06 09:19:01,568 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-06 09:20:02,682 - __main__ - INFO - [Heartbeat] Epoch 5 batch 53/68 | loss 1.067612 | elapsed 61.1s | graphs 1696
+2026-03-06 09:20:19,742 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 09:20:22,600 - __main__ - INFO - Losses | train 1.019750 | val 0.089017 | lr 1.00e-03 | time train=78.2s val=2.9s total=81.0s
+2026-03-06 09:20:22,600 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-06 09:21:22,685 - __main__ - INFO - [Heartbeat] Epoch 6 batch 52/68 | loss 0.990131 | elapsed 60.1s | graphs 1664
+2026-03-06 09:21:40,787 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 09:21:43,600 - __main__ - INFO - Losses | train 1.001153 | val 0.101387 | lr 1.00e-03 | time train=78.2s val=2.8s total=81.0s
+2026-03-06 09:21:43,600 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-06 09:22:44,339 - __main__ - INFO - [Heartbeat] Epoch 7 batch 52/68 | loss 0.877635 | elapsed 60.7s | graphs 1664
+2026-03-06 09:23:02,537 - __main__ - INFO - Training phase complete (78.9s) | Running validation...
+2026-03-06 09:23:05,346 - __main__ - INFO - Losses | train 0.912664 | val 0.092106 | lr 1.00e-03 | time train=78.9s val=2.8s total=81.7s
+2026-03-06 09:23:05,346 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-06 09:24:06,508 - __main__ - INFO - [Heartbeat] Epoch 8 batch 53/68 | loss 0.782292 | elapsed 61.2s | graphs 1696
+2026-03-06 09:24:23,621 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:24:26,429 - __main__ - INFO - Losses | train 0.762129 | val 0.154569 | lr 1.00e-03 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 09:24:26,429 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-06 09:25:26,928 - __main__ - INFO - [Heartbeat] Epoch 9 batch 52/68 | loss 0.793691 | elapsed 60.5s | graphs 1664
+2026-03-06 09:25:44,856 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 09:25:47,731 - __main__ - INFO - Losses | train 0.753201 | val 0.290269 | lr 1.00e-03 | time train=78.4s val=2.9s total=81.3s
+2026-03-06 09:25:47,731 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-06 09:26:48,523 - __main__ - INFO - [Heartbeat] Epoch 10 batch 52/68 | loss 0.802018 | elapsed 60.8s | graphs 1664
+2026-03-06 09:27:05,907 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 09:27:08,844 - __main__ - INFO - Losses | train 0.797823 | val 0.406924 | lr 5.00e-04 | time train=78.2s val=2.9s total=81.1s
+2026-03-06 09:27:08,844 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-06 09:28:09,103 - __main__ - INFO - [Heartbeat] Epoch 11 batch 52/68 | loss 0.555459 | elapsed 60.3s | graphs 1664
+2026-03-06 09:28:27,365 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-06 09:28:30,167 - __main__ - INFO - Losses | train 0.559681 | val 0.565723 | lr 5.00e-04 | time train=78.5s val=2.8s total=81.3s
+2026-03-06 09:28:30,167 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-06 09:29:31,261 - __main__ - INFO - [Heartbeat] Epoch 12 batch 53/68 | loss 0.652536 | elapsed 61.1s | graphs 1696
+2026-03-06 09:29:48,446 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:29:51,290 - __main__ - INFO - Losses | train 0.658235 | val 0.223514 | lr 5.00e-04 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 09:29:51,290 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-06 09:30:51,994 - __main__ - INFO - [Heartbeat] Epoch 13 batch 53/68 | loss 0.668170 | elapsed 60.7s | graphs 1696
+2026-03-06 09:31:09,410 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 09:31:12,259 - __main__ - INFO - Losses | train 0.694623 | val 0.072554 | lr 5.00e-04 | time train=78.1s val=2.8s total=81.0s
+2026-03-06 09:31:12,259 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-06 09:32:12,760 - __main__ - INFO - [Heartbeat] Epoch 14 batch 52/68 | loss 0.583786 | elapsed 60.5s | graphs 1664
+2026-03-06 09:32:30,741 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-06 09:32:33,554 - __main__ - INFO - Losses | train 0.595386 | val 0.150155 | lr 5.00e-04 | time train=78.5s val=2.8s total=81.3s
+2026-03-06 09:32:33,554 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-06 09:33:33,737 - __main__ - INFO - [Heartbeat] Epoch 15 batch 52/68 | loss 0.710335 | elapsed 60.2s | graphs 1664
+2026-03-06 09:33:52,021 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-06 09:33:54,828 - __main__ - INFO - Losses | train 0.679534 | val 0.204258 | lr 5.00e-04 | time train=78.5s val=2.8s total=81.3s
+2026-03-06 09:33:54,829 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-06 09:34:55,844 - __main__ - INFO - [Heartbeat] Epoch 16 batch 53/68 | loss 0.649479 | elapsed 61.0s | graphs 1696
+2026-03-06 09:35:13,022 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-06 09:35:15,886 - __main__ - INFO - Losses | train 0.646173 | val 0.379206 | lr 5.00e-04 | time train=78.2s val=2.9s total=81.1s
+2026-03-06 09:35:15,886 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-06 09:36:16,407 - __main__ - INFO - [Heartbeat] Epoch 17 batch 52/68 | loss 0.646287 | elapsed 60.5s | graphs 1664
+2026-03-06 09:36:33,991 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 09:36:36,808 - __main__ - INFO - Losses | train 0.662181 | val 0.218011 | lr 5.00e-04 | time train=78.1s val=2.8s total=80.9s
+2026-03-06 09:36:36,809 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-06 09:37:36,945 - __main__ - INFO - [Heartbeat] Epoch 18 batch 52/68 | loss 0.686506 | elapsed 60.1s | graphs 1664
+2026-03-06 09:37:54,920 - __main__ - INFO - Training phase complete (78.1s) | Running validation...
+2026-03-06 09:37:57,732 - __main__ - INFO - Losses | train 0.658159 | val 0.366682 | lr 5.00e-04 | time train=78.1s val=2.8s total=80.9s
+2026-03-06 09:37:57,732 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-06 09:38:58,025 - __main__ - INFO - [Heartbeat] Epoch 19 batch 52/68 | loss 0.558498 | elapsed 60.3s | graphs 1664
+2026-03-06 09:39:16,002 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:39:18,927 - __main__ - INFO - Losses | train 0.599011 | val 0.231367 | lr 2.50e-04 | time train=78.3s val=2.9s total=81.2s
+2026-03-06 09:39:18,928 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-06 09:40:18,981 - __main__ - INFO - [Heartbeat] Epoch 20 batch 52/68 | loss 0.581518 | elapsed 60.1s | graphs 1664
+2026-03-06 09:40:37,360 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 09:40:40,274 - __main__ - INFO - Losses | train 0.589838 | val 0.259092 | lr 2.50e-04 | time train=78.4s val=2.9s total=81.3s
+2026-03-06 09:40:40,274 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-06 09:41:40,348 - __main__ - INFO - [Heartbeat] Epoch 21 batch 52/68 | loss 0.606406 | elapsed 60.1s | graphs 1664
+2026-03-06 09:41:58,574 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:42:01,381 - __main__ - INFO - Losses | train 0.612543 | val 0.473544 | lr 2.50e-04 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 09:42:01,381 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-06 09:43:01,527 - __main__ - INFO - [Heartbeat] Epoch 22 batch 52/68 | loss 0.602632 | elapsed 60.1s | graphs 1664
+2026-03-06 09:43:19,671 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:43:22,496 - __main__ - INFO - Losses | train 0.600890 | val 0.418270 | lr 2.50e-04 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 09:43:22,496 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-06 09:44:22,689 - __main__ - INFO - [Heartbeat] Epoch 23 batch 52/68 | loss 0.561348 | elapsed 60.2s | graphs 1664
+2026-03-06 09:44:41,080 - __main__ - INFO - Training phase complete (78.6s) | Running validation...
+2026-03-06 09:44:43,900 - __main__ - INFO - Losses | train 0.562339 | val 0.357848 | lr 2.50e-04 | time train=78.6s val=2.8s total=81.4s
+2026-03-06 09:44:43,901 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-06 09:45:44,728 - __main__ - INFO - [Heartbeat] Epoch 24 batch 52/68 | loss 0.582483 | elapsed 60.8s | graphs 1664
+2026-03-06 09:46:02,180 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-06 09:46:04,995 - __main__ - INFO - Losses | train 0.588608 | val 0.356563 | lr 2.50e-04 | time train=78.3s val=2.8s total=81.1s
+2026-03-06 09:46:04,995 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-06 09:47:05,687 - __main__ - INFO - [Heartbeat] Epoch 25 batch 52/68 | loss 0.519905 | elapsed 60.7s | graphs 1664
+2026-03-06 09:47:23,367 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-06 09:47:26,185 - __main__ - INFO - Losses | train 0.541599 | val 0.622994 | lr 1.25e-04 | time train=78.4s val=2.8s total=81.2s
+2026-03-06 09:47:33,294 - __main__ - INFO - Final test loss: 0.077061
+2026-03-06 10:14:15,670 - __main__ - INFO - Starting data generation...
+2026-03-06 10:16:16,638 - __main__ - INFO - Starting data generation...
+2026-03-06 10:17:42,008 - __main__ - INFO - Starting data generation...
+2026-03-06 10:17:42,016 - __main__ - INFO - Generated 5000 circuit configurations
+2026-03-06 10:17:50,573 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-06 10:18:01,825 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-06 10:18:02,036 - distributed.scheduler - INFO - State start
+2026-03-06 10:18:02,037 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:43039
+2026-03-06 10:18:02,038 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-06 10:18:02,038 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-06 10:18:02,044 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:36271'
+2026-03-06 10:18:02,047 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:46787'
+2026-03-06 10:18:02,048 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:43077'
+2026-03-06 10:18:02,050 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:37619'
+2026-03-06 10:18:10,142 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:36775 name: 0
+2026-03-06 10:18:10,150 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:36775
+2026-03-06 10:18:10,151 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35210
+2026-03-06 10:18:10,151 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:33793 name: 1
+2026-03-06 10:18:10,151 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:33793
+2026-03-06 10:18:10,151 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35196
+2026-03-06 10:18:10,151 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:42903 name: 2
+2026-03-06 10:18:10,152 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:42903
+2026-03-06 10:18:10,152 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35226
+2026-03-06 10:18:10,186 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:45341 name: 3
+2026-03-06 10:18:10,186 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:45341
+2026-03-06 10:18:10,186 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35232
+2026-03-06 10:18:10,260 - distributed.scheduler - INFO - Receive client connection: Client-d4d5ae9d-1988-11f1-9c77-8c3b4adc0253
+2026-03-06 10:18:10,260 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35248
+2026-03-06 10:18:10,260 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-06 10:18:10,260 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-06 10:18:10,261 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-06 10:18:10,261 - __main__ - INFO - Workers connected: 4
+2026-03-06 10:41:10,820 - distributed.scheduler - INFO - Remove client Client-d4d5ae9d-1988-11f1-9c77-8c3b4adc0253
+2026-03-06 10:41:10,849 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35248; closing.
+2026-03-06 10:41:10,849 - distributed.scheduler - INFO - Remove client Client-d4d5ae9d-1988-11f1-9c77-8c3b4adc0253
+2026-03-06 10:41:10,849 - distributed.scheduler - INFO - Close client connection: Client-d4d5ae9d-1988-11f1-9c77-8c3b4adc0253
+2026-03-06 10:41:10,850 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772822470.8502288') (0, 1, 2, 3)
+2026-03-06 10:41:10,850 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:36271'. Reason: nanny-close
+2026-03-06 10:41:10,850 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 10:41:10,850 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:46787'. Reason: nanny-close
+2026-03-06 10:41:10,851 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 10:41:10,851 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:43077'. Reason: nanny-close
+2026-03-06 10:41:10,851 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 10:41:10,851 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:37619'. Reason: nanny-close
+2026-03-06 10:41:10,854 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 10:41:10,854 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35210; closing.
+2026-03-06 10:41:10,854 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35196; closing.
+2026-03-06 10:41:10,854 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35226; closing.
+2026-03-06 10:41:10,854 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:36775 name: 0 (stimulus_id='handle-worker-cleanup-1772822470.8548565')
+2026-03-06 10:41:10,855 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:33793 name: 1 (stimulus_id='handle-worker-cleanup-1772822470.8550322')
+2026-03-06 10:41:10,855 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:42903 name: 2 (stimulus_id='handle-worker-cleanup-1772822470.8551466')
+2026-03-06 10:41:10,855 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35232; closing.
+2026-03-06 10:41:10,855 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:45341 name: 3 (stimulus_id='handle-worker-cleanup-1772822470.855587')
+2026-03-06 10:41:10,855 - distributed.scheduler - INFO - Lost all workers
+2026-03-06 10:41:10,855 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:43039 remote=tcp://127.0.0.1:35232>
+Traceback (most recent call last):
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/comm/tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/tornado/gen.py", line 783, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/comm/tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/comm/tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:43039 remote=tcp://127.0.0.1:35232>: Stream is closed
+2026-03-06 10:41:13,156 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:36271' closed.
+2026-03-06 10:41:13,189 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:43077' closed.
+2026-03-06 10:41:13,202 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:46787' closed.
+2026-03-06 10:41:13,385 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:37619' closed.
+2026-03-06 10:41:13,386 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-06 10:41:13,386 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-06 10:41:13,386 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-06 10:41:13,389 - __main__ - INFO - Wrote metadata to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht/metadata_quansistor.json
+2026-03-06 10:41:13,389 - __main__ - INFO - Wrote index to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht/index_quansistor.jsonl
+2026-03-06 10:41:13,389 - __main__ - INFO - Samples saved under /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht
+2026-03-06 11:08:06,674 - __main__ - INFO - Starting GNN training...
+2026-03-06 11:11:49,223 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-06 12:19:27,180 - __main__ - INFO - Starting GNN training...
+2026-03-06 12:24:05,031 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-06 13:08:24,953 - __main__ - INFO - Starting GNN training...
+2026-03-06 13:13:15,322 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-06 13:14:15,851 - __main__ - INFO - [Heartbeat] Epoch 1 batch 74/180 | loss 7.036892 | elapsed 60.5s | graphs 2368
+2026-03-06 13:15:16,096 - __main__ - INFO - [Heartbeat] Epoch 1 batch 158/180 | loss 4.263410 | elapsed 120.8s | graphs 5056
+2026-03-06 13:15:32,525 - __main__ - INFO - Training phase complete (137.2s) | Running validation...
+2026-03-06 13:15:38,009 - __main__ - INFO - Losses | train 3.931033 | val 0.182882 | lr 1.00e-03 | time train=137.2s val=5.5s total=142.7s
+2026-03-06 13:15:38,009 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-06 13:16:38,142 - __main__ - INFO - [Heartbeat] Epoch 2 batch 84/180 | loss 1.379842 | elapsed 60.1s | graphs 2688
+2026-03-06 13:17:38,844 - __main__ - INFO - [Heartbeat] Epoch 2 batch 168/180 | loss 1.255909 | elapsed 120.8s | graphs 5376
+2026-03-06 13:17:47,490 - __main__ - INFO - Training phase complete (129.5s) | Running validation...
+2026-03-06 13:17:53,012 - __main__ - INFO - Losses | train 1.260623 | val 1.148095 | lr 1.00e-03 | time train=129.5s val=5.5s total=135.0s
+2026-03-06 13:17:53,012 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-06 13:18:53,417 - __main__ - INFO - [Heartbeat] Epoch 3 batch 85/180 | loss 0.814572 | elapsed 60.4s | graphs 2720
+2026-03-06 13:19:54,006 - __main__ - INFO - [Heartbeat] Epoch 3 batch 170/180 | loss 0.765186 | elapsed 121.0s | graphs 5440
+2026-03-06 13:20:02,307 - __main__ - INFO - Training phase complete (129.3s) | Running validation...
+2026-03-06 13:20:07,878 - __main__ - INFO - Losses | train 0.753373 | val 0.721168 | lr 1.00e-03 | time train=129.3s val=5.6s total=134.9s
+2026-03-06 13:20:07,879 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-06 13:21:08,471 - __main__ - INFO - [Heartbeat] Epoch 4 batch 83/180 | loss 0.677213 | elapsed 60.6s | graphs 2656
+2026-03-06 13:22:08,847 - __main__ - INFO - [Heartbeat] Epoch 4 batch 167/180 | loss 0.642184 | elapsed 121.0s | graphs 5344
+2026-03-06 13:22:18,564 - __main__ - INFO - Training phase complete (130.7s) | Running validation...
+2026-03-06 13:22:24,170 - __main__ - INFO - Losses | train 0.652857 | val 0.140327 | lr 1.00e-03 | time train=130.7s val=5.6s total=136.3s
+2026-03-06 13:22:24,171 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-06 13:23:24,531 - __main__ - INFO - [Heartbeat] Epoch 5 batch 85/180 | loss 0.578193 | elapsed 60.4s | graphs 2720
+2026-03-06 13:24:24,873 - __main__ - INFO - [Heartbeat] Epoch 5 batch 168/180 | loss 0.597302 | elapsed 120.7s | graphs 5376
+2026-03-06 13:24:34,001 - __main__ - INFO - Training phase complete (129.8s) | Running validation...
+2026-03-06 13:24:39,485 - __main__ - INFO - Losses | train 0.594307 | val 0.712527 | lr 1.00e-03 | time train=129.8s val=5.5s total=135.3s
+2026-03-06 13:24:39,486 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-06 13:25:40,105 - __main__ - INFO - [Heartbeat] Epoch 6 batch 84/180 | loss 0.680179 | elapsed 60.6s | graphs 2688
+2026-03-06 13:26:40,747 - __main__ - INFO - [Heartbeat] Epoch 6 batch 168/180 | loss 0.694087 | elapsed 121.3s | graphs 5376
+2026-03-06 13:26:48,752 - __main__ - INFO - Training phase complete (129.3s) | Running validation...
+2026-03-06 13:26:54,197 - __main__ - INFO - Losses | train 0.688265 | val 0.275169 | lr 1.00e-03 | time train=129.3s val=5.4s total=134.7s
+2026-03-06 13:26:54,197 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-06 13:27:54,661 - __main__ - INFO - [Heartbeat] Epoch 7 batch 86/180 | loss 0.537022 | elapsed 60.5s | graphs 2752
+2026-03-06 13:28:54,754 - __main__ - INFO - [Heartbeat] Epoch 7 batch 167/180 | loss 0.540632 | elapsed 120.6s | graphs 5344
+2026-03-06 13:29:04,762 - __main__ - INFO - Training phase complete (130.6s) | Running validation...
+2026-03-06 13:29:10,340 - __main__ - INFO - Losses | train 0.536541 | val 0.628452 | lr 1.00e-03 | time train=130.6s val=5.6s total=136.1s
+2026-03-06 13:29:10,341 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-06 13:30:10,554 - __main__ - INFO - [Heartbeat] Epoch 8 batch 83/180 | loss 0.599772 | elapsed 60.2s | graphs 2656
+2026-03-06 13:31:11,091 - __main__ - INFO - [Heartbeat] Epoch 8 batch 168/180 | loss 0.554303 | elapsed 120.8s | graphs 5376
+2026-03-06 13:31:19,597 - __main__ - INFO - Training phase complete (129.3s) | Running validation...
+2026-03-06 13:31:25,070 - __main__ - INFO - Losses | train 0.563058 | val 1.325773 | lr 1.00e-03 | time train=129.3s val=5.5s total=134.7s
+2026-03-06 13:31:25,071 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-06 13:32:25,210 - __main__ - INFO - [Heartbeat] Epoch 9 batch 83/180 | loss 0.551360 | elapsed 60.1s | graphs 2656
+2026-03-06 13:33:26,137 - __main__ - INFO - [Heartbeat] Epoch 9 batch 169/180 | loss 0.535330 | elapsed 121.1s | graphs 5408
+2026-03-06 13:33:33,803 - __main__ - INFO - Training phase complete (128.7s) | Running validation...
+2026-03-06 13:33:39,185 - __main__ - INFO - Losses | train 0.534023 | val 1.053303 | lr 1.00e-03 | time train=128.7s val=5.4s total=134.1s
+2026-03-06 13:33:39,185 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-06 13:34:39,568 - __main__ - INFO - [Heartbeat] Epoch 10 batch 86/180 | loss 0.510520 | elapsed 60.4s | graphs 2752
+2026-03-06 13:35:39,612 - __main__ - INFO - [Heartbeat] Epoch 10 batch 169/180 | loss 0.511370 | elapsed 120.4s | graphs 5408
+2026-03-06 13:35:47,542 - __main__ - INFO - Training phase complete (128.4s) | Running validation...
+2026-03-06 13:35:52,872 - __main__ - INFO - Losses | train 0.512729 | val 0.451967 | lr 5.00e-04 | time train=128.4s val=5.3s total=133.7s
+2026-03-06 13:35:52,872 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-06 13:36:53,266 - __main__ - INFO - [Heartbeat] Epoch 11 batch 85/180 | loss 0.496212 | elapsed 60.4s | graphs 2720
+2026-03-06 13:37:53,402 - __main__ - INFO - [Heartbeat] Epoch 11 batch 169/180 | loss 0.489151 | elapsed 120.5s | graphs 5408
+2026-03-06 13:38:01,067 - __main__ - INFO - Training phase complete (128.2s) | Running validation...
+2026-03-06 13:38:06,469 - __main__ - INFO - Losses | train 0.484485 | val 1.188732 | lr 5.00e-04 | time train=128.2s val=5.4s total=133.6s
+2026-03-06 13:38:06,469 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-06 13:39:06,566 - __main__ - INFO - [Heartbeat] Epoch 12 batch 84/180 | loss 0.409039 | elapsed 60.1s | graphs 2688
+2026-03-06 13:40:06,795 - __main__ - INFO - [Heartbeat] Epoch 12 batch 169/180 | loss 0.437918 | elapsed 120.3s | graphs 5408
+2026-03-06 13:40:15,123 - __main__ - INFO - Training phase complete (128.7s) | Running validation...
+2026-03-06 13:40:20,753 - __main__ - INFO - Losses | train 0.434859 | val 0.495341 | lr 5.00e-04 | time train=128.7s val=5.6s total=134.3s
+2026-03-06 13:40:20,754 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-06 13:41:20,991 - __main__ - INFO - [Heartbeat] Epoch 13 batch 85/180 | loss 0.421747 | elapsed 60.2s | graphs 2720
+2026-03-06 13:42:21,403 - __main__ - INFO - [Heartbeat] Epoch 13 batch 169/180 | loss 0.436863 | elapsed 120.6s | graphs 5408
+2026-03-06 13:42:28,789 - __main__ - INFO - Training phase complete (128.0s) | Running validation...
+2026-03-06 13:42:34,115 - __main__ - INFO - Losses | train 0.431009 | val 0.232759 | lr 5.00e-04 | time train=128.0s val=5.3s total=133.4s
+2026-03-06 13:42:34,116 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-06 13:43:34,557 - __main__ - INFO - [Heartbeat] Epoch 14 batch 86/180 | loss 0.428497 | elapsed 60.4s | graphs 2752
+2026-03-06 13:44:34,809 - __main__ - INFO - [Heartbeat] Epoch 14 batch 170/180 | loss 0.418504 | elapsed 120.7s | graphs 5440
+2026-03-06 13:44:42,024 - __main__ - INFO - Training phase complete (127.9s) | Running validation...
+2026-03-06 13:44:47,378 - __main__ - INFO - Losses | train 0.423938 | val 0.642585 | lr 5.00e-04 | time train=127.9s val=5.4s total=133.3s
+2026-03-06 13:44:47,378 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-06 13:45:48,051 - __main__ - INFO - [Heartbeat] Epoch 15 batch 86/180 | loss 0.452045 | elapsed 60.7s | graphs 2752
+2026-03-06 13:46:48,481 - __main__ - INFO - [Heartbeat] Epoch 15 batch 171/180 | loss 0.447504 | elapsed 121.1s | graphs 5472
+2026-03-06 13:46:55,502 - __main__ - INFO - Training phase complete (128.1s) | Running validation...
+2026-03-06 13:47:00,869 - __main__ - INFO - Losses | train 0.451969 | val 0.309850 | lr 5.00e-04 | time train=128.1s val=5.4s total=133.5s
+2026-03-06 13:47:00,869 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-06 13:48:01,177 - __main__ - INFO - [Heartbeat] Epoch 16 batch 85/180 | loss 0.390714 | elapsed 60.3s | graphs 2720
+2026-03-06 13:49:01,323 - __main__ - INFO - [Heartbeat] Epoch 16 batch 169/180 | loss 0.397422 | elapsed 120.5s | graphs 5408
+2026-03-06 13:49:08,861 - __main__ - INFO - Training phase complete (128.0s) | Running validation...
+2026-03-06 13:49:14,191 - __main__ - INFO - Losses | train 0.397598 | val 0.361289 | lr 2.50e-04 | time train=128.0s val=5.3s total=133.3s
+2026-03-06 13:49:14,191 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-06 13:50:14,707 - __main__ - INFO - [Heartbeat] Epoch 17 batch 85/180 | loss 0.385359 | elapsed 60.5s | graphs 2720
+2026-03-06 13:51:14,842 - __main__ - INFO - [Heartbeat] Epoch 17 batch 169/180 | loss 0.386735 | elapsed 120.7s | graphs 5408
+2026-03-06 13:51:22,514 - __main__ - INFO - Training phase complete (128.3s) | Running validation...
+2026-03-06 13:51:27,893 - __main__ - INFO - Losses | train 0.384106 | val 0.294135 | lr 2.50e-04 | time train=128.3s val=5.4s total=133.7s
+2026-03-06 13:51:27,893 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-06 13:52:28,324 - __main__ - INFO - [Heartbeat] Epoch 18 batch 86/180 | loss 0.374457 | elapsed 60.4s | graphs 2752
+2026-03-06 13:53:28,661 - __main__ - INFO - [Heartbeat] Epoch 18 batch 170/180 | loss 0.394843 | elapsed 120.8s | graphs 5440
+2026-03-06 13:53:36,031 - __main__ - INFO - Training phase complete (128.1s) | Running validation...
+2026-03-06 13:53:41,504 - __main__ - INFO - Losses | train 0.391860 | val 0.395461 | lr 2.50e-04 | time train=128.1s val=5.5s total=133.6s
+2026-03-06 13:53:41,504 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-06 13:54:41,620 - __main__ - INFO - [Heartbeat] Epoch 19 batch 83/180 | loss 0.349363 | elapsed 60.1s | graphs 2656
+2026-03-06 13:55:41,955 - __main__ - INFO - [Heartbeat] Epoch 19 batch 169/180 | loss 0.364081 | elapsed 120.5s | graphs 5408
+2026-03-06 13:55:50,099 - __main__ - INFO - Training phase complete (128.6s) | Running validation...
+2026-03-06 13:55:55,453 - __main__ - INFO - Losses | train 0.364424 | val 0.401540 | lr 2.50e-04 | time train=128.6s val=5.4s total=133.9s
+2026-03-06 13:55:55,453 - __main__ - INFO - Early stopping at epoch 019 | best val 0.140327 | patience exhausted (15/15)
+2026-03-06 13:56:08,615 - __main__ - INFO - Final test loss: 0.127392
+2026-03-06 14:06:26,713 - __main__ - INFO - Starting data generation...
+2026-03-06 14:06:26,760 - __main__ - INFO - Generated 40000 circuit configurations
+2026-03-06 14:06:38,643 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-06 14:06:53,178 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-06 14:06:53,294 - distributed.scheduler - INFO - State start
+2026-03-06 14:06:53,296 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:40973
+2026-03-06 14:06:53,296 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-06 14:06:53,296 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-06 14:06:53,302 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:33757'
+2026-03-06 14:06:53,305 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:39083'
+2026-03-06 14:06:53,306 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:45101'
+2026-03-06 14:06:53,308 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:40297'
+2026-03-06 14:07:03,477 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:34807 name: 2
+2026-03-06 14:07:03,485 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:34807
+2026-03-06 14:07:03,485 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:54728
+2026-03-06 14:07:03,485 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:43979 name: 3
+2026-03-06 14:07:03,485 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:43979
+2026-03-06 14:07:03,485 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:54712
+2026-03-06 14:07:03,486 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:36727 name: 0
+2026-03-06 14:07:03,486 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:36727
+2026-03-06 14:07:03,486 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:54710
+2026-03-06 14:07:03,486 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:43491 name: 1
+2026-03-06 14:07:03,486 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:43491
+2026-03-06 14:07:03,486 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:54734
+2026-03-06 14:07:03,555 - distributed.scheduler - INFO - Receive client connection: Client-ce83e903-19a8-11f1-bd32-8c3b4adbe4af
+2026-03-06 14:07:03,555 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:54740
+2026-03-06 14:07:03,555 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-06 14:07:03,555 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-06 14:07:03,556 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-06 14:07:03,556 - __main__ - INFO - Workers connected: 4
+2026-03-06 16:56:32,927 - distributed.scheduler - INFO - Remove client Client-ce83e903-19a8-11f1-bd32-8c3b4adbe4af
+2026-03-06 16:56:32,968 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:54740; closing.
+2026-03-06 16:56:32,968 - distributed.scheduler - INFO - Remove client Client-ce83e903-19a8-11f1-bd32-8c3b4adbe4af
+2026-03-06 16:56:32,968 - distributed.scheduler - INFO - Close client connection: Client-ce83e903-19a8-11f1-bd32-8c3b4adbe4af
+2026-03-06 16:56:32,969 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772844992.9693568') (0, 1, 2, 3)
+2026-03-06 16:56:32,969 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:33757'. Reason: nanny-close
+2026-03-06 16:56:32,969 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 16:56:32,969 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:39083'. Reason: nanny-close
+2026-03-06 16:56:32,969 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 16:56:32,970 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:45101'. Reason: nanny-close
+2026-03-06 16:56:32,970 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 16:56:32,970 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:40297'. Reason: nanny-close
+2026-03-06 16:56:32,970 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-06 16:56:32,971 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:54710; closing.
+2026-03-06 16:56:32,971 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:54734; closing.
+2026-03-06 16:56:32,971 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:36727 name: 0 (stimulus_id='handle-worker-cleanup-1772844992.9717464')
+2026-03-06 16:56:32,971 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:43491 name: 1 (stimulus_id='handle-worker-cleanup-1772844992.9719162')
+2026-03-06 16:56:32,972 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:54728; closing.
+2026-03-06 16:56:32,972 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:34807 name: 2 (stimulus_id='handle-worker-cleanup-1772844992.972417')
+2026-03-06 16:56:32,973 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:54712; closing.
+2026-03-06 16:56:32,973 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:43979 name: 3 (stimulus_id='handle-worker-cleanup-1772844992.973456')
+2026-03-06 16:56:32,973 - distributed.scheduler - INFO - Lost all workers
+2026-03-06 16:56:36,970 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-06 16:56:36,970 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-06 16:56:36,970 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-06 16:56:36,970 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-06 16:56:36,988 - distributed.nanny - INFO - Worker process 539985 was killed by signal 9
+2026-03-06 16:56:36,989 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:40297' closed.
+2026-03-06 16:56:37,005 - distributed.nanny - INFO - Worker process 539976 was killed by signal 9
+2026-03-06 16:56:37,006 - distributed.nanny - INFO - Worker process 539974 was killed by signal 9
+2026-03-06 16:56:37,006 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:33757' closed.
+2026-03-06 16:56:37,006 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:39083' closed.
+2026-03-06 16:56:37,016 - distributed.nanny - INFO - Worker process 539983 was killed by signal 9
+2026-03-06 16:56:37,016 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:45101' closed.
+2026-03-06 16:56:37,017 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-06 16:56:37,017 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-06 16:56:37,017 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-06 16:56:37,064 - __main__ - INFO - Wrote metadata to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht/metadata_quansistor.json
+2026-03-06 16:56:37,065 - __main__ - INFO - Wrote index to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht/index_quansistor.jsonl
+2026-03-06 16:56:37,065 - __main__ - INFO - Samples saved under /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht

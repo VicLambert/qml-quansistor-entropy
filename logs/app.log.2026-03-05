@@ -1,0 +1,1202 @@
+2026-03-04 09:52:02,501 - distributed.core - INFO - Event loop was unresponsive in Nanny for 56139.07s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:03,302 - distributed.core - INFO - Event loop was unresponsive in Scheduler for 56139.86s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:03,304 - distributed.core - INFO - Event loop was unresponsive in Nanny for 56139.86s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:03,305 - distributed.core - INFO - Event loop was unresponsive in Nanny for 56139.86s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:03,307 - distributed.core - INFO - Event loop was unresponsive in Nanny for 56139.86s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:07,051 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57540'. Reason: nanny-close
+2026-03-04 09:52:07,056 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57536'. Reason: nanny-close
+2026-03-04 09:52:07,059 - distributed.scheduler - WARNING - Worker failed to heartbeat for 56144s; attempting restart: <WorkerState 'tcp://127.0.0.1:59013', name: 0, status: running, memory: 1, processing: 2>
+2026-03-04 09:52:07,060 - distributed.scheduler - WARNING - Worker failed to heartbeat for 56144s; attempting restart: <WorkerState 'tcp://127.0.0.1:59019', name: 2, status: running, memory: 0, processing: 2>
+2026-03-04 09:52:07,061 - distributed.scheduler - INFO - Restarting 2 workers: ['tcp://127.0.0.1:59019', 'tcp://127.0.0.1:59013'] (stimulus_id='check-worker-ttl-1772635927.0595124'
+2026-03-04 09:52:07,066 - distributed.core - INFO - Event loop was unresponsive in Nanny for 4.56s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:07,067 - distributed.core - INFO - Event loop was unresponsive in Scheduler for 3.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:07,068 - distributed.core - INFO - Event loop was unresponsive in Nanny for 3.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:07,070 - distributed.core - INFO - Event loop was unresponsive in Nanny for 3.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:07,070 - distributed.core - INFO - Event loop was unresponsive in Nanny for 3.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-04 09:52:07,543 - distributed.nanny - INFO - Nanny asking worker to close. Reason: check-worker-ttl-1772635927.0595124
+2026-03-04 09:52:07,550 - distributed.nanny - INFO - Nanny asking worker to close. Reason: check-worker-ttl-1772635927.0595124
+2026-03-04 09:52:08,792 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59021; closing.
+2026-03-04 09:52:08,794 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59018; closing.
+2026-03-04 09:52:09,451 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59019 name: 2 (stimulus_id='handle-worker-cleanup-1772635929.4511807')
+2026-03-04 09:52:09,455 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59013 name: 0 (stimulus_id='handle-worker-cleanup-1772635929.4551997')
+2026-03-04 09:52:09,459 - distributed.scheduler - WARNING - Removing worker 'tcp://127.0.0.1:59013' caused the cluster to lose already computed task(s), which will be recomputed elsewhere: {'compute_entry_for_config-f675e062-2836-4e62-86c0-75808f7c7162'} (stimulus_id='handle-worker-cleanup-1772635929.4551997')
+2026-03-04 09:52:09,462 - distributed.scheduler - INFO - Lost all workers
+2026-03-04 09:52:11,554 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-04 09:52:11,569 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-04 09:52:11,764 - distributed.nanny - INFO - Worker process 32916 was killed by signal 15
+2026-03-04 09:52:11,765 - distributed.nanny - INFO - Worker process 37064 was killed by signal 15
+2026-03-04 09:52:11,840 - distributed.nanny - WARNING - Restarting worker
+2026-03-04 09:52:11,870 - distributed.nanny - WARNING - Restarting worker
+2026-03-04 09:52:11,886 - distributed.scheduler - INFO - Workers restart finished (did not wait for new workers) (stimulus_id='check-worker-ttl-1772635927.0595124'
+2026-03-04 09:52:24,781 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57538'. Reason: nanny-close
+2026-03-04 09:52:24,784 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57534'. Reason: nanny-close
+2026-03-04 09:52:45,681 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:58854 name: 3
+2026-03-04 09:52:45,713 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:58854
+2026-03-04 09:52:45,716 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62569
+2026-03-04 09:52:46,350 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62570 name: 1
+2026-03-04 09:52:46,389 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62570
+2026-03-04 09:52:46,431 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62572
+2026-03-04 09:52:46,612 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 09:52:46,622 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 09:52:46,714 - distributed.core - INFO - Connection to tcp://127.0.0.1:62572 has been closed.
+2026-03-04 09:52:46,716 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62570 name: 1 (stimulus_id='handle-worker-cleanup-1772635966.715919')
+2026-03-04 09:52:46,836 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62569; closing.
+2026-03-04 09:52:46,839 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:58854 name: 3 (stimulus_id='handle-worker-cleanup-1772635966.839703')
+2026-03-04 09:52:46,842 - distributed.scheduler - INFO - Lost all workers
+2026-03-04 09:52:50,632 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-04 09:52:50,744 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-04 09:52:50,983 - distributed.nanny - INFO - Worker process 11652 was killed by signal 15
+2026-03-04 09:52:50,993 - distributed.nanny - INFO - Worker process 39372 was killed by signal 15
+2026-03-04 09:52:58,508 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:59912 name: 2
+2026-03-04 09:52:58,512 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:59912
+2026-03-04 09:52:58,520 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59914
+2026-03-04 09:52:58,565 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 09:52:58,635 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59914; closing.
+2026-03-04 09:52:58,639 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59912 name: 2 (stimulus_id='handle-worker-cleanup-1772635978.6397321')
+2026-03-04 09:52:58,681 - distributed.scheduler - ERROR - Task compute_entry_for_config-59234c46-46b3-4a41-ac0e-f0a03236b4f5 marked as failed because 4 workers died while trying to run it
+2026-03-04 09:52:58,692 - distributed.scheduler - ERROR - Task compute_entry_for_config-b111a3f1-bd55-4662-8e47-9f3a6c6ff078 marked as failed because 4 workers died while trying to run it
+2026-03-04 09:52:58,696 - distributed.scheduler - INFO - Lost all workers
+2026-03-04 09:52:58,957 - __main__ - ERROR - Failed row 2778 (haar_Q10_L71_S2861364775): Attempted to run task 'compute_entry_for_config-59234c46-46b3-4a41-ac0e-f0a03236b4f5' on 4 different workers, but all those workers died while running it. The last worker that attempt to run the task was tcp://127.0.0.1:59912. Inspecting worker logs is often a good next step to diagnose what went wrong. For more information see https://distributed.dask.org/en/stable/killed.html.
+2026-03-04 09:52:59,147 - __main__ - ERROR - Failed row 2779 (haar_Q10_L71_S1392527932): Attempted to run task 'compute_entry_for_config-b111a3f1-bd55-4662-8e47-9f3a6c6ff078' on 4 different workers, but all those workers died while running it. The last worker that attempt to run the task was tcp://127.0.0.1:59912. Inspecting worker logs is often a good next step to diagnose what went wrong. For more information see https://distributed.dask.org/en/stable/killed.html.
+2026-03-04 09:53:00,730 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:59917 name: 0
+2026-03-04 09:53:00,731 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:59917
+2026-03-04 09:53:00,732 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59919
+2026-03-04 09:53:00,846 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 09:53:00,914 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59919; closing.
+2026-03-04 09:53:00,973 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59917 name: 0 (stimulus_id='handle-worker-cleanup-1772635980.9737632')
+2026-03-04 09:53:00,977 - distributed.scheduler - INFO - Lost all workers
+2026-03-04 09:53:02,594 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-04 09:53:02,774 - distributed.nanny - INFO - Worker process 11084 was killed by signal 15
+2026-03-04 09:53:04,861 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-04 09:53:05,051 - distributed.nanny - INFO - Worker process 33280 was killed by signal 15
+2026-03-04 09:54:41,640 - distributed.scheduler - INFO - Remove client Client-5651cb64-1751-11f1-af1c-d4f32d25dd97
+2026-03-04 09:54:41,751 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62730; closing.
+2026-03-04 09:54:41,756 - distributed.scheduler - INFO - Remove client Client-5651cb64-1751-11f1-af1c-d4f32d25dd97
+2026-03-04 09:54:41,833 - distributed.scheduler - INFO - Close client connection: Client-5651cb64-1751-11f1-af1c-d4f32d25dd97
+2026-03-04 10:53:24,967 - __main__ - INFO - Starting data generation...
+2026-03-04 10:53:24,975 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-04 10:53:25,396 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-04 10:53:25,977 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-04 10:53:26,008 - distributed.scheduler - INFO - State start
+2026-03-04 10:53:26,036 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:50762
+2026-03-04 10:53:26,036 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:50761/status
+2026-03-04 10:53:26,037 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-04 10:53:26,108 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:50767'
+2026-03-04 10:53:26,115 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:50769'
+2026-03-04 10:53:26,117 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:50771'
+2026-03-04 10:53:26,119 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:50765'
+2026-03-04 10:53:38,488 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64036 name: 2
+2026-03-04 10:53:38,535 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64036
+2026-03-04 10:53:38,536 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64041
+2026-03-04 10:53:38,537 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64037 name: 0
+2026-03-04 10:53:38,537 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64037
+2026-03-04 10:53:38,537 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64040
+2026-03-04 10:53:38,538 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64042 name: 1
+2026-03-04 10:53:38,539 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64042
+2026-03-04 10:53:38,539 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64045
+2026-03-04 10:53:38,540 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64043 name: 3
+2026-03-04 10:53:38,540 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64043
+2026-03-04 10:53:38,540 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64047
+2026-03-04 10:53:38,611 - distributed.scheduler - INFO - Receive client connection: Client-4f52828d-17e2-11f1-84b4-d4f32d25dd97
+2026-03-04 10:53:38,612 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64049
+2026-03-04 10:53:38,614 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-04 10:53:38,614 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:50761/status
+2026-03-04 10:53:38,615 - __main__ - INFO - Dask dashboard: http://127.0.0.1:50761/status
+2026-03-04 10:53:38,616 - __main__ - INFO - Workers connected: 4
+2026-03-04 11:04:36,903 - distributed.scheduler - INFO - Remove client Client-4f52828d-17e2-11f1-84b4-d4f32d25dd97
+2026-03-04 11:04:36,909 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64049; closing.
+2026-03-04 11:04:36,912 - distributed.scheduler - INFO - Remove client Client-4f52828d-17e2-11f1-84b4-d4f32d25dd97
+2026-03-04 11:04:36,913 - distributed.scheduler - INFO - Close client connection: Client-4f52828d-17e2-11f1-84b4-d4f32d25dd97
+2026-03-04 11:04:36,923 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772640276.9236343') (0, 1, 2, 3)
+2026-03-04 11:04:36,925 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:50765'. Reason: nanny-close
+2026-03-04 11:04:36,925 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 11:04:36,929 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:50767'. Reason: nanny-close
+2026-03-04 11:04:36,942 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 11:04:36,942 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:50769'. Reason: nanny-close
+2026-03-04 11:04:36,942 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 11:04:36,943 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:50771'. Reason: nanny-close
+2026-03-04 11:04:36,945 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-04 11:04:36,950 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64045; closing.
+2026-03-04 11:04:36,950 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64040; closing.
+2026-03-04 11:04:36,951 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64042 name: 1 (stimulus_id='handle-worker-cleanup-1772640276.9514396')
+2026-03-04 11:04:36,952 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64037 name: 0 (stimulus_id='handle-worker-cleanup-1772640276.9522362')
+2026-03-04 11:04:36,952 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64041; closing.
+2026-03-04 11:04:36,956 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64036 name: 2 (stimulus_id='handle-worker-cleanup-1772640276.9561908')
+2026-03-04 11:04:36,956 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64047; closing.
+2026-03-04 11:04:36,957 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64043 name: 3 (stimulus_id='handle-worker-cleanup-1772640276.957716')
+2026-03-04 11:04:36,958 - distributed.scheduler - INFO - Lost all workers
+2026-03-04 11:04:36,959 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:50762 remote=tcp://127.0.0.1:64041>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-04 11:04:36,987 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:50762 remote=tcp://127.0.0.1:64047>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:50762 remote=tcp://127.0.0.1:64047>: Stream is closed
+2026-03-04 11:04:39,854 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:50769' closed.
+2026-03-04 11:04:39,855 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:50767' closed.
+2026-03-04 11:04:39,856 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:50771' closed.
+2026-03-04 11:04:39,857 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:50765' closed.
+2026-03-04 11:04:39,859 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-04 11:04:39,861 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-04 11:04:39,878 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-04 11:04:39,887 - __main__ - INFO - Wrote metadata to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\metadata.json
+2026-03-04 11:04:39,888 - __main__ - INFO - Wrote index to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\index.jsonl
+2026-03-04 11:04:39,889 - __main__ - INFO - Samples saved under C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht
+2026-03-05 09:23:19,358 - __main__ - INFO - Starting data generation...
+2026-03-05 09:23:19,367 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 09:23:19,813 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 09:23:21,703 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 09:23:21,731 - distributed.scheduler - INFO - State start
+2026-03-05 09:23:21,755 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:62085
+2026-03-05 09:23:21,756 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 09:23:21,756 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 09:23:21,833 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62091'
+2026-03-05 09:23:21,837 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62089'
+2026-03-05 09:23:21,839 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62095'
+2026-03-05 09:23:21,840 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62093'
+2026-03-05 09:23:29,593 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62109 name: 0
+2026-03-05 09:23:29,614 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62109
+2026-03-05 09:23:29,615 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62111
+2026-03-05 09:23:29,615 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62112 name: 3
+2026-03-05 09:23:29,615 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62112
+2026-03-05 09:23:29,615 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62114
+2026-03-05 09:23:29,650 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62115 name: 1
+2026-03-05 09:23:29,650 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62115
+2026-03-05 09:23:29,650 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62117
+2026-03-05 09:23:29,768 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62118 name: 2
+2026-03-05 09:23:29,768 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62118
+2026-03-05 09:23:29,769 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62120
+2026-03-05 09:23:29,782 - distributed.scheduler - INFO - Receive client connection: Client-e1d2695c-189e-11f1-b988-fcb0de6e8d72
+2026-03-05 09:23:29,783 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62121
+2026-03-05 09:23:29,783 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 09:23:29,783 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 09:23:29,785 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 09:23:29,785 - __main__ - INFO - Workers connected: 4
+2026-03-05 09:35:01,409 - distributed.scheduler - INFO - Remove client Client-e1d2695c-189e-11f1-b988-fcb0de6e8d72
+2026-03-05 09:35:01,410 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62121; closing.
+2026-03-05 09:35:01,410 - distributed.scheduler - INFO - Remove client Client-e1d2695c-189e-11f1-b988-fcb0de6e8d72
+2026-03-05 09:35:01,411 - distributed.scheduler - INFO - Close client connection: Client-e1d2695c-189e-11f1-b988-fcb0de6e8d72
+2026-03-05 09:35:01,412 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772721301.413302') (0, 1, 2, 3)
+2026-03-05 09:35:01,413 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62089'. Reason: nanny-close
+2026-03-05 09:35:01,414 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 09:35:01,414 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62091'. Reason: nanny-close
+2026-03-05 09:35:01,415 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 09:35:01,415 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62093'. Reason: nanny-close
+2026-03-05 09:35:01,415 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 09:35:01,415 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62095'. Reason: nanny-close
+2026-03-05 09:35:01,416 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 09:35:01,416 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62111; closing.
+2026-03-05 09:35:01,417 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62109 name: 0 (stimulus_id='handle-worker-cleanup-1772721301.41793')
+2026-03-05 09:35:01,419 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62117; closing.
+2026-03-05 09:35:01,421 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62115 name: 1 (stimulus_id='handle-worker-cleanup-1772721301.4217732')
+2026-03-05 09:35:01,421 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62120; closing.
+2026-03-05 09:35:01,422 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62118 name: 2 (stimulus_id='handle-worker-cleanup-1772721301.423358')
+2026-03-05 09:35:01,423 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:62085 remote=tcp://127.0.0.1:62117>
+Traceback (most recent call last):
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 09:35:01,425 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:62085 remote=tcp://127.0.0.1:62120>
+Traceback (most recent call last):
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+  File "C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:62085 remote=tcp://127.0.0.1:62120>: Stream is closed
+2026-03-05 09:35:01,426 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62114; closing.
+2026-03-05 09:35:01,426 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62112 name: 3 (stimulus_id='handle-worker-cleanup-1772721301.4272425')
+2026-03-05 09:35:01,426 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 09:35:03,500 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62089' closed.
+2026-03-05 09:35:03,501 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62091' closed.
+2026-03-05 09:35:03,501 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62093' closed.
+2026-03-05 09:35:03,514 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62095' closed.
+2026-03-05 09:35:03,515 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 09:35:03,516 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 09:35:03,519 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-05 09:35:03,522 - __main__ - INFO - Wrote metadata to C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\metadata.json
+2026-03-05 09:35:03,522 - __main__ - INFO - Wrote index to C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\index.jsonl
+2026-03-05 09:35:03,522 - __main__ - INFO - Samples saved under C:\Users\Victor\Desktop\Universit�\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht
+2026-03-05 15:00:26,951 - __main__ - INFO - Starting data generation...
+2026-03-05 15:00:26,964 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 15:00:27,858 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 15:00:29,024 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 15:00:29,087 - distributed.scheduler - INFO - State start
+2026-03-05 15:00:29,129 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:52972
+2026-03-05 15:00:29,130 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 15:00:29,130 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 15:00:29,256 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:52981'
+2026-03-05 15:00:29,263 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:52975'
+2026-03-05 15:00:29,269 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:52979'
+2026-03-05 15:00:29,278 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:52977'
+2026-03-05 15:00:46,601 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:60647 name: 2
+2026-03-05 15:00:46,659 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:60647
+2026-03-05 15:00:46,659 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:60652
+2026-03-05 15:00:46,660 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:60646 name: 1
+2026-03-05 15:00:46,661 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:60646
+2026-03-05 15:00:46,662 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:60653
+2026-03-05 15:00:46,663 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:60645 name: 3
+2026-03-05 15:00:46,664 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:60645
+2026-03-05 15:00:46,664 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:60651
+2026-03-05 15:00:46,666 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:60654 name: 0
+2026-03-05 15:00:46,666 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:60654
+2026-03-05 15:00:46,667 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:60656
+2026-03-05 15:00:46,732 - distributed.scheduler - INFO - Receive client connection: Client-fffaa8c5-18cd-11f1-9168-d4f32d25dd97
+2026-03-05 15:00:46,733 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:60657
+2026-03-05 15:00:46,734 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 15:00:46,735 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 15:00:46,738 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 15:00:46,740 - __main__ - INFO - Workers connected: 4
+2026-03-05 15:12:47,865 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:52977'. Reason: worker-close
+2026-03-05 15:12:47,886 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:52979'. Reason: worker-close
+2026-03-05 15:12:47,892 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:60653; closing.
+2026-03-05 15:12:47,897 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:60646 name: 1 (stimulus_id='handle-worker-cleanup-1772741567.8964183')
+2026-03-05 15:12:47,903 - distributed.scheduler - WARNING - Removing worker 'tcp://127.0.0.1:60646' caused the cluster to lose already computed task(s), which will be recomputed elsewhere: {'compute_entry_for_config-c5028f22-07a9-4159-92f2-9269c321b5f9'} (stimulus_id='handle-worker-cleanup-1772741567.8964183')
+2026-03-05 15:12:47,911 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:60652; closing.
+2026-03-05 15:12:47,913 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:60647 name: 2 (stimulus_id='handle-worker-cleanup-1772741567.913447')
+2026-03-05 15:12:47,921 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:52975'. Reason: worker-close
+2026-03-05 15:12:47,937 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:60656; closing.
+2026-03-05 15:12:47,939 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:52981'. Reason: worker-close
+2026-03-05 15:12:47,941 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:60654 name: 0 (stimulus_id='handle-worker-cleanup-1772741567.9409263')
+2026-03-05 15:12:47,949 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:60651; closing.
+2026-03-05 15:12:47,950 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:60645 name: 3 (stimulus_id='handle-worker-cleanup-1772741567.9506772')
+2026-03-05 15:12:47,951 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 15:12:47,953 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:52972 remote=tcp://127.0.0.1:60651>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 15:12:48,059 - distributed.scheduler - INFO - Remove client Client-fffaa8c5-18cd-11f1-9168-d4f32d25dd97
+2026-03-05 15:12:48,061 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:60657; closing.
+2026-03-05 15:12:48,062 - distributed.scheduler - INFO - Remove client Client-fffaa8c5-18cd-11f1-9168-d4f32d25dd97
+2026-03-05 15:12:48,067 - distributed.scheduler - INFO - Close client connection: Client-fffaa8c5-18cd-11f1-9168-d4f32d25dd97
+2026-03-05 15:12:48,076 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772741568.075358') (0, 1, 2, 3)
+2026-03-05 15:12:48,079 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:52975'. Reason: nanny-close
+2026-03-05 15:12:48,083 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:12:48,088 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:52977'. Reason: nanny-close
+2026-03-05 15:12:48,126 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:12:48,128 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:52979'. Reason: nanny-close
+2026-03-05 15:12:48,131 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:12:48,132 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:52981'. Reason: nanny-close
+2026-03-05 15:12:48,135 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:12:51,592 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:52979' closed.
+2026-03-05 15:12:51,594 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:52981' closed.
+2026-03-05 15:12:51,611 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:52975' closed.
+2026-03-05 15:12:51,623 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:52977' closed.
+2026-03-05 15:12:51,641 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 15:12:51,774 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 15:17:31,523 - __main__ - INFO - Starting data generation...
+2026-03-05 15:17:31,540 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 15:17:32,461 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 15:17:34,268 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 15:17:34,366 - distributed.scheduler - INFO - State start
+2026-03-05 15:17:34,438 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:54118
+2026-03-05 15:17:34,439 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 15:17:34,441 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 15:17:34,675 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54123'
+2026-03-05 15:17:34,683 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54125'
+2026-03-05 15:17:34,690 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54121'
+2026-03-05 15:17:34,696 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54127'
+2026-03-05 15:17:55,039 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61539 name: 3
+2026-03-05 15:17:55,114 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61539
+2026-03-05 15:17:55,115 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61541
+2026-03-05 15:17:55,119 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61542 name: 1
+2026-03-05 15:17:55,120 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61542
+2026-03-05 15:17:55,120 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61544
+2026-03-05 15:17:55,198 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61550 name: 2
+2026-03-05 15:17:55,200 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61550
+2026-03-05 15:17:55,200 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61554
+2026-03-05 15:17:55,202 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61549 name: 0
+2026-03-05 15:17:55,203 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61549
+2026-03-05 15:17:55,204 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61553
+2026-03-05 15:17:55,249 - distributed.scheduler - INFO - Receive client connection: Client-650586c5-18d0-11f1-a0f0-d4f32d25dd97
+2026-03-05 15:17:55,251 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61555
+2026-03-05 15:17:55,253 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 15:17:55,254 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 15:17:55,259 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 15:17:55,261 - __main__ - INFO - Workers connected: 4
+2026-03-05 15:56:49,284 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54127'. Reason: worker-close
+2026-03-05 15:56:49,289 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61541; closing.
+2026-03-05 15:56:49,290 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61539 name: 3 (stimulus_id='handle-worker-cleanup-1772744209.290435')
+2026-03-05 15:56:49,328 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54121'. Reason: worker-close
+2026-03-05 15:56:49,329 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54123'. Reason: worker-close
+2026-03-05 15:56:49,330 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54125'. Reason: worker-close
+2026-03-05 15:56:49,338 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61553; closing.
+2026-03-05 15:56:49,339 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61554; closing.
+2026-03-05 15:56:49,340 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61544; closing.
+2026-03-05 15:56:49,341 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61549 name: 0 (stimulus_id='handle-worker-cleanup-1772744209.341017')
+2026-03-05 15:56:49,342 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61550 name: 2 (stimulus_id='handle-worker-cleanup-1772744209.342113')
+2026-03-05 15:56:49,342 - distributed.scheduler - WARNING - Removing worker 'tcp://127.0.0.1:61550' caused the cluster to lose already computed task(s), which will be recomputed elsewhere: {'compute_entry_for_config-b4d5682d-1b51-4648-b96c-3ec128af2cbc'} (stimulus_id='handle-worker-cleanup-1772744209.342113')
+2026-03-05 15:56:49,343 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61542 name: 1 (stimulus_id='handle-worker-cleanup-1772744209.343882')
+2026-03-05 15:56:49,344 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 15:56:49,346 - distributed.scheduler - INFO - Remove client Client-650586c5-18d0-11f1-a0f0-d4f32d25dd97
+2026-03-05 15:56:49,349 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61555; closing.
+2026-03-05 15:56:49,350 - distributed.scheduler - INFO - Remove client Client-650586c5-18d0-11f1-a0f0-d4f32d25dd97
+2026-03-05 15:56:49,356 - distributed.scheduler - INFO - Close client connection: Client-650586c5-18d0-11f1-a0f0-d4f32d25dd97
+2026-03-05 15:56:49,360 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772744209.3605242') (0, 1, 2, 3)
+2026-03-05 15:56:49,362 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54121'. Reason: nanny-close
+2026-03-05 15:56:49,363 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:56:49,364 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54123'. Reason: nanny-close
+2026-03-05 15:56:49,366 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:56:49,367 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54125'. Reason: nanny-close
+2026-03-05 15:56:49,368 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:56:49,369 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54127'. Reason: nanny-close
+2026-03-05 15:56:49,371 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 15:56:53,378 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 15:56:53,394 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 15:56:53,400 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 15:56:53,411 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 15:56:53,619 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54121' closed.
+2026-03-05 15:56:53,624 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54127' closed.
+2026-03-05 15:56:53,633 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54123' closed.
+2026-03-05 15:56:53,641 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54125' closed.
+2026-03-05 15:56:53,643 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 15:56:53,644 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 15:57:35,851 - __main__ - INFO - Starting data generation...
+2026-03-05 15:57:35,876 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 15:57:37,087 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 15:57:38,796 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 15:57:38,893 - distributed.scheduler - INFO - State start
+2026-03-05 15:57:38,955 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:62028
+2026-03-05 15:57:38,956 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 15:57:38,957 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 15:57:39,173 - tornado.application - ERROR - Uncaught exception GET /status/ws (127.0.0.1)
+HTTPServerRequest(protocol='http', host='127.0.0.1:8787', method='GET', uri='/status/ws', version='HTTP/1.1', remote_ip='127.0.0.1')
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\websocket.py", line 965, in _accept_connection
+    open_result = handler.open(*handler.open_args, **handler.open_kwargs)
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\web.py", line 3388, in wrapper
+    return method(self, *args, **kwargs)
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\bokeh\server\views\ws.py", line 149, in open
+    raise ProtocolError("Token is expired. Configure the app with a larger value for --session-token-expiration if necessary")
+bokeh.protocol.exceptions.ProtocolError: Token is expired. Configure the app with a larger value for --session-token-expiration if necessary
+2026-03-05 15:57:39,192 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62038'
+2026-03-05 15:57:39,201 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62032'
+2026-03-05 15:57:39,208 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62034'
+2026-03-05 15:57:39,212 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:62036'
+2026-03-05 15:58:00,111 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61171 name: 3
+2026-03-05 15:58:00,213 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61171
+2026-03-05 15:58:00,214 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61175
+2026-03-05 15:58:00,332 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61176 name: 2
+2026-03-05 15:58:00,334 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61176
+2026-03-05 15:58:00,335 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61178
+2026-03-05 15:58:00,340 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61183 name: 1
+2026-03-05 15:58:00,341 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61183
+2026-03-05 15:58:00,342 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61185
+2026-03-05 15:58:00,374 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61186 name: 0
+2026-03-05 15:58:00,375 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61186
+2026-03-05 15:58:00,376 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61188
+2026-03-05 15:58:00,477 - distributed.scheduler - INFO - Receive client connection: Client-fea2c938-18d5-11f1-a058-d4f32d25dd97
+2026-03-05 15:58:00,478 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61189
+2026-03-05 15:58:00,482 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 15:58:00,484 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 15:58:00,490 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 15:58:00,494 - __main__ - INFO - Workers connected: 4
+2026-03-05 16:11:13,423 - distributed.scheduler - INFO - Remove client Client-fea2c938-18d5-11f1-a058-d4f32d25dd97
+2026-03-05 16:11:13,424 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61189; closing.
+2026-03-05 16:11:13,425 - distributed.scheduler - INFO - Remove client Client-fea2c938-18d5-11f1-a058-d4f32d25dd97
+2026-03-05 16:11:13,426 - distributed.scheduler - INFO - Close client connection: Client-fea2c938-18d5-11f1-a058-d4f32d25dd97
+2026-03-05 16:11:13,431 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772745073.4309726') (0, 1, 2, 3)
+2026-03-05 16:11:13,432 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62032'. Reason: nanny-close
+2026-03-05 16:11:13,433 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:11:13,434 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62034'. Reason: nanny-close
+2026-03-05 16:11:13,436 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:11:13,437 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62036'. Reason: nanny-close
+2026-03-05 16:11:13,438 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:11:13,440 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:62038'. Reason: nanny-close
+2026-03-05 16:11:13,441 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:11:13,467 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61185; closing.
+2026-03-05 16:11:13,469 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61188; closing.
+2026-03-05 16:11:13,477 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61183 name: 1 (stimulus_id='handle-worker-cleanup-1772745073.477515')
+2026-03-05 16:11:13,479 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61186 name: 0 (stimulus_id='handle-worker-cleanup-1772745073.4797168')
+2026-03-05 16:11:13,503 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61175; closing.
+2026-03-05 16:11:13,508 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61178; closing.
+2026-03-05 16:11:13,512 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61171 name: 3 (stimulus_id='handle-worker-cleanup-1772745073.5123897')
+2026-03-05 16:11:13,514 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61176 name: 2 (stimulus_id='handle-worker-cleanup-1772745073.514442')
+2026-03-05 16:11:13,515 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 16:11:17,094 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62032' closed.
+2026-03-05 16:11:17,160 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62036' closed.
+2026-03-05 16:11:17,248 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62034' closed.
+2026-03-05 16:11:17,268 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:62038' closed.
+2026-03-05 16:11:17,273 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 16:11:17,276 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 16:11:17,283 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-05 16:11:17,291 - __main__ - INFO - Wrote metadata to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\metadata.json
+2026-03-05 16:11:17,293 - __main__ - INFO - Wrote index to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\index.jsonl
+2026-03-05 16:11:17,294 - __main__ - INFO - Samples saved under C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht
+2026-03-05 16:22:15,211 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:22:15,220 - __main__ - INFO - AMP device type: cpu
+2026-03-05 16:23:12,972 - __main__ - INFO - Starting data generation...
+2026-03-05 16:23:13,002 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 16:23:14,175 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 16:23:15,909 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 16:23:15,990 - distributed.scheduler - INFO - State start
+2026-03-05 16:23:16,053 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:57916
+2026-03-05 16:23:16,054 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 16:23:16,055 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 16:23:16,273 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57923'
+2026-03-05 16:23:16,283 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57919'
+2026-03-05 16:23:16,289 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57921'
+2026-03-05 16:23:16,298 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57925'
+2026-03-05 16:23:44,087 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57944 name: 2
+2026-03-05 16:23:44,156 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57944
+2026-03-05 16:23:44,156 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57947
+2026-03-05 16:23:44,159 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57952 name: 1
+2026-03-05 16:23:44,160 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57952
+2026-03-05 16:23:44,161 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57954
+2026-03-05 16:23:44,162 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57949 name: 3
+2026-03-05 16:23:44,164 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57949
+2026-03-05 16:23:44,164 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57951
+2026-03-05 16:23:44,167 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57943 name: 0
+2026-03-05 16:23:44,168 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57943
+2026-03-05 16:23:44,168 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57948
+2026-03-05 16:23:44,238 - distributed.scheduler - INFO - Receive client connection: Client-96cd4b47-18d9-11f1-af40-d4f32d25dd97
+2026-03-05 16:23:44,239 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57955
+2026-03-05 16:23:44,242 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 16:23:44,243 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 16:23:44,248 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 16:23:44,251 - __main__ - INFO - Workers connected: 4
+2026-03-05 16:30:28,122 - distributed.scheduler - INFO - Remove client Client-96cd4b47-18d9-11f1-af40-d4f32d25dd97
+2026-03-05 16:30:28,124 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57955; closing.
+2026-03-05 16:30:28,125 - distributed.scheduler - INFO - Remove client Client-96cd4b47-18d9-11f1-af40-d4f32d25dd97
+2026-03-05 16:30:28,126 - distributed.scheduler - INFO - Close client connection: Client-96cd4b47-18d9-11f1-af40-d4f32d25dd97
+2026-03-05 16:30:28,132 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772746228.1319523') (0, 1, 2, 3)
+2026-03-05 16:30:28,134 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57919'. Reason: nanny-close
+2026-03-05 16:30:28,135 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:30:28,136 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57921'. Reason: nanny-close
+2026-03-05 16:30:28,139 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:30:28,140 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57923'. Reason: nanny-close
+2026-03-05 16:30:28,144 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:30:28,145 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57925'. Reason: nanny-close
+2026-03-05 16:30:28,147 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 16:30:28,155 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57954; closing.
+2026-03-05 16:30:28,158 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57948; closing.
+2026-03-05 16:30:28,162 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57952 name: 1 (stimulus_id='handle-worker-cleanup-1772746228.1621766')
+2026-03-05 16:30:28,166 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57943 name: 0 (stimulus_id='handle-worker-cleanup-1772746228.1660175')
+2026-03-05 16:30:28,169 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57947; closing.
+2026-03-05 16:30:28,176 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57944 name: 2 (stimulus_id='handle-worker-cleanup-1772746228.1767309')
+2026-03-05 16:30:28,182 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57951; closing.
+2026-03-05 16:30:28,184 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:57916 remote=tcp://127.0.0.1:57947>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 16:30:28,200 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57949 name: 3 (stimulus_id='handle-worker-cleanup-1772746228.2003324')
+2026-03-05 16:30:28,203 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 16:30:31,346 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57921' closed.
+2026-03-05 16:30:31,347 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57925' closed.
+2026-03-05 16:30:31,348 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57923' closed.
+2026-03-05 16:30:31,353 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57919' closed.
+2026-03-05 16:30:31,355 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 16:30:31,357 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 16:30:31,367 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-05 16:30:31,389 - __main__ - INFO - Wrote metadata to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\metadata.json
+2026-03-05 16:30:31,391 - __main__ - INFO - Wrote index to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht\index.jsonl
+2026-03-05 16:30:31,392 - __main__ - INFO - Samples saved under C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_quimb_fwht
+2026-03-05 16:32:07,261 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:32:07,265 - __main__ - INFO - AMP device type: cpu
+2026-03-05 16:33:31,830 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:33:31,833 - __main__ - INFO - AMP device type: cpu
+2026-03-05 16:34:27,020 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:34:27,023 - __main__ - INFO - AMP device type: cpu
+2026-03-05 16:35:12,927 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:35:13,058 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 16:37:08,829 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:37:08,967 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 16:46:03,661 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:46:12,980 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 16:48:25,079 - __main__ - INFO - Starting GNN training...
+2026-03-05 16:48:31,224 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 18:41:04,884 - __main__ - INFO - Starting data generation...
+2026-03-05 18:44:09,424 - __main__ - INFO - Starting data generation...
+2026-03-05 18:45:01,994 - __main__ - INFO - Starting data generation...
+2026-03-05 18:47:37,523 - __main__ - INFO - Starting data generation...
+2026-03-05 18:47:37,541 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 18:47:38,860 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 4 workers, 1 cores per worker.
+2026-03-05 18:48:59,468 - __main__ - INFO - Starting data generation...
+2026-03-05 18:48:59,486 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 18:49:00,718 - qqe.parallel.dask - INFO - Creating SLURM Dask cluster with 4 workers, 1 cores per worker.
+2026-03-05 18:49:52,645 - __main__ - INFO - Starting data generation...
+2026-03-05 18:49:52,664 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 18:49:53,799 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 18:49:55,306 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 18:49:55,650 - distributed.scheduler - INFO - State start
+2026-03-05 18:49:55,711 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:63809
+2026-03-05 18:49:55,712 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 18:49:55,713 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 18:49:55,880 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:63812'
+2026-03-05 18:49:55,893 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:63818'
+2026-03-05 18:49:55,905 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:63816'
+2026-03-05 18:49:55,912 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:63814'
+2026-03-05 18:50:22,757 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62576 name: 3
+2026-03-05 18:50:22,779 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62576
+2026-03-05 18:50:22,779 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62580
+2026-03-05 18:50:22,782 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62574 name: 2
+2026-03-05 18:50:22,782 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62574
+2026-03-05 18:50:22,783 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62581
+2026-03-05 18:50:22,784 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62583 name: 1
+2026-03-05 18:50:22,784 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62583
+2026-03-05 18:50:22,785 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62585
+2026-03-05 18:50:22,786 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:62575 name: 0
+2026-03-05 18:50:22,789 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:62575
+2026-03-05 18:50:22,789 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62582
+2026-03-05 18:50:22,847 - distributed.scheduler - INFO - Receive client connection: Client-132f9919-18ee-11f1-83f8-d4f32d25dd97
+2026-03-05 18:50:22,848 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:62586
+2026-03-05 18:50:22,850 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 18:50:22,852 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 18:50:22,854 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 18:50:22,856 - __main__ - INFO - Workers connected: 4
+2026-03-05 18:50:43,987 - distributed.scheduler - INFO - Remove client Client-132f9919-18ee-11f1-83f8-d4f32d25dd97
+2026-03-05 18:50:43,989 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:62586; closing.
+2026-03-05 18:50:43,991 - distributed.scheduler - INFO - Remove client Client-132f9919-18ee-11f1-83f8-d4f32d25dd97
+2026-03-05 18:50:43,993 - distributed.scheduler - INFO - Close client connection: Client-132f9919-18ee-11f1-83f8-d4f32d25dd97
+2026-03-05 18:50:44,000 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772754644.000494') (0, 1, 2, 3)
+2026-03-05 18:50:44,008 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:63812'. Reason: nanny-close
+2026-03-05 18:50:44,010 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:50:44,011 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:63814'. Reason: nanny-close
+2026-03-05 18:50:44,018 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:50:44,019 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:63816'. Reason: nanny-close
+2026-03-05 18:50:44,021 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:50:44,024 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:63818'. Reason: nanny-close
+2026-03-05 18:50:44,029 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:50:44,677 - distributed.core - INFO - Connection to tcp://127.0.0.1:62582 has been closed.
+2026-03-05 18:50:44,689 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62575 name: 0 (stimulus_id='handle-worker-cleanup-1772754644.6892655')
+2026-03-05 18:50:44,693 - distributed.core - INFO - Connection to tcp://127.0.0.1:62580 has been closed.
+2026-03-05 18:50:44,694 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62576 name: 3 (stimulus_id='handle-worker-cleanup-1772754644.6941082')
+2026-03-05 18:50:44,695 - distributed.core - INFO - Connection to tcp://127.0.0.1:62581 has been closed.
+2026-03-05 18:50:44,696 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62574 name: 2 (stimulus_id='handle-worker-cleanup-1772754644.695964')
+2026-03-05 18:50:44,697 - distributed.core - INFO - Connection to tcp://127.0.0.1:62585 has been closed.
+2026-03-05 18:50:44,697 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:62583 name: 1 (stimulus_id='handle-worker-cleanup-1772754644.6973312')
+2026-03-05 18:50:44,699 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 18:50:44,700 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:63809 remote=tcp://127.0.0.1:62581>
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:63809 remote=tcp://127.0.0.1:62581>: Stream is closed
+2026-03-05 18:50:44,712 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:63809 remote=tcp://127.0.0.1:62580>
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:63809 remote=tcp://127.0.0.1:62580>: Stream is closed
+2026-03-05 18:50:44,763 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:63809 remote=tcp://127.0.0.1:62585>
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "c:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:63809 remote=tcp://127.0.0.1:62585>: Stream is closed
+2026-03-05 18:50:44,804 - distributed.scheduler - WARNING - Received heartbeat from unregistered worker 'tcp://127.0.0.1:62576'.
+2026-03-05 18:50:44,809 - distributed.scheduler - WARNING - Received heartbeat from unregistered worker 'tcp://127.0.0.1:62583'.
+2026-03-05 18:50:44,810 - distributed.scheduler - WARNING - Received heartbeat from unregistered worker 'tcp://127.0.0.1:62575'.
+2026-03-05 18:50:44,811 - distributed.scheduler - WARNING - Received heartbeat from unregistered worker 'tcp://127.0.0.1:62574'.
+2026-03-05 18:50:48,013 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:50:48,028 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:50:48,029 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:50:48,031 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:50:48,164 - distributed.nanny - INFO - Worker process 38724 was killed by signal 15
+2026-03-05 18:50:48,167 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:63812' closed.
+2026-03-05 18:50:48,184 - distributed.nanny - INFO - Worker process 24396 was killed by signal 15
+2026-03-05 18:50:48,185 - distributed.nanny - INFO - Worker process 44488 was killed by signal 15
+2026-03-05 18:50:48,188 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:63814' closed.
+2026-03-05 18:50:48,189 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:63816' closed.
+2026-03-05 18:50:48,189 - distributed.nanny - INFO - Worker process 35508 was killed by signal 15
+2026-03-05 18:50:48,191 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:63818' closed.
+2026-03-05 18:50:48,192 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 18:50:48,194 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 18:51:28,793 - __main__ - INFO - Starting data generation...
+2026-03-05 18:51:28,804 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 18:51:29,261 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 18:51:30,179 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 18:51:30,249 - distributed.scheduler - INFO - State start
+2026-03-05 18:51:30,296 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:64199
+2026-03-05 18:51:30,297 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 18:51:30,298 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 18:51:30,460 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54684'
+2026-03-05 18:51:30,465 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54680'
+2026-03-05 18:51:30,468 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54686'
+2026-03-05 18:51:30,471 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:54682'
+2026-03-05 18:51:53,734 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61108 name: 2
+2026-03-05 18:51:53,794 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61108
+2026-03-05 18:51:53,795 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61113
+2026-03-05 18:51:53,798 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61109 name: 1
+2026-03-05 18:51:53,798 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61109
+2026-03-05 18:51:53,799 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61112
+2026-03-05 18:51:53,899 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61116 name: 0
+2026-03-05 18:51:53,901 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61116
+2026-03-05 18:51:53,902 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61119
+2026-03-05 18:51:54,016 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61122 name: 3
+2026-03-05 18:51:54,017 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61122
+2026-03-05 18:51:54,018 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61124
+2026-03-05 18:51:54,092 - distributed.scheduler - INFO - Receive client connection: Client-499175fb-18ee-11f1-a29c-d4f32d25dd97
+2026-03-05 18:51:54,093 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61125
+2026-03-05 18:51:54,095 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 18:51:54,097 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 18:51:54,100 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 18:51:54,103 - __main__ - INFO - Workers connected: 4
+2026-03-05 18:58:33,834 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54686'. Reason: worker-close
+2026-03-05 18:58:33,835 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54680'. Reason: worker-close
+2026-03-05 18:58:33,841 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54684'. Reason: worker-close
+2026-03-05 18:58:33,843 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61124; closing.
+2026-03-05 18:58:33,848 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61122 name: 3 (stimulus_id='handle-worker-cleanup-1772755113.848078')
+2026-03-05 18:58:33,855 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61119; closing.
+2026-03-05 18:58:33,862 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:54682'. Reason: worker-close
+2026-03-05 18:58:33,863 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61116 name: 0 (stimulus_id='handle-worker-cleanup-1772755113.8636742')
+2026-03-05 18:58:33,866 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61113; closing.
+2026-03-05 18:58:33,869 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61108 name: 2 (stimulus_id='handle-worker-cleanup-1772755113.8695273')
+2026-03-05 18:58:33,875 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:64199 remote=tcp://127.0.0.1:61119>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 18:58:33,884 - distributed.core - INFO - Connection to tcp://127.0.0.1:61112 has been closed.
+2026-03-05 18:58:33,884 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61109 name: 1 (stimulus_id='handle-worker-cleanup-1772755113.884588')
+2026-03-05 18:58:33,885 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 18:58:33,912 - distributed.scheduler - INFO - Remove client Client-499175fb-18ee-11f1-a29c-d4f32d25dd97
+2026-03-05 18:58:33,914 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61125; closing.
+2026-03-05 18:58:33,915 - distributed.scheduler - INFO - Remove client Client-499175fb-18ee-11f1-a29c-d4f32d25dd97
+2026-03-05 18:58:33,925 - distributed.scheduler - INFO - Close client connection: Client-499175fb-18ee-11f1-a29c-d4f32d25dd97
+2026-03-05 18:58:33,931 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772755113.9314907') (0, 1, 2, 3)
+2026-03-05 18:58:33,932 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54680'. Reason: nanny-close
+2026-03-05 18:58:33,933 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:58:33,934 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54682'. Reason: nanny-close
+2026-03-05 18:58:33,935 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:58:33,936 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54684'. Reason: nanny-close
+2026-03-05 18:58:33,936 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:58:33,937 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:54686'. Reason: nanny-close
+2026-03-05 18:58:33,938 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:58:36,317 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54680' closed.
+2026-03-05 18:58:36,427 - distributed.nanny - INFO - Worker process 19052 exited with status 1
+2026-03-05 18:58:36,428 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54684' closed.
+2026-03-05 18:58:36,429 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54686' closed.
+2026-03-05 18:58:36,447 - distributed.nanny - INFO - Worker process 1856 exited with status 1
+2026-03-05 18:58:36,449 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:54682' closed.
+2026-03-05 18:58:36,450 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 18:58:36,451 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 19:00:11,773 - __main__ - INFO - Starting data generation...
+2026-03-05 19:00:11,785 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 19:00:12,481 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 19:00:13,554 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 19:00:13,644 - distributed.scheduler - INFO - State start
+2026-03-05 19:00:13,695 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:57012
+2026-03-05 19:00:13,696 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 19:00:13,697 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 19:00:13,898 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57015'
+2026-03-05 19:00:13,906 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57019'
+2026-03-05 19:00:13,911 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57017'
+2026-03-05 19:00:13,916 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:57021'
+2026-03-05 19:00:28,137 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57048 name: 0
+2026-03-05 19:00:28,190 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57048
+2026-03-05 19:00:28,190 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57054
+2026-03-05 19:00:28,238 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57055 name: 2
+2026-03-05 19:00:28,238 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57055
+2026-03-05 19:00:28,239 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57057
+2026-03-05 19:00:28,241 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57058 name: 1
+2026-03-05 19:00:28,242 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57058
+2026-03-05 19:00:28,242 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57060
+2026-03-05 19:00:28,328 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57063 name: 3
+2026-03-05 19:00:28,328 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57063
+2026-03-05 19:00:28,328 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57065
+2026-03-05 19:00:28,375 - distributed.scheduler - INFO - Receive client connection: Client-7c1b2048-18ef-11f1-97e8-d4f32d25dd97
+2026-03-05 19:00:28,377 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57066
+2026-03-05 19:00:28,379 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 19:00:28,380 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 19:00:28,383 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 19:00:28,386 - __main__ - INFO - Workers connected: 4
+2026-03-05 19:04:37,606 - distributed.core - INFO - Event loop was unresponsive in Scheduler for 60.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-05 19:04:37,613 - distributed.core - INFO - Event loop was unresponsive in Nanny for 60.75s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-05 19:04:37,615 - distributed.core - INFO - Event loop was unresponsive in Nanny for 60.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-05 19:04:37,615 - distributed.core - INFO - Event loop was unresponsive in Nanny for 60.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-05 19:04:37,616 - distributed.core - INFO - Event loop was unresponsive in Nanny for 60.76s.  This is often caused by long-running GIL-holding functions or moving large chunks of data. This can cause timeouts and instability.
+2026-03-05 19:13:54,308 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:57019'. Reason: worker-close
+2026-03-05 19:13:54,312 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:57021'. Reason: worker-close
+2026-03-05 19:13:54,314 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:57015'. Reason: worker-close
+2026-03-05 19:13:54,315 - distributed.nanny - INFO - Closing Nanny gracefully at 'tcp://127.0.0.1:57017'. Reason: worker-close
+2026-03-05 19:13:54,316 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57057; closing.
+2026-03-05 19:13:54,321 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57055 name: 2 (stimulus_id='handle-worker-cleanup-1772756034.3191803')
+2026-03-05 19:13:54,344 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57065; closing.
+2026-03-05 19:13:54,345 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57054; closing.
+2026-03-05 19:13:54,347 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57063 name: 3 (stimulus_id='handle-worker-cleanup-1772756034.3470743')
+2026-03-05 19:13:54,348 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57048 name: 0 (stimulus_id='handle-worker-cleanup-1772756034.3487544')
+2026-03-05 19:13:54,350 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57060; closing.
+2026-03-05 19:13:54,351 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57058 name: 1 (stimulus_id='handle-worker-cleanup-1772756034.3510406')
+2026-03-05 19:13:54,351 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 19:13:54,357 - distributed.scheduler - INFO - Remove client Client-7c1b2048-18ef-11f1-97e8-d4f32d25dd97
+2026-03-05 19:13:54,360 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57066; closing.
+2026-03-05 19:13:54,362 - distributed.scheduler - INFO - Remove client Client-7c1b2048-18ef-11f1-97e8-d4f32d25dd97
+2026-03-05 19:13:54,376 - distributed.scheduler - INFO - Close client connection: Client-7c1b2048-18ef-11f1-97e8-d4f32d25dd97
+2026-03-05 19:13:54,390 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772756034.3895519') (0, 1, 2, 3)
+2026-03-05 19:13:54,395 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57015'. Reason: nanny-close
+2026-03-05 19:13:54,397 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:13:54,446 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57017'. Reason: nanny-close
+2026-03-05 19:13:54,450 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:13:54,451 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57019'. Reason: nanny-close
+2026-03-05 19:13:54,453 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:13:54,453 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:57021'. Reason: nanny-close
+2026-03-05 19:13:54,455 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:13:57,116 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57017' closed.
+2026-03-05 19:13:57,121 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57019' closed.
+2026-03-05 19:13:57,124 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57021' closed.
+2026-03-05 19:13:57,144 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:57015' closed.
+2026-03-05 19:13:57,147 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 19:13:57,150 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 19:17:17,075 - __main__ - INFO - Starting data generation...
+2026-03-05 19:17:17,085 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 19:17:17,873 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 19:17:18,900 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 19:17:18,962 - distributed.scheduler - INFO - State start
+2026-03-05 19:17:19,011 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:61262
+2026-03-05 19:17:19,012 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 19:17:19,013 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 19:17:19,062 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 15.64 GiB
+2026-03-05 19:17:19,085 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 15.64 GiB
+2026-03-05 19:17:19,105 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 15.64 GiB
+2026-03-05 19:17:19,125 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 15.64 GiB
+2026-03-05 19:17:19,153 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:61269'
+2026-03-05 19:17:19,160 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:61265'
+2026-03-05 19:17:19,165 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:61271'
+2026-03-05 19:17:19,170 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:61267'
+2026-03-05 19:17:33,916 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61286 name: 3
+2026-03-05 19:17:34,003 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61286
+2026-03-05 19:17:34,012 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61291
+2026-03-05 19:17:34,017 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61287 name: 1
+2026-03-05 19:17:34,019 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61287
+2026-03-05 19:17:34,020 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61293
+2026-03-05 19:17:34,027 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61284 name: 2
+2026-03-05 19:17:34,028 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61284
+2026-03-05 19:17:34,029 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61289
+2026-03-05 19:17:34,044 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:61294 name: 0
+2026-03-05 19:17:34,045 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:61294
+2026-03-05 19:17:34,047 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:61296
+2026-03-05 19:17:35,431 - distributed.scheduler - INFO - Receive client connection: Client-e045487f-18f1-11f1-876c-d4f32d25dd97
+2026-03-05 19:17:35,433 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:56772
+2026-03-05 19:17:35,440 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 19:17:35,442 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 19:17:35,447 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 19:17:35,452 - __main__ - INFO - Workers connected: 4
+2026-03-05 19:54:32,123 - distributed.scheduler - INFO - Remove client Client-e045487f-18f1-11f1-876c-d4f32d25dd97
+2026-03-05 19:54:32,141 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:56772; closing.
+2026-03-05 19:54:32,144 - distributed.scheduler - INFO - Remove client Client-e045487f-18f1-11f1-876c-d4f32d25dd97
+2026-03-05 19:54:32,148 - distributed.scheduler - INFO - Close client connection: Client-e045487f-18f1-11f1-876c-d4f32d25dd97
+2026-03-05 19:54:32,169 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772758472.1675494') (0, 1, 2, 3)
+2026-03-05 19:54:32,171 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:61265'. Reason: nanny-close
+2026-03-05 19:54:32,174 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:54:32,182 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:61267'. Reason: nanny-close
+2026-03-05 19:54:32,227 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:54:32,230 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:61269'. Reason: nanny-close
+2026-03-05 19:54:32,232 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:54:32,233 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:61271'. Reason: nanny-close
+2026-03-05 19:54:32,236 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 19:54:32,244 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61293; closing.
+2026-03-05 19:54:32,246 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61287 name: 1 (stimulus_id='handle-worker-cleanup-1772758472.2455318')
+2026-03-05 19:54:32,255 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61291; closing.
+2026-03-05 19:54:32,257 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61286 name: 3 (stimulus_id='handle-worker-cleanup-1772758472.2573316')
+2026-03-05 19:54:32,258 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:61262 remote=tcp://127.0.0.1:61291>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 298, in write
+    raise StreamClosedError()
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 308, in write
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:61262 remote=tcp://127.0.0.1:61291>: Stream is closed
+2026-03-05 19:54:32,541 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61296; closing.
+2026-03-05 19:54:32,541 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61294 name: 0 (stimulus_id='handle-worker-cleanup-1772758472.5419188')
+2026-03-05 19:54:32,544 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:61289; closing.
+2026-03-05 19:54:32,546 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:61284 name: 2 (stimulus_id='handle-worker-cleanup-1772758472.5466707')
+2026-03-05 19:54:32,547 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 19:54:32,549 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:61262 remote=tcp://127.0.0.1:61289>
+Traceback (most recent call last):
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
+    value = future.result()
+  File "C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 19:54:36,187 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 19:54:36,233 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 19:54:36,235 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 19:54:36,237 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 19:54:36,795 - distributed.nanny - INFO - Worker process 28044 was killed by signal 15
+2026-03-05 19:54:36,883 - distributed.nanny - INFO - Worker process 44068 was killed by signal 15
+2026-03-05 19:54:36,888 - distributed.nanny - INFO - Worker process 44864 was killed by signal 15
+2026-03-05 19:54:36,889 - distributed.nanny - INFO - Worker process 8436 was killed by signal 15
+2026-03-05 19:54:36,961 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:61265' closed.
+2026-03-05 19:54:36,969 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:61269' closed.
+2026-03-05 19:54:36,972 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:61271' closed.
+2026-03-05 19:54:36,973 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:61267' closed.
+2026-03-05 19:54:37,001 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 19:54:37,165 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 19:54:37,285 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-05 19:54:37,301 - __main__ - INFO - Wrote metadata to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_pennylane_fwht\metadata_random.json
+2026-03-05 19:54:37,303 - __main__ - INFO - Wrote index to C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_pennylane_fwht\index_random.jsonl
+2026-03-05 19:54:37,303 - __main__ - INFO - Samples saved under C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\qqe\data\encoding_data_pennylane_fwht
+2026-03-05 20:02:09,396 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:04:17,298 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:07:42,257 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:07:42,267 - __main__ - INFO - Dataset loaded with 0 samples.
+2026-03-05 20:08:05,768 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:08:05,776 - __main__ - INFO - QuantumCircuitGraphDataset()
+2026-03-05 20:08:05,777 - __main__ - INFO - Dataset loaded with 0 samples.
+2026-03-05 20:09:26,824 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:09:26,828 - __main__ - INFO - []
+2026-03-05 20:09:26,832 - __main__ - INFO - QuantumCircuitGraphDataset()
+2026-03-05 20:09:26,832 - __main__ - INFO - Dataset loaded with 0 samples.
+2026-03-05 20:09:59,076 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:09:59,082 - __main__ - INFO - []
+2026-03-05 20:09:59,087 - __main__ - INFO - QuantumCircuitGraphDataset()
+2026-03-05 20:09:59,088 - __main__ - INFO - Dataset loaded with 0 samples.
+2026-03-05 20:10:21,061 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:10:21,097 - __main__ - INFO - ['qqe\\data\\encoding_data_pennylane_fwht\\random_Q10_L11_S1153511314.pt', 'qqe\\data\\encoding_data_pennylane_fwht\\random_Q10_L11_S1239258084.pt', 'qqe\\data\\encoding_data_pennylane_fwht\\random_Q10_L11_S1523000230.pt', 'qqe\\data\\encoding_data_pennylane_fwht\\random_Q10_L11_S1617151728.pt', 'qqe\\data\\encoding_data_pennylane_fwht\\random_Q10_L11_S1750066641.pt']
+2026-03-05 20:10:21,119 - __main__ - INFO - QuantumCircuitGraphDataset(3000)
+2026-03-05 20:10:21,120 - __main__ - INFO - Dataset loaded with 3000 samples.
+2026-03-05 20:11:11,851 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:11:23,744 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:11:34,322 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 20:16:34,705 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:16:44,878 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 20:18:46,559 - __main__ - INFO - Losses | train 10.517736 | val 1.280978 | lr 1.00e-03
+2026-03-05 20:18:46,565 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-05 20:20:27,103 - __main__ - INFO - Losses | train 1.786220 | val 0.699844 | lr 1.00e-03
+2026-03-05 20:20:27,109 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-05 20:24:17,546 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:24:25,036 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 20:25:25,116 - __main__ - INFO - [Heartbeat] Epoch 1 batch 42/68 | loss 12.207606 | elapsed 60.1s | graphs 1344
+2026-03-05 20:26:01,579 - __main__ - INFO - Training phase complete (96.5s) | Running validation...
+2026-03-05 20:26:04,780 - __main__ - INFO - Losses | train 8.568908 | val 0.249111 | lr 1.00e-03 | time train=96.5s val=3.2s total=99.7s
+2026-03-05 20:26:04,785 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-05 20:27:05,982 - __main__ - INFO - [Heartbeat] Epoch 2 batch 41/68 | loss 1.498661 | elapsed 61.2s | graphs 1312
+2026-03-05 20:27:41,851 - __main__ - INFO - Training phase complete (97.1s) | Running validation...
+2026-03-05 20:27:45,374 - __main__ - INFO - Losses | train 1.499517 | val 0.212377 | lr 1.00e-03 | time train=97.1s val=3.5s total=100.6s
+2026-03-05 20:28:40,114 - __main__ - INFO - Starting GNN training...
+2026-03-05 20:28:48,618 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 20:29:49,004 - __main__ - INFO - [Heartbeat] Epoch 1 batch 36/68 | loss 13.284654 | elapsed 60.4s | graphs 1152
+2026-03-05 20:30:28,176 - __main__ - INFO - Training phase complete (99.6s) | Running validation...
+2026-03-05 20:30:31,561 - __main__ - INFO - Losses | train 8.089081 | val 0.129641 | lr 1.00e-03 | time train=99.6s val=3.4s total=102.9s
+2026-03-05 20:30:31,565 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-05 20:31:32,580 - __main__ - INFO - [Heartbeat] Epoch 2 batch 25/68 | loss 1.281679 | elapsed 61.0s | graphs 800
+2026-03-05 20:32:32,809 - __main__ - INFO - [Heartbeat] Epoch 2 batch 59/68 | loss 1.226785 | elapsed 121.2s | graphs 1888
+2026-03-05 20:32:44,351 - __main__ - INFO - Training phase complete (132.8s) | Running validation...
+2026-03-05 20:32:47,571 - __main__ - INFO - Losses | train 1.187059 | val 0.704331 | lr 1.00e-03 | time train=132.8s val=3.2s total=136.0s
+2026-03-05 20:32:47,572 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-05 20:33:50,245 - __main__ - INFO - [Heartbeat] Epoch 3 batch 32/68 | loss 0.961205 | elapsed 62.7s | graphs 1024
+2026-03-05 20:34:50,509 - __main__ - INFO - [Heartbeat] Epoch 3 batch 64/68 | loss 0.970143 | elapsed 122.9s | graphs 2048
+2026-03-05 20:34:55,634 - __main__ - INFO - Training phase complete (128.1s) | Running validation...
+2026-03-05 20:34:58,900 - __main__ - INFO - Losses | train 0.967977 | val 0.158241 | lr 1.00e-03 | time train=128.1s val=3.3s total=131.3s
+2026-03-05 20:34:58,900 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-05 20:36:00,152 - __main__ - INFO - [Heartbeat] Epoch 4 batch 30/68 | loss 1.072430 | elapsed 61.3s | graphs 960
+2026-03-05 20:36:53,632 - __main__ - INFO - Training phase complete (114.7s) | Running validation...
+2026-03-05 20:36:56,838 - __main__ - INFO - Losses | train 0.932881 | val 0.342045 | lr 1.00e-03 | time train=114.7s val=3.2s total=117.9s
+2026-03-05 20:36:56,839 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-05 20:37:57,373 - __main__ - INFO - [Heartbeat] Epoch 5 batch 33/68 | loss 0.771251 | elapsed 60.5s | graphs 1056
+2026-03-05 20:38:59,685 - __main__ - INFO - [Heartbeat] Epoch 5 batch 67/68 | loss 0.814954 | elapsed 122.8s | graphs 2144
+2026-03-05 20:39:02,553 - __main__ - INFO - Training phase complete (125.7s) | Running validation...
+2026-03-05 20:39:12,497 - __main__ - INFO - Losses | train 0.816406 | val 0.203056 | lr 1.00e-03 | time train=125.7s val=9.9s total=135.7s
+2026-03-05 20:39:12,498 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-05 20:40:12,707 - __main__ - INFO - [Heartbeat] Epoch 6 batch 45/68 | loss 0.824380 | elapsed 60.2s | graphs 1440
+2026-03-05 20:40:46,523 - __main__ - INFO - Training phase complete (94.0s) | Running validation...
+2026-03-05 20:40:49,664 - __main__ - INFO - Losses | train 0.849031 | val 0.445667 | lr 1.00e-03 | time train=94.0s val=3.1s total=97.2s
+2026-03-05 20:40:49,664 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-05 20:41:50,600 - __main__ - INFO - [Heartbeat] Epoch 7 batch 31/68 | loss 0.760440 | elapsed 60.9s | graphs 992
+2026-03-05 20:42:51,249 - __main__ - INFO - [Heartbeat] Epoch 7 batch 67/68 | loss 0.743511 | elapsed 121.6s | graphs 2144
+2026-03-05 20:42:52,000 - __main__ - INFO - Training phase complete (122.3s) | Running validation...
+2026-03-05 20:42:55,479 - __main__ - INFO - Losses | train 0.741514 | val 0.397322 | lr 5.00e-04 | time train=122.3s val=3.5s total=125.8s
+2026-03-05 20:42:55,479 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-05 20:43:56,134 - __main__ - INFO - [Heartbeat] Epoch 8 batch 39/68 | loss 0.622898 | elapsed 60.7s | graphs 1248
+2026-03-05 20:44:35,703 - __main__ - INFO - Training phase complete (100.2s) | Running validation...
+2026-03-05 20:44:38,512 - __main__ - INFO - Losses | train 0.669168 | val 0.227872 | lr 5.00e-04 | time train=100.2s val=2.8s total=103.0s
+2026-03-05 20:44:38,513 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-05 20:45:41,628 - __main__ - INFO - [Heartbeat] Epoch 9 batch 36/68 | loss 0.594012 | elapsed 63.1s | graphs 1152
+2026-03-05 20:46:32,176 - __main__ - INFO - Training phase complete (113.7s) | Running validation...
+2026-03-05 20:46:35,228 - __main__ - INFO - Losses | train 0.615158 | val 0.329379 | lr 5.00e-04 | time train=113.7s val=3.1s total=116.7s
+2026-03-05 20:46:35,228 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-05 20:47:37,875 - __main__ - INFO - [Heartbeat] Epoch 10 batch 29/68 | loss 0.571980 | elapsed 62.6s | graphs 928
+2026-03-05 20:48:38,240 - __main__ - INFO - [Heartbeat] Epoch 10 batch 50/68 | loss 0.651803 | elapsed 123.0s | graphs 1600
+2026-03-05 20:49:05,724 - __main__ - INFO - Training phase complete (150.5s) | Running validation...
+2026-03-05 20:49:08,930 - __main__ - INFO - Losses | train 0.643454 | val 0.455830 | lr 5.00e-04 | time train=150.5s val=3.2s total=153.7s
+2026-03-05 18:08:58,193 - __main__ - INFO - Starting GNN training...
+2026-03-05 18:12:25,695 - __main__ - INFO - Starting data generation...
+2026-03-05 18:12:25,791 - __main__ - INFO - Generated 3000 circuit configurations
+2026-03-05 18:12:34,535 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-03-05 18:12:47,432 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-03-05 18:12:47,581 - distributed.scheduler - INFO - State start
+2026-03-05 18:12:47,583 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:41445
+2026-03-05 18:12:47,583 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-03-05 18:12:47,583 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-03-05 18:12:47,590 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:45249'
+2026-03-05 18:12:47,592 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:40251'
+2026-03-05 18:12:47,595 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:39505'
+2026-03-05 18:12:47,596 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:36687'
+2026-03-05 18:12:58,420 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:40621 name: 1
+2026-03-05 18:12:58,428 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:40621
+2026-03-05 18:12:58,428 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35120
+2026-03-05 18:12:58,429 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:43647 name: 3
+2026-03-05 18:12:58,429 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:43647
+2026-03-05 18:12:58,429 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35104
+2026-03-05 18:12:58,430 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:44991 name: 2
+2026-03-05 18:12:58,430 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:44991
+2026-03-05 18:12:58,430 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35128
+2026-03-05 18:12:58,430 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:35113 name: 0
+2026-03-05 18:12:58,431 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:35113
+2026-03-05 18:12:58,431 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35110
+2026-03-05 18:12:58,483 - distributed.scheduler - INFO - Receive client connection: Client-feb990b8-1901-11f1-b8c3-8c3b4adc03a3
+2026-03-05 18:12:58,484 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:35140
+2026-03-05 18:12:58,484 - qqe.parallel.dask - INFO - Dask client created successfully.
+2026-03-05 18:12:58,484 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-03-05 18:12:58,485 - __main__ - INFO - Dask dashboard: http://127.0.0.1:8787/status
+2026-03-05 18:12:58,485 - __main__ - INFO - Workers connected: 4
+2026-03-05 18:26:05,142 - distributed.scheduler - INFO - Remove client Client-feb990b8-1901-11f1-b8c3-8c3b4adc03a3
+2026-03-05 18:26:05,158 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35140; closing.
+2026-03-05 18:26:05,159 - distributed.scheduler - INFO - Remove client Client-feb990b8-1901-11f1-b8c3-8c3b4adc03a3
+2026-03-05 18:26:05,159 - distributed.scheduler - INFO - Close client connection: Client-feb990b8-1901-11f1-b8c3-8c3b4adc03a3
+2026-03-05 18:26:05,159 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1772763965.1598792') (0, 1, 2, 3)
+2026-03-05 18:26:05,160 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:45249'. Reason: nanny-close
+2026-03-05 18:26:05,160 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:26:05,160 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:40251'. Reason: nanny-close
+2026-03-05 18:26:05,160 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:26:05,160 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:39505'. Reason: nanny-close
+2026-03-05 18:26:05,161 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:26:05,161 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:36687'. Reason: nanny-close
+2026-03-05 18:26:05,161 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-03-05 18:26:05,163 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35110; closing.
+2026-03-05 18:26:05,163 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:35113 name: 0 (stimulus_id='handle-worker-cleanup-1772763965.1635897')
+2026-03-05 18:26:05,164 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35104; closing.
+2026-03-05 18:26:05,164 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35120; closing.
+2026-03-05 18:26:05,164 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:35128; closing.
+2026-03-05 18:26:05,164 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:43647 name: 3 (stimulus_id='handle-worker-cleanup-1772763965.1648793')
+2026-03-05 18:26:05,165 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:40621 name: 1 (stimulus_id='handle-worker-cleanup-1772763965.1650548')
+2026-03-05 18:26:05,165 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:44991 name: 2 (stimulus_id='handle-worker-cleanup-1772763965.165182')
+2026-03-05 18:26:05,165 - distributed.scheduler - INFO - Lost all workers
+2026-03-05 18:26:05,165 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:41445 remote=tcp://127.0.0.1:35120>
+Traceback (most recent call last):
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/tornado/gen.py", line 783, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/comm/tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 18:26:05,297 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:41445 remote=tcp://127.0.0.1:35104>
+Traceback (most recent call last):
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/tornado/gen.py", line 783, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/comm/tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 18:26:05,297 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:41445 remote=tcp://127.0.0.1:35128>
+Traceback (most recent call last):
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/batched.py", line 115, in _background_send
+    nbytes = yield coro
+             ^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/tornado/gen.py", line 783, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "/project/6099921/NDOT/QML-gates-tests/qqe/.venv/lib/python3.11/site-packages/distributed/comm/tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+2026-03-05 18:26:09,161 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:26:09,162 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:26:09,163 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:26:09,163 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-03-05 18:26:09,192 - distributed.nanny - INFO - Worker process 1325264 was killed by signal 9
+2026-03-05 18:26:09,193 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:45249' closed.
+2026-03-05 18:26:09,204 - distributed.nanny - INFO - Worker process 1325268 was killed by signal 9
+2026-03-05 18:26:09,205 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:40251' closed.
+2026-03-05 18:26:09,206 - distributed.nanny - INFO - Worker process 1325277 was killed by signal 9
+2026-03-05 18:26:09,206 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:36687' closed.
+2026-03-05 18:26:09,216 - distributed.nanny - INFO - Worker process 1325274 was killed by signal 9
+2026-03-05 18:26:09,217 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:39505' closed.
+2026-03-05 18:26:09,217 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-03-05 18:26:09,217 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-03-05 18:26:09,218 - qqe.parallel.dask - INFO - Dask client and cluster closed.
+2026-03-05 18:26:09,220 - __main__ - INFO - Wrote metadata to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht/metadata_random.json
+2026-03-05 18:26:09,220 - __main__ - INFO - Wrote index to /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht/index_random.jsonl
+2026-03-05 18:26:09,220 - __main__ - INFO - Samples saved under /project/6099921/NDOT/QML-gates-tests/qqe/qqe/data/encoding_data_pennylane_fwht
+2026-03-05 18:26:39,533 - __main__ - INFO - Starting GNN training...
+2026-03-05 18:26:44,838 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-05 18:27:45,225 - __main__ - INFO - [Heartbeat] Epoch 1 batch 48/68 | loss 6.161071 | elapsed 60.4s | graphs 1536
+2026-03-05 18:28:08,400 - __main__ - INFO - Training phase complete (83.6s) | Running validation...
+2026-03-05 18:28:11,221 - __main__ - INFO - Losses | train 4.872528 | val 0.787913 | lr 1.00e-03 | time train=83.6s val=2.8s total=86.4s
+2026-03-05 18:28:11,222 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-05 18:29:11,650 - __main__ - INFO - [Heartbeat] Epoch 2 batch 52/68 | loss 1.200234 | elapsed 60.4s | graphs 1664
+2026-03-05 18:29:29,542 - __main__ - INFO - Training phase complete (78.3s) | Running validation...
+2026-03-05 18:29:32,373 - __main__ - INFO - Losses | train 1.220640 | val 0.959749 | lr 1.00e-03 | time train=78.3s val=2.8s total=81.2s
+2026-03-05 18:29:32,374 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-05 18:30:32,879 - __main__ - INFO - [Heartbeat] Epoch 3 batch 52/68 | loss 1.118573 | elapsed 60.5s | graphs 1664
+2026-03-05 18:30:51,121 - __main__ - INFO - Training phase complete (78.7s) | Running validation...
+2026-03-05 18:30:54,084 - __main__ - INFO - Losses | train 1.139490 | val 1.721026 | lr 1.00e-03 | time train=78.7s val=3.0s total=81.7s
+2026-03-05 18:30:54,084 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-05 18:31:54,672 - __main__ - INFO - [Heartbeat] Epoch 4 batch 52/68 | loss 1.047931 | elapsed 60.6s | graphs 1664
+2026-03-05 18:32:12,324 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-05 18:32:15,263 - __main__ - INFO - Losses | train 1.015058 | val 0.540277 | lr 1.00e-03 | time train=78.2s val=2.9s total=81.2s
+2026-03-05 18:32:15,264 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-05 18:33:15,376 - __main__ - INFO - [Heartbeat] Epoch 5 batch 52/68 | loss 0.844877 | elapsed 60.1s | graphs 1664
+2026-03-05 18:33:33,473 - __main__ - INFO - Training phase complete (78.2s) | Running validation...
+2026-03-05 18:33:36,281 - __main__ - INFO - Losses | train 0.836083 | val 0.084638 | lr 1.00e-03 | time train=78.2s val=2.8s total=81.0s
+2026-03-05 18:33:36,282 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-05 18:34:37,502 - __main__ - INFO - [Heartbeat] Epoch 6 batch 53/68 | loss 0.688307 | elapsed 61.2s | graphs 1696
+2026-03-05 18:34:54,968 - __main__ - INFO - Training phase complete (78.7s) | Running validation...
+2026-03-05 18:34:57,798 - __main__ - INFO - Losses | train 0.725798 | val 0.539177 | lr 1.00e-03 | time train=78.7s val=2.8s total=81.5s
+2026-03-05 18:34:57,799 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-05 18:35:59,169 - __main__ - INFO - [Heartbeat] Epoch 7 batch 53/68 | loss 0.673525 | elapsed 61.4s | graphs 1696
+2026-03-05 18:36:16,219 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-05 18:36:19,095 - __main__ - INFO - Losses | train 0.697819 | val 0.277920 | lr 1.00e-03 | time train=78.4s val=2.9s total=81.3s
+2026-03-05 18:36:19,095 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-05 18:37:19,415 - __main__ - INFO - [Heartbeat] Epoch 8 batch 52/68 | loss 0.873323 | elapsed 60.3s | graphs 1664
+2026-03-05 18:37:37,483 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-05 18:37:40,352 - __main__ - INFO - Losses | train 0.836923 | val 0.230479 | lr 1.00e-03 | time train=78.4s val=2.9s total=81.3s
+2026-03-05 18:37:40,352 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-05 18:38:41,003 - __main__ - INFO - [Heartbeat] Epoch 9 batch 53/68 | loss 0.876845 | elapsed 60.7s | graphs 1696
+2026-03-05 18:38:58,851 - __main__ - INFO - Training phase complete (78.5s) | Running validation...
+2026-03-05 18:39:01,659 - __main__ - INFO - Losses | train 0.837014 | val 0.527627 | lr 1.00e-03 | time train=78.5s val=2.8s total=81.3s
+2026-03-05 18:39:01,660 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-05 18:40:02,366 - __main__ - INFO - [Heartbeat] Epoch 10 batch 52/68 | loss 0.666036 | elapsed 60.7s | graphs 1664
+2026-03-05 18:40:20,017 - __main__ - INFO - Training phase complete (78.4s) | Running validation...
+2026-03-05 18:40:22,839 - __main__ - INFO - Losses | train 0.666270 | val 0.338288 | lr 1.00e-03 | time train=78.4s val=2.8s total=81.2s

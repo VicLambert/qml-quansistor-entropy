@@ -12,4 +12,4 @@ source /project/6099921/NDOT/QML-gates-tests/qqe/.venv/bin/activate
 
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 
-python -u train_gnn.py
+python -u train_gnn.py --epochs=25

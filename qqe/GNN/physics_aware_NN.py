@@ -1,3 +1,5 @@
+
+import warnings
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -139,12 +141,38 @@ class GNN(nn.Module):
         # Global branch
         g = data.global_features
         if g.dim() == 1:
-            g = g.view(num_graphs, -1)  # requires fixed global_dim across dataset
+            if g.numel() % num_graphs != 0:
+                raise RuntimeError(
+                    f"Inconsistent global_features in batch: total={g.numel()}, "
+                    f"num_graphs={num_graphs}. Expected fixed per-graph feature length."
+                )
+            g = g.view(num_graphs, -1)
+        elif g.dim() == 2 and g.size(0) == num_graphs:
+            pass
+        else:
+            g = g.reshape(num_graphs, -1)
         g_feat = self.global_mlp(g.float())
 
         # Combine
         out = self.regressor(torch.cat([x_pool, g_feat], dim=-1))
         return out.view(-1)
+
+
+def normalize_gate_count(dataset):
+    all_keys = set()
+    for data in dataset:
+        if hasattr(data, "gate_count") or isinstance(data.gate_count, dict):
+            all_keys.update(data.gate_count.keys())
+    all_keys = sorted(all_keys)
+
+    for data in dataset:
+        if hasattr(data, "gate_count") and isinstance(data.gate_count, dict):
+            for key in all_keys:
+                if key not in data.gate_count:
+                    data.gate_count[key] = 0
+
+    return dataset, all_keys
+
 
 class QuantumCircuitGraphDataset(PyGDataset):
     """Loads per-circuit .pt files produced by compute_entry_for_config.
@@ -170,7 +198,44 @@ class QuantumCircuitGraphDataset(PyGDataset):
         self.pt_paths = [str(p) for p in pt_paths]
         self.global_feature_variant = global_feature_variant
         self.node_feature_backend_variant = node_feature_backend_variant
+        
+        # Collect all unique gate count keys from all samples
+        self.all_gate_keys = self._collect_all_gate_keys()
+        self.global_feature_dim = self._collect_global_feature_dim()
+        
         super().__init__(root=root, transform=transform, pre_transform=pre_transform)
+
+    def _collect_all_gate_keys(self) -> list[str]:
+        """Scan all .pt files to collect all unique gate count keys."""
+        all_keys = set()
+        for pt_path in self.pt_paths:
+            obj = torch.load(pt_path, map_location="cpu")
+            gate_counts = obj.get("gate_counts", {})
+            if isinstance(gate_counts, dict):
+                all_keys.update(gate_counts.keys())
+        return sorted(all_keys)
+    
+    def _collect_global_feature_dim(self) -> int:
+        dim_counts: dict[int, int] = {}
+        for pt_path in self.pt_paths:
+            obj = torch.load(pt_path, map_location="cpu")
+            g = obj.get("global_features", None)
+            if g is None:
+                continue
+            if not torch.is_tensor(g):
+                g = torch.as_tensor(g)
+            d = int(g.numel())
+            dim_counts[d] = dim_counts.get(d, 0) + 1
+
+        if not dim_counts:
+            return 0
+
+        if len(dim_counts) > 1:
+            warnings.warn(
+                f"Inconsistent global_features dims found: {dim_counts}. "
+                f"Will pad/truncate to max dim={max(dim_counts)}."
+            )
+        return max(dim_counts)
 
     @property
     def raw_file_names(self) -> list[str]:
@@ -180,6 +245,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
     @property
     def processed_file_names(self) -> list[str]:
         return []
+    
     def len(self) -> int:
         return len(self.pt_paths)
 
@@ -196,8 +262,17 @@ class QuantumCircuitGraphDataset(PyGDataset):
             x = x.to(torch.float32)
         if edge_index.dtype != torch.long:
             edge_index = edge_index.to(torch.long)
-        if g.dtype != torch.float32:
-            g = g.to(torch.float32)
+        # if g.dtype != torch.float32:
+        #     g = g.to(torch.float32)
+        if not torch.is_tensor(g):
+            g = torch.as_tensor(g, dtype=torch.float32)
+        g = g.flatten().to(torch.float32)
+
+        if self.global_feature_dim > 0 and g.numel() != self.global_feature_dim:
+            if g.numel() < self.global_feature_dim:
+                g = F.pad(g, (0, self.global_feature_dim - g.numel()))
+            else:
+                g = g[: self.global_feature_dim]
 
         # label
         if y_val is None:
@@ -206,11 +281,17 @@ class QuantumCircuitGraphDataset(PyGDataset):
             y = torch.tensor([float(y_val)], dtype=torch.float32)
 
         data = Data(x=x, edge_index=edge_index, y=y)
-        data.global_features = g
+        data.global_features = g.unsqueeze(0)
         data.num_qubits = int(obj.get("meta", {}).get("n_qubits", 0))
 
-        # Keep for debugging / analysis (won't hurt)
-        data.gate_counts = obj.get("gate_counts", {})
+        # Normalize gate_counts: add missing keys with value 0
+        gate_counts = obj.get("gate_counts", {})
+        if isinstance(gate_counts, dict):
+            normalized_gate_counts = {key: gate_counts.get(key, 0) for key in self.all_gate_keys}
+        else:
+            normalized_gate_counts = {key: 0 for key in self.all_gate_keys}
+        
+        data.gate_counts = normalized_gate_counts
         data.meta = obj.get("meta", {})
 
         return data

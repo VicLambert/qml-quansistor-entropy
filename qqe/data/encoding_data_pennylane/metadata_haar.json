@@ -2,9 +2,12 @@
   "backend": "pennylane",
   "method": "fwht",
   "n_bins": 50,
-  "n_seeds": 15,
+  "n_seeds": 50,
   "families": [
-    "random"
+    "quansistor",
+    "haar",
+    "random",
+    "clifford"
   ],
   "qubits_range": [
     4,
@@ -64,7 +67,7 @@
     97,
     99
   ],
-  "entries_completed": 3000,
+  "entries_completed": 10000,
   "use_dask": true,
-  "index_file": "index_random.jsonl"
+  "index_file": "index_haar.jsonl"
 }

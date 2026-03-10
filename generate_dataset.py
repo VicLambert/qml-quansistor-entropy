@@ -28,6 +28,7 @@ from qqe.circuit.patterns import TdopingRules, to_qasm
 from qqe.experiments.core import run_experiment
 from qqe.GNN.encoder import qasm_to_pyg_graph
 from qqe.utils import FileCache, configure_logger
+import contextlib
 
 if TYPE_CHECKING:
     from qqe.circuit.spec import GateSpec
@@ -110,10 +111,8 @@ def _safe_gate_counts(gate_counts: Any) -> dict[str, int]:
 
 def _trim_process_memory() -> None:
     """Best-effort memory release to keep Dask worker RSS under control."""
-    try:
+    with contextlib.suppress(Exception):
         gc.collect()
-    except Exception:
-        pass
 
     try:
         if torch.cuda.is_available():
@@ -482,49 +481,56 @@ def main(
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
     layers_values = np.arange(layers_min, layers_max + 1, layers_step)
 
-    params = generate_dataset_params(
-        selected_families,
-        qubits_values,
-        layers_values,
-        n_seeds_option,
-    )
-    if max_configs is not None:
-        params = params[:max_configs]
-    logger.info("Generated %s circuit configurations", len(params))
-
-    output_dir = PROJECT_ROOT / output_file / f"encoding_data_{backend}_{method}"
+    output_dir = PROJECT_ROOT / output_file / f"encoding_data_{backend}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    entries = compute_all_entries(
-        params,
-        backend=backend,
-        method=method,
-        use_dask=use_dask,
-        n_bins_value=n_bins_option,
-        dask_n_workers=dask_n_workers,
-        dask_memory_per_worker=dask_memory_per_worker,
-        output_dir=output_dir,
-    )
+    for family in selected_families:
+        logger.info("Selected family: %s", family)
+        family_output_dir = output_dir / family
+        family_output_dir.mkdir(parents=True, exist_ok=True)
 
-    family = params[0]["family"] if params else "unknown"
-    meta_path = output_dir / f"metadata_{family}.json"
-    metadata = {
-        "backend": backend,
-        "method": method,
-        "n_bins": n_bins_option,
-        "n_seeds": n_seeds_option,
-        "families": selected_families,
-        "qubits_range": qubits_values.tolist(),
-        "layers_range": layers_values.tolist(),
-        "entries_completed": len(entries),
-        "use_dask": use_dask,
-        "index_file": f"index_{family}.jsonl",
-    }
-    meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+        params = generate_dataset_params(
+            [family],
+            qubits_values,
+            layers_values,
+            n_seeds_option,
+        )
+        if max_configs is not None:
+            params = params[:max_configs]
+        logger.info("Generated %s circuit configurations for family %s", len(params), family)
 
-    logger.info("Wrote metadata to %s", meta_path)
-    logger.info("Wrote index to %s", output_dir / f"index_{family}.jsonl")
-    logger.info("Samples saved under %s", output_dir)
+        entries = compute_all_entries(
+            params,
+            backend=backend,
+            method=method,
+            use_dask=use_dask,
+            n_bins_value=n_bins_option,
+            dask_n_workers=dask_n_workers,
+            dask_memory_per_worker=dask_memory_per_worker,
+            output_dir=family_output_dir,
+        )
+
+        meta_path = family_output_dir / f"metadata_{family}.json"
+        metadata = {
+            "backend": backend,
+            "method": method,
+            "n_bins": n_bins_option,
+            "n_seeds": n_seeds_option,
+            "families": selected_families,
+            "qubits_range": qubits_values.tolist(),
+            "layers_range": layers_values.tolist(),
+            "entries_completed": len(entries),
+            "use_dask": use_dask,
+            "index_file": f"index_{family}.jsonl",
+        }
+        meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+
+        logger.info("Completed family %s: %s entries", family, len(entries))
+        logger.info("  Metadata: %s", meta_path)
+        logger.info("  Index: %s", family_output_dir / f"index_{family}.jsonl")
+        logger.info("  Samples: %s", family_output_dir)
+
+    logger.info("All families processed successfully")
 
     # with output_path.with_suffix(".json").open("w") as f:
     #     json.dump(payload, f)
