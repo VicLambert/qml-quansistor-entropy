@@ -48,7 +48,12 @@ def collect_pt_paths(dataset_dir: str, family: str | None = None) -> list[str]:
     if family is not None:
         paths = sorted((d / "encoding_data_pennylane" / family).glob("*.pt"))
     else:
-        paths = sorted((d / "encoding_data_pennylane").glob("*.pt"))
+        paths = []
+        encoding_dir = d / "encoding_data_pennylane"
+        if encoding_dir.exists():
+            for family_dir in sorted(encoding_dir.iterdir()):
+                if family_dir.is_dir():
+                    paths.extend(sorted(family_dir.glob("*.pt")))
     if not paths:
         paths = sorted(d.glob("*.pt"))
     return [str(p) for p in paths]
@@ -208,7 +213,6 @@ def build_full_loader(
         pin_memory=pin_mem,
     )
 
-
 def build_train_val_test_loaders_two_stage(
     pt_paths: list[str],
     train_split: float = 0.8,
@@ -217,7 +221,7 @@ def build_train_val_test_loaders_two_stage(
     seed: int = 42,
     global_feature_variant: str = "baseline",
     node_feature_backend_variant: str | None = None,
-):
+) -> tuple[DataLoader, DataLoader, DataLoader, int, int]:
     suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
     root = _cache_root_for_paths(pt_paths, suffix=suffix)
 
@@ -230,8 +234,10 @@ def build_train_val_test_loaders_two_stage(
     if len(dataset) < 3:
         raise RuntimeError("Dataset too small for train/val/test splitting.")
 
-    # Wrap dataset to handle padding
     padded_dataset = PaddedGraphDatasetWrapper(dataset)
+
+    node_in_dim = padded_dataset.target_dim
+    global_in_dim = dataset.global_feature_dim
 
     generator = torch.Generator().manual_seed(seed)
     primary_train_len = max(1, int(len(padded_dataset) * train_split))
@@ -256,28 +262,82 @@ def build_train_val_test_loaders_two_stage(
     pin_mem = torch.cuda.is_available()
 
     return (
-        DataLoader(
-            train_ds,
-            batch_size=batch_size,
-            shuffle=True,
-            num_workers=0,
-            pin_memory=pin_mem,
-        ),
-        DataLoader(
-            val_ds,
-            batch_size=batch_size,
-            shuffle=False,
-            num_workers=0,
-            pin_memory=pin_mem,
-        ),
-        DataLoader(
-            test_ds,
-            batch_size=batch_size,
-            shuffle=False,
-            num_workers=0,
-            pin_memory=pin_mem,
-        ),
+        DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=pin_mem),
+        DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=pin_mem),
+        DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=pin_mem),
+        node_in_dim,
+        global_in_dim,
     )
+
+# def build_train_val_test_loaders_two_stage(
+#     pt_paths: list[str],
+#     train_split: float = 0.8,
+#     val_within_train: float = 0.1,
+#     batch_size: int = 32,
+#     seed: int = 42,
+#     global_feature_variant: str = "baseline",
+#     node_feature_backend_variant: str | None = None,
+# ):
+#     suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
+#     root = _cache_root_for_paths(pt_paths, suffix=suffix)
+
+#     dataset = QuantumCircuitGraphDataset(
+#         root=root,
+#         pt_paths=pt_paths,
+#         global_feature_variant=global_feature_variant,
+#         node_feature_backend_variant=node_feature_backend_variant,
+#     )
+#     if len(dataset) < 3:
+#         raise RuntimeError("Dataset too small for train/val/test splitting.")
+
+#     # Wrap dataset to handle padding
+#     padded_dataset = PaddedGraphDatasetWrapper(dataset)
+
+#     generator = torch.Generator().manual_seed(seed)
+#     primary_train_len = max(1, int(len(padded_dataset) * train_split))
+#     test_len = max(1, len(padded_dataset) - primary_train_len)
+#     while primary_train_len + test_len > len(padded_dataset):
+#         primary_train_len -= 1
+
+#     primary_train, test_ds = random_split(
+#         padded_dataset,
+#         [primary_train_len, test_len],
+#         generator=generator,
+#     )
+
+#     val_len = max(1, int(len(primary_train) * val_within_train))
+#     real_train_len = max(1, len(primary_train) - val_len)
+#     train_ds, val_ds = random_split(
+#         primary_train,
+#         [real_train_len, val_len],
+#         generator=generator,
+#     )
+
+#     pin_mem = torch.cuda.is_available()
+
+#     return (
+#         DataLoader(
+#             train_ds,
+#             batch_size=batch_size,
+#             shuffle=True,
+#             num_workers=0,
+#             pin_memory=pin_mem,
+#         ),
+#         DataLoader(
+#             val_ds,
+#             batch_size=batch_size,
+#             shuffle=False,
+#             num_workers=0,
+#             pin_memory=pin_mem,
+#         ),
+#         DataLoader(
+#             test_ds,
+#             batch_size=batch_size,
+#             shuffle=False,
+#             num_workers=0,
+#             pin_memory=pin_mem,
+#         ),
+#     )
 
 
 @torch.no_grad()
@@ -564,7 +624,7 @@ def main(
         300.0, help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
-    pt_paths = collect_pt_paths("outputs/data")  # or .../samples
+    data_paths = collect_pt_paths("outputs/data")  # or .../samples
     # logger.info(pt_paths[:5])
     # global_feature_variant: str = "binned"
     # node_feature_backend_variant: str | None = None
@@ -579,14 +639,21 @@ def main(
     # )
     # logger.info(dataset)
     # logger.info(f"Dataset loaded with {len(dataset)} samples.")
-    train_loader, val_loader, test_loader = build_train_val_test_loaders_two_stage(
-        pt_paths,
-        global_feature_variant="binned",
-        batch_size=32,
-    )
+    # train_loader, val_loader, test_loader = build_train_val_test_loaders_two_stage(
+    #     pt_paths,
+    #     global_feature_variant="binned",
+    #     batch_size=32,
+    # )
 
-    node_in_dim = get_node_feature_dim_from_sample(pt_paths)
-    global_in_dim = get_global_feature_dim_from_sample(pt_paths)
+    # node_in_dim = get_node_feature_dim_from_sample(pt_paths)
+    # global_in_dim = get_global_feature_dim_from_sample(pt_paths)
+    train_loader, val_loader, test_loader, node_in_dim, global_in_dim = (
+        build_train_val_test_loaders_two_stage(
+            data_paths,
+            global_feature_variant="binned",
+            batch_size=32,
+        )
+    )
 
     model = GNN(
         node_in_dim=node_in_dim,
@@ -645,14 +712,16 @@ def temp_main(
     if not data_paths:
         logger.error("No data paths found. Check dataset directory and family name.")
         return
-    train_loader, val_loader, test_loader = build_train_val_test_loaders_two_stage(
+    train_loader, val_loader, test_loader, node_in_dim, global_in_dim = (
+    build_train_val_test_loaders_two_stage(
         data_paths,
         global_feature_variant="binned",
         batch_size=32,
     )
+)
 
-    node_in_dim = get_node_feature_dim_from_sample(data_paths)
-    global_in_dim = get_global_feature_dim_from_sample(data_paths)
+    # node_in_dim = get_node_feature_dim_from_sample(data_paths)
+    # global_in_dim = get_global_feature_dim_from_sample(data_paths)
 
     model = GNN(
         node_in_dim=node_in_dim,
