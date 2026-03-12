@@ -198,11 +198,11 @@ class QuantumCircuitGraphDataset(PyGDataset):
         self.pt_paths = [str(p) for p in pt_paths]
         self.global_feature_variant = global_feature_variant
         self.node_feature_backend_variant = node_feature_backend_variant
-        
+
         # Collect all unique gate count keys from all samples
         self.all_gate_keys = self._collect_all_gate_keys()
         self.global_feature_dim = self._collect_global_feature_dim()
-        
+
         super().__init__(root=root, transform=transform, pre_transform=pre_transform)
 
     def _collect_all_gate_keys(self) -> list[str]:
@@ -214,7 +214,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
             if isinstance(gate_counts, dict):
                 all_keys.update(gate_counts.keys())
         return sorted(all_keys)
-    
+
     def _build_uniform_binned_global(self, normalized_gate_counts: dict[str, int], meta: dict) -> torch.Tensor:
         """Build uniform binned global feature vector from normalized gate counts."""
         feature_list = [
@@ -223,12 +223,12 @@ class QuantumCircuitGraphDataset(PyGDataset):
         ]
         feature_list.extend(float(normalized_gate_counts.get(k, 0)) for k in self.all_gate_keys)
         return torch.tensor(feature_list, dtype=torch.float32)
-    
+
     def _collect_global_feature_dim(self) -> int:
         # For binned variant, dimension is fixed: 2 (metadata) + num_gate_keys
         if self.global_feature_variant == "binned":
             return 2 + len(self.all_gate_keys)
-        
+
         # For other variants, scan actual dimensions
         dim_counts: dict[int, int] = {}
         for pt_path in self.pt_paths:
@@ -259,7 +259,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
     @property
     def processed_file_names(self) -> list[str]:
         return []
-    
+
     def len(self) -> int:
         return len(self.pt_paths)
 
@@ -277,9 +277,9 @@ class QuantumCircuitGraphDataset(PyGDataset):
             normalized_gate_counts = {key: gate_counts.get(key, 0) for key in self.all_gate_keys}
         else:
             normalized_gate_counts = {key: 0 for key in self.all_gate_keys}
-        
+
         meta = obj.get("meta", {})
-        
+
         # Build global features uniformly from normalized gate counts (binned) or pad/truncate (other)
         if self.global_feature_variant == "binned":
             g = self._build_uniform_binned_global(normalized_gate_counts, meta)
@@ -288,13 +288,13 @@ class QuantumCircuitGraphDataset(PyGDataset):
             if not torch.is_tensor(g):
                 g = torch.as_tensor(g, dtype=torch.float32)
             g = g.flatten().to(torch.float32)
-            
+
             if self.global_feature_dim > 0 and g.numel() != self.global_feature_dim:
                 if g.numel() < self.global_feature_dim:
                     g = F.pad(g, (0, self.global_feature_dim - g.numel()))
                 else:
                     g = g[: self.global_feature_dim]
-        
+
         # Dtypes for model
         if x.dtype != torch.float32:
             x = x.to(torch.float32)
