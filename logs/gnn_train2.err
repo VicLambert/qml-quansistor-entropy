@@ -1,0 +1,394 @@
+2026-03-11 12:47:43,970 - __main__ - INFO - Starting GNN training...
+2026-03-11 13:13:02,437 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-11 13:14:02,503 - __main__ - INFO - [Heartbeat] Epoch 1 batch 58/900 | loss 9.601484 | elapsed 60.0s | graphs 1856
+2026-03-11 13:15:02,614 - __main__ - INFO - [Heartbeat] Epoch 1 batch 131/900 | loss 5.401328 | elapsed 120.2s | graphs 4192
+2026-03-11 13:16:03,333 - __main__ - INFO - [Heartbeat] Epoch 1 batch 202/900 | loss 3.969086 | elapsed 180.9s | graphs 6464
+2026-03-11 13:17:04,295 - __main__ - INFO - [Heartbeat] Epoch 1 batch 276/900 | loss 3.268141 | elapsed 241.8s | graphs 8832
+2026-03-11 13:18:05,056 - __main__ - INFO - [Heartbeat] Epoch 1 batch 348/900 | loss 2.838447 | elapsed 302.6s | graphs 11136
+2026-03-11 13:19:05,452 - __main__ - INFO - [Heartbeat] Epoch 1 batch 419/900 | loss 2.540169 | elapsed 363.0s | graphs 13408
+2026-03-11 13:20:06,162 - __main__ - INFO - [Heartbeat] Epoch 1 batch 491/900 | loss 2.299908 | elapsed 423.7s | graphs 15712
+2026-03-11 13:21:06,225 - __main__ - INFO - [Heartbeat] Epoch 1 batch 560/900 | loss 2.134268 | elapsed 483.8s | graphs 17920
+2026-03-11 13:22:06,683 - __main__ - INFO - [Heartbeat] Epoch 1 batch 632/900 | loss 1.980777 | elapsed 544.2s | graphs 20224
+2026-03-11 13:23:07,190 - __main__ - INFO - [Heartbeat] Epoch 1 batch 704/900 | loss 1.859452 | elapsed 604.7s | graphs 22528
+2026-03-11 13:24:07,360 - __main__ - INFO - [Heartbeat] Epoch 1 batch 775/900 | loss 1.753642 | elapsed 664.9s | graphs 24800
+2026-03-11 13:25:07,918 - __main__ - INFO - [Heartbeat] Epoch 1 batch 847/900 | loss 1.669805 | elapsed 725.5s | graphs 27104
+2026-03-11 13:25:52,019 - __main__ - INFO - Training phase complete (769.6s) | Running validation...
+2026-03-11 13:26:21,670 - __main__ - INFO - Losses | train 1.615559 | val 0.433212 | lr 1.00e-03 | time train=769.6s val=29.7s total=799.2s
+2026-03-11 13:26:21,672 - __main__ - WARNING - Epoch 1 took 799.2s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 13:26:21,673 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-11 13:27:22,336 - __main__ - INFO - [Heartbeat] Epoch 2 batch 70/900 | loss 0.695219 | elapsed 60.7s | graphs 2240
+2026-03-11 13:28:23,323 - __main__ - INFO - [Heartbeat] Epoch 2 batch 143/900 | loss 0.689491 | elapsed 121.7s | graphs 4576
+2026-03-11 13:29:23,772 - __main__ - INFO - [Heartbeat] Epoch 2 batch 213/900 | loss 0.683590 | elapsed 182.1s | graphs 6816
+2026-03-11 13:30:23,839 - __main__ - INFO - [Heartbeat] Epoch 2 batch 285/900 | loss 0.661457 | elapsed 242.2s | graphs 9120
+2026-03-11 13:31:23,853 - __main__ - INFO - [Heartbeat] Epoch 2 batch 355/900 | loss 0.652734 | elapsed 302.2s | graphs 11360
+2026-03-11 13:32:24,524 - __main__ - INFO - [Heartbeat] Epoch 2 batch 427/900 | loss 0.641418 | elapsed 362.9s | graphs 13664
+2026-03-11 13:33:25,108 - __main__ - INFO - [Heartbeat] Epoch 2 batch 499/900 | loss 0.664034 | elapsed 423.4s | graphs 15968
+2026-03-11 13:34:25,216 - __main__ - INFO - [Heartbeat] Epoch 2 batch 570/900 | loss 0.657087 | elapsed 483.5s | graphs 18240
+2026-03-11 13:35:25,901 - __main__ - INFO - [Heartbeat] Epoch 2 batch 643/900 | loss 0.651561 | elapsed 544.2s | graphs 20576
+2026-03-11 13:36:26,525 - __main__ - INFO - [Heartbeat] Epoch 2 batch 717/900 | loss 0.644644 | elapsed 604.9s | graphs 22944
+2026-03-11 13:37:26,873 - __main__ - INFO - [Heartbeat] Epoch 2 batch 788/900 | loss 0.640281 | elapsed 665.2s | graphs 25216
+2026-03-11 13:38:27,301 - __main__ - INFO - [Heartbeat] Epoch 2 batch 860/900 | loss 0.630878 | elapsed 725.6s | graphs 27520
+2026-03-11 13:39:00,502 - __main__ - INFO - Training phase complete (758.8s) | Running validation...
+2026-03-11 13:39:30,054 - __main__ - INFO - Losses | train 0.629060 | val 0.193486 | lr 1.00e-03 | time train=758.8s val=29.5s total=788.4s
+2026-03-11 13:39:30,055 - __main__ - WARNING - Epoch 2 took 788.4s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 13:39:30,056 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-11 13:40:30,398 - __main__ - INFO - [Heartbeat] Epoch 3 batch 72/900 | loss 0.560103 | elapsed 60.3s | graphs 2304
+2026-03-11 13:41:30,604 - __main__ - INFO - [Heartbeat] Epoch 3 batch 141/900 | loss 0.556897 | elapsed 120.5s | graphs 4512
+2026-03-11 13:42:30,913 - __main__ - INFO - [Heartbeat] Epoch 3 batch 214/900 | loss 0.534062 | elapsed 180.9s | graphs 6848
+2026-03-11 13:43:31,629 - __main__ - INFO - [Heartbeat] Epoch 3 batch 288/900 | loss 0.544264 | elapsed 241.6s | graphs 9216
+2026-03-11 13:44:32,051 - __main__ - INFO - [Heartbeat] Epoch 3 batch 358/900 | loss 0.541230 | elapsed 302.0s | graphs 11456
+2026-03-11 13:45:32,838 - __main__ - INFO - [Heartbeat] Epoch 3 batch 431/900 | loss 0.534768 | elapsed 362.8s | graphs 13792
+2026-03-11 13:46:32,870 - __main__ - INFO - [Heartbeat] Epoch 3 batch 501/900 | loss 0.525216 | elapsed 422.8s | graphs 16032
+2026-03-11 13:47:32,993 - __main__ - INFO - [Heartbeat] Epoch 3 batch 574/900 | loss 0.523303 | elapsed 482.9s | graphs 18368
+2026-03-11 13:48:33,230 - __main__ - INFO - [Heartbeat] Epoch 3 batch 643/900 | loss 0.514522 | elapsed 543.2s | graphs 20576
+2026-03-11 13:49:33,378 - __main__ - INFO - [Heartbeat] Epoch 3 batch 716/900 | loss 0.505322 | elapsed 603.3s | graphs 22912
+2026-03-11 13:50:33,844 - __main__ - INFO - [Heartbeat] Epoch 3 batch 788/900 | loss 0.504418 | elapsed 663.8s | graphs 25216
+2026-03-11 13:51:34,046 - __main__ - INFO - [Heartbeat] Epoch 3 batch 857/900 | loss 0.498813 | elapsed 724.0s | graphs 27424
+2026-03-11 13:52:10,420 - __main__ - INFO - Training phase complete (760.4s) | Running validation...
+2026-03-11 13:52:40,483 - __main__ - INFO - Losses | train 0.495284 | val 0.455516 | lr 1.00e-03 | time train=760.4s val=30.1s total=790.4s
+2026-03-11 13:52:40,483 - __main__ - WARNING - Epoch 3 took 790.4s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 13:52:40,483 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-11 13:53:40,687 - __main__ - INFO - [Heartbeat] Epoch 4 batch 72/900 | loss 0.496689 | elapsed 60.2s | graphs 2304
+2026-03-11 13:54:41,068 - __main__ - INFO - [Heartbeat] Epoch 4 batch 144/900 | loss 0.459346 | elapsed 120.6s | graphs 4608
+2026-03-11 13:55:41,782 - __main__ - INFO - [Heartbeat] Epoch 4 batch 217/900 | loss 0.452469 | elapsed 181.3s | graphs 6944
+2026-03-11 13:56:42,355 - __main__ - INFO - [Heartbeat] Epoch 4 batch 290/900 | loss 0.459727 | elapsed 241.9s | graphs 9280
+2026-03-11 13:57:42,473 - __main__ - INFO - [Heartbeat] Epoch 4 batch 358/900 | loss 0.462071 | elapsed 302.0s | graphs 11456
+2026-03-11 13:58:42,882 - __main__ - INFO - [Heartbeat] Epoch 4 batch 429/900 | loss 0.463333 | elapsed 362.4s | graphs 13728
+2026-03-11 13:59:43,645 - __main__ - INFO - [Heartbeat] Epoch 4 batch 500/900 | loss 0.449690 | elapsed 423.2s | graphs 16000
+2026-03-11 14:00:44,317 - __main__ - INFO - [Heartbeat] Epoch 4 batch 573/900 | loss 0.441358 | elapsed 483.8s | graphs 18336
+2026-03-11 14:01:45,102 - __main__ - INFO - [Heartbeat] Epoch 4 batch 645/900 | loss 0.432382 | elapsed 544.6s | graphs 20640
+2026-03-11 14:02:46,005 - __main__ - INFO - [Heartbeat] Epoch 4 batch 717/900 | loss 0.432111 | elapsed 605.5s | graphs 22944
+2026-03-11 14:03:46,274 - __main__ - INFO - [Heartbeat] Epoch 4 batch 788/900 | loss 0.427981 | elapsed 665.8s | graphs 25216
+2026-03-11 14:04:46,950 - __main__ - INFO - [Heartbeat] Epoch 4 batch 860/900 | loss 0.425754 | elapsed 726.5s | graphs 27520
+2026-03-11 14:05:21,221 - __main__ - INFO - Training phase complete (760.7s) | Running validation...
+2026-03-11 14:05:50,748 - __main__ - INFO - Losses | train 0.424078 | val 0.231680 | lr 1.00e-03 | time train=760.7s val=29.5s total=790.3s
+2026-03-11 14:05:50,748 - __main__ - WARNING - Epoch 4 took 790.3s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 14:05:50,748 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-11 14:06:51,360 - __main__ - INFO - [Heartbeat] Epoch 5 batch 72/900 | loss 0.392174 | elapsed 60.6s | graphs 2304
+2026-03-11 14:07:51,427 - __main__ - INFO - [Heartbeat] Epoch 5 batch 142/900 | loss 0.375870 | elapsed 120.7s | graphs 4544
+2026-03-11 14:08:51,882 - __main__ - INFO - [Heartbeat] Epoch 5 batch 214/900 | loss 0.367179 | elapsed 181.1s | graphs 6848
+2026-03-11 14:09:52,432 - __main__ - INFO - [Heartbeat] Epoch 5 batch 290/900 | loss 0.370018 | elapsed 241.7s | graphs 9280
+2026-03-11 14:10:52,632 - __main__ - INFO - [Heartbeat] Epoch 5 batch 361/900 | loss 0.383919 | elapsed 301.9s | graphs 11552
+2026-03-11 14:11:52,640 - __main__ - INFO - [Heartbeat] Epoch 5 batch 431/900 | loss 0.383038 | elapsed 361.9s | graphs 13792
+2026-03-11 14:12:53,379 - __main__ - INFO - [Heartbeat] Epoch 5 batch 505/900 | loss 0.381029 | elapsed 422.6s | graphs 16160
+2026-03-11 14:13:53,542 - __main__ - INFO - [Heartbeat] Epoch 5 batch 577/900 | loss 0.381435 | elapsed 482.8s | graphs 18464
+2026-03-11 14:14:53,607 - __main__ - INFO - [Heartbeat] Epoch 5 batch 646/900 | loss 0.379942 | elapsed 542.9s | graphs 20672
+2026-03-11 14:15:53,617 - __main__ - INFO - [Heartbeat] Epoch 5 batch 715/900 | loss 0.377200 | elapsed 602.9s | graphs 22880
+2026-03-11 14:16:54,147 - __main__ - INFO - [Heartbeat] Epoch 5 batch 785/900 | loss 0.374805 | elapsed 663.4s | graphs 25120
+2026-03-11 14:17:54,880 - __main__ - INFO - [Heartbeat] Epoch 5 batch 857/900 | loss 0.373001 | elapsed 724.1s | graphs 27424
+2026-03-11 14:18:54,471 - __main__ - INFO - Training phase complete (783.7s) | Running validation...
+2026-03-11 14:19:25,357 - __main__ - INFO - Losses | train 0.369134 | val 0.424090 | lr 1.00e-03 | time train=783.7s val=30.9s total=814.6s
+2026-03-11 14:19:25,358 - __main__ - WARNING - Epoch 5 took 814.6s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 14:19:25,358 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-11 14:20:25,739 - __main__ - INFO - [Heartbeat] Epoch 6 batch 69/900 | loss 0.319280 | elapsed 60.4s | graphs 2208
+2026-03-11 14:21:26,408 - __main__ - INFO - [Heartbeat] Epoch 6 batch 140/900 | loss 0.328577 | elapsed 121.0s | graphs 4480
+2026-03-11 14:22:26,661 - __main__ - INFO - [Heartbeat] Epoch 6 batch 211/900 | loss 0.320785 | elapsed 181.3s | graphs 6752
+2026-03-11 14:23:27,417 - __main__ - INFO - [Heartbeat] Epoch 6 batch 283/900 | loss 0.326956 | elapsed 242.1s | graphs 9056
+2026-03-11 14:24:27,598 - __main__ - INFO - [Heartbeat] Epoch 6 batch 356/900 | loss 0.323634 | elapsed 302.2s | graphs 11392
+2026-03-11 14:25:27,855 - __main__ - INFO - [Heartbeat] Epoch 6 batch 428/900 | loss 0.323840 | elapsed 362.5s | graphs 13696
+2026-03-11 14:26:28,280 - __main__ - INFO - [Heartbeat] Epoch 6 batch 502/900 | loss 0.320916 | elapsed 422.9s | graphs 16064
+2026-03-11 14:27:28,709 - __main__ - INFO - [Heartbeat] Epoch 6 batch 572/900 | loss 0.316660 | elapsed 483.4s | graphs 18304
+2026-03-11 14:28:28,956 - __main__ - INFO - [Heartbeat] Epoch 6 batch 644/900 | loss 0.315511 | elapsed 543.6s | graphs 20608
+2026-03-11 14:29:29,073 - __main__ - INFO - [Heartbeat] Epoch 6 batch 714/900 | loss 0.313474 | elapsed 603.7s | graphs 22848
+2026-03-11 14:30:29,648 - __main__ - INFO - [Heartbeat] Epoch 6 batch 786/900 | loss 0.309109 | elapsed 664.3s | graphs 25152
+2026-03-11 14:31:30,174 - __main__ - INFO - [Heartbeat] Epoch 6 batch 859/900 | loss 0.308874 | elapsed 724.8s | graphs 27488
+2026-03-11 14:32:05,436 - __main__ - INFO - Training phase complete (760.1s) | Running validation...
+2026-03-11 14:32:35,718 - __main__ - INFO - Losses | train 0.308055 | val 0.348027 | lr 1.00e-03 | time train=760.1s val=30.3s total=790.4s
+2026-03-11 14:32:35,718 - __main__ - WARNING - Epoch 6 took 790.4s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 14:32:35,718 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-11 14:33:36,328 - __main__ - INFO - [Heartbeat] Epoch 7 batch 71/900 | loss 0.273531 | elapsed 60.6s | graphs 2272
+2026-03-11 14:34:37,049 - __main__ - INFO - [Heartbeat] Epoch 7 batch 142/900 | loss 0.315922 | elapsed 121.3s | graphs 4544
+2026-03-11 14:35:37,704 - __main__ - INFO - [Heartbeat] Epoch 7 batch 212/900 | loss 0.310647 | elapsed 182.0s | graphs 6784
+2026-03-11 14:36:37,943 - __main__ - INFO - [Heartbeat] Epoch 7 batch 284/900 | loss 0.305698 | elapsed 242.2s | graphs 9088
+2026-03-11 14:37:38,312 - __main__ - INFO - [Heartbeat] Epoch 7 batch 356/900 | loss 0.302531 | elapsed 302.6s | graphs 11392
+2026-03-11 14:38:38,770 - __main__ - INFO - [Heartbeat] Epoch 7 batch 426/900 | loss 0.304528 | elapsed 363.1s | graphs 13632
+2026-03-11 14:39:38,875 - __main__ - INFO - [Heartbeat] Epoch 7 batch 496/900 | loss 0.308913 | elapsed 423.2s | graphs 15872
+2026-03-11 14:40:39,698 - __main__ - INFO - [Heartbeat] Epoch 7 batch 569/900 | loss 0.310532 | elapsed 484.0s | graphs 18208
+2026-03-11 14:41:40,228 - __main__ - INFO - [Heartbeat] Epoch 7 batch 642/900 | loss 0.307063 | elapsed 544.5s | graphs 20544
+2026-03-11 14:42:41,091 - __main__ - INFO - [Heartbeat] Epoch 7 batch 714/900 | loss 0.304903 | elapsed 605.4s | graphs 22848
+2026-03-11 14:43:41,737 - __main__ - INFO - [Heartbeat] Epoch 7 batch 787/900 | loss 0.302643 | elapsed 666.0s | graphs 25184
+2026-03-11 14:44:41,960 - __main__ - INFO - [Heartbeat] Epoch 7 batch 859/900 | loss 0.300742 | elapsed 726.2s | graphs 27488
+2026-03-11 14:45:17,782 - __main__ - INFO - Training phase complete (762.1s) | Running validation...
+2026-03-11 14:45:47,218 - __main__ - INFO - Losses | train 0.298792 | val 0.222075 | lr 1.00e-03 | time train=762.1s val=29.4s total=791.5s
+2026-03-11 14:45:47,219 - __main__ - WARNING - Epoch 7 took 791.5s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 14:45:47,219 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-11 14:46:47,477 - __main__ - INFO - [Heartbeat] Epoch 8 batch 71/900 | loss 0.271110 | elapsed 60.3s | graphs 2272
+2026-03-11 14:47:48,192 - __main__ - INFO - [Heartbeat] Epoch 8 batch 145/900 | loss 0.270606 | elapsed 121.0s | graphs 4640
+2026-03-11 14:48:48,673 - __main__ - INFO - [Heartbeat] Epoch 8 batch 213/900 | loss 0.269350 | elapsed 181.5s | graphs 6816
+2026-03-11 14:49:49,318 - __main__ - INFO - [Heartbeat] Epoch 8 batch 286/900 | loss 0.271504 | elapsed 242.1s | graphs 9152
+2026-03-11 14:50:49,519 - __main__ - INFO - [Heartbeat] Epoch 8 batch 358/900 | loss 0.268954 | elapsed 302.3s | graphs 11456
+2026-03-11 14:51:49,596 - __main__ - INFO - [Heartbeat] Epoch 8 batch 431/900 | loss 0.267355 | elapsed 362.4s | graphs 13792
+2026-03-11 14:52:49,791 - __main__ - INFO - [Heartbeat] Epoch 8 batch 505/900 | loss 0.267447 | elapsed 422.6s | graphs 16160
+2026-03-11 14:53:50,509 - __main__ - INFO - [Heartbeat] Epoch 8 batch 577/900 | loss 0.267015 | elapsed 483.3s | graphs 18464
+2026-03-11 14:54:50,676 - __main__ - INFO - [Heartbeat] Epoch 8 batch 644/900 | loss 0.266733 | elapsed 543.5s | graphs 20608
+2026-03-11 14:55:51,164 - __main__ - INFO - [Heartbeat] Epoch 8 batch 718/900 | loss 0.266537 | elapsed 603.9s | graphs 22976
+2026-03-11 14:56:52,024 - __main__ - INFO - [Heartbeat] Epoch 8 batch 790/900 | loss 0.268358 | elapsed 664.8s | graphs 25280
+2026-03-11 14:57:52,780 - __main__ - INFO - [Heartbeat] Epoch 8 batch 859/900 | loss 0.268124 | elapsed 725.6s | graphs 27488
+2026-03-11 14:58:39,851 - __main__ - INFO - Training phase complete (772.6s) | Running validation...
+2026-03-11 14:59:15,795 - __main__ - INFO - Losses | train 0.267923 | val 0.179610 | lr 1.00e-03 | time train=772.6s val=35.9s total=808.6s
+2026-03-11 14:59:15,796 - __main__ - WARNING - Epoch 8 took 808.6s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 14:59:15,796 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-11 15:00:15,827 - __main__ - INFO - [Heartbeat] Epoch 9 batch 72/900 | loss 0.257420 | elapsed 60.0s | graphs 2304
+2026-03-11 15:01:16,094 - __main__ - INFO - [Heartbeat] Epoch 9 batch 142/900 | loss 0.275643 | elapsed 120.3s | graphs 4544
+2026-03-11 15:02:16,495 - __main__ - INFO - [Heartbeat] Epoch 9 batch 215/900 | loss 0.267227 | elapsed 180.7s | graphs 6880
+2026-03-11 15:03:17,140 - __main__ - INFO - [Heartbeat] Epoch 9 batch 289/900 | loss 0.267048 | elapsed 241.3s | graphs 9248
+2026-03-11 15:04:18,015 - __main__ - INFO - [Heartbeat] Epoch 9 batch 362/900 | loss 0.266348 | elapsed 302.2s | graphs 11584
+2026-03-11 15:05:18,914 - __main__ - INFO - [Heartbeat] Epoch 9 batch 436/900 | loss 0.260075 | elapsed 363.1s | graphs 13952
+2026-03-11 15:06:18,944 - __main__ - INFO - [Heartbeat] Epoch 9 batch 506/900 | loss 0.258476 | elapsed 423.1s | graphs 16192
+2026-03-11 15:07:19,449 - __main__ - INFO - [Heartbeat] Epoch 9 batch 578/900 | loss 0.258981 | elapsed 483.7s | graphs 18496
+2026-03-11 15:08:19,858 - __main__ - INFO - [Heartbeat] Epoch 9 batch 650/900 | loss 0.258625 | elapsed 544.1s | graphs 20800
+2026-03-11 15:09:20,670 - __main__ - INFO - [Heartbeat] Epoch 9 batch 720/900 | loss 0.258813 | elapsed 604.9s | graphs 23040
+2026-03-11 15:10:20,751 - __main__ - INFO - [Heartbeat] Epoch 9 batch 790/900 | loss 0.258435 | elapsed 665.0s | graphs 25280
+2026-03-11 15:11:21,036 - __main__ - INFO - [Heartbeat] Epoch 9 batch 860/900 | loss 0.254478 | elapsed 725.2s | graphs 27520
+2026-03-11 15:11:55,593 - __main__ - INFO - Training phase complete (759.8s) | Running validation...
+2026-03-11 15:12:24,923 - __main__ - INFO - Losses | train 0.255060 | val 0.367024 | lr 1.00e-03 | time train=759.8s val=29.3s total=789.1s
+2026-03-11 15:12:24,923 - __main__ - WARNING - Epoch 9 took 789.1s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 15:12:24,923 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-11 15:13:25,062 - __main__ - INFO - [Heartbeat] Epoch 10 batch 73/900 | loss 0.248543 | elapsed 60.1s | graphs 2336
+2026-03-11 15:14:25,463 - __main__ - INFO - [Heartbeat] Epoch 10 batch 146/900 | loss 0.245911 | elapsed 120.5s | graphs 4672
+2026-03-11 15:15:25,541 - __main__ - INFO - [Heartbeat] Epoch 10 batch 215/900 | loss 0.248995 | elapsed 180.6s | graphs 6880
+2026-03-11 15:16:25,571 - __main__ - INFO - [Heartbeat] Epoch 10 batch 286/900 | loss 0.247609 | elapsed 240.6s | graphs 9152
+2026-03-11 15:17:25,792 - __main__ - INFO - [Heartbeat] Epoch 10 batch 358/900 | loss 0.243794 | elapsed 300.9s | graphs 11456
+2026-03-11 15:18:25,829 - __main__ - INFO - [Heartbeat] Epoch 10 batch 428/900 | loss 0.245713 | elapsed 360.9s | graphs 13696
+2026-03-11 15:19:25,931 - __main__ - INFO - [Heartbeat] Epoch 10 batch 500/900 | loss 0.246760 | elapsed 421.0s | graphs 16000
+2026-03-11 15:20:26,213 - __main__ - INFO - [Heartbeat] Epoch 10 batch 572/900 | loss 0.246390 | elapsed 481.3s | graphs 18304
+2026-03-11 15:21:26,319 - __main__ - INFO - [Heartbeat] Epoch 10 batch 643/900 | loss 0.244785 | elapsed 541.4s | graphs 20576
+2026-03-11 15:22:26,593 - __main__ - INFO - [Heartbeat] Epoch 10 batch 715/900 | loss 0.247416 | elapsed 601.7s | graphs 22880
+2026-03-11 15:23:27,047 - __main__ - INFO - [Heartbeat] Epoch 10 batch 782/900 | loss 0.247990 | elapsed 662.1s | graphs 25024
+2026-03-11 15:24:27,551 - __main__ - INFO - [Heartbeat] Epoch 10 batch 837/900 | loss 0.246709 | elapsed 722.6s | graphs 26784
+2026-03-11 15:25:27,363 - __main__ - INFO - Training phase complete (782.4s) | Running validation...
+2026-03-11 15:25:57,135 - __main__ - INFO - Losses | train 0.245902 | val 0.263181 | lr 1.00e-03 | time train=782.4s val=29.8s total=812.2s
+2026-03-11 15:25:57,136 - __main__ - WARNING - Epoch 10 took 812.2s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 15:25:57,136 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-11 15:26:57,616 - __main__ - INFO - [Heartbeat] Epoch 11 batch 73/900 | loss 0.232835 | elapsed 60.5s | graphs 2336
+2026-03-11 15:27:57,676 - __main__ - INFO - [Heartbeat] Epoch 11 batch 147/900 | loss 0.262479 | elapsed 120.5s | graphs 4704
+2026-03-11 15:28:57,932 - __main__ - INFO - [Heartbeat] Epoch 11 batch 220/900 | loss 0.254529 | elapsed 180.8s | graphs 7040
+2026-03-11 15:29:58,150 - __main__ - INFO - [Heartbeat] Epoch 11 batch 290/900 | loss 0.249331 | elapsed 241.0s | graphs 9280
+2026-03-11 15:30:58,748 - __main__ - INFO - [Heartbeat] Epoch 11 batch 364/900 | loss 0.241571 | elapsed 301.6s | graphs 11648
+2026-03-11 15:31:59,398 - __main__ - INFO - [Heartbeat] Epoch 11 batch 435/900 | loss 0.238075 | elapsed 362.3s | graphs 13920
+2026-03-11 15:33:00,029 - __main__ - INFO - [Heartbeat] Epoch 11 batch 507/900 | loss 0.238010 | elapsed 422.9s | graphs 16224
+2026-03-11 15:34:00,293 - __main__ - INFO - [Heartbeat] Epoch 11 batch 576/900 | loss 0.235834 | elapsed 483.2s | graphs 18432
+2026-03-11 15:35:00,484 - __main__ - INFO - [Heartbeat] Epoch 11 batch 647/900 | loss 0.237292 | elapsed 543.3s | graphs 20704
+2026-03-11 15:36:00,921 - __main__ - INFO - [Heartbeat] Epoch 11 batch 717/900 | loss 0.236581 | elapsed 603.8s | graphs 22944
+2026-03-11 15:37:01,181 - __main__ - INFO - [Heartbeat] Epoch 11 batch 789/900 | loss 0.238161 | elapsed 664.0s | graphs 25248
+2026-03-11 15:38:01,824 - __main__ - INFO - [Heartbeat] Epoch 11 batch 861/900 | loss 0.236990 | elapsed 724.7s | graphs 27552
+2026-03-11 15:38:35,169 - __main__ - INFO - Training phase complete (758.0s) | Running validation...
+2026-03-11 15:39:04,325 - __main__ - INFO - Losses | train 0.235938 | val 0.184873 | lr 1.00e-03 | time train=758.0s val=29.2s total=787.2s
+2026-03-11 15:39:04,326 - __main__ - WARNING - Epoch 11 took 787.2s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 15:39:04,326 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-11 15:40:04,882 - __main__ - INFO - [Heartbeat] Epoch 12 batch 70/900 | loss 0.224004 | elapsed 60.6s | graphs 2240
+2026-03-11 15:41:05,332 - __main__ - INFO - [Heartbeat] Epoch 12 batch 141/900 | loss 0.233665 | elapsed 121.0s | graphs 4512
+2026-03-11 15:42:05,356 - __main__ - INFO - [Heartbeat] Epoch 12 batch 210/900 | loss 0.223538 | elapsed 181.0s | graphs 6720
+2026-03-11 15:43:06,168 - __main__ - INFO - [Heartbeat] Epoch 12 batch 284/900 | loss 0.224529 | elapsed 241.8s | graphs 9088
+2026-03-11 15:44:06,212 - __main__ - INFO - [Heartbeat] Epoch 12 batch 355/900 | loss 0.224803 | elapsed 301.9s | graphs 11360
+2026-03-11 15:45:06,679 - __main__ - INFO - [Heartbeat] Epoch 12 batch 428/900 | loss 0.221441 | elapsed 362.4s | graphs 13696
+2026-03-11 15:46:06,764 - __main__ - INFO - [Heartbeat] Epoch 12 batch 499/900 | loss 0.224120 | elapsed 422.4s | graphs 15968
+2026-03-11 15:47:07,090 - __main__ - INFO - [Heartbeat] Epoch 12 batch 572/900 | loss 0.224390 | elapsed 482.8s | graphs 18304
+2026-03-11 15:48:07,837 - __main__ - INFO - [Heartbeat] Epoch 12 batch 644/900 | loss 0.224296 | elapsed 543.5s | graphs 20608
+2026-03-11 15:49:08,026 - __main__ - INFO - [Heartbeat] Epoch 12 batch 715/900 | loss 0.223958 | elapsed 603.7s | graphs 22880
+2026-03-11 15:50:08,514 - __main__ - INFO - [Heartbeat] Epoch 12 batch 787/900 | loss 0.222085 | elapsed 664.2s | graphs 25184
+2026-03-11 15:51:09,221 - __main__ - INFO - [Heartbeat] Epoch 12 batch 859/900 | loss 0.222099 | elapsed 724.9s | graphs 27488
+2026-03-11 15:51:44,372 - __main__ - INFO - Training phase complete (760.0s) | Running validation...
+2026-03-11 15:52:13,511 - __main__ - INFO - Losses | train 0.222503 | val 0.248848 | lr 1.00e-03 | time train=760.0s val=29.1s total=789.2s
+2026-03-11 15:52:13,511 - __main__ - WARNING - Epoch 12 took 789.2s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 15:52:13,511 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-11 15:53:13,685 - __main__ - INFO - [Heartbeat] Epoch 13 batch 71/900 | loss 0.202650 | elapsed 60.2s | graphs 2272
+2026-03-11 15:54:14,225 - __main__ - INFO - [Heartbeat] Epoch 13 batch 145/900 | loss 0.217114 | elapsed 120.7s | graphs 4640
+2026-03-11 15:55:14,952 - __main__ - INFO - [Heartbeat] Epoch 13 batch 218/900 | loss 0.224167 | elapsed 181.4s | graphs 6976
+2026-03-11 15:56:15,112 - __main__ - INFO - [Heartbeat] Epoch 13 batch 290/900 | loss 0.222758 | elapsed 241.6s | graphs 9280
+2026-03-11 15:57:15,794 - __main__ - INFO - [Heartbeat] Epoch 13 batch 361/900 | loss 0.218654 | elapsed 302.3s | graphs 11552
+2026-03-11 15:58:15,970 - __main__ - INFO - [Heartbeat] Epoch 13 batch 434/900 | loss 0.216641 | elapsed 362.5s | graphs 13888
+2026-03-11 15:59:15,982 - __main__ - INFO - [Heartbeat] Epoch 13 batch 504/900 | loss 0.216202 | elapsed 422.5s | graphs 16128
+2026-03-11 16:00:16,598 - __main__ - INFO - [Heartbeat] Epoch 13 batch 575/900 | loss 0.218245 | elapsed 483.1s | graphs 18400
+2026-03-11 16:01:17,095 - __main__ - INFO - [Heartbeat] Epoch 13 batch 645/900 | loss 0.220143 | elapsed 543.6s | graphs 20640
+2026-03-11 16:02:17,666 - __main__ - INFO - [Heartbeat] Epoch 13 batch 717/900 | loss 0.220842 | elapsed 604.2s | graphs 22944
+2026-03-11 16:03:18,312 - __main__ - INFO - [Heartbeat] Epoch 13 batch 790/900 | loss 0.220808 | elapsed 664.8s | graphs 25280
+2026-03-11 16:04:19,241 - __main__ - INFO - [Heartbeat] Epoch 13 batch 861/900 | loss 0.218741 | elapsed 725.7s | graphs 27552
+2026-03-11 16:04:52,758 - __main__ - INFO - Training phase complete (759.2s) | Running validation...
+2026-03-11 16:05:22,016 - __main__ - INFO - Losses | train 0.218600 | val 0.554001 | lr 1.00e-03 | time train=759.2s val=29.3s total=788.5s
+2026-03-11 16:05:22,017 - __main__ - WARNING - Epoch 13 took 788.5s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 16:05:22,017 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-11 16:06:22,515 - __main__ - INFO - [Heartbeat] Epoch 14 batch 70/900 | loss 0.201225 | elapsed 60.5s | graphs 2240
+2026-03-11 16:07:22,860 - __main__ - INFO - [Heartbeat] Epoch 14 batch 144/900 | loss 0.217456 | elapsed 120.8s | graphs 4608
+2026-03-11 16:08:23,080 - __main__ - INFO - [Heartbeat] Epoch 14 batch 214/900 | loss 0.222343 | elapsed 181.1s | graphs 6848
+2026-03-11 16:09:23,514 - __main__ - INFO - [Heartbeat] Epoch 14 batch 286/900 | loss 0.219799 | elapsed 241.5s | graphs 9152
+2026-03-11 16:10:24,144 - __main__ - INFO - [Heartbeat] Epoch 14 batch 358/900 | loss 0.218256 | elapsed 302.1s | graphs 11456
+2026-03-11 16:11:24,577 - __main__ - INFO - [Heartbeat] Epoch 14 batch 430/900 | loss 0.216049 | elapsed 362.6s | graphs 13760
+2026-03-11 16:12:24,940 - __main__ - INFO - [Heartbeat] Epoch 14 batch 501/900 | loss 0.216706 | elapsed 422.9s | graphs 16032
+2026-03-11 16:13:25,473 - __main__ - INFO - [Heartbeat] Epoch 14 batch 574/900 | loss 0.217672 | elapsed 483.5s | graphs 18368
+2026-03-11 16:14:26,228 - __main__ - INFO - [Heartbeat] Epoch 14 batch 644/900 | loss 0.216914 | elapsed 544.2s | graphs 20608
+2026-03-11 16:15:26,750 - __main__ - INFO - [Heartbeat] Epoch 14 batch 715/900 | loss 0.220412 | elapsed 604.7s | graphs 22880
+2026-03-11 16:16:27,169 - __main__ - INFO - [Heartbeat] Epoch 14 batch 788/900 | loss 0.217561 | elapsed 665.2s | graphs 25216
+2026-03-11 16:17:27,653 - __main__ - INFO - [Heartbeat] Epoch 14 batch 859/900 | loss 0.217712 | elapsed 725.6s | graphs 27488
+2026-03-11 16:18:02,471 - __main__ - INFO - Training phase complete (760.5s) | Running validation...
+2026-03-11 16:18:32,297 - __main__ - INFO - Losses | train 0.216446 | val 0.296082 | lr 5.00e-04 | time train=760.5s val=29.8s total=790.3s
+2026-03-11 16:18:32,297 - __main__ - WARNING - Epoch 14 took 790.3s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 16:18:32,297 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-11 16:19:33,247 - __main__ - INFO - [Heartbeat] Epoch 15 batch 72/900 | loss 0.211598 | elapsed 60.9s | graphs 2304
+2026-03-11 16:20:33,257 - __main__ - INFO - [Heartbeat] Epoch 15 batch 144/900 | loss 0.199995 | elapsed 121.0s | graphs 4608
+2026-03-11 16:21:34,097 - __main__ - INFO - [Heartbeat] Epoch 15 batch 214/900 | loss 0.196041 | elapsed 181.8s | graphs 6848
+2026-03-11 16:22:34,364 - __main__ - INFO - [Heartbeat] Epoch 15 batch 285/900 | loss 0.196261 | elapsed 242.1s | graphs 9120
+2026-03-11 16:23:34,984 - __main__ - INFO - [Heartbeat] Epoch 15 batch 354/900 | loss 0.196891 | elapsed 302.7s | graphs 11328
+2026-03-11 16:24:35,224 - __main__ - INFO - [Heartbeat] Epoch 15 batch 426/900 | loss 0.196641 | elapsed 362.9s | graphs 13632
+2026-03-11 16:25:36,347 - __main__ - INFO - [Heartbeat] Epoch 15 batch 498/900 | loss 0.193877 | elapsed 424.0s | graphs 15936
+2026-03-11 16:26:37,134 - __main__ - INFO - [Heartbeat] Epoch 15 batch 571/900 | loss 0.195197 | elapsed 484.8s | graphs 18272
+2026-03-11 16:27:37,606 - __main__ - INFO - [Heartbeat] Epoch 15 batch 646/900 | loss 0.196769 | elapsed 545.3s | graphs 20672
+2026-03-11 16:28:37,751 - __main__ - INFO - [Heartbeat] Epoch 15 batch 713/900 | loss 0.198318 | elapsed 605.5s | graphs 22816
+2026-03-11 16:29:37,784 - __main__ - INFO - [Heartbeat] Epoch 15 batch 783/900 | loss 0.198801 | elapsed 665.5s | graphs 25056
+2026-03-11 16:30:38,410 - __main__ - INFO - [Heartbeat] Epoch 15 batch 850/900 | loss 0.199407 | elapsed 726.1s | graphs 27200
+2026-03-11 16:31:22,227 - __main__ - INFO - Training phase complete (769.9s) | Running validation...
+2026-03-11 16:31:51,563 - __main__ - INFO - Losses | train 0.198604 | val 0.220261 | lr 5.00e-04 | time train=769.9s val=29.3s total=799.3s
+2026-03-11 16:31:51,563 - __main__ - WARNING - Epoch 15 took 799.3s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 16:31:51,563 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-11 16:32:52,095 - __main__ - INFO - [Heartbeat] Epoch 16 batch 71/900 | loss 0.194842 | elapsed 60.5s | graphs 2272
+2026-03-11 16:33:52,657 - __main__ - INFO - [Heartbeat] Epoch 16 batch 144/900 | loss 0.204465 | elapsed 121.1s | graphs 4608
+2026-03-11 16:34:53,002 - __main__ - INFO - [Heartbeat] Epoch 16 batch 216/900 | loss 0.201491 | elapsed 181.4s | graphs 6912
+2026-03-11 16:35:53,686 - __main__ - INFO - [Heartbeat] Epoch 16 batch 288/900 | loss 0.199591 | elapsed 242.1s | graphs 9216
+2026-03-11 16:36:53,733 - __main__ - INFO - [Heartbeat] Epoch 16 batch 359/900 | loss 0.201734 | elapsed 302.2s | graphs 11488
+2026-03-11 16:37:54,223 - __main__ - INFO - [Heartbeat] Epoch 16 batch 430/900 | loss 0.201557 | elapsed 362.7s | graphs 13760
+2026-03-11 16:38:54,828 - __main__ - INFO - [Heartbeat] Epoch 16 batch 501/900 | loss 0.201779 | elapsed 423.3s | graphs 16032
+2026-03-11 16:39:55,199 - __main__ - INFO - [Heartbeat] Epoch 16 batch 572/900 | loss 0.202472 | elapsed 483.6s | graphs 18304
+2026-03-11 16:40:56,050 - __main__ - INFO - [Heartbeat] Epoch 16 batch 644/900 | loss 0.202436 | elapsed 544.5s | graphs 20608
+2026-03-11 16:41:56,626 - __main__ - INFO - [Heartbeat] Epoch 16 batch 717/900 | loss 0.202421 | elapsed 605.1s | graphs 22944
+2026-03-11 16:42:57,156 - __main__ - INFO - [Heartbeat] Epoch 16 batch 788/900 | loss 0.203280 | elapsed 665.6s | graphs 25216
+2026-03-11 16:43:57,452 - __main__ - INFO - [Heartbeat] Epoch 16 batch 862/900 | loss 0.203076 | elapsed 725.9s | graphs 27584
+2026-03-11 16:44:30,626 - __main__ - INFO - Training phase complete (759.1s) | Running validation...
+2026-03-11 16:45:00,000 - __main__ - INFO - Losses | train 0.203822 | val 0.246392 | lr 5.00e-04 | time train=759.1s val=29.4s total=788.4s
+2026-03-11 16:45:00,000 - __main__ - WARNING - Epoch 16 took 788.4s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 16:45:00,000 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-11 16:46:00,631 - __main__ - INFO - [Heartbeat] Epoch 17 batch 73/900 | loss 0.206330 | elapsed 60.6s | graphs 2336
+2026-03-11 16:47:01,289 - __main__ - INFO - [Heartbeat] Epoch 17 batch 148/900 | loss 0.200846 | elapsed 121.3s | graphs 4736
+2026-03-11 16:48:01,910 - __main__ - INFO - [Heartbeat] Epoch 17 batch 219/900 | loss 0.199602 | elapsed 181.9s | graphs 7008
+2026-03-11 16:49:02,659 - __main__ - INFO - [Heartbeat] Epoch 17 batch 292/900 | loss 0.197905 | elapsed 242.7s | graphs 9344
+2026-03-11 16:50:03,331 - __main__ - INFO - [Heartbeat] Epoch 17 batch 367/900 | loss 0.197971 | elapsed 303.3s | graphs 11744
+2026-03-11 16:51:03,541 - __main__ - INFO - [Heartbeat] Epoch 17 batch 437/900 | loss 0.198802 | elapsed 363.5s | graphs 13984
+2026-03-11 16:52:03,906 - __main__ - INFO - [Heartbeat] Epoch 17 batch 506/900 | loss 0.195314 | elapsed 423.9s | graphs 16192
+2026-03-11 16:53:04,666 - __main__ - INFO - [Heartbeat] Epoch 17 batch 577/900 | loss 0.196681 | elapsed 484.7s | graphs 18464
+2026-03-11 16:54:04,996 - __main__ - INFO - [Heartbeat] Epoch 17 batch 648/900 | loss 0.198911 | elapsed 545.0s | graphs 20736
+2026-03-11 16:55:05,153 - __main__ - INFO - [Heartbeat] Epoch 17 batch 718/900 | loss 0.197712 | elapsed 605.2s | graphs 22976
+2026-03-11 16:56:05,181 - __main__ - INFO - [Heartbeat] Epoch 17 batch 788/900 | loss 0.197004 | elapsed 665.2s | graphs 25216
+2026-03-11 16:57:05,255 - __main__ - INFO - [Heartbeat] Epoch 17 batch 862/900 | loss 0.195838 | elapsed 725.3s | graphs 27584
+2026-03-11 16:57:37,576 - __main__ - INFO - Training phase complete (757.6s) | Running validation...
+2026-03-11 16:58:06,971 - __main__ - INFO - Losses | train 0.195640 | val 0.284237 | lr 5.00e-04 | time train=757.6s val=29.4s total=787.0s
+2026-03-11 16:58:06,971 - __main__ - WARNING - Epoch 17 took 787.0s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 16:58:06,971 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-11 16:59:07,062 - __main__ - INFO - [Heartbeat] Epoch 18 batch 73/900 | loss 0.196641 | elapsed 60.1s | graphs 2336
+2026-03-11 17:00:07,569 - __main__ - INFO - [Heartbeat] Epoch 18 batch 142/900 | loss 0.195355 | elapsed 120.6s | graphs 4544
+2026-03-11 17:01:07,884 - __main__ - INFO - [Heartbeat] Epoch 18 batch 213/900 | loss 0.194102 | elapsed 180.9s | graphs 6816
+2026-03-11 17:02:08,127 - __main__ - INFO - [Heartbeat] Epoch 18 batch 287/900 | loss 0.194283 | elapsed 241.2s | graphs 9184
+2026-03-11 17:03:08,499 - __main__ - INFO - [Heartbeat] Epoch 18 batch 359/900 | loss 0.194052 | elapsed 301.5s | graphs 11488
+2026-03-11 17:04:08,736 - __main__ - INFO - [Heartbeat] Epoch 18 batch 430/900 | loss 0.194702 | elapsed 361.8s | graphs 13760
+2026-03-11 17:05:09,118 - __main__ - INFO - [Heartbeat] Epoch 18 batch 500/900 | loss 0.194185 | elapsed 422.1s | graphs 16000
+2026-03-11 17:06:09,370 - __main__ - INFO - [Heartbeat] Epoch 18 batch 570/900 | loss 0.195068 | elapsed 482.4s | graphs 18240
+2026-03-11 17:07:09,571 - __main__ - INFO - [Heartbeat] Epoch 18 batch 643/900 | loss 0.194205 | elapsed 542.6s | graphs 20576
+2026-03-11 17:08:10,458 - __main__ - INFO - [Heartbeat] Epoch 18 batch 716/900 | loss 0.194135 | elapsed 603.5s | graphs 22912
+2026-03-11 17:09:10,521 - __main__ - INFO - [Heartbeat] Epoch 18 batch 789/900 | loss 0.195594 | elapsed 663.5s | graphs 25248
+2026-03-11 17:10:10,796 - __main__ - INFO - [Heartbeat] Epoch 18 batch 860/900 | loss 0.194545 | elapsed 723.8s | graphs 27520
+2026-03-11 17:10:44,469 - __main__ - INFO - Training phase complete (757.5s) | Running validation...
+2026-03-11 17:11:16,025 - __main__ - INFO - Losses | train 0.193792 | val 0.250177 | lr 5.00e-04 | time train=757.5s val=31.6s total=789.1s
+2026-03-11 17:11:16,025 - __main__ - WARNING - Epoch 18 took 789.1s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 17:11:16,025 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-11 17:12:16,462 - __main__ - INFO - [Heartbeat] Epoch 19 batch 73/900 | loss 0.177124 | elapsed 60.4s | graphs 2336
+2026-03-11 17:13:16,525 - __main__ - INFO - [Heartbeat] Epoch 19 batch 144/900 | loss 0.178167 | elapsed 120.5s | graphs 4608
+2026-03-11 17:14:16,570 - __main__ - INFO - [Heartbeat] Epoch 19 batch 216/900 | loss 0.184566 | elapsed 180.5s | graphs 6912
+2026-03-11 17:15:17,136 - __main__ - INFO - [Heartbeat] Epoch 19 batch 289/900 | loss 0.185783 | elapsed 241.1s | graphs 9248
+2026-03-11 17:16:17,237 - __main__ - INFO - [Heartbeat] Epoch 19 batch 360/900 | loss 0.188493 | elapsed 301.2s | graphs 11520
+2026-03-11 17:17:18,136 - __main__ - INFO - [Heartbeat] Epoch 19 batch 432/900 | loss 0.187973 | elapsed 362.1s | graphs 13824
+2026-03-11 17:18:18,445 - __main__ - INFO - [Heartbeat] Epoch 19 batch 504/900 | loss 0.189067 | elapsed 422.4s | graphs 16128
+2026-03-11 17:19:18,673 - __main__ - INFO - [Heartbeat] Epoch 19 batch 574/900 | loss 0.189094 | elapsed 482.6s | graphs 18368
+2026-03-11 17:20:19,373 - __main__ - INFO - [Heartbeat] Epoch 19 batch 631/900 | loss 0.190461 | elapsed 543.3s | graphs 20192
+2026-03-11 17:21:19,530 - __main__ - INFO - [Heartbeat] Epoch 19 batch 699/900 | loss 0.190120 | elapsed 603.5s | graphs 22368
+2026-03-11 17:22:20,437 - __main__ - INFO - [Heartbeat] Epoch 19 batch 770/900 | loss 0.190292 | elapsed 664.4s | graphs 24640
+2026-03-11 17:23:21,204 - __main__ - INFO - [Heartbeat] Epoch 19 batch 845/900 | loss 0.191624 | elapsed 725.2s | graphs 27040
+2026-03-11 17:24:08,307 - __main__ - INFO - Training phase complete (772.3s) | Running validation...
+2026-03-11 17:24:37,888 - __main__ - INFO - Losses | train 0.192143 | val 0.262427 | lr 5.00e-04 | time train=772.3s val=29.6s total=801.9s
+2026-03-11 17:24:37,888 - __main__ - WARNING - Epoch 19 took 801.9s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 17:24:37,888 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-11 17:25:38,218 - __main__ - INFO - [Heartbeat] Epoch 20 batch 74/900 | loss 0.179320 | elapsed 60.3s | graphs 2368
+2026-03-11 17:26:38,457 - __main__ - INFO - [Heartbeat] Epoch 20 batch 147/900 | loss 0.191168 | elapsed 120.6s | graphs 4704
+2026-03-11 17:27:38,660 - __main__ - INFO - [Heartbeat] Epoch 20 batch 219/900 | loss 0.190204 | elapsed 180.8s | graphs 7008
+2026-03-11 17:28:38,883 - __main__ - INFO - [Heartbeat] Epoch 20 batch 290/900 | loss 0.193434 | elapsed 241.0s | graphs 9280
+2026-03-11 17:29:39,305 - __main__ - INFO - [Heartbeat] Epoch 20 batch 361/900 | loss 0.193005 | elapsed 301.4s | graphs 11552
+2026-03-11 17:30:39,450 - __main__ - INFO - [Heartbeat] Epoch 20 batch 430/900 | loss 0.193596 | elapsed 361.6s | graphs 13760
+2026-03-11 17:31:39,517 - __main__ - INFO - [Heartbeat] Epoch 20 batch 502/900 | loss 0.196259 | elapsed 421.6s | graphs 16064
+2026-03-11 17:32:39,663 - __main__ - INFO - [Heartbeat] Epoch 20 batch 572/900 | loss 0.196530 | elapsed 481.8s | graphs 18304
+2026-03-11 17:33:40,516 - __main__ - INFO - [Heartbeat] Epoch 20 batch 638/900 | loss 0.195913 | elapsed 542.6s | graphs 20416
+2026-03-11 17:34:41,283 - __main__ - INFO - [Heartbeat] Epoch 20 batch 709/900 | loss 0.196419 | elapsed 603.4s | graphs 22688
+2026-03-11 17:35:41,681 - __main__ - INFO - [Heartbeat] Epoch 20 batch 780/900 | loss 0.196620 | elapsed 663.8s | graphs 24960
+2026-03-11 17:36:42,503 - __main__ - INFO - [Heartbeat] Epoch 20 batch 855/900 | loss 0.196435 | elapsed 724.6s | graphs 27360
+2026-03-11 17:37:25,456 - __main__ - INFO - Training phase complete (767.6s) | Running validation...
+2026-03-11 17:37:55,786 - __main__ - INFO - Losses | train 0.195777 | val 0.274472 | lr 2.50e-04 | time train=767.6s val=30.3s total=797.9s
+2026-03-11 17:37:55,787 - __main__ - WARNING - Epoch 20 took 797.9s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 17:37:55,787 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-11 17:38:56,107 - __main__ - INFO - [Heartbeat] Epoch 21 batch 70/900 | loss 0.200860 | elapsed 60.3s | graphs 2240
+2026-03-11 17:39:56,845 - __main__ - INFO - [Heartbeat] Epoch 21 batch 142/900 | loss 0.198683 | elapsed 121.1s | graphs 4544
+2026-03-11 17:40:57,425 - __main__ - INFO - [Heartbeat] Epoch 21 batch 216/900 | loss 0.192322 | elapsed 181.6s | graphs 6912
+2026-03-11 17:41:57,474 - __main__ - INFO - [Heartbeat] Epoch 21 batch 287/900 | loss 0.189665 | elapsed 241.7s | graphs 9184
+2026-03-11 17:42:57,568 - __main__ - INFO - [Heartbeat] Epoch 21 batch 357/900 | loss 0.186855 | elapsed 301.8s | graphs 11424
+2026-03-11 17:43:58,327 - __main__ - INFO - [Heartbeat] Epoch 21 batch 429/900 | loss 0.186786 | elapsed 362.5s | graphs 13728
+2026-03-11 17:44:59,108 - __main__ - INFO - [Heartbeat] Epoch 21 batch 501/900 | loss 0.185494 | elapsed 423.3s | graphs 16032
+2026-03-11 17:45:59,264 - __main__ - INFO - [Heartbeat] Epoch 21 batch 571/900 | loss 0.185805 | elapsed 483.5s | graphs 18272
+2026-03-11 17:46:59,839 - __main__ - INFO - [Heartbeat] Epoch 21 batch 644/900 | loss 0.188485 | elapsed 544.1s | graphs 20608
+2026-03-11 17:47:59,856 - __main__ - INFO - [Heartbeat] Epoch 21 batch 717/900 | loss 0.189423 | elapsed 604.1s | graphs 22944
+2026-03-11 17:48:59,899 - __main__ - INFO - [Heartbeat] Epoch 21 batch 788/900 | loss 0.188552 | elapsed 664.1s | graphs 25216
+2026-03-11 17:49:59,999 - __main__ - INFO - [Heartbeat] Epoch 21 batch 860/900 | loss 0.189329 | elapsed 724.2s | graphs 27520
+2026-03-11 17:50:34,059 - __main__ - INFO - Training phase complete (758.3s) | Running validation...
+2026-03-11 17:51:03,885 - __main__ - INFO - Losses | train 0.189436 | val 0.309069 | lr 2.50e-04 | time train=758.3s val=29.8s total=788.1s
+2026-03-11 17:51:03,885 - __main__ - WARNING - Epoch 21 took 788.1s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 17:51:03,885 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-11 17:52:04,427 - __main__ - INFO - [Heartbeat] Epoch 22 batch 71/900 | loss 0.178542 | elapsed 60.5s | graphs 2272
+2026-03-11 17:53:04,485 - __main__ - INFO - [Heartbeat] Epoch 22 batch 143/900 | loss 0.183212 | elapsed 120.6s | graphs 4576
+2026-03-11 17:54:04,924 - __main__ - INFO - [Heartbeat] Epoch 22 batch 215/900 | loss 0.183011 | elapsed 181.0s | graphs 6880
+2026-03-11 17:55:05,167 - __main__ - INFO - [Heartbeat] Epoch 22 batch 287/900 | loss 0.184094 | elapsed 241.3s | graphs 9184
+2026-03-11 17:56:05,232 - __main__ - INFO - [Heartbeat] Epoch 22 batch 357/900 | loss 0.186369 | elapsed 301.3s | graphs 11424
+2026-03-11 17:57:05,654 - __main__ - INFO - [Heartbeat] Epoch 22 batch 431/900 | loss 0.185525 | elapsed 361.8s | graphs 13792
+2026-03-11 17:58:05,724 - __main__ - INFO - [Heartbeat] Epoch 22 batch 500/900 | loss 0.187479 | elapsed 421.8s | graphs 16000
+2026-03-11 17:59:06,216 - __main__ - INFO - [Heartbeat] Epoch 22 batch 572/900 | loss 0.186764 | elapsed 482.3s | graphs 18304
+2026-03-11 18:00:06,557 - __main__ - INFO - [Heartbeat] Epoch 22 batch 644/900 | loss 0.186859 | elapsed 542.7s | graphs 20608
+2026-03-11 18:01:07,032 - __main__ - INFO - [Heartbeat] Epoch 22 batch 715/900 | loss 0.186565 | elapsed 603.1s | graphs 22880
+2026-03-11 18:02:07,553 - __main__ - INFO - [Heartbeat] Epoch 22 batch 786/900 | loss 0.187941 | elapsed 663.7s | graphs 25152
+2026-03-11 18:03:07,862 - __main__ - INFO - [Heartbeat] Epoch 22 batch 858/900 | loss 0.187256 | elapsed 724.0s | graphs 27456
+2026-03-11 18:03:42,646 - __main__ - INFO - Training phase complete (758.8s) | Running validation...
+2026-03-11 18:04:12,200 - __main__ - INFO - Losses | train 0.186856 | val 0.383010 | lr 2.50e-04 | time train=758.8s val=29.6s total=788.3s
+2026-03-11 18:04:12,201 - __main__ - WARNING - Epoch 22 took 788.3s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 18:04:12,201 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-11 18:05:12,364 - __main__ - INFO - [Heartbeat] Epoch 23 batch 72/900 | loss 0.172784 | elapsed 60.2s | graphs 2304
+2026-03-11 18:06:12,655 - __main__ - INFO - [Heartbeat] Epoch 23 batch 144/900 | loss 0.178142 | elapsed 120.5s | graphs 4608
+2026-03-11 18:07:13,150 - __main__ - INFO - [Heartbeat] Epoch 23 batch 216/900 | loss 0.176818 | elapsed 180.9s | graphs 6912
+2026-03-11 18:08:13,653 - __main__ - INFO - [Heartbeat] Epoch 23 batch 287/900 | loss 0.172992 | elapsed 241.5s | graphs 9184
+2026-03-11 18:09:14,031 - __main__ - INFO - [Heartbeat] Epoch 23 batch 357/900 | loss 0.177580 | elapsed 301.8s | graphs 11424
+2026-03-11 18:10:14,712 - __main__ - INFO - [Heartbeat] Epoch 23 batch 428/900 | loss 0.175007 | elapsed 362.5s | graphs 13696
+2026-03-11 18:11:14,910 - __main__ - INFO - [Heartbeat] Epoch 23 batch 502/900 | loss 0.178008 | elapsed 422.7s | graphs 16064
+2026-03-11 18:12:15,394 - __main__ - INFO - [Heartbeat] Epoch 23 batch 571/900 | loss 0.180342 | elapsed 483.2s | graphs 18272
+2026-03-11 18:13:16,138 - __main__ - INFO - [Heartbeat] Epoch 23 batch 643/900 | loss 0.181013 | elapsed 543.9s | graphs 20576
+2026-03-11 18:14:16,798 - __main__ - INFO - [Heartbeat] Epoch 23 batch 716/900 | loss 0.181865 | elapsed 604.6s | graphs 22912
+2026-03-11 18:15:17,537 - __main__ - INFO - [Heartbeat] Epoch 23 batch 789/900 | loss 0.182173 | elapsed 665.3s | graphs 25248
+2026-03-11 18:16:17,566 - __main__ - INFO - [Heartbeat] Epoch 23 batch 861/900 | loss 0.181927 | elapsed 725.4s | graphs 27552
+2026-03-11 18:16:50,730 - __main__ - INFO - Training phase complete (758.5s) | Running validation...
+2026-03-11 18:17:19,944 - __main__ - INFO - Losses | train 0.183275 | val 0.208236 | lr 2.50e-04 | time train=758.5s val=29.2s total=787.7s
+2026-03-11 18:17:19,945 - __main__ - WARNING - Epoch 23 took 787.7s (>300s threshold). This is expected for large models/datasets.
+2026-03-11 18:17:19,945 - __main__ - INFO - Early stopping at epoch 023 | best val 0.179610 | patience exhausted (15/15)
+Validation:   0%|          | 0/250 [00:00<?, ?it/s]Validation:   0%|          | 1/250 [00:01<06:30,  1.57s/it]Validation:   1%|          | 2/250 [00:03<06:38,  1.61s/it]Validation:   1%|          | 3/250 [00:04<06:43,  1.63s/it]Validation:   2%|▏         | 4/250 [00:06<06:29,  1.58s/it]Validation:   2%|▏         | 5/250 [00:07<06:26,  1.58s/it]Validation:   2%|▏         | 6/250 [00:09<06:19,  1.55s/it]Validation:   3%|▎         | 7/250 [00:11<06:24,  1.58s/it]Validation:   3%|▎         | 8/250 [00:12<06:05,  1.51s/it]Validation:   4%|▎         | 9/250 [00:13<06:04,  1.51s/it]Validation:   4%|▍         | 10/250 [00:15<06:34,  1.64s/it]Validation:   4%|▍         | 11/250 [00:17<06:21,  1.60s/it]Validation:   5%|▍         | 12/250 [00:18<06:17,  1.59s/it]Validation:   5%|▌         | 13/250 [00:20<06:17,  1.59s/it]Validation:   6%|▌         | 14/250 [00:22<06:10,  1.57s/it]Validation:   6%|▌         | 15/250 [00:23<06:20,  1.62s/it]Validation:   6%|▋         | 16/250 [00:25<06:13,  1.60s/it]Validation:   7%|▋         | 17/250 [00:26<06:10,  1.59s/it]Validation:   7%|▋         | 18/250 [00:28<06:13,  1.61s/it]Validation:   8%|▊         | 19/250 [00:30<06:10,  1.60s/it]Validation:   8%|▊         | 20/250 [00:31<06:20,  1.65s/it]Validation:   8%|▊         | 21/250 [00:33<06:06,  1.60s/it]Validation:   9%|▉         | 22/250 [00:34<05:59,  1.58s/it]Validation:   9%|▉         | 23/250 [00:36<05:53,  1.56s/it]Validation:  10%|▉         | 24/250 [00:38<05:54,  1.57s/it]Validation:  10%|█         | 25/250 [00:39<06:15,  1.67s/it]Validation:  10%|█         | 26/250 [00:41<06:12,  1.66s/it]Validation:  11%|█         | 27/250 [00:43<06:05,  1.64s/it]Validation:  11%|█         | 28/250 [00:44<06:01,  1.63s/it]Validation:  12%|█▏        | 29/250 [00:46<05:55,  1.61s/it]Validation:  12%|█▏        | 30/250 [00:48<06:04,  1.66s/it]Validation:  12%|█▏        | 31/250 [00:49<05:56,  1.63s/it]Validation:  13%|█▎        | 32/250 [00:51<05:44,  1.58s/it]Validation:  13%|█▎        | 33/250 [00:52<05:40,  1.57s/it]Validation:  14%|█▎        | 34/250 [00:54<05:41,  1.58s/it]Validation:  14%|█▍        | 35/250 [00:55<05:40,  1.58s/it]Validation:  14%|█▍        | 36/250 [00:57<05:28,  1.54s/it]Validation:  15%|█▍        | 37/250 [00:58<05:23,  1.52s/it]Validation:  15%|█▌        | 38/250 [01:00<05:34,  1.58s/it]Validation:  16%|█▌        | 39/250 [01:02<05:35,  1.59s/it]Validation:  16%|█▌        | 40/250 [01:03<05:30,  1.58s/it]Validation:  16%|█▋        | 41/250 [01:05<05:29,  1.58s/it]Validation:  17%|█▋        | 42/250 [01:06<05:30,  1.59s/it]Validation:  17%|█▋        | 43/250 [01:08<05:28,  1.59s/it]Validation:  18%|█▊        | 44/250 [01:09<05:16,  1.54s/it]Validation:  18%|█▊        | 45/250 [01:11<05:14,  1.53s/it]Validation:  18%|█▊        | 46/250 [01:12<05:17,  1.56s/it]Validation:  19%|█▉        | 47/250 [01:14<05:23,  1.59s/it]Validation:  19%|█▉        | 48/250 [01:16<05:17,  1.57s/it]Validation:  20%|█▉        | 49/250 [01:18<05:48,  1.73s/it]Validation:  20%|██        | 50/250 [01:20<05:59,  1.80s/it]Validation:  20%|██        | 51/250 [01:21<05:47,  1.75s/it]Validation:  21%|██        | 52/250 [01:23<05:41,  1.72s/it]Validation:  21%|██        | 53/250 [01:25<05:25,  1.65s/it]Validation:  22%|██▏       | 54/250 [01:26<05:15,  1.61s/it]Validation:  22%|██▏       | 55/250 [01:28<05:18,  1.63s/it]Validation:  22%|██▏       | 56/250 [01:30<05:37,  1.74s/it]Validation:  23%|██▎       | 57/250 [01:31<05:27,  1.70s/it]Validation:  23%|██▎       | 58/250 [01:33<05:20,  1.67s/it]Validation:  24%|██▎       | 59/250 [01:34<05:12,  1.64s/it]Validation:  24%|██▍       | 60/250 [01:36<05:11,  1.64s/it]Validation:  24%|██▍       | 61/250 [01:38<05:15,  1.67s/it]Validation:  25%|██▍       | 62/250 [01:40<05:15,  1.68s/it]Validation:  25%|██▌       | 63/250 [01:41<05:20,  1.71s/it]Validation:  26%|██▌       | 64/250 [01:43<05:05,  1.64s/it]Validation:  26%|██▌       | 65/250 [01:44<05:03,  1.64s/it]Validation:  26%|██▋       | 66/250 [01:46<05:02,  1.64s/it]Validation:  27%|██▋       | 67/250 [01:48<04:49,  1.58s/it]Validation:  27%|██▋       | 68/250 [01:49<04:54,  1.62s/it]Validation:  28%|██▊       | 69/250 [01:51<04:57,  1.64s/it]Validation:  28%|██▊       | 70/250 [01:53<04:53,  1.63s/it]Validation:  28%|██▊       | 71/250 [01:54<04:47,  1.61s/it]Validation:  29%|██▉       | 72/250 [01:56<04:40,  1.58s/it]Validation:  29%|██▉       | 73/250 [01:57<04:44,  1.61s/it]Validation:  30%|██▉       | 74/250 [01:59<04:43,  1.61s/it]Validation:  30%|███       | 75/250 [02:01<04:40,  1.60s/it]Validation:  30%|███       | 76/250 [02:02<04:37,  1.60s/it]Validation:  31%|███       | 77/250 [02:04<04:38,  1.61s/it]Validation:  31%|███       | 78/250 [02:05<04:35,  1.60s/it]Validation:  32%|███▏      | 79/250 [02:07<04:41,  1.64s/it]Validation:  32%|███▏      | 80/250 [02:09<04:42,  1.66s/it]Validation:  32%|███▏      | 81/250 [02:10<04:35,  1.63s/it]Validation:  33%|███▎      | 82/250 [02:12<04:32,  1.62s/it]Validation:  33%|███▎      | 83/250 [02:14<04:31,  1.63s/it]Validation:  34%|███▎      | 84/250 [02:15<04:28,  1.61s/it]Validation:  34%|███▍      | 85/250 [02:16<04:10,  1.52s/it]Validation:  34%|███▍      | 86/250 [02:18<04:12,  1.54s/it]Validation:  35%|███▍      | 87/250 [02:20<04:12,  1.55s/it]Validation:  35%|███▌      | 88/250 [02:21<04:10,  1.55s/it]Validation:  36%|███▌      | 89/250 [02:23<04:05,  1.53s/it]Validation:  36%|███▌      | 90/250 [02:24<04:05,  1.54s/it]Validation:  36%|███▋      | 91/250 [02:26<04:03,  1.53s/it]Validation:  37%|███▋      | 92/250 [02:27<04:07,  1.57s/it]Validation:  37%|███▋      | 93/250 [02:29<04:08,  1.58s/it]Validation:  38%|███▊      | 94/250 [02:30<04:01,  1.55s/it]Validation:  38%|███▊      | 95/250 [02:32<03:55,  1.52s/it]Validation:  38%|███▊      | 96/250 [02:33<03:48,  1.48s/it]Validation:  39%|███▉      | 97/250 [02:35<03:37,  1.42s/it]Validation:  39%|███▉      | 98/250 [02:36<03:37,  1.43s/it]Validation:  40%|███▉      | 99/250 [02:38<03:39,  1.45s/it]Validation:  40%|████      | 100/250 [02:39<03:33,  1.43s/it]Validation:  40%|████      | 101/250 [02:40<03:37,  1.46s/it]Validation:  41%|████      | 102/250 [02:42<03:31,  1.43s/it]Validation:  41%|████      | 103/250 [02:43<03:36,  1.47s/it]Validation:  42%|████▏     | 104/250 [02:45<03:28,  1.43s/it]Validation:  42%|████▏     | 105/250 [02:46<03:32,  1.47s/it]Validation:  42%|████▏     | 106/250 [02:48<03:23,  1.41s/it]Validation:  43%|████▎     | 107/250 [02:49<03:28,  1.46s/it]Validation:  43%|████▎     | 108/250 [02:51<03:27,  1.46s/it]Validation:  44%|████▎     | 109/250 [02:52<03:36,  1.53s/it]Validation:  44%|████▍     | 110/250 [02:54<03:27,  1.48s/it]Validation:  44%|████▍     | 111/250 [02:55<03:38,  1.57s/it]Validation:  45%|████▍     | 112/250 [02:57<03:26,  1.50s/it]Validation:  45%|████▌     | 113/250 [02:58<03:18,  1.45s/it]Validation:  46%|████▌     | 114/250 [02:59<03:14,  1.43s/it]Validation:  46%|████▌     | 115/250 [03:01<03:13,  1.43s/it]Validation:  46%|████▋     | 116/250 [03:02<03:13,  1.45s/it]Validation:  47%|████▋     | 117/250 [03:04<03:12,  1.45s/it]Validation:  47%|████▋     | 118/250 [03:05<03:14,  1.47s/it]Validation:  48%|████▊     | 119/250 [03:07<03:07,  1.43s/it]Validation:  48%|████▊     | 120/250 [03:08<03:10,  1.46s/it]Validation:  48%|████▊     | 121/250 [03:10<03:12,  1.49s/it]Validation:  49%|████▉     | 122/250 [03:11<03:10,  1.49s/it]Validation:  49%|████▉     | 123/250 [03:13<03:02,  1.44s/it]Validation:  50%|████▉     | 124/250 [03:14<03:00,  1.43s/it]Validation:  50%|█████     | 125/250 [03:15<03:02,  1.46s/it]Validation:  50%|█████     | 126/250 [03:17<02:56,  1.42s/it]Validation:  51%|█████     | 127/250 [03:18<02:51,  1.39s/it]Validation:  51%|█████     | 128/250 [03:20<02:55,  1.44s/it]Validation:  52%|█████▏    | 129/250 [03:21<02:52,  1.42s/it]Validation:  52%|█████▏    | 130/250 [03:22<02:47,  1.39s/it]Validation:  52%|█████▏    | 131/250 [03:24<02:52,  1.45s/it]Validation:  53%|█████▎    | 132/250 [03:25<02:50,  1.45s/it]Validation:  53%|█████▎    | 133/250 [03:27<02:43,  1.40s/it]Validation:  54%|█████▎    | 134/250 [03:28<02:55,  1.51s/it]Validation:  54%|█████▍    | 135/250 [03:30<02:48,  1.46s/it]Validation:  54%|█████▍    | 136/250 [03:31<02:39,  1.40s/it]Validation:  55%|█████▍    | 137/250 [03:33<02:38,  1.40s/it]Validation:  55%|█████▌    | 138/250 [03:34<02:43,  1.46s/it]Validation:  56%|█████▌    | 139/250 [03:36<02:42,  1.46s/it]Validation:  56%|█████▌    | 140/250 [03:37<02:44,  1.50s/it]Validation:  56%|█████▋    | 141/250 [03:38<02:34,  1.41s/it]Validation:  57%|█████▋    | 142/250 [03:40<02:30,  1.39s/it]Validation:  57%|█████▋    | 143/250 [03:41<02:31,  1.41s/it]Validation:  58%|█████▊    | 144/250 [03:43<02:40,  1.51s/it]Validation:  58%|█████▊    | 145/250 [03:44<02:35,  1.48s/it]Validation:  58%|█████▊    | 146/250 [03:46<02:30,  1.45s/it]Validation:  59%|█████▉    | 147/250 [03:47<02:31,  1.47s/it]Validation:  59%|█████▉    | 148/250 [03:49<02:29,  1.46s/it]Validation:  60%|█████▉    | 149/250 [03:50<02:25,  1.44s/it]Validation:  60%|██████    | 150/250 [03:51<02:20,  1.41s/it]Validation:  60%|██████    | 151/250 [03:53<02:18,  1.40s/it]Validation:  61%|██████    | 152/250 [03:54<02:19,  1.43s/it]Validation:  61%|██████    | 153/250 [03:56<02:16,  1.41s/it]Validation:  62%|██████▏   | 154/250 [03:57<02:14,  1.40s/it]Validation:  62%|██████▏   | 155/250 [03:58<02:12,  1.39s/it]Validation:  62%|██████▏   | 156/250 [04:00<02:08,  1.37s/it]Validation:  63%|██████▎   | 157/250 [04:01<02:04,  1.34s/it]Validation:  63%|██████▎   | 158/250 [04:02<02:04,  1.35s/it]Validation:  64%|██████▎   | 159/250 [04:04<02:06,  1.39s/it]Validation:  64%|██████▍   | 160/250 [04:05<02:03,  1.38s/it]Validation:  64%|██████▍   | 161/250 [04:07<02:07,  1.43s/it]Validation:  65%|██████▍   | 162/250 [04:08<02:02,  1.40s/it]Validation:  65%|██████▌   | 163/250 [04:09<02:00,  1.38s/it]Validation:  66%|██████▌   | 164/250 [04:11<01:58,  1.38s/it]Validation:  66%|██████▌   | 165/250 [04:12<01:59,  1.41s/it]Validation:  66%|██████▋   | 166/250 [04:14<02:00,  1.43s/it]Validation:  67%|██████▋   | 167/250 [04:15<02:00,  1.45s/it]Validation:  67%|██████▋   | 168/250 [04:16<01:54,  1.40s/it]Validation:  68%|██████▊   | 169/250 [04:18<01:54,  1.42s/it]Validation:  68%|██████▊   | 170/250 [04:19<01:53,  1.42s/it]Validation:  68%|██████▊   | 171/250 [04:21<01:50,  1.41s/it]Validation:  69%|██████▉   | 172/250 [04:22<01:48,  1.39s/it]Validation:  69%|██████▉   | 173/250 [04:23<01:44,  1.36s/it]Validation:  70%|██████▉   | 174/250 [04:25<01:47,  1.42s/it]Validation:  70%|███████   | 175/250 [04:26<01:46,  1.42s/it]Validation:  70%|███████   | 176/250 [04:28<01:45,  1.42s/it]Validation:  71%|███████   | 177/250 [04:29<01:41,  1.39s/it]Validation:  71%|███████   | 178/250 [04:31<01:47,  1.50s/it]Validation:  72%|███████▏  | 179/250 [04:32<01:46,  1.50s/it]Validation:  72%|███████▏  | 180/250 [04:34<01:46,  1.52s/it]Validation:  72%|███████▏  | 181/250 [04:35<01:40,  1.46s/it]Validation:  73%|███████▎  | 182/250 [04:37<01:38,  1.44s/it]Validation:  73%|███████▎  | 183/250 [04:38<01:33,  1.39s/it]Validation:  74%|███████▎  | 184/250 [04:39<01:31,  1.39s/it]Validation:  74%|███████▍  | 185/250 [04:41<01:29,  1.37s/it]Validation:  74%|███████▍  | 186/250 [04:42<01:25,  1.34s/it]Validation:  75%|███████▍  | 187/250 [04:43<01:25,  1.36s/it]Validation:  75%|███████▌  | 188/250 [04:45<01:21,  1.32s/it]Validation:  76%|███████▌  | 189/250 [04:46<01:22,  1.36s/it]Validation:  76%|███████▌  | 190/250 [04:48<01:25,  1.42s/it]Validation:  76%|███████▋  | 191/250 [04:49<01:22,  1.40s/it]Validation:  77%|███████▋  | 192/250 [04:50<01:19,  1.37s/it]Validation:  77%|███████▋  | 193/250 [04:51<01:14,  1.31s/it]Validation:  78%|███████▊  | 194/250 [04:53<01:15,  1.35s/it]Validation:  78%|███████▊  | 195/250 [04:54<01:17,  1.40s/it]Validation:  78%|███████▊  | 196/250 [04:56<01:17,  1.43s/it]Validation:  79%|███████▉  | 197/250 [04:58<01:21,  1.53s/it]Validation:  79%|███████▉  | 198/250 [04:59<01:19,  1.54s/it]Validation:  80%|███████▉  | 199/250 [05:01<01:18,  1.55s/it]Validation:  80%|████████  | 200/250 [05:02<01:14,  1.49s/it]Validation:  80%|████████  | 201/250 [05:04<01:13,  1.51s/it]Validation:  81%|████████  | 202/250 [05:05<01:12,  1.52s/it]Validation:  81%|████████  | 203/250 [05:07<01:12,  1.54s/it]Validation:  82%|████████▏ | 204/250 [05:09<01:13,  1.60s/it]Validation:  82%|████████▏ | 205/250 [05:10<01:12,  1.61s/it]Validation:  82%|████████▏ | 206/250 [05:12<01:09,  1.58s/it]Validation:  83%|████████▎ | 207/250 [05:13<01:09,  1.61s/it]Validation:  83%|████████▎ | 208/250 [05:15<01:10,  1.68s/it]Validation:  84%|████████▎ | 209/250 [05:17<01:04,  1.58s/it]Validation:  84%|████████▍ | 210/250 [05:18<01:01,  1.55s/it]Validation:  84%|████████▍ | 211/250 [05:19<00:58,  1.51s/it]Validation:  85%|████████▍ | 212/250 [05:21<00:58,  1.55s/it]Validation:  85%|████████▌ | 213/250 [05:23<00:58,  1.57s/it]Validation:  86%|████████▌ | 214/250 [05:24<00:56,  1.58s/it]Validation:  86%|████████▌ | 215/250 [05:26<00:55,  1.59s/it]Validation:  86%|████████▋ | 216/250 [05:27<00:53,  1.57s/it]Validation:  87%|████████▋ | 217/250 [05:29<00:50,  1.55s/it]Validation:  87%|████████▋ | 218/250 [05:30<00:47,  1.49s/it]Validation:  88%|████████▊ | 219/250 [05:32<00:47,  1.55s/it]Validation:  88%|████████▊ | 220/250 [05:33<00:45,  1.53s/it]Validation:  88%|████████▊ | 221/250 [05:35<00:42,  1.46s/it]Validation:  89%|████████▉ | 222/250 [05:36<00:39,  1.42s/it]Validation:  89%|████████▉ | 223/250 [05:37<00:38,  1.43s/it]Validation:  90%|████████▉ | 224/250 [05:39<00:37,  1.45s/it]Validation:  90%|█████████ | 225/250 [05:41<00:38,  1.54s/it]Validation:  90%|█████████ | 226/250 [05:42<00:38,  1.59s/it]Validation:  91%|█████████ | 227/250 [05:44<00:34,  1.52s/it]Validation:  91%|█████████ | 228/250 [05:45<00:32,  1.50s/it]Validation:  92%|█████████▏| 229/250 [05:47<00:31,  1.49s/it]Validation:  92%|█████████▏| 230/250 [05:48<00:30,  1.55s/it]Validation:  92%|█████████▏| 231/250 [05:50<00:29,  1.54s/it]Validation:  93%|█████████▎| 232/250 [05:51<00:26,  1.45s/it]Validation:  93%|█████████▎| 233/250 [05:52<00:23,  1.39s/it]Validation:  94%|█████████▎| 234/250 [05:54<00:22,  1.44s/it]Validation:  94%|█████████▍| 235/250 [05:56<00:22,  1.49s/it]Validation:  94%|█████████▍| 236/250 [05:57<00:20,  1.47s/it]Validation:  95%|█████████▍| 237/250 [05:58<00:18,  1.40s/it]Validation:  95%|█████████▌| 238/250 [05:59<00:16,  1.35s/it]Validation:  96%|█████████▌| 239/250 [06:01<00:14,  1.36s/it]Validation:  96%|█████████▌| 240/250 [06:02<00:13,  1.36s/it]Validation:  96%|█████████▋| 241/250 [06:04<00:12,  1.37s/it]Validation:  97%|█████████▋| 242/250 [06:05<00:10,  1.35s/it]Validation:  97%|█████████▋| 243/250 [06:06<00:09,  1.39s/it]Validation:  98%|█████████▊| 244/250 [06:08<00:08,  1.41s/it]Validation:  98%|█████████▊| 245/250 [06:09<00:06,  1.39s/it]Validation:  98%|█████████▊| 246/250 [06:11<00:05,  1.37s/it]Validation:  99%|█████████▉| 247/250 [06:12<00:04,  1.42s/it]Validation:  99%|█████████▉| 248/250 [06:14<00:02,  1.45s/it]Validation: 100%|█████████▉| 249/250 [06:15<00:01,  1.47s/it]Validation: 100%|██████████| 250/250 [06:17<00:00,  1.46s/it]                                                             2026-03-11 18:23:37,272 - __main__ - INFO - Final test loss: 0.179389
