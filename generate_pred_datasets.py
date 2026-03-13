@@ -180,41 +180,6 @@ def compute_entry_for_config(
             global_feature_variant="binned",
         )
 
-        backend_config = BackendConfig(
-            name=backend,
-            representation=representation,
-            params={},
-        )
-        property_request = PropertyRequest(
-            name="SRE",
-            method=method,
-            params={},
-        )
-        exp_config = ExperimentConfig(
-            spec=spec,
-            backend=backend_config,
-            properties=[property_request],
-        )
-
-        backend_factory = BACKEND_REGISTRY[backend]
-        backend_instance = backend_factory() if callable(backend_factory) else backend_factory
-
-        state = backend_instance.simulate(
-            spec,
-            representation=representation,
-            **backend_config.params,
-        )
-
-        result = run_experiment(
-            exp_config,
-            backend_registry=BACKEND_REGISTRY,
-            state=state,
-            cache=cache,
-        )
-
-        sre_result = result.results.get("SRE")
-        sre_value = float(sre_result.value) if sre_result is not None else None
-
         # ---- compact storage ----
         x = graph_data.x.detach().cpu()
         # Only uint8 if binary
@@ -231,7 +196,6 @@ def compute_entry_for_config(
             "edge_index": edge_index,
             "global_features": global_features,
             "gate_counts": _safe_gate_counts(gate_counts),
-            "sre": sre_value,
             "meta": {
                 "cid": cid,
                 "family": family,
@@ -248,7 +212,7 @@ def compute_entry_for_config(
         torch.save(payload, tmp_path)
         tmp_path.replace(path)
 
-        return {"cid": cid, "sre": sre_value, "path": str(path)}
+        return {"cid": cid, "path": str(path)}
 
     except Exception:
         logger.exception(
@@ -449,15 +413,15 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "haar",
+        "random,quansistor,clifford",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
         25,
         help="Number of seeds per (family, qubits, layers)",
     ),
-    qubits_min: int = typer.Option(4, help="Minimum number of qubits"),
-    qubits_max: int = typer.Option(10, help="Maximum number of qubits (inclusive)"),
+    qubits_min: int = typer.Option(12, help="Minimum number of qubits"),
+    qubits_max: int = typer.Option(24, help="Maximum number of qubits (inclusive)"),
     qubits_step: int = typer.Option(2, help="Step for qubits range"),
     layers_min: int = typer.Option(1, help="Minimum number of layers"),
     layers_max: int = typer.Option(99, help="Maximum number of layers (inclusive)"),
@@ -481,7 +445,7 @@ def main(
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
     layers_values = np.arange(layers_min, layers_max + 1, layers_step)
 
-    output_dir = PROJECT_ROOT / output_file / f"encoding_data_{backend}"
+    output_dir = PROJECT_ROOT / output_file / "predictions"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for family in selected_families:
