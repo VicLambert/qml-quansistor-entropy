@@ -10,6 +10,7 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
+from dask.graph_manipulation import checkpoint
 import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
@@ -18,6 +19,7 @@ import typer
 from torch.amp import GradScaler, autocast
 from torch.optim import Adam
 from torch.utils.data import random_split
+from torch_geometric.data import Data, Dataset as PyGDataset
 from torch_geometric.loader import DataLoader
 from tqdm import tqdm
 
@@ -105,6 +107,39 @@ class PaddedGraphDatasetWrapper:
         return len(self.dataset)
 
 
+MASTER_GATE_TYPES = [
+    "input", "measurement",
+    "h", "s", "t", "id",
+    "rx", "ry", "rz",
+    "cx",
+    "qx", "qy", "haar",
+]
+
+FAMILY_GATE_TYPES = {
+    "random": ["input", "measurement", "rx", "ry", "rz", "cx"],
+    "clifford": ["input", "measurement", "h", "s", "t", "id", "cx"],
+    "haar": ["input", "measurement", "haar"],
+    "quansistor": ["input", "measurement", "qx", "qy"],
+}
+
+class FamilyNodeProjector:
+    def __init__(self, family: str):
+        self.family = family
+        self.master_gate_types = MASTER_GATE_TYPES
+        self.family_gate_types = FAMILY_GATE_TYPES[family]
+        self.keep_gate_idx = [
+            self.master_gate_types.index(name) for name in self.family_gate_types
+        ]
+        self.n_gate_master = len(self.master_gate_types)
+
+    def __call__(self, data: Data) -> Data:
+        gate_part = data.x[:, :self.n_gate_master]
+        qubit_part = data.x[:, self.n_gate_master:]
+
+        out = data.clone()
+        out.x = torch.cat([gate_part[:, self.keep_gate_idx], qubit_part], dim=1)
+        return out
+
 def _safe_y(batch) -> torch.Tensor:
     """Return y as float tensor shaped [num_graphs]."""
     if not hasattr(batch, "y") or batch.y is None:
@@ -118,12 +153,12 @@ def _safe_y(batch) -> torch.Tensor:
 
 
 def get_node_feature_dim_from_sample(pt_paths: list[str]) -> int:
-    obj = torch.load(pt_paths[0], map_location="cpu")
+    obj = torch.load(pt_paths[0], map_location="cuda" if torch.cuda.is_available() else "cpu")
     return int(obj["x"].shape[1])
 
 
 def get_global_feature_dim_from_sample(pt_paths: list[str]) -> int:
-    obj = torch.load(pt_paths[0], map_location="cpu")
+    obj = torch.load(pt_paths[0], map_location="cuda" if torch.cuda.is_available() else "cpu")
     return int(obj["global_features"].numel())
 
 
@@ -221,8 +256,9 @@ def build_train_val_test_loaders_two_stage(
     seed: int = 42,
     global_feature_variant: str = "baseline",
     node_feature_backend_variant: str | None = None,
-) -> tuple[DataLoader, DataLoader, DataLoader, int, int]:
-    suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
+    family_projection: str | None = None,
+) -> tuple[DataLoader, DataLoader, DataLoader, int, int, QuantumCircuitGraphDataset]:
+    suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}_family_projection_{family_projection or 'none'}"
     root = _cache_root_for_paths(pt_paths, suffix=suffix)
 
     dataset = QuantumCircuitGraphDataset(
@@ -231,10 +267,20 @@ def build_train_val_test_loaders_two_stage(
         global_feature_variant=global_feature_variant,
         node_feature_backend_variant=node_feature_backend_variant,
     )
-    if len(dataset) < 3:
-        raise RuntimeError("Dataset too small for train/val/test splitting.")
 
-    padded_dataset = PaddedGraphDatasetWrapper(dataset)
+    projected_dataset = dataset
+    if family_projection is not None:
+        if family_projection not in FAMILY_REGISTRY:
+            raise ValueError(f"Invalid family_projection '{family_projection}'. Must be one of: {list(FAMILY_REGISTRY.keys())}")
+        logger.info(f"Applying family projection for family '{family_projection}'")
+        projector = FamilyNodeProjector(family_projection)
+        projected_dataset = projector(projected_dataset)
+
+    if len(projected_dataset) < 3:
+        msg = "Dataset too small for train/val/test splitting."
+        raise RuntimeError(msg)
+
+    padded_dataset = PaddedGraphDatasetWrapper(projected_dataset)
 
     node_in_dim = padded_dataset.target_dim
     global_in_dim = dataset.global_feature_dim
@@ -260,13 +306,13 @@ def build_train_val_test_loaders_two_stage(
     )
 
     pin_mem = torch.cuda.is_available()
-
     return (
         DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=pin_mem),
         DataLoader(val_ds, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=pin_mem),
         DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=pin_mem),
         node_in_dim,
         global_in_dim,
+        dataset,
     )
 
 # def build_train_val_test_loaders_two_stage(
@@ -413,8 +459,11 @@ def train_model(
         loss_fn: nn.Module = nn.MSELoss()
     elif loss_type.lower() == "huber":
         loss_fn = nn.SmoothL1Loss(beta=huber_delta)
+    elif loss_type.lower() == "l1":
+        loss_fn = nn.L1Loss()
     else:
-        raise ValueError("loss_type must be 'mse' or 'huber'")
+        msg = "loss_type must be 'mse', 'huber', or 'l1'"
+        raise ValueError(msg)
 
     opt = Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     if scheduler == "plateau":
@@ -577,6 +626,21 @@ def train_model(
 
     return model, hist, dev
 
+def _unique_path(path: str) -> str:
+    p = Path(path)
+    if not p.exists():
+        return str(p)
+
+    stem = p.stem
+    suffix = p.suffix
+    parent = p.parent
+
+    i = 1
+    while True:
+        candidate = parent / f"{stem}_{i}{suffix}"
+        if not candidate.exists():
+            return str(candidate)
+        i += 1
 
 def plot_training_curves(
     hist: TrainHistory,
@@ -594,18 +658,12 @@ def plot_training_curves(
     plt.title(title)
     plt.legend()
     plt.grid(True)
-    plt.show()
 
-    # if hist.lr:
-    #     plt.figure()
-    #     plt.plot(epochs, hist.lr, label="lr")
-    #     plt.xlabel("Epoch")
-    #     plt.ylabel("Learning rate")
-    #     plt.title("Learning rate")
-    #     plt.grid(True)
-    #     plt.show()
     if save_fig and fig_path is not None:
-        plt.savefig(fig_path)
+        safe_path = _unique_path(fig_path)
+        plt.savefig(safe_path)
+
+    plt.show()
 
 
 def main(
@@ -624,30 +682,97 @@ def main(
         300.0, help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
-    data_paths = collect_pt_paths("outputs/data")  # or .../samples
-    # logger.info(pt_paths[:5])
-    # global_feature_variant: str = "binned"
-    # node_feature_backend_variant: str | None = None
-    # suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
-    # root = _cache_root_for_paths(pt_paths, suffix=suffix)
+    data_paths = collect_pt_paths("outputs/data")
+    train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = (
+        build_train_val_test_loaders_two_stage(
+            data_paths,
+            global_feature_variant="binned",
+            batch_size=32,
+        )
+    )
 
-    # dataset = QuantumCircuitGraphDataset(
-    #     root=root,
-    #     pt_paths=pt_paths,
-    #     global_feature_variant=global_feature_variant,
-    #     node_feature_backend_variant=node_feature_backend_variant,
-    # )
-    # logger.info(dataset)
-    # logger.info(f"Dataset loaded with {len(dataset)} samples.")
-    # train_loader, val_loader, test_loader = build_train_val_test_loaders_two_stage(
-    #     pt_paths,
-    #     global_feature_variant="binned",
-    #     batch_size=32,
-    # )
+    model = GNN(
+        node_in_dim=node_in_dim,
+        global_in_dim=global_in_dim,
+        gnn_hidden=32,
+        gnn_heads=8,
+        global_hidden=16,
+        reg_hidden=16,
+        num_layers=5,
+        dropout_rate=0.1,
+    )
 
-    # node_in_dim = get_node_feature_dim_from_sample(pt_paths)
-    # global_in_dim = get_global_feature_dim_from_sample(pt_paths)
-    train_loader, val_loader, test_loader, node_in_dim, global_in_dim = (
+    model, hist, dev = train_model(
+        model,
+        train_loader,
+        val_loader,
+        epochs=epochs,
+        lr=lr,
+        loss_type=loss_type,
+        huber_delta=1.0,
+        early_stopping_patience=15,
+        scheduler="plateau",
+        show_progress=show_progress,
+        show_val_progress=show_val_progress,
+        log_every_n_batches=log_every_n_batches,
+        heartbeat_secs=heartbeat_secs,
+        epoch_time_warning_secs=epoch_time_warning_secs,
+    )
+    huber_delta=1.0
+    if loss_type.lower() == "mse":
+        loss_fn: nn.Module = nn.MSELoss()
+    elif loss_type.lower() == "huber":
+        loss_fn = nn.SmoothL1Loss(beta=huber_delta)
+    elif loss_type.lower() == "l1":
+        loss_fn = nn.L1Loss()
+    else:
+        raise ValueError("loss_type must be 'mse', 'huber', or 'l1'")
+
+    test_loss = evaluate_loss(model, test_loader, dev, loss_fn, use_amp=True, show_progress=True)
+    logger.info(f"Final test loss: {test_loss:.6f}")
+
+    plot_training_curves(
+        hist,
+        title="GNN SRE regression",
+        save_fig=True,
+        fig_path="outputs/figures/training_curves.png",
+    )
+
+    torch.save(model.state_dict(), "outputs/gnn_model.pt")
+
+def train_global(
+        epochs: int = 30,
+        lr: float = 0.001,
+        loss_type: str = "huber",             # "mse" | "huber" | "l1"
+        training_mode: str = "global",     # "global" | "per_family"
+        family: str | None = None,
+    ):
+    ...
+
+def train_per_family():...
+
+def temp_main(
+    epochs: int = 30,
+    lr: float = 0.001,
+    loss_type: str = "huber",             # "mse" | "huber" | "l1"
+    training_mode: str = "global",     # "global" | "per_family"
+    family: str | None = None,
+    show_progress: bool = typer.Option(True, help="Show progress bars during training"),
+    show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
+    log_every_n_batches: int = typer.Option(5, help="Log training stats every N batches (0=disable)"),
+    heartbeat_secs: float = typer.Option(60.0, help="Heartbeat log interval in seconds (0=disable)"),
+    epoch_time_warning_secs: float = typer.Option(300.0, help="Warn if epoch exceeds N seconds (0=disable)"),
+):
+    if training_mode == "per_family" and (family is None or family not in FAMILY_REGISTRY):
+        logger.error(
+            f"Invalid family '{family}' for per_family training. Must be one of: {list(FAMILY_REGISTRY.keys())}",
+        )
+        return
+    data_paths = collect_pt_paths("outputs/data", family=family if training_mode == "per_family" else None)
+    if not data_paths:
+        logger.error("No data paths found. Check dataset directory and family name.")
+        return
+    train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = (
         build_train_val_test_loaders_two_stage(
             data_paths,
             global_feature_variant="binned",
@@ -683,85 +808,48 @@ def main(
         epoch_time_warning_secs=epoch_time_warning_secs,
     )
 
-    test_loss = evaluate_loss(model, test_loader, dev, nn.MSELoss(), use_amp=True, show_progress=True)
+    huber_delta=1.0
+    if loss_type.lower() == "mse":
+        loss_fn: nn.Module = nn.MSELoss()
+    elif loss_type.lower() == "huber":
+        loss_fn = nn.SmoothL1Loss(beta=huber_delta)
+    elif loss_type.lower() == "l1":
+        loss_fn = nn.L1Loss()
+    else:
+        raise ValueError("loss_type must be 'mse', 'huber', or 'l1'")
+
+    test_loss = evaluate_loss(model, test_loader, dev, loss_fn, use_amp=True, show_progress=True)
     logger.info(f"Final test loss: {test_loss:.6f}")
 
     plot_training_curves(
         hist,
         title="GNN SRE regression",
         save_fig=True,
-        fig_path="outputs/figures/training_curves.png",
+        fig_path=f"outputs/figures/training_curves/training_curves_{loss_type}_{family if training_mode == 'per_family' else 'global'}.png",
     )
 
-    torch.save(model.state_dict(), "outputs/gnn_model.pt")
+    checkpoint = {
+        "model_state_dict": model.state_dict(),
+        "model_config": {
+            "node_in_dim": node_in_dim,
+            "global_in_dim": global_in_dim,
+            "gnn_hidden": 32,
+            "gnn_heads": 8,
+            "global_hidden": 16,
+            "reg_hidden": 16,
+            "num_layers": 5,
+            "dropout_rate": 0.1,
+        },
+        "feature_config": {
+            "global_feature_variant": "binned",
+            "node_feature_backend_variant": None,
+            "all_gate_keys": base_dataset.all_gate_keys,
+        },
+    }
 
+    model_save_path = f"models/gnn_model_{family if training_mode == 'per_family' else 'global'}.pt"
+    torch.save(checkpoint, model_save_path)
 
-def temp_main(
-    epochs: int = 15,
-    lr: float = 0.001,
-    loss_type: str = "mse",
-    training_mode: str = "global",     # "global" | "per_family"
-    family: str | None = None,
-    show_progress: bool = typer.Option(True, help="Show progress bars during training"),
-    show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
-    log_every_n_batches: int = typer.Option(5, help="Log training stats every N batches (0=disable)"),
-    heartbeat_secs: float = typer.Option(60.0, help="Heartbeat log interval in seconds (0=disable)"),
-    epoch_time_warning_secs: float = typer.Option(300.0, help="Warn if epoch exceeds N seconds (0=disable)"),
-):
-    data_paths = collect_pt_paths("outputs/data", family=family if training_mode == "per_family" else None)
-    if not data_paths:
-        logger.error("No data paths found. Check dataset directory and family name.")
-        return
-    train_loader, val_loader, test_loader, node_in_dim, global_in_dim = (
-    build_train_val_test_loaders_two_stage(
-        data_paths,
-        global_feature_variant="binned",
-        batch_size=32,
-    )
-)
-
-    # node_in_dim = get_node_feature_dim_from_sample(data_paths)
-    # global_in_dim = get_global_feature_dim_from_sample(data_paths)
-
-    model = GNN(
-        node_in_dim=node_in_dim,
-        global_in_dim=global_in_dim,
-        gnn_hidden=32,
-        gnn_heads=8,
-        global_hidden=16,
-        reg_hidden=16,
-        num_layers=5,
-        dropout_rate=0.1,
-    )
-
-    model, hist, dev = train_model(
-        model,
-        train_loader,
-        val_loader,
-        epochs=epochs,
-        lr=lr,
-        loss_type=loss_type,
-        huber_delta=1.0,
-        early_stopping_patience=15,
-        scheduler="plateau",
-        show_progress=show_progress,
-        show_val_progress=show_val_progress,
-        log_every_n_batches=log_every_n_batches,
-        heartbeat_secs=heartbeat_secs,
-        epoch_time_warning_secs=epoch_time_warning_secs,
-    )
-
-    test_loss = evaluate_loss(model, test_loader, dev, nn.MSELoss(), use_amp=True, show_progress=True)
-    logger.info(f"Final test loss: {test_loss:.6f}")
-
-    plot_training_curves(
-        hist,
-        title="GNN SRE regression",
-        save_fig=True,
-        fig_path="outputs/figures/training_curves.png",
-    )
-
-    torch.save(model.state_dict(), "outputs/gnn_model.pt")
 
 if __name__ == "__main__":
     configure_logger(logging.INFO, logging.INFO)

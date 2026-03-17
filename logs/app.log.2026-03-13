@@ -1,0 +1,678 @@
+2026-03-13 13:16:52,125 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:21:49,183 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:22:22,794 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 13:23:23,145 - __main__ - INFO - [Heartbeat] Epoch 1 batch 96/450 | loss 9.476742 | elapsed 60.4s | graphs 3072
+2026-03-13 13:24:23,371 - __main__ - INFO - [Heartbeat] Epoch 1 batch 194/450 | loss 6.522929 | elapsed 120.6s | graphs 6208
+2026-03-13 13:25:24,006 - __main__ - INFO - [Heartbeat] Epoch 1 batch 292/450 | loss 5.587999 | elapsed 181.2s | graphs 9344
+2026-03-13 13:26:24,466 - __main__ - INFO - [Heartbeat] Epoch 1 batch 391/450 | loss 5.023931 | elapsed 241.7s | graphs 12512
+2026-03-13 13:27:00,014 - __main__ - INFO - Training phase complete (277.2s) | Running validation...
+2026-03-13 13:27:10,275 - __main__ - INFO - Losses | train 4.795056 | val 1.007991 | lr 1.00e-03 | time train=277.2s val=10.3s total=287.5s
+2026-03-13 13:27:10,276 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 13:28:10,817 - __main__ - INFO - [Heartbeat] Epoch 2 batch 95/450 | loss 2.728833 | elapsed 60.5s | graphs 3040
+2026-03-13 13:29:10,843 - __main__ - INFO - [Heartbeat] Epoch 2 batch 201/450 | loss 2.700588 | elapsed 120.6s | graphs 6432
+2026-03-13 13:30:10,899 - __main__ - INFO - [Heartbeat] Epoch 2 batch 296/450 | loss 2.593408 | elapsed 180.6s | graphs 9472
+2026-03-13 13:31:11,179 - __main__ - INFO - [Heartbeat] Epoch 2 batch 393/450 | loss 2.435035 | elapsed 240.9s | graphs 12576
+2026-03-13 13:31:45,461 - __main__ - INFO - Training phase complete (275.2s) | Running validation...
+2026-03-13 13:31:55,356 - __main__ - INFO - Losses | train 2.400460 | val 0.930543 | lr 1.00e-03 | time train=275.2s val=9.9s total=285.1s
+2026-03-13 13:31:55,357 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 13:32:56,011 - __main__ - INFO - [Heartbeat] Epoch 3 batch 97/450 | loss 1.691465 | elapsed 60.7s | graphs 3104
+2026-03-13 13:33:56,536 - __main__ - INFO - [Heartbeat] Epoch 3 batch 195/450 | loss 1.718602 | elapsed 121.2s | graphs 6240
+2026-03-13 13:34:56,783 - __main__ - INFO - [Heartbeat] Epoch 3 batch 290/450 | loss 1.664443 | elapsed 181.4s | graphs 9280
+2026-03-13 13:35:57,011 - __main__ - INFO - [Heartbeat] Epoch 3 batch 385/450 | loss 1.566074 | elapsed 241.7s | graphs 12320
+2026-03-13 13:36:37,999 - __main__ - INFO - Training phase complete (282.6s) | Running validation...
+2026-03-13 13:36:48,408 - __main__ - INFO - Losses | train 1.497764 | val 0.328934 | lr 1.00e-03 | time train=282.6s val=10.4s total=293.1s
+2026-03-13 13:36:48,409 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 13:37:48,773 - __main__ - INFO - [Heartbeat] Epoch 4 batch 98/450 | loss 1.028975 | elapsed 60.4s | graphs 3136
+2026-03-13 13:38:49,226 - __main__ - INFO - [Heartbeat] Epoch 4 batch 195/450 | loss 1.047613 | elapsed 120.8s | graphs 6240
+2026-03-13 13:39:49,464 - __main__ - INFO - [Heartbeat] Epoch 4 batch 287/450 | loss 1.044817 | elapsed 181.1s | graphs 9184
+2026-03-13 13:40:49,788 - __main__ - INFO - [Heartbeat] Epoch 4 batch 376/450 | loss 0.994890 | elapsed 241.4s | graphs 12032
+2026-03-13 13:41:43,665 - __main__ - INFO - Training phase complete (295.3s) | Running validation...
+2026-03-13 13:41:55,745 - __main__ - INFO - Losses | train 0.971469 | val 0.770066 | lr 1.00e-03 | time train=295.3s val=12.1s total=307.3s
+2026-03-13 13:41:55,745 - __main__ - WARNING - Epoch 4 took 307.3s (>300s threshold). This is expected for large models/datasets.
+2026-03-13 13:41:55,745 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 13:42:56,012 - __main__ - INFO - [Heartbeat] Epoch 5 batch 96/450 | loss 0.753949 | elapsed 60.3s | graphs 3072
+2026-03-13 13:43:56,633 - __main__ - INFO - [Heartbeat] Epoch 5 batch 197/450 | loss 0.691401 | elapsed 120.9s | graphs 6304
+2026-03-13 13:44:56,657 - __main__ - INFO - [Heartbeat] Epoch 5 batch 293/450 | loss 0.722024 | elapsed 180.9s | graphs 9376
+2026-03-13 13:45:57,274 - __main__ - INFO - [Heartbeat] Epoch 5 batch 398/450 | loss 0.699474 | elapsed 241.5s | graphs 12736
+2026-03-13 13:46:31,236 - __main__ - INFO - Training phase complete (275.5s) | Running validation...
+2026-03-13 13:46:41,895 - __main__ - INFO - Losses | train 0.703026 | val 0.871945 | lr 1.00e-03 | time train=275.5s val=10.7s total=286.1s
+2026-03-13 13:46:41,896 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 13:47:42,293 - __main__ - INFO - [Heartbeat] Epoch 6 batch 93/450 | loss 0.577372 | elapsed 60.4s | graphs 2976
+2026-03-13 13:48:42,726 - __main__ - INFO - [Heartbeat] Epoch 6 batch 191/450 | loss 0.597149 | elapsed 120.8s | graphs 6112
+2026-03-13 13:49:43,130 - __main__ - INFO - [Heartbeat] Epoch 6 batch 280/450 | loss 0.594109 | elapsed 181.2s | graphs 8960
+2026-03-13 13:50:43,431 - __main__ - INFO - [Heartbeat] Epoch 6 batch 374/450 | loss 0.587788 | elapsed 241.5s | graphs 11968
+2026-03-13 13:51:34,311 - __main__ - INFO - Training phase complete (292.4s) | Running validation...
+2026-03-13 13:51:45,490 - __main__ - INFO - Losses | train 0.579969 | val 0.349115 | lr 1.00e-03 | time train=292.4s val=11.2s total=303.6s
+2026-03-13 13:51:45,491 - __main__ - WARNING - Epoch 6 took 303.6s (>300s threshold). This is expected for large models/datasets.
+2026-03-13 13:51:45,491 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 13:52:59,137 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:55:02,602 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:55:16,931 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 13:55:33,187 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:55:57,091 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 13:56:48,887 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:57:12,230 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 13:58:23,901 - __main__ - INFO - Starting GNN training...
+2026-03-13 13:58:49,109 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 14:00:58,326 - __main__ - INFO - Starting GNN training...
+2026-03-13 14:01:12,409 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 14:01:51,735 - __main__ - INFO - Training phase complete (39.3s) | Running validation...
+2026-03-13 14:01:55,551 - __main__ - INFO - Losses | train 2.230836 | val 0.331669 | lr 1.00e-03 | time train=39.3s val=3.8s total=43.1s
+2026-03-13 14:01:55,553 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 14:02:38,302 - __main__ - INFO - Training phase complete (42.7s) | Running validation...
+2026-03-13 14:02:41,640 - __main__ - INFO - Losses | train 0.873117 | val 0.258178 | lr 1.00e-03 | time train=42.7s val=3.3s total=46.1s
+2026-03-13 14:02:41,643 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 14:03:20,432 - __main__ - INFO - Training phase complete (38.8s) | Running validation...
+2026-03-13 14:03:23,802 - __main__ - INFO - Losses | train 0.733044 | val 0.336989 | lr 1.00e-03 | time train=38.8s val=3.4s total=42.2s
+2026-03-13 14:03:23,802 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 14:04:02,474 - __main__ - INFO - Training phase complete (38.7s) | Running validation...
+2026-03-13 14:04:05,913 - __main__ - INFO - Losses | train 0.603973 | val 0.354588 | lr 1.00e-03 | time train=38.7s val=3.4s total=42.1s
+2026-03-13 14:04:05,913 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 14:04:44,982 - __main__ - INFO - Training phase complete (39.1s) | Running validation...
+2026-03-13 14:04:48,467 - __main__ - INFO - Losses | train 0.555673 | val 0.540699 | lr 1.00e-03 | time train=39.1s val=3.5s total=42.6s
+2026-03-13 14:04:48,467 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 14:05:27,341 - __main__ - INFO - Training phase complete (38.9s) | Running validation...
+2026-03-13 14:05:30,707 - __main__ - INFO - Losses | train 0.518228 | val 0.567363 | lr 1.00e-03 | time train=38.9s val=3.4s total=42.2s
+2026-03-13 14:05:30,707 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 14:06:09,492 - __main__ - INFO - Training phase complete (38.8s) | Running validation...
+2026-03-13 14:06:12,829 - __main__ - INFO - Losses | train 0.471299 | val 0.444772 | lr 1.00e-03 | time train=38.8s val=3.3s total=42.1s
+2026-03-13 14:06:12,829 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-13 14:06:51,382 - __main__ - INFO - Training phase complete (38.6s) | Running validation...
+2026-03-13 14:06:54,722 - __main__ - INFO - Losses | train 0.416716 | val 0.201364 | lr 1.00e-03 | time train=38.6s val=3.3s total=41.9s
+2026-03-13 14:06:54,723 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-13 14:07:34,414 - __main__ - INFO - Training phase complete (39.7s) | Running validation...
+2026-03-13 14:07:37,951 - __main__ - INFO - Losses | train 0.389919 | val 0.068357 | lr 1.00e-03 | time train=39.7s val=3.5s total=43.2s
+2026-03-13 14:07:37,953 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-13 14:08:18,183 - __main__ - INFO - Training phase complete (40.2s) | Running validation...
+2026-03-13 14:08:23,098 - __main__ - INFO - Losses | train 0.367248 | val 0.325797 | lr 1.00e-03 | time train=40.2s val=4.9s total=45.1s
+2026-03-13 14:08:23,099 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-13 14:09:05,592 - __main__ - INFO - Training phase complete (42.5s) | Running validation...
+2026-03-13 14:09:09,540 - __main__ - INFO - Losses | train 0.344543 | val 0.530307 | lr 1.00e-03 | time train=42.5s val=3.9s total=46.4s
+2026-03-13 14:09:09,541 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-13 14:09:53,791 - __main__ - INFO - Training phase complete (44.2s) | Running validation...
+2026-03-13 14:09:57,861 - __main__ - INFO - Losses | train 0.327976 | val 0.274280 | lr 1.00e-03 | time train=44.2s val=4.1s total=48.3s
+2026-03-13 14:09:57,861 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-13 14:10:42,031 - __main__ - INFO - Training phase complete (44.2s) | Running validation...
+2026-03-13 14:10:46,005 - __main__ - INFO - Losses | train 0.306920 | val 0.470780 | lr 1.00e-03 | time train=44.2s val=4.0s total=48.1s
+2026-03-13 14:10:46,005 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-13 14:11:29,073 - __main__ - INFO - Training phase complete (43.1s) | Running validation...
+2026-03-13 14:11:33,254 - __main__ - INFO - Losses | train 0.285752 | val 0.372889 | lr 1.00e-03 | time train=43.1s val=4.2s total=47.2s
+2026-03-13 14:11:33,254 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-13 14:12:18,257 - __main__ - INFO - Training phase complete (45.0s) | Running validation...
+2026-03-13 14:12:22,455 - __main__ - INFO - Losses | train 0.279927 | val 0.382398 | lr 5.00e-04 | time train=45.0s val=4.2s total=49.2s
+2026-03-13 14:12:32,843 - __main__ - INFO - Final test loss: 0.080213
+2026-03-13 14:15:50,968 - __main__ - INFO - Starting GNN training...
+2026-03-13 14:16:05,128 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 14:16:48,690 - __main__ - INFO - Training phase complete (43.6s) | Running validation...
+2026-03-13 14:16:52,623 - __main__ - INFO - Losses | train 0.622686 | val 0.391766 | lr 1.00e-03 | time train=43.6s val=3.9s total=47.5s
+2026-03-13 14:16:52,626 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 14:17:38,541 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 14:17:42,670 - __main__ - INFO - Losses | train 0.281776 | val 0.259982 | lr 1.00e-03 | time train=45.9s val=4.1s total=50.0s
+2026-03-13 14:17:42,673 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 14:18:15,775 - __main__ - INFO - Starting GNN training...
+2026-03-13 14:18:30,587 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 14:19:15,238 - __main__ - INFO - Training phase complete (44.6s) | Running validation...
+2026-03-13 14:19:19,315 - __main__ - INFO - Losses | train 0.624629 | val 0.195748 | lr 1.00e-03 | time train=44.6s val=4.1s total=48.7s
+2026-03-13 14:19:19,319 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 14:20:01,516 - __main__ - INFO - Training phase complete (42.2s) | Running validation...
+2026-03-13 14:20:04,877 - __main__ - INFO - Losses | train 0.350468 | val 0.272682 | lr 1.00e-03 | time train=42.2s val=3.4s total=45.6s
+2026-03-13 14:20:04,877 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 14:20:45,349 - __main__ - INFO - Training phase complete (40.5s) | Running validation...
+2026-03-13 14:20:48,854 - __main__ - INFO - Losses | train 0.300797 | val 0.342656 | lr 1.00e-03 | time train=40.5s val=3.5s total=44.0s
+2026-03-13 14:20:48,854 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 14:21:30,858 - __main__ - INFO - Training phase complete (42.0s) | Running validation...
+2026-03-13 14:21:35,110 - __main__ - INFO - Losses | train 0.266303 | val 0.254491 | lr 1.00e-03 | time train=42.0s val=4.3s total=46.3s
+2026-03-13 14:21:35,110 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 14:22:20,437 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 14:22:24,844 - __main__ - INFO - Losses | train 0.256227 | val 0.397251 | lr 1.00e-03 | time train=45.3s val=4.4s total=49.7s
+2026-03-13 14:22:24,845 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 14:23:11,056 - __main__ - INFO - Training phase complete (46.2s) | Running validation...
+2026-03-13 14:23:15,305 - __main__ - INFO - Losses | train 0.223324 | val 0.208582 | lr 1.00e-03 | time train=46.2s val=4.2s total=50.5s
+2026-03-13 14:23:15,305 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 14:24:01,354 - __main__ - INFO - Training phase complete (46.0s) | Running validation...
+2026-03-13 14:24:05,517 - __main__ - INFO - Losses | train 0.198900 | val 0.177793 | lr 1.00e-03 | time train=46.0s val=4.2s total=50.2s
+2026-03-13 14:24:05,521 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-13 14:24:50,505 - __main__ - INFO - Training phase complete (45.0s) | Running validation...
+2026-03-13 14:24:54,679 - __main__ - INFO - Losses | train 0.191945 | val 0.223620 | lr 1.00e-03 | time train=45.0s val=4.2s total=49.2s
+2026-03-13 14:24:54,680 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-13 14:25:41,493 - __main__ - INFO - Training phase complete (46.8s) | Running validation...
+2026-03-13 14:25:45,412 - __main__ - INFO - Losses | train 0.184709 | val 0.221262 | lr 1.00e-03 | time train=46.8s val=3.9s total=50.7s
+2026-03-13 14:25:45,412 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-13 14:26:30,475 - __main__ - INFO - Training phase complete (45.1s) | Running validation...
+2026-03-13 14:26:33,958 - __main__ - INFO - Losses | train 0.166723 | val 0.229957 | lr 1.00e-03 | time train=45.1s val=3.5s total=48.5s
+2026-03-13 14:26:33,958 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-13 14:27:13,001 - __main__ - INFO - Training phase complete (39.0s) | Running validation...
+2026-03-13 14:27:16,555 - __main__ - INFO - Losses | train 0.171854 | val 0.190047 | lr 1.00e-03 | time train=39.0s val=3.6s total=42.6s
+2026-03-13 14:27:16,555 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-13 14:27:56,054 - __main__ - INFO - Training phase complete (39.5s) | Running validation...
+2026-03-13 14:27:59,517 - __main__ - INFO - Losses | train 0.157959 | val 0.161973 | lr 1.00e-03 | time train=39.5s val=3.5s total=43.0s
+2026-03-13 14:27:59,520 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-13 14:28:40,788 - __main__ - INFO - Training phase complete (41.3s) | Running validation...
+2026-03-13 14:28:45,037 - __main__ - INFO - Losses | train 0.151716 | val 0.298360 | lr 1.00e-03 | time train=41.3s val=4.2s total=45.5s
+2026-03-13 14:28:45,037 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-13 14:29:29,019 - __main__ - INFO - Training phase complete (44.0s) | Running validation...
+2026-03-13 14:29:33,030 - __main__ - INFO - Losses | train 0.145504 | val 0.201510 | lr 1.00e-03 | time train=44.0s val=4.0s total=48.0s
+2026-03-13 14:29:33,030 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-13 14:30:12,244 - __main__ - INFO - Training phase complete (39.2s) | Running validation...
+2026-03-13 14:30:15,782 - __main__ - INFO - Losses | train 0.140949 | val 0.161709 | lr 1.00e-03 | time train=39.2s val=3.5s total=42.8s
+2026-03-13 14:30:15,785 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-13 14:30:55,661 - __main__ - INFO - Training phase complete (39.9s) | Running validation...
+2026-03-13 14:30:59,260 - __main__ - INFO - Losses | train 0.131692 | val 0.228824 | lr 1.00e-03 | time train=39.9s val=3.6s total=43.5s
+2026-03-13 14:30:59,260 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-13 14:31:44,212 - __main__ - INFO - Training phase complete (45.0s) | Running validation...
+2026-03-13 14:31:48,388 - __main__ - INFO - Losses | train 0.139591 | val 0.172602 | lr 1.00e-03 | time train=45.0s val=4.2s total=49.1s
+2026-03-13 14:31:48,389 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-13 14:32:34,275 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 14:32:38,508 - __main__ - INFO - Losses | train 0.130763 | val 0.147070 | lr 1.00e-03 | time train=45.9s val=4.2s total=50.1s
+2026-03-13 14:32:38,510 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-13 14:33:24,300 - __main__ - INFO - Training phase complete (45.8s) | Running validation...
+2026-03-13 14:33:28,567 - __main__ - INFO - Losses | train 0.124748 | val 0.100302 | lr 1.00e-03 | time train=45.8s val=4.3s total=50.1s
+2026-03-13 14:33:28,569 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-13 14:34:12,760 - __main__ - INFO - Training phase complete (44.2s) | Running validation...
+2026-03-13 14:34:16,363 - __main__ - INFO - Losses | train 0.124056 | val 0.258826 | lr 1.00e-03 | time train=44.2s val=3.6s total=47.8s
+2026-03-13 14:34:16,363 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-13 14:34:56,467 - __main__ - INFO - Training phase complete (40.1s) | Running validation...
+2026-03-13 14:35:00,154 - __main__ - INFO - Losses | train 0.121498 | val 0.255715 | lr 1.00e-03 | time train=40.1s val=3.7s total=43.8s
+2026-03-13 14:35:00,154 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-13 14:35:43,024 - __main__ - INFO - Training phase complete (42.9s) | Running validation...
+2026-03-13 14:35:46,728 - __main__ - INFO - Losses | train 0.120626 | val 0.086103 | lr 1.00e-03 | time train=42.9s val=3.7s total=46.6s
+2026-03-13 14:35:46,731 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-13 14:36:26,697 - __main__ - INFO - Training phase complete (40.0s) | Running validation...
+2026-03-13 14:36:30,362 - __main__ - INFO - Losses | train 0.116159 | val 0.301174 | lr 1.00e-03 | time train=40.0s val=3.7s total=43.6s
+2026-03-13 14:36:30,362 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-13 14:37:12,852 - __main__ - INFO - Training phase complete (42.5s) | Running validation...
+2026-03-13 14:37:17,069 - __main__ - INFO - Losses | train 0.115741 | val 0.208545 | lr 1.00e-03 | time train=42.5s val=4.2s total=46.7s
+2026-03-13 14:37:17,069 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-13 14:38:02,142 - __main__ - INFO - Training phase complete (45.1s) | Running validation...
+2026-03-13 14:38:05,762 - __main__ - INFO - Losses | train 0.110083 | val 0.127315 | lr 1.00e-03 | time train=45.1s val=3.6s total=48.7s
+2026-03-13 14:38:14,774 - __main__ - INFO - Final test loss: 0.182059
+2026-03-13 14:40:12,867 - __main__ - INFO - Starting GNN training...
+2026-03-13 14:40:27,469 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 14:41:13,777 - __main__ - INFO - Training phase complete (46.3s) | Running validation...
+2026-03-13 14:41:17,928 - __main__ - INFO - Losses | train 2.798245 | val 1.019820 | lr 4.00e-03 | time train=46.3s val=4.2s total=50.5s
+2026-03-13 14:41:17,932 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 14:42:02,984 - __main__ - INFO - Training phase complete (45.1s) | Running validation...
+2026-03-13 14:42:07,406 - __main__ - INFO - Losses | train 0.725939 | val 0.291721 | lr 4.00e-03 | time train=45.1s val=4.4s total=49.5s
+2026-03-13 14:42:07,409 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 14:42:55,699 - __main__ - INFO - Training phase complete (48.3s) | Running validation...
+2026-03-13 14:42:59,912 - __main__ - INFO - Losses | train 0.564922 | val 0.433905 | lr 4.00e-03 | time train=48.3s val=4.2s total=52.5s
+2026-03-13 14:42:59,912 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 14:43:46,367 - __main__ - INFO - Training phase complete (46.5s) | Running validation...
+2026-03-13 14:43:50,536 - __main__ - INFO - Losses | train 0.514487 | val 0.113799 | lr 4.00e-03 | time train=46.5s val=4.2s total=50.6s
+2026-03-13 14:43:50,539 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 14:44:36,507 - __main__ - INFO - Training phase complete (46.0s) | Running validation...
+2026-03-13 14:44:40,800 - __main__ - INFO - Losses | train 0.411784 | val 0.158166 | lr 4.00e-03 | time train=46.0s val=4.3s total=50.3s
+2026-03-13 14:44:40,800 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 14:45:26,657 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 14:45:30,808 - __main__ - INFO - Losses | train 0.365850 | val 0.314729 | lr 4.00e-03 | time train=45.9s val=4.2s total=50.0s
+2026-03-13 14:45:30,809 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 14:46:16,485 - __main__ - INFO - Training phase complete (45.7s) | Running validation...
+2026-03-13 14:46:20,691 - __main__ - INFO - Losses | train 0.353584 | val 0.147066 | lr 4.00e-03 | time train=45.7s val=4.2s total=49.9s
+2026-03-13 14:46:20,692 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-13 14:47:05,856 - __main__ - INFO - Training phase complete (45.2s) | Running validation...
+2026-03-13 14:47:10,086 - __main__ - INFO - Losses | train 0.349158 | val 0.174484 | lr 4.00e-03 | time train=45.2s val=4.2s total=49.4s
+2026-03-13 14:47:10,087 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-13 14:47:55,345 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 14:47:59,632 - __main__ - INFO - Losses | train 0.337993 | val 0.186836 | lr 4.00e-03 | time train=45.3s val=4.3s total=49.5s
+2026-03-13 14:47:59,632 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-13 14:48:44,792 - __main__ - INFO - Training phase complete (45.2s) | Running validation...
+2026-03-13 14:48:49,033 - __main__ - INFO - Losses | train 0.320277 | val 0.367414 | lr 2.00e-03 | time train=45.2s val=4.2s total=49.4s
+2026-03-13 14:48:49,033 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-13 14:49:34,169 - __main__ - INFO - Training phase complete (45.1s) | Running validation...
+2026-03-13 14:49:38,249 - __main__ - INFO - Losses | train 0.249892 | val 0.203821 | lr 2.00e-03 | time train=45.1s val=4.1s total=49.2s
+2026-03-13 14:49:38,249 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-13 14:50:23,487 - __main__ - INFO - Training phase complete (45.2s) | Running validation...
+2026-03-13 14:50:27,729 - __main__ - INFO - Losses | train 0.253788 | val 0.231827 | lr 2.00e-03 | time train=45.2s val=4.2s total=49.5s
+2026-03-13 14:50:27,729 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-13 14:51:14,881 - __main__ - INFO - Training phase complete (47.2s) | Running validation...
+2026-03-13 14:51:19,268 - __main__ - INFO - Losses | train 0.243853 | val 0.434188 | lr 2.00e-03 | time train=47.2s val=4.4s total=51.5s
+2026-03-13 14:51:19,268 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-13 14:52:06,293 - __main__ - INFO - Training phase complete (47.0s) | Running validation...
+2026-03-13 14:52:10,612 - __main__ - INFO - Losses | train 0.233844 | val 0.453437 | lr 2.00e-03 | time train=47.0s val=4.3s total=51.3s
+2026-03-13 14:52:10,612 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-13 14:52:57,757 - __main__ - INFO - Training phase complete (47.1s) | Running validation...
+2026-03-13 14:53:02,021 - __main__ - INFO - Losses | train 0.243460 | val 0.154556 | lr 2.00e-03 | time train=47.1s val=4.3s total=51.4s
+2026-03-13 14:53:02,021 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-13 14:53:48,586 - __main__ - INFO - Training phase complete (46.6s) | Running validation...
+2026-03-13 14:53:52,956 - __main__ - INFO - Losses | train 0.237593 | val 0.219280 | lr 1.00e-03 | time train=46.6s val=4.4s total=50.9s
+2026-03-13 14:53:52,958 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-13 14:54:39,111 - __main__ - INFO - Training phase complete (46.2s) | Running validation...
+2026-03-13 14:54:43,123 - __main__ - INFO - Losses | train 0.221174 | val 0.224220 | lr 1.00e-03 | time train=46.2s val=4.0s total=50.2s
+2026-03-13 14:54:43,123 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-13 14:55:29,552 - __main__ - INFO - Training phase complete (46.4s) | Running validation...
+2026-03-13 14:55:33,877 - __main__ - INFO - Losses | train 0.220570 | val 0.260434 | lr 1.00e-03 | time train=46.4s val=4.3s total=50.8s
+2026-03-13 14:55:33,877 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-13 14:56:20,705 - __main__ - INFO - Training phase complete (46.8s) | Running validation...
+2026-03-13 14:56:24,935 - __main__ - INFO - Losses | train 0.222432 | val 0.180942 | lr 1.00e-03 | time train=46.8s val=4.2s total=51.1s
+2026-03-13 14:56:24,935 - __main__ - INFO - Early stopping at epoch 019 | best val 0.113799 | patience exhausted (15/15)
+2026-03-13 14:56:36,928 - __main__ - INFO - Final test loss: 0.132268
+2026-03-13 14:58:27,756 - __main__ - INFO - Starting GNN training...
+2026-03-13 14:58:43,355 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 14:59:29,283 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 14:59:33,281 - __main__ - INFO - Losses | train 2.162652 | val 0.737659 | lr 1.00e-03 | time train=45.9s val=4.0s total=49.9s
+2026-03-13 14:59:33,283 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 15:00:18,669 - __main__ - INFO - Training phase complete (45.4s) | Running validation...
+2026-03-13 15:00:22,958 - __main__ - INFO - Losses | train 0.765955 | val 0.507356 | lr 1.00e-03 | time train=45.4s val=4.3s total=49.7s
+2026-03-13 15:00:22,961 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 15:01:08,571 - __main__ - INFO - Training phase complete (45.6s) | Running validation...
+2026-03-13 15:01:12,658 - __main__ - INFO - Losses | train 0.598972 | val 0.375367 | lr 1.00e-03 | time train=45.6s val=4.1s total=49.7s
+2026-03-13 15:01:12,661 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 15:01:58,299 - __main__ - INFO - Training phase complete (45.6s) | Running validation...
+2026-03-13 15:02:02,470 - __main__ - INFO - Losses | train 0.542035 | val 0.282827 | lr 1.00e-03 | time train=45.6s val=4.2s total=49.8s
+2026-03-13 15:02:02,473 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 15:02:48,284 - __main__ - INFO - Training phase complete (45.8s) | Running validation...
+2026-03-13 15:02:52,462 - __main__ - INFO - Losses | train 0.479561 | val 0.378160 | lr 1.00e-03 | time train=45.8s val=4.2s total=50.0s
+2026-03-13 15:02:52,463 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 15:03:38,531 - __main__ - INFO - Training phase complete (46.1s) | Running validation...
+2026-03-13 15:03:42,824 - __main__ - INFO - Losses | train 0.435727 | val 0.518138 | lr 1.00e-03 | time train=46.1s val=4.3s total=50.4s
+2026-03-13 15:03:42,825 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 15:04:28,542 - __main__ - INFO - Training phase complete (45.7s) | Running validation...
+2026-03-13 15:04:32,757 - __main__ - INFO - Losses | train 0.402450 | val 0.240011 | lr 1.00e-03 | time train=45.7s val=4.2s total=49.9s
+2026-03-13 15:04:32,760 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-13 15:05:18,657 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 15:05:22,805 - __main__ - INFO - Losses | train 0.366974 | val 0.730458 | lr 1.00e-03 | time train=45.9s val=4.1s total=50.0s
+2026-03-13 15:05:22,805 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-13 15:06:08,148 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 15:06:12,216 - __main__ - INFO - Losses | train 0.347465 | val 0.564455 | lr 1.00e-03 | time train=45.3s val=4.1s total=49.4s
+2026-03-13 15:06:12,217 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-13 15:06:57,862 - __main__ - INFO - Training phase complete (45.6s) | Running validation...
+2026-03-13 15:07:02,053 - __main__ - INFO - Losses | train 0.330683 | val 0.174783 | lr 1.00e-03 | time train=45.6s val=4.2s total=49.8s
+2026-03-13 15:07:02,056 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-13 15:07:47,007 - __main__ - INFO - Training phase complete (44.9s) | Running validation...
+2026-03-13 15:07:51,147 - __main__ - INFO - Losses | train 0.320804 | val 0.277369 | lr 1.00e-03 | time train=44.9s val=4.1s total=49.1s
+2026-03-13 15:07:51,147 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-13 15:08:36,159 - __main__ - INFO - Training phase complete (45.0s) | Running validation...
+2026-03-13 15:08:40,221 - __main__ - INFO - Losses | train 0.287370 | val 0.440924 | lr 1.00e-03 | time train=45.0s val=4.1s total=49.1s
+2026-03-13 15:08:40,222 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-13 15:09:25,110 - __main__ - INFO - Training phase complete (44.9s) | Running validation...
+2026-03-13 15:09:29,172 - __main__ - INFO - Losses | train 0.278514 | val 0.148714 | lr 1.00e-03 | time train=44.9s val=4.1s total=49.0s
+2026-03-13 15:09:29,176 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-13 15:10:14,062 - __main__ - INFO - Training phase complete (44.9s) | Running validation...
+2026-03-13 15:10:18,367 - __main__ - INFO - Losses | train 0.265290 | val 0.155393 | lr 1.00e-03 | time train=44.9s val=4.3s total=49.2s
+2026-03-13 15:10:18,367 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-13 15:11:00,713 - __main__ - INFO - Training phase complete (42.3s) | Running validation...
+2026-03-13 15:11:04,220 - __main__ - INFO - Losses | train 0.247831 | val 0.231147 | lr 1.00e-03 | time train=42.3s val=3.5s total=45.9s
+2026-03-13 15:11:04,220 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-13 15:11:43,548 - __main__ - INFO - Training phase complete (39.3s) | Running validation...
+2026-03-13 15:11:47,118 - __main__ - INFO - Losses | train 0.241672 | val 0.281229 | lr 1.00e-03 | time train=39.3s val=3.6s total=42.9s
+2026-03-13 15:11:47,118 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-13 15:12:26,315 - __main__ - INFO - Training phase complete (39.2s) | Running validation...
+2026-03-13 15:12:29,834 - __main__ - INFO - Losses | train 0.242544 | val 0.170960 | lr 1.00e-03 | time train=39.2s val=3.5s total=42.7s
+2026-03-13 15:12:29,834 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-13 15:13:08,838 - __main__ - INFO - Training phase complete (39.0s) | Running validation...
+2026-03-13 15:13:12,425 - __main__ - INFO - Losses | train 0.226766 | val 0.238562 | lr 1.00e-03 | time train=39.0s val=3.6s total=42.6s
+2026-03-13 15:13:12,426 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-13 15:13:51,502 - __main__ - INFO - Training phase complete (39.1s) | Running validation...
+2026-03-13 15:13:55,056 - __main__ - INFO - Losses | train 0.211513 | val 0.178031 | lr 5.00e-04 | time train=39.1s val=3.6s total=42.6s
+2026-03-13 15:13:55,057 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-13 15:14:34,023 - __main__ - INFO - Training phase complete (39.0s) | Running validation...
+2026-03-13 15:14:37,601 - __main__ - INFO - Losses | train 0.199316 | val 0.072618 | lr 5.00e-04 | time train=39.0s val=3.6s total=42.5s
+2026-03-13 15:14:37,603 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-13 15:15:16,711 - __main__ - INFO - Training phase complete (39.1s) | Running validation...
+2026-03-13 15:15:20,193 - __main__ - INFO - Losses | train 0.200644 | val 0.107566 | lr 5.00e-04 | time train=39.1s val=3.5s total=42.6s
+2026-03-13 15:15:20,193 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-13 15:15:59,268 - __main__ - INFO - Training phase complete (39.1s) | Running validation...
+2026-03-13 15:16:02,792 - __main__ - INFO - Losses | train 0.197687 | val 0.088385 | lr 5.00e-04 | time train=39.1s val=3.5s total=42.6s
+2026-03-13 15:16:02,794 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-13 15:16:41,723 - __main__ - INFO - Training phase complete (38.9s) | Running validation...
+2026-03-13 15:16:45,384 - __main__ - INFO - Losses | train 0.194840 | val 0.125054 | lr 5.00e-04 | time train=38.9s val=3.7s total=42.6s
+2026-03-13 15:16:45,384 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-13 15:17:25,003 - __main__ - INFO - Training phase complete (39.6s) | Running validation...
+2026-03-13 15:17:28,490 - __main__ - INFO - Losses | train 0.189980 | val 0.133625 | lr 5.00e-04 | time train=39.6s val=3.5s total=43.1s
+2026-03-13 15:17:28,490 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-13 15:18:07,635 - __main__ - INFO - Training phase complete (39.1s) | Running validation...
+2026-03-13 15:18:11,182 - __main__ - INFO - Losses | train 0.183274 | val 0.183327 | lr 5.00e-04 | time train=39.1s val=3.5s total=42.7s
+2026-03-13 15:18:11,182 - __main__ - INFO - -------- EPOCH : 026 --------
+
+2026-03-13 15:18:50,197 - __main__ - INFO - Training phase complete (39.0s) | Running validation...
+2026-03-13 15:18:53,726 - __main__ - INFO - Losses | train 0.186563 | val 0.291958 | lr 2.50e-04 | time train=39.0s val=3.5s total=42.5s
+2026-03-13 15:18:53,726 - __main__ - INFO - -------- EPOCH : 027 --------
+
+2026-03-13 15:19:32,608 - __main__ - INFO - Training phase complete (38.9s) | Running validation...
+2026-03-13 15:19:36,091 - __main__ - INFO - Losses | train 0.178734 | val 0.133528 | lr 2.50e-04 | time train=38.9s val=3.5s total=42.4s
+2026-03-13 15:19:36,091 - __main__ - INFO - -------- EPOCH : 028 --------
+
+2026-03-13 15:20:15,290 - __main__ - INFO - Training phase complete (39.2s) | Running validation...
+2026-03-13 15:20:18,701 - __main__ - INFO - Losses | train 0.174673 | val 0.138330 | lr 2.50e-04 | time train=39.2s val=3.4s total=42.6s
+2026-03-13 15:20:18,701 - __main__ - INFO - -------- EPOCH : 029 --------
+
+2026-03-13 15:20:57,757 - __main__ - INFO - Training phase complete (39.1s) | Running validation...
+2026-03-13 15:21:01,095 - __main__ - INFO - Losses | train 0.175193 | val 0.143444 | lr 2.50e-04 | time train=39.1s val=3.3s total=42.4s
+2026-03-13 15:21:01,095 - __main__ - INFO - -------- EPOCH : 030 --------
+
+2026-03-13 15:21:40,098 - __main__ - INFO - Training phase complete (39.0s) | Running validation...
+2026-03-13 15:21:43,581 - __main__ - INFO - Losses | train 0.170944 | val 0.169578 | lr 2.50e-04 | time train=39.0s val=3.5s total=42.5s
+2026-03-13 15:21:53,248 - __main__ - INFO - Final test loss: 0.081368
+2026-03-13 16:02:58,273 - __main__ - INFO - Starting GNN training...
+2026-03-13 16:03:13,792 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 16:03:58,969 - __main__ - INFO - Training phase complete (45.2s) | Running validation...
+2026-03-13 16:04:02,660 - __main__ - INFO - Losses | train 508.022971 | val 512.182591 | lr 1.00e-03 | time train=45.2s val=3.7s total=48.9s
+2026-03-13 16:04:02,663 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 16:06:00,459 - __main__ - INFO - Starting GNN training...
+2026-03-13 16:06:42,576 - __main__ - INFO - Starting GNN training...
+2026-03-13 16:06:56,682 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 16:07:38,327 - __main__ - INFO - Training phase complete (41.6s) | Running validation...
+2026-03-13 16:07:42,555 - __main__ - INFO - Losses | train 1.008516 | val 1.070644 | lr 1.00e-03 | time train=41.6s val=4.2s total=45.9s
+2026-03-13 16:07:42,558 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 16:08:23,094 - __main__ - INFO - Training phase complete (40.5s) | Running validation...
+2026-03-13 16:08:26,244 - __main__ - INFO - Losses | train 0.754295 | val 1.103827 | lr 1.00e-03 | time train=40.5s val=3.1s total=43.7s
+2026-03-13 16:08:26,245 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 16:09:05,991 - __main__ - INFO - Training phase complete (39.7s) | Running validation...
+2026-03-13 16:09:09,878 - __main__ - INFO - Losses | train 0.665512 | val 0.989104 | lr 1.00e-03 | time train=39.7s val=3.9s total=43.6s
+2026-03-13 16:09:09,881 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 16:09:55,189 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 16:09:59,205 - __main__ - INFO - Losses | train 0.603376 | val 0.488912 | lr 1.00e-03 | time train=45.3s val=4.0s total=49.3s
+2026-03-13 16:09:59,208 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 16:10:43,867 - __main__ - INFO - Training phase complete (44.7s) | Running validation...
+2026-03-13 16:10:47,985 - __main__ - INFO - Losses | train 0.578542 | val 0.945781 | lr 1.00e-03 | time train=44.7s val=4.1s total=48.8s
+2026-03-13 16:10:47,985 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 16:11:32,679 - __main__ - INFO - Training phase complete (44.7s) | Running validation...
+2026-03-13 16:11:36,757 - __main__ - INFO - Losses | train 0.546146 | val 0.718023 | lr 1.00e-03 | time train=44.7s val=4.1s total=48.8s
+2026-03-13 16:11:36,757 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 16:12:20,043 - __main__ - INFO - Training phase complete (43.3s) | Running validation...
+2026-03-13 16:12:24,505 - __main__ - INFO - Losses | train 0.518711 | val 0.836472 | lr 1.00e-03 | time train=43.3s val=4.5s total=47.7s
+2026-03-13 16:12:24,505 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-13 16:13:11,154 - __main__ - INFO - Training phase complete (46.6s) | Running validation...
+2026-03-13 16:13:15,526 - __main__ - INFO - Losses | train 0.516464 | val 0.815745 | lr 1.00e-03 | time train=46.6s val=4.4s total=51.0s
+2026-03-13 16:13:15,528 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-13 16:14:02,011 - __main__ - INFO - Training phase complete (46.5s) | Running validation...
+2026-03-13 16:14:06,288 - __main__ - INFO - Losses | train 0.504616 | val 0.813731 | lr 1.00e-03 | time train=46.5s val=4.3s total=50.8s
+2026-03-13 16:14:06,289 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-13 16:15:01,330 - __main__ - INFO - Training phase complete (55.0s) | Running validation...
+2026-03-13 16:15:05,715 - __main__ - INFO - Losses | train 0.475493 | val 0.292833 | lr 1.00e-03 | time train=55.0s val=4.4s total=59.4s
+2026-03-13 16:15:05,718 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-13 16:15:59,599 - __main__ - INFO - Training phase complete (53.9s) | Running validation...
+2026-03-13 16:16:04,435 - __main__ - INFO - Losses | train 0.447564 | val 0.920549 | lr 1.00e-03 | time train=53.9s val=4.8s total=58.7s
+2026-03-13 16:16:04,435 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-13 16:16:58,286 - __main__ - INFO - Training phase complete (53.9s) | Running validation...
+2026-03-13 16:17:02,710 - __main__ - INFO - Losses | train 0.450788 | val 0.595702 | lr 1.00e-03 | time train=53.9s val=4.4s total=58.3s
+2026-03-13 16:17:02,711 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-13 16:17:52,073 - __main__ - INFO - Training phase complete (49.4s) | Running validation...
+2026-03-13 16:17:56,174 - __main__ - INFO - Losses | train 0.424255 | val 0.441219 | lr 1.00e-03 | time train=49.4s val=4.1s total=53.5s
+2026-03-13 16:17:56,174 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-13 16:18:41,496 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 16:18:45,671 - __main__ - INFO - Losses | train 0.441769 | val 0.433820 | lr 1.00e-03 | time train=45.3s val=4.2s total=49.5s
+2026-03-13 16:18:45,671 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-13 16:19:33,575 - __main__ - INFO - Training phase complete (47.9s) | Running validation...
+2026-03-13 16:19:38,215 - __main__ - INFO - Losses | train 0.416818 | val 0.572575 | lr 1.00e-03 | time train=47.9s val=4.6s total=52.5s
+2026-03-13 16:19:38,215 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-13 16:20:33,457 - __main__ - INFO - Training phase complete (55.2s) | Running validation...
+2026-03-13 16:20:38,255 - __main__ - INFO - Losses | train 0.396753 | val 0.634017 | lr 5.00e-04 | time train=55.2s val=4.8s total=60.0s
+2026-03-13 16:20:38,255 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-13 16:21:31,002 - __main__ - INFO - Training phase complete (52.7s) | Running validation...
+2026-03-13 16:21:35,393 - __main__ - INFO - Losses | train 0.387274 | val 0.455758 | lr 5.00e-04 | time train=52.7s val=4.4s total=57.1s
+2026-03-13 16:21:35,393 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-13 16:22:26,720 - __main__ - INFO - Training phase complete (51.3s) | Running validation...
+2026-03-13 16:22:31,167 - __main__ - INFO - Losses | train 0.378120 | val 0.630862 | lr 5.00e-04 | time train=51.3s val=4.4s total=55.8s
+2026-03-13 16:22:31,167 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-13 16:23:21,584 - __main__ - INFO - Training phase complete (50.4s) | Running validation...
+2026-03-13 16:23:26,207 - __main__ - INFO - Losses | train 0.371722 | val 0.629621 | lr 5.00e-04 | time train=50.4s val=4.6s total=55.0s
+2026-03-13 16:23:26,207 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-13 16:24:19,251 - __main__ - INFO - Training phase complete (53.0s) | Running validation...
+2026-03-13 16:24:23,664 - __main__ - INFO - Losses | train 0.364501 | val 0.642413 | lr 5.00e-04 | time train=53.0s val=4.4s total=57.5s
+2026-03-13 16:24:23,665 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-13 16:25:15,504 - __main__ - INFO - Training phase complete (51.8s) | Running validation...
+2026-03-13 16:25:19,758 - __main__ - INFO - Losses | train 0.379212 | val 0.706961 | lr 5.00e-04 | time train=51.8s val=4.3s total=56.1s
+2026-03-13 16:25:19,759 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-13 16:26:10,749 - __main__ - INFO - Training phase complete (51.0s) | Running validation...
+2026-03-13 16:26:15,026 - __main__ - INFO - Losses | train 0.372208 | val 0.644382 | lr 2.50e-04 | time train=51.0s val=4.3s total=55.3s
+2026-03-13 16:26:15,028 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-13 16:27:06,594 - __main__ - INFO - Training phase complete (51.6s) | Running validation...
+2026-03-13 16:27:10,919 - __main__ - INFO - Losses | train 0.357753 | val 0.552819 | lr 2.50e-04 | time train=51.6s val=4.3s total=55.9s
+2026-03-13 16:27:10,919 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-13 16:28:00,859 - __main__ - INFO - Training phase complete (49.9s) | Running validation...
+2026-03-13 16:28:05,006 - __main__ - INFO - Losses | train 0.355717 | val 0.596003 | lr 2.50e-04 | time train=49.9s val=4.1s total=54.1s
+2026-03-13 16:28:05,006 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-13 16:28:52,758 - __main__ - INFO - Training phase complete (47.8s) | Running validation...
+2026-03-13 16:28:56,737 - __main__ - INFO - Losses | train 0.353178 | val 0.628871 | lr 2.50e-04 | time train=47.8s val=4.0s total=51.7s
+2026-03-13 16:28:56,737 - __main__ - INFO - Early stopping at epoch 025 | best val 0.292833 | patience exhausted (15/15)
+2026-03-13 16:29:06,791 - __main__ - INFO - Final test loss: 0.309966
+2026-03-13 16:38:30,254 - __main__ - INFO - Starting GNN training...
+2026-03-13 16:38:44,632 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-13 16:39:29,408 - __main__ - INFO - Training phase complete (44.8s) | Running validation...
+2026-03-13 16:39:33,381 - __main__ - INFO - Losses | train 0.645262 | val 0.293270 | lr 1.00e-03 | time train=44.8s val=4.0s total=48.7s
+2026-03-13 16:39:33,384 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-13 16:40:17,765 - __main__ - INFO - Training phase complete (44.4s) | Running validation...
+2026-03-13 16:40:21,335 - __main__ - INFO - Losses | train 0.318737 | val 0.512362 | lr 1.00e-03 | time train=44.4s val=3.6s total=48.0s
+2026-03-13 16:40:21,335 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-13 16:41:06,637 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 16:41:10,977 - __main__ - INFO - Losses | train 0.256501 | val 0.365020 | lr 1.00e-03 | time train=45.3s val=4.3s total=49.6s
+2026-03-13 16:41:10,977 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-13 16:41:56,237 - __main__ - INFO - Training phase complete (45.3s) | Running validation...
+2026-03-13 16:42:00,383 - __main__ - INFO - Losses | train 0.233766 | val 0.296692 | lr 1.00e-03 | time train=45.3s val=4.1s total=49.4s
+2026-03-13 16:42:00,384 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-13 16:42:44,708 - __main__ - INFO - Training phase complete (44.3s) | Running validation...
+2026-03-13 16:42:49,156 - __main__ - INFO - Losses | train 0.218141 | val 0.115304 | lr 1.00e-03 | time train=44.3s val=4.4s total=48.8s
+2026-03-13 16:42:49,159 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-13 16:43:36,697 - __main__ - INFO - Training phase complete (47.5s) | Running validation...
+2026-03-13 16:43:41,347 - __main__ - INFO - Losses | train 0.202428 | val 0.290975 | lr 1.00e-03 | time train=47.5s val=4.7s total=52.2s
+2026-03-13 16:43:41,347 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-13 16:44:29,153 - __main__ - INFO - Training phase complete (47.8s) | Running validation...
+2026-03-13 16:44:33,595 - __main__ - INFO - Losses | train 0.198210 | val 0.124462 | lr 1.00e-03 | time train=47.8s val=4.4s total=52.2s
+2026-03-13 16:44:33,595 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-13 16:45:21,364 - __main__ - INFO - Training phase complete (47.8s) | Running validation...
+2026-03-13 16:45:25,484 - __main__ - INFO - Losses | train 0.191113 | val 0.128508 | lr 1.00e-03 | time train=47.8s val=4.1s total=51.9s
+2026-03-13 16:45:25,484 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-13 16:46:12,144 - __main__ - INFO - Training phase complete (46.7s) | Running validation...
+2026-03-13 16:46:16,440 - __main__ - INFO - Losses | train 0.179867 | val 0.110026 | lr 1.00e-03 | time train=46.7s val=4.3s total=51.0s
+2026-03-13 16:46:16,443 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-13 16:47:03,181 - __main__ - INFO - Training phase complete (46.7s) | Running validation...
+2026-03-13 16:47:07,498 - __main__ - INFO - Losses | train 0.179968 | val 0.292085 | lr 1.00e-03 | time train=46.7s val=4.3s total=51.1s
+2026-03-13 16:47:07,499 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-13 16:47:53,963 - __main__ - INFO - Training phase complete (46.5s) | Running validation...
+2026-03-13 16:47:58,097 - __main__ - INFO - Losses | train 0.170007 | val 0.305896 | lr 1.00e-03 | time train=46.5s val=4.1s total=50.6s
+2026-03-13 16:47:58,097 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-13 16:48:43,795 - __main__ - INFO - Training phase complete (45.7s) | Running validation...
+2026-03-13 16:48:48,007 - __main__ - INFO - Losses | train 0.164336 | val 0.320467 | lr 1.00e-03 | time train=45.7s val=4.2s total=49.9s
+2026-03-13 16:48:48,007 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-13 16:49:33,454 - __main__ - INFO - Training phase complete (45.4s) | Running validation...
+2026-03-13 16:49:37,618 - __main__ - INFO - Losses | train 0.158057 | val 0.294062 | lr 1.00e-03 | time train=45.4s val=4.2s total=49.6s
+2026-03-13 16:49:37,618 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-13 16:50:23,270 - __main__ - INFO - Training phase complete (45.7s) | Running validation...
+2026-03-13 16:50:27,463 - __main__ - INFO - Losses | train 0.163365 | val 0.292303 | lr 1.00e-03 | time train=45.7s val=4.2s total=49.8s
+2026-03-13 16:50:27,463 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-13 16:51:13,017 - __main__ - INFO - Training phase complete (45.6s) | Running validation...
+2026-03-13 16:51:17,200 - __main__ - INFO - Losses | train 0.139038 | val 0.232107 | lr 5.00e-04 | time train=45.6s val=4.2s total=49.7s
+2026-03-13 16:51:17,200 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-13 16:52:03,114 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 16:52:07,324 - __main__ - INFO - Losses | train 0.135571 | val 0.079992 | lr 5.00e-04 | time train=45.9s val=4.2s total=50.1s
+2026-03-13 16:52:07,328 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-13 16:52:53,195 - __main__ - INFO - Training phase complete (45.9s) | Running validation...
+2026-03-13 16:52:57,443 - __main__ - INFO - Losses | train 0.126528 | val 0.225168 | lr 5.00e-04 | time train=45.9s val=4.2s total=50.1s
+2026-03-13 16:52:57,445 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-13 16:53:43,238 - __main__ - INFO - Training phase complete (45.8s) | Running validation...
+2026-03-13 16:53:47,451 - __main__ - INFO - Losses | train 0.130145 | val 0.098716 | lr 5.00e-04 | time train=45.8s val=4.2s total=50.0s
+2026-03-13 16:53:47,451 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-13 16:54:33,081 - __main__ - INFO - Training phase complete (45.6s) | Running validation...
+2026-03-13 16:54:37,271 - __main__ - INFO - Losses | train 0.125265 | val 0.187718 | lr 5.00e-04 | time train=45.6s val=4.2s total=49.8s
+2026-03-13 16:54:37,271 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-13 16:55:23,020 - __main__ - INFO - Training phase complete (45.7s) | Running validation...
+2026-03-13 16:55:27,224 - __main__ - INFO - Losses | train 0.125194 | val 0.135453 | lr 5.00e-04 | time train=45.7s val=4.2s total=50.0s
+2026-03-13 16:55:27,225 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-13 16:56:13,030 - __main__ - INFO - Training phase complete (45.8s) | Running validation...
+2026-03-13 16:56:17,188 - __main__ - INFO - Losses | train 0.121965 | val 0.150341 | lr 5.00e-04 | time train=45.8s val=4.2s total=50.0s
+2026-03-13 16:56:17,189 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-13 16:57:02,786 - __main__ - INFO - Training phase complete (45.6s) | Running validation...
+2026-03-13 16:57:06,949 - __main__ - INFO - Losses | train 0.117860 | val 0.211372 | lr 2.50e-04 | time train=45.6s val=4.2s total=49.8s
+2026-03-13 16:57:06,949 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-13 16:57:52,702 - __main__ - INFO - Training phase complete (45.8s) | Running validation...
+2026-03-13 16:57:56,895 - __main__ - INFO - Losses | train 0.111723 | val 0.216920 | lr 2.50e-04 | time train=45.8s val=4.2s total=49.9s
+2026-03-13 16:57:56,897 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-13 16:58:42,940 - __main__ - INFO - Training phase complete (46.0s) | Running validation...
+2026-03-13 16:58:47,317 - __main__ - INFO - Losses | train 0.112876 | val 0.124008 | lr 2.50e-04 | time train=46.0s val=4.4s total=50.4s
+2026-03-13 16:58:47,319 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-13 16:59:34,878 - __main__ - INFO - Training phase complete (47.6s) | Running validation...
+2026-03-13 16:59:39,148 - __main__ - INFO - Losses | train 0.110708 | val 0.167999 | lr 2.50e-04 | time train=47.6s val=4.3s total=51.8s
+2026-03-13 16:59:39,148 - __main__ - INFO - -------- EPOCH : 026 --------
+
+2026-03-13 17:00:26,419 - __main__ - INFO - Training phase complete (47.3s) | Running validation...
+2026-03-13 17:00:30,850 - __main__ - INFO - Losses | train 0.115749 | val 0.180613 | lr 2.50e-04 | time train=47.3s val=4.4s total=51.7s
+2026-03-13 17:00:30,850 - __main__ - INFO - -------- EPOCH : 027 --------
+
+2026-03-13 17:01:18,488 - __main__ - INFO - Training phase complete (47.6s) | Running validation...
+2026-03-13 17:01:22,737 - __main__ - INFO - Losses | train 0.109762 | val 0.167986 | lr 2.50e-04 | time train=47.6s val=4.2s total=51.9s
+2026-03-13 17:01:22,737 - __main__ - INFO - -------- EPOCH : 028 --------
+
+2026-03-13 17:02:10,381 - __main__ - INFO - Training phase complete (47.6s) | Running validation...
+2026-03-13 17:02:14,678 - __main__ - INFO - Losses | train 0.110195 | val 0.177138 | lr 1.25e-04 | time train=47.6s val=4.3s total=51.9s
+2026-03-13 17:02:14,678 - __main__ - INFO - -------- EPOCH : 029 --------
+
+2026-03-13 19:11:23,471 - __main__ - INFO - [Heartbeat] Epoch 29 batch 427/450 | loss 0.106979 | elapsed 7748.8s | graphs 13664
+2026-03-13 19:11:27,128 - __main__ - INFO - Training phase complete (7752.4s) | Running validation...
+2026-03-13 19:11:32,030 - __main__ - INFO - Losses | train 0.107159 | val 0.148318 | lr 1.25e-04 | time train=7752.4s val=4.9s total=7757.4s
+2026-03-13 19:11:32,030 - __main__ - WARNING - Epoch 29 took 7757.4s (>300s threshold). This is expected for large models/datasets.
+2026-03-13 19:11:32,030 - __main__ - INFO - -------- EPOCH : 030 --------
+
+2026-03-13 19:12:15,982 - __main__ - INFO - Training phase complete (44.0s) | Running validation...
+2026-03-13 19:12:19,862 - __main__ - INFO - Losses | train 0.107657 | val 0.131244 | lr 1.25e-04 | time train=44.0s val=3.9s total=47.8s
+2026-03-13 19:12:30,395 - __main__ - INFO - Final test loss: 0.084924

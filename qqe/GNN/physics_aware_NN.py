@@ -185,13 +185,13 @@ class QuantumCircuitGraphDataset(PyGDataset):
       - gate_counts: dict (optional, carried along)
       - meta: dict (optional)
     """
-
     def __init__(
         self,
         root: str,
         pt_paths: list[str],
         global_feature_variant: str = "baseline",
         node_feature_backend_variant: str | None = None,
+        fixed_all_gate_keys: list[str] | None = None,
         transform=None,
         pre_transform=None,
     ):
@@ -199,8 +199,11 @@ class QuantumCircuitGraphDataset(PyGDataset):
         self.global_feature_variant = global_feature_variant
         self.node_feature_backend_variant = node_feature_backend_variant
 
-        # Collect all unique gate count keys from all samples
-        self.all_gate_keys = self._collect_all_gate_keys()
+        if fixed_all_gate_keys is None:
+            self.all_gate_keys = self._collect_all_gate_keys()
+        else:
+            self.all_gate_keys = list(fixed_all_gate_keys)
+
         self.global_feature_dim = self._collect_global_feature_dim()
 
         super().__init__(root=root, transform=transform, pre_transform=pre_transform)
