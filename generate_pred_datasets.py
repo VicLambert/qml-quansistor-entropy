@@ -413,11 +413,11 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random,quansistor,clifford",
+        "random,quansistor,clifford,haar",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
-        25,
+        20,
         help="Number of seeds per (family, qubits, layers)",
     ),
     qubits_min: int = typer.Option(12, help="Minimum number of qubits"),
