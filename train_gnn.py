@@ -754,7 +754,7 @@ def train_per_family():...
 def temp_main(
     epochs: int = 30,
     lr: float = 0.001,
-    loss_type: str = "huber",             # "mse" | "huber" | "l1"
+    loss_type: str = "mse",             # "mse" | "huber" | "l1"
     training_mode: str = "global",     # "global" | "per_family"
     family: str | None = None,
     show_progress: bool = typer.Option(True, help="Show progress bars during training"),

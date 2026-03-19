@@ -1201,3 +1201,866 @@ distributed.comm.core.CommClosedError
 2026-03-17 15:51:27,332 - __main__ - INFO -   Index: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\data\predictions\haar\index_haar.jsonl
 2026-03-17 15:51:27,332 - __main__ - INFO -   Samples: C:\Users\victo\Desktop\University\Research\qml-quansistor-entropy\outputs\data\predictions\haar
 2026-03-17 15:51:27,332 - __main__ - INFO - All families processed successfully
+2026-03-18 09:53:59,780 - __main__ - INFO - Starting GNN training...
+2026-03-18 09:54:59,301 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-18 09:55:59,314 - __main__ - INFO - [Heartbeat] Epoch 1 batch 485/900 | loss 2.052960 | elapsed 60.0s | graphs 15520
+2026-03-18 09:56:48,729 - __main__ - INFO - Training phase complete (109.4s) | Running validation...
+2026-03-18 09:56:58,670 - __main__ - INFO - Losses | train 1.410664 | val 0.466835 | lr 1.00e-03 | time train=109.4s val=9.9s total=119.4s
+2026-03-18 09:56:58,675 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-18 09:57:58,724 - __main__ - INFO - [Heartbeat] Epoch 2 batch 432/900 | loss 0.585824 | elapsed 60.0s | graphs 13824
+2026-03-18 09:58:58,812 - __main__ - INFO - [Heartbeat] Epoch 2 batch 898/900 | loss 0.544071 | elapsed 120.1s | graphs 28736
+2026-03-18 09:58:59,063 - __main__ - INFO - Training phase complete (120.4s) | Running validation...
+2026-03-18 09:59:09,337 - __main__ - INFO - Losses | train 0.544191 | val 0.105697 | lr 1.00e-03 | time train=120.4s val=10.3s total=130.7s
+2026-03-18 09:59:09,342 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-18 10:00:09,393 - __main__ - INFO - [Heartbeat] Epoch 3 batch 473/900 | loss 0.476688 | elapsed 60.1s | graphs 15136
+2026-03-18 10:01:05,619 - __main__ - INFO - Training phase complete (116.3s) | Running validation...
+2026-03-18 10:01:15,909 - __main__ - INFO - Losses | train 0.456672 | val 0.562009 | lr 1.00e-03 | time train=116.3s val=10.3s total=126.6s
+2026-03-18 10:01:15,910 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-18 10:02:16,014 - __main__ - INFO - [Heartbeat] Epoch 4 batch 462/900 | loss 0.444709 | elapsed 60.1s | graphs 14784
+2026-03-18 10:03:10,321 - __main__ - INFO - Training phase complete (114.4s) | Running validation...
+2026-03-18 10:03:20,257 - __main__ - INFO - Losses | train 0.414656 | val 0.157920 | lr 1.00e-03 | time train=114.4s val=9.9s total=124.3s
+2026-03-18 10:03:20,257 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-18 10:04:20,269 - __main__ - INFO - [Heartbeat] Epoch 5 batch 456/900 | loss 0.350921 | elapsed 60.0s | graphs 14592
+2026-03-18 10:05:19,004 - __main__ - INFO - Training phase complete (118.7s) | Running validation...
+2026-03-18 10:05:28,999 - __main__ - INFO - Losses | train 0.352534 | val 0.092463 | lr 1.00e-03 | time train=118.7s val=10.0s total=128.7s
+2026-03-18 10:05:29,004 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-18 10:06:29,011 - __main__ - INFO - [Heartbeat] Epoch 6 batch 469/900 | loss 0.346200 | elapsed 60.0s | graphs 15008
+2026-03-18 10:07:24,560 - __main__ - INFO - Training phase complete (115.6s) | Running validation...
+2026-03-18 10:07:34,675 - __main__ - INFO - Losses | train 0.334745 | val 0.421816 | lr 1.00e-03 | time train=115.6s val=10.1s total=125.7s
+2026-03-18 10:07:34,676 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-18 10:08:34,776 - __main__ - INFO - [Heartbeat] Epoch 7 batch 470/900 | loss 0.299278 | elapsed 60.1s | graphs 15040
+2026-03-18 10:09:33,477 - __main__ - INFO - Training phase complete (118.8s) | Running validation...
+2026-03-18 10:09:44,452 - __main__ - INFO - Losses | train 0.292281 | val 0.407976 | lr 1.00e-03 | time train=118.8s val=11.0s total=129.8s
+2026-03-18 10:09:44,452 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-18 10:10:44,575 - __main__ - INFO - [Heartbeat] Epoch 8 batch 428/900 | loss 0.281923 | elapsed 60.1s | graphs 13696
+2026-03-18 10:11:44,621 - __main__ - INFO - [Heartbeat] Epoch 8 batch 861/900 | loss 0.284308 | elapsed 120.2s | graphs 27552
+2026-03-18 10:11:50,340 - __main__ - INFO - Training phase complete (125.9s) | Running validation...
+2026-03-18 10:12:00,796 - __main__ - INFO - Losses | train 0.283280 | val 0.397575 | lr 1.00e-03 | time train=125.9s val=10.5s total=136.3s
+2026-03-18 10:12:00,797 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-18 10:13:00,878 - __main__ - INFO - [Heartbeat] Epoch 9 batch 439/900 | loss 0.253112 | elapsed 60.1s | graphs 14048
+2026-03-18 10:14:00,988 - __main__ - INFO - [Heartbeat] Epoch 9 batch 860/900 | loss 0.256114 | elapsed 120.2s | graphs 27520
+2026-03-18 10:14:06,714 - __main__ - INFO - Training phase complete (125.9s) | Running validation...
+2026-03-18 10:14:17,107 - __main__ - INFO - Losses | train 0.255231 | val 0.199518 | lr 1.00e-03 | time train=125.9s val=10.4s total=136.3s
+2026-03-18 10:14:17,107 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-18 10:15:17,162 - __main__ - INFO - [Heartbeat] Epoch 10 batch 429/900 | loss 0.256835 | elapsed 60.1s | graphs 13728
+2026-03-18 10:16:17,269 - __main__ - INFO - [Heartbeat] Epoch 10 batch 879/900 | loss 0.249338 | elapsed 120.2s | graphs 28128
+2026-03-18 10:16:19,863 - __main__ - INFO - Training phase complete (122.8s) | Running validation...
+2026-03-18 10:16:29,092 - __main__ - INFO - Losses | train 0.250075 | val 0.178252 | lr 1.00e-03 | time train=122.8s val=9.2s total=132.0s
+2026-03-18 10:16:29,092 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-18 10:17:29,182 - __main__ - INFO - [Heartbeat] Epoch 11 batch 463/900 | loss 0.238637 | elapsed 60.1s | graphs 14816
+2026-03-18 10:18:26,740 - __main__ - INFO - Training phase complete (117.6s) | Running validation...
+2026-03-18 10:18:36,292 - __main__ - INFO - Losses | train 0.237835 | val 0.246079 | lr 5.00e-04 | time train=117.6s val=9.6s total=127.2s
+2026-03-18 10:18:36,292 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-18 10:19:36,378 - __main__ - INFO - [Heartbeat] Epoch 12 batch 486/900 | loss 0.216464 | elapsed 60.1s | graphs 15552
+2026-03-18 10:20:27,143 - __main__ - INFO - Training phase complete (110.9s) | Running validation...
+2026-03-18 10:20:38,800 - __main__ - INFO - Losses | train 0.213313 | val 0.427903 | lr 5.00e-04 | time train=110.9s val=11.7s total=122.5s
+2026-03-18 10:20:38,801 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-18 10:21:38,881 - __main__ - INFO - [Heartbeat] Epoch 13 batch 440/900 | loss 0.216608 | elapsed 60.1s | graphs 14080
+2026-03-18 10:22:38,251 - __main__ - INFO - Training phase complete (119.4s) | Running validation...
+2026-03-18 10:22:48,076 - __main__ - INFO - Losses | train 0.207801 | val 0.232232 | lr 5.00e-04 | time train=119.4s val=9.8s total=129.3s
+2026-03-18 10:22:48,076 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-18 10:23:48,186 - __main__ - INFO - [Heartbeat] Epoch 14 batch 488/900 | loss 0.200607 | elapsed 60.1s | graphs 15616
+2026-03-18 10:24:47,236 - __main__ - INFO - Training phase complete (119.2s) | Running validation...
+2026-03-18 10:24:57,220 - __main__ - INFO - Losses | train 0.205795 | val 0.234460 | lr 5.00e-04 | time train=119.2s val=10.0s total=129.1s
+2026-03-18 10:24:57,220 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-18 10:25:57,299 - __main__ - INFO - [Heartbeat] Epoch 15 batch 527/900 | loss 0.204713 | elapsed 60.1s | graphs 16864
+2026-03-18 10:26:36,287 - __main__ - INFO - Training phase complete (99.1s) | Running validation...
+2026-03-18 10:26:45,443 - __main__ - INFO - Losses | train 0.201314 | val 0.323479 | lr 5.00e-04 | time train=99.1s val=9.2s total=108.2s
+2026-03-18 10:26:45,443 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-18 10:27:45,517 - __main__ - INFO - [Heartbeat] Epoch 16 batch 576/900 | loss 0.197084 | elapsed 60.1s | graphs 18432
+2026-03-18 10:28:19,669 - __main__ - INFO - Training phase complete (94.2s) | Running validation...
+2026-03-18 10:28:28,743 - __main__ - INFO - Losses | train 0.196999 | val 0.265654 | lr 5.00e-04 | time train=94.2s val=9.1s total=103.3s
+2026-03-18 10:28:28,743 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-18 10:29:28,755 - __main__ - INFO - [Heartbeat] Epoch 17 batch 576/900 | loss 0.193317 | elapsed 60.0s | graphs 18432
+2026-03-18 10:30:02,908 - __main__ - INFO - Training phase complete (94.2s) | Running validation...
+2026-03-18 10:30:12,159 - __main__ - INFO - Losses | train 0.192537 | val 0.253149 | lr 2.50e-04 | time train=94.2s val=9.2s total=103.4s
+2026-03-18 10:30:12,159 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-18 10:31:12,219 - __main__ - INFO - [Heartbeat] Epoch 18 batch 574/900 | loss 0.191121 | elapsed 60.1s | graphs 18368
+2026-03-18 10:31:46,191 - __main__ - INFO - Training phase complete (94.0s) | Running validation...
+2026-03-18 10:31:55,071 - __main__ - INFO - Losses | train 0.187180 | val 0.363577 | lr 2.50e-04 | time train=94.0s val=8.9s total=102.9s
+2026-03-18 10:31:55,071 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-18 10:32:55,128 - __main__ - INFO - [Heartbeat] Epoch 19 batch 576/900 | loss 0.179272 | elapsed 60.1s | graphs 18432
+2026-03-18 10:33:28,902 - __main__ - INFO - Training phase complete (93.8s) | Running validation...
+2026-03-18 10:33:37,792 - __main__ - INFO - Losses | train 0.182116 | val 0.307936 | lr 2.50e-04 | time train=93.8s val=8.9s total=102.7s
+2026-03-18 10:33:37,792 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-18 10:34:37,869 - __main__ - INFO - [Heartbeat] Epoch 20 batch 574/900 | loss 0.186549 | elapsed 60.1s | graphs 18368
+2026-03-18 10:35:11,800 - __main__ - INFO - Training phase complete (94.0s) | Running validation...
+2026-03-18 10:35:20,624 - __main__ - INFO - Losses | train 0.186752 | val 0.303803 | lr 2.50e-04 | time train=94.0s val=8.8s total=102.8s
+2026-03-18 10:35:20,624 - __main__ - INFO - Early stopping at epoch 020 | best val 0.092463 | patience exhausted (15/15)
+2026-03-18 10:35:45,079 - __main__ - INFO - Final test loss: 0.089179
+2026-03-18 10:39:50,522 - __main__ - INFO - Starting GNN training...
+2026-03-18 10:40:00,685 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-18 10:40:18,112 - __main__ - INFO - Training phase complete (17.4s) | Running validation...
+2026-03-18 10:40:19,708 - __main__ - INFO - Losses | train 3.444037 | val 1.029885 | lr 1.00e-03 | time train=17.4s val=1.6s total=19.0s
+2026-03-18 10:40:19,712 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-18 10:40:37,798 - __main__ - INFO - Training phase complete (18.1s) | Running validation...
+2026-03-18 10:40:39,375 - __main__ - INFO - Losses | train 0.679016 | val 1.223962 | lr 1.00e-03 | time train=18.1s val=1.6s total=19.7s
+2026-03-18 10:40:39,377 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-18 10:40:57,682 - __main__ - INFO - Training phase complete (18.3s) | Running validation...
+2026-03-18 10:40:59,294 - __main__ - INFO - Losses | train 0.546281 | val 0.142164 | lr 1.00e-03 | time train=18.3s val=1.6s total=19.9s
+2026-03-18 10:40:59,297 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-18 10:41:17,657 - __main__ - INFO - Training phase complete (18.4s) | Running validation...
+2026-03-18 10:41:19,176 - __main__ - INFO - Losses | train 0.648132 | val 1.330024 | lr 1.00e-03 | time train=18.4s val=1.5s total=19.9s
+2026-03-18 10:41:19,177 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-18 10:41:36,491 - __main__ - INFO - Training phase complete (17.3s) | Running validation...
+2026-03-18 10:41:38,087 - __main__ - INFO - Losses | train 0.507217 | val 0.621105 | lr 1.00e-03 | time train=17.3s val=1.6s total=18.9s
+2026-03-18 10:41:38,087 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-18 10:41:56,474 - __main__ - INFO - Training phase complete (18.4s) | Running validation...
+2026-03-18 10:41:58,085 - __main__ - INFO - Losses | train 0.433671 | val 0.422657 | lr 1.00e-03 | time train=18.4s val=1.6s total=20.0s
+2026-03-18 10:41:58,086 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-18 10:42:16,797 - __main__ - INFO - Training phase complete (18.7s) | Running validation...
+2026-03-18 10:42:18,392 - __main__ - INFO - Losses | train 0.445846 | val 0.719666 | lr 1.00e-03 | time train=18.7s val=1.6s total=20.3s
+2026-03-18 10:42:18,392 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-18 10:42:36,248 - __main__ - INFO - Training phase complete (17.9s) | Running validation...
+2026-03-18 10:42:37,835 - __main__ - INFO - Losses | train 0.448673 | val 0.959753 | lr 1.00e-03 | time train=17.9s val=1.6s total=19.4s
+2026-03-18 10:42:37,835 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-18 10:42:55,846 - __main__ - INFO - Training phase complete (18.0s) | Running validation...
+2026-03-18 10:42:57,481 - __main__ - INFO - Losses | train 0.433419 | val 0.381906 | lr 5.00e-04 | time train=18.0s val=1.6s total=19.6s
+2026-03-18 10:42:57,482 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-18 10:43:16,619 - __main__ - INFO - Training phase complete (19.1s) | Running validation...
+2026-03-18 10:43:18,222 - __main__ - INFO - Losses | train 0.368142 | val 0.206419 | lr 5.00e-04 | time train=19.1s val=1.6s total=20.7s
+2026-03-18 10:43:18,222 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-18 10:43:36,607 - __main__ - INFO - Training phase complete (18.4s) | Running validation...
+2026-03-18 10:43:38,168 - __main__ - INFO - Losses | train 0.358983 | val 0.390350 | lr 5.00e-04 | time train=18.4s val=1.6s total=19.9s
+2026-03-18 10:43:38,168 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-18 10:43:56,368 - __main__ - INFO - Training phase complete (18.2s) | Running validation...
+2026-03-18 10:43:57,893 - __main__ - INFO - Losses | train 0.341321 | val 0.601017 | lr 5.00e-04 | time train=18.2s val=1.5s total=19.7s
+2026-03-18 10:43:57,893 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-18 10:44:16,237 - __main__ - INFO - Training phase complete (18.3s) | Running validation...
+2026-03-18 10:44:17,834 - __main__ - INFO - Losses | train 0.316643 | val 0.293178 | lr 5.00e-04 | time train=18.3s val=1.6s total=19.9s
+2026-03-18 10:44:17,835 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-18 10:44:38,211 - __main__ - INFO - Training phase complete (20.4s) | Running validation...
+2026-03-18 10:44:40,135 - __main__ - INFO - Losses | train 0.324813 | val 0.126297 | lr 5.00e-04 | time train=20.4s val=1.9s total=22.3s
+2026-03-18 10:44:40,138 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-18 10:45:04,729 - __main__ - INFO - Training phase complete (24.6s) | Running validation...
+2026-03-18 10:45:06,736 - __main__ - INFO - Losses | train 0.327514 | val 0.398651 | lr 5.00e-04 | time train=24.6s val=2.0s total=26.6s
+2026-03-18 10:45:06,738 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-18 10:45:28,415 - __main__ - INFO - Training phase complete (21.7s) | Running validation...
+2026-03-18 10:45:30,090 - __main__ - INFO - Losses | train 0.324928 | val 0.408135 | lr 5.00e-04 | time train=21.7s val=1.7s total=23.4s
+2026-03-18 10:45:30,090 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-18 10:45:50,634 - __main__ - INFO - Training phase complete (20.5s) | Running validation...
+2026-03-18 10:45:52,481 - __main__ - INFO - Losses | train 0.307762 | val 0.618800 | lr 5.00e-04 | time train=20.5s val=1.8s total=22.4s
+2026-03-18 10:45:52,482 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-18 10:46:14,341 - __main__ - INFO - Training phase complete (21.9s) | Running validation...
+2026-03-18 10:46:15,801 - __main__ - INFO - Losses | train 0.296097 | val 0.588084 | lr 5.00e-04 | time train=21.9s val=1.5s total=23.3s
+2026-03-18 10:46:15,802 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-18 10:46:33,536 - __main__ - INFO - Training phase complete (17.7s) | Running validation...
+2026-03-18 10:46:35,179 - __main__ - INFO - Losses | train 0.287740 | val 0.206804 | lr 5.00e-04 | time train=17.7s val=1.6s total=19.4s
+2026-03-18 10:46:35,179 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-18 10:46:53,659 - __main__ - INFO - Training phase complete (18.5s) | Running validation...
+2026-03-18 10:46:55,203 - __main__ - INFO - Losses | train 0.286510 | val 0.394267 | lr 2.50e-04 | time train=18.5s val=1.5s total=20.0s
+2026-03-18 10:46:55,203 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-18 10:47:13,500 - __main__ - INFO - Training phase complete (18.3s) | Running validation...
+2026-03-18 10:47:15,048 - __main__ - INFO - Losses | train 0.274166 | val 0.379931 | lr 2.50e-04 | time train=18.3s val=1.5s total=19.8s
+2026-03-18 10:47:15,048 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-18 10:47:33,622 - __main__ - INFO - Training phase complete (18.6s) | Running validation...
+2026-03-18 10:47:35,202 - __main__ - INFO - Losses | train 0.259141 | val 0.348052 | lr 2.50e-04 | time train=18.6s val=1.6s total=20.2s
+2026-03-18 10:47:35,202 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-18 10:47:53,707 - __main__ - INFO - Training phase complete (18.5s) | Running validation...
+2026-03-18 10:47:55,326 - __main__ - INFO - Losses | train 0.263470 | val 0.360963 | lr 2.50e-04 | time train=18.5s val=1.6s total=20.1s
+2026-03-18 10:47:55,326 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-18 10:48:14,015 - __main__ - INFO - Training phase complete (18.7s) | Running validation...
+2026-03-18 10:48:15,614 - __main__ - INFO - Losses | train 0.253833 | val 0.335845 | lr 2.50e-04 | time train=18.7s val=1.6s total=20.3s
+2026-03-18 10:48:15,615 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-18 10:48:33,875 - __main__ - INFO - Training phase complete (18.3s) | Running validation...
+2026-03-18 10:48:35,538 - __main__ - INFO - Losses | train 0.255115 | val 0.374267 | lr 2.50e-04 | time train=18.3s val=1.7s total=19.9s
+2026-03-18 10:48:35,538 - __main__ - INFO - -------- EPOCH : 026 --------
+
+2026-03-18 10:48:53,328 - __main__ - INFO - Training phase complete (17.8s) | Running validation...
+2026-03-18 10:48:54,955 - __main__ - INFO - Losses | train 0.251405 | val 0.246461 | lr 1.25e-04 | time train=17.8s val=1.6s total=19.4s
+2026-03-18 10:48:54,956 - __main__ - INFO - -------- EPOCH : 027 --------
+
+2026-03-18 10:49:13,729 - __main__ - INFO - Training phase complete (18.8s) | Running validation...
+2026-03-18 10:49:15,375 - __main__ - INFO - Losses | train 0.250632 | val 0.275164 | lr 1.25e-04 | time train=18.8s val=1.6s total=20.4s
+2026-03-18 10:49:15,375 - __main__ - INFO - -------- EPOCH : 028 --------
+
+2026-03-18 10:49:34,276 - __main__ - INFO - Training phase complete (18.9s) | Running validation...
+2026-03-18 10:49:35,861 - __main__ - INFO - Losses | train 0.245167 | val 0.296414 | lr 1.25e-04 | time train=18.9s val=1.6s total=20.5s
+2026-03-18 10:49:35,861 - __main__ - INFO - -------- EPOCH : 029 --------
+
+2026-03-18 10:49:54,514 - __main__ - INFO - Training phase complete (18.7s) | Running validation...
+2026-03-18 10:49:56,115 - __main__ - INFO - Losses | train 0.243734 | val 0.240386 | lr 1.25e-04 | time train=18.7s val=1.6s total=20.3s
+2026-03-18 10:49:56,115 - __main__ - INFO - Early stopping at epoch 029 | best val 0.126297 | patience exhausted (15/15)
+2026-03-18 10:50:00,719 - __main__ - INFO - Final test loss: 0.109378
+2026-03-18 10:50:28,369 - __main__ - INFO - Starting GNN training...
+2026-03-18 10:50:36,653 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-18 10:50:52,165 - __main__ - INFO - Training phase complete (15.5s) | Running validation...
+2026-03-18 10:50:53,105 - __main__ - INFO - Losses | train 2.763087 | val 0.335682 | lr 1.00e-03 | time train=15.5s val=0.9s total=16.5s
+2026-03-18 10:50:53,109 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-18 10:51:08,462 - __main__ - INFO - Training phase complete (15.4s) | Running validation...
+2026-03-18 10:51:09,398 - __main__ - INFO - Losses | train 0.924005 | val 0.252439 | lr 1.00e-03 | time train=15.4s val=0.9s total=16.3s
+2026-03-18 10:51:09,401 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-18 10:51:24,843 - __main__ - INFO - Training phase complete (15.4s) | Running validation...
+2026-03-18 10:51:25,795 - __main__ - INFO - Losses | train 0.697477 | val 0.231214 | lr 1.00e-03 | time train=15.4s val=1.0s total=16.4s
+2026-03-18 10:51:25,797 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-18 10:51:41,373 - __main__ - INFO - Training phase complete (15.6s) | Running validation...
+2026-03-18 10:51:42,346 - __main__ - INFO - Losses | train 0.714804 | val 0.481753 | lr 1.00e-03 | time train=15.6s val=1.0s total=16.5s
+2026-03-18 10:51:42,346 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-18 10:51:58,148 - __main__ - INFO - Training phase complete (15.8s) | Running validation...
+2026-03-18 10:51:59,137 - __main__ - INFO - Losses | train 0.626007 | val 0.215564 | lr 1.00e-03 | time train=15.8s val=1.0s total=16.8s
+2026-03-18 10:51:59,140 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-18 10:52:14,921 - __main__ - INFO - Training phase complete (15.8s) | Running validation...
+2026-03-18 10:52:15,887 - __main__ - INFO - Losses | train 0.602964 | val 0.400277 | lr 1.00e-03 | time train=15.8s val=1.0s total=16.7s
+2026-03-18 10:52:15,887 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-18 10:52:31,574 - __main__ - INFO - Training phase complete (15.7s) | Running validation...
+2026-03-18 10:52:32,531 - __main__ - INFO - Losses | train 0.565615 | val 0.345179 | lr 1.00e-03 | time train=15.7s val=1.0s total=16.6s
+2026-03-18 10:52:32,531 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-18 10:52:48,199 - __main__ - INFO - Training phase complete (15.7s) | Running validation...
+2026-03-18 10:52:49,177 - __main__ - INFO - Losses | train 0.567640 | val 0.190649 | lr 1.00e-03 | time train=15.7s val=1.0s total=16.6s
+2026-03-18 10:52:49,180 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-18 10:53:05,053 - __main__ - INFO - Training phase complete (15.9s) | Running validation...
+2026-03-18 10:53:06,008 - __main__ - INFO - Losses | train 0.563372 | val 0.281862 | lr 1.00e-03 | time train=15.9s val=1.0s total=16.8s
+2026-03-18 10:53:06,008 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-18 10:53:21,679 - __main__ - INFO - Training phase complete (15.7s) | Running validation...
+2026-03-18 10:53:22,632 - __main__ - INFO - Losses | train 0.515430 | val 0.579688 | lr 1.00e-03 | time train=15.7s val=1.0s total=16.6s
+2026-03-18 10:53:22,632 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-18 10:53:38,444 - __main__ - INFO - Training phase complete (15.8s) | Running validation...
+2026-03-18 10:53:39,433 - __main__ - INFO - Losses | train 0.529214 | val 0.162354 | lr 1.00e-03 | time train=15.8s val=1.0s total=16.8s
+2026-03-18 10:53:39,436 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-18 10:53:55,251 - __main__ - INFO - Training phase complete (15.8s) | Running validation...
+2026-03-18 10:53:56,218 - __main__ - INFO - Losses | train 0.510114 | val 0.377511 | lr 1.00e-03 | time train=15.8s val=1.0s total=16.8s
+2026-03-18 10:53:56,218 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-18 10:54:12,324 - __main__ - INFO - Training phase complete (16.1s) | Running validation...
+2026-03-18 10:54:13,334 - __main__ - INFO - Losses | train 0.465213 | val 0.316383 | lr 1.00e-03 | time train=16.1s val=1.0s total=17.1s
+2026-03-18 10:54:13,334 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-18 10:54:29,430 - __main__ - INFO - Training phase complete (16.1s) | Running validation...
+2026-03-18 10:54:30,384 - __main__ - INFO - Losses | train 0.484971 | val 0.690986 | lr 1.00e-03 | time train=16.1s val=1.0s total=17.1s
+2026-03-18 10:54:30,385 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-18 10:54:46,735 - __main__ - INFO - Training phase complete (16.4s) | Running validation...
+2026-03-18 10:54:47,717 - __main__ - INFO - Losses | train 0.481344 | val 0.649743 | lr 1.00e-03 | time train=16.4s val=1.0s total=17.3s
+2026-03-18 10:54:47,717 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-18 10:55:03,963 - __main__ - INFO - Training phase complete (16.2s) | Running validation...
+2026-03-18 10:55:04,948 - __main__ - INFO - Losses | train 0.411002 | val 0.448980 | lr 1.00e-03 | time train=16.2s val=1.0s total=17.2s
+2026-03-18 10:55:04,948 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-18 10:55:20,945 - __main__ - INFO - Training phase complete (16.0s) | Running validation...
+2026-03-18 10:55:21,969 - __main__ - INFO - Losses | train 0.415955 | val 0.343866 | lr 5.00e-04 | time train=16.0s val=1.0s total=17.0s
+2026-03-18 10:55:21,969 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-18 10:55:37,638 - __main__ - INFO - Training phase complete (15.7s) | Running validation...
+2026-03-18 10:55:38,559 - __main__ - INFO - Losses | train 0.381298 | val 0.295427 | lr 5.00e-04 | time train=15.7s val=0.9s total=16.6s
+2026-03-18 10:55:38,559 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-18 10:55:54,183 - __main__ - INFO - Training phase complete (15.6s) | Running validation...
+2026-03-18 10:55:55,127 - __main__ - INFO - Losses | train 0.387506 | val 0.326690 | lr 5.00e-04 | time train=15.6s val=0.9s total=16.6s
+2026-03-18 10:55:55,127 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-18 10:56:10,602 - __main__ - INFO - Training phase complete (15.5s) | Running validation...
+2026-03-18 10:56:11,540 - __main__ - INFO - Losses | train 0.371052 | val 0.439785 | lr 5.00e-04 | time train=15.5s val=0.9s total=16.4s
+2026-03-18 10:56:11,540 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-18 10:56:26,975 - __main__ - INFO - Training phase complete (15.4s) | Running validation...
+2026-03-18 10:56:27,928 - __main__ - INFO - Losses | train 0.361381 | val 0.363805 | lr 5.00e-04 | time train=15.4s val=1.0s total=16.4s
+2026-03-18 10:56:27,928 - __main__ - INFO - -------- EPOCH : 022 --------
+
+2026-03-18 10:56:43,661 - __main__ - INFO - Training phase complete (15.7s) | Running validation...
+2026-03-18 10:56:44,600 - __main__ - INFO - Losses | train 0.353952 | val 0.293775 | lr 5.00e-04 | time train=15.7s val=0.9s total=16.7s
+2026-03-18 10:56:44,600 - __main__ - INFO - -------- EPOCH : 023 --------
+
+2026-03-18 10:57:00,064 - __main__ - INFO - Training phase complete (15.5s) | Running validation...
+2026-03-18 10:57:01,005 - __main__ - INFO - Losses | train 0.348058 | val 0.200738 | lr 2.50e-04 | time train=15.5s val=0.9s total=16.4s
+2026-03-18 10:57:01,006 - __main__ - INFO - -------- EPOCH : 024 --------
+
+2026-03-18 10:57:16,340 - __main__ - INFO - Training phase complete (15.3s) | Running validation...
+2026-03-18 10:57:17,266 - __main__ - INFO - Losses | train 0.357513 | val 0.238325 | lr 2.50e-04 | time train=15.3s val=0.9s total=16.3s
+2026-03-18 10:57:17,268 - __main__ - INFO - -------- EPOCH : 025 --------
+
+2026-03-18 10:57:32,642 - __main__ - INFO - Training phase complete (15.4s) | Running validation...
+2026-03-18 10:57:33,572 - __main__ - INFO - Losses | train 0.319654 | val 0.247816 | lr 2.50e-04 | time train=15.4s val=0.9s total=16.3s
+2026-03-18 10:57:33,573 - __main__ - INFO - -------- EPOCH : 026 --------
+
+2026-03-18 10:57:49,083 - __main__ - INFO - Training phase complete (15.5s) | Running validation...
+2026-03-18 10:57:50,023 - __main__ - INFO - Losses | train 0.340868 | val 0.389132 | lr 2.50e-04 | time train=15.5s val=0.9s total=16.4s
+2026-03-18 10:57:50,023 - __main__ - INFO - Early stopping at epoch 026 | best val 0.162354 | patience exhausted (15/15)
+2026-03-18 10:57:52,475 - __main__ - INFO - Final test loss: 0.164737
+2026-03-18 10:58:13,723 - __main__ - INFO - Starting GNN training...
+2026-03-18 10:58:21,374 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-18 10:58:30,135 - __main__ - INFO - Training phase complete (8.8s) | Running validation...
+2026-03-18 10:58:30,769 - __main__ - INFO - Losses | train 2.801474 | val 0.084029 | lr 1.00e-03 | time train=8.8s val=0.6s total=9.4s
+2026-03-18 10:58:30,772 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-18 10:58:39,237 - __main__ - INFO - Training phase complete (8.5s) | Running validation...
+2026-03-18 10:58:39,851 - __main__ - INFO - Losses | train 0.784951 | val 0.071382 | lr 1.00e-03 | time train=8.5s val=0.6s total=9.1s
+2026-03-18 10:58:39,855 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-18 10:58:48,230 - __main__ - INFO - Training phase complete (8.4s) | Running validation...
+2026-03-18 10:58:48,841 - __main__ - INFO - Losses | train 0.614384 | val 0.058587 | lr 1.00e-03 | time train=8.4s val=0.6s total=9.0s
+2026-03-18 10:58:48,845 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-18 10:58:57,034 - __main__ - INFO - Training phase complete (8.2s) | Running validation...
+2026-03-18 10:58:57,642 - __main__ - INFO - Losses | train 0.568869 | val 0.576731 | lr 1.00e-03 | time train=8.2s val=0.6s total=8.8s
+2026-03-18 10:58:57,644 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-18 10:59:06,111 - __main__ - INFO - Training phase complete (8.5s) | Running validation...
+2026-03-18 10:59:06,718 - __main__ - INFO - Losses | train 0.466920 | val 0.120366 | lr 1.00e-03 | time train=8.5s val=0.6s total=9.1s
+2026-03-18 10:59:06,718 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-18 10:59:15,318 - __main__ - INFO - Training phase complete (8.6s) | Running validation...
+2026-03-18 10:59:15,968 - __main__ - INFO - Losses | train 0.432508 | val 0.267356 | lr 1.00e-03 | time train=8.6s val=0.7s total=9.3s
+2026-03-18 10:59:15,968 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-18 10:59:24,521 - __main__ - INFO - Training phase complete (8.6s) | Running validation...
+2026-03-18 10:59:25,154 - __main__ - INFO - Losses | train 0.435623 | val 0.487577 | lr 1.00e-03 | time train=8.6s val=0.6s total=9.2s
+2026-03-18 10:59:25,154 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-18 10:59:33,651 - __main__ - INFO - Training phase complete (8.5s) | Running validation...
+2026-03-18 10:59:34,272 - __main__ - INFO - Losses | train 0.447100 | val 0.371660 | lr 1.00e-03 | time train=8.5s val=0.6s total=9.1s
+2026-03-18 10:59:34,272 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-18 10:59:42,751 - __main__ - INFO - Training phase complete (8.5s) | Running validation...
+2026-03-18 10:59:43,378 - __main__ - INFO - Losses | train 0.377229 | val 0.271558 | lr 5.00e-04 | time train=8.5s val=0.6s total=9.1s
+2026-03-18 10:59:43,378 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-18 10:59:52,083 - __main__ - INFO - Training phase complete (8.7s) | Running validation...
+2026-03-18 10:59:52,712 - __main__ - INFO - Losses | train 0.321854 | val 0.154392 | lr 5.00e-04 | time train=8.7s val=0.6s total=9.3s
+2026-03-18 10:59:52,712 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-18 11:00:01,208 - __main__ - INFO - Training phase complete (8.5s) | Running validation...
+2026-03-18 11:00:01,835 - __main__ - INFO - Losses | train 0.302312 | val 0.253900 | lr 5.00e-04 | time train=8.5s val=0.6s total=9.1s
+2026-03-18 11:00:01,837 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-18 11:00:10,156 - __main__ - INFO - Training phase complete (8.3s) | Running validation...
+2026-03-18 11:00:10,767 - __main__ - INFO - Losses | train 0.325669 | val 0.183267 | lr 5.00e-04 | time train=8.3s val=0.6s total=8.9s
+2026-03-18 11:00:10,767 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-18 11:00:19,105 - __main__ - INFO - Training phase complete (8.3s) | Running validation...
+2026-03-18 11:00:19,712 - __main__ - INFO - Losses | train 0.302360 | val 0.109443 | lr 5.00e-04 | time train=8.3s val=0.6s total=8.9s
+2026-03-18 11:00:19,712 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-18 11:00:28,740 - __main__ - INFO - Training phase complete (9.0s) | Running validation...
+2026-03-18 11:00:29,351 - __main__ - INFO - Losses | train 0.292866 | val 0.182336 | lr 5.00e-04 | time train=9.0s val=0.6s total=9.6s
+2026-03-18 11:00:29,351 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-18 11:00:37,780 - __main__ - INFO - Training phase complete (8.4s) | Running validation...
+2026-03-18 11:00:38,423 - __main__ - INFO - Losses | train 0.285517 | val 0.146345 | lr 2.50e-04 | time train=8.4s val=0.6s total=9.1s
+2026-03-18 11:00:38,424 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-18 11:00:46,832 - __main__ - INFO - Training phase complete (8.4s) | Running validation...
+2026-03-18 11:00:47,435 - __main__ - INFO - Losses | train 0.262201 | val 0.291178 | lr 2.50e-04 | time train=8.4s val=0.6s total=9.0s
+2026-03-18 11:00:47,435 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-18 11:00:55,791 - __main__ - INFO - Training phase complete (8.4s) | Running validation...
+2026-03-18 11:00:56,404 - __main__ - INFO - Losses | train 0.256879 | val 0.272780 | lr 2.50e-04 | time train=8.4s val=0.6s total=9.0s
+2026-03-18 11:00:56,404 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-18 11:01:04,721 - __main__ - INFO - Training phase complete (8.3s) | Running validation...
+2026-03-18 11:01:05,387 - __main__ - INFO - Losses | train 0.273179 | val 0.075840 | lr 2.50e-04 | time train=8.3s val=0.7s total=9.0s
+2026-03-18 11:01:05,388 - __main__ - INFO - Early stopping at epoch 018 | best val 0.058587 | patience exhausted (15/15)
+2026-03-18 11:01:07,002 - __main__ - INFO - Final test loss: 0.062018
+2026-03-18 11:01:25,172 - __main__ - INFO - Starting GNN training...
+2026-03-18 11:01:33,888 - __main__ - INFO - -------- EPOCH : 001 --------
+
+2026-03-18 11:01:51,212 - __main__ - INFO - Training phase complete (17.3s) | Running validation...
+2026-03-18 11:01:52,471 - __main__ - INFO - Losses | train 3.883439 | val 0.216070 | lr 1.00e-03 | time train=17.3s val=1.3s total=18.6s
+2026-03-18 11:01:52,474 - __main__ - INFO - -------- EPOCH : 002 --------
+
+2026-03-18 11:02:09,487 - __main__ - INFO - Training phase complete (17.0s) | Running validation...
+2026-03-18 11:02:10,758 - __main__ - INFO - Losses | train 0.912435 | val 0.077946 | lr 1.00e-03 | time train=17.0s val=1.3s total=18.3s
+2026-03-18 11:02:10,760 - __main__ - INFO - -------- EPOCH : 003 --------
+
+2026-03-18 11:02:27,991 - __main__ - INFO - Training phase complete (17.2s) | Running validation...
+2026-03-18 11:02:29,242 - __main__ - INFO - Losses | train 0.763624 | val 0.212676 | lr 1.00e-03 | time train=17.2s val=1.3s total=18.5s
+2026-03-18 11:02:29,242 - __main__ - INFO - -------- EPOCH : 004 --------
+
+2026-03-18 11:02:46,535 - __main__ - INFO - Training phase complete (17.3s) | Running validation...
+2026-03-18 11:02:47,798 - __main__ - INFO - Losses | train 0.520010 | val 0.581980 | lr 1.00e-03 | time train=17.3s val=1.3s total=18.6s
+2026-03-18 11:02:47,798 - __main__ - INFO - -------- EPOCH : 005 --------
+
+2026-03-18 11:03:05,217 - __main__ - INFO - Training phase complete (17.4s) | Running validation...
+2026-03-18 11:03:06,529 - __main__ - INFO - Losses | train 0.500344 | val 0.278668 | lr 1.00e-03 | time train=17.4s val=1.3s total=18.7s
+2026-03-18 11:03:06,529 - __main__ - INFO - -------- EPOCH : 006 --------
+
+2026-03-18 11:03:23,404 - __main__ - INFO - Training phase complete (16.9s) | Running validation...
+2026-03-18 11:03:24,643 - __main__ - INFO - Losses | train 0.428185 | val 0.075292 | lr 1.00e-03 | time train=16.9s val=1.2s total=18.1s
+2026-03-18 11:03:24,646 - __main__ - INFO - -------- EPOCH : 007 --------
+
+2026-03-18 11:03:41,758 - __main__ - INFO - Training phase complete (17.1s) | Running validation...
+2026-03-18 11:03:43,164 - __main__ - INFO - Losses | train 0.440739 | val 0.420854 | lr 1.00e-03 | time train=17.1s val=1.4s total=18.5s
+2026-03-18 11:03:43,164 - __main__ - INFO - -------- EPOCH : 008 --------
+
+2026-03-18 11:04:00,735 - __main__ - INFO - Training phase complete (17.6s) | Running validation...
+2026-03-18 11:04:02,045 - __main__ - INFO - Losses | train 0.379649 | val 0.410760 | lr 1.00e-03 | time train=17.6s val=1.3s total=18.9s
+2026-03-18 11:04:02,045 - __main__ - INFO - -------- EPOCH : 009 --------
+
+2026-03-18 11:04:19,715 - __main__ - INFO - Training phase complete (17.7s) | Running validation...
+2026-03-18 11:04:20,990 - __main__ - INFO - Losses | train 0.375022 | val 0.641760 | lr 1.00e-03 | time train=17.7s val=1.3s total=18.9s
+2026-03-18 11:04:20,991 - __main__ - INFO - -------- EPOCH : 010 --------
+
+2026-03-18 11:04:38,833 - __main__ - INFO - Training phase complete (17.8s) | Running validation...
+2026-03-18 11:04:40,144 - __main__ - INFO - Losses | train 0.392613 | val 0.176685 | lr 1.00e-03 | time train=17.8s val=1.3s total=19.2s
+2026-03-18 11:04:40,144 - __main__ - INFO - -------- EPOCH : 011 --------
+
+2026-03-18 11:04:57,764 - __main__ - INFO - Training phase complete (17.6s) | Running validation...
+2026-03-18 11:04:59,047 - __main__ - INFO - Losses | train 0.346130 | val 0.186833 | lr 1.00e-03 | time train=17.6s val=1.3s total=18.9s
+2026-03-18 11:04:59,047 - __main__ - INFO - -------- EPOCH : 012 --------
+
+2026-03-18 11:05:16,876 - __main__ - INFO - Training phase complete (17.8s) | Running validation...
+2026-03-18 11:05:18,148 - __main__ - INFO - Losses | train 0.341804 | val 0.077861 | lr 5.00e-04 | time train=17.8s val=1.3s total=19.1s
+2026-03-18 11:05:18,148 - __main__ - INFO - -------- EPOCH : 013 --------
+
+2026-03-18 11:05:35,754 - __main__ - INFO - Training phase complete (17.6s) | Running validation...
+2026-03-18 11:05:37,034 - __main__ - INFO - Losses | train 0.309846 | val 0.168282 | lr 5.00e-04 | time train=17.6s val=1.3s total=18.9s
+2026-03-18 11:05:37,034 - __main__ - INFO - -------- EPOCH : 014 --------
+
+2026-03-18 11:05:54,702 - __main__ - INFO - Training phase complete (17.7s) | Running validation...
+2026-03-18 11:05:55,992 - __main__ - INFO - Losses | train 0.302447 | val 0.322768 | lr 5.00e-04 | time train=17.7s val=1.3s total=19.0s
+2026-03-18 11:05:55,992 - __main__ - INFO - -------- EPOCH : 015 --------
+
+2026-03-18 11:06:13,580 - __main__ - INFO - Training phase complete (17.6s) | Running validation...
+2026-03-18 11:06:14,863 - __main__ - INFO - Losses | train 0.307454 | val 0.124366 | lr 5.00e-04 | time train=17.6s val=1.3s total=18.9s
+2026-03-18 11:06:14,863 - __main__ - INFO - -------- EPOCH : 016 --------
+
+2026-03-18 11:06:32,726 - __main__ - INFO - Training phase complete (17.9s) | Running validation...
+2026-03-18 11:06:34,223 - __main__ - INFO - Losses | train 0.291160 | val 0.120476 | lr 5.00e-04 | time train=17.9s val=1.5s total=19.4s
+2026-03-18 11:06:34,223 - __main__ - INFO - -------- EPOCH : 017 --------
+
+2026-03-18 11:06:52,115 - __main__ - INFO - Training phase complete (17.9s) | Running validation...
+2026-03-18 11:06:53,418 - __main__ - INFO - Losses | train 0.300217 | val 0.167130 | lr 5.00e-04 | time train=17.9s val=1.3s total=19.2s
+2026-03-18 11:06:53,420 - __main__ - INFO - -------- EPOCH : 018 --------
+
+2026-03-18 11:07:10,966 - __main__ - INFO - Training phase complete (17.5s) | Running validation...
+2026-03-18 11:07:12,233 - __main__ - INFO - Losses | train 0.289422 | val 0.284380 | lr 2.50e-04 | time train=17.5s val=1.3s total=18.8s
+2026-03-18 11:07:12,233 - __main__ - INFO - -------- EPOCH : 019 --------
+
+2026-03-18 11:07:29,376 - __main__ - INFO - Training phase complete (17.1s) | Running validation...
+2026-03-18 11:07:30,617 - __main__ - INFO - Losses | train 0.262365 | val 0.316867 | lr 2.50e-04 | time train=17.1s val=1.2s total=18.4s
+2026-03-18 11:07:30,618 - __main__ - INFO - -------- EPOCH : 020 --------
+
+2026-03-18 11:07:48,194 - __main__ - INFO - Training phase complete (17.6s) | Running validation...
+2026-03-18 11:07:49,494 - __main__ - INFO - Losses | train 0.265387 | val 0.278788 | lr 2.50e-04 | time train=17.6s val=1.3s total=18.9s
+2026-03-18 11:07:49,494 - __main__ - INFO - -------- EPOCH : 021 --------
+
+2026-03-18 11:08:07,053 - __main__ - INFO - Training phase complete (17.6s) | Running validation...
+2026-03-18 11:08:08,338 - __main__ - INFO - Losses | train 0.279811 | val 0.292123 | lr 2.50e-04 | time train=17.6s val=1.3s total=18.8s
+2026-03-18 11:08:08,338 - __main__ - INFO - Early stopping at epoch 021 | best val 0.075292 | patience exhausted (15/15)
+2026-03-18 11:08:11,758 - __main__ - INFO - Final test loss: 0.068631
+2026-03-18 17:30:55,551 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:30:55,552 - __main__ - INFO - Collected 0 .pt files for dataset.
+2026-03-18 17:31:30,582 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:31:32,880 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:31:49,480 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:31:49,480 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:31:49,480 - __main__ - INFO - Global feature dimension: 153
+2026-03-18 17:32:12,510 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:32:14,541 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:32:28,299 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:32:28,299 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:32:28,299 - __main__ - INFO - Global feature dimension: 3
+2026-03-18 17:33:46,732 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:33:48,463 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:34:02,783 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:34:02,783 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:34:02,783 - __main__ - INFO - Global feature dimension: 3
+2026-03-18 17:38:44,828 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:38:46,600 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:39:00,977 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:39:00,979 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:39:00,979 - __main__ - INFO - Global feature dimension: 3
+2026-03-18 17:43:32,040 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:43:33,764 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:44:00,283 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:44:00,283 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:44:00,283 - __main__ - INFO - Global feature dimension: 153
+2026-03-18 17:44:44,066 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:44:45,827 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:45:12,572 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:45:12,572 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:45:12,572 - __main__ - INFO - Global feature dimension: 153
+2026-03-18 17:45:38,846 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 17:45:38,846 - __main__ - INFO - Prediction node feature dim: 37
+2026-03-18 17:45:38,846 - __main__ - INFO - Prediction global feature dim: 153
+2026-03-18 17:49:42,565 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:49:42,565 - __main__ - INFO - Using global model at ../models/gnn_model_global.pt
+2026-03-18 17:49:44,361 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:50:10,258 - __main__ - INFO - Dataset size: 8750
+2026-03-18 17:50:10,258 - __main__ - INFO - Node feature dimension: 37
+2026-03-18 17:50:10,258 - __main__ - INFO - Global feature dimension: 153
+2026-03-18 17:50:35,976 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 17:50:35,976 - __main__ - INFO - Prediction node feature dim: 37
+2026-03-18 17:50:35,977 - __main__ - INFO - Prediction global feature dim: 153
+2026-03-18 17:50:35,977 - __main__ - INFO - Using device: cuda
+2026-03-18 17:51:18,052 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:51:18,054 - __main__ - INFO - Using global model at models/gnn_model_global.pt
+2026-03-18 17:51:19,884 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:51:21,639 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 17:51:21,641 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 17:51:21,641 - __main__ - INFO - Prediction global feature dim: 458
+2026-03-18 17:51:21,641 - __main__ - INFO - Trained node/global dims from checkpoint: 23/458
+2026-03-18 17:51:21,641 - __main__ - INFO - Using device: cuda
+2026-03-18 17:51:21,756 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 458, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 17:53:06,196 - __main__ - INFO - First 10 predictions: [5.862550258636475, 5.748928546905518, 5.896430492401123, 5.983453273773193, 5.47473669052124, 5.670311450958252, 5.9264092445373535, 5.9654974937438965, 5.743811130523682, 5.736098289489746]
+2026-03-18 17:53:06,196 - __main__ - INFO - Total predictions: 8750
+2026-03-18 17:53:06,196 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 17:53:06,196 - __main__ - INFO - [1] pred=5.862550 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,196 - __main__ - INFO - [2] pred=5.748929 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [3] pred=5.896430 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [4] pred=5.983453 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [5] pred=5.474737 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [6] pred=5.670311 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [7] pred=5.926409 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [8] pred=5.965497 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [9] pred=5.743811 | n_qubits=12 | n_layers=11
+2026-03-18 17:53:06,197 - __main__ - INFO - [10] pred=5.736098 | n_qubits=12 | n_layers=11
+2026-03-18 17:54:28,274 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 17:54:28,275 - __main__ - INFO - Using per-family model for family 'random' at models/gnn_model_random.pt
+2026-03-18 17:54:30,295 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 17:54:31,976 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 17:54:31,976 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 17:54:31,976 - __main__ - INFO - Prediction global feature dim: 153
+2026-03-18 17:54:31,976 - __main__ - INFO - Trained node/global dims from checkpoint: 23/153
+2026-03-18 17:54:31,976 - __main__ - INFO - Using device: cuda
+2026-03-18 17:54:32,107 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 153, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 17:55:31,857 - __main__ - INFO - First 10 predictions: [5.686141014099121, 5.721367359161377, 5.750951766967773, 5.955611705780029, 5.411133289337158, 5.726555347442627, 5.682530879974365, 5.952777862548828, 5.664376735687256, 5.623219966888428]
+2026-03-18 17:55:31,858 - __main__ - INFO - Total predictions: 8750
+2026-03-18 17:55:31,858 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 17:55:31,858 - __main__ - INFO - [1] pred=5.686141 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,858 - __main__ - INFO - [2] pred=5.721367 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,858 - __main__ - INFO - [3] pred=5.750952 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,858 - __main__ - INFO - [4] pred=5.955612 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,858 - __main__ - INFO - [5] pred=5.411133 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,858 - __main__ - INFO - [6] pred=5.726555 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,859 - __main__ - INFO - [7] pred=5.682531 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,859 - __main__ - INFO - [8] pred=5.952778 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,859 - __main__ - INFO - [9] pred=5.664377 | n_qubits=12 | n_layers=11
+2026-03-18 17:55:31,859 - __main__ - INFO - [10] pred=5.623220 | n_qubits=12 | n_layers=11
+2026-03-18 18:11:26,655 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 18:11:26,655 - __main__ - INFO - Using per-family model for family 'quansistor' at models/gnn_model_quansistor.pt
+2026-03-18 18:11:29,104 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 18:11:30,881 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 18:11:30,882 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 18:11:30,882 - __main__ - INFO - Prediction global feature dim: 302
+2026-03-18 18:11:30,882 - __main__ - INFO - Trained node/global dims from checkpoint: 23/302
+2026-03-18 18:11:30,882 - __main__ - INFO - Using device: cuda
+2026-03-18 18:11:30,969 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 302, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 18:12:45,439 - __main__ - INFO - First 10 predictions: [6.905697345733643, 6.943289279937744, 6.924892902374268, 6.843210220336914, 6.8802809715271, 6.848968505859375, 6.922911643981934, 6.887623310089111, 6.840601921081543, 6.8827595710754395]
+2026-03-18 18:12:45,440 - __main__ - INFO - Total predictions: 8750
+2026-03-18 18:12:45,440 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 18:12:45,440 - __main__ - INFO - [1] pred=6.905697 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,440 - __main__ - INFO - [2] pred=6.943289 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,440 - __main__ - INFO - [3] pred=6.924893 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,440 - __main__ - INFO - [4] pred=6.843210 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,440 - __main__ - INFO - [5] pred=6.880281 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,440 - __main__ - INFO - [6] pred=6.848969 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,440 - __main__ - INFO - [7] pred=6.922912 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,441 - __main__ - INFO - [8] pred=6.887623 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,441 - __main__ - INFO - [9] pred=6.840602 | n_qubits=12 | n_layers=11
+2026-03-18 18:12:45,441 - __main__ - INFO - [10] pred=6.882760 | n_qubits=12 | n_layers=11
+2026-03-18 18:13:10,343 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 18:13:10,345 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 18:13:12,740 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 18:13:14,474 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 18:13:14,474 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 18:13:14,475 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 18:13:14,475 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 18:13:14,475 - __main__ - INFO - Using device: cuda
+2026-03-18 18:13:14,579 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 18:14:09,449 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 18:14:09,450 - __main__ - INFO - [1] pred=1.840964 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [2] pred=1.876783 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [3] pred=1.772599 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [4] pred=1.824755 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [5] pred=1.855186 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [6] pred=1.830313 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [7] pred=1.876408 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [8] pred=1.853510 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [9] pred=1.819958 | n_qubits=12 | n_layers=11
+2026-03-18 18:14:09,450 - __main__ - INFO - [10] pred=1.828157 | n_qubits=12 | n_layers=11
+2026-03-18 18:22:20,154 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 18:22:20,156 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 18:22:22,034 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 18:22:23,788 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 18:22:23,788 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 18:22:23,788 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 18:22:23,788 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 18:22:23,788 - __main__ - INFO - Using device: cuda
+2026-03-18 18:22:23,888 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 18:23:18,061 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 18:23:18,061 - __main__ - INFO - [1] pred=1.840964 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,061 - __main__ - INFO - [2] pred=1.876783 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,061 - __main__ - INFO - [3] pred=1.772599 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,061 - __main__ - INFO - [4] pred=1.824755 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,061 - __main__ - INFO - [5] pred=1.855185 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,061 - __main__ - INFO - [6] pred=1.830313 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,062 - __main__ - INFO - [7] pred=1.876408 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,062 - __main__ - INFO - [8] pred=1.853511 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,062 - __main__ - INFO - [9] pred=1.819958 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,062 - __main__ - INFO - [10] pred=1.828157 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:23:18,064 - __main__ - INFO - Evaluation | labeled=0 | MAE=nan | RMSE=nan | R2=nan | Spearman=nan
+2026-03-18 18:23:18,064 - __main__ - INFO - No finite labels were found in prediction files; skipped eval artifacts.
+2026-03-18 18:25:12,369 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 18:25:12,370 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 18:25:14,083 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 18:25:15,832 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 18:25:15,832 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 18:25:15,834 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 18:25:15,834 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 18:25:15,834 - __main__ - INFO - Using device: cuda
+2026-03-18 18:25:15,936 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 18:25:26,569 - __main__ - INFO - Loaded 10000 labeled targets from outputs/data
+2026-03-18 18:26:18,014 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 18:26:18,014 - __main__ - INFO - [1] pred=1.840964 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [2] pred=1.876783 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [3] pred=1.772599 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [4] pred=1.824755 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [5] pred=1.855186 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [6] pred=1.830313 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [7] pred=1.876408 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [8] pred=1.853510 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [9] pred=1.819958 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,016 - __main__ - INFO - [10] pred=1.828157 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:26:18,018 - __main__ - INFO - Evaluation | labeled=0 | MAE=nan | RMSE=nan | R2=nan | Spearman=nan
+2026-03-18 18:26:18,018 - __main__ - INFO - No finite labels were found in prediction files; skipped eval artifacts.
+2026-03-18 18:31:18,221 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 18:31:18,222 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 18:31:20,158 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 18:31:22,096 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 18:31:22,096 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 18:31:22,096 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 18:31:22,096 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 18:31:22,096 - __main__ - INFO - Using device: cuda
+2026-03-18 18:31:22,207 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 18:31:29,305 - __main__ - INFO - Loaded 10000 labeled targets from outputs/data
+2026-03-18 18:32:20,172 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 18:32:20,172 - __main__ - INFO - [1] pred=1.840964 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,172 - __main__ - INFO - [2] pred=1.876783 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,172 - __main__ - INFO - [3] pred=1.772600 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,172 - __main__ - INFO - [4] pred=1.824755 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,172 - __main__ - INFO - [5] pred=1.855185 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,172 - __main__ - INFO - [6] pred=1.830313 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,174 - __main__ - INFO - [7] pred=1.876408 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,174 - __main__ - INFO - [8] pred=1.853510 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,174 - __main__ - INFO - [9] pred=1.819958 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,174 - __main__ - INFO - [10] pred=1.828158 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:32:20,174 - __main__ - INFO - Evaluation | labeled=0 | MAE=nan | RMSE=nan | R2=nan | Spearman=nan
+2026-03-18 18:32:20,175 - __main__ - INFO - No finite labels were found in prediction files; skipped eval artifacts.
+2026-03-18 18:35:27,608 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 18:35:27,609 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 18:35:29,346 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 18:35:31,113 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 18:35:31,113 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 18:35:31,113 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 18:35:31,113 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 18:35:31,113 - __main__ - INFO - Using device: cuda
+2026-03-18 18:35:31,217 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 18:35:44,483 - __main__ - INFO - Loaded 10000 labeled targets from outputs/data
+2026-03-18 18:35:44,485 - __main__ - INFO - Loaded 200 labeled (family,n_qubits,n_layers) groups
+2026-03-18 18:36:34,036 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 18:36:34,036 - __main__ - INFO - [1] pred=1.840964 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,036 - __main__ - INFO - [2] pred=1.876783 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,036 - __main__ - INFO - [3] pred=1.772599 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,036 - __main__ - INFO - [4] pred=1.824755 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,037 - __main__ - INFO - [5] pred=1.855186 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,037 - __main__ - INFO - [6] pred=1.830313 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,037 - __main__ - INFO - [7] pred=1.876408 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,037 - __main__ - INFO - [8] pred=1.853511 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,038 - __main__ - INFO - [9] pred=1.819958 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,038 - __main__ - INFO - [10] pred=1.828157 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 18:36:34,038 - __main__ - INFO - Target assignment coverage | exact=0 | shape_mean=0 | unmatched=8750
+2026-03-18 18:36:34,039 - __main__ - INFO - Evaluation | labeled=0 | MAE=nan | RMSE=nan | R2=nan | Spearman=nan
+2026-03-18 18:36:34,039 - __main__ - INFO - No finite labels were found in prediction files; skipped eval artifacts.
+2026-03-18 20:07:31,462 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 20:07:31,464 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 20:07:33,285 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 20:07:35,059 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 20:07:35,059 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 20:07:35,059 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 20:07:35,059 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 20:07:35,059 - __main__ - INFO - Using device: cuda
+2026-03-18 20:07:35,185 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 20:07:48,271 - __main__ - INFO - Loaded 10000 labeled targets from outputs/data
+2026-03-18 20:07:48,271 - __main__ - INFO - Loaded 200 labeled (family,n_qubits,n_layers) groups
+2026-03-18 20:08:56,352 - __main__ - INFO - First 10 prediction records with parameters:
+2026-03-18 20:08:56,352 - __main__ - INFO - [1] pred=1.840964 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,352 - __main__ - INFO - [2] pred=1.876783 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,352 - __main__ - INFO - [3] pred=1.772599 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,352 - __main__ - INFO - [4] pred=1.824755 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,352 - __main__ - INFO - [5] pred=1.855185 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,354 - __main__ - INFO - [6] pred=1.830313 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,354 - __main__ - INFO - [7] pred=1.876408 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,354 - __main__ - INFO - [8] pred=1.853510 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,354 - __main__ - INFO - [9] pred=1.819958 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,354 - __main__ - INFO - [10] pred=1.828157 | target=None | n_qubits=12 | n_layers=11
+2026-03-18 20:08:56,354 - __main__ - INFO - Target assignment coverage | exact=0 | shape_mean=0 | unmatched=8750
+2026-03-18 20:08:56,354 - __main__ - INFO - Label support summary | available n_qubits=[4, 6, 8, 10] | layer range=1..99
+2026-03-18 20:08:56,357 - __main__ - INFO - Top 10 unmatched (family, n_qubits, n_layers) groups:
+2026-03-18 20:08:56,357 - __main__ - INFO - [1] family=clifford | n_qubits=12 | n_layers=11 | count=25
+2026-03-18 20:08:56,357 - __main__ - INFO - [2] family=clifford | n_qubits=12 | n_layers=13 | count=25
+2026-03-18 20:08:56,357 - __main__ - INFO - [3] family=clifford | n_qubits=12 | n_layers=15 | count=25
+2026-03-18 20:08:56,357 - __main__ - INFO - [4] family=clifford | n_qubits=12 | n_layers=17 | count=25
+2026-03-18 20:08:56,357 - __main__ - INFO - [5] family=clifford | n_qubits=12 | n_layers=19 | count=25
+2026-03-18 20:08:56,358 - __main__ - INFO - [6] family=clifford | n_qubits=12 | n_layers=1 | count=25
+2026-03-18 20:08:56,358 - __main__ - INFO - [7] family=clifford | n_qubits=12 | n_layers=21 | count=25
+2026-03-18 20:08:56,358 - __main__ - INFO - [8] family=clifford | n_qubits=12 | n_layers=23 | count=25
+2026-03-18 20:08:56,359 - __main__ - INFO - [9] family=clifford | n_qubits=12 | n_layers=25 | count=25
+2026-03-18 20:08:56,359 - __main__ - INFO - [10] family=clifford | n_qubits=12 | n_layers=27 | count=25
+2026-03-18 20:08:56,359 - __main__ - INFO - Evaluation | labeled=0 | MAE=nan | RMSE=nan | R2=nan | Spearman=nan
+2026-03-18 20:08:56,359 - __main__ - INFO - No finite labels were found in prediction files; skipped eval artifacts.
+2026-03-18 20:10:07,411 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 20:10:07,414 - __main__ - INFO - Using per-family model for family 'clifford--simulate-missing-targets' at models/gnn_model_clifford--simulate-missing-targets.pt
+2026-03-18 20:10:07,414 - __main__ - INFO - Collected 0 .pt files for dataset.
+2026-03-18 20:10:24,433 - __main__ - INFO - Starting prediction data loading...
+2026-03-18 20:10:24,435 - __main__ - INFO - Using per-family model for family 'clifford' at models/gnn_model_clifford.pt
+2026-03-18 20:10:26,154 - __main__ - INFO - Collected 8750 .pt files for dataset.
+2026-03-18 20:10:27,888 - __main__ - INFO - Prediction graphs: 8750
+2026-03-18 20:10:27,889 - __main__ - INFO - Prediction node feature dim: 23
+2026-03-18 20:10:27,889 - __main__ - INFO - Prediction global feature dim: 7
+2026-03-18 20:10:27,889 - __main__ - INFO - Trained node/global dims from checkpoint: 23/7
+2026-03-18 20:10:27,889 - __main__ - INFO - Using device: cuda
+2026-03-18 20:10:27,985 - __main__ - INFO - Loaded model config: {'node_in_dim': 23, 'global_in_dim': 7, 'gnn_hidden': 32, 'gnn_heads': 8, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 5, 'dropout_rate': 0.1}
+2026-03-18 20:10:43,829 - __main__ - INFO - Loaded 10000 labeled targets from outputs/data
+2026-03-18 20:10:43,830 - __main__ - INFO - Loaded 200 labeled (family,n_qubits,n_layers) groups
+2026-03-18 20:11:50,241 - __main__ - INFO - Running simulation fallback for 2500 records (backend=quimb, method=fwht, representation=dense)
+2026-03-18 20:11:50,241 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:12:11,038 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:12:31,325 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:12:52,351 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:13:12,284 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:13:32,062 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:13:51,901 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:14:12,012 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:14:31,873 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:14:51,789 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:15:11,577 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:15:31,241 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:15:51,778 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:16:12,108 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:16:31,837 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:16:51,828 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:17:11,722 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:17:31,698 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:17:51,673 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:18:12,000 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:18:31,953 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:18:51,998 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:19:11,942 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:19:31,717 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:19:51,676 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:20:11,734 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:20:31,718 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:20:51,786 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:21:12,342 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:21:32,438 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:21:52,388 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:22:12,438 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:22:32,171 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:22:52,185 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:23:12,477 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:23:32,553 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:23:52,472 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:24:12,481 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:24:32,431 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:24:52,326 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:25:12,305 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:25:32,225 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:25:52,307 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:26:12,265 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:26:31,988 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:26:51,948 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:27:11,823 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:27:31,643 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:27:51,668 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:28:11,751 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:28:31,536 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:28:51,603 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:29:11,578 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:29:31,490 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:29:51,350 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:30:11,328 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:30:31,527 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:30:51,838 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:31:11,793 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:31:31,819 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:31:51,966 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:32:11,885 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:32:31,713 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:32:51,555 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:33:11,543 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:33:31,676 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:33:51,481 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:34:11,493 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:34:31,448 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:34:51,325 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:35:11,313 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:35:31,296 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:35:51,245 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:36:11,346 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:36:31,308 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:36:51,234 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:37:11,387 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:37:31,197 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:37:51,416 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:38:11,306 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:38:31,315 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:38:51,340 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:39:11,074 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:39:31,079 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:39:51,435 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:40:11,997 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:40:32,029 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:40:51,973 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:41:12,445 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:41:32,440 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:41:52,495 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None
+2026-03-18 20:42:12,440 - qqe.circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=None

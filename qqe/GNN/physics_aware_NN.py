@@ -212,7 +212,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
         """Scan all .pt files to collect all unique gate count keys."""
         all_keys = set()
         for pt_path in self.pt_paths:
-            obj = torch.load(pt_path, map_location="cpu")
+            obj = torch.load(pt_path, map_location="cpu", weights_only=True)
             gate_counts = obj.get("gate_counts", {})
             if isinstance(gate_counts, dict):
                 all_keys.update(gate_counts.keys())
@@ -235,7 +235,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
         # For other variants, scan actual dimensions
         dim_counts: dict[int, int] = {}
         for pt_path in self.pt_paths:
-            obj = torch.load(pt_path, map_location="cpu")
+            obj = torch.load(pt_path, map_location="cpu", weights_only=True)
             g = obj.get("global_features", None)
             if g is None:
                 continue
@@ -267,7 +267,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
         return len(self.pt_paths)
 
     def get(self, idx: int) -> Data:
-        obj = torch.load(self.pt_paths[idx], map_location="cpu")
+        obj = torch.load(self.pt_paths[idx], map_location="cpu", weights_only=True)
 
         x = obj["x"]
         edge_index = obj["edge_index"]
