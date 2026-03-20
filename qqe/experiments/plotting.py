@@ -16,6 +16,7 @@ from matplotlib.patches import Rectangle
 from qqe.circuit.gates import gate_unitary
 from qqe.circuit.spec import CircuitSpec
 from qqe.states.types import DenseState
+from qqe.GNN.training.train import TrainHistory
 
 logger = logging.getLogger(__name__)
 
@@ -478,3 +479,43 @@ def plot_sredensity_v_tcount(
         plt.show()
 
     plt.close(fig)
+
+def _unique_path(path: str) -> str:
+    p = Path(path)
+    if not p.exists():
+        return str(p)
+
+    stem = p.stem
+    suffix = p.suffix
+    parent = p.parent
+
+    i = 1
+    while True:
+        candidate = parent / f"{stem}_{i}{suffix}"
+        if not candidate.exists():
+            return str(candidate)
+        i += 1
+
+def plot_training_curves(
+    hist: TrainHistory,
+    title: str = "Training curves",
+    save_fig: bool = False,
+    fig_path: str | None = None,
+):
+    epochs = list(range(1, len(hist.train_loss) + 1))
+
+    plt.figure()
+    plt.plot(epochs, hist.train_loss, label="train")
+    plt.plot(epochs, hist.val_loss, label="val")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title(title)
+    plt.legend()
+    plt.grid(True)
+
+    if save_fig and fig_path is not None:
+        safe_path = _unique_path(fig_path)
+        plt.savefig(safe_path)
+
+    plt.show()
+

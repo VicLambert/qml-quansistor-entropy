@@ -30,6 +30,8 @@ from qqe.circuit.patterns import TdopingRules, to_qasm
 from qqe.experiments.core import run_experiment
 from qqe.GNN.encoder import qasm_to_pyg_graph
 from qqe.utils import FileCache, configure_logger
+from qqe.GNN.encoder import flatten_complex_matrix_features
+from qqe.circuit.gates import gate_unitary
 
 if TYPE_CHECKING:
     from qqe.circuit.spec import GateSpec
@@ -87,6 +89,35 @@ def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
 def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
 
+def build_op_descriptors_from_spec(
+    gates,
+    family: str,
+) -> list[torch.Tensor | None]:
+    """
+    Build one descriptor per gate, aligned with spec.gates / QASM op order.
+    For Haar gates, reconstruct the 4x4 unitary from the stored seed.
+    """
+    descriptors: list[torch.Tensor | None] = []
+
+    if gates is None:
+        return descriptors
+
+    for gate in gates:
+        gate_kind = str(gate.kind).lower()
+
+        if family == "haar" and gate_kind == "haar":
+            # HaarBrickwork stores params=(seed,)
+            U = gate_unitary(
+                gate.kind,
+                d=gate.d,
+                params=gate.params,
+            )
+            desc = flatten_complex_matrix_features(U)
+            descriptors.append(desc)
+        else:
+            descriptors.append(None)
+
+    return descriptors
 
 def generate_dataset_params(
     families: list[str],
@@ -179,12 +210,14 @@ def compute_entry(
 
         gates = cast("tuple[GateSpec] | None", spec.gates)
         qasm = to_qasm(spec, gates)
+        op_descriptors = build_op_descriptors_from_spec(gates, family)
 
         graph_data, gate_counts = qasm_to_pyg_graph(
             qasm_str = qasm,
             n_bins= config.n_bins,
             family=family,
             global_feature_variant="binned",
+            op_descriptors = op_descriptors,
         )
 
         sre_value = None
