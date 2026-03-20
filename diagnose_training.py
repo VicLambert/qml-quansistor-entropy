@@ -71,7 +71,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
 
 def collect_pt_paths(dataset_dir: str) -> list[str]:
     d = Path(dataset_dir)
-    paths = sorted((d / "encoding_data_quimb_fwht").glob("*.pt"))
+    paths = sorted((d / "encoding_data_pennylane").glob("*.pt"))
     if not paths:
         paths = sorted(d.glob("*.pt"))
     return [str(p) for p in paths]
@@ -129,7 +129,7 @@ def main():
     print("=" * 60)
 
     # Setup
-    pt_paths = collect_pt_paths("outputs/data/")
+    pt_paths = collect_pt_paths("outputs/data")
     print(f"\n📊 Dataset: {len(pt_paths)} samples")
 
     # Check sample data
