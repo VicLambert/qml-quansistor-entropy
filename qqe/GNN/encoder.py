@@ -344,10 +344,9 @@ def _encode_node_feature(
     qubits: int | list[int],
     num_qubits: int,
     params: list[float] | None = None,
-    haar_descriptor: torch.Tensor | None = None,
+    haar_descriptor: torch.Tensor | list[float] | dict | None = None,
 ) -> torch.Tensor:
     """Encode a node feature vector."""
-    # Gate type one-hot encoding
     gate_types = [
         "input", "measurement",
         "h", "s", "t", "id",
@@ -355,8 +354,13 @@ def _encode_node_feature(
         "cx",
         "qx", "qy", "haar",
     ]
+
     gate_type_norm = "haar" if gate_type == "haar2" else gate_type
-    gate_idx = gate_types.index(gate_type_norm) if gate_type_norm in gate_types else gate_types.index("unknown")
+
+    if gate_type_norm not in gate_types:
+        raise ValueError(f"Unknown gate type: {gate_type!r}")
+
+    gate_idx = gate_types.index(gate_type_norm)
 
     gate_onehot = torch.zeros(len(gate_types), dtype=torch.float32)
     gate_onehot[gate_idx] = 1.0
@@ -368,8 +372,38 @@ def _encode_node_feature(
         for q in qubits:
             qubit_mask[q] = 1.0
 
+    # Normalize Haar descriptor into a tensor
     if haar_descriptor is None:
         haar_descriptor = zero_haar_descriptor()
+
+    elif isinstance(haar_descriptor, dict):
+        # Try the most likely keys used upstream
+        if "haar_descriptor" in haar_descriptor:
+            haar_descriptor = haar_descriptor["haar_descriptor"]
+        elif "descriptor" in haar_descriptor:
+            haar_descriptor = haar_descriptor["descriptor"]
+        elif "unitary" in haar_descriptor:
+            haar_descriptor = haar_descriptor["unitary"]
+        else:
+            raise KeyError(
+                "Received dict for haar_descriptor, but no recognized feature key was found. "
+                f"Available keys: {list(haar_descriptor.keys())}"
+            )
+
+    if not torch.is_tensor(haar_descriptor):
+        haar_descriptor = torch.tensor(haar_descriptor, dtype=torch.float32)
+    else:
+        haar_descriptor = haar_descriptor.to(dtype=torch.float32)
+
+    if haar_descriptor.ndim != 1:
+        raise ValueError(
+            f"haar_descriptor must be 1D, got shape {tuple(haar_descriptor.shape)}"
+        )
+
+    if haar_descriptor.numel() != HAAR_DESC_DIM:
+        raise ValueError(
+            f"haar_descriptor must have length {HAAR_DESC_DIM}, got {haar_descriptor.numel()}"
+        )
 
     return torch.cat([gate_onehot, qubit_mask, haar_descriptor], dim=0)
 

@@ -109,7 +109,7 @@ def build_op_descriptors_from_spec(gates, family):
 
         if family == "haar" and kind == "haar":
             U = gate_unitary(gate)   # <-- use the GateSpec directly
-            descriptor["unitary"] = U
+            descriptor["unitary"] = flatten_complex_matrix_features(U)
 
         op_descriptors.append(descriptor)
 
