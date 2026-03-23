@@ -89,35 +89,31 @@ def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
 def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
 
-def build_op_descriptors_from_spec(
-    gates,
-    family: str,
-) -> list[torch.Tensor | None]:
-    """
-    Build one descriptor per gate, aligned with spec.gates / QASM op order.
-    For Haar gates, reconstruct the 4x4 unitary from the stored seed.
-    """
-    descriptors: list[torch.Tensor | None] = []
-
-    if gates is None:
-        return descriptors
+def build_op_descriptors_from_spec(gates, family):
+    op_descriptors = []
 
     for gate in gates:
-        gate_kind = str(gate.kind).lower()
+        kind = gate.kind
+        wires = tuple(gate.wires)
+        params = gate.params
+        seed = gate.seed
+        d = gate.d
 
-        if family == "haar" and gate_kind == "haar":
-            # HaarBrickwork stores params=(seed,)
-            U = gate_unitary(
-                gate.kind,
-                d=gate.d,
-                params=gate.params,
-            )
-            desc = flatten_complex_matrix_features(U)
-            descriptors.append(desc)
-        else:
-            descriptors.append(None)
+        descriptor = {
+            "kind": kind,
+            "wires": wires,
+            "params": params,
+            "seed": seed,
+            "d": d,
+        }
 
-    return descriptors
+        if family == "haar" and kind == "haar":
+            U = gate_unitary(gate)   # <-- use the GateSpec directly
+            descriptor["unitary"] = U
+
+        op_descriptors.append(descriptor)
+
+    return op_descriptors
 
 def generate_dataset_params(
     families: list[str],
