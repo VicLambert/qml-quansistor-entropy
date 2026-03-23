@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from typing import Any
 
 import numpy as np
 import torch
@@ -16,10 +17,12 @@ def bin_theta(theta: float, n_bins: int) -> int:
     idx = int(np.floor(n_bins * t / twopi))
     return max(0, min(idx, n_bins - 1))
 
+
 def bin_gaussian_quantile(x: float, n_bins: int) -> int:
     u = float(norm.cdf(float(x)))
     idx = int(np.floor(n_bins * u))
     return max(0, min(idx, n_bins - 1))
+
 
 HAAR_DESC_DIM = 32  # 16 real + 16 imag for a 4x4 unitary
 
@@ -46,13 +49,12 @@ def zero_haar_descriptor() -> torch.Tensor:
 # ---------------- QASM parsing ----------------
 
 _QREG_RE = re.compile(r"qreg\s+q\[(\d+)\]\s*;")
-
 _HEADER_PREFIXES = ("openqasm", "include", "opaque", "gate", "qreg")
-
 _GATE_LINE_RE = re.compile(
     r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*(?:\(\s*([^\)]*)\s*\))?\s+"
     r"q\[(\d+)\]\s*(?:,\s*q\[(\d+)\]\s*)?;\s*$",
 )
+
 
 def _split_params(params_str: str | None) -> list[float]:
     if not params_str:
@@ -60,21 +62,21 @@ def _split_params(params_str: str | None) -> list[float]:
     parts = [p.strip() for p in params_str.split(",") if p.strip() != ""]
     return [float(p) for p in parts]
 
+
 def _parse_n_qubits(qasm: str) -> int:
     m = _QREG_RE.search(qasm)
     if not m:
         raise ValueError("Could not find qreg q[N]; in QASM.")
     return int(m.group(1))
 
+
 def _parse_ops(qasm: str) -> list[tuple[str, list[float], int, int | None]]:
-    """Returns ops as tuples: (name, params, w0, w1)
-    Skips header/declaration lines.
-    """
     ops = []
     for raw in qasm.splitlines():
         line = raw.strip()
         if not line:
             continue
+
         low = line.lower()
         if any(low.startswith(p) for p in _HEADER_PREFIXES):
             continue
@@ -89,6 +91,7 @@ def _parse_ops(qasm: str) -> list[tuple[str, list[float], int, int | None]]:
         w1 = int(m.group(4)) if m.group(4) is not None else None
         ops.append((name.lower(), params, w0, w1))
     return ops
+
 
 def infer_family_from_qasm(qasm: str) -> str:
     ops = _parse_ops(qasm)
@@ -116,6 +119,7 @@ def _init_rotation_features(n_bins: int) -> dict[str, int]:
     feats["CNOT_count"] = 0
     return feats
 
+
 def _init_quansistor_features(n_bins: int) -> dict[str, int]:
     feats: dict[str, int] = {}
     for axis in ("qx", "qy"):
@@ -124,8 +128,10 @@ def _init_quansistor_features(n_bins: int) -> dict[str, int]:
                 feats[f"{axis}_{p}_bin_{b}"] = 0
     return feats
 
+
 def _init_haar_features() -> dict[str, int]:
     return {"haar_count": 0}
+
 
 def _init_clifford_features() -> dict[str, int]:
     return {
@@ -199,7 +205,6 @@ def encode_qasm_to_feature_dict(
                 feats["CNOT_count"] += 1
         return feats, {"family": fam, "n_qubits": n_qubits, "n_bins": n_bins}
 
-    # fallback: count gate names
     feats: dict[str, int] = {}
     for name, params, w0, w1 in ops:
         feats[f"{name}_count"] = feats.get(f"{name}_count", 0) + 1
@@ -213,28 +218,14 @@ def qasm_to_pyg_graph(
     global_feature_variant: str = "baseline",
     n_bins: int = 50,
     family: str | None = None,
-    op_descriptors: list[torch.Tensor | None] | None = None,
+    op_descriptors: list[dict[str, Any] | None] | None = None,
 ) -> tuple[Data, dict[str, int]]:
-    """Convert a QASM string to a PyG Data graph using existing qqe architecture.
+    """
+    Convert a QASM string to a PyG Data graph using existing qqe architecture.
 
     Nodes: input per qubit, gate nodes, and output per qubit.
     Directed edges follow temporal flow on each wire.
-
-    Args:
-        qasm_str: OpenQASM 2.0 string
-        num_qubits_hint: Fallback if parsing fails
-        global_feature_variant: "baseline" or "binned"
-        n_bins: Number of bins for parameter discretization
-        family: Circuit family (haar, clifford, quansistor, random)
-
-    Returns:
-        (data, gate_counts) where data contains:
-            - x: [num_nodes, node_feature_dim]
-            - edge_index: [2, num_edges]
-            - num_qubits: stored in data.num_qubits
-            - global_features: Tensor with global circuit statistics
     """
-    # Parse number of qubits
     try:
         num_qubits = _parse_n_qubits(qasm_str)
     except ValueError:
@@ -243,32 +234,35 @@ def qasm_to_pyg_graph(
         else:
             raise ValueError("Could not determine number of qubits")
 
-    # Parse operations
     ops = _parse_ops(qasm_str)
     if op_descriptors is not None and len(op_descriptors) != len(ops):
         raise ValueError(
             f"op_descriptors length ({len(op_descriptors)}) must match number of parsed ops ({len(ops)})"
         )
 
-    # Node and edge lists
     x_features: list[torch.Tensor] = []
     edge_src: list[int] = []
     edge_dst: list[int] = []
     last_node_for_qubit: list[int] = []
 
-    # Create input nodes (one per qubit)
     for q in range(num_qubits):
         idx = len(x_features)
         x_features.append(_encode_node_feature("input", q, num_qubits))
         last_node_for_qubit.append(idx)
 
-    # Process gates
     for op_idx, (gate_name, params, w0, w1) in enumerate(ops):
         gate_name_norm = "haar" if gate_name == "haar2" else gate_name
-        haar_desc = zero_haar_descriptor()
 
-        if op_descriptors is not None and op_descriptors[op_idx] is not None:
-            haar_desc = op_descriptors[op_idx]
+        haar_desc: torch.Tensor | None = None
+        if gate_name_norm == "haar" and op_descriptors is not None:
+            descriptor = op_descriptors[op_idx]
+            if descriptor is not None:
+                raw = descriptor.get("haar_descriptor")
+                if raw is not None:
+                    if torch.is_tensor(raw):
+                        haar_desc = raw.to(dtype=torch.float32)
+                    else:
+                        haar_desc = torch.tensor(raw, dtype=torch.float32)
 
         if w1 is None:
             node_idx = len(x_features)
@@ -293,21 +287,19 @@ def qasm_to_pyg_graph(
                     num_qubits,
                     params,
                     haar_descriptor=haar_desc,
-                ),
+                )
             )
             edge_src.extend([last_node_for_qubit[w0], last_node_for_qubit[w1]])
             edge_dst.extend([node_idx, node_idx])
             last_node_for_qubit[w0] = node_idx
             last_node_for_qubit[w1] = node_idx
 
-    # Create output nodes (one per qubit)
     for q in range(num_qubits):
         node_idx = len(x_features)
         x_features.append(_encode_node_feature("measurement", q, num_qubits))
         edge_src.append(last_node_for_qubit[q])
         edge_dst.append(node_idx)
 
-    # Stack node features
     if x_features:
         x = torch.stack(x_features, dim=0)
         x = torch.nan_to_num(x, nan=0.0, posinf=0.0, neginf=0.0)
@@ -316,12 +308,10 @@ def qasm_to_pyg_graph(
         x = torch.zeros((0, _get_node_feature_dim(num_qubits)), dtype=torch.float32)
         edge_index = torch.zeros((2, 0), dtype=torch.long)
 
-    # Extract global features using existing encoder
     gate_features, meta = encode_qasm_to_feature_dict(
-        qasm_str, n_bins=n_bins, family=family, require_family=False,
+        qasm_str, n_bins=n_bins, family=family, require_family=False
     )
 
-    # Build global feature vector
     if global_feature_variant == "baseline":
         global_feat = _global_features_baseline(ops, num_qubits)
     elif global_feature_variant == "binned":
@@ -331,7 +321,6 @@ def qasm_to_pyg_graph(
 
     global_feat = torch.nan_to_num(global_feat, nan=0.0, posinf=0.0, neginf=0.0)
 
-    # Create PyG Data object
     data = Data(x=x, edge_index=edge_index)
     data.num_qubits = num_qubits
     data.global_features = global_feat
@@ -344,9 +333,8 @@ def _encode_node_feature(
     qubits: int | list[int],
     num_qubits: int,
     params: list[float] | None = None,
-    haar_descriptor: torch.Tensor | list[float] | dict | None = None,
+    haar_descriptor: torch.Tensor | list[float] | np.ndarray | None = None,
 ) -> torch.Tensor:
-    """Encode a node feature vector."""
     gate_types = [
         "input", "measurement",
         "h", "s", "t", "id",
@@ -372,25 +360,9 @@ def _encode_node_feature(
         for q in qubits:
             qubit_mask[q] = 1.0
 
-    # Normalize Haar descriptor into a tensor
     if haar_descriptor is None:
         haar_descriptor = zero_haar_descriptor()
-
-    elif isinstance(haar_descriptor, dict):
-        # Try the most likely keys used upstream
-        if "haar_descriptor" in haar_descriptor:
-            haar_descriptor = haar_descriptor["haar_descriptor"]
-        elif "descriptor" in haar_descriptor:
-            haar_descriptor = haar_descriptor["descriptor"]
-        elif "unitary" in haar_descriptor:
-            haar_descriptor = haar_descriptor["unitary"]
-        else:
-            raise KeyError(
-                "Received dict for haar_descriptor, but no recognized feature key was found. "
-                f"Available keys: {list(haar_descriptor.keys())}"
-            )
-
-    if not torch.is_tensor(haar_descriptor):
+    elif not torch.is_tensor(haar_descriptor):
         haar_descriptor = torch.tensor(haar_descriptor, dtype=torch.float32)
     else:
         haar_descriptor = haar_descriptor.to(dtype=torch.float32)
@@ -407,6 +379,7 @@ def _encode_node_feature(
 
     return torch.cat([gate_onehot, qubit_mask, haar_descriptor], dim=0)
 
+
 gate_types = [
     "input", "measurement",
     "h", "s", "t", "id",
@@ -414,16 +387,16 @@ gate_types = [
     "cx",
     "qx", "qy", "haar",
 ]
+
+
 def _get_node_feature_dim(num_qubits: int) -> int:
-    gate_types_dim = len(gate_types)  # includes "unknown"
-    return gate_types_dim + num_qubits + HAAR_DESC_DIM  # gate_types + unknown + 4 params (will be + num_qubits dynamically) #FIXME
+    return len(gate_types) + num_qubits + HAAR_DESC_DIM
 
 
 def _global_features_baseline(
     ops: list[tuple[str, list[float], int, int | None]],
     num_qubits: int,
 ) -> torch.Tensor:
-    """Compute baseline global features: [depth, num_param_gates, num_qubits, total_gates, rx, ry, rz, cx]."""
     gate_counts = {"rx": 0, "ry": 0, "rz": 0, "cx": 0, "cnot": 0}
     depth = 0
     num_param_gates = 0
@@ -449,7 +422,7 @@ def _global_features_baseline(
             gate_counts["rz"],
             cx_count,
         ],
-        dtype=torch.float,
+        dtype=torch.float32,
     )
 
 
@@ -458,18 +431,12 @@ def _global_features_binned(
     meta: dict[str, object],
     n_bins: int,
 ) -> torch.Tensor:
-    """Convert binned gate features to a fixed-size global vector."""
-    # Flatten the binned features dictionary into a vector
     feature_list = []
 
-    # Add basic metadata
     feature_list.append(float(meta.get("n_qubits", 0)))
     feature_list.append(float(n_bins))
 
-    # Sort keys for consistent ordering
     for key in sorted(gate_features.keys()):
         feature_list.append(float(gate_features[key]))
 
-    return torch.tensor(feature_list, dtype=torch.float)
-
-
+    return torch.tensor(feature_list, dtype=torch.float32)

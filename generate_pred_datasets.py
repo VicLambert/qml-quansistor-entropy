@@ -1,46 +1,17 @@
 from __future__ import annotations
 
-import ctypes
-import gc
-import hashlib
-import itertools
-import json
 import logging
-import os
-
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
-import torch
 import typer
 
-from tqdm import tqdm
-
-from qqe.backend import PennylaneBackend, QuimbBackend
-from qqe.circuit.families import (
-    CliffordBrickwork,
-    HaarBrickwork,
-    QuansistorBrickwork,
-    RandomCircuit,
-)
-from qqe.circuit.patterns import TdopingRules, to_qasm
-from qqe.experiments.core import run_experiment
-from qqe.GNN.encoder import qasm_to_pyg_graph
-from qqe.utils import FileCache, configure_logger
-
-from qqe.GNN.dataset_builder import (
-    CircuitConfig,
-    DataGenConfig,
-    run_dataset_pipeline,
-)
-import contextlib
-
-if TYPE_CHECKING:
-    from qqe.circuit.spec import GateSpec
+from qqe.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline
+from qqe.utils import configure_logger
 
 logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent
+
 
 def main(
     backend: str = typer.Option("pennylane", help="Backend to use (quimb or pennylane)"),
@@ -76,11 +47,10 @@ def main(
     ),
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
-
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
     layers_values = np.arange(layers_min, layers_max + 1, layers_step)
 
-    output_dir = Path(output_file) / "predictions"
+    output_dir = Path(output_file)
 
     config = DataGenConfig(
         backend=backend,
@@ -106,9 +76,13 @@ def main(
         layers_values=layers_values,
         n_seeds=n_seeds_option,
         use_dask=use_dask,
+        max_configs=max_configs,
+        dask_n_workers=dask_n_workers,
+        dask_memory_per_worker=dask_memory_per_worker,
     )
+
 
 if __name__ == "__main__":
     configure_logger(logging.INFO, logging.INFO)
-    logger.info("Starting data generation...")
+    logger.info("Starting prediction data generation...")
     typer.run(main)

@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import contextlib
@@ -28,9 +27,11 @@ from qqe.circuit.families import (
 )
 from qqe.circuit.patterns import TdopingRules, to_qasm
 from qqe.experiments.core import run_experiment
-from qqe.GNN.encoder import qasm_to_pyg_graph
-from qqe.utils import FileCache, configure_logger
-from qqe.GNN.encoder import flatten_complex_matrix_features
+from qqe.GNN.encoder import flatten_complex_matrix_features, qasm_to_pyg_graph
+from qqe.utils import FileCache
+
+# Keep this import path only if it is the correct one in your project.
+# If your real function lives in qqe.circuit.matrix_factory, switch it there.
 from qqe.circuit.gates import gate_unitary
 
 if TYPE_CHECKING:
@@ -73,6 +74,7 @@ class DataGenConfig:
     output_dir: Path
     max_configs: int | None
 
+
 @dataclass
 class CircuitConfig:
     cid: str
@@ -86,34 +88,46 @@ def make_seed(family: str, n_qubits: int, n_layers: int, rep: int) -> int:
     s = f"{family}|{n_qubits}|{n_layers}|{rep}".encode()
     return int.from_bytes(hashlib.blake2b(s, digest_size=4).digest(), "little")
 
+
 def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
     return f"{family}_Q{n_qubits}_L{n_layers}_S{seed}"
 
-def build_op_descriptors_from_spec(gates, family):
-    op_descriptors = []
+
+def build_op_descriptors_from_spec(
+    gates: tuple["GateSpec", ...] | None,
+    family: str,
+) -> list[dict[str, Any]] | None:
+    """
+    Build per-gate descriptor metadata aligned with the parsed QASM op order.
+
+    Only Haar gates need a nonzero fixed-size node descriptor block.
+    All other gates may still keep metadata, but should not carry a Haar descriptor.
+    """
+    if gates is None:
+        return None
+
+    op_descriptors: list[dict[str, Any]] = []
 
     for gate in gates:
-        kind = gate.kind
-        wires = tuple(gate.wires)
-        params = gate.params
-        seed = gate.seed
-        d = gate.d
+        kind = str(gate.kind).lower()
+        kind_norm = "haar" if kind == "haar2" else kind
 
-        descriptor = {
-            "kind": kind,
-            "wires": wires,
-            "params": params,
-            "seed": seed,
-            "d": d,
+        descriptor: dict[str, Any] = {
+            "kind": kind_norm,
+            "wires": tuple(gate.wires),
+            "params": gate.params,
+            "seed": gate.seed,
+            "d": gate.d,
         }
 
-        if family == "haar" and kind == "haar":
-            U = gate_unitary(gate)   # <-- use the GateSpec directly
-            descriptor["unitary"] = flatten_complex_matrix_features(U)
+        if family == "haar" and kind_norm == "haar":
+            U = gate_unitary(gate)
+            descriptor["haar_descriptor"] = flatten_complex_matrix_features(U)
 
         op_descriptors.append(descriptor)
 
     return op_descriptors
+
 
 def generate_dataset_params(
     families: list[str],
@@ -123,30 +137,31 @@ def generate_dataset_params(
 ) -> list[CircuitConfig]:
     config = []
     for family, n_qubits, n_layers in itertools.product(
-        families, qubits_values, layers_values,
+        families, qubits_values, layers_values
     ):
         for rep in range(num_seeds):
             seed = make_seed(family, n_qubits, n_layers, rep)
             cid = make_cid(family, n_qubits, n_layers, seed)
             config.append(
                 CircuitConfig(
-                    cid,
-                    family,
-                    n_qubits,
-                    n_layers,
-                    seed,
-                ),
+                    cid=cid,
+                    family=family,
+                    n_qubits=int(n_qubits),
+                    n_layers=int(n_layers),
+                    seed=int(seed),
+                )
             )
     return config
 
+
 def sanitize_gate_counts(gate_counts: dict[str, int]) -> dict[str, int]:
-    """Remove gates with zero count."""
     if not isinstance(gate_counts, dict):
         return {}
     safe: dict[str, int] = {}
     for key, value in gate_counts.items():
         safe[str(key)] = int(value)
     return safe
+
 
 def trim_memory() -> None:
     with contextlib.suppress(Exception):
@@ -166,13 +181,12 @@ def trim_memory() -> None:
             libc = ctypes.CDLL("libc.so.6")
             libc.malloc_trim(0)
     except Exception:
-        # APIs are platform-dependent; ignore if unavailable.
         pass
 
 
 def compute_entry(
     config: DataGenConfig,
-    cid : str,
+    cid: str,
     family: str,
     n_qubits: int,
     n_layers: int,
@@ -204,16 +218,16 @@ def compute_entry(
             tdoping=tdoping if family == "clifford" else None,
         )
 
-        gates = cast("tuple[GateSpec] | None", spec.gates)
+        gates = cast("tuple[GateSpec, ...] | None", spec.gates)
         qasm = to_qasm(spec, gates)
         op_descriptors = build_op_descriptors_from_spec(gates, family)
 
         graph_data, gate_counts = qasm_to_pyg_graph(
-            qasm_str = qasm,
-            n_bins= config.n_bins,
+            qasm_str=qasm,
+            n_bins=config.n_bins,
             family=family,
             global_feature_variant="binned",
-            op_descriptors = op_descriptors,
+            op_descriptors=op_descriptors,
         )
 
         sre_value = None
@@ -261,6 +275,7 @@ def compute_entry(
             x = x.to(torch.uint8)
         else:
             x = x.to(torch.float16)
+
         edge_index = graph_data.edge_index.detach().cpu().to(torch.int32)
         global_features = graph_data.global_features.detach().cpu().to(torch.float32)
 
@@ -281,6 +296,7 @@ def compute_entry(
                 "n_bins": int(config.n_bins),
             },
         }
+
         if config.compute_sre:
             payload["sre"] = sre_value
 
@@ -292,6 +308,7 @@ def compute_entry(
             "path": str(path),
             **({"sre": sre_value} if config.compute_sre else {}),
         }
+
     except Exception:
         logger.exception(
             "Error computing entry for family=%s Q%s L%s S%s",
@@ -304,6 +321,7 @@ def compute_entry(
 
     finally:
         trim_memory()
+
 
 def compute_all_entries(
     params: list[CircuitConfig],
@@ -320,8 +338,8 @@ def compute_all_entries(
             dask_n_workers=dask_n_workers,
             dask_memory_per_worker=dask_memory_per_worker,
         )
-
     return compute_all_entries_sequential(params, config)
+
 
 def compute_all_entries_sequential(
     params: list[CircuitConfig],
@@ -337,7 +355,6 @@ def compute_all_entries_sequential(
 
     with index_path.open("a", encoding="utf-8") as f:
         for row in tqdm(params, desc="Computing dataset entries"):
-
             entry = compute_entry(
                 config,
                 cid=row.cid,
@@ -350,10 +367,8 @@ def compute_all_entries_sequential(
             if entry is None:
                 continue
 
-            # stream to disk immediately
             f.write(json.dumps(entry) + "\n")
             f.flush()
-
             entries.append(entry)
 
             if config.compute_sre:
@@ -363,13 +378,13 @@ def compute_all_entries_sequential(
 
     return entries
 
+
 def compute_all_entries_parallel(
     params: list[CircuitConfig],
     config: DataGenConfig,
     dask_n_workers: int,
     dask_memory_per_worker: str | None = "auto",
 ) -> list[dict[str, Any]]:
-
     from dask.distributed import as_completed
     from qqe.parallel import dask_client
 
@@ -381,7 +396,6 @@ def compute_all_entries_parallel(
 
     cpu_count = os.cpu_count() or 2
     safe_workers = max(1, min(int(dask_n_workers), cpu_count))
-
     max_inflight = max(1, safe_workers // 2)
 
     rows_out: list[dict[str, Any]] = []
@@ -394,14 +408,13 @@ def compute_all_entries_parallel(
         dashboard=True,
         walltime="0-2:30:00",
     ) as client:
-
         client.wait_for_workers(1)
 
         ac = as_completed()
         inflight = {}
         it = iter(params)
 
-        def submit_one(row: CircuitConfig):
+        def submit_one(row: CircuitConfig) -> None:
             fut = client.submit(
                 compute_entry,
                 config,
@@ -415,7 +428,6 @@ def compute_all_entries_parallel(
             inflight[fut] = row
             ac.add(fut)
 
-        # prime queue
         for _ in range(min(max_inflight, len(params))):
             row = next(it, None)
             if row is None:
@@ -424,7 +436,6 @@ def compute_all_entries_parallel(
 
         with index_path.open("a", encoding="utf-8") as f:
             for fut in tqdm(ac, total=len(params), desc="Parallel dataset generation"):
-
                 row = inflight.pop(fut, None)
 
                 try:
@@ -433,15 +444,12 @@ def compute_all_entries_parallel(
                         f.write(json.dumps(entry) + "\n")
                         f.flush()
                         rows_out.append(entry)
-
                 except Exception as exc:
                     cid = row.cid if row else "unknown"
                     logger.error("Failed (%s): %s", cid, exc)
-
                 finally:
                     fut.release()
 
-                # keep pipeline full
                 next_row = next(it, None)
                 if next_row is not None:
                     submit_one(next_row)
@@ -451,7 +459,7 @@ def compute_all_entries_parallel(
 
 def run_dataset_pipeline(
     *,
-    config,
+    config: DataGenConfig,
     families: list[str],
     qubits_values: np.ndarray,
     layers_values: np.ndarray,
@@ -463,8 +471,9 @@ def run_dataset_pipeline(
 ) -> None:
     invalid = [f for f in families if f not in FAMILY_REGISTRY]
     if invalid:
-        msg = f"Unknown families: {invalid}. Valid: {list(FAMILY_REGISTRY.keys())}"
-        raise ValueError(msg)
+        raise ValueError(
+            f"Unknown families: {invalid}. Valid: {list(FAMILY_REGISTRY.keys())}"
+        )
 
     base_output_dir: Path = config.output_dir
     base_output_dir.mkdir(parents=True, exist_ok=True)
@@ -475,9 +484,6 @@ def run_dataset_pipeline(
         family_output_dir = base_output_dir / family
         family_output_dir.mkdir(parents=True, exist_ok=True)
 
-        # -------------------------------
-        # 3. Generate params
-        # -------------------------------
         params = generate_dataset_params(
             [family],
             qubits_values,
@@ -490,9 +496,6 @@ def run_dataset_pipeline(
 
         logger.info("Generated %d configs for %s", len(params), family)
 
-        # -------------------------------
-        # 4. Compute entries
-        # -------------------------------
         config.output_dir = family_output_dir
         entries = compute_all_entries(
             params,
@@ -502,11 +505,7 @@ def run_dataset_pipeline(
             dask_memory_per_worker=dask_memory_per_worker,
         )
 
-        # -------------------------------
-        # 5. Write metadata
-        # -------------------------------
         meta_path = family_output_dir / f"metadata_{family}.json"
-
         metadata = {
             "backend": config.backend,
             "method": config.method,
@@ -520,7 +519,6 @@ def run_dataset_pipeline(
             "compute_sre": config.compute_sre,
             "index_file": f"index_{family}.jsonl",
         }
-
         meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
         logger.info("Completed %s: %d entries", family, len(entries))
