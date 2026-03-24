@@ -477,11 +477,12 @@ def run_dataset_pipeline(
 
     base_output_dir: Path = config.output_dir
     base_output_dir.mkdir(parents=True, exist_ok=True)
+    data_dir = f"encoding_data_{config.backend}" if config.compute_sre else "predictions"
 
     for family in families:
         logger.info("Processing family: %s", family)
 
-        family_output_dir = base_output_dir / family
+        family_output_dir = base_output_dir / data_dir / family
         family_output_dir.mkdir(parents=True, exist_ok=True)
 
         params = generate_dataset_params(
