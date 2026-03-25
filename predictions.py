@@ -6,6 +6,7 @@ import logging
 import re
 import time
 
+import numpy as np
 from pathlib import Path
 from typing import Any
 
@@ -378,7 +379,7 @@ def plot_predictions_vs_qubits_for_layer(
         return
 
     x = [int(row["n_qubits"]) for row in filtered if row.get("n_qubits") is not None]
-    y = [float(row["prediction"]) for row in filtered if row.get("n_qubits") is not None]
+    y = [float(np.mean(row["prediction"])) for row in filtered if row.get("n_qubits") is not None]
 
     if not x:
         logger.info("No valid n_qubits values for n_layers=%d; skipping plot %s", n_layers, output_path)
