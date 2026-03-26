@@ -420,11 +420,11 @@ def derive_layer_plot_output_path(predictions_output_csv: Path, n_layers: int) -
 def main(
     family: str | None = typer.Option(None, help="Family to predict on for per-family data selection."),
     model_type: str = typer.Option("global", help="'global' or 'per_family'"),
-    dataset_dir: str = typer.Option("outputs/data/predictions", help="Root directory containing prediction .pt files."),
+    dataset_dir: str = typer.Option("outputs/data", help="Root directory containing prediction .pt files."),
     batch_size: int = typer.Option(32, help="Prediction batch size."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
     node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
-    plot_n_layers: int | None = typer.Option(None, help="If set, save a plot of all predictions vs n_qubits for this n_layers value."),
+    plot_n_layers: int | None = typer.Option(45, help="If set, save a plot of all predictions vs n_qubits for this n_layers value."),
     output_csv: str = typer.Option("outputs/predictions/predictions.csv", help="Where to save predictions."),
 ):
     if model_type not in {"global", "per_family"}:
@@ -482,12 +482,11 @@ def main(
     aggregate_csv_path, aggregate_plot_path = derive_aggregate_output_paths(output_csv_path)
     aggregated = aggregate_predictions_by_size(records)
     save_aggregated_predictions_csv(aggregated, aggregate_csv_path)
-    plot_aggregated_predictions(aggregated, aggregate_plot_path)
 
-    if plot_n_layers is not None:
-        layer_plot_path = derive_layer_plot_output_path(output_csv_path, plot_n_layers)
-        plot_predictions_vs_qubits_for_layer(records, n_layers=plot_n_layers, output_path=layer_plot_path)
-        logger.info("Saved fixed-layer plot (n_layers=%d) to %s", plot_n_layers, layer_plot_path)
+
+    layer_plot_path = derive_layer_plot_output_path(output_csv_path, plot_n_layers)
+    plot_predictions_vs_qubits_for_layer(records, n_layers=plot_n_layers, output_path=layer_plot_path)
+    logger.info("Saved fixed-layer plot (n_layers=%d) to %s", plot_n_layers, layer_plot_path)
 
     logger.info("Saved %d predictions to %s", len(records), output_csv_path)
     logger.info("Saved %d aggregated rows to %s", len(aggregated), aggregate_csv_path)

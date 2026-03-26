@@ -18,7 +18,7 @@ def main(
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
-        "outputs/data/predictions",
+        "outputs/data",
         help="Output folder for results",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
@@ -34,7 +34,7 @@ def main(
     qubits_max: int = typer.Option(20, help="Maximum number of qubits (inclusive)"),
     qubits_step: int = typer.Option(2, help="Step for qubits range"),
     layers_min: int = typer.Option(1, help="Minimum number of layers"),
-    layers_max: int = typer.Option(99, help="Maximum number of layers (inclusive)"),
+    layers_max: int = typer.Option(100, help="Maximum number of layers (inclusive)"),
     layers_step: int = typer.Option(2, help="Step for layers range"),
     max_configs: int | None = typer.Option(
         None,

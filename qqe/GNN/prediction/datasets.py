@@ -168,7 +168,7 @@ def build_prediction_loader(
     return (
         dataset,
         padded_dataset,
-        DataLoader(pred_ds, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=pin_mem),
+        DataLoader(pred_ds, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=pin_mem),
         node_in_dim,
         global_in_dim,
     )
