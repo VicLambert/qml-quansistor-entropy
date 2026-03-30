@@ -23,87 +23,86 @@ from qqe.utils import configure_logger
 logger = logging.getLogger(__name__)
 
 
-# -----------------------------
-# basic path helpers
-# -----------------------------
+# =========================================================
+# Basic helpers
+# =========================================================
 
-def collect_pred_paths(dataset_dir: str, family: str | None = None) -> list[str]:
-    d = Path(dataset_dir)
-    pred_root = d / "predictions"
+def collect_prediction_paths(dataset_root: str, family: str | None = None) -> list[str]:
+    root = Path(dataset_root)
+    pred_root = root / "predictions"
 
     if family is not None:
         paths = sorted((pred_root / family).glob("*.pt"))
     else:
         paths = []
         if pred_root.exists():
-            for family_dir in sorted(pred_root.iterdir()):
-                if family_dir.is_dir():
-                    paths.extend(sorted(family_dir.glob("*.pt")))
-
-    if not paths:
-        paths = sorted(d.glob("*.pt"))
+            for subdir in sorted(pred_root.iterdir()):
+                if subdir.is_dir():
+                    paths.extend(sorted(subdir.glob("*.pt")))
 
     return [str(p.resolve()) for p in paths]
 
 
-def cache_root_for_paths(paths: list[str], suffix: str = "") -> str:
-    canonical = "|".join(sorted(str(Path(p).resolve()) for p in paths))
-    digest = hashlib.md5(canonical.encode("utf-8")).hexdigest()[:10]
-    tag = f"_{suffix}" if suffix else ""
-    cache_dir = Path("qqe") / "cache" / f"pyg_cache_{digest}{tag}"
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    return str(cache_dir.resolve())
+def checkpoint_path(model_kind: str, training_scope: str, family: str | None = None) -> Path:
+    if model_kind not in {"gnn", "nn"}:
+        raise ValueError("model_kind must be 'gnn' or 'nn'")
+    if training_scope not in {"global", "family"}:
+        raise ValueError("training_scope must be 'global' or 'family'")
+
+    if training_scope == "family":
+        if family is None:
+            raise ValueError("family must be provided when training_scope='family'")
+        return Path(f"models/{model_kind}_model_{family}.pt")
+
+    return Path(f"models/{model_kind}_model_global.pt")
 
 
-def _safe_tag(value: str | None, fallback: str = "none") -> str:
-    """Return a filesystem-friendly tag for file naming."""
-    raw = (value or fallback).strip()
-    cleaned = [ch if ch.isalnum() or ch in {"-", "_"} else "-" for ch in raw]
-    tag = "".join(cleaned).strip("-")
-    return tag or fallback
+def load_checkpoint(path: str | Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    payload = torch.load(path, map_location="cpu", weights_only=False)
+
+    if not isinstance(payload, dict):
+        raise RuntimeError("Checkpoint must be a dict.")
+
+    if "model_state_dict" in payload:
+        state_dict = payload["model_state_dict"]
+        model_config = payload.get("model_config", {}) or {}
+        feature_config = payload.get("feature_config", {}) or {}
+    else:
+        # older raw state_dict format
+        state_dict = payload
+        model_config = {}
+        feature_config = {}
+
+    return state_dict, model_config, feature_config
 
 
-def resolve_output_csv_path(
-    output_csv: str,
-    *,
-    model_type: str,
-    family: str | None,
-    model_path: str,
-    global_feature_variant: str,
-    node_feature_backend_variant: str | None,
-    batch_size: int,
-) -> Path:
-    """Build a descriptive default filename while preserving explicit custom paths."""
-    if "{family}" in output_csv:
-        output_csv = output_csv.format(family=family or "all")
-
-    out = Path(output_csv)
-
-    # Only auto-expand the default output file into a run-specific file name.
-    if out.name == "predictions.csv":
-        timestamp = time.strftime("%Y%m%d_%H%M%S")
-        model_tag = _safe_tag(Path(model_path).stem.replace("gnn_model_", ""), fallback="model")
-        family_tag = _safe_tag(family, fallback="all")
-        model_type_tag = _safe_tag(model_type, fallback="global")
-
-        filename = (
-            f"pred_{model_type_tag}"
-            f"__model-{model_tag}"
-            f"__family-{family_tag}"
-            f"__{timestamp}.csv"
+def build_model(model_kind: str, model_config: dict[str, Any]) -> torch.nn.Module:
+    if model_kind == "gnn":
+        return GNN(
+            node_in_dim=int(model_config["node_in_dim"]),
+            global_in_dim=int(model_config["global_in_dim"]),
+            gnn_hidden=int(model_config.get("gnn_hidden", 32)),
+            gnn_heads=int(model_config.get("gnn_heads", 8)),
+            global_hidden=int(model_config.get("global_hidden", 16)),
+            reg_hidden=int(model_config.get("reg_hidden", 16)),
+            num_layers=int(model_config.get("num_layers", 5)),
+            dropout_rate=float(model_config.get("dropout_rate", 0.1)),
         )
-        return out.parent / filename
 
-    return out
+    if model_kind == "nn":
+        return Regressor(
+            in_dim=int(model_config["global_in_dim"]),
+            hidden_dim=int(model_config.get("hidden_dim", 128)),
+        )
+
+    raise ValueError(f"Unsupported model_kind: {model_kind}")
 
 
-# -----------------------------
-# dataset wrapper
-# -----------------------------
+# =========================================================
+# Dataset wrappers
+# =========================================================
 
-class PaddedGraphDatasetWrapper:
-    """Pad or truncate node/global feature widths to the trained model dimensions."""
-
+class PredictionGraphWrapper:
     def __init__(
         self,
         dataset,
@@ -121,24 +120,22 @@ class PaddedGraphDatasetWrapper:
         data = self.dataset[idx].clone()
 
         if self.target_node_dim is not None:
-            cur_node_dim = int(data.x.shape[1])
-            if cur_node_dim < self.target_node_dim:
-                data.x = F.pad(data.x, (0, self.target_node_dim - cur_node_dim), value=0.0)
-            elif cur_node_dim > self.target_node_dim:
+            cur = int(data.x.shape[1])
+            if cur < self.target_node_dim:
+                data.x = F.pad(data.x, (0, self.target_node_dim - cur))
+            elif cur > self.target_node_dim:
                 data.x = data.x[:, : self.target_node_dim]
 
-        if hasattr(data, "global_features") and data.global_features is not None:
+        if hasattr(data, "global_features"):
             g = data.global_features
-            if g.dim() == 0:
-                g = g.view(1)
-            elif g.dim() > 1:
+            if g.dim() > 1:
                 g = g.view(-1)
 
             if self.target_global_dim is not None:
-                cur_global_dim = int(g.shape[0])
-                if cur_global_dim < self.target_global_dim:
-                    g = F.pad(g, (0, self.target_global_dim - cur_global_dim), value=0.0)
-                elif cur_global_dim > self.target_global_dim:
+                cur = int(g.shape[0])
+                if cur < self.target_global_dim:
+                    g = F.pad(g, (0, self.target_global_dim - cur))
+                elif cur > self.target_global_dim:
                     g = g[: self.target_global_dim]
 
             data.global_features = g
@@ -146,578 +143,333 @@ class PaddedGraphDatasetWrapper:
         return data
 
 
-# -----------------------------
-# checkpoint/model helpers
-# -----------------------------
-
-def extract_state_dict(payload):
-    if isinstance(payload, dict) and "model_state_dict" in payload:
-        return payload["model_state_dict"]
-    if isinstance(payload, dict) and all(torch.is_tensor(v) for v in payload.values()):
-        return payload
-    raise RuntimeError("Unsupported checkpoint format.")
-
-
-def load_checkpoint(model_path: str) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    try:
-        payload = torch.load(model_path, map_location="cpu", weights_only=False)
-    except RuntimeError as e:
-        # If checkpoint is corrupted and it's an NN model, try to fallback to GNN
-        if "nn_model" in model_path:
-            logger.warning("Failed to load NN checkpoint: %s | Attempting GNN fallback...", e)
-            fallback_path = model_path.replace("nn_model", "gnn_model")
-            if Path(fallback_path).exists():
-                logger.info("Loading fallback GNN checkpoint: %s", fallback_path)
-                payload = torch.load(fallback_path, map_location="cpu", weights_only=False)
-            else:
-                raise RuntimeError(f"Failed to load {model_path} and fallback {fallback_path} doesn't exist") from e
-        else:
-            raise
-
-    if not isinstance(payload, dict):
-        raise RuntimeError("Expected checkpoint payload to be a dict.")
-
-    state_dict = extract_state_dict(payload)
-    model_config = payload.get("model_config", {}) or {}
-    feature_config = payload.get("feature_config", {}) or {}
-
-    return state_dict, model_config, feature_config
-
-
-def build_model(model_config: dict[str, Any]) -> GNN | Regressor:
-    # Check if this is a GNN model (has node_in_dim) or NN model (only global_in_dim)
-    if "node_in_dim" in model_config and model_config["node_in_dim"] is not None:
-        # Treat as GNN
-        required_keys = ["node_in_dim", "global_in_dim"]
-        for key in required_keys:
-            if key not in model_config:
-                raise RuntimeError(f"Missing required model_config key for GNN: {key}")
-        return GNN(
-            node_in_dim=int(model_config["node_in_dim"]),
-            global_in_dim=int(model_config["global_in_dim"]),
-            gnn_hidden=int(model_config.get("gnn_hidden", 32)),
-            gnn_heads=int(model_config.get("gnn_heads", 8)),
-            global_hidden=int(model_config.get("global_hidden", 16)),
-            reg_hidden=int(model_config.get("reg_hidden", 16)),
-            num_layers=int(model_config.get("num_layers", 5)),
-            dropout_rate=float(model_config.get("dropout_rate", 0.1)),
-        )
-    # Treat as Regressor (NN)
-    if "global_in_dim" not in model_config:
-        raise RuntimeError("Missing required model_config key for Regressor: global_in_dim")
-    return Regressor(
-        in_dim=int(model_config["global_in_dim"]),
-        hidden_dim=int(model_config.get("hidden_dim", 128)),
-    )
-
-# -----------------------------
-# prediction dataset/loader
-# -----------------------------
-
-class TensorTargetDatasetWrapper:
-    """Extract (global_features, metadata) pairs from graph dataset for NN inference."""
-    def __init__(self, dataset):
+class PredictionTensorWrapper:
+    def __init__(self, dataset, target_global_dim: int | None = None):
         self.dataset = dataset
+        self.target_global_dim = target_global_dim
 
     def __len__(self) -> int:
         return len(self.dataset)
 
-    def __getitem__(self, idx: int) -> tuple[torch.Tensor, dict[str, Any]]:
+    def __getitem__(self, idx: int):
         data = self.dataset[idx]
-        g = getattr(data, "global_features", None)
-        if g is None:
-            raise ValueError("Sample missing 'global_features'.")
+        g = data.global_features
         if not torch.is_tensor(g):
             g = torch.as_tensor(g, dtype=torch.float32)
         g = g.flatten().to(torch.float32)
+
+        if self.target_global_dim is not None:
+            cur = int(g.shape[0])
+            if cur < self.target_global_dim:
+                g = F.pad(g, (0, self.target_global_dim - cur))
+            elif cur > self.target_global_dim:
+                g = g[: self.target_global_dim]
 
         meta = getattr(data, "meta", {}) or {}
         return g, meta
 
 
-def build_prediction_loader(
+def build_prediction_dataset(
     pt_paths: list[str],
     *,
-    batch_size: int,
     global_feature_variant: str,
     node_feature_backend_variant: str | None,
     fixed_all_gate_keys: list[str] | None,
+):
+    return QuantumCircuitGraphDataset(
+        root="qqe/cache/prediction_cache",
+        pt_paths=pt_paths,
+        global_feature_variant=global_feature_variant,
+        node_feature_backend_variant=node_feature_backend_variant,
+        fixed_all_gate_keys=fixed_all_gate_keys,
+    )
+
+
+def build_loader(
+    model_kind: str,
+    dataset,
+    *,
+    batch_size: int,
     target_node_dim: int | None,
     target_global_dim: int | None,
-) -> tuple[QuantumCircuitGraphDataset, DataLoader]:
-    suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
-    root = cache_root_for_paths(pt_paths, suffix=suffix)
+):
+    if model_kind == "gnn":
+        wrapped = PredictionGraphWrapper(
+            dataset,
+            target_node_dim=target_node_dim,
+            target_global_dim=target_global_dim,
+        )
+        return PyGDataLoader(
+            wrapped,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=0,
+            pin_memory=torch.cuda.is_available(),
+        )
 
-    dataset = QuantumCircuitGraphDataset(
-        root=root,
-        pt_paths=pt_paths,
-        global_feature_variant=global_feature_variant,
-        node_feature_backend_variant=node_feature_backend_variant,
-        fixed_all_gate_keys=fixed_all_gate_keys,
-    )
+    if model_kind == "nn":
+        wrapped = PredictionTensorWrapper(dataset, target_global_dim=target_global_dim)
 
-    wrapped = PaddedGraphDatasetWrapper(
-        dataset,
-        target_node_dim=target_node_dim,
-        target_global_dim=target_global_dim,
-    )
+        def collate_fn(batch):
+            xs, metas = zip(*batch)
+            return torch.stack(xs, dim=0), list(metas)
 
-    loader = DataLoader(
-        wrapped,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=0,
-        pin_memory=torch.cuda.is_available(),
-    )
+        return TorchDataLoader(
+            wrapped,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=0,
+            pin_memory=torch.cuda.is_available(),
+            collate_fn=collate_fn,
+        )
 
-    return dataset, loader
-
-
-def build_prediction_loader_nn(
-    pt_paths: list[str],
-    *,
-    batch_size: int,
-    global_feature_variant: str,
-    node_feature_backend_variant: str | None,
-    fixed_all_gate_keys: list[str] | None,
-    target_global_dim: int | None,
-) -> tuple[QuantumCircuitGraphDataset, DataLoader]:
-    """Build tensor-based loader for NN (Regressor) models."""
-    suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
-    root = cache_root_for_paths(pt_paths, suffix=suffix)
-
-    dataset = QuantumCircuitGraphDataset(
-        root=root,
-        pt_paths=pt_paths,
-        global_feature_variant=global_feature_variant,
-        node_feature_backend_variant=node_feature_backend_variant,
-        fixed_all_gate_keys=fixed_all_gate_keys,
-    )
-
-    nn_dataset = TensorTargetDatasetWrapper(dataset)
-
-    def collate_fn(batch: list[tuple[torch.Tensor, dict]]) -> tuple[torch.Tensor, list[dict]]:
-        tensors, metas = zip(*batch)
-        stacked = torch.stack(tensors, dim=0)
-        return stacked, list(metas)
-
-    loader = torch.utils.data.DataLoader(
-        nn_dataset,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=0,
-        pin_memory=torch.cuda.is_available(),
-        collate_fn=collate_fn,
-    )
-
-    return dataset, loader
+    raise ValueError(f"Unsupported model_kind: {model_kind}")
 
 
-# -----------------------------
-# inference
-# -----------------------------
-
-def is_regressor_model(model: GNN | Regressor) -> bool:
-    """Detect if model is a Regressor (NN) or GNN based on type."""
-    return isinstance(model, Regressor)
-
+# =========================================================
+# Prediction
+# =========================================================
 
 @torch.no_grad()
-def run_predictions(
-    model: GNN | Regressor,
-    loader: DataLoader,
+def predict(
+    model: torch.nn.Module,
+    loader,
+    *,
+    model_kind: str,
     device: torch.device,
 ) -> list[dict[str, Any]]:
     model.eval()
-    records: list[dict[str, Any]] = []
-    is_nn = is_regressor_model(model)
+    rows: list[dict[str, Any]] = []
 
-    for batch_data in loader:
-        if is_nn:
-            # NN loader yields (tensor_batch, meta_list)
-            tensor_batch, meta_list = batch_data
-            tensor_batch = tensor_batch.to(device)
-            pred = model(tensor_batch).view(-1).cpu().tolist()
+    if model_kind == "gnn":
+        for batch in loader:
+            samples = batch.to_data_list()
+            batch = batch.to(device)
+            preds = model(batch).view(-1).cpu().tolist()
 
-            for meta, pred_value in zip(meta_list, pred):
-                records.append(
-                    {
-                        "cid": meta.get("cid"),
-                        "prediction": float(pred_value),
-                        "family": meta.get("family"),
-                        "seed": meta.get("seed"),
-                        "n_qubits": meta.get("n_qubits"),
-                        "n_layers": meta.get("n_layers"),
-                    },
-                )
-        else:
-            # GNN loader yields graph Batch objects
-            samples = batch_data.to_data_list()
-            batch_data = batch_data.to(device)
-            pred = model(batch_data).view(-1).cpu().tolist()
-
-            for sample, pred_value in zip(samples, pred):
+            for sample, pred in zip(samples, preds):
                 meta = getattr(sample, "meta", {}) or {}
-                records.append(
+                rows.append(
                     {
                         "cid": meta.get("cid"),
-                        "prediction": float(pred_value),
                         "family": meta.get("family"),
                         "seed": meta.get("seed"),
                         "n_qubits": meta.get("n_qubits"),
                         "n_layers": meta.get("n_layers"),
+                        "prediction": float(pred),
                     },
                 )
+        return rows
 
-    return records
+    if model_kind == "nn":
+        for x, metas in loader:
+            x = x.to(device)
+            preds = model(x).view(-1).cpu().tolist()
+
+            for meta, pred in zip(metas, preds):
+                rows.append(
+                    {
+                        "cid": meta.get("cid"),
+                        "family": meta.get("family"),
+                        "seed": meta.get("seed"),
+                        "n_qubits": meta.get("n_qubits"),
+                        "n_layers": meta.get("n_layers"),
+                        "prediction": float(pred),
+                    },
+                )
+        return rows
+
+    raise ValueError(f"Unsupported model_kind: {model_kind}")
 
 
-def save_predictions_csv(records: list[dict[str, Any]], output_path: Path) -> None:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+# =========================================================
+# Saving + aggregation
+# =========================================================
 
-    fieldnames = ["cid", "prediction", "family", "seed", "n_qubits", "n_layers"]
-    with output_path.open("w", newline="", encoding="utf-8") as f:
+def save_predictions_csv(rows: list[dict[str, Any]], path: str | Path) -> Path:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    fieldnames = ["cid", "family", "seed", "n_qubits", "n_layers", "prediction"]
+    with path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(records)
+        writer.writerows(rows)
+
+    return path
 
 
-def aggregate_predictions_by_size(
-    records: list[dict[str, Any]],
+def aggregate_mean_std(
+    rows: list[dict[str, Any]],
     *,
-    group_by_family: bool = False,
+    x_key: str,
+    fixed_key: str | None = None,
+    fixed_value: int | None = None,
 ) -> list[dict[str, Any]]:
-    """Compute seed-averaged prediction stats per size, optionally split by family."""
-    # First level: collect values per (family?, n_qubits, n_layers, seed)
-    per_seed: dict[tuple[str | None, int, int, int], list[float]] = {}
+    filtered = rows
+    if fixed_key is not None and fixed_value is not None:
+        filtered = [r for r in rows if int(r[fixed_key]) == int(fixed_value)]
 
-    for row in records:
-        n_qubits = row.get("n_qubits")
-        n_layers = row.get("n_layers")
-        pred = row.get("prediction")
-        seed = row.get("seed")
-        family = row.get("family")
+    groups: dict[int, list[float]] = {}
+    for r in filtered:
+        x = int(r[x_key])
+        groups.setdefault(x, []).append(float(r["prediction"]))
 
-        if n_qubits is None or n_layers is None or pred is None:
-            continue
-
-        if seed is None:
-            cid = str(row.get("cid") or "")
-            match = re.search(r"_S(\d+)$", cid)
-            if match is not None:
-                seed = int(match.group(1))
-            else:
-                # Fallback: if seed is not available, treat each row as its own pseudo-seed.
-                seed = int(hashlib.md5(cid.encode("utf-8")).hexdigest()[:8], 16)
-
-        family_key = str(family) if family is not None and group_by_family else None
-        key = (family_key, int(n_qubits), int(n_layers), int(seed))
-        per_seed[key] = per_seed.get(
-            key,
-            [],
-        ) + [float(pred)]
-
-    # Second level: average seed means per (family?, n_qubits, n_layers)
-    by_size: dict[tuple[str | None, int, int], list[float]] = {}
-    for (family_key, n_qubits, n_layers, _seed), values in per_seed.items():
-        seed_mean = sum(values) / len(values)
-        by_size.setdefault((family_key, n_qubits, n_layers), []).append(seed_mean)
-
-    aggregated: list[dict[str, Any]] = []
-    for (family_key, n_qubits, n_layers), seed_means in sorted(by_size.items()):
-        seed_means_arr = np.asarray(seed_means, dtype=float)
-        n_seeds = int(len(seed_means_arr))
-        prediction_avg = float(seed_means_arr.mean())
-        prediction_std = float(seed_means_arr.std(ddof=0)) if n_seeds > 0 else 0.0
-        prediction_sem = float(prediction_std / np.sqrt(n_seeds)) if n_seeds > 0 else 0.0
-
-        aggregated.append(
+    out = []
+    for x in sorted(groups):
+        vals = np.asarray(groups[x], dtype=float)
+        out.append(
             {
-                "family": family_key,
-                "n_qubits": n_qubits,
-                "n_layers": n_layers,
-                "n_seeds": n_seeds,
-                "prediction_avg": prediction_avg,
-                "prediction_std": prediction_std,
-                "prediction_sem": prediction_sem,
+                x_key: x,
+                "mean": float(vals.mean()),
+                "std": float(vals.std(ddof=0)),
+                "n": int(len(vals)),
             },
         )
-
-    return aggregated
-
-
-def save_aggregated_predictions_csv(aggregated: list[dict[str, Any]], output_path: Path) -> None:
-    """Save per-size aggregated predictions to CSV."""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    fieldnames = [
-        "family",
-        "n_qubits",
-        "n_layers",
-        "n_seeds",
-        "prediction_avg",
-        "prediction_std",
-        "prediction_sem",
-    ]
-    with output_path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(aggregated)
+    return out
 
 
-def plot_aggregated_predictions(aggregated: list[dict[str, Any]], output_path: Path) -> None:
-    """Plot average prediction by size and save to disk."""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+# =========================================================
+# Plotting
+# =========================================================
 
-    if not aggregated:
-        logger.info("No aggregated points available; skipping plot save to %s", output_path)
-        return
-
-    x = [int(row["n_qubits"]) for row in aggregated]
-    y = [int(row["n_layers"]) for row in aggregated]
-    z = [float(row["prediction_avg"]) for row in aggregated]
-    n_seeds = [int(row["n_seeds"]) for row in aggregated]
-
-    plt.figure(figsize=(8, 6))
-    scatter = plt.scatter(x, y, c=z, s=[30 + 10 * c for c in n_seeds], cmap="viridis", alpha=0.9)
-    plt.colorbar(scatter, label="Average prediction")
-    plt.xlabel("n_qubits")
-    plt.ylabel("n_layers")
-    plt.title("Seed-averaged prediction per (n_qubits, n_layers)")
-    plt.grid(True, linestyle="--", alpha=0.3)
-    plt.tight_layout()
-    plt.savefig(output_path, dpi=180)
-    plt.close()
-
-
-def plot_predictions_vs_qubits_for_layer(
-    aggregated: list[dict[str, Any]],
+def plot_fixed_layers_vary_qubits(
+    rows: list[dict[str, Any]],
     *,
     n_layers: int,
-    output_path: Path,
-    split_by_family: bool,
-) -> None:
-    """Plot aggregated predictions for a fixed n_layers against n_qubits with error bars."""
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    filtered = [row for row in aggregated if row.get("n_layers") is not None and int(row["n_layers"]) == n_layers]
-    if not filtered:
-        logger.info("No aggregated rows found for n_layers=%d; skipping plot %s", n_layers, output_path)
+    output_path: str | Path | None = None,
+):
+    agg = aggregate_mean_std(
+        rows,
+        x_key="n_qubits",
+        fixed_key="n_layers",
+        fixed_value=n_layers,
+    )
+    if not agg:
+        logger.info("No predictions found for n_layers=%s", n_layers)
         return
 
-    groups: dict[str | None, list[dict[str, Any]]] = {}
-    for row in filtered:
-        fam = row.get("family")
-        key = str(fam) if fam is not None else None
-        groups.setdefault(key, []).append(row)
-
-    if not groups:
-        logger.info("No valid aggregated groups for n_layers=%d; skipping plot %s", n_layers, output_path)
-        return
+    x = [r["n_qubits"] for r in agg]
+    y = [r["mean"] for r in agg]
+    yerr = [r["std"] for r in agg]
 
     plt.figure(figsize=(8, 5))
-
-    if split_by_family:
-        for fam in sorted(groups.keys(), key=lambda v: "" if v is None else v):
-            group_rows = sorted(groups[fam], key=lambda r: int(r["n_qubits"]))
-            x = [int(row["n_qubits"]) for row in group_rows]
-            y = [float(row["prediction_avg"]) for row in group_rows]
-            yerr = [float(row.get("prediction_std", 0.0)) for row in group_rows]
-            label = fam if fam is not None else "all"
-            plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3, label=label)
-        plt.legend(title="family")
-        plt.title(f"Aggregated predictions vs n_qubits by family (n_layers={n_layers})")
-    else:
-        group_rows = sorted(filtered, key=lambda r: int(r["n_qubits"]))
-        x = [int(row["n_qubits"]) for row in group_rows]
-        y = [float(row["prediction_avg"]) for row in group_rows]
-        yerr = [float(row.get("prediction_std", 0.0)) for row in group_rows]
-        plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
-        plt.title(f"Aggregated predictions vs n_qubits (n_layers={n_layers})")
-
-    plt.xlabel("n_qubits")
-    plt.ylabel("SRE")
-    plt.grid(visible=True, linestyle="--", alpha=0.3)
+    plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+    plt.xlabel("Number of qubits")
+    plt.ylabel("Predicted SRE")
+    plt.title(f"Predicted SRE vs qubits (n_layers={n_layers})")
+    plt.grid(True, linestyle="--", alpha=0.3)
     plt.tight_layout()
-    plt.savefig(output_path, dpi=180)
-    plt.close()
+
+    if output_path is not None:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(output_path, dpi=180)
+        plt.close()
+    else:
+        plt.show()
 
 
-def derive_aggregate_output_paths(predictions_output_csv: Path) -> tuple[Path, Path]:
-    """Derive aggregate CSV and plot paths from the prediction CSV path."""
-    stem = predictions_output_csv.stem
-    parent = predictions_output_csv.parent
-    aggregate_csv = parent / f"{stem}__avg_by_size.csv"
-    aggregate_plot = parent / f"{stem}__avg_by_size.png"
-    return aggregate_csv, aggregate_plot
+def plot_fixed_qubits_vary_layers(
+    rows: list[dict[str, Any]],
+    *,
+    n_qubits: int,
+    output_path: str | Path | None = None,
+):
+    agg = aggregate_mean_std(
+        rows,
+        x_key="n_layers",
+        fixed_key="n_qubits",
+        fixed_value=n_qubits,
+    )
+    if not agg:
+        logger.info("No predictions found for n_qubits=%s", n_qubits)
+        return
+
+    x = [r["n_layers"] for r in agg]
+    y = [r["mean"] for r in agg]
+    yerr = [r["std"] for r in agg]
+
+    plt.figure(figsize=(8, 5))
+    plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+    plt.xlabel("Number of layers")
+    plt.ylabel("Predicted SRE")
+    plt.title(f"Predicted SRE vs layers (n_qubits={n_qubits})")
+    plt.grid(True, linestyle="--", alpha=0.3)
+    plt.tight_layout()
+
+    if output_path is not None:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(output_path, dpi=180)
+        plt.close()
+    else:
+        plt.show()
 
 
-def derive_layer_plot_output_path(predictions_output_csv: Path, n_layers: int) -> Path:
-    """Derive fixed-layer plot path from the prediction CSV path."""
-    stem = predictions_output_csv.stem
-    parent = predictions_output_csv.parent
-    return parent / f"{stem}__pred_vs_qubits__L{n_layers}.png"
-
-
-# -----------------------------
-# CLI
-# -----------------------------
+# =========================================================
+# Main
+# =========================================================
 
 def main(
-    family: str | None = typer.Option(None, help="Family to predict on for per-family data selection."),
-    model_type: str = typer.Option("gnn", help="'gnn' or 'nn' to select prediction pipeline"),
-    training_type: str = typer.Option("global", help="'global' or 'per_family'"),
-    global_eval_family: str | None = typer.Option(
-        None,
-        help="Optional family filter for global model evaluation dataset selection.",
-    ),
-    dataset_dir: str = typer.Option("outputs/data", help="Root directory containing prediction .pt files."),
-    batch_size: int = typer.Option(32, help="Prediction batch size."),
+    model_kind: str = typer.Option("gnn", help="Model type: 'gnn' or 'nn'."),
+    training_scope: str = typer.Option("global", help="'global' or 'family'."),
+    model_family: str | None = typer.Option(None, help="Family used if training_scope='family'."),
+    dataset_root: str = typer.Option("outputs/data", help="Root folder containing prediction files."),
+    dataset_family: str | None = typer.Option(None, help="Optional family to predict on."),
+    batch_size: int = typer.Option(32, help="Batch size."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
     node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
-    plot_n_layers: int | None = typer.Option(45, help="If set, save a plot of all predictions vs n_qubits for this n_layers value."),
-    output_csv: str = typer.Option("outputs/figures/predictions/predictions.csv", help="Where to save predictions."),
+    output_csv: str = typer.Option("outputs/predictions/predictions.csv", help="Output CSV path."),
+    plot_n_layers: int | None = typer.Option(None, help="Make plot at fixed n_layers, varying n_qubits."),
+    plot_n_qubits: int | None = typer.Option(None, help="Make plot at fixed n_qubits, varying n_layers."),
 ):
-    if training_type not in {"global", "per_family"}:
-        raise ValueError("training_type must be 'global' or 'per_family'")
+    ckpt_path = checkpoint_path(model_kind, training_scope, model_family)
+    logger.info("Loading checkpoint: %s", ckpt_path)
 
-    if training_type == "per_family" and family is None:
-        raise ValueError("family must be provided when training_type='per_family'")
-    
-    if model_type == "nn":
-        logger.info("Selected model_type 'nn' for prediction. Will attempt to load Regressor model and use NN prediction pipeline.")
-        model_path = (
-            f"models/nn_model_{family}.pt"
-            if training_type == "per_family"
-            else "models/nn_model_global.pt"
-        )
-    else:
-        logger.info("Selected model_type 'gnn' for prediction. Will attempt to load GNN model and use GNN prediction pipeline.")
-        model_path = (
-            f"models/gnn_model_{family}.pt"
-            if training_type == "per_family"
-            else "models/gnn_model_global.pt"
-        )
+    state_dict, model_config, feature_config = load_checkpoint(ckpt_path)
 
-    state_dict, model_config, feature_config = load_checkpoint(model_path)
+    model = build_model(model_kind, model_config)
+    model.load_state_dict(state_dict, strict=False)
 
-    eval_family = family if training_type == "per_family" else global_eval_family
-    pt_paths = collect_pred_paths(dataset_dir, family=eval_family)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+
+    pt_paths = collect_prediction_paths(dataset_root, dataset_family)
     if not pt_paths:
         raise RuntimeError("No prediction .pt files found.")
 
-    logger.info("Found %d prediction files.", len(pt_paths))
+    logger.info("Found %d prediction files", len(pt_paths))
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = build_model(model_config).to(device)
-    missing_keys, unexpected_keys = model.load_state_dict(state_dict, strict=False)
-
-    logger.info("Loaded model from %s", model_path)
-    if missing_keys:
-        logger.info("Missing keys: %s", missing_keys)
-    if unexpected_keys:
-        logger.info("Unexpected keys: %s", unexpected_keys)
-
-    is_nn = is_regressor_model(model)
-    if is_nn:
-        logger.info("Using NN (Regressor) prediction pipeline.")
-        _dataset, loader = build_prediction_loader_nn(
-            pt_paths,
-            batch_size=batch_size,
-            global_feature_variant=global_feature_variant,
-            node_feature_backend_variant=node_feature_backend_variant,
-            fixed_all_gate_keys=feature_config.get("all_gate_keys"),
-            target_global_dim=model_config.get("global_in_dim"),
-        )
-    else:
-        logger.info("Using GNN prediction pipeline.")
-        _dataset, loader = build_prediction_loader(
-            pt_paths,
-            batch_size=batch_size,
-            global_feature_variant=global_feature_variant,
-            node_feature_backend_variant=node_feature_backend_variant,
-            fixed_all_gate_keys=feature_config.get("all_gate_keys"),
-            target_node_dim=model_config.get("node_in_dim"),
-            target_global_dim=model_config.get("global_in_dim"),
-        )
-
-    records = run_predictions(model, loader, device)
-    output_csv_path = resolve_output_csv_path(
-        output_csv,
-        model_type=training_type,
-        family=eval_family,
-        model_path=model_path,
-        global_feature_variant=global_feature_variant,
-        node_feature_backend_variant=node_feature_backend_variant,
-        batch_size=batch_size,
+    dataset = build_prediction_dataset(
+        pt_paths,
+        global_feature_variant=feature_config.get("global_feature_variant", global_feature_variant),
+        node_feature_backend_variant=feature_config.get("node_feature_backend_variant", node_feature_backend_variant),
+        fixed_all_gate_keys=feature_config.get("all_gate_keys"),
     )
-    save_predictions_csv(records, output_csv_path)
 
-    aggregate_csv_path, aggregate_plot_path = derive_aggregate_output_paths(output_csv_path)
-    split_by_family = training_type == "global" and global_eval_family is None
-    aggregated = aggregate_predictions_by_size(records, group_by_family=split_by_family)
-    save_aggregated_predictions_csv(aggregated, aggregate_csv_path)
+    loader = build_loader(
+        model_kind,
+        dataset,
+        batch_size=batch_size,
+        target_node_dim=model_config.get("node_in_dim"),
+        target_global_dim=model_config.get("global_in_dim"),
+    )
+
+    rows = predict(model, loader, model_kind=model_kind, device=device)
+    save_predictions_csv(rows, output_csv)
+
+    logger.info("Saved %d predictions to %s", len(rows), output_csv)
 
     if plot_n_layers is not None:
-        layer_plot_path = derive_layer_plot_output_path(output_csv_path, plot_n_layers)
-        plot_predictions_vs_qubits_for_layer(
-            aggregated,
-            n_layers=plot_n_layers,
-            output_path=layer_plot_path,
-            split_by_family=split_by_family,
-        )
-        logger.info(
-            "Saved fixed-layer aggregated plot (n_layers=%d, split_by_family=%s) to %s",
-            plot_n_layers,
-            split_by_family,
-            layer_plot_path,
-        )
+        plot_path = Path(output_csv).with_name(f"{Path(output_csv).stem}_fixedL{plot_n_layers}.png")
+        plot_fixed_layers_vary_qubits(rows, n_layers=plot_n_layers, output_path=plot_path)
+        logger.info("Saved fixed-layer plot to %s", plot_path)
 
-    logger.info("Saved %d predictions to %s", len(records), output_csv_path)
-    logger.info("Saved %d aggregated rows to %s", len(aggregated), aggregate_csv_path)
-    logger.info("Saved aggregate plot to %s", aggregate_plot_path)
-
-    preview = min(10, len(records))
-    for i, row in enumerate(records[:preview], start=1):
-        logger.info(
-            "[%d] cid=%s | pred=%.6f | family=%s | n_qubits=%s | n_layers=%s",
-            i,
-            str(row["cid"]),
-            float(row["prediction"]),
-            str(row["family"]),
-            str(row["n_qubits"]),
-            str(row["n_layers"]),
-        )
-
-def prediction_pipeline(
-    model: GNN | Regressor,
-    family: str | None,
-):...
-
-def new_main(
-    family: str | None = typer.Option(None, help="Family to predict on for per-family data selection."),
-    model_type: str = typer.Option("gnn", help="'gnn' or 'nn' to select prediction pipeline"),
-    training_type: str = typer.Option("global", help="'global' or 'per_family'"),
-    global_eval_family: str | None = typer.Option(
-        None,
-        help="Optional family filter for global model evaluation dataset selection.",
-    ),
-    dataset_dir: str = typer.Option("outputs/data", help="Root directory containing prediction .pt files."),
-    batch_size: int = typer.Option(32, help="Prediction batch size."),
-    global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
-    node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
-    plot_n_layers: int | None = typer.Option(45, help="If set, save a plot of all predictions vs n_qubits for this n_layers value."),
-    output_csv: str = typer.Option("outputs/figures/predictions/predictions.csv", help="Where to save predictions."),
-):
-    if training_type not in {"global", "per_family"}:
-        raise ValueError("training_type must be 'global' or 'per_family'")
-    if model_type not in {"gnn", "nn"}:
-        raise ValueError("model_type must be 'gnn' or 'nn'")
-    if training_type == "per_family" and family is None:
-        raise ValueError("family must be specified when training_type is 'per_family'")
-
-    
-
+    if plot_n_qubits is not None:
+        plot_path = Path(output_csv).with_name(f"{Path(output_csv).stem}_fixedQ{plot_n_qubits}.png")
+        plot_fixed_qubits_vary_layers(rows, n_qubits=plot_n_qubits, output_path=plot_path)
+        logger.info("Saved fixed-qubit plot to %s", plot_path)
 
 
 if __name__ == "__main__":
