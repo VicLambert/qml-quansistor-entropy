@@ -4,13 +4,14 @@ from __future__ import annotations
 import hashlib
 
 from pathlib import Path
-from tqdm import tqdm
 
 import torch
-from torch_geometric.data import Data
 import torch.nn as nn
-from torch.amp import GradScaler, autocast
+
+from torch.amp import autocast
+from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader
+from tqdm import tqdm
 
 from .train_config import FAMILY_GATE_TYPES, MASTER_GATE_TYPES
 
@@ -20,8 +21,7 @@ def _amp_device_type() -> str:
 
 
 def _family_global_gate_keys(family: str, all_gate_keys: list[str]) -> list[str]:
-    """
-    Return the subset of global gate-feature keys relevant for a given family.
+    """Return the subset of global gate-feature keys relevant for a given family.
 
     all_gate_keys contains only the gate-count part of the binned global vector,
     i.e. it does NOT include the leading metadata entries [n_qubits, n_bins].
@@ -68,8 +68,7 @@ class FamilyNodeProjector:
 
 
 class FamilyGlobalProjector:
-    """
-    Projects data.global_features from the master binned schema to a family-specific one.
+    """Projects data.global_features from the master binned schema to a family-specific one.
 
     Assumes the global feature layout is:
         [n_qubits, n_bins] + all_gate_keys
@@ -98,8 +97,7 @@ class FamilyGlobalProjector:
 
 
 class FamilyFeatureProjector:
-    """
-    Combined projector for both node features and global features.
+    """Combined projector for both node features and global features.
     """
     def __init__(self, family: str, all_gate_keys: list[str]):
         self.node_projector = FamilyNodeProjector(family)
@@ -136,6 +134,43 @@ def _safe_y(batch) -> torch.Tensor:
         y = y.view(-1)
 
     return y.float()
+
+
+def _move_to_device(x, device: torch.device):
+    if torch.is_tensor(x):
+        return x.to(device, non_blocking=True)
+    if hasattr(x, "to"):
+        return x.to(device, non_blocking=True)
+    return x
+
+
+def unpack_supervised_batch(
+    batch,
+    device: torch.device,
+) -> tuple[object, torch.Tensor, int]:
+    """Normalize batches from either:
+    - PyG loaders yielding Data/Batch objects with .y and .num_graphs
+    - Torch loaders yielding (features, target) tuples/lists
+    """
+    if isinstance(batch, (tuple, list)):
+        if len(batch) < 2:
+            raise ValueError("Tuple/list batch must contain at least (inputs, targets).")
+
+        x = _move_to_device(batch[0], device)
+        y_raw = _move_to_device(batch[1], device)
+
+        if torch.is_tensor(y_raw):
+            y = y_raw.float().view(-1)
+        else:
+            y = torch.as_tensor(y_raw, dtype=torch.float32, device=device).view(-1)
+
+        batch_size = int(y.numel()) if y.numel() > 0 else 1
+        return x, y, batch_size
+
+    moved_batch = _move_to_device(batch, device)
+    y = _safe_y(moved_batch)
+    batch_size = int(getattr(moved_batch, "num_graphs", y.numel()))
+    return moved_batch, y, max(1, batch_size)
 
 
 def collect_files_path(data_dir: str, family: str | None = None, backend: str | None = "pennylane") -> list[str]:
@@ -181,14 +216,13 @@ def evaluate_loss(
     loader_iter = tqdm(loader, desc="Validation", leave=False) if show_progress else loader
 
     for batch in loader_iter:
-        batch = batch.to(device, non_blocking=True)
-        y = _safe_y(batch)
+        model_input, y, batch_size = unpack_supervised_batch(batch, device)
 
         with autocast(
             device_type=_amp_device_type(),
             enabled=(use_amp and device.type == "cuda"),
         ):
-            pred = model(batch).view(-1).float()
+            pred = model(model_input).view(-1).float()
 
             # (Optional) ignore NaN labels if you ever have any
             mask = torch.isfinite(y)
@@ -196,7 +230,7 @@ def evaluate_loss(
                 continue
             loss = loss_fn(pred[mask], y[mask])
 
-        total_loss += float(loss.item()) * int(batch.num_graphs)
-        total_graphs += int(batch.num_graphs)
+        total_loss += float(loss.item()) * batch_size
+        total_graphs += batch_size
 
     return total_loss / max(1, total_graphs)

@@ -396,7 +396,9 @@ def compute_all_entries_parallel(
 
     cpu_count = os.cpu_count() or 2
     safe_workers = max(1, min(int(dask_n_workers), cpu_count))
-    max_inflight = max(1, safe_workers // 2)
+    # Increase max_inflight to better utilize all workers
+    # Use 3x workers to keep pipeline full while managing memory
+    max_inflight = max(safe_workers, safe_workers * 3)
 
     rows_out: list[dict[str, Any]] = []
 

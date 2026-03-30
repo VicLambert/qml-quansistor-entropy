@@ -1,32 +1,21 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
 import logging
 import sys
 import time
 
-from collections import Counter
 from dataclasses import dataclass
-from pathlib import Path
 
-from dask.graph_manipulation import checkpoint
-import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
-import typer
 
 from torch.amp import GradScaler, autocast
 from torch.optim import Adam
-from torch.utils.data import random_split
-from torch_geometric.data import Data, Dataset as PyGDataset
 from torch_geometric.loader import DataLoader
 from tqdm import tqdm
 
-from qqe.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
-from qqe.utils import configure_logger
-from qqe.GNN.training.utils import _safe_y, evaluate_loss
+from qqe.GNN.training.utils import evaluate_loss, unpack_supervised_batch
 
 logger = logging.getLogger(__name__)
 
@@ -37,12 +26,11 @@ def build_loss(loss_type: str, huber_delta: float = 1.0) -> nn.Module:
     loss_type = loss_type.lower()
     if loss_type == "mse":
         return nn.MSELoss()
-    elif loss_type == "l1":
+    if loss_type == "l1":
         return nn.L1Loss()
-    elif loss_type == "huber":
+    if loss_type == "huber":
         return nn.HuberLoss(delta=huber_delta)
-    else:
-        raise ValueError(f"Unsupported loss type: {loss_type}")
+    raise ValueError(f"Unsupported loss type: {loss_type}")
 
 
 @dataclass
@@ -86,8 +74,7 @@ def _run_train_epoch(
     )
 
     for batch in train_iter:
-        batch = batch.to(device, non_blocking=True)
-        y = _safe_y(batch)
+        model_input, y, batch_size = unpack_supervised_batch(batch, device)
 
         optimizer.zero_grad(set_to_none=True)
 
@@ -95,7 +82,7 @@ def _run_train_epoch(
             device_type=amp_device,
             enabled=(use_amp and device.type == "cuda"),
         ):
-            pred = model(batch).view(-1).float()
+            pred = model(model_input).view(-1).float()
             mask = torch.isfinite(y)
             if mask.sum() == 0:
                 continue
@@ -114,8 +101,8 @@ def _run_train_epoch(
         scaler.step(optimizer)
         scaler.update()
 
-        total_loss += float(loss.item()) * int(batch.num_graphs)
-        total_graphs += int(batch.num_graphs)
+        total_loss += float(loss.item()) * batch_size
+        total_graphs += batch_size
         batch_count += 1
 
         running_loss = total_loss / max(1, total_graphs)

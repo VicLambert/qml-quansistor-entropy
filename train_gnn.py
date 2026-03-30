@@ -1,33 +1,18 @@
 from __future__ import annotations
 
-import hashlib
-import json
 import logging
-import sys
-import time
 
-from collections import Counter
-from dataclasses import dataclass, asdict
-from pathlib import Path
+from dataclasses import asdict
 
-import matplotlib.pyplot as plt
 import torch
-import torch.nn as nn
 import typer
 
-from dask.graph_manipulation import checkpoint
-from torch.amp import GradScaler, autocast
-from torch.optim import Adam
-from torch.utils.data import random_split
-from torch_geometric.data import Data, Dataset as PyGDataset
-from torch_geometric.loader import DataLoader
-
 from qqe.experiments.plotting import plot_training_curves
-from qqe.GNN.physics_aware_NN import Regressor, GNN, QuantumCircuitGraphDataset
+from qqe.GNN.physics_aware_NN import GNN, Regressor
+from qqe.GNN.training.datasets import build_loaders, build_loaders_NN
 from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
 from qqe.GNN.training.utils import collect_files_path, evaluate_loss
-from qqe.GNN.training.datasets import build_loaders
 from qqe.utils import configure_logger
 
 logger = logging.getLogger(__name__)
@@ -108,7 +93,7 @@ def run_training_NN(
     if not data_paths:
         raise RuntimeError("No data paths found.")
 
-    train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = build_loaders(
+    train_loader, val_loader, test_loader, global_in_dim, base_dataset = build_loaders_NN(
         data_paths,
         batch_size=cfg.batch_size,
         seed=cfg.seed,
@@ -141,14 +126,15 @@ def run_training_NN(
     loss_fn = build_loss(cfg.loss_type, huber_delta=1.0)
     test_loss = evaluate_loss(model, test_loader, dev, loss_fn, use_amp=True, show_progress=True)
 
-    return model, hist, test_loss, node_in_dim, global_in_dim, base_dataset
+    return model, hist, test_loss, global_in_dim, base_dataset
 
 
 def main(
     epochs: int = 30,
     lr: float = 0.001,
-    loss_type: str = "mse",             # "mse" | "huber" | "l1"
+    loss_type: str = "huber",             # "mse" | "huber" | "l1"
     training_mode: str = "global",     # "global" | "per_family"
+    model_type: str = "gnn",          # "gnn" | "nn"
     family: str | None = None,
     show_progress: bool = typer.Option(True, help="Show progress bars during training"),
     show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
@@ -168,19 +154,23 @@ def main(
         heartbeat=heartbeat_secs,
         epoch_warning=epoch_time_warning_secs,
     )
-    model, hist, test_loss, node_in_dim, global_in_dim, base_dataset = run_training(train_config)
+    if model_type == "gnn":
+        model, hist, test_loss, node_in_dim, global_in_dim, base_dataset = run_training(train_config)
+    else:
+        model, hist, test_loss, global_in_dim, base_dataset = run_training_NN(train_config)
+        node_in_dim = None
 
     plot_training_curves(
         hist,
-        title="GNN SRE regression",
+        title=f"{model_type.upper()} SRE regression",
         save_fig=True,
-        fig_path=f"outputs/figures/training_curves/training_curves_{loss_type}_{family if training_mode == 'per_family' else 'global'}.png",
+        fig_path=f"outputs/figures/training_curves/training_curves_{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}.png",
     )
 
     checkpoint = {
         "model_state_dict": model.state_dict(),
         "model_config": {
-            "node_in_dim": node_in_dim,
+            "node_in_dim": node_in_dim or None,
             "global_in_dim": global_in_dim,
             "gnn_hidden": 32,
             "gnn_heads": 8,
@@ -201,7 +191,7 @@ def main(
         },
     }
 
-    model_save_path = f"models/gnn_model_{family if training_mode == 'per_family' else 'global'}.pt"
+    model_save_path = f"models/{model_type}_model_{loss_type}_{family if training_mode == 'per_family' else 'global'}.pt"
     torch.save(checkpoint, model_save_path)
 
 
