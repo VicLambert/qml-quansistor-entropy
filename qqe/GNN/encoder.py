@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+
 from typing import Any
 
 import numpy as np
@@ -10,6 +11,7 @@ from scipy.stats import norm
 from torch_geometric.data import Data
 
 # ---------------- helpers ----------------
+
 
 def bin_theta(theta: float, n_bins: int) -> int:
     twopi = 2.0 * np.pi
@@ -24,22 +26,21 @@ def bin_gaussian_quantile(x: float, n_bins: int) -> int:
     return max(0, min(idx, n_bins - 1))
 
 
-HAAR_DESC_DIM = 32  # 16 real + 16 imag for a 4x4 unitary
+HAAR_DESC_DIM = 50  # Eigenphase histogram bins for a Haar gate unitary
 
 
-def flatten_complex_matrix_features(U: np.ndarray) -> torch.Tensor:
-    """
-    Convert a 4x4 complex unitary into 32 real features:
-    [Re(U).flatten(), Im(U).flatten()]
+def eigenvalue_phase_histogram_features(
+    U: np.ndarray, bins: int = HAAR_DESC_DIM
+) -> torch.Tensor:
+    """Convert a complex unitary into an eigenphase histogram descriptor.
+
+    The descriptor is a fixed-length vector counting eigenvalue phases in [0, 2*pi).
     """
     U = np.asarray(U, dtype=np.complex128)
-    if U.shape != (4, 4):
-        raise ValueError(f"Expected Haar unitary shape (4, 4), got {U.shape}")
-
-    re = np.real(U).reshape(-1)
-    im = np.imag(U).reshape(-1)
-    feat = np.concatenate([re, im], axis=0)
-    return torch.tensor(feat, dtype=torch.float32)
+    lam = np.linalg.eigvals(U)
+    phases = np.mod(np.angle(lam), 2.0 * np.pi)
+    counts, _ = np.histogram(phases, bins=bins, range=(0.0, 2.0 * np.pi))
+    return torch.tensor(counts, dtype=torch.float32)
 
 
 def zero_haar_descriptor() -> torch.Tensor:
@@ -111,6 +112,7 @@ def infer_family_from_qasm(qasm: str) -> str:
 
 # ---------------- feature templates ----------------
 
+
 def _init_rotation_features(n_bins: int) -> dict[str, int]:
     feats: dict[str, int] = {}
     for g in ("rx", "ry", "rz"):
@@ -129,8 +131,47 @@ def _init_quansistor_features(n_bins: int) -> dict[str, int]:
     return feats
 
 
-def _init_haar_features() -> dict[str, int]:
-    return {"haar_count": 0}
+def _init_haar_features(n_bins: int) -> dict[str, int]:
+    feats: dict[str, int] = {"haar_count": 0}
+    for b in range(1, n_bins + 1):
+        feats[f"haar_eig_bin_{b}"] = 0
+    return feats
+
+
+def _inject_haar_eig_bin_counts(
+    gate_features: dict[str, int],
+    op_descriptors: list[dict[str, Any] | None],
+    n_bins: int,
+) -> dict[str, int]:
+    out = dict(gate_features)
+
+    for b in range(1, n_bins + 1):
+        out[f"haar_eig_bin_{b}"] = 0
+
+    for descriptor in op_descriptors:
+        if descriptor is None:
+            continue
+
+        kind = str(descriptor.get("kind", "")).lower()
+        if kind not in ("haar", "haar2"):
+            continue
+
+        raw = descriptor.get("haar_descriptor")
+        if raw is None:
+            continue
+
+        if torch.is_tensor(raw):
+            hist = raw.detach().cpu().to(dtype=torch.float32).view(-1)
+        else:
+            hist = torch.tensor(raw, dtype=torch.float32).view(-1)
+
+        if hist.numel() != n_bins:
+            continue
+
+        for i, value in enumerate(hist.tolist(), start=1):
+            out[f"haar_eig_bin_{i}"] += int(round(float(value)))
+
+    return out
 
 
 def _init_clifford_features() -> dict[str, int]:
@@ -144,6 +185,7 @@ def _init_clifford_features() -> dict[str, int]:
 
 
 # ---------------- main encoder ----------------
+
 
 def encode_qasm_to_feature_dict(
     qasm: str,
@@ -184,7 +226,7 @@ def encode_qasm_to_feature_dict(
         return feats, {"family": fam, "n_qubits": n_qubits, "n_bins": n_bins}
 
     if fam == "haar":
-        feats = _init_haar_features()
+        feats = _init_haar_features(n_bins)
         for name, params, w0, w1 in ops:
             if name in ("haar", "haar2") and w1 is not None:
                 feats["haar_count"] += 1
@@ -220,8 +262,7 @@ def qasm_to_pyg_graph(
     family: str | None = None,
     op_descriptors: list[dict[str, Any] | None] | None = None,
 ) -> tuple[Data, dict[str, int]]:
-    """
-    Convert a QASM string to a PyG Data graph using existing qqe architecture.
+    """Convert a QASM string to a PyG Data graph using existing qqe architecture.
 
     Nodes: input per qubit, gate nodes, and output per qubit.
     Directed edges follow temporal flow on each wire.
@@ -237,7 +278,7 @@ def qasm_to_pyg_graph(
     ops = _parse_ops(qasm_str)
     if op_descriptors is not None and len(op_descriptors) != len(ops):
         raise ValueError(
-            f"op_descriptors length ({len(op_descriptors)}) must match number of parsed ops ({len(ops)})"
+            f"op_descriptors length ({len(op_descriptors)}) must match number of parsed ops ({len(ops)})",
         )
 
     x_features: list[torch.Tensor] = []
@@ -273,7 +314,7 @@ def qasm_to_pyg_graph(
                     num_qubits,
                     params,
                     haar_descriptor=haar_desc,
-                )
+                ),
             )
             edge_src.append(last_node_for_qubit[w0])
             edge_dst.append(node_idx)
@@ -287,7 +328,7 @@ def qasm_to_pyg_graph(
                     num_qubits,
                     params,
                     haar_descriptor=haar_desc,
-                )
+                ),
             )
             edge_src.extend([last_node_for_qubit[w0], last_node_for_qubit[w1]])
             edge_dst.extend([node_idx, node_idx])
@@ -309,8 +350,14 @@ def qasm_to_pyg_graph(
         edge_index = torch.zeros((2, 0), dtype=torch.long)
 
     gate_features, meta = encode_qasm_to_feature_dict(
-        qasm_str, n_bins=n_bins, family=family, require_family=False
+        qasm_str,
+        n_bins=n_bins,
+        family=family,
+        require_family=False,
     )
+
+    if op_descriptors is not None and str(meta.get("family", "")).lower() == "haar":
+        gate_features = _inject_haar_eig_bin_counts(gate_features, op_descriptors, n_bins)
 
     if global_feature_variant == "baseline":
         global_feat = _global_features_baseline(ops, num_qubits)
@@ -336,11 +383,19 @@ def _encode_node_feature(
     haar_descriptor: torch.Tensor | list[float] | np.ndarray | None = None,
 ) -> torch.Tensor:
     gate_types = [
-        "input", "measurement",
-        "h", "s", "t", "id",
-        "rx", "ry", "rz",
+        "input",
+        "measurement",
+        "h",
+        "s",
+        "t",
+        "id",
+        "rx",
+        "ry",
+        "rz",
         "cx",
-        "qx", "qy", "haar",
+        "qx",
+        "qy",
+        "haar",
     ]
 
     gate_type_norm = "haar" if gate_type == "haar2" else gate_type
@@ -369,23 +424,31 @@ def _encode_node_feature(
 
     if haar_descriptor.ndim != 1:
         raise ValueError(
-            f"haar_descriptor must be 1D, got shape {tuple(haar_descriptor.shape)}"
+            f"haar_descriptor must be 1D, got shape {tuple(haar_descriptor.shape)}",
         )
 
     if haar_descriptor.numel() != HAAR_DESC_DIM:
         raise ValueError(
-            f"haar_descriptor must have length {HAAR_DESC_DIM}, got {haar_descriptor.numel()}"
+            f"haar_descriptor must have length {HAAR_DESC_DIM}, got {haar_descriptor.numel()}",
         )
 
     return torch.cat([gate_onehot, qubit_mask, haar_descriptor], dim=0)
 
 
 gate_types = [
-    "input", "measurement",
-    "h", "s", "t", "id",
-    "rx", "ry", "rz",
+    "input",
+    "measurement",
+    "h",
+    "s",
+    "t",
+    "id",
+    "rx",
+    "ry",
+    "rz",
     "cx",
-    "qx", "qy", "haar",
+    "qx",
+    "qy",
+    "haar",
 ]
 
 

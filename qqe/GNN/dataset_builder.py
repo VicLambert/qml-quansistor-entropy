@@ -25,14 +25,14 @@ from qqe.circuit.families import (
     QuansistorBrickwork,
     RandomCircuit,
 )
-from qqe.circuit.patterns import TdopingRules, to_qasm
-from qqe.experiments.core import run_experiment
-from qqe.GNN.encoder import flatten_complex_matrix_features, qasm_to_pyg_graph
-from qqe.utils import FileCache
 
 # Keep this import path only if it is the correct one in your project.
 # If your real function lives in qqe.circuit.matrix_factory, switch it there.
 from qqe.circuit.gates import gate_unitary
+from qqe.circuit.patterns import TdopingRules, to_qasm
+from qqe.experiments.core import run_experiment
+from qqe.GNN.encoder import eigenvalue_phase_histogram_features, qasm_to_pyg_graph
+from qqe.utils import FileCache
 
 if TYPE_CHECKING:
     from qqe.circuit.spec import GateSpec
@@ -95,11 +95,10 @@ def make_cid(family: str, n_qubits: int, n_layers: int, seed: int) -> str:
 
 
 def build_op_descriptors_from_spec(
-    gates: tuple["GateSpec", ...] | None,
+    gates: tuple[GateSpec, ...] | None,
     family: str,
 ) -> list[dict[str, Any]] | None:
-    """
-    Build per-gate descriptor metadata aligned with the parsed QASM op order.
+    """Build per-gate descriptor metadata aligned with the parsed QASM op order.
 
     Only Haar gates need a nonzero fixed-size node descriptor block.
     All other gates may still keep metadata, but should not carry a Haar descriptor.
@@ -123,7 +122,7 @@ def build_op_descriptors_from_spec(
 
         if family == "haar" and kind_norm == "haar":
             U = gate_unitary(gate)
-            descriptor["haar_descriptor"] = flatten_complex_matrix_features(U)
+            descriptor["haar_descriptor"] = eigenvalue_phase_histogram_features(U)
 
         op_descriptors.append(descriptor)
 
@@ -138,7 +137,9 @@ def generate_dataset_params(
 ) -> list[CircuitConfig]:
     config = []
     for family, n_qubits, n_layers in itertools.product(
-        families, qubits_values, layers_values
+        families,
+        qubits_values,
+        layers_values,
     ):
         for rep in range(num_seeds):
             seed = make_seed(family, n_qubits, n_layers, rep)
@@ -150,7 +151,7 @@ def generate_dataset_params(
                     n_qubits=int(n_qubits),
                     n_layers=int(n_layers),
                     seed=int(seed),
-                )
+                ),
             )
     return config
 
@@ -431,6 +432,7 @@ def compute_all_entries_parallel(
     dask_memory_per_worker: str | None = "auto",
 ) -> list[dict[str, Any]]:
     from dask.distributed import as_completed
+
     from qqe.parallel import dask_client
 
     base_dir = config.output_dir or DATASET_DIR
@@ -519,12 +521,14 @@ def run_dataset_pipeline(
     invalid = [f for f in families if f not in FAMILY_REGISTRY]
     if invalid:
         raise ValueError(
-            f"Unknown families: {invalid}. Valid: {list(FAMILY_REGISTRY.keys())}"
+            f"Unknown families: {invalid}. Valid: {list(FAMILY_REGISTRY.keys())}",
         )
 
     base_output_dir: Path = config.output_dir
     base_output_dir.mkdir(parents=True, exist_ok=True)
-    data_dir = f"encoding_data_{config.backend}" if config.compute_sre else "predictions"
+    target = "sre" if config.compute_sre else "ee" if config.compute_EE else None
+
+    data_dir = f"encoding_data_{target}_{config.backend}" if target else "predictions"
 
     for family in families:
         logger.info("Processing family: %s", family)

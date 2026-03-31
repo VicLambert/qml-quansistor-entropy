@@ -456,7 +456,7 @@ def plot_fixed_qubits_vary_layers(
 # =========================================================
 
 def main(
-    model_kind: str = typer.Option("gnn", help="Model type: 'gnn' or 'nn'."),
+    model_kind: str = typer.Option("nn", help="Model type: 'gnn' or 'nn'."),
     training_scope: str = typer.Option("global", help="'global' or 'family'."),
     model_family: str | None = typer.Option(None, help="Family used if training_scope='family'."),
     dataset_root: str = typer.Option("outputs/data", help="Root folder containing prediction files."),
@@ -465,8 +465,8 @@ def main(
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
     node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
     output_csv: str = typer.Option("outputs/figures/predictions/predictions.csv", help="Output CSV path."),
-    plot_n_layers: int | None = typer.Option(None, help="Make plot at fixed n_layers, varying n_qubits."),
-    plot_n_qubits: int | None = typer.Option(None, help="Make plot at fixed n_qubits, varying n_layers."),
+    plot_n_layers: int | None = typer.Option(80, help="Make plot at fixed n_layers, varying n_qubits."),
+    plot_n_qubits: int | None = typer.Option(16, help="Make plot at fixed n_qubits, varying n_layers."),
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
 ):
     ckpt_path = checkpoint_path(model_kind, training_scope, model_family)

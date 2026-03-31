@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import hashlib
@@ -28,21 +27,17 @@ def _family_global_gate_keys(family: str, all_gate_keys: list[str]) -> list[str]
     """
     if family == "random":
         keep = [
-            k for k in all_gate_keys
-            if (
-                k.startswith(("rx_bin_", "ry_bin_", "rz_bin_")) or k == "CNOT_count"
-            )
+            k
+            for k in all_gate_keys
+            if (k.startswith(("rx_bin_", "ry_bin_", "rz_bin_")) or k == "CNOT_count")
         ]
     elif family == "clifford":
         wanted = {"I_count", "H_count", "S_count", "T_count", "CNOT_count"}
         keep = [k for k in all_gate_keys if k in wanted]
     elif family == "haar":
-        keep = [k for k in all_gate_keys if k == "haar_count"]
+        keep = [k for k in all_gate_keys if k.startswith("haar_eig_bin_")]
     elif family == "quansistor":
-        keep = [
-            k for k in all_gate_keys
-            if k.startswith("qx_") or k.startswith("qy_")
-        ]
+        keep = [k for k in all_gate_keys if k.startswith("qx_") or k.startswith("qy_")]
     else:
         raise ValueError(f"Unknown family '{family}'")
 
@@ -53,14 +48,13 @@ class FamilyNodeProjector:
     def __init__(self, family: str):
         self.family = family
         self.keep_gate_idx = [
-            MASTER_GATE_TYPES.index(name)
-            for name in FAMILY_GATE_TYPES[family]
+            MASTER_GATE_TYPES.index(name) for name in FAMILY_GATE_TYPES[family]
         ]
         self.n_gate_master = len(MASTER_GATE_TYPES)
 
     def __call__(self, data: Data) -> Data:
-        gate = data.x[:, :self.n_gate_master]
-        qubit = data.x[:, self.n_gate_master:]
+        gate = data.x[:, : self.n_gate_master]
+        qubit = data.x[:, self.n_gate_master :]
 
         out = data.clone()
         out.x = torch.cat([gate[:, self.keep_gate_idx], qubit], dim=1)
@@ -74,6 +68,7 @@ class FamilyGlobalProjector:
         [n_qubits, n_bins] + all_gate_keys
     where all_gate_keys is the same ordering used by QuantumCircuitGraphDataset.
     """
+
     def __init__(self, family: str, all_gate_keys: list[str]):
         self.family = family
         self.all_gate_keys = list(all_gate_keys)
@@ -81,9 +76,7 @@ class FamilyGlobalProjector:
         keep_gate_keys = _family_global_gate_keys(family, self.all_gate_keys)
 
         # First two positions are metadata: [n_qubits, n_bins]
-        self.keep_idx = [0, 1] + [
-            2 + self.all_gate_keys.index(k) for k in keep_gate_keys
-        ]
+        self.keep_idx = [0, 1] + [2 + self.all_gate_keys.index(k) for k in keep_gate_keys]
 
     def __call__(self, data: Data) -> Data:
         out = data.clone()
@@ -97,8 +90,8 @@ class FamilyGlobalProjector:
 
 
 class FamilyFeatureProjector:
-    """Combined projector for both node features and global features.
-    """
+    """Combined projector for both node features and global features."""
+
     def __init__(self, family: str, all_gate_keys: list[str]):
         self.node_projector = FamilyNodeProjector(family)
         self.global_projector = FamilyGlobalProjector(family, all_gate_keys)
@@ -121,8 +114,10 @@ class ProjectedDatasetWrapper:
         data = self.dataset[idx]
         return self.transform(data)
 
+
 def _amp_device_type() -> str:
     return "cuda" if torch.cuda.is_available() else "cpu"
+
 
 def _safe_y(batch) -> torch.Tensor:
     if not hasattr(batch, "y") or batch.y is None:
@@ -173,14 +168,18 @@ def unpack_supervised_batch(
     return moved_batch, y, max(1, batch_size)
 
 
-def collect_files_path(data_dir: str, family: str | None = None, backend: str | None = "pennylane") -> list[str]:
+def collect_files_path(
+    data_dir: str,
+    family: str | None = None,
+    backend: str | None = "pennylane",
+) -> list[str]:
     """Collects file paths matching the pattern in the given directory."""
     d = Path(data_dir)
     if family is not None:
-        paths = sorted((d / f"encoding_data_{backend}" / family).glob("*.pt"))
+        paths = sorted((d / f"encoding_data_sre_{backend}" / family).glob("*.pt"))
     else:
         paths = []
-        encoding_dir = d / f"encoding_data_{backend}"
+        encoding_dir = d / f"encoding_data_sre_{backend}"
         if encoding_dir.exists():
             for family_dir in sorted(encoding_dir.iterdir()):
                 if family_dir.is_dir():
@@ -199,6 +198,7 @@ def cache_root_paths(paths: list[str], suffix: str = "") -> str:
     cache_dir = Path("qqe") / "cache" / f"pyg_cache_{digest}{tag}"
     cache_dir.mkdir(parents=True, exist_ok=True)
     return str(cache_dir)
+
 
 @torch.no_grad()
 def evaluate_loss(
