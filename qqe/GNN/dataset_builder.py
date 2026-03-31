@@ -67,6 +67,7 @@ class DataGenConfig:
     n_seeds: int
     n_bins: int
     compute_sre: bool
+    compute_EE: bool
     representation: str
     use_dask: bool
     dask_n_workers: int
@@ -231,6 +232,7 @@ def compute_entry(
         )
 
         sre_value = None
+        EE_value = None
         if config.compute_sre:
             backend_config = BackendConfig(
                 name=config.backend,
@@ -270,6 +272,45 @@ def compute_entry(
             sre_result = result.results.get("SRE")
             sre_value = float(sre_result.value) if sre_result else None
 
+        if config.compute_EE:
+            backend_config = BackendConfig(
+                name=config.backend,
+                representation=config.representation,
+                params={},
+            )
+
+            property_request = PropertyRequest(
+                name="entanglement_entropy",
+                method=config.method,
+                params={},
+            )
+
+            exp_config = ExperimentConfig(
+                spec=spec,
+                backend=backend_config,
+                properties=[property_request],
+            )
+
+            backend_factory = BACKEND_REGISTRY[config.backend]
+            backend_instance = (
+                backend_factory() if callable(backend_factory) else backend_factory
+            )
+
+            state = backend_instance.simulate(
+                spec,
+                representation=config.representation,
+            )
+
+            result = run_experiment(
+                exp_config,
+                backend_registry=BACKEND_REGISTRY,
+                state=state,
+                cache=cache,
+            )
+
+            ee_result = result.results.get("entanglement_entropy")
+            EE_value = float(ee_result.value) if ee_result else None
+
         x = graph_data.x.detach().cpu()
         if x.numel() > 0 and x.min().item() >= 0 and x.max().item() <= 1:
             x = x.to(torch.uint8)
@@ -300,6 +341,9 @@ def compute_entry(
         if config.compute_sre:
             payload["sre"] = sre_value
 
+        if config.compute_EE:
+            payload["ee"] = EE_value
+
         torch.save(payload, tmp_path)
         tmp_path.replace(path)
 
@@ -307,6 +351,7 @@ def compute_entry(
             "cid": cid,
             "path": str(path),
             **({"sre": sre_value} if config.compute_sre else {}),
+            **({"ee": EE_value} if config.compute_EE else {}),
         }
 
     except Exception:

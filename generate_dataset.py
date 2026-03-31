@@ -15,7 +15,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 
 def main(
     backend: str = typer.Option("pennylane", help="Backend to use (quimb or pennylane)"),
-    method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
+    target: str = typer.Option("SRE", help="Property to compute (SRE or EE)"),
+    method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling) or EE method (renyi or von_neumann)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
         "outputs/data/",
@@ -60,7 +61,8 @@ def main(
         layers_values=layers_values,
         n_seeds=n_seeds_option,
         n_bins=n_bins_option,
-        compute_sre=True,
+        compute_sre=target == "SRE",
+        compute_EE=target == "EE",
         representation="dense",
         use_dask=use_dask,
         dask_n_workers=dask_n_workers,

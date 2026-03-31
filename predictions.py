@@ -15,7 +15,8 @@ import torch
 import torch.nn.functional as F
 import typer
 
-from torch_geometric.loader import DataLoader
+from torch_geometric.loader import DataLoader as PyGDataLoader
+from torch.utils.data import DataLoader as TorchDataLoader
 
 from qqe.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset, Regressor
 from qqe.utils import configure_logger
@@ -338,26 +339,48 @@ def plot_fixed_layers_vary_qubits(
     *,
     n_layers: int,
     output_path: str | Path | None = None,
+    split_by_family: bool = True,
 ):
-    agg = aggregate_mean_std(
-        rows,
-        x_key="n_qubits",
-        fixed_key="n_layers",
-        fixed_value=n_layers,
-    )
-    if not agg:
+    filtered = [r for r in rows if int(r["n_layers"]) == int(n_layers)]
+    if not filtered:
         logger.info("No predictions found for n_layers=%s", n_layers)
         return
 
-    x = [r["n_qubits"] for r in agg]
-    y = [r["mean"] for r in agg]
-    yerr = [r["std"] for r in agg]
-
     plt.figure(figsize=(8, 5))
-    plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+
+    if split_by_family:
+        families = sorted({str(r.get("family", "unknown")) for r in filtered})
+        for family in families:
+            family_rows = [r for r in filtered if str(r.get("family", "unknown")) == family]
+
+            groups: dict[int, list[float]] = {}
+            for r in family_rows:
+                q = int(r["n_qubits"])
+                groups.setdefault(q, []).append(float(r["prediction"]))
+
+            x = sorted(groups.keys())
+            y = [np.mean(groups[q]) for q in x]
+            yerr = [np.std(groups[q], ddof=0) for q in x]
+
+            plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3, label=family)
+
+        plt.legend(title="family")
+        plt.title(f"Predicted SRE vs qubits (n_layers={n_layers})")
+    else:
+        groups: dict[int, list[float]] = {}
+        for r in filtered:
+            q = int(r["n_qubits"])
+            groups.setdefault(q, []).append(float(r["prediction"]))
+
+        x = sorted(groups.keys())
+        y = [np.mean(groups[q]) for q in x]
+        yerr = [np.std(groups[q], ddof=0) for q in x]
+
+        plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+        plt.title(f"Predicted SRE vs qubits (n_layers={n_layers})")
+
     plt.xlabel("Number of qubits")
     plt.ylabel("Predicted SRE")
-    plt.title(f"Predicted SRE vs qubits (n_layers={n_layers})")
     plt.grid(True, linestyle="--", alpha=0.3)
     plt.tight_layout()
 
@@ -369,32 +392,53 @@ def plot_fixed_layers_vary_qubits(
     else:
         plt.show()
 
-
 def plot_fixed_qubits_vary_layers(
     rows: list[dict[str, Any]],
     *,
     n_qubits: int,
     output_path: str | Path | None = None,
+    split_by_family: bool = True,
 ):
-    agg = aggregate_mean_std(
-        rows,
-        x_key="n_layers",
-        fixed_key="n_qubits",
-        fixed_value=n_qubits,
-    )
-    if not agg:
+    filtered = [r for r in rows if int(r["n_qubits"]) == int(n_qubits)]
+    if not filtered:
         logger.info("No predictions found for n_qubits=%s", n_qubits)
         return
 
-    x = [r["n_layers"] for r in agg]
-    y = [r["mean"] for r in agg]
-    yerr = [r["std"] for r in agg]
-
     plt.figure(figsize=(8, 5))
-    plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+
+    if split_by_family:
+        families = sorted({str(r.get("family", "unknown")) for r in filtered})
+        for family in families:
+            family_rows = [r for r in filtered if str(r.get("family", "unknown")) == family]
+
+            groups: dict[int, list[float]] = {}
+            for r in family_rows:
+                L = int(r["n_layers"])
+                groups.setdefault(L, []).append(float(r["prediction"]))
+
+            x = sorted(groups.keys())
+            y = [np.mean(groups[L]) for L in x]
+            yerr = [np.std(groups[L], ddof=0) for L in x]
+
+            plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3, label=family)
+
+        plt.legend(title="family")
+        plt.title(f"Predicted SRE vs layers (n_qubits={n_qubits})")
+    else:
+        groups: dict[int, list[float]] = {}
+        for r in filtered:
+            L = int(r["n_layers"])
+            groups.setdefault(L, []).append(float(r["prediction"]))
+
+        x = sorted(groups.keys())
+        y = [np.mean(groups[L]) for L in x]
+        yerr = [np.std(groups[L], ddof=0) for L in x]
+
+        plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+        plt.title(f"Predicted SRE vs layers (n_qubits={n_qubits})")
+
     plt.xlabel("Number of layers")
     plt.ylabel("Predicted SRE")
-    plt.title(f"Predicted SRE vs layers (n_qubits={n_qubits})")
     plt.grid(True, linestyle="--", alpha=0.3)
     plt.tight_layout()
 
@@ -420,9 +464,10 @@ def main(
     batch_size: int = typer.Option(32, help="Batch size."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
     node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
-    output_csv: str = typer.Option("outputs/predictions/predictions.csv", help="Output CSV path."),
+    output_csv: str = typer.Option("outputs/figures/predictions/predictions.csv", help="Output CSV path."),
     plot_n_layers: int | None = typer.Option(None, help="Make plot at fixed n_layers, varying n_qubits."),
     plot_n_qubits: int | None = typer.Option(None, help="Make plot at fixed n_qubits, varying n_layers."),
+    split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
 ):
     ckpt_path = checkpoint_path(model_kind, training_scope, model_family)
     logger.info("Loading checkpoint: %s", ckpt_path)
@@ -463,12 +508,22 @@ def main(
 
     if plot_n_layers is not None:
         plot_path = Path(output_csv).with_name(f"{Path(output_csv).stem}_fixedL{plot_n_layers}.png")
-        plot_fixed_layers_vary_qubits(rows, n_layers=plot_n_layers, output_path=plot_path)
+        plot_fixed_layers_vary_qubits(
+            rows,
+            n_layers=plot_n_layers,
+            output_path=plot_path,
+            split_by_family=split_by_family,
+        )
         logger.info("Saved fixed-layer plot to %s", plot_path)
 
     if plot_n_qubits is not None:
         plot_path = Path(output_csv).with_name(f"{Path(output_csv).stem}_fixedQ{plot_n_qubits}.png")
-        plot_fixed_qubits_vary_layers(rows, n_qubits=plot_n_qubits, output_path=plot_path)
+        plot_fixed_qubits_vary_layers(
+            rows,
+            n_qubits=plot_n_qubits,
+            output_path=plot_path,
+            split_by_family=split_by_family,
+        )
         logger.info("Saved fixed-qubit plot to %s", plot_path)
 
 
