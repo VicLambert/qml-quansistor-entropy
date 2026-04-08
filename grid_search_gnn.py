@@ -9,6 +9,7 @@ import random
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import asdict
 from pathlib import Path
+from tqdm import tqdm
 
 import torch
 import typer
@@ -116,13 +117,13 @@ def _run_single_trial(trial_payload: dict) -> dict:
 
 
 def main(
-    epochs: int = 30,
-    training_mode: str = "per_family",  # "global" | "per_family"
-    family: str | None = "quansistor",
+    epochs: int = 10,
+    training_mode: str = "global",  # "global" | "per_family"
+    family: str | None = None,
     loss_type: str = "huber",  # "mse" | "huber" | "l1"
     batch_size: int = 32,
     seed: int = 42,
-    show_progress: bool = typer.Option(default=False, help="Show training progress bars"),
+    show_progress: bool = typer.Option(default=True, help="Show training progress bars"),
     show_val_progress: bool = typer.Option(
         default=False, help="Show validation progress bars"
     ),
@@ -135,7 +136,6 @@ def main(
     dropout_grid: str = typer.Option("0.0,0.1,0.2", help="Comma-separated values"),
     lr_grid: str = typer.Option("0.001,0.0005", help="Comma-separated values"),
     weight_decay_grid: str = typer.Option("0.0,0.0001", help="Comma-separated values"),
-    max_trials: int = typer.Option(0, help="Cap number of trials (0 = all combinations)"),
     shuffle_trials: bool = typer.Option(
         default=False, help="Shuffle grid before max_trials cut"
     ),
@@ -154,8 +154,12 @@ def main(
         10, min=1, help="Early-stopping patience per trial"
     ),
     early_stopping_min_delta: float = typer.Option(0.0, help="Early-stopping minimum delta"),
+    max_trials: int = typer.Option(20, help="Cap number of trials (0 = all combinations)"),
     results_dir: str = typer.Option(
         "outputs/runs/hparam_search", help="Directory for search outputs"
+    ),
+    show_grid_progress: bool = typer.Option(
+        default=True, help="Show grid search progress",
     ),
 ):
     train_cfg = TrainConfig(
@@ -249,46 +253,89 @@ def main(
                 trial_result = run_out["trial_result"]
                 results.append(trial_result)
 
-                if trial_result["best_val_loss"] < best_val_loss:
-                    best_val_loss = trial_result["best_val_loss"]
-                    best_trial = trial_result
-                    best_run_payload = run_out
-
-                if show_grid_progress:
-                    pbar.set_postfix(
-                        trial=idx,
-                        val=f"{trial_result['best_val_loss']:.4f}",
-                        best=f"{best_val_loss:.4f}",
-                    )
-                pbar.update(1)
-    else:
-        with ProcessPoolExecutor(max_workers=n_jobs) as executor:
-            futures = {
-                executor.submit(_run_single_trial, payload): payload
-                for payload in trial_payloads
+    with tqdm(
+        total=len(values_product),
+        desc="Grid Search Trials",
+        unit="trial",
+        disable=not show_grid_progress,
+    ) as pbar:
+        for idx, combo in enumerate(values_product, start=1):
+            params = dict(zip(keys, combo, strict=True))
+            model_hparams = {
+                "gnn_hidden": int(params["gnn_hidden"]),
+                "gnn_heads": int(params["gnn_heads"]),
+                "global_hidden": int(params["global_hidden"]),
+                "reg_hidden": int(params["reg_hidden"]),
+                "num_layers": int(params["num_layers"]),
+                "dropout_rate": float(params["dropout_rate"]),
             }
-            with tqdm(
-                total=len(trial_payloads),
-                desc="Grid search (parallel)",
-                disable=not show_grid_progress,
-                dynamic_ncols=True,
-            ) as pbar:
-                for fut in as_completed(futures):
-                    run_out = fut.result()
-                    trial_result = run_out["trial_result"]
-                    results.append(trial_result)
+            train_hparams = {
+                "weight_decay": float(params["weight_decay"]),
+            }
+            trial_cfg = TrainConfig(**asdict(train_cfg))
+            trial_cfg.lr = float(params["lr"])
 
-                    if trial_result["best_val_loss"] < best_val_loss:
-                        best_val_loss = trial_result["best_val_loss"]
-                        best_trial = trial_result
-                        best_run_payload = run_out
+            logger.info("Trial %d/%d params=%s", idx, len(values_product), params)
 
-                    if show_grid_progress:
-                        pbar.set_postfix(
-                            done=len(results),
-                            best=f"{best_val_loss:.4f}",
-                        )
-                    pbar.update(1)
+            (
+                model,
+                hist,
+                test_loss,
+                node_in_dim,
+                global_in_dim,
+                base_dataset,
+                used_model_hparams,
+            ) = run_training(
+                trial_cfg,
+                model_hparams=model_hparams,
+                train_hparams=train_hparams,
+            )
+
+            best_trial_val = min(hist.val_loss) if hist.val_loss else float("inf")
+            final_val = hist.val_loss[-1] if hist.val_loss else float("inf")
+
+            trial_result = {
+                "trial": idx,
+                "best_val_loss": float(best_trial_val),
+                "final_val_loss": float(final_val),
+                "test_loss": float(test_loss),
+                "lr": float(trial_cfg.lr),
+                "weight_decay": float(train_hparams["weight_decay"]),
+                **used_model_hparams,
+            }
+            results.append(trial_result)
+
+            if best_trial_val < best_val_loss:
+                best_val_loss = best_trial_val
+                best_trial = trial_result
+                best_checkpoint = {
+                    "model_state_dict": model.state_dict(),
+                    "model_config": {
+                        "node_in_dim": node_in_dim,
+                        "global_in_dim": global_in_dim,
+                        **used_model_hparams,
+                    },
+                    "train_config": asdict(trial_cfg),
+                    "feature_config": {
+                        "global_feature_variant": trial_cfg.global_feature_variant,
+                        "node_feature_backend_variant": trial_cfg.node_feature_backend_variant,
+                        "all_gate_keys": getattr(base_dataset, "all_gate_keys", None),
+                        "family_projection": (
+                            trial_cfg.family if trial_cfg.training_mode == "per_family" else None
+                        ),
+                    },
+                    "final_metrics": {
+                        "best_val_loss": float(best_trial_val),
+                        "test_loss": float(test_loss),
+                    },
+                }
+            if show_grid_progress:
+                pbar.set_postfix(
+                    trial=idx,
+                    val=f"{best_trial_val:.4f}",
+                    best=f"{best_val_loss:.4f}",
+                )
+                pbar.update(1)
 
     results = sorted(results, key=lambda x: x["best_val_loss"])
 
