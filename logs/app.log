@@ -1,360 +1,384 @@
-2026-04-06 09:41:12,503 - __main__ - INFO - Starting prediction...
-2026-04-06 09:41:12,508 - __main__ - INFO - Loading checkpoint: models\nn_model_global.pt
-2026-04-06 09:42:21,564 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 09:49:26,082 - __main__ - INFO - Saved 270000 predictions to outputs/figures/predictions/global/predictions_global.csv
-2026-04-06 09:49:26,498 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/global/pred_layers_global.png
-2026-04-06 09:49:26,724 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/global/pred_qubits_global.png
-2026-04-06 09:55:43,004 - __main__ - INFO - Starting prediction...
-2026-04-06 09:55:43,006 - __main__ - INFO - Loading checkpoint: models\nn_model_global.pt
-2026-04-06 09:57:14,921 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 10:04:12,119 - __main__ - INFO - Saved 270000 predictions to outputs/figures/predictions/global/nn_predictions_global.csv
-2026-04-06 10:04:12,675 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/global/nn_pred_layers_global.png
-2026-04-06 10:04:12,913 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/global/nn_pred_qubits_global.png
-2026-04-06 10:10:29,430 - __main__ - INFO - Starting prediction...
-2026-04-06 10:10:29,432 - __main__ - INFO - Loading checkpoint: models\nn_model_global.pt
-2026-04-06 10:11:34,241 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 10:18:26,962 - __main__ - INFO - Saved 270000 predictions to outputs/figures/predictions/global/nn_predictions_global.csv
-2026-04-06 10:18:27,436 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/global/nn_pred_layers_global.png
-2026-04-06 10:18:27,684 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/global/nn_pred_qubits_global.png
-2026-04-06 10:19:58,361 - __main__ - INFO - Starting prediction...
-2026-04-06 10:19:58,363 - __main__ - INFO - Loading checkpoint: models\gnn_model_global.pt
-2026-04-06 10:21:08,607 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 10:43:21,200 - __main__ - INFO - Starting prediction...
-2026-04-06 10:43:21,202 - __main__ - INFO - Loading checkpoint: models\gnn_model_global.pt
-2026-04-06 10:44:34,310 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 10:58:39,079 - __main__ - INFO - Starting prediction...
-2026-04-06 10:58:39,081 - __main__ - INFO - Loading checkpoint: models\nn_model_global.pt
-2026-04-06 10:59:56,402 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 11:07:13,104 - __main__ - INFO - Saved 270000 predictions to outputs/figures/predictions/global/nn_predictions_global.csv
-2026-04-06 11:07:13,504 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/global/nn_pred_layers_global.png
-2026-04-06 11:07:13,729 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/global/nn_pred_qubits_global.png
-2026-04-06 11:09:28,064 - __main__ - INFO - Starting prediction...
-2026-04-06 11:09:45,947 - __main__ - INFO - Starting prediction...
-2026-04-06 11:09:45,950 - __main__ - INFO - Loading checkpoint: models\nn_model_haar.pt
-2026-04-06 11:10:01,907 - __main__ - INFO - Found 67500 prediction files
-2026-04-06 11:11:14,272 - __main__ - INFO - Saved 67500 predictions to outputs/figures/predictions/family/nn_predictions_haar.csv
-2026-04-06 11:11:14,507 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/family/nn_pred_layers_haar.png
-2026-04-06 11:11:14,678 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/family/nn_pred_qubits_haar.png
-2026-04-06 11:12:41,271 - __main__ - INFO - Starting prediction...
-2026-04-06 11:12:41,273 - __main__ - INFO - Loading checkpoint: models\nn_model_ramdom.pt
-2026-04-06 11:13:00,018 - __main__ - INFO - Starting prediction...
-2026-04-06 11:13:00,020 - __main__ - INFO - Loading checkpoint: models\nn_model_random.pt
-2026-04-06 11:13:13,675 - __main__ - INFO - Found 67500 prediction files
-2026-04-06 11:15:00,428 - __main__ - INFO - Saved 67500 predictions to outputs/figures/predictions/family/nn_predictions_random.csv
-2026-04-06 11:15:00,693 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/family/nn_pred_layers_random.png
-2026-04-06 11:15:00,912 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/family/nn_pred_qubits_random.png
-2026-04-06 11:15:27,530 - __main__ - INFO - Starting prediction...
-2026-04-06 11:15:27,532 - __main__ - INFO - Loading checkpoint: models\gnn_model_global.pt
-2026-04-06 11:16:29,553 - __main__ - INFO - Found 270000 prediction files
-2026-04-06 12:07:48,594 - __main__ - INFO - Saved 270000 predictions to outputs/figures/predictions/global/gnn_predictions_global.csv
-2026-04-06 12:07:49,498 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/global/gnn_pred_layers_global.png
-2026-04-06 12:07:49,918 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/global/gnn_pred_qubits_global.png
-2026-04-06 12:25:54,669 - __main__ - INFO - Starting prediction...
-2026-04-06 12:25:54,671 - __main__ - INFO - Loading checkpoint: models\nn_model_quansistor.pt
-2026-04-06 12:26:13,542 - __main__ - INFO - Found 67500 prediction files
-2026-04-06 12:28:43,363 - __main__ - INFO - Saved 67500 predictions to outputs/figures/predictions/family/nn_predictions_quansistor.csv
-2026-04-06 12:28:43,635 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/family/nn_pred_layers_quansistor.png
-2026-04-06 12:28:43,838 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/family/nn_pred_qubits_quansistor.png
-2026-04-06 12:32:02,094 - __main__ - INFO - Starting prediction...
-2026-04-06 12:32:02,096 - __main__ - INFO - Loading checkpoint: models\nn_model_clifford.pt
-2026-04-06 12:32:21,490 - __main__ - INFO - Found 67500 prediction files
-2026-04-06 12:33:45,555 - __main__ - INFO - Saved 67500 predictions to outputs/figures/predictions/family/nn_predictions_clifford.csv
-2026-04-06 12:33:45,889 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/family/nn_pred_layers_clifford.png
-2026-04-06 12:33:46,069 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/family/nn_pred_qubits_clifford.png
-2026-04-06 12:52:29,043 - __main__ - INFO - Starting prediction...
-2026-04-06 12:52:29,044 - __main__ - INFO - Loading checkpoint: models\gnn_model_quansistor.pt
-2026-04-06 12:52:45,357 - __main__ - INFO - Found 67500 prediction files
-2026-04-06 12:55:17,401 - __main__ - INFO - Starting prediction...
-2026-04-06 12:55:17,403 - __main__ - INFO - Loading checkpoint: models\gnn_model_quansistor.pt
-2026-04-06 12:55:33,599 - __main__ - INFO - Found 67500 prediction files
-2026-04-06 13:04:37,322 - __main__ - INFO - Saved 67500 predictions to outputs/figures/predictions/family/gnn_predictions_quansistor.csv
-2026-04-06 13:04:37,598 - __main__ - INFO - Saved fixed-layer plot to outputs/figures/predictions/family/gnn_pred_layers_quansistor.png
-2026-04-06 13:04:37,788 - __main__ - INFO - Saved fixed-qubit plot to outputs/figures/predictions/family/gnn_pred_qubits_quansistor.png
-2026-04-06 13:16:58,713 - __main__ - INFO - Starting data generation...
-2026-04-06 13:16:58,715 - qqe.GNN.dataset_builder - INFO - Processing family: haar
-2026-04-06 13:16:58,818 - qqe.GNN.dataset_builder - INFO - Generated 50000 configs for haar
-2026-04-06 13:16:59,379 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-04-06 13:16:59,871 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
-2026-04-06 13:16:59,890 - distributed.scheduler - INFO - State start
-2026-04-06 13:16:59,913 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:56246
-2026-04-06 13:16:59,914 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
-2026-04-06 13:16:59,914 - distributed.scheduler - INFO - Registering Worker plugin shuffle
-2026-04-06 13:16:59,937 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 13:16:59,950 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 13:16:59,962 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 13:16:59,974 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 13:16:59,989 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:56249'
-2026-04-06 13:16:59,992 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:56253'
-2026-04-06 13:16:59,994 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:56251'
-2026-04-06 13:16:59,996 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:56255'
-2026-04-06 13:17:07,972 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:51405 name: 3
-2026-04-06 13:17:08,002 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:51405
-2026-04-06 13:17:08,002 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:51409
-2026-04-06 13:17:08,003 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:51406 name: 1
-2026-04-06 13:17:08,003 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:51406
-2026-04-06 13:17:08,003 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:51410
-2026-04-06 13:17:08,035 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:51411 name: 2
-2026-04-06 13:17:08,036 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:51411
-2026-04-06 13:17:08,036 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:51413
-2026-04-06 13:17:08,064 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:57835 name: 0
-2026-04-06 13:17:08,065 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:57835
-2026-04-06 13:17:08,065 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57837
-2026-04-06 13:17:08,133 - distributed.scheduler - INFO - Receive client connection: Client-70dcc3b7-31dc-11f1-be30-fcb0de6e8d72
-2026-04-06 13:17:08,133 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:57838
-2026-04-06 13:17:08,134 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-04-06 13:17:08,134 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-04-06 14:25:33,830 - distributed.scheduler - INFO - Remove client Client-70dcc3b7-31dc-11f1-be30-fcb0de6e8d72
-2026-04-06 14:25:33,830 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57838; closing.
-2026-04-06 14:25:33,830 - distributed.scheduler - INFO - Remove client Client-70dcc3b7-31dc-11f1-be30-fcb0de6e8d72
-2026-04-06 14:25:33,831 - distributed.scheduler - INFO - Close client connection: Client-70dcc3b7-31dc-11f1-be30-fcb0de6e8d72
-2026-04-06 14:25:33,832 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1775499933.8327277') (0, 1, 2, 3)
-2026-04-06 14:25:33,833 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:56249'. Reason: nanny-close
-2026-04-06 14:25:33,833 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 14:25:33,833 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:56251'. Reason: nanny-close
-2026-04-06 14:25:33,833 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 14:25:33,833 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:56253'. Reason: nanny-close
-2026-04-06 14:25:33,834 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 14:25:33,834 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:56255'. Reason: nanny-close
-2026-04-06 14:25:33,834 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 14:25:33,835 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:57837; closing.
-2026-04-06 14:25:33,835 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:57835 name: 0 (stimulus_id='handle-worker-cleanup-1775499933.8358984')
-2026-04-06 14:25:33,836 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:51410; closing.
-2026-04-06 14:25:33,836 - distributed.core - INFO - Connection to tcp://127.0.0.1:51409 has been closed.
-2026-04-06 14:25:33,836 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:51405 name: 3 (stimulus_id='handle-worker-cleanup-1775499933.837431')
-2026-04-06 14:25:33,837 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:51406 name: 1 (stimulus_id='handle-worker-cleanup-1775499933.8377645')
-2026-04-06 14:25:33,837 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:51413; closing.
-2026-04-06 14:25:33,838 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:51411 name: 2 (stimulus_id='handle-worker-cleanup-1775499933.8385863')
-2026-04-06 14:25:33,838 - distributed.scheduler - INFO - Lost all workers
-2026-04-06 14:25:35,609 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:56255' closed.
-2026-04-06 14:25:35,609 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:56253' closed.
-2026-04-06 14:25:35,619 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:56249' closed.
-2026-04-06 14:25:35,631 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:56251' closed.
-2026-04-06 14:25:35,631 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
-2026-04-06 14:25:35,633 - distributed.scheduler - INFO - Scheduler closing all comms
-2026-04-06 14:25:35,634 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-04-06 14:25:35,638 - qqe.GNN.dataset_builder - INFO - Completed haar: 50000 entries
-2026-04-06 14:25:35,638 - qqe.GNN.dataset_builder - INFO - Metadata: outputs\data\encoding_data_ee_pennylane\haar\metadata_haar.json
-2026-04-06 14:25:35,638 - qqe.GNN.dataset_builder - INFO - Samples: outputs\data\encoding_data_ee_pennylane\haar
-2026-04-06 14:25:35,638 - qqe.GNN.dataset_builder - INFO - Processing family: random
-2026-04-06 14:25:35,762 - qqe.GNN.dataset_builder - INFO - Generated 50000 configs for random
-2026-04-06 14:25:35,763 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-04-06 14:25:35,788 - distributed.scheduler - INFO - State start
-2026-04-06 14:25:35,804 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:49175
-2026-04-06 14:25:35,804 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
-2026-04-06 14:25:35,804 - distributed.scheduler - INFO - Registering Worker plugin shuffle
-2026-04-06 14:25:35,824 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 14:25:35,833 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 14:25:35,844 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 14:25:35,855 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 14:25:35,867 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:49178'
-2026-04-06 14:25:35,868 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:49180'
-2026-04-06 14:25:35,871 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:49182'
-2026-04-06 14:25:35,872 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:49184'
-2026-04-06 14:25:44,741 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:49199 name: 1
-2026-04-06 14:25:44,741 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:49199
-2026-04-06 14:25:44,741 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:49204
-2026-04-06 14:25:44,743 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:49200 name: 3
-2026-04-06 14:25:44,743 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:49200
-2026-04-06 14:25:44,743 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:49203
-2026-04-06 14:25:44,786 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:49205 name: 0
-2026-04-06 14:25:44,787 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:49205
-2026-04-06 14:25:44,787 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:49208
-2026-04-06 14:25:44,787 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:49206 name: 2
-2026-04-06 14:25:44,788 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:49206
-2026-04-06 14:25:44,788 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:49210
-2026-04-06 14:25:44,861 - distributed.scheduler - INFO - Receive client connection: Client-069f4506-31e6-11f1-be30-fcb0de6e8d72
-2026-04-06 14:25:44,861 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:49211
-2026-04-06 14:25:44,862 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-04-06 14:25:44,862 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-04-06 15:32:10,462 - distributed.scheduler - INFO - Remove client Client-069f4506-31e6-11f1-be30-fcb0de6e8d72
-2026-04-06 15:32:10,462 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:49211; closing.
-2026-04-06 15:32:10,462 - distributed.scheduler - INFO - Remove client Client-069f4506-31e6-11f1-be30-fcb0de6e8d72
-2026-04-06 15:32:10,463 - distributed.scheduler - INFO - Close client connection: Client-069f4506-31e6-11f1-be30-fcb0de6e8d72
-2026-04-06 15:32:10,463 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1775503930.4649522') (0, 1, 2, 3)
-2026-04-06 15:32:10,465 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:49178'. Reason: nanny-close
-2026-04-06 15:32:10,465 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 15:32:10,465 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:49180'. Reason: nanny-close
-2026-04-06 15:32:10,466 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 15:32:10,466 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:49182'. Reason: nanny-close
-2026-04-06 15:32:10,466 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 15:32:10,466 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:49184'. Reason: nanny-close
-2026-04-06 15:32:10,466 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 15:32:10,467 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:49208; closing.
-2026-04-06 15:32:10,467 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:49205 name: 0 (stimulus_id='handle-worker-cleanup-1775503930.467904')
-2026-04-06 15:32:10,468 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:49204; closing.
-2026-04-06 15:32:10,468 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:49199 name: 1 (stimulus_id='handle-worker-cleanup-1775503930.4688928')
-2026-04-06 15:32:10,469 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:49203; closing.
-2026-04-06 15:32:10,469 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:49210; closing.
-2026-04-06 15:32:10,470 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:49175 remote=tcp://127.0.0.1:49204>
-Traceback (most recent call last):
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
-    nbytes = yield coro
-             ^^^^^^^^^^
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
-    value = future.result()
-            ^^^^^^^^^^^^^^^
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
-    raise CommClosedError()
-distributed.comm.core.CommClosedError
-2026-04-06 15:32:10,471 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:49200 name: 3 (stimulus_id='handle-worker-cleanup-1775503930.4718843')
-2026-04-06 15:32:10,471 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:49206 name: 2 (stimulus_id='handle-worker-cleanup-1775503930.4721975')
-2026-04-06 15:32:10,471 - distributed.scheduler - INFO - Lost all workers
-2026-04-06 15:32:12,037 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:49178' closed.
-2026-04-06 15:32:12,037 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:49182' closed.
-2026-04-06 15:32:12,038 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:49184' closed.
-2026-04-06 15:32:12,038 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:49180' closed.
-2026-04-06 15:32:12,038 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
-2026-04-06 15:32:12,038 - distributed.scheduler - INFO - Scheduler closing all comms
-2026-04-06 15:32:12,041 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-04-06 15:32:12,066 - qqe.GNN.dataset_builder - INFO - Completed random: 50000 entries
-2026-04-06 15:32:12,066 - qqe.GNN.dataset_builder - INFO - Metadata: outputs\data\encoding_data_ee_pennylane\random\metadata_random.json
-2026-04-06 15:32:12,066 - qqe.GNN.dataset_builder - INFO - Samples: outputs\data\encoding_data_ee_pennylane\random
-2026-04-06 15:32:12,066 - qqe.GNN.dataset_builder - INFO - Processing family: clifford
-2026-04-06 15:32:12,165 - qqe.GNN.dataset_builder - INFO - Generated 50000 configs for clifford
-2026-04-06 15:32:12,165 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-04-06 15:32:12,188 - distributed.scheduler - INFO - State start
-2026-04-06 15:32:12,204 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:64055
-2026-04-06 15:32:12,204 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
-2026-04-06 15:32:12,204 - distributed.scheduler - INFO - Registering Worker plugin shuffle
-2026-04-06 15:32:12,227 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 15:32:12,239 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 15:32:12,252 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 15:32:12,265 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 15:32:12,278 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:64063'
-2026-04-06 15:32:12,281 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:64058'
-2026-04-06 15:32:12,283 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:64061'
-2026-04-06 15:32:12,284 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:64065'
-2026-04-06 15:32:22,116 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64080 name: 2
-2026-04-06 15:32:22,116 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64080
-2026-04-06 15:32:22,116 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64082
-2026-04-06 15:32:22,161 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64085 name: 1
-2026-04-06 15:32:22,161 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64085
-2026-04-06 15:32:22,161 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64089
-2026-04-06 15:32:22,162 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64084 name: 3
-2026-04-06 15:32:22,163 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64084
-2026-04-06 15:32:22,163 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64091
-2026-04-06 15:32:22,163 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:64083 name: 0
-2026-04-06 15:32:22,163 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:64083
-2026-04-06 15:32:22,163 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64090
-2026-04-06 15:32:22,199 - distributed.scheduler - INFO - Receive client connection: Client-5538e553-31ef-11f1-be30-fcb0de6e8d72
-2026-04-06 15:32:22,199 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:64092
-2026-04-06 15:32:22,200 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-04-06 15:32:22,201 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-04-06 16:34:17,189 - distributed.scheduler - INFO - Remove client Client-5538e553-31ef-11f1-be30-fcb0de6e8d72
-2026-04-06 16:34:17,190 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64092; closing.
-2026-04-06 16:34:17,190 - distributed.scheduler - INFO - Remove client Client-5538e553-31ef-11f1-be30-fcb0de6e8d72
-2026-04-06 16:34:17,190 - distributed.scheduler - INFO - Close client connection: Client-5538e553-31ef-11f1-be30-fcb0de6e8d72
-2026-04-06 16:34:17,191 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1775507657.1917925') (0, 1, 2, 3)
-2026-04-06 16:34:17,192 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:64058'. Reason: nanny-close
-2026-04-06 16:34:17,192 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 16:34:17,192 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:64061'. Reason: nanny-close
-2026-04-06 16:34:17,192 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 16:34:17,192 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:64063'. Reason: nanny-close
-2026-04-06 16:34:17,193 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 16:34:17,193 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:64065'. Reason: nanny-close
-2026-04-06 16:34:17,193 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 16:34:17,193 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64090; closing.
-2026-04-06 16:34:17,193 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64083 name: 0 (stimulus_id='handle-worker-cleanup-1775507657.1945536')
-2026-04-06 16:34:17,194 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64089; closing.
-2026-04-06 16:34:17,195 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64085 name: 1 (stimulus_id='handle-worker-cleanup-1775507657.1955137')
-2026-04-06 16:34:17,196 - distributed.core - INFO - Connection to tcp://127.0.0.1:64091 has been closed.
-2026-04-06 16:34:17,196 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64084 name: 3 (stimulus_id='handle-worker-cleanup-1775507657.196802')
-2026-04-06 16:34:17,196 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:64082; closing.
-2026-04-06 16:34:17,196 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:64055 remote=tcp://127.0.0.1:64089>
-Traceback (most recent call last):
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
-    nbytes = yield coro
-             ^^^^^^^^^^
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
-    value = future.result()
-            ^^^^^^^^^^^^^^^
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
-    raise CommClosedError()
-distributed.comm.core.CommClosedError
-2026-04-06 16:34:17,198 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:64080 name: 2 (stimulus_id='handle-worker-cleanup-1775507657.1985612')
-2026-04-06 16:34:17,198 - distributed.scheduler - INFO - Lost all workers
-2026-04-06 16:34:18,685 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:64063' closed.
-2026-04-06 16:34:18,714 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:64061' closed.
-2026-04-06 16:34:18,714 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:64065' closed.
-2026-04-06 16:34:18,714 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:64058' closed.
-2026-04-06 16:34:18,715 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
-2026-04-06 16:34:18,716 - distributed.scheduler - INFO - Scheduler closing all comms
-2026-04-06 16:34:18,717 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-04-06 16:34:18,744 - qqe.GNN.dataset_builder - INFO - Completed clifford: 50000 entries
-2026-04-06 16:34:18,745 - qqe.GNN.dataset_builder - INFO - Metadata: outputs\data\encoding_data_ee_pennylane\clifford\metadata_clifford.json
-2026-04-06 16:34:18,745 - qqe.GNN.dataset_builder - INFO - Samples: outputs\data\encoding_data_ee_pennylane\clifford
-2026-04-06 16:34:18,745 - qqe.GNN.dataset_builder - INFO - Processing family: quansistor
-2026-04-06 16:34:19,275 - qqe.GNN.dataset_builder - INFO - Generated 50000 configs for quansistor
-2026-04-06 16:34:19,276 - qqe.parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
-2026-04-06 16:34:19,295 - distributed.scheduler - INFO - State start
-2026-04-06 16:34:19,310 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:53793
-2026-04-06 16:34:19,310 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
-2026-04-06 16:34:19,310 - distributed.scheduler - INFO - Registering Worker plugin shuffle
-2026-04-06 16:34:19,327 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 16:34:19,338 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 16:34:19,348 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 16:34:19,359 - distributed.nanny.memory - WARNING - Ignoring provided memory limit 64GiB due to system memory limit of 31.19 GiB
-2026-04-06 16:34:19,372 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:53802'
-2026-04-06 16:34:19,374 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:53796'
-2026-04-06 16:34:19,375 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:53800'
-2026-04-06 16:34:19,376 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:53798'
-2026-04-06 16:34:27,076 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:53818 name: 1
-2026-04-06 16:34:27,077 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:53818
-2026-04-06 16:34:27,077 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:53825
-2026-04-06 16:34:27,077 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:53819 name: 2
-2026-04-06 16:34:27,077 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:53819
-2026-04-06 16:34:27,077 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:53826
-2026-04-06 16:34:27,078 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:53820 name: 0
-2026-04-06 16:34:27,078 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:53820
-2026-04-06 16:34:27,078 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:53824
-2026-04-06 16:34:27,123 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:53827 name: 3
-2026-04-06 16:34:27,123 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:53827
-2026-04-06 16:34:27,124 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:53829
-2026-04-06 16:34:27,189 - distributed.scheduler - INFO - Receive client connection: Client-017d5141-31f8-11f1-be30-fcb0de6e8d72
-2026-04-06 16:34:27,190 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:53830
-2026-04-06 16:34:27,190 - qqe.parallel.dask - INFO - Dask client created successfully.
-2026-04-06 16:34:27,190 - qqe.parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
-2026-04-06 17:34:09,156 - distributed.scheduler - INFO - Remove client Client-017d5141-31f8-11f1-be30-fcb0de6e8d72
-2026-04-06 17:34:09,156 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:53830; closing.
-2026-04-06 17:34:09,156 - distributed.scheduler - INFO - Remove client Client-017d5141-31f8-11f1-be30-fcb0de6e8d72
-2026-04-06 17:34:09,157 - distributed.scheduler - INFO - Close client connection: Client-017d5141-31f8-11f1-be30-fcb0de6e8d72
-2026-04-06 17:34:09,158 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1775511249.1584506') (0, 1, 2, 3)
-2026-04-06 17:34:09,159 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:53796'. Reason: nanny-close
-2026-04-06 17:34:09,159 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 17:34:09,159 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:53798'. Reason: nanny-close
-2026-04-06 17:34:09,159 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 17:34:09,159 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:53800'. Reason: nanny-close
-2026-04-06 17:34:09,160 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 17:34:09,160 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:53802'. Reason: nanny-close
-2026-04-06 17:34:09,160 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
-2026-04-06 17:34:09,161 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:53824; closing.
-2026-04-06 17:34:09,161 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:53820 name: 0 (stimulus_id='handle-worker-cleanup-1775511249.1612072')
-2026-04-06 17:34:09,161 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:53825; closing.
-2026-04-06 17:34:09,162 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:53818 name: 1 (stimulus_id='handle-worker-cleanup-1775511249.1620617')
-2026-04-06 17:34:09,162 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:53826; closing.
-2026-04-06 17:34:09,163 - distributed.batched - INFO - Batched Comm Closed <TCP (closed) Scheduler connection to worker local=tcp://127.0.0.1:53793 remote=tcp://127.0.0.1:53825>
-Traceback (most recent call last):
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\batched.py", line 115, in _background_send
-    nbytes = yield coro
-             ^^^^^^^^^^
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\tornado\gen.py", line 783, in run
-    value = future.result()
-            ^^^^^^^^^^^^^^^
-  File "C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\.venv\Lib\site-packages\distributed\comm\tcp.py", line 263, in write
-    raise CommClosedError()
-distributed.comm.core.CommClosedError
-2026-04-06 17:34:09,164 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:53819 name: 2 (stimulus_id='handle-worker-cleanup-1775511249.1643496')
-2026-04-06 17:34:09,164 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:53829; closing.
-2026-04-06 17:34:09,165 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:53827 name: 3 (stimulus_id='handle-worker-cleanup-1775511249.16506')
-2026-04-06 17:34:09,165 - distributed.scheduler - INFO - Lost all workers
-2026-04-06 17:34:10,548 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:53798' closed.
-2026-04-06 17:34:10,548 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:53800' closed.
-2026-04-06 17:34:10,548 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:53802' closed.
-2026-04-06 17:34:10,562 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:53796' closed.
-2026-04-06 17:34:10,562 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
-2026-04-06 17:34:10,564 - distributed.scheduler - INFO - Scheduler closing all comms
-2026-04-06 17:34:10,565 - qqe.parallel.dask - INFO - Dask client and cluster closed.
-2026-04-06 17:34:10,589 - qqe.GNN.dataset_builder - INFO - Completed quansistor: 50000 entries
-2026-04-06 17:34:10,589 - qqe.GNN.dataset_builder - INFO - Metadata: outputs\data\encoding_data_ee_pennylane\quansistor\metadata_quansistor.json
-2026-04-06 17:34:10,589 - qqe.GNN.dataset_builder - INFO - Samples: outputs\data\encoding_data_ee_pennylane\quansistor
-2026-04-06 17:34:10,589 - qqe.GNN.dataset_builder - INFO - All families processed successfully
+2026-04-08 11:39:18,006 - __main__ - INFO - Starting grid search with 1296 trial(s)
+2026-04-08 11:39:18,009 - __main__ - INFO - Trial 1/1296 params={'gnn_hidden': 16, 'gnn_heads': 2, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 3, 'dropout_rate': 0.0, 'lr': 0.001, 'weight_decay': 0.0}
+2026-04-08 11:52:43,353 - __main__ - INFO - Starting grid search with 1296 trial(s)
+2026-04-08 11:52:43,359 - __main__ - INFO - Trial 1/1296 params={'gnn_hidden': 16, 'gnn_heads': 2, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 3, 'dropout_rate': 0.0, 'lr': 0.001, 'weight_decay': 0.0}
+2026-04-08 12:00:38,178 - qqe.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-04-08 12:00:51,768 - __main__ - INFO - Starting grid search with 1296 trial(s)
+2026-04-08 12:00:51,772 - __main__ - INFO - Trial 1/1296 params={'gnn_hidden': 16, 'gnn_heads': 2, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 3, 'dropout_rate': 0.0, 'lr': 0.001, 'weight_decay': 0.0}
+2026-04-08 12:06:56,163 - qqe.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-04-08 12:07:56,259 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 570/4500 | loss 0.526189 | elapsed 60.1s | graphs 18240
+2026-04-08 12:08:56,320 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1189/4500 | loss 0.291720 | elapsed 120.2s | graphs 38048
+2026-04-08 12:09:56,390 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1821/4500 | loss 0.205759 | elapsed 180.2s | graphs 58272
+2026-04-08 12:10:56,412 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 2407/4500 | loss 0.164305 | elapsed 240.2s | graphs 77024
+2026-04-08 12:11:56,478 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 2940/4500 | loss 0.140406 | elapsed 300.3s | graphs 94080
+2026-04-08 12:12:56,552 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 3465/4500 | loss 0.124071 | elapsed 360.4s | graphs 110880
+2026-04-08 12:13:56,617 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 3988/4500 | loss 0.112053 | elapsed 420.5s | graphs 127616
+2026-04-08 12:14:55,176 - qqe.GNN.training.train - INFO - Training complete (479.0s) | running validation...
+2026-04-08 12:15:46,119 - qqe.GNN.training.train - INFO - Losses | train 0.103044 | val 0.029912 | lr 1.00e-03 | time train=479.0s val=50.9s total=530.0s
+2026-04-08 12:15:46,119 - qqe.GNN.training.train - WARNING - Epoch 1 took 530.0s (>300s threshold).
+2026-04-08 12:15:46,124 - qqe.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-04-08 12:16:46,171 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 546/4500 | loss 0.031414 | elapsed 60.0s | graphs 17472
+2026-04-08 12:17:46,233 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1096/4500 | loss 0.031921 | elapsed 120.1s | graphs 35072
+2026-04-08 12:18:46,233 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1638/4500 | loss 0.031376 | elapsed 180.1s | graphs 52416
+2026-04-08 12:19:46,239 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 2151/4500 | loss 0.031022 | elapsed 240.1s | graphs 68832
+2026-04-08 12:20:46,291 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 2682/4500 | loss 0.031276 | elapsed 300.2s | graphs 85824
+2026-04-08 12:21:46,362 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 3211/4500 | loss 0.031014 | elapsed 360.2s | graphs 102752
+2026-04-08 12:22:46,476 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 3744/4500 | loss 0.031047 | elapsed 420.4s | graphs 119808
+2026-04-08 12:23:46,544 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 4273/4500 | loss 0.030691 | elapsed 480.4s | graphs 136736
+2026-04-08 12:24:13,520 - qqe.GNN.training.train - INFO - Training complete (507.4s) | running validation...
+2026-04-08 12:25:08,310 - qqe.GNN.training.train - INFO - Losses | train 0.030739 | val 0.034304 | lr 1.00e-03 | time train=507.4s val=54.8s total=562.2s
+2026-04-08 12:25:08,311 - qqe.GNN.training.train - WARNING - Epoch 2 took 562.2s (>300s threshold).
+2026-04-08 12:25:08,311 - qqe.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-04-08 12:26:08,418 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 503/4500 | loss 0.029021 | elapsed 60.1s | graphs 16096
+2026-04-08 12:27:08,434 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1052/4500 | loss 0.028679 | elapsed 120.1s | graphs 33664
+2026-04-08 12:28:08,451 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1591/4500 | loss 0.028940 | elapsed 180.1s | graphs 50912
+2026-04-08 12:29:08,549 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 2120/4500 | loss 0.028692 | elapsed 240.2s | graphs 67840
+2026-04-08 12:30:08,594 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 2642/4500 | loss 0.028892 | elapsed 300.3s | graphs 84544
+2026-04-08 12:31:08,635 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 3173/4500 | loss 0.028562 | elapsed 360.3s | graphs 101536
+2026-04-08 12:32:08,640 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 3706/4500 | loss 0.028170 | elapsed 420.3s | graphs 118592
+2026-04-08 12:33:08,685 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 4244/4500 | loss 0.028246 | elapsed 480.4s | graphs 135808
+2026-04-08 12:33:37,518 - qqe.GNN.training.train - INFO - Training complete (509.2s) | running validation...
+2026-04-08 12:34:28,979 - qqe.GNN.training.train - INFO - Losses | train 0.028292 | val 0.024782 | lr 1.00e-03 | time train=509.2s val=51.5s total=560.7s
+2026-04-08 12:34:28,979 - qqe.GNN.training.train - WARNING - Epoch 3 took 560.7s (>300s threshold).
+2026-04-08 12:34:28,980 - qqe.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-04-08 12:35:29,012 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 534/4500 | loss 0.027534 | elapsed 60.0s | graphs 17088
+2026-04-08 12:36:29,026 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1071/4500 | loss 0.026991 | elapsed 120.0s | graphs 34272
+2026-04-08 12:37:29,038 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1596/4500 | loss 0.026505 | elapsed 180.1s | graphs 51072
+2026-04-08 12:38:29,106 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 2140/4500 | loss 0.026314 | elapsed 240.1s | graphs 68480
+2026-04-08 12:39:29,190 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 2683/4500 | loss 0.026371 | elapsed 300.2s | graphs 85856
+2026-04-08 12:40:29,192 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 3195/4500 | loss 0.026010 | elapsed 360.2s | graphs 102240
+2026-04-08 12:41:29,248 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 3717/4500 | loss 0.025815 | elapsed 420.3s | graphs 118944
+2026-04-08 12:42:29,307 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 4262/4500 | loss 0.025972 | elapsed 480.3s | graphs 136384
+2026-04-08 12:42:55,904 - qqe.GNN.training.train - INFO - Training complete (506.9s) | running validation...
+2026-04-08 12:43:46,816 - qqe.GNN.training.train - INFO - Losses | train 0.025926 | val 0.024459 | lr 1.00e-03 | time train=506.9s val=50.9s total=557.8s
+2026-04-08 12:43:46,816 - qqe.GNN.training.train - WARNING - Epoch 4 took 557.8s (>300s threshold).
+2026-04-08 12:43:46,818 - qqe.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-04-08 12:44:46,886 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 531/4500 | loss 0.025855 | elapsed 60.1s | graphs 16992
+2026-04-08 12:45:46,984 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1062/4500 | loss 0.025545 | elapsed 120.2s | graphs 33984
+2026-04-08 12:46:47,074 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1604/4500 | loss 0.025290 | elapsed 180.3s | graphs 51328
+2026-04-08 12:47:47,175 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 2122/4500 | loss 0.025106 | elapsed 240.4s | graphs 67904
+2026-04-08 12:48:47,228 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 2654/4500 | loss 0.024621 | elapsed 300.4s | graphs 84928
+2026-04-08 12:49:47,230 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 3168/4500 | loss 0.025037 | elapsed 360.4s | graphs 101376
+2026-04-08 12:50:47,325 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 3705/4500 | loss 0.024899 | elapsed 420.5s | graphs 118560
+2026-04-08 12:51:47,395 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 4224/4500 | loss 0.024918 | elapsed 480.6s | graphs 135168
+2026-04-08 12:52:19,736 - qqe.GNN.training.train - INFO - Training complete (512.9s) | running validation...
+2026-04-08 12:53:11,580 - qqe.GNN.training.train - INFO - Losses | train 0.025094 | val 0.024667 | lr 1.00e-03 | time train=512.9s val=51.8s total=564.8s
+2026-04-08 12:53:11,580 - qqe.GNN.training.train - WARNING - Epoch 5 took 564.8s (>300s threshold).
+2026-04-08 12:53:11,580 - qqe.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-04-08 12:54:11,615 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 505/4500 | loss 0.023963 | elapsed 60.0s | graphs 16160
+2026-04-08 12:55:11,665 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1015/4500 | loss 0.023892 | elapsed 120.1s | graphs 32480
+2026-04-08 12:56:11,670 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1537/4500 | loss 0.024504 | elapsed 180.1s | graphs 49184
+2026-04-08 12:57:11,729 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 2074/4500 | loss 0.024366 | elapsed 240.1s | graphs 66368
+2026-04-08 12:58:11,781 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 2599/4500 | loss 0.024251 | elapsed 300.2s | graphs 83168
+2026-04-08 12:59:11,786 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 3132/4500 | loss 0.024019 | elapsed 360.2s | graphs 100224
+2026-04-08 13:00:11,892 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 3676/4500 | loss 0.023828 | elapsed 420.3s | graphs 117632
+2026-04-08 13:01:11,904 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 4208/4500 | loss 0.023852 | elapsed 480.3s | graphs 134656
+2026-04-08 13:01:44,735 - qqe.GNN.training.train - INFO - Training complete (513.2s) | running validation...
+2026-04-08 13:02:35,424 - qqe.GNN.training.train - INFO - Losses | train 0.023826 | val 0.024429 | lr 1.00e-03 | time train=513.2s val=50.7s total=563.8s
+2026-04-08 13:02:35,425 - qqe.GNN.training.train - WARNING - Epoch 6 took 563.8s (>300s threshold).
+2026-04-08 13:02:35,426 - qqe.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-04-08 13:03:35,439 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 526/4500 | loss 0.022359 | elapsed 60.0s | graphs 16832
+2026-04-08 13:04:35,512 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1074/4500 | loss 0.022823 | elapsed 120.1s | graphs 34368
+2026-04-08 13:05:35,577 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1608/4500 | loss 0.022728 | elapsed 180.2s | graphs 51456
+2026-04-08 13:06:35,598 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 2127/4500 | loss 0.022875 | elapsed 240.2s | graphs 68064
+2026-04-08 13:07:35,692 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 2668/4500 | loss 0.022952 | elapsed 300.3s | graphs 85376
+2026-04-08 13:08:35,708 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 3207/4500 | loss 0.022676 | elapsed 360.3s | graphs 102624
+2026-04-08 13:09:35,800 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 3751/4500 | loss 0.022750 | elapsed 420.4s | graphs 120032
+2026-04-08 13:10:35,893 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 4285/4500 | loss 0.023007 | elapsed 480.5s | graphs 137120
+2026-04-08 13:10:59,927 - qqe.GNN.training.train - INFO - Training complete (504.5s) | running validation...
+2026-04-08 13:11:51,216 - qqe.GNN.training.train - INFO - Losses | train 0.022953 | val 0.021752 | lr 1.00e-03 | time train=504.5s val=51.3s total=555.8s
+2026-04-08 13:11:51,216 - qqe.GNN.training.train - WARNING - Epoch 7 took 555.8s (>300s threshold).
+2026-04-08 13:11:51,218 - qqe.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-04-08 13:12:51,252 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 529/4500 | loss 0.021364 | elapsed 60.0s | graphs 16928
+2026-04-08 13:13:51,285 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1043/4500 | loss 0.021251 | elapsed 120.1s | graphs 33376
+2026-04-08 13:14:51,363 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1553/4500 | loss 0.021381 | elapsed 180.1s | graphs 49696
+2026-04-08 13:15:51,368 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 2086/4500 | loss 0.021437 | elapsed 240.2s | graphs 66752
+2026-04-08 13:16:51,463 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 2624/4500 | loss 0.021267 | elapsed 300.2s | graphs 83968
+2026-04-08 13:17:51,507 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 3168/4500 | loss 0.021117 | elapsed 360.3s | graphs 101376
+2026-04-08 13:18:51,577 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 3700/4500 | loss 0.021047 | elapsed 420.4s | graphs 118400
+2026-04-08 13:19:51,649 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 4211/4500 | loss 0.020883 | elapsed 480.4s | graphs 134752
+2026-04-08 13:20:25,909 - qqe.GNN.training.train - INFO - Training complete (514.7s) | running validation...
+2026-04-08 13:21:16,323 - qqe.GNN.training.train - INFO - Losses | train 0.020878 | val 0.020370 | lr 1.00e-03 | time train=514.7s val=50.4s total=565.1s
+2026-04-08 13:21:16,323 - qqe.GNN.training.train - WARNING - Epoch 8 took 565.1s (>300s threshold).
+2026-04-08 13:21:16,324 - qqe.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-04-08 13:22:16,415 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 511/4500 | loss 0.019307 | elapsed 60.1s | graphs 16352
+2026-04-08 13:23:16,430 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1021/4500 | loss 0.019317 | elapsed 120.1s | graphs 32672
+2026-04-08 13:24:16,487 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1530/4500 | loss 0.019646 | elapsed 180.2s | graphs 48960
+2026-04-08 13:25:16,580 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 2045/4500 | loss 0.019179 | elapsed 240.3s | graphs 65440
+2026-04-08 13:26:16,675 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 2563/4500 | loss 0.019162 | elapsed 300.4s | graphs 82016
+2026-04-08 13:27:16,771 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 3070/4500 | loss 0.019009 | elapsed 360.4s | graphs 98240
+2026-04-08 13:28:16,798 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 3607/4500 | loss 0.019259 | elapsed 420.5s | graphs 115424
+2026-04-08 13:29:16,864 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 4145/4500 | loss 0.019135 | elapsed 480.5s | graphs 132640
+2026-04-08 13:29:57,150 - qqe.GNN.training.train - INFO - Training complete (520.8s) | running validation...
+2026-04-08 13:30:46,031 - qqe.GNN.training.train - INFO - Losses | train 0.019135 | val 0.018077 | lr 1.00e-03 | time train=520.8s val=48.9s total=569.7s
+2026-04-08 13:30:46,032 - qqe.GNN.training.train - WARNING - Epoch 9 took 569.7s (>300s threshold).
+2026-04-08 13:30:46,034 - qqe.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-04-08 13:31:46,127 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 526/4500 | loss 0.018483 | elapsed 60.1s | graphs 16832
+2026-04-08 13:32:46,128 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1045/4500 | loss 0.018695 | elapsed 120.1s | graphs 33440
+2026-04-08 13:33:46,212 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1566/4500 | loss 0.018431 | elapsed 180.2s | graphs 50112
+2026-04-08 13:34:46,250 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 2092/4500 | loss 0.018533 | elapsed 240.2s | graphs 66944
+2026-04-08 13:35:46,269 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 2623/4500 | loss 0.018340 | elapsed 300.2s | graphs 83936
+2026-04-08 13:36:46,302 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 3179/4500 | loss 0.018501 | elapsed 360.3s | graphs 101728
+2026-04-08 13:37:46,401 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 3723/4500 | loss 0.018401 | elapsed 420.4s | graphs 119136
+2026-04-08 13:38:46,402 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 4240/4500 | loss 0.018224 | elapsed 480.4s | graphs 135680
+2026-04-08 13:39:17,049 - qqe.GNN.training.train - INFO - Training complete (511.0s) | running validation...
+2026-04-08 13:40:07,546 - qqe.GNN.training.train - INFO - Losses | train 0.018181 | val 0.018623 | lr 1.00e-03 | time train=511.0s val=50.5s total=561.5s
+2026-04-08 13:40:07,546 - qqe.GNN.training.train - WARNING - Epoch 10 took 561.5s (>300s threshold).
+2026-04-08 13:40:07,546 - qqe.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-04-08 13:41:07,656 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 531/4500 | loss 0.018230 | elapsed 60.1s | graphs 16992
+2026-04-08 13:42:07,745 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1062/4500 | loss 0.018071 | elapsed 120.2s | graphs 33984
+2026-04-08 13:43:07,779 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1603/4500 | loss 0.017719 | elapsed 180.2s | graphs 51296
+2026-04-08 13:44:07,831 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 2142/4500 | loss 0.017658 | elapsed 240.3s | graphs 68544
+2026-04-08 13:45:07,859 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 2683/4500 | loss 0.017711 | elapsed 300.3s | graphs 85856
+2026-04-08 13:46:07,913 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 3211/4500 | loss 0.017785 | elapsed 360.4s | graphs 102752
+2026-04-08 13:47:08,016 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 3730/4500 | loss 0.017795 | elapsed 420.5s | graphs 119360
+2026-04-08 13:48:08,066 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 4239/4500 | loss 0.017775 | elapsed 480.5s | graphs 135648
+2026-04-08 13:48:38,183 - qqe.GNN.training.train - INFO - Training complete (510.6s) | running validation...
+2026-04-08 13:49:29,314 - qqe.GNN.training.train - INFO - Losses | train 0.017700 | val 0.019544 | lr 1.00e-03 | time train=510.6s val=51.1s total=561.8s
+2026-04-08 13:49:29,314 - qqe.GNN.training.train - WARNING - Epoch 11 took 561.8s (>300s threshold).
+2026-04-08 13:49:29,314 - qqe.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-04-08 13:50:29,349 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 524/4500 | loss 0.016886 | elapsed 60.0s | graphs 16768
+2026-04-08 13:51:29,449 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 1055/4500 | loss 0.016915 | elapsed 120.1s | graphs 33760
+2026-04-08 13:52:29,505 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 1580/4500 | loss 0.017128 | elapsed 180.2s | graphs 50560
+2026-04-08 13:53:29,512 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 2080/4500 | loss 0.017231 | elapsed 240.2s | graphs 66560
+2026-04-08 13:54:29,622 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 2579/4500 | loss 0.017296 | elapsed 300.3s | graphs 82528
+2026-04-08 13:55:29,722 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 3089/4500 | loss 0.017376 | elapsed 360.4s | graphs 98848
+2026-04-08 13:56:29,745 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 3626/4500 | loss 0.017364 | elapsed 420.4s | graphs 116032
+2026-04-08 13:57:29,813 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 4154/4500 | loss 0.017319 | elapsed 480.5s | graphs 132928
+2026-04-08 13:58:11,213 - qqe.GNN.training.train - INFO - Training complete (521.9s) | running validation...
+2026-04-08 13:59:03,038 - qqe.GNN.training.train - INFO - Losses | train 0.017343 | val 0.018622 | lr 1.00e-03 | time train=521.9s val=51.8s total=573.7s
+2026-04-08 13:59:03,038 - qqe.GNN.training.train - WARNING - Epoch 12 took 573.7s (>300s threshold).
+2026-04-08 13:59:03,038 - qqe.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-04-08 14:00:03,081 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 532/4500 | loss 0.016786 | elapsed 60.0s | graphs 17024
+2026-04-08 14:01:03,085 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 1050/4500 | loss 0.017145 | elapsed 120.0s | graphs 33600
+2026-04-08 14:02:03,129 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 1560/4500 | loss 0.017060 | elapsed 180.1s | graphs 49920
+2026-04-08 14:03:03,141 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 2077/4500 | loss 0.017270 | elapsed 240.1s | graphs 66464
+2026-04-08 14:04:03,194 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 2605/4500 | loss 0.017071 | elapsed 300.2s | graphs 83360
+2026-04-08 14:05:03,239 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 3143/4500 | loss 0.017228 | elapsed 360.2s | graphs 100576
+2026-04-08 14:06:03,342 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 3671/4500 | loss 0.017247 | elapsed 420.3s | graphs 117472
+2026-04-08 14:07:03,438 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 4209/4500 | loss 0.017197 | elapsed 480.4s | graphs 134688
+2026-04-08 14:07:34,894 - qqe.GNN.training.train - INFO - Training complete (511.9s) | running validation...
+2026-04-08 14:08:26,086 - qqe.GNN.training.train - INFO - Losses | train 0.017177 | val 0.016198 | lr 1.00e-03 | time train=511.9s val=51.2s total=563.0s
+2026-04-08 14:08:26,086 - qqe.GNN.training.train - WARNING - Epoch 13 took 563.0s (>300s threshold).
+2026-04-08 14:08:26,088 - qqe.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-04-08 14:09:26,177 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 538/4500 | loss 0.016818 | elapsed 60.1s | graphs 17216
+2026-04-08 14:10:26,217 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 1085/4500 | loss 0.016503 | elapsed 120.1s | graphs 34720
+2026-04-08 14:11:26,295 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 1618/4500 | loss 0.016680 | elapsed 180.2s | graphs 51776
+2026-04-08 14:12:26,299 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 2124/4500 | loss 0.016647 | elapsed 240.2s | graphs 67968
+2026-04-08 14:13:26,317 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 2653/4500 | loss 0.016640 | elapsed 300.2s | graphs 84896
+2026-04-08 14:14:26,339 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 3186/4500 | loss 0.016817 | elapsed 360.3s | graphs 101952
+2026-04-08 14:15:26,398 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 3718/4500 | loss 0.016781 | elapsed 420.3s | graphs 118976
+2026-04-08 14:16:26,482 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 4245/4500 | loss 0.016639 | elapsed 480.4s | graphs 135840
+2026-04-08 14:16:55,427 - qqe.GNN.training.train - INFO - Training complete (509.3s) | running validation...
+2026-04-08 14:17:47,008 - qqe.GNN.training.train - INFO - Losses | train 0.016654 | val 0.016512 | lr 1.00e-03 | time train=509.3s val=51.6s total=560.9s
+2026-04-08 14:17:47,009 - qqe.GNN.training.train - WARNING - Epoch 14 took 560.9s (>300s threshold).
+2026-04-08 14:17:47,009 - qqe.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-04-08 14:18:47,067 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 533/4500 | loss 0.017157 | elapsed 60.1s | graphs 17056
+2026-04-08 14:19:47,194 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 1059/4500 | loss 0.017052 | elapsed 120.2s | graphs 33888
+2026-04-08 14:20:47,284 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 1563/4500 | loss 0.016790 | elapsed 180.3s | graphs 50016
+2026-04-08 14:21:47,340 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 2098/4500 | loss 0.016637 | elapsed 240.3s | graphs 67136
+2026-04-08 14:22:47,421 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 2630/4500 | loss 0.016572 | elapsed 300.4s | graphs 84160
+2026-04-08 14:23:47,448 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 3153/4500 | loss 0.016413 | elapsed 360.4s | graphs 100896
+2026-04-08 14:24:47,506 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 3679/4500 | loss 0.016400 | elapsed 420.5s | graphs 117728
+2026-04-08 14:25:47,506 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 4201/4500 | loss 0.016329 | elapsed 480.5s | graphs 134432
+2026-04-08 14:26:21,633 - qqe.GNN.training.train - INFO - Training complete (514.6s) | running validation...
+2026-04-08 14:27:12,587 - qqe.GNN.training.train - INFO - Losses | train 0.016420 | val 0.016606 | lr 1.00e-03 | time train=514.6s val=51.0s total=565.6s
+2026-04-08 14:27:12,588 - qqe.GNN.training.train - WARNING - Epoch 15 took 565.6s (>300s threshold).
+2026-04-08 14:27:12,588 - qqe.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-04-08 14:28:12,611 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 513/4500 | loss 0.014943 | elapsed 60.0s | graphs 16416
+2026-04-08 14:29:12,686 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 1015/4500 | loss 0.015452 | elapsed 120.1s | graphs 32480
+2026-04-08 14:30:12,693 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 1526/4500 | loss 0.015791 | elapsed 180.1s | graphs 48832
+2026-04-08 14:31:12,712 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 2038/4500 | loss 0.015946 | elapsed 240.1s | graphs 65216
+2026-04-08 14:32:12,773 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 2554/4500 | loss 0.016073 | elapsed 300.2s | graphs 81728
+2026-04-08 14:33:12,803 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 3082/4500 | loss 0.016159 | elapsed 360.2s | graphs 98624
+2026-04-08 14:34:12,860 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 3599/4500 | loss 0.016144 | elapsed 420.3s | graphs 115168
+2026-04-08 14:35:12,926 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 4106/4500 | loss 0.016114 | elapsed 480.3s | graphs 131392
+2026-04-08 14:35:59,633 - qqe.GNN.training.train - INFO - Training complete (527.0s) | running validation...
+2026-04-08 14:36:50,147 - qqe.GNN.training.train - INFO - Losses | train 0.016142 | val 0.018546 | lr 1.00e-03 | time train=527.0s val=50.5s total=577.6s
+2026-04-08 14:36:50,147 - qqe.GNN.training.train - WARNING - Epoch 16 took 577.6s (>300s threshold).
+2026-04-08 14:36:50,149 - qqe.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-04-08 14:37:50,204 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 514/4500 | loss 0.015427 | elapsed 60.1s | graphs 16448
+2026-04-08 14:38:50,228 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 1042/4500 | loss 0.015703 | elapsed 120.1s | graphs 33344
+2026-04-08 14:39:50,295 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 1571/4500 | loss 0.015874 | elapsed 180.1s | graphs 50272
+2026-04-08 14:40:50,371 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 2095/4500 | loss 0.015829 | elapsed 240.2s | graphs 67040
+2026-04-08 14:41:50,395 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 2612/4500 | loss 0.015902 | elapsed 300.2s | graphs 83584
+2026-04-08 14:42:50,434 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 3152/4500 | loss 0.015986 | elapsed 360.3s | graphs 100864
+2026-04-08 14:43:50,522 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 3672/4500 | loss 0.015892 | elapsed 420.4s | graphs 117504
+2026-04-08 14:44:50,571 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 4194/4500 | loss 0.015993 | elapsed 480.4s | graphs 134208
+2026-04-08 14:45:25,881 - qqe.GNN.training.train - INFO - Training complete (515.7s) | running validation...
+2026-04-08 14:46:14,758 - qqe.GNN.training.train - INFO - Losses | train 0.015980 | val 0.018566 | lr 1.00e-03 | time train=515.7s val=48.9s total=564.6s
+2026-04-08 14:46:14,758 - qqe.GNN.training.train - WARNING - Epoch 17 took 564.6s (>300s threshold).
+2026-04-08 14:46:14,760 - qqe.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-04-08 14:47:14,794 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 511/4500 | loss 0.016095 | elapsed 60.0s | graphs 16352
+2026-04-08 14:48:14,809 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 1024/4500 | loss 0.015817 | elapsed 120.0s | graphs 32768
+2026-04-08 14:49:14,831 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 1547/4500 | loss 0.015812 | elapsed 180.1s | graphs 49504
+2026-04-08 14:50:14,897 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 2089/4500 | loss 0.015733 | elapsed 240.1s | graphs 66848
+2026-04-08 14:51:14,995 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 2606/4500 | loss 0.015666 | elapsed 300.2s | graphs 83392
+2026-04-08 14:52:15,039 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 3129/4500 | loss 0.015731 | elapsed 360.3s | graphs 100128
+2026-04-08 14:53:15,105 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 3674/4500 | loss 0.015745 | elapsed 420.3s | graphs 117568
+2026-04-08 14:54:15,198 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 4203/4500 | loss 0.015693 | elapsed 480.4s | graphs 134496
+2026-04-08 14:54:47,323 - qqe.GNN.training.train - INFO - Training complete (512.6s) | running validation...
+2026-04-08 14:55:38,956 - qqe.GNN.training.train - INFO - Losses | train 0.015720 | val 0.015762 | lr 1.00e-03 | time train=512.6s val=51.6s total=564.2s
+2026-04-08 14:55:38,957 - qqe.GNN.training.train - WARNING - Epoch 18 took 564.2s (>300s threshold).
+2026-04-08 14:55:38,960 - qqe.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-04-08 14:56:39,039 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 513/4500 | loss 0.015846 | elapsed 60.1s | graphs 16416
+2026-04-08 14:57:39,043 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 1039/4500 | loss 0.015520 | elapsed 120.1s | graphs 33248
+2026-04-08 14:58:39,045 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 1567/4500 | loss 0.015435 | elapsed 180.1s | graphs 50144
+2026-04-08 14:59:39,157 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 2077/4500 | loss 0.015587 | elapsed 240.2s | graphs 66464
+2026-04-08 15:00:39,253 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 2581/4500 | loss 0.015578 | elapsed 300.3s | graphs 82592
+2026-04-08 15:01:39,344 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 3098/4500 | loss 0.015531 | elapsed 360.4s | graphs 99136
+2026-04-08 15:02:39,440 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 3609/4500 | loss 0.015458 | elapsed 420.5s | graphs 115488
+2026-04-08 15:03:39,531 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 4129/4500 | loss 0.015465 | elapsed 480.6s | graphs 132128
+2026-04-08 15:04:23,221 - qqe.GNN.training.train - INFO - Training complete (524.3s) | running validation...
+2026-04-08 15:05:13,064 - qqe.GNN.training.train - INFO - Losses | train 0.015622 | val 0.015974 | lr 1.00e-03 | time train=524.3s val=49.8s total=574.1s
+2026-04-08 15:05:13,065 - qqe.GNN.training.train - WARNING - Epoch 19 took 574.1s (>300s threshold).
+2026-04-08 15:05:13,065 - qqe.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-04-08 15:06:13,088 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 528/4500 | loss 0.014981 | elapsed 60.0s | graphs 16896
+2026-04-08 15:07:13,096 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 1040/4500 | loss 0.015204 | elapsed 120.0s | graphs 33280
+2026-04-08 15:08:13,167 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 1539/4500 | loss 0.015215 | elapsed 180.1s | graphs 49248
+2026-04-08 15:09:13,262 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 2055/4500 | loss 0.015349 | elapsed 240.2s | graphs 65760
+2026-04-08 15:10:13,332 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 2574/4500 | loss 0.015457 | elapsed 300.3s | graphs 82368
+2026-04-08 15:11:13,438 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 3081/4500 | loss 0.015475 | elapsed 360.4s | graphs 98592
+2026-04-08 15:12:13,506 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 3602/4500 | loss 0.015466 | elapsed 420.4s | graphs 115264
+2026-04-08 15:13:13,541 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 4114/4500 | loss 0.015441 | elapsed 480.5s | graphs 131648
+2026-04-08 15:13:58,733 - qqe.GNN.training.train - INFO - Training complete (525.7s) | running validation...
+2026-04-08 15:14:49,275 - qqe.GNN.training.train - INFO - Losses | train 0.015461 | val 0.017778 | lr 1.00e-03 | time train=525.7s val=50.5s total=576.2s
+2026-04-08 15:14:49,275 - qqe.GNN.training.train - WARNING - Epoch 20 took 576.2s (>300s threshold).
+2026-04-08 15:14:49,275 - qqe.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-04-08 15:15:49,294 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 525/4500 | loss 0.014747 | elapsed 60.0s | graphs 16800
+2026-04-08 15:16:49,315 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 1052/4500 | loss 0.014886 | elapsed 120.0s | graphs 33664
+2026-04-08 15:17:49,410 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 1563/4500 | loss 0.015195 | elapsed 180.1s | graphs 50016
+2026-04-08 15:18:49,476 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 2081/4500 | loss 0.015192 | elapsed 240.2s | graphs 66592
+2026-04-08 15:19:49,533 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 2599/4500 | loss 0.015216 | elapsed 300.3s | graphs 83168
+2026-04-08 15:20:49,598 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 3130/4500 | loss 0.015162 | elapsed 360.3s | graphs 100160
+2026-04-08 15:21:49,633 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 3665/4500 | loss 0.015267 | elapsed 420.4s | graphs 117280
+2026-04-08 15:22:49,635 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 4197/4500 | loss 0.015262 | elapsed 480.4s | graphs 134304
+2026-04-08 15:23:24,364 - qqe.GNN.training.train - INFO - Training complete (515.1s) | running validation...
+2026-04-08 15:24:15,471 - qqe.GNN.training.train - INFO - Losses | train 0.015195 | val 0.016569 | lr 1.00e-03 | time train=515.1s val=51.1s total=566.2s
+2026-04-08 15:24:15,472 - qqe.GNN.training.train - WARNING - Epoch 21 took 566.2s (>300s threshold).
+2026-04-08 15:24:15,472 - qqe.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-04-08 15:25:15,517 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 536/4500 | loss 0.014316 | elapsed 60.0s | graphs 17152
+2026-04-08 15:26:15,573 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 1089/4500 | loss 0.014521 | elapsed 120.1s | graphs 34848
+2026-04-08 15:27:15,647 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 1633/4500 | loss 0.014714 | elapsed 180.2s | graphs 52256
+2026-04-08 15:28:15,722 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 2179/4500 | loss 0.014858 | elapsed 240.2s | graphs 69728
+2026-04-08 15:29:15,825 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 2710/4500 | loss 0.014946 | elapsed 300.4s | graphs 86720
+2026-04-08 15:30:15,907 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 3254/4500 | loss 0.015011 | elapsed 360.4s | graphs 104128
+2026-04-08 15:31:15,980 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 3793/4500 | loss 0.015119 | elapsed 420.5s | graphs 121376
+2026-04-08 15:32:16,081 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 4334/4500 | loss 0.015123 | elapsed 480.6s | graphs 138688
+2026-04-08 15:32:34,715 - qqe.GNN.training.train - INFO - Training complete (499.2s) | running validation...
+2026-04-08 15:33:26,726 - qqe.GNN.training.train - INFO - Losses | train 0.015158 | val 0.016289 | lr 1.00e-03 | time train=499.2s val=52.0s total=551.3s
+2026-04-08 15:33:26,728 - qqe.GNN.training.train - WARNING - Epoch 22 took 551.3s (>300s threshold).
+2026-04-08 15:33:26,728 - qqe.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-04-08 15:34:26,738 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 520/4500 | loss 0.014857 | elapsed 60.0s | graphs 16640
+2026-04-08 15:35:26,832 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 1037/4500 | loss 0.014934 | elapsed 120.1s | graphs 33184
+2026-04-08 15:36:26,868 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 1555/4500 | loss 0.015144 | elapsed 180.1s | graphs 49760
+2026-04-08 15:37:26,915 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 2077/4500 | loss 0.015037 | elapsed 240.2s | graphs 66464
+2026-04-08 15:38:26,926 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 2595/4500 | loss 0.014819 | elapsed 300.2s | graphs 83040
+2026-04-08 15:39:27,021 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 3110/4500 | loss 0.014934 | elapsed 360.3s | graphs 99520
+2026-04-08 15:40:27,106 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 3612/4500 | loss 0.014986 | elapsed 420.4s | graphs 115584
+2026-04-08 15:41:27,160 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 4134/4500 | loss 0.015061 | elapsed 480.4s | graphs 132288
+2026-04-08 15:42:09,767 - qqe.GNN.training.train - INFO - Training complete (523.0s) | running validation...
+2026-04-08 15:43:01,427 - qqe.GNN.training.train - INFO - Losses | train 0.015096 | val 0.016543 | lr 1.00e-03 | time train=523.0s val=51.7s total=574.7s
+2026-04-08 15:43:01,427 - qqe.GNN.training.train - WARNING - Epoch 23 took 574.7s (>300s threshold).
+2026-04-08 15:43:01,427 - qqe.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-04-08 15:44:01,502 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 514/4500 | loss 0.013739 | elapsed 60.1s | graphs 16448
+2026-04-08 15:45:01,574 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 1027/4500 | loss 0.014357 | elapsed 120.1s | graphs 32864
+2026-04-08 15:46:01,607 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 1545/4500 | loss 0.014482 | elapsed 180.2s | graphs 49440
+2026-04-08 15:47:01,700 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 2073/4500 | loss 0.014737 | elapsed 240.3s | graphs 66336
+2026-04-08 15:48:01,819 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 2592/4500 | loss 0.014840 | elapsed 300.4s | graphs 82944
+2026-04-08 15:49:01,820 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 3112/4500 | loss 0.014876 | elapsed 360.4s | graphs 99584
+2026-04-08 15:50:01,850 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 3642/4500 | loss 0.014957 | elapsed 420.4s | graphs 116544
+2026-04-08 15:51:01,913 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 4166/4500 | loss 0.014904 | elapsed 480.5s | graphs 133312
+2026-04-08 15:51:39,888 - qqe.GNN.training.train - INFO - Training complete (518.5s) | running validation...
+2026-04-08 15:52:31,449 - qqe.GNN.training.train - INFO - Losses | train 0.014870 | val 0.016444 | lr 5.00e-04 | time train=518.5s val=51.6s total=570.0s
+2026-04-08 15:52:31,449 - qqe.GNN.training.train - WARNING - Epoch 24 took 570.0s (>300s threshold).
+2026-04-08 15:52:31,451 - qqe.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-04-08 15:53:31,559 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 542/4500 | loss 0.013074 | elapsed 60.1s | graphs 17344
+2026-04-08 15:54:31,575 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 1063/4500 | loss 0.013331 | elapsed 120.1s | graphs 34016
+2026-04-08 15:55:31,612 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 1596/4500 | loss 0.013464 | elapsed 180.2s | graphs 51072
+2026-04-08 15:56:31,639 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 2106/4500 | loss 0.013693 | elapsed 240.2s | graphs 67392
+2026-04-08 15:57:31,715 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 2622/4500 | loss 0.013523 | elapsed 300.3s | graphs 83904
+2026-04-08 15:58:31,777 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 3131/4500 | loss 0.013526 | elapsed 360.3s | graphs 100192
+2026-04-08 15:59:31,815 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 3653/4500 | loss 0.013582 | elapsed 420.4s | graphs 116896
+2026-04-08 16:00:31,899 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 4172/4500 | loss 0.013647 | elapsed 480.4s | graphs 133504
+2026-04-08 16:01:10,548 - qqe.GNN.training.train - INFO - Training complete (519.1s) | running validation...
+2026-04-08 16:01:59,906 - qqe.GNN.training.train - INFO - Losses | train 0.013640 | val 0.020148 | lr 5.00e-04 | time train=519.1s val=49.4s total=568.5s
+2026-04-08 16:01:59,906 - qqe.GNN.training.train - WARNING - Epoch 25 took 568.5s (>300s threshold).
+2026-04-08 16:01:59,906 - qqe.GNN.training.train - INFO - -------- EPOCH 026 --------
+2026-04-08 16:02:59,915 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 520/4500 | loss 0.013475 | elapsed 60.0s | graphs 16640
+2026-04-08 16:03:59,978 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 1041/4500 | loss 0.013696 | elapsed 120.1s | graphs 33312
+2026-04-08 16:05:00,042 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 1575/4500 | loss 0.013526 | elapsed 180.1s | graphs 50400
+2026-04-08 16:06:00,089 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 2084/4500 | loss 0.013686 | elapsed 240.2s | graphs 66688
+2026-04-08 16:07:00,162 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 2587/4500 | loss 0.013649 | elapsed 300.3s | graphs 82784
+2026-04-08 16:08:00,254 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 3114/4500 | loss 0.013518 | elapsed 360.3s | graphs 99648
+2026-04-08 16:09:00,320 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 3660/4500 | loss 0.013588 | elapsed 420.4s | graphs 117120
+2026-04-08 16:10:00,402 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 26 batch 4196/4500 | loss 0.013571 | elapsed 480.5s | graphs 134272
+2026-04-08 16:10:34,735 - qqe.GNN.training.train - INFO - Training complete (514.8s) | running validation...
+2026-04-08 16:11:25,715 - qqe.GNN.training.train - INFO - Losses | train 0.013542 | val 0.016016 | lr 5.00e-04 | time train=514.8s val=51.0s total=565.8s
+2026-04-08 16:11:25,715 - qqe.GNN.training.train - WARNING - Epoch 26 took 565.8s (>300s threshold).
+2026-04-08 16:11:25,715 - qqe.GNN.training.train - INFO - -------- EPOCH 027 --------
+2026-04-08 16:12:25,824 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 505/4500 | loss 0.013153 | elapsed 60.1s | graphs 16160
+2026-04-08 16:13:25,916 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 1012/4500 | loss 0.013826 | elapsed 120.2s | graphs 32384
+2026-04-08 16:14:26,030 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 1530/4500 | loss 0.013665 | elapsed 180.3s | graphs 48960
+2026-04-08 16:15:26,050 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 2070/4500 | loss 0.013346 | elapsed 240.3s | graphs 66240
+2026-04-08 16:16:26,116 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 2613/4500 | loss 0.013368 | elapsed 300.4s | graphs 83616
+2026-04-08 16:17:26,166 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 3134/4500 | loss 0.013462 | elapsed 360.5s | graphs 100288
+2026-04-08 16:18:26,201 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 3635/4500 | loss 0.013566 | elapsed 420.5s | graphs 116320
+2026-04-08 16:19:26,319 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 27 batch 4170/4500 | loss 0.013459 | elapsed 480.6s | graphs 133440
+2026-04-08 16:20:04,133 - qqe.GNN.training.train - INFO - Training complete (518.4s) | running validation...
+2026-04-08 16:20:54,796 - qqe.GNN.training.train - INFO - Losses | train 0.013453 | val 0.016233 | lr 5.00e-04 | time train=518.4s val=50.7s total=569.1s
+2026-04-08 16:20:54,796 - qqe.GNN.training.train - WARNING - Epoch 27 took 569.1s (>300s threshold).
+2026-04-08 16:20:54,796 - qqe.GNN.training.train - INFO - -------- EPOCH 028 --------
+2026-04-08 16:21:54,826 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 498/4500 | loss 0.013450 | elapsed 60.0s | graphs 15936
+2026-04-08 16:22:54,911 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 999/4500 | loss 0.013571 | elapsed 120.1s | graphs 31968
+2026-04-08 16:23:55,010 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 1501/4500 | loss 0.013451 | elapsed 180.2s | graphs 48032
+2026-04-08 16:24:55,042 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 2023/4500 | loss 0.013423 | elapsed 240.2s | graphs 64736
+2026-04-08 16:25:55,061 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 2536/4500 | loss 0.013429 | elapsed 300.3s | graphs 81152
+2026-04-08 16:26:55,148 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 3073/4500 | loss 0.013326 | elapsed 360.4s | graphs 98336
+2026-04-08 16:27:55,149 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 3605/4500 | loss 0.013438 | elapsed 420.4s | graphs 115360
+2026-04-08 16:28:55,219 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 28 batch 4137/4500 | loss 0.013363 | elapsed 480.4s | graphs 132384
+2026-04-08 16:29:35,932 - qqe.GNN.training.train - INFO - Training complete (521.1s) | running validation...
+2026-04-08 16:30:26,905 - qqe.GNN.training.train - INFO - Losses | train 0.013411 | val 0.015629 | lr 5.00e-04 | time train=521.1s val=51.0s total=572.1s
+2026-04-08 16:30:26,907 - qqe.GNN.training.train - WARNING - Epoch 28 took 572.1s (>300s threshold).
+2026-04-08 16:30:26,909 - qqe.GNN.training.train - INFO - -------- EPOCH 029 --------
+2026-04-08 16:31:27,008 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 534/4500 | loss 0.012864 | elapsed 60.1s | graphs 17088
+2026-04-08 16:32:27,068 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 1069/4500 | loss 0.012917 | elapsed 120.2s | graphs 34208
+2026-04-08 16:33:27,069 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 1607/4500 | loss 0.012845 | elapsed 180.2s | graphs 51424
+2026-04-08 16:34:27,150 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 2142/4500 | loss 0.012991 | elapsed 240.2s | graphs 68544
+2026-04-08 16:35:27,190 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 2673/4500 | loss 0.013137 | elapsed 300.3s | graphs 85536
+2026-04-08 16:36:27,457 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 3223/4500 | loss 0.013286 | elapsed 360.5s | graphs 103136
+2026-04-08 16:37:27,461 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 3762/4500 | loss 0.013294 | elapsed 420.6s | graphs 120384
+2026-04-08 16:38:27,560 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 29 batch 4289/4500 | loss 0.013277 | elapsed 480.7s | graphs 137248
+2026-04-08 16:38:51,967 - qqe.GNN.training.train - INFO - Training complete (505.1s) | running validation...
+2026-04-08 16:39:41,027 - qqe.GNN.training.train - INFO - Losses | train 0.013293 | val 0.015717 | lr 5.00e-04 | time train=505.1s val=49.1s total=554.1s
+2026-04-08 16:39:41,027 - qqe.GNN.training.train - WARNING - Epoch 29 took 554.1s (>300s threshold).
+2026-04-08 16:39:41,027 - qqe.GNN.training.train - INFO - -------- EPOCH 030 --------
+2026-04-08 16:40:41,062 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 529/4500 | loss 0.013097 | elapsed 60.0s | graphs 16928
+2026-04-08 16:41:41,095 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 1036/4500 | loss 0.012765 | elapsed 120.1s | graphs 33152
+2026-04-08 16:42:41,115 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 1581/4500 | loss 0.012891 | elapsed 180.1s | graphs 50592
+2026-04-08 16:43:41,140 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 2112/4500 | loss 0.012940 | elapsed 240.1s | graphs 67584
+2026-04-08 16:44:41,182 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 2632/4500 | loss 0.013029 | elapsed 300.2s | graphs 84224
+2026-04-08 16:45:41,312 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 3173/4500 | loss 0.013069 | elapsed 360.3s | graphs 101536
+2026-04-08 16:46:41,425 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 3694/4500 | loss 0.013126 | elapsed 420.4s | graphs 118208
+2026-04-08 16:47:41,554 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 30 batch 4233/4500 | loss 0.013201 | elapsed 480.5s | graphs 135456
+2026-04-08 16:48:11,190 - qqe.GNN.training.train - INFO - Training complete (510.2s) | running validation...
+2026-04-08 16:49:02,010 - qqe.GNN.training.train - INFO - Losses | train 0.013231 | val 0.015926 | lr 5.00e-04 | time train=510.2s val=50.8s total=561.0s
+2026-04-08 16:49:02,010 - qqe.GNN.training.train - WARNING - Epoch 30 took 561.0s (>300s threshold).
+2026-04-08 16:51:33,047 - __main__ - INFO - Trial 2/1296 params={'gnn_hidden': 16, 'gnn_heads': 2, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 3, 'dropout_rate': 0.0, 'lr': 0.001, 'weight_decay': 0.0001}
+2026-04-08 17:00:35,343 - qqe.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-04-08 17:01:35,388 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 525/4500 | loss 0.488949 | elapsed 60.0s | graphs 16800
+2026-04-08 17:02:35,395 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1025/4500 | loss 0.293173 | elapsed 120.1s | graphs 32800
+2026-04-08 17:03:35,435 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1560/4500 | loss 0.210672 | elapsed 180.1s | graphs 49920
+2026-04-08 17:04:35,473 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 2042/4500 | loss 0.169435 | elapsed 240.1s | graphs 65344
+2026-04-08 17:05:35,556 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 2528/4500 | loss 0.143601 | elapsed 300.2s | graphs 80896
+2026-04-08 17:06:35,602 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 2993/4500 | loss 0.127059 | elapsed 360.3s | graphs 95776
+2026-04-08 17:07:35,746 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 3471/4500 | loss 0.114481 | elapsed 420.4s | graphs 111072
+2026-04-08 17:08:35,768 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 3953/4500 | loss 0.104666 | elapsed 480.4s | graphs 126496
+2026-04-08 17:09:35,786 - qqe.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 4436/4500 | loss 0.096776 | elapsed 540.4s | graphs 141952
+2026-04-08 17:09:44,090 - qqe.GNN.training.train - INFO - Training complete (548.7s) | running validation...
+2026-04-08 17:10:40,287 - qqe.GNN.training.train - INFO - Losses | train 0.095863 | val 0.039594 | lr 1.00e-03 | time train=548.7s val=56.2s total=604.9s
+2026-04-08 17:10:40,287 - qqe.GNN.training.train - WARNING - Epoch 1 took 604.9s (>300s threshold).
+2026-04-08 17:10:40,289 - qqe.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-04-08 17:12:18,441 - __main__ - INFO - Starting grid search with 20 trial(s)
+2026-04-08 17:12:18,446 - __main__ - INFO - Trial 1/20 params={'gnn_hidden': 16, 'gnn_heads': 2, 'global_hidden': 16, 'reg_hidden': 16, 'num_layers': 3, 'dropout_rate': 0.0, 'lr': 0.001, 'weight_decay': 0.0}
+2026-04-08 17:18:42,681 - qqe.GNN.training.train - INFO - -------- EPOCH 001 --------
