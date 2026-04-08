@@ -15,8 +15,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 
 def main(
     backend: str = typer.Option("pennylane", help="Backend to use (quimb or pennylane)"),
-    target: str = typer.Option("SRE", help="Property to compute (SRE or EE)"),
-    method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling) or EE method (renyi or von_neumann)"),
+    target: str = typer.Option("EE", help="Property to compute (SRE or EE)"),
+    method: str = typer.Option("renyi", help="SRE method (exact, fwht, or sampling) or EE method (renyi or von_neumann)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
         "outputs/data/",

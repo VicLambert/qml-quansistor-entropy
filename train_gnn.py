@@ -136,6 +136,7 @@ def main(
     training_mode: str = "global",     # "global" | "per_family"
     model_type: str = "gnn",          # "gnn" | "nn"
     family: str | None = None,
+    target: str = "sre",              # "sre" | "ee"
     show_progress: bool = typer.Option(True, help="Show progress bars during training"),
     show_val_progress: bool = typer.Option(False, help="Show progress bar during validation"),
     log_every_n_batches: int = typer.Option(5, help="Log training stats every N batches (0=disable)"),
@@ -148,6 +149,7 @@ def main(
         loss_type=loss_type,
         training_mode=training_mode,
         family=family,
+        target=target,
         show_progress=show_progress,
         show_val_progress=show_val_progress,
         log_batch_loss_every=log_every_n_batches,

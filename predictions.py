@@ -1,10 +1,7 @@
 from __future__ import annotations
 
 import csv
-import hashlib
 import logging
-import re
-import time
 
 from pathlib import Path
 from typing import Any
@@ -15,8 +12,9 @@ import torch
 import torch.nn.functional as F
 import typer
 
-from torch_geometric.loader import DataLoader as PyGDataLoader
 from torch.utils.data import DataLoader as TorchDataLoader
+from torch_geometric.loader import DataLoader as PyGDataLoader
+from tqdm import tqdm
 
 from qqe.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset, Regressor
 from qqe.utils import configure_logger
@@ -167,7 +165,8 @@ class PredictionTensorWrapper:
                 g = g[: self.target_global_dim]
 
         meta = getattr(data, "meta", {}) or {}
-        return g, meta
+        target = extract_target_value(data)
+        return g, meta, target
 
 
 def build_prediction_dataset(
@@ -212,8 +211,8 @@ def build_loader(
         wrapped = PredictionTensorWrapper(dataset, target_global_dim=target_global_dim)
 
         def collate_fn(batch):
-            xs, metas = zip(*batch)
-            return torch.stack(xs, dim=0), list(metas)
+            xs, metas, targets = zip(*batch)
+            return torch.stack(xs, dim=0), list(metas), list(targets)
 
         return TorchDataLoader(
             wrapped,
@@ -231,6 +230,23 @@ def build_loader(
 # Prediction
 # =========================================================
 
+def extract_target_value(sample: Any) -> float | None:
+    y = getattr(sample, "y", None)
+    if y is None:
+        return None
+
+    if torch.is_tensor(y):
+        if y.numel() == 0:
+            return None
+        value = float(y.flatten()[0].item())
+    else:
+        value = float(y)
+
+    if not np.isfinite(value):
+        return None
+
+    return value
+
 @torch.no_grad()
 def predict(
     model: torch.nn.Module,
@@ -238,18 +254,27 @@ def predict(
     *,
     model_kind: str,
     device: torch.device,
+    show_progress: bool = True,
 ) -> list[dict[str, Any]]:
     model.eval()
     rows: list[dict[str, Any]] = []
+    total_batches = len(loader) if hasattr(loader, "__len__") else None
 
     if model_kind == "gnn":
-        for batch in loader:
+        for batch in tqdm(
+            loader,
+            total=total_batches,
+            desc="Predicting (gnn)",
+            unit="batch",
+            disable=not show_progress,
+        ):
             samples = batch.to_data_list()
             batch = batch.to(device)
             preds = model(batch).view(-1).cpu().tolist()
 
             for sample, pred in zip(samples, preds):
                 meta = getattr(sample, "meta", {}) or {}
+                target = extract_target_value(sample)
                 rows.append(
                     {
                         "cid": meta.get("cid"),
@@ -257,17 +282,25 @@ def predict(
                         "seed": meta.get("seed"),
                         "n_qubits": meta.get("n_qubits"),
                         "n_layers": meta.get("n_layers"),
+                        "target": target,
                         "prediction": float(pred),
+                        "error": abs(float(pred - target)) if target is not None else None,
                     },
                 )
         return rows
 
     if model_kind == "nn":
-        for x, metas in loader:
+        for x, metas, targets in tqdm(
+            loader,
+            total=total_batches,
+            desc="Predicting (nn)",
+            unit="batch",
+            disable=not show_progress,
+        ):
             x = x.to(device)
             preds = model(x).view(-1).cpu().tolist()
 
-            for meta, pred in zip(metas, preds):
+            for meta, pred, target in zip(metas, preds, targets):
                 rows.append(
                     {
                         "cid": meta.get("cid"),
@@ -275,7 +308,9 @@ def predict(
                         "seed": meta.get("seed"),
                         "n_qubits": meta.get("n_qubits"),
                         "n_layers": meta.get("n_layers"),
+                        "target": target,
                         "prediction": float(pred),
+                        "error": abs(float(pred - target)) if target is not None else None,
                     },
                 )
         return rows
@@ -291,7 +326,7 @@ def save_predictions_csv(rows: list[dict[str, Any]], path: str | Path) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    fieldnames = ["cid", "family", "seed", "n_qubits", "n_layers", "prediction"]
+    fieldnames = ["cid", "family", "seed", "n_qubits", "n_layers", "target", "prediction", "error"]
     with path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
@@ -324,7 +359,7 @@ def aggregate_mean_std(
                 x_key: x,
                 "mean": float(vals.mean()),
                 "std": float(vals.std(ddof=0)),
-                "n": int(len(vals)),
+                "n": len(vals),
             },
         )
     return out
@@ -464,13 +499,14 @@ def main(
     batch_size: int = typer.Option(32, help="Batch size."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
     node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
-    output_csv: str = typer.Option("outputs/figures/predictions/predictions.csv", help="Output CSV path."),
     plot_n_layers: int | None = typer.Option(80, help="Make plot at fixed n_layers, varying n_qubits."),
     plot_n_qubits: int | None = typer.Option(16, help="Make plot at fixed n_qubits, varying n_layers."),
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
+    show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
     ckpt_path = checkpoint_path(model_kind, training_scope, model_family)
     logger.info("Loading checkpoint: %s", ckpt_path)
+    output_csv = f"outputs/figures/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
     state_dict, model_config, feature_config = load_checkpoint(ckpt_path)
 
@@ -501,13 +537,19 @@ def main(
         target_global_dim=model_config.get("global_in_dim"),
     )
 
-    rows = predict(model, loader, model_kind=model_kind, device=device)
+    rows = predict(
+        model,
+        loader,
+        model_kind=model_kind,
+        device=device,
+        show_progress=show_progress,
+    )
     save_predictions_csv(rows, output_csv)
 
     logger.info("Saved %d predictions to %s", len(rows), output_csv)
 
     if plot_n_layers is not None:
-        plot_path = Path(output_csv).with_name(f"{Path(output_csv).stem}_fixedL{plot_n_layers}.png")
+        plot_path = f"outputs/figures/predictions/{training_scope}/{model_kind}_pred_layers_{model_family or 'global'}.png"
         plot_fixed_layers_vary_qubits(
             rows,
             n_layers=plot_n_layers,
@@ -517,7 +559,7 @@ def main(
         logger.info("Saved fixed-layer plot to %s", plot_path)
 
     if plot_n_qubits is not None:
-        plot_path = Path(output_csv).with_name(f"{Path(output_csv).stem}_fixedQ{plot_n_qubits}.png")
+        plot_path = f"outputs/figures/predictions/{training_scope}/{model_kind}_pred_qubits_{model_family or 'global'}.png"
         plot_fixed_qubits_vary_layers(
             rows,
             n_qubits=plot_n_qubits,

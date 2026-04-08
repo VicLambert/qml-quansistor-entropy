@@ -32,6 +32,7 @@ class TrainConfig:
     batch_size: int = 32
     training_mode: str = "global"   # "global" or "per_family"
     family: str | None = None       # Only used if training_mode is "per_family"
+    target: str = "sre"          # "sre" or "ee"
     global_feature_variant: str = "binned"
     node_feature_backend_variant: str | None = None
     seed: int = 42
