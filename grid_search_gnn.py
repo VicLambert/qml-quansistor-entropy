@@ -125,7 +125,7 @@ def main(
     seed: int = 42,
     show_progress: bool = typer.Option(default=True, help="Show training progress bars"),
     show_val_progress: bool = typer.Option(
-        default=False, help="Show validation progress bars"
+        default=False, help="Show validation progress bars",
     ),
     show_grid_progress: bool = typer.Option(default=True, help="Show progress bar for trials"),
     gnn_hidden_grid: str = typer.Option("16,32,64", help="Comma-separated values"),
@@ -137,10 +137,10 @@ def main(
     lr_grid: str = typer.Option("0.001,0.0005", help="Comma-separated values"),
     weight_decay_grid: str = typer.Option("0.0,0.0001", help="Comma-separated values"),
     shuffle_trials: bool = typer.Option(
-        default=False, help="Shuffle grid before max_trials cut"
+        default=False, help="Shuffle grid before max_trials cut",
     ),
     n_jobs: int = typer.Option(
-        1, min=1, help="Parallel worker processes (CPU only recommended)"
+        1, min=1, help="Parallel worker processes (CPU only recommended)",
     ),
     allow_parallel_cuda: bool = typer.Option(
         default=False,
@@ -157,9 +157,6 @@ def main(
     max_trials: int = typer.Option(20, help="Cap number of trials (0 = all combinations)"),
     results_dir: str = typer.Option(
         "outputs/runs/hparam_search", help="Directory for search outputs"
-    ),
-    show_grid_progress: bool = typer.Option(
-        default=True, help="Show grid search progress",
     ),
 ):
     train_cfg = TrainConfig(

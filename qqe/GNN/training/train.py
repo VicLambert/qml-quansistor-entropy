@@ -165,6 +165,7 @@ def train_model(
     epoch_time_warning_secs: float = 300.0,
 ) -> tuple[nn.Module, TrainHistory, torch.device]:
     dev = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+    print(f"Using device: {dev}")
     model = model.to(dev)
 
     loss_fn = build_loss(loss_type=loss_type, huber_delta=huber_delta)
