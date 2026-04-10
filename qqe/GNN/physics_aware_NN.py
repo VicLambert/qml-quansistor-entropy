@@ -1,5 +1,9 @@
 
+from __future__ import annotations
+from typing import Sequence
+
 import warnings
+import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -71,36 +75,79 @@ class Regressor(nn.Module):
     def forward(self, h: torch.Tensor) -> torch.Tensor:
         return self.net(h)
 
+def _get_activation(activation: str) -> nn.Module:
+    if activation == "relu":
+        return nn.ReLU()
+    elif activation == "elu":
+        return nn.ELU()
+    else:
+        raise ValueError(f"Unsupported activation function: {activation}")
+
+
 class NN(nn.Module):
     def __init__(
         self,
         global_in_dim: int = 8,
-        global_hidden: int = GLOBAL_HIDDEN,
-        reg_hidden: int = REG_HIDDEN,
+        global_hidden: Sequence[int] = (64, 64, 64),
+        activation: str = "relu",
+        use_batchnorm: bool = False,
         dropout_rate: float = 0.1,
     ):
-        super().__init__()
-        self.global_mlp = GlobalMLP(global_in_dim, global_hidden, dropout_rate=dropout_rate)
-        self.regressor = Regressor(global_hidden, reg_hidden, dropout_rate=dropout_rate)
+        self.global_in_dim = global_in_dim
+        self.hidden_layers = tuple(int(h) for h in global_hidden)
+        self.use_batchnorm = use_batchnorm
 
-    def forward(self, data) -> torch.Tensor:
-        if torch.is_tensor(data):
-            g = data
-        elif hasattr(data, "global_features"):
-            g = data.global_features
-        else:
-            raise TypeError(
-                f"NN.forward expected Tensor or object with 'global_features', got {type(data)}"
+        activation_layer = _get_activation(activation)
+
+        feature_layers: list[nn.Module] = []
+
+        previous_dim = self.global_in_dim
+
+        for hidden_dim in self.hidden_layers:
+            feature_layers.append(nn.Linear(previous_dim, hidden_dim))
+            if self.use_batchnorm:
+                feature_layers.append(nn.BatchNorm1d(hidden_dim))
+            feature_layers.append(activation_layer)
+            if dropout_rate:
+                feature_layers.append(nn.Dropout(p=dropout_rate))
+            previous_dim = hidden_dim
+        self.feature_extractor = nn.Sequential(*feature_layers) if feature_layers else nn.Identity()
+
+        last_dim = self.hidden_layers[-1] if self.hidden_layers else previous_dim
+        self.regressor = nn.Linear(last_dim, 1)
+
+        self._initialize_weights(activation_layer)
+
+    def _initialize_weights(self, activation_layer: nn.Module) -> None:
+        nonlinearity = "relu"
+        negative_slope = 0.01 if isinstance(activation_layer, nn.LeakyReLU) else 0.0
+
+        for module in self.modules():
+            if isinstance(module, nn.Linear):
+                nn.init.kaiming_uniform_(
+                    module.weight,
+                    a=negative_slope,
+                    mode="fan_in",
+                    nonlinearity=nonlinearity,
+                )
+                if module.bias is not None:
+                    fan_in, _ = nn.init._calculate_fan_in_and_fan_out(module.weight)
+                    bound = 1 / math.sqrt(fan_in) if fan_in > 0 else 0.0
+                    nn.init.uniform_(module.bias, -bound, bound)
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Compute regression prediction.
+
+        Expects x with shape [batch_size, input_dim]. Returns a tensor with
+        shape [batch_size], squeezing the final singleton dimension.
+        """
+        if x.dim() != 2 or x.size(-1) != self.input_dim:
+            raise ValueError(
+                f"Expected input of shape [batch, {self.input_dim}], got {tuple(x.shape)}"
             )
 
-        if g.dim() == 1:
-            g = g.unsqueeze(0)
-        elif g.dim() > 2:
-            g = g.reshape(g.size(0), -1)
-
-        g_feat = self.global_mlp(g.float())
-        out = self.regressor(g_feat)
-        return out.view(-1)
+        features = self.feature_extractor(x)
+        output = self.regressor(features)
+        return output.squeeze(-1)
 
 class GNN(nn.Module):
     def __init__(

@@ -42,7 +42,7 @@ def collect_prediction_paths(dataset_root: str, family: str | None = None) -> li
     return [str(p.resolve()) for p in paths]
 
 
-def checkpoint_path(model_kind: str, training_scope: str, family: str | None = None) -> Path:
+def checkpoint_path(model_kind: str, training_scope: str, family: str | None = None, loss_type: str = "mse") -> Path:
     if model_kind not in {"gnn", "nn"}:
         raise ValueError("model_kind must be 'gnn' or 'nn'")
     if training_scope not in {"global", "family"}:
@@ -504,7 +504,7 @@ def main(
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
-    ckpt_path = checkpoint_path(model_kind, training_scope, model_family)
+    ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type="mse")
     logger.info("Loading checkpoint: %s", ckpt_path)
     output_csv = f"outputs/figures/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
