@@ -31,7 +31,7 @@ GNN_HIDDEN = 32
 GNN_HEADS = 8
 GLOBAL_HIDDEN = 16
 REG_HIDDEN = 16
-NUM_LAYERS = 5
+NUM_LAYERS = 3
 
 
 class GlobalMLP(nn.Module):
@@ -71,6 +71,36 @@ class Regressor(nn.Module):
     def forward(self, h: torch.Tensor) -> torch.Tensor:
         return self.net(h)
 
+class NN(nn.Module):
+    def __init__(
+        self,
+        global_in_dim: int = 8,
+        global_hidden: int = GLOBAL_HIDDEN,
+        reg_hidden: int = REG_HIDDEN,
+        dropout_rate: float = 0.1,
+    ):
+        super().__init__()
+        self.global_mlp = GlobalMLP(global_in_dim, global_hidden, dropout_rate=dropout_rate)
+        self.regressor = Regressor(global_hidden, reg_hidden, dropout_rate=dropout_rate)
+
+    def forward(self, data) -> torch.Tensor:
+        if torch.is_tensor(data):
+            g = data
+        elif hasattr(data, "global_features"):
+            g = data.global_features
+        else:
+            raise TypeError(
+                f"NN.forward expected Tensor or object with 'global_features', got {type(data)}"
+            )
+
+        if g.dim() == 1:
+            g = g.unsqueeze(0)
+        elif g.dim() > 2:
+            g = g.reshape(g.size(0), -1)
+
+        g_feat = self.global_mlp(g.float())
+        out = self.regressor(g_feat)
+        return out.view(-1)
 
 class GNN(nn.Module):
     def __init__(

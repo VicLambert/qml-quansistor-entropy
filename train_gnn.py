@@ -8,7 +8,7 @@ import torch
 import typer
 
 from qqe.experiments.plotting import plot_training_curves
-from qqe.GNN.physics_aware_NN import GNN, Regressor
+from qqe.GNN.physics_aware_NN import GNN, NN
 from qqe.GNN.training.datasets import build_loaders, build_loaders_NN
 from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
@@ -149,9 +149,11 @@ def run_training_NN(
         node_feature_variant=cfg.node_feature_backend_variant,
         family_projection=family_projection,
     )
-    model = Regressor(
-        in_dim=global_in_dim,
-        hidden_dim=128,
+    model = NN(
+        global_in_dim = global_in_dim,
+        global_hidden = 64,
+        reg_hidden = 128,
+        dropout_rate = 0.1,
     )
 
     model, hist, dev = train_model(
@@ -180,9 +182,9 @@ def run_training_NN(
 def main(
     epochs: int = 30,
     lr: float = 0.001,
-    loss_type: str = "huber",  # "mse" | "huber" | "l1"
+    loss_type: str = "mse",  # "mse" | "huber" | "l1"
     training_mode: str = "global",  # "global" | "per_family"
-    model_type: str = "gnn",  # "gnn" | "nn"
+    model_type: str = "nn",  # "gnn" | "nn"
     family: str | None = None,
     target: str = "sre",  # "sre" | "ee"
     show_progress: bool = typer.Option(
