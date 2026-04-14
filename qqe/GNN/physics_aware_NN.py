@@ -93,6 +93,7 @@ class NN(nn.Module):
         use_batchnorm: bool = False,
         dropout_rate: float = 0.1,
     ):
+        super().__init__()
         self.global_in_dim = global_in_dim
         self.hidden_layers = tuple(int(h) for h in global_hidden)
         self.use_batchnorm = use_batchnorm
@@ -140,9 +141,9 @@ class NN(nn.Module):
         Expects x with shape [batch_size, input_dim]. Returns a tensor with
         shape [batch_size], squeezing the final singleton dimension.
         """
-        if x.dim() != 2 or x.size(-1) != self.input_dim:
+        if x.dim() != 2 or x.size(-1) != self.global_in_dim:
             raise ValueError(
-                f"Expected input of shape [batch, {self.input_dim}], got {tuple(x.shape)}"
+                f"Expected input of shape [batch, {self.global_in_dim}], got {tuple(x.shape)}"
             )
 
         features = self.feature_extractor(x)

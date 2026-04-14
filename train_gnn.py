@@ -58,7 +58,7 @@ def run_training(
         "gnn_heads": 8,
         "global_hidden": 16,
         "reg_hidden": 16,
-        "num_layers": 5,
+        "num_layers": 3,
         "dropout_rate": 0.1,
     }
     if model_hparams:
@@ -151,9 +151,9 @@ def run_training_NN(
     )
     model = NN(
         global_in_dim = global_in_dim,
-        global_hidden = 64,
-        reg_hidden = 128,
-        dropout_rate = 0.1,
+        global_hidden = (64, 128, 64),
+        use_batchnorm = True,
+        dropout_rate = 0.0,
     )
 
     model, hist, dev = train_model(
