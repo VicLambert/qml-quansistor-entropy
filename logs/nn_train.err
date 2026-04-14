@@ -1,0 +1,114 @@
+2026-04-14 05:09:29,568 - __main__ - INFO - Starting GNN training...
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /project/6099921/NDOT/QML-gates-tests/qqe/train_gnn.py:230 in main           │
+│                                                                              │
+│   227 │   │   │   model_hparams,                                             │
+│   228 │   │   ) = run_training(train_config)                                 │
+│   229 │   else:                                                              │
+│ ❱ 230 │   │   model, hist, test_loss, global_in_dim, base_dataset = run_trai │
+│   231 │   │   node_in_dim = None                                             │
+│   232 │   │   model_hparams = {                                              │
+│   233 │   │   │   "gnn_hidden": None,                                        │
+│                                                                              │
+│ ╭───────────────────────────── locals ─────────────────────────────╮         │
+│ │ epoch_time_warning_secs = 300.0                                  │         │
+│ │                  epochs = 50                                     │         │
+│ │                  family = None                                   │         │
+│ │          heartbeat_secs = 60.0                                   │         │
+│ │     log_every_n_batches = 5                                      │         │
+│ │               loss_type = 'mse'                                  │         │
+│ │                      lr = 0.001                                  │         │
+│ │              model_type = 'nn'                                   │         │
+│ │           show_progress = True                                   │         │
+│ │       show_val_progress = False                                  │         │
+│ │                  target = 'sre'                                  │         │
+│ │            train_config = TrainConfig(                           │         │
+│ │                           │   epochs=50,                         │         │
+│ │                           │   lr=0.001,                          │         │
+│ │                           │   loss_type='mse',                   │         │
+│ │                           │   batch_size=32,                     │         │
+│ │                           │   training_mode='global',            │         │
+│ │                           │   family=None,                       │         │
+│ │                           │   target='sre',                      │         │
+│ │                           │   global_feature_variant='binned',   │         │
+│ │                           │   node_feature_backend_variant=None, │         │
+│ │                           │   seed=42,                           │         │
+│ │                           │   train_split=0.8,                   │         │
+│ │                           │   val_split=0.1,                     │         │
+│ │                           │   show_progress=True,                │         │
+│ │                           │   show_val_progress=False,           │         │
+│ │                           │   log_batch_loss_every=5,            │         │
+│ │                           │   heartbeat=60.0,                    │         │
+│ │                           │   epoch_warning=300.0                │         │
+│ │                           )                                      │         │
+│ │           training_mode = 'global'                               │         │
+│ ╰──────────────────────────────────────────────────────────────────╯         │
+│                                                                              │
+│ /project/6099921/NDOT/QML-gates-tests/qqe/train_gnn.py:152 in                │
+│ run_training_NN                                                              │
+│                                                                              │
+│   149 │   │   node_feature_variant=cfg.node_feature_backend_variant,         │
+│   150 │   │   family_projection=family_projection,                           │
+│   151 │   )                                                                  │
+│ ❱ 152 │   model = NN(                                                        │
+│   153 │   │   global_in_dim = global_in_dim,                                 │
+│   154 │   │   global_hidden = 64,                                            │
+│   155 │   │   reg_hidden = 128,                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │      base_dataset = QuantumCircuitGraphDataset(57607)                    │ │
+│ │               cfg = TrainConfig(                                         │ │
+│ │                     │   epochs=50,                                       │ │
+│ │                     │   lr=0.001,                                        │ │
+│ │                     │   loss_type='mse',                                 │ │
+│ │                     │   batch_size=32,                                   │ │
+│ │                     │   training_mode='global',                          │ │
+│ │                     │   family=None,                                     │ │
+│ │                     │   target='sre',                                    │ │
+│ │                     │   global_feature_variant='binned',                 │ │
+│ │                     │   node_feature_backend_variant=None,               │ │
+│ │                     │   seed=42,                                         │ │
+│ │                     │   train_split=0.8,                                 │ │
+│ │                     │   val_split=0.1,                                   │ │
+│ │                     │   show_progress=True,                              │ │
+│ │                     │   show_val_progress=False,                         │ │
+│ │                     │   log_batch_loss_every=5,                          │ │
+│ │                     │   heartbeat=60.0,                                  │ │
+│ │                     │   epoch_warning=300.0                              │ │
+│ │                     )                                                    │ │
+│ │        data_paths = [                                                    │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │                                                    │ │
+│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
+│ │                     │   ... +57597                                       │ │
+│ │                     ]                                                    │ │
+│ │     family_filter = None                                                 │ │
+│ │ family_projection = None                                                 │ │
+│ │     global_in_dim = 508                                                  │ │
+│ │       test_loader = <torch.utils.data.dataloader.DataLoader object at    │ │
+│ │                     0x146ca6562110>                                      │ │
+│ │      train_loader = <torch.utils.data.dataloader.DataLoader object at    │ │
+│ │                     0x146ca4ff7e10>                                      │ │
+│ │        val_loader = <torch.utils.data.dataloader.DataLoader object at    │ │
+│ │                     0x146ca5de0dd0>                                      │ │
+│ │    VALID_FAMILIES = {'haar', 'clifford', 'random', 'quansistor'}         │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+╰──────────────────────────────────────────────────────────────────────────────╯
+TypeError: NN.__init__() got an unexpected keyword argument 'reg_hidden'
