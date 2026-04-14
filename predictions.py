@@ -53,7 +53,7 @@ def checkpoint_path(model_kind: str, training_scope: str, family: str | None = N
             raise ValueError("family must be provided when training_scope='family'")
         return Path(f"models/{model_kind}_model_{family}.pt")
 
-    return Path(f"models/{model_kind}_model_global.pt")
+    return Path(f"models/{model_kind}_model_{loss_type}_global.pt")
 
 
 def load_checkpoint(path: str | Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
