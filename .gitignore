@@ -4,5 +4,6 @@
 example_visualization.py
 outputs/data/encoding_data_quimb_fwht.json
 
-/logs/workers
+*.log
+/logs/
 /outputs/
