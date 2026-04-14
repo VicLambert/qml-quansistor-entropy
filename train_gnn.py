@@ -152,8 +152,8 @@ def run_training_NN(
     model = NN(
         global_in_dim = global_in_dim,
         global_hidden = (64, 128, 64),
-        use_batchnorm = True,
-        dropout_rate = 0.0,
+        use_batchnorm = False,
+        dropout_rate = 0.1,
     )
 
     model, hist, dev = train_model(
@@ -180,7 +180,7 @@ def run_training_NN(
 
 
 def main(
-    epochs: int = 30,
+    epochs: int = 40,
     lr: float = 0.001,
     loss_type: str = "mse",  # "mse" | "huber" | "l1"
     training_mode: str = "global",  # "global" | "per_family"
@@ -188,19 +188,19 @@ def main(
     family: str | None = None,
     target: str = "sre",  # "sre" | "ee"
     show_progress: bool = typer.Option(
-        default=True, help="Show progress bars during training"
+        default=True, help="Show progress bars during training",
     ),
     show_val_progress: bool = typer.Option(
-        default=False, help="Show progress bar during validation"
+        default=False, help="Show progress bar during validation",
     ),
     log_every_n_batches: int = typer.Option(
-        5, help="Log training stats every N batches (0=disable)"
+        5, help="Log training stats every N batches (0=disable)",
     ),
     heartbeat_secs: float = typer.Option(
-        60.0, help="Heartbeat log interval in seconds (0=disable)"
+        60.0, help="Heartbeat log interval in seconds (0=disable)",
     ),
     epoch_time_warning_secs: float = typer.Option(
-        300.0, help="Warn if epoch exceeds N seconds (0=disable)"
+        300.0, help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
     train_config = TrainConfig(
