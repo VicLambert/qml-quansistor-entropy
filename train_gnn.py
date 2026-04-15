@@ -179,10 +179,10 @@ def run_training_NN(
         family_projection=family_projection,
     )
     model = NN(
-        global_in_dim=global_in_dim,
-        global_hidden=(64, 128, 64),
-        use_batchnorm=False,
-        dropout_rate=0.1,
+        global_in_dim = global_in_dim,
+        global_hidden = (64, 128, 64),
+        use_batchnorm = False,
+        dropout_rate = 0.0,
     )
 
     model, hist, dev = train_model(

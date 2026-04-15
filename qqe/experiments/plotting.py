@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import ast
 import logging
 
@@ -502,6 +503,7 @@ def plot_training_curves(
     save_fig: bool = False,
     fig_path: str | None = None,
 ):
+    os.makedirs(fig_path, exist_ok=True)
     epochs = list(range(1, len(hist.train_loss) + 1))
 
     plt.figure()

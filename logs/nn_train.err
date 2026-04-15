@@ -1,114 +1,105 @@
-2026-04-14 05:09:29,568 - __main__ - INFO - Starting GNN training...
-╭───────────────────── Traceback (most recent call last) ──────────────────────╮
-│ /project/6099921/NDOT/QML-gates-tests/qqe/train_gnn.py:230 in main           │
-│                                                                              │
-│   227 │   │   │   model_hparams,                                             │
-│   228 │   │   ) = run_training(train_config)                                 │
-│   229 │   else:                                                              │
-│ ❱ 230 │   │   model, hist, test_loss, global_in_dim, base_dataset = run_trai │
-│   231 │   │   node_in_dim = None                                             │
-│   232 │   │   model_hparams = {                                              │
-│   233 │   │   │   "gnn_hidden": None,                                        │
-│                                                                              │
-│ ╭───────────────────────────── locals ─────────────────────────────╮         │
-│ │ epoch_time_warning_secs = 300.0                                  │         │
-│ │                  epochs = 50                                     │         │
-│ │                  family = None                                   │         │
-│ │          heartbeat_secs = 60.0                                   │         │
-│ │     log_every_n_batches = 5                                      │         │
-│ │               loss_type = 'mse'                                  │         │
-│ │                      lr = 0.001                                  │         │
-│ │              model_type = 'nn'                                   │         │
-│ │           show_progress = True                                   │         │
-│ │       show_val_progress = False                                  │         │
-│ │                  target = 'sre'                                  │         │
-│ │            train_config = TrainConfig(                           │         │
-│ │                           │   epochs=50,                         │         │
-│ │                           │   lr=0.001,                          │         │
-│ │                           │   loss_type='mse',                   │         │
-│ │                           │   batch_size=32,                     │         │
-│ │                           │   training_mode='global',            │         │
-│ │                           │   family=None,                       │         │
-│ │                           │   target='sre',                      │         │
-│ │                           │   global_feature_variant='binned',   │         │
-│ │                           │   node_feature_backend_variant=None, │         │
-│ │                           │   seed=42,                           │         │
-│ │                           │   train_split=0.8,                   │         │
-│ │                           │   val_split=0.1,                     │         │
-│ │                           │   show_progress=True,                │         │
-│ │                           │   show_val_progress=False,           │         │
-│ │                           │   log_batch_loss_every=5,            │         │
-│ │                           │   heartbeat=60.0,                    │         │
-│ │                           │   epoch_warning=300.0                │         │
-│ │                           )                                      │         │
-│ │           training_mode = 'global'                               │         │
-│ ╰──────────────────────────────────────────────────────────────────╯         │
-│                                                                              │
-│ /project/6099921/NDOT/QML-gates-tests/qqe/train_gnn.py:152 in                │
-│ run_training_NN                                                              │
-│                                                                              │
-│   149 │   │   node_feature_variant=cfg.node_feature_backend_variant,         │
-│   150 │   │   family_projection=family_projection,                           │
-│   151 │   )                                                                  │
-│ ❱ 152 │   model = NN(                                                        │
-│   153 │   │   global_in_dim = global_in_dim,                                 │
-│   154 │   │   global_hidden = 64,                                            │
-│   155 │   │   reg_hidden = 128,                                              │
-│                                                                              │
-│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
-│ │      base_dataset = QuantumCircuitGraphDataset(57607)                    │ │
-│ │               cfg = TrainConfig(                                         │ │
-│ │                     │   epochs=50,                                       │ │
-│ │                     │   lr=0.001,                                        │ │
-│ │                     │   loss_type='mse',                                 │ │
-│ │                     │   batch_size=32,                                   │ │
-│ │                     │   training_mode='global',                          │ │
-│ │                     │   family=None,                                     │ │
-│ │                     │   target='sre',                                    │ │
-│ │                     │   global_feature_variant='binned',                 │ │
-│ │                     │   node_feature_backend_variant=None,               │ │
-│ │                     │   seed=42,                                         │ │
-│ │                     │   train_split=0.8,                                 │ │
-│ │                     │   val_split=0.1,                                   │ │
-│ │                     │   show_progress=True,                              │ │
-│ │                     │   show_val_progress=False,                         │ │
-│ │                     │   log_batch_loss_every=5,                          │ │
-│ │                     │   heartbeat=60.0,                                  │ │
-│ │                     │   epoch_warning=300.0                              │ │
-│ │                     )                                                    │ │
-│ │        data_paths = [                                                    │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │                                                    │ │
-│ │                     'outputs/data/encoding_data_sre_pennylane/clifford/… │ │
-│ │                     │   ... +57597                                       │ │
-│ │                     ]                                                    │ │
-│ │     family_filter = None                                                 │ │
-│ │ family_projection = None                                                 │ │
-│ │     global_in_dim = 508                                                  │ │
-│ │       test_loader = <torch.utils.data.dataloader.DataLoader object at    │ │
-│ │                     0x146ca6562110>                                      │ │
-│ │      train_loader = <torch.utils.data.dataloader.DataLoader object at    │ │
-│ │                     0x146ca4ff7e10>                                      │ │
-│ │        val_loader = <torch.utils.data.dataloader.DataLoader object at    │ │
-│ │                     0x146ca5de0dd0>                                      │ │
-│ │    VALID_FAMILIES = {'haar', 'clifford', 'random', 'quansistor'}         │ │
-│ ╰──────────────────────────────────────────────────────────────────────────╯ │
-╰──────────────────────────────────────────────────────────────────────────────╯
-TypeError: NN.__init__() got an unexpected keyword argument 'reg_hidden'
+2026-04-15 07:00:53,535 - __main__ - INFO - Starting GNN training...
+2026-04-15 07:23:28,984 - qqe.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-04-15 07:24:12,344 - qqe.GNN.training.train - INFO - Training complete (43.3s) | running validation...
+2026-04-15 07:24:16,657 - qqe.GNN.training.train - INFO - Losses | train 0.561153 | val 0.258641 | lr 1.00e-03 | time train=43.3s val=4.3s total=47.7s
+2026-04-15 07:24:16,702 - qqe.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-04-15 07:24:54,894 - qqe.GNN.training.train - INFO - Training complete (38.2s) | running validation...
+2026-04-15 07:24:59,130 - qqe.GNN.training.train - INFO - Losses | train 0.112397 | val 0.092499 | lr 1.00e-03 | time train=38.2s val=4.2s total=42.4s
+2026-04-15 07:24:59,132 - qqe.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-04-15 07:25:39,609 - qqe.GNN.training.train - INFO - Training complete (40.5s) | running validation...
+2026-04-15 07:25:43,837 - qqe.GNN.training.train - INFO - Losses | train 0.068300 | val 0.036204 | lr 1.00e-03 | time train=40.5s val=4.2s total=44.7s
+2026-04-15 07:25:43,837 - qqe.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-04-15 07:26:23,352 - qqe.GNN.training.train - INFO - Training complete (39.5s) | running validation...
+2026-04-15 07:26:27,369 - qqe.GNN.training.train - INFO - Losses | train 0.048596 | val 0.091208 | lr 1.00e-03 | time train=39.5s val=4.0s total=43.5s
+2026-04-15 07:26:27,369 - qqe.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-04-15 07:27:08,513 - qqe.GNN.training.train - INFO - Training complete (41.1s) | running validation...
+2026-04-15 07:27:12,974 - qqe.GNN.training.train - INFO - Losses | train 0.043078 | val 0.033511 | lr 1.00e-03 | time train=41.1s val=4.5s total=45.6s
+2026-04-15 07:27:12,974 - qqe.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-04-15 07:27:51,983 - qqe.GNN.training.train - INFO - Training complete (39.0s) | running validation...
+2026-04-15 07:27:56,131 - qqe.GNN.training.train - INFO - Losses | train 0.041452 | val 0.053850 | lr 1.00e-03 | time train=39.0s val=4.1s total=43.2s
+2026-04-15 07:27:56,132 - qqe.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-04-15 07:28:36,110 - qqe.GNN.training.train - INFO - Training complete (40.0s) | running validation...
+2026-04-15 07:28:40,346 - qqe.GNN.training.train - INFO - Losses | train 0.035705 | val 0.062952 | lr 1.00e-03 | time train=40.0s val=4.2s total=44.2s
+2026-04-15 07:28:40,346 - qqe.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-04-15 07:29:19,607 - qqe.GNN.training.train - INFO - Training complete (39.3s) | running validation...
+2026-04-15 07:29:24,101 - qqe.GNN.training.train - INFO - Losses | train 0.034651 | val 0.029646 | lr 1.00e-03 | time train=39.3s val=4.5s total=43.8s
+2026-04-15 07:29:24,101 - qqe.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-04-15 07:30:03,223 - qqe.GNN.training.train - INFO - Training complete (39.1s) | running validation...
+2026-04-15 07:30:07,197 - qqe.GNN.training.train - INFO - Losses | train 0.030241 | val 0.040750 | lr 1.00e-03 | time train=39.1s val=4.0s total=43.1s
+2026-04-15 07:30:07,197 - qqe.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-04-15 07:30:48,524 - qqe.GNN.training.train - INFO - Training complete (41.3s) | running validation...
+2026-04-15 07:30:53,306 - qqe.GNN.training.train - INFO - Losses | train 0.032352 | val 0.032801 | lr 1.00e-03 | time train=41.3s val=4.8s total=46.1s
+2026-04-15 07:30:53,306 - qqe.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-04-15 07:31:37,059 - qqe.GNN.training.train - INFO - Training complete (43.8s) | running validation...
+2026-04-15 07:31:41,827 - qqe.GNN.training.train - INFO - Losses | train 0.029238 | val 0.032391 | lr 1.00e-03 | time train=43.8s val=4.8s total=48.5s
+2026-04-15 07:31:41,827 - qqe.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-04-15 07:32:25,429 - qqe.GNN.training.train - INFO - Training complete (43.6s) | running validation...
+2026-04-15 07:32:29,489 - qqe.GNN.training.train - INFO - Losses | train 0.028934 | val 0.054485 | lr 1.00e-03 | time train=43.6s val=4.1s total=47.7s
+2026-04-15 07:32:29,489 - qqe.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-04-15 07:33:08,527 - qqe.GNN.training.train - INFO - Training complete (39.0s) | running validation...
+2026-04-15 07:33:12,887 - qqe.GNN.training.train - INFO - Losses | train 0.028096 | val 0.038082 | lr 1.00e-03 | time train=39.0s val=4.4s total=43.4s
+2026-04-15 07:33:12,887 - qqe.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-04-15 07:33:51,392 - qqe.GNN.training.train - INFO - Training complete (38.5s) | running validation...
+2026-04-15 07:33:55,367 - qqe.GNN.training.train - INFO - Losses | train 0.025897 | val 0.045759 | lr 5.00e-04 | time train=38.5s val=4.0s total=42.5s
+2026-04-15 07:33:55,367 - qqe.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-04-15 07:34:32,247 - qqe.GNN.training.train - INFO - Training complete (36.9s) | running validation...
+2026-04-15 07:34:36,158 - qqe.GNN.training.train - INFO - Losses | train 0.019865 | val 0.028139 | lr 5.00e-04 | time train=36.9s val=3.9s total=40.8s
+2026-04-15 07:34:36,159 - qqe.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-04-15 07:35:12,410 - qqe.GNN.training.train - INFO - Training complete (36.3s) | running validation...
+2026-04-15 07:35:16,751 - qqe.GNN.training.train - INFO - Losses | train 0.019679 | val 0.026805 | lr 5.00e-04 | time train=36.3s val=4.3s total=40.6s
+2026-04-15 07:35:16,751 - qqe.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-04-15 07:35:53,543 - qqe.GNN.training.train - INFO - Training complete (36.8s) | running validation...
+2026-04-15 07:35:57,476 - qqe.GNN.training.train - INFO - Losses | train 0.019581 | val 0.038424 | lr 5.00e-04 | time train=36.8s val=3.9s total=40.7s
+2026-04-15 07:35:57,477 - qqe.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-04-15 07:36:33,960 - qqe.GNN.training.train - INFO - Training complete (36.5s) | running validation...
+2026-04-15 07:36:37,856 - qqe.GNN.training.train - INFO - Losses | train 0.019658 | val 0.030381 | lr 5.00e-04 | time train=36.5s val=3.9s total=40.4s
+2026-04-15 07:36:37,856 - qqe.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-04-15 07:37:14,585 - qqe.GNN.training.train - INFO - Training complete (36.7s) | running validation...
+2026-04-15 07:37:18,795 - qqe.GNN.training.train - INFO - Losses | train 0.019634 | val 0.025271 | lr 5.00e-04 | time train=36.7s val=4.2s total=40.9s
+2026-04-15 07:37:18,796 - qqe.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-04-15 07:37:58,519 - qqe.GNN.training.train - INFO - Training complete (39.7s) | running validation...
+2026-04-15 07:38:02,545 - qqe.GNN.training.train - INFO - Losses | train 0.019052 | val 0.030264 | lr 5.00e-04 | time train=39.7s val=4.0s total=43.7s
+2026-04-15 07:38:02,547 - qqe.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-04-15 07:38:38,702 - qqe.GNN.training.train - INFO - Training complete (36.2s) | running validation...
+2026-04-15 07:38:42,642 - qqe.GNN.training.train - INFO - Losses | train 0.018811 | val 0.029216 | lr 5.00e-04 | time train=36.2s val=3.9s total=40.1s
+2026-04-15 07:38:42,642 - qqe.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-04-15 07:39:21,214 - qqe.GNN.training.train - INFO - Training complete (38.6s) | running validation...
+2026-04-15 07:39:25,679 - qqe.GNN.training.train - INFO - Losses | train 0.018553 | val 0.027612 | lr 5.00e-04 | time train=38.6s val=4.5s total=43.0s
+2026-04-15 07:39:25,679 - qqe.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-04-15 07:40:03,985 - qqe.GNN.training.train - INFO - Training complete (38.3s) | running validation...
+2026-04-15 07:40:07,976 - qqe.GNN.training.train - INFO - Losses | train 0.018908 | val 0.032496 | lr 5.00e-04 | time train=38.3s val=4.0s total=42.3s
+2026-04-15 07:40:07,976 - qqe.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-04-15 07:40:45,405 - qqe.GNN.training.train - INFO - Training complete (37.4s) | running validation...
+2026-04-15 07:40:49,447 - qqe.GNN.training.train - INFO - Losses | train 0.019122 | val 0.029033 | lr 5.00e-04 | time train=37.4s val=4.0s total=41.5s
+2026-04-15 07:40:49,449 - qqe.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-04-15 07:41:26,472 - qqe.GNN.training.train - INFO - Training complete (37.0s) | running validation...
+2026-04-15 07:41:30,397 - qqe.GNN.training.train - INFO - Losses | train 0.018662 | val 0.027315 | lr 2.50e-04 | time train=37.0s val=3.9s total=40.9s
+2026-04-15 07:41:30,398 - qqe.GNN.training.train - INFO - -------- EPOCH 026 --------
+2026-04-15 07:42:06,597 - qqe.GNN.training.train - INFO - Training complete (36.2s) | running validation...
+2026-04-15 07:42:10,534 - qqe.GNN.training.train - INFO - Losses | train 0.016299 | val 0.027135 | lr 2.50e-04 | time train=36.2s val=3.9s total=40.1s
+2026-04-15 07:42:10,534 - qqe.GNN.training.train - INFO - -------- EPOCH 027 --------
+2026-04-15 07:42:46,984 - qqe.GNN.training.train - INFO - Training complete (36.4s) | running validation...
+2026-04-15 07:42:52,027 - qqe.GNN.training.train - INFO - Losses | train 0.016238 | val 0.026500 | lr 2.50e-04 | time train=36.4s val=5.0s total=41.5s
+2026-04-15 07:42:52,029 - qqe.GNN.training.train - INFO - -------- EPOCH 028 --------
+2026-04-15 07:43:29,785 - qqe.GNN.training.train - INFO - Training complete (37.8s) | running validation...
+2026-04-15 07:43:33,690 - qqe.GNN.training.train - INFO - Losses | train 0.016342 | val 0.026631 | lr 2.50e-04 | time train=37.8s val=3.9s total=41.7s
+2026-04-15 07:43:33,690 - qqe.GNN.training.train - INFO - -------- EPOCH 029 --------
+2026-04-15 07:44:09,849 - qqe.GNN.training.train - INFO - Training complete (36.2s) | running validation...
+2026-04-15 07:44:13,962 - qqe.GNN.training.train - INFO - Losses | train 0.016541 | val 0.026824 | lr 2.50e-04 | time train=36.2s val=4.1s total=40.3s
+2026-04-15 07:44:13,962 - qqe.GNN.training.train - INFO - -------- EPOCH 030 --------
+2026-04-15 07:44:50,120 - qqe.GNN.training.train - INFO - Training complete (36.2s) | running validation...
+2026-04-15 07:44:54,024 - qqe.GNN.training.train - INFO - Losses | train 0.016292 | val 0.025769 | lr 2.50e-04 | time train=36.2s val=3.9s total=40.1s
+2026-04-15 07:44:54,024 - qqe.GNN.training.train - INFO - -------- EPOCH 031 --------
+2026-04-15 07:45:30,528 - qqe.GNN.training.train - INFO - Training complete (36.5s) | running validation...
+2026-04-15 07:45:34,460 - qqe.GNN.training.train - INFO - Losses | train 0.016168 | val 0.027245 | lr 1.25e-04 | time train=36.5s val=3.9s total=40.4s
+2026-04-15 07:45:34,460 - qqe.GNN.training.train - INFO - -------- EPOCH 032 --------
+2026-04-15 07:46:10,724 - qqe.GNN.training.train - INFO - Training complete (36.3s) | running validation...
+2026-04-15 07:46:14,788 - qqe.GNN.training.train - INFO - Losses | train 0.015339 | val 0.026540 | lr 1.25e-04 | time train=36.3s val=4.1s total=40.3s
+2026-04-15 07:46:14,788 - qqe.GNN.training.train - INFO - -------- EPOCH 033 --------
+2026-04-15 07:46:51,142 - qqe.GNN.training.train - INFO - Training complete (36.4s) | running validation...
+2026-04-15 07:46:55,277 - qqe.GNN.training.train - INFO - Losses | train 0.015378 | val 0.025905 | lr 1.25e-04 | time train=36.4s val=4.1s total=40.5s
+2026-04-15 07:46:55,278 - qqe.GNN.training.train - INFO - -------- EPOCH 034 --------
+2026-04-15 07:47:31,630 - qqe.GNN.training.train - INFO - Training complete (36.4s) | running validation...
+2026-04-15 07:47:35,547 - qqe.GNN.training.train - INFO - Losses | train 0.015339 | val 0.026584 | lr 1.25e-04 | time train=36.4s val=3.9s total=40.3s
+2026-04-15 07:47:35,547 - qqe.GNN.training.train - INFO - Early stopping at epoch 034 | best val 0.025271 | patience exhausted (15/15)
+Validation:   0%|          | 0/361 [00:00<?, ?it/s]Validation:   1%|          | 4/361 [00:00<00:09, 37.00it/s]Validation:   2%|▏         | 8/361 [00:00<00:09, 35.76it/s]Validation:   3%|▎         | 12/361 [00:00<00:09, 35.45it/s]Validation:   4%|▍         | 16/361 [00:00<00:09, 35.54it/s]Validation:   6%|▌         | 20/361 [00:00<00:09, 35.76it/s]Validation:   7%|▋         | 24/361 [00:00<00:09, 35.68it/s]Validation:   8%|▊         | 28/361 [00:00<00:09, 36.15it/s]Validation:   9%|▉         | 32/361 [00:00<00:09, 36.31it/s]Validation:  10%|▉         | 36/361 [00:00<00:08, 36.81it/s]Validation:  11%|█         | 40/361 [00:01<00:08, 36.72it/s]Validation:  12%|█▏        | 44/361 [00:01<00:08, 36.41it/s]Validation:  13%|█▎        | 48/361 [00:01<00:08, 36.67it/s]Validation:  14%|█▍        | 52/361 [00:01<00:08, 36.58it/s]Validation:  16%|█▌        | 56/361 [00:01<00:08, 36.37it/s]Validation:  17%|█▋        | 60/361 [00:01<00:08, 35.44it/s]Validation:  18%|█▊        | 64/361 [00:01<00:08, 36.25it/s]Validation:  19%|█▉        | 68/361 [00:01<00:08, 36.31it/s]Validation:  20%|█▉        | 72/361 [00:01<00:07, 36.37it/s]Validation:  21%|██        | 76/361 [00:02<00:07, 36.01it/s]Validation:  22%|██▏       | 80/361 [00:02<00:07, 35.99it/s]Validation:  23%|██▎       | 84/361 [00:02<00:07, 36.22it/s]Validation:  24%|██▍       | 88/361 [00:02<00:07, 36.52it/s]Validation:  25%|██▌       | 92/361 [00:02<00:07, 36.39it/s]Validation:  27%|██▋       | 96/361 [00:02<00:07, 36.11it/s]Validation:  28%|██▊       | 100/361 [00:02<00:07, 35.71it/s]Validation:  29%|██▉       | 104/361 [00:02<00:07, 35.83it/s]Validation:  30%|██▉       | 108/361 [00:02<00:07, 36.05it/s]Validation:  31%|███       | 112/361 [00:03<00:06, 36.47it/s]Validation:  32%|███▏      | 116/361 [00:03<00:06, 35.67it/s]Validation:  33%|███▎      | 120/361 [00:03<00:06, 35.08it/s]Validation:  34%|███▍      | 124/361 [00:03<00:06, 35.45it/s]Validation:  35%|███▌      | 128/361 [00:03<00:06, 35.35it/s]Validation:  37%|███▋      | 132/361 [00:03<00:06, 35.82it/s]Validation:  38%|███▊      | 136/361 [00:03<00:06, 34.30it/s]Validation:  39%|███▉      | 140/361 [00:03<00:06, 34.57it/s]Validation:  40%|███▉      | 144/361 [00:04<00:06, 34.78it/s]Validation:  41%|████      | 148/361 [00:04<00:06, 34.50it/s]Validation:  42%|████▏     | 152/361 [00:04<00:05, 35.01it/s]Validation:  43%|████▎     | 156/361 [00:04<00:05, 35.05it/s]Validation:  44%|████▍     | 160/361 [00:04<00:05, 34.97it/s]Validation:  45%|████▌     | 164/361 [00:04<00:05, 34.28it/s]Validation:  47%|████▋     | 168/361 [00:04<00:05, 34.55it/s]Validation:  48%|████▊     | 172/361 [00:04<00:05, 35.13it/s]Validation:  49%|████▉     | 176/361 [00:04<00:05, 35.16it/s]Validation:  50%|████▉     | 180/361 [00:05<00:05, 34.76it/s]Validation:  51%|█████     | 184/361 [00:05<00:05, 34.97it/s]Validation:  52%|█████▏    | 188/361 [00:05<00:04, 35.80it/s]Validation:  53%|█████▎    | 192/361 [00:05<00:04, 36.56it/s]Validation:  54%|█████▍    | 196/361 [00:05<00:04, 33.87it/s]Validation:  55%|█████▌    | 200/361 [00:05<00:04, 34.22it/s]Validation:  57%|█████▋    | 204/361 [00:05<00:04, 34.68it/s]Validation:  58%|█████▊    | 208/361 [00:05<00:04, 35.18it/s]Validation:  59%|█████▊    | 212/361 [00:05<00:04, 35.35it/s]Validation:  60%|█████▉    | 216/361 [00:06<00:04, 35.57it/s]Validation:  61%|██████    | 220/361 [00:06<00:03, 36.50it/s]Validation:  62%|██████▏   | 224/361 [00:06<00:03, 36.45it/s]Validation:  63%|██████▎   | 228/361 [00:06<00:03, 33.77it/s]Validation:  64%|██████▍   | 232/361 [00:06<00:03, 34.48it/s]Validation:  65%|██████▌   | 236/361 [00:06<00:03, 34.66it/s]Validation:  66%|██████▋   | 240/361 [00:06<00:03, 35.05it/s]Validation:  68%|██████▊   | 244/361 [00:06<00:03, 35.68it/s]Validation:  69%|██████▊   | 248/361 [00:06<00:03, 36.11it/s]Validation:  70%|██████▉   | 252/361 [00:07<00:03, 36.01it/s]Validation:  71%|███████   | 256/361 [00:07<00:02, 35.72it/s]Validation:  72%|███████▏  | 260/361 [00:07<00:02, 35.56it/s]Validation:  73%|███████▎  | 264/361 [00:07<00:02, 35.42it/s]Validation:  74%|███████▍  | 268/361 [00:07<00:02, 35.50it/s]Validation:  75%|███████▌  | 272/361 [00:07<00:02, 35.36it/s]Validation:  76%|███████▋  | 276/361 [00:07<00:02, 35.62it/s]Validation:  78%|███████▊  | 280/361 [00:07<00:02, 35.27it/s]Validation:  79%|███████▊  | 284/361 [00:07<00:02, 35.81it/s]Validation:  80%|███████▉  | 288/361 [00:08<00:02, 35.14it/s]Validation:  81%|████████  | 292/361 [00:08<00:01, 34.91it/s]Validation:  82%|████████▏ | 296/361 [00:08<00:01, 35.15it/s]Validation:  83%|████████▎ | 300/361 [00:08<00:01, 35.40it/s]Validation:  84%|████████▍ | 304/361 [00:08<00:01, 35.67it/s]Validation:  85%|████████▌ | 308/361 [00:08<00:01, 35.78it/s]Validation:  86%|████████▋ | 312/361 [00:08<00:01, 32.72it/s]Validation:  88%|████████▊ | 316/361 [00:08<00:01, 33.03it/s]Validation:  89%|████████▊ | 320/361 [00:09<00:01, 33.64it/s]Validation:  90%|████████▉ | 324/361 [00:09<00:01, 34.30it/s]Validation:  91%|█████████ | 328/361 [00:09<00:00, 34.65it/s]Validation:  92%|█████████▏| 332/361 [00:09<00:00, 35.65it/s]Validation:  93%|█████████▎| 336/361 [00:09<00:00, 35.54it/s]Validation:  94%|█████████▍| 340/361 [00:09<00:00, 35.27it/s]Validation:  95%|█████████▌| 344/361 [00:09<00:00, 35.06it/s]Validation:  96%|█████████▋| 348/361 [00:09<00:00, 34.96it/s]Validation:  98%|█████████▊| 352/361 [00:09<00:00, 34.92it/s]Validation:  99%|█████████▊| 356/361 [00:10<00:00, 35.24it/s]Validation: 100%|█████████▉| 360/361 [00:10<00:00, 35.85it/s]                                                             2026-04-15 07:47:47,576 - __main__ - INFO - Saved model at models/nn_model_huber_global.pt
