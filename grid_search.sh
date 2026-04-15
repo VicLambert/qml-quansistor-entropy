@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=def-boudrea1
 #SBATCH --job-name=grid_search
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=6
 #SBATCH --mem=0
 #SBATCH --output=logs/grid_search.out
 #SBATCH --error=logs/grid_search.err

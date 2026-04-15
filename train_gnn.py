@@ -153,7 +153,7 @@ def run_training_NN(
         global_in_dim = global_in_dim,
         global_hidden = (64, 128, 64),
         use_batchnorm = False,
-        dropout_rate = 0.1,
+        dropout_rate = 0.0,
     )
 
     model, hist, dev = train_model(
@@ -273,7 +273,7 @@ def main(
 
     model_save_path = f"models/{model_type}_model_{loss_type}_{family if training_mode == 'per_family' else 'global'}.pt"
     torch.save(checkpoint, model_save_path)
-
+    logger.info(f"Saved model at {model_save_path}")
 
 if __name__ == "__main__":
     configure_logger(logging.INFO, logging.INFO)

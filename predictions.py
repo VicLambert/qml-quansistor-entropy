@@ -491,6 +491,7 @@ def plot_fixed_qubits_vary_layers(
 # =========================================================
 
 def main(
+    model_path: str = typer.Option(" models/nn_model_huber_global.pt", help="Path to model checkpoint."),
     model_kind: str = typer.Option("nn", help="Model type: 'gnn' or 'nn'."),
     training_scope: str = typer.Option("global", help="'global' or 'family'."),
     model_family: str | None = typer.Option(None, help="Family used if training_scope='family'."),
@@ -504,7 +505,7 @@ def main(
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
-    ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type="mse")
+    ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type="huber")
     logger.info("Loading checkpoint: %s", ckpt_path)
     output_csv = f"outputs/figures/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
