@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 
 from dataclasses import asdict
+from pathlib import Path
 
 import torch
 import typer
@@ -18,6 +19,29 @@ from qqe.utils import configure_logger
 logger = logging.getLogger(__name__)
 
 
+def _resolve_model_save_path(base_path: str, allow_overwrite: bool = False) -> str:
+    """Return a non-colliding checkpoint path unless overwrite is explicitly allowed."""
+    path = Path(base_path)
+    if allow_overwrite or not path.exists():
+        return str(path)
+
+    stem = path.stem
+    suffix = path.suffix
+    parent = path.parent
+    counter = 1
+
+    while True:
+        candidate = parent / f"{stem}_v{counter}{suffix}"
+        if not candidate.exists():
+            logger.warning(
+                "Model checkpoint already exists at %s. Saving to %s instead.",
+                path,
+                candidate,
+            )
+            return str(candidate)
+        counter += 1
+
+
 def run_training(
     cfg: TrainConfig,
     model_hparams: dict | None = None,
@@ -29,7 +53,7 @@ def run_training(
     VALID_FAMILIES = {"haar", "clifford", "quansistor", "random"}
     if cfg.training_mode == "per_family" and cfg.family not in VALID_FAMILIES:
         raise ValueError(
-            f"Invalid family: {cfg.family}. Must be one of {sorted(VALID_FAMILIES)}"
+            f"Invalid family: {cfg.family}. Must be one of {sorted(VALID_FAMILIES)}",
         )
     if cfg.training_mode not in {"global", "per_family"}:
         raise ValueError("training_mode must be 'global' or 'per_family'")
@@ -105,7 +129,12 @@ def run_training(
 
     loss_fn = build_loss(cfg.loss_type, huber_delta=1.0)
     test_loss = evaluate_loss(
-        model, test_loader, dev, loss_fn, use_amp=True, show_progress=True
+        model,
+        test_loader,
+        dev,
+        loss_fn,
+        use_amp=True,
+        show_progress=True,
     )
 
     return (
@@ -128,7 +157,7 @@ def run_training_NN(
     VALID_FAMILIES = {"haar", "clifford", "quansistor", "random"}
     if cfg.training_mode == "per_family" and cfg.family not in VALID_FAMILIES:
         raise ValueError(
-            f"Invalid family: {cfg.family}. Must be one of {sorted(VALID_FAMILIES)}"
+            f"Invalid family: {cfg.family}. Must be one of {sorted(VALID_FAMILIES)}",
         )
     if cfg.training_mode not in {"global", "per_family"}:
         raise ValueError("training_mode must be 'global' or 'per_family'")
@@ -150,10 +179,10 @@ def run_training_NN(
         family_projection=family_projection,
     )
     model = NN(
-        global_in_dim = global_in_dim,
-        global_hidden = (64, 128, 64),
-        use_batchnorm = False,
-        dropout_rate = 0.1,
+        global_in_dim=global_in_dim,
+        global_hidden=(64, 128, 64),
+        use_batchnorm=False,
+        dropout_rate=0.1,
     )
 
     model, hist, dev = train_model(
@@ -173,7 +202,12 @@ def run_training_NN(
 
     loss_fn = build_loss(cfg.loss_type, huber_delta=1.0)
     test_loss = evaluate_loss(
-        model, test_loader, dev, loss_fn, use_amp=True, show_progress=True
+        model,
+        test_loader,
+        dev,
+        loss_fn,
+        use_amp=True,
+        show_progress=True,
     )
 
     return model, hist, test_loss, global_in_dim, base_dataset
@@ -185,22 +219,31 @@ def main(
     loss_type: str = "mse",  # "mse" | "huber" | "l1"
     training_mode: str = "global",  # "global" | "per_family"
     model_type: str = "nn",  # "gnn" | "nn"
+    allow_overwrite: bool = typer.Option(
+        False,
+        help="Allow overwriting an existing model checkpoint with the same name",
+    ),
     family: str | None = None,
     target: str = "sre",  # "sre" | "ee"
     show_progress: bool = typer.Option(
-        default=True, help="Show progress bars during training",
+        default=True,
+        help="Show progress bars during training",
     ),
     show_val_progress: bool = typer.Option(
-        default=False, help="Show progress bar during validation",
+        default=False,
+        help="Show progress bar during validation",
     ),
     log_every_n_batches: int = typer.Option(
-        5, help="Log training stats every N batches (0=disable)",
+        5,
+        help="Log training stats every N batches (0=disable)",
     ),
     heartbeat_secs: float = typer.Option(
-        60.0, help="Heartbeat log interval in seconds (0=disable)",
+        60.0,
+        help="Heartbeat log interval in seconds (0=disable)",
     ),
     epoch_time_warning_secs: float = typer.Option(
-        300.0, help="Warn if epoch exceeds N seconds (0=disable)",
+        300.0,
+        help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
     train_config = TrainConfig(
@@ -271,8 +314,12 @@ def main(
         },
     }
 
-    model_save_path = f"models/{model_type}_model_{loss_type}_{family if training_mode == 'per_family' else 'global'}.pt"
+    model_save_path = _resolve_model_save_path(
+        f"models/{model_type}_model_{loss_type}_{family if training_mode == 'per_family' else 'global'}.pt",
+        allow_overwrite=allow_overwrite,
+    )
     torch.save(checkpoint, model_save_path)
+    logger.info("Saved model checkpoint to %s", model_save_path)
 
 
 if __name__ == "__main__":
