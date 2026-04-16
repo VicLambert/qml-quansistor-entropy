@@ -9,7 +9,7 @@ import torch
 import typer
 
 from qqe.experiments.plotting import plot_training_curves
-from qqe.GNN.physics_aware_NN import GNN, NN
+from qqe.GNN.physics_aware_NN import GNN, NN, Regressor
 from qqe.GNN.training.datasets import build_loaders, build_loaders_NN
 from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
@@ -178,10 +178,15 @@ def run_training_NN(
         node_feature_variant=cfg.node_feature_backend_variant,
         family_projection=family_projection,
     )
-    model = NN(
-        global_in_dim = global_in_dim,
-        global_hidden = (64, 128, 64),
-        use_batchnorm = False,
+    # model = NN(
+    #     global_in_dim = global_in_dim,
+    #     global_hidden = (64, 128, 64),
+    #     use_batchnorm = False,
+    #     dropout_rate = 0.0,
+    # )
+    model = Regressor(
+        in_dim = global_in_dim,
+        hidden_dim = 128,
         dropout_rate = 0.0,
     )
 
@@ -217,13 +222,13 @@ def main(
     epochs: int = 40,
     lr: float = 0.001,
     loss_type: str = "mse",  # "mse" | "huber" | "l1"
-    training_mode: str = "global",  # "global" | "per_family"
+    training_mode: str = "per_family",  # "global" | "per_family"
     model_type: str = "nn",  # "gnn" | "nn"
     allow_overwrite: bool = typer.Option(
         False,
         help="Allow overwriting an existing model checkpoint with the same name",
     ),
-    family: str | None = None,
+    family: str | None = "haar",
     target: str = "sre",  # "sre" | "ee"
     show_progress: bool = typer.Option(
         default=True,

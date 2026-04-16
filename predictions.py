@@ -51,7 +51,7 @@ def checkpoint_path(model_kind: str, training_scope: str, family: str | None = N
     if training_scope == "family":
         if family is None:
             raise ValueError("family must be provided when training_scope='family'")
-        return Path(f"models/{model_kind}_model_{family}.pt")
+        return Path(f"models/{model_kind}_model_{loss_type}_{family}_v1.pt")
 
     return Path(f"models/{model_kind}_model_{loss_type}_global.pt")
 
@@ -493,7 +493,7 @@ def plot_fixed_qubits_vary_layers(
 def main(
     model_path: str = typer.Option(" models/nn_model_huber_global.pt", help="Path to model checkpoint."),
     model_kind: str = typer.Option("nn", help="Model type: 'gnn' or 'nn'."),
-    training_scope: str = typer.Option("global", help="'global' or 'family'."),
+    training_scope: str = typer.Option("family", help="'global' or 'family'."),
     model_family: str | None = typer.Option(None, help="Family used if training_scope='family'."),
     dataset_root: str = typer.Option("outputs/data", help="Root folder containing prediction files."),
     dataset_family: str | None = typer.Option(None, help="Optional family to predict on."),
@@ -505,7 +505,7 @@ def main(
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
-    ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type="huber")
+    ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type="mse")
     logger.info("Loading checkpoint: %s", ckpt_path)
     output_csv = f"outputs/figures/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
