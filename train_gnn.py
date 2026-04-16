@@ -10,8 +10,8 @@ import typer
 
 from qqe.experiments.plotting import plot_training_curves
 from qqe.GNN.physics_aware_NN import GNN, NN, Regressor
-from qqe.GNN.training.datasets import build_loaders, build_loaders_NN
-from qqe.GNN.training.train import build_loss, train_model
+from qqe.GNN.training.datasets import build_loaders,  qqe.GNN.training.train import build_loss, train_modelbuild_loaders_NN
+from
 from qqe.GNN.training.train_config import TrainConfig
 from qqe.GNN.training.utils import collect_files_path, evaluate_loss
 from qqe.utils import configure_logger
