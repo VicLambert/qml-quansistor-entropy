@@ -23,7 +23,7 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random",
+        "haar,random,clifford,quansistor",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
