@@ -39,6 +39,7 @@ dependencies = [
     "scipy-stubs~=1.17.0",
     "ipykernel>=7.2.0",
     "optuna>=4.8.0",
+    "torchvision>=0.26.0",
 ]
 
 [project.optional-dependencies]
@@ -65,6 +66,8 @@ line-length = 95
 profile = "black"
 known_first_party = ["qqe"]
 
+[tool.uv]
+extra-index-url = ["https://download.pytorch.org/whl/cu126"]
 
 [tool.ruff.lint]
 select = [
