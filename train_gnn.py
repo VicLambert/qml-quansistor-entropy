@@ -10,8 +10,8 @@ import typer
 
 from qqe.experiments.plotting import plot_training_curves
 from qqe.GNN.physics_aware_NN import GNN, NN, Regressor
-from qqe.GNN.training.datasets import build_loaders,  qqe.GNN.training.train import build_loss, train_modelbuild_loaders_NN
-from
+from qqe.GNN.training.datasets import build_loaders, build_loaders_NN
+from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
 from qqe.GNN.training.utils import collect_files_path, evaluate_loss
 from qqe.utils import configure_logger
@@ -150,6 +150,8 @@ def run_training(
 
 def run_training_NN(
     cfg: TrainConfig,
+    model_type: str | None = None,
+    model_params: dict | None = None,
 ):
     family_filter = cfg.family if cfg.training_mode == "per_family" else None
     family_projection = cfg.family if cfg.training_mode == "per_family" else None
@@ -178,17 +180,22 @@ def run_training_NN(
         node_feature_variant=cfg.node_feature_backend_variant,
         family_projection=family_projection,
     )
-    # model = NN(
-    #     global_in_dim = global_in_dim,
-    #     global_hidden = (64, 128, 64),
-    #     use_batchnorm = False,
-    #     dropout_rate = 0.0,
-    # )
-    model = Regressor(
-        in_dim = global_in_dim,
-        hidden_dim = 128,
-        dropout_rate = 0.0,
-    )
+    if model_type == "nn":
+        pass
+    elif model_type == "MLP":
+        model = NN(
+            in_dim = global_in_dim,
+            hidden_dim = model_params.get("hidden_dim", 128) if model_params else 64,
+            dropout_rate = model_params.get("dropout_rate", 0.0) if model_params else 0.0,
+        )
+    elif model_type == "regressor":
+        model = Regressor(
+            in_dim = global_in_dim,
+            hidden_dim = model_params.get("hidden_dim", 128) if model_params else 64,
+            dropout_rate = model_params.get("dropout_rate", 0.0) if model_params else 0.0,
+        )
+    else:
+        raise ValueError(f"Unsupported model type: {model_type}")
 
     model, hist, dev = train_model(
         model,
@@ -224,6 +231,7 @@ def main(
     loss_type: str = "mse",  # "mse" | "huber" | "l1"
     training_mode: str = "per_family",  # "global" | "per_family"
     model_type: str = "nn",  # "gnn" | "nn"
+    nn_type: str = "MLP",  # "MLP" | "regressor"
     allow_overwrite: bool = typer.Option(
         False,
         help="Allow overwriting an existing model checkpoint with the same name",
@@ -275,7 +283,7 @@ def main(
             model_hparams,
         ) = run_training(train_config)
     else:
-        model, hist, test_loss, global_in_dim, base_dataset = run_training_NN(train_config)
+        model, hist, test_loss, global_in_dim, base_dataset = run_training_NN(train_config, model_type=nn_type, model_params={"hidden_dim": 128, "dropout_rate": 0.1})
         node_in_dim = None
         model_hparams = {
             "gnn_hidden": None,

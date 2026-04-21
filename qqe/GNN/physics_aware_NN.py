@@ -85,70 +85,24 @@ def _get_activation(activation: str) -> nn.Module:
 
 
 class NN(nn.Module):
-    def __init__(
-        self,
-        global_in_dim: int = 8,
-        global_hidden: Sequence[int] = (64, 64, 64),
-        activation: str = "relu",
-        use_batchnorm: bool = False,
-        dropout_rate: float = 0.1,
-    ):
+    def __init__(self, in_dim: int, hidden_dim: int = 64, dropout_rate: float = 0.0):
         super().__init__()
-        self.global_in_dim = global_in_dim
-        self.hidden_layers = tuple(int(h) for h in global_hidden)
-        self.use_batchnorm = use_batchnorm
+        dr = float(dropout_rate) if dropout_rate is not None else 0.0
+        self.net = nn.Sequential(
+            nn.Linear(in_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(p=dr),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(p=dr),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(p=dr),
+            nn.Linear(hidden_dim, 1),
+        )
 
-        activation_layer = _get_activation(activation)
-
-        feature_layers: list[nn.Module] = []
-
-        previous_dim = self.global_in_dim
-
-        for hidden_dim in self.hidden_layers:
-            feature_layers.append(nn.Linear(previous_dim, hidden_dim))
-            if self.use_batchnorm:
-                feature_layers.append(nn.BatchNorm1d(hidden_dim))
-            feature_layers.append(activation_layer)
-            if dropout_rate:
-                feature_layers.append(nn.Dropout(p=dropout_rate))
-            previous_dim = hidden_dim
-        self.feature_extractor = nn.Sequential(*feature_layers) if feature_layers else nn.Identity()
-
-        last_dim = self.hidden_layers[-1] if self.hidden_layers else previous_dim
-        self.regressor = nn.Linear(last_dim, 1)
-
-        self._initialize_weights(activation_layer)
-
-    def _initialize_weights(self, activation_layer: nn.Module) -> None:
-        nonlinearity = "relu"
-        negative_slope = 0.01 if isinstance(activation_layer, nn.LeakyReLU) else 0.0
-
-        for module in self.modules():
-            if isinstance(module, nn.Linear):
-                nn.init.kaiming_uniform_(
-                    module.weight,
-                    a=negative_slope,
-                    mode="fan_in",
-                    nonlinearity=nonlinearity,
-                )
-                if module.bias is not None:
-                    fan_in, _ = nn.init._calculate_fan_in_and_fan_out(module.weight)
-                    bound = 1 / math.sqrt(fan_in) if fan_in > 0 else 0.0
-                    nn.init.uniform_(module.bias, -bound, bound)
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Compute regression prediction.
-
-        Expects x with shape [batch_size, input_dim]. Returns a tensor with
-        shape [batch_size], squeezing the final singleton dimension.
-        """
-        if x.dim() != 2 or x.size(-1) != self.global_in_dim:
-            raise ValueError(
-                f"Expected input of shape [batch, {self.global_in_dim}], got {tuple(x.shape)}"
-            )
-
-        features = self.feature_extractor(x)
-        output = self.regressor(features)
-        return output.squeeze(-1)
+    def forward(self, g: torch.Tensor) -> torch.Tensor:
+        return self.net(g)
 
 class GNN(nn.Module):
     def __init__(
