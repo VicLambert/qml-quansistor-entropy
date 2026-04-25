@@ -1,0 +1,29 @@
+{
+  "backend": "pennylane",
+  "method": "fwht",
+  "n_bins": 50,
+  "n_seeds": 10,
+  "families": [
+    "haar",
+    "random",
+    "quansistor",
+    "clifford"
+  ],
+  "qubits_range": [
+    4,
+    6,
+    8
+  ],
+  "layers_range": [
+    1,
+    2,
+    4,
+    25,
+    50,
+    100
+  ],
+  "entries_completed": 180,
+  "use_dask": true,
+  "compute_sre": true,
+  "index_file": "index_clifford.jsonl"
+}
