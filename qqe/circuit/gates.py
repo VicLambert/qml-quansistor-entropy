@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 import numpy as np
+from scipy.linalg import expm
 from qqe.circuit.spec import GateSpec
 
 
@@ -99,16 +100,37 @@ def circ_Y(a, b, g):
         ],
     )
 
+def random_hermitian(d: int, rng: np.random.Generator) -> np.ndarray:
+    """Generates a random Hermitian matrix of dimension d x d."""
+    A = rng.normal(size=(d, d)) + 1j * rng.normal(size=(d, d))
+    h = A + A.conj().T
+    norm = np.linalg.norm(h)
+    return h / norm if norm > 0 else h
 
-def haar_unitary_gate(d, rng):
-    a, b = rng.normal(size=(d, d)), rng.normal(size=(d, d))
+def exp_hermitian(d: int, rng: np.random.Generator, strength: float) -> np.ndarray:
+    """Generates a Haar random unitary matrix of dimension d x d."""
+    h = random_hermitian(d, rng)
+    return expm(-1j * strength * h)
 
-    Z = a + 1j * b
-    Q, R = np.linalg.qr(Z)
+def haar_unitary_gate(
+        d: int,
+        rng: np.random.Generator,
+        mode: str = "full_haar",
+        strength: float = 1.0,
+    ) -> np.ndarray:
+    if mode == "full_haar":
+        a, b = rng.normal(size=(d, d)), rng.normal(size=(d, d))
 
-    Lambda = np.diag([R[i, i] / np.abs(R[i, i]) for i in range(d)])
-    return np.dot(Q, Lambda)
+        Z = a + 1j * b
+        Q, R = np.linalg.qr(Z)
 
+        Lambda = np.diag([R[i, i] / np.abs(R[i, i]) for i in range(d)])
+        return np.dot(Q, Lambda)
+    elif mode == "exp_hermitian":
+        return exp_hermitian(d, rng, strength)
+    elif mode == "identity":
+        return np.eye(d, dtype=complex)
+    raise ValueError(f"Unknown Haar mode: {mode!r}")
 
 def random_quansistor_gate(a, b, g, axis):
     """Generate a random quansistor gate from symmetry class X or Y.
@@ -249,7 +271,7 @@ def gate_unitary(gate: GateSpec) -> np.ndarray:
             msg = "Haar gate requires a seed."
             raise ValueError(msg)
         rng = np.random.default_rng(gate.seed)
-        U = haar_unitary_gate(d=gate.d ** len(gate.wires), rng=rng)
+        U = haar_unitary_gate(d=gate.d ** len(gate.wires), rng=rng, mode=gate.params[2], strength=gate.params[1])
         U = np.asarray(U, dtype=complex)
         expected = (gate.d ** len(gate.wires), gate.d ** len(gate.wires))
         if U.shape != expected:

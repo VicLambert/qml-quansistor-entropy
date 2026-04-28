@@ -258,19 +258,25 @@ class HaarBrickwork:
         pattern: str = "brickwork",
         **kwargs: Any,
     ) -> CircuitSpec:
+        params = dict(kwargs)
+
         spec = CircuitSpec(
-            n_qubits=n_qubits,
-            n_layers=n_layers,
-            d=d,
-            global_seed=seed,
+            n_qubits=int(n_qubits),
+            n_layers=int(n_layers),
+            d=int(d),
+            global_seed=int(seed),
             family=self.name,
             connectivity=connectivity,
             pattern=pattern,
-            params={},
+            params=params,
         )
         return replace(spec, gates=tuple(self.gates(spec)))
 
     def gates(self, spec: CircuitSpec) -> Generator[GateSpec]:
+        gate_probability = float(spec.params.get("gate_probability", 1.0))
+        haar_strength = float(spec.params.get("haar_strength", 1.0))
+        haar_mode = str(spec.params.get("haar_mode", "full_haar"))
+
         for layer in range(spec.n_layers):
             pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
 
@@ -282,21 +288,79 @@ class HaarBrickwork:
                     wires=(a, b),
                     kind="haar",
                 )
+                rng = np.random.default_rng(s)
+                if rng.random() > gate_probability:
+                    yield GateSpec(
+                        kind="I",
+                        wires=(int(a),),
+                        d=spec.d,
+                        seed=s,
+                        tags=("layer", f"L{layer}", "haar_skipped_identity", f"wire_{a}"),
+                        params=(),
+                    )
+                    yield GateSpec(
+                        kind="I",
+                        wires=(int(b),),
+                        d=spec.d,
+                        seed=s,
+                        tags=("layer", f"L{layer}", "haar_skipped_identity", f"wire_{b}"),
+                        params=(),
+                    )
+                    continue
+
                 yield GateSpec(
                     kind="haar",
                     wires=(a, b),
                     d=spec.d,
                     seed=s,
                     tags=("layer", f"L{layer}", "haar"),
-                    params=(s,),
+                    params=(s, float(haar_strength), haar_mode),
                 )
 
+
+
+def quansistor_blocks(n_qubits: int, n_layer: int) -> list[tuple[int, int, int, int]]:
+    start = (n_layer % 2) * 2  # shift by 2 wires each odd layer
+    blocks: list[tuple[int, int, int, int]] = []
+    for i in range(start, n_qubits - 3, 4):
+        blocks.append((i, i + 1, i + 2, i + 3))
+    return blocks
+
+def leftover_pairs(n_qubits: int, used: set[int], connectivity: str) -> list[tuple[int, int]]:
+    left = [i for i in range(n_qubits) if i not in used]
+    leftover = set(left)
+
+    pairs: list[tuple[int, int]] = []
+    used = set()
+
+    for i in range(n_qubits - 1):
+        a, b = i, i + 1
+        if a in leftover and b in leftover and a not in used and b not in used:
+            pairs.append((a, b))
+            used.update((a, b))
+    if connectivity in ("loop", "ring"):
+        a, b = n_qubits - 1, 0
+        if a in leftover and b in leftover and a not in used and b not in used:
+            pairs.append((a, b))
+            used.update((a, b))
+    return pairs
+
+def kv(**kwargs) -> tuple[str, ...]:
+    # deterministic ordering
+    return tuple(f"{k}={v}" for k, v in sorted(kwargs.items()))
 
 def _axis_from_seed(seed: int) -> str:
     # deterministic, reproducible across runs
     rng = np.random.default_rng(seed)
     return "X" if rng.integers(0, 2) == 0 else "Y"
 
+_BLOCK_STEPS = (
+    (0, 1),  # q0 q1
+    (2, 3),  # q2 q3
+    (1, 2),  # q1 q2
+    (0, 1),  # q0 q1
+    (2, 3),  # q2 q3
+)
 
 @dataclass(frozen=True)
 class QuansistorBrickwork:
@@ -313,6 +377,7 @@ class QuansistorBrickwork:
         pattern: str = "brickwork",
         **kwargs: Any,
     ) -> CircuitSpec:
+        params = dict(kwargs)
         spec = CircuitSpec(
             n_qubits=n_qubits,
             n_layers=n_layers,
@@ -321,9 +386,46 @@ class QuansistorBrickwork:
             family=self.name,
             connectivity=connectivity,
             pattern=pattern,
-            params={},
+            params=params,
         )
         return replace(spec, gates=tuple(self.gates(spec)))
+    def sample_quansistor_params(
+            self,
+            rng: np.random.Generator,
+            param_regime: str,
+            param_scale: float | None = None,
+        ) -> tuple[float, float, float]:
+            if param_regime == "identity_like":
+                sigma = 0.02 if param_scale is None else float(param_scale)
+                a, b, g = rng.normal(0.0, sigma, 3)
+
+            elif param_regime == "weak":
+                sigma = 0.20 if param_scale is None else float(param_scale)
+                a, b, g = rng.normal(0.0, sigma, 3)
+
+            elif param_regime == "moderate":
+                sigma = 0.75 if param_scale is None else float(param_scale)
+                a, b, g = rng.normal(0.0, sigma, 3)
+
+            elif param_regime == "structured_equal_ab":
+                scale = np.pi if param_scale is None else float(param_scale) * np.pi
+                base = rng.uniform(-scale, scale)
+                g = rng.uniform(-0.25, 0.25)
+                a, b = base, base
+
+            elif param_regime == "structured_opposite_ab":
+                scale = np.pi if param_scale is None else float(param_scale) * np.pi
+                base = rng.uniform(-scale, scale)
+                g = rng.uniform(-0.25, 0.25)
+                a, b = base, -base
+
+            elif param_regime == "generic_uniform":
+                a, b, g = rng.uniform(-np.pi, np.pi, 3)
+
+            else:
+                raise ValueError(f"Unknown param_regime={param_regime}")
+
+            return float(a), float(b), float(g)
 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         if spec.pattern == "custom":
@@ -390,12 +492,43 @@ class QuansistorBrickwork:
                         kind="quansistor",
                     )
                     rng = np.random.default_rng(s)
-                    a_, b_, g_ = rng.standard_normal(3)
-                    axis = rng.choice(["X","Y"])
-                    params=(float(a_), float(b_), float(g_), str(axis))
+
+                    gate_probability = float(spec.params.get("gate_probability", 1.0))
+                    param_regime = str(spec.params.get("param_regime", "generic_uniform"))
+                    param_scale = spec.params.get("param_scale", None)
+
+                    a_, b_, g_ = self.sample_quansistor_params(
+                        rng=rng,
+                        param_regime=param_regime,
+                        param_scale=param_scale,
+                    )
+
+                    if rng.random() > gate_probability:
+                        yield GateSpec(
+                            kind="I",
+                            wires=(int(a),),
+                            d=spec.d,
+                            seed=s,
+                            tags=("layer", f"L{layer}", "quansistor_skipped_identity", f"wire_{a}"),
+                            params=(),
+                        )
+                        yield GateSpec(
+                            kind="I",
+                            wires=(int(b),),
+                            d=spec.d,
+                            seed=s,
+                            tags=("layer", f"L{layer}", "quansistor_skipped_identity", f"wire_{b}"),
+                            params=(),
+                        )
+                        continue
+
+
+                    axis = str(rng.choice(["X", "Y"]))
+                    params = (float(a_), float(b_), float(g_), axis)
+
                     yield GateSpec(
                         kind="quansistor",
-                        wires=(a, b),
+                        wires=(int(a), int(b)),
                         d=spec.d,
                         seed=s,
                         tags=(
@@ -404,9 +537,12 @@ class QuansistorBrickwork:
                             "quansistor",
                             f"axis_{axis}",
                             f"wire_{a}_{b}",
+                            f"regime_{param_regime}",
                         ),
                         params=params,
                     )
+
+
 @dataclass(frozen=True)
 class RandomCircuit:
     name: str = "random"
@@ -424,6 +560,8 @@ class RandomCircuit:
         pattern: str = "random",
         **kwargs: Any,
     ) -> CircuitSpec:
+        params = dict(kwargs)
+
         spec = CircuitSpec(
             n_qubits=n_qubits,
             n_layers=n_layers,
@@ -432,7 +570,7 @@ class RandomCircuit:
             family=self.name,
             connectivity=connectivity,
             pattern=pattern,
-            params={},
+            params=params,
         )
         return replace(spec, gates=tuple(self.gates(spec)))
 
@@ -470,10 +608,37 @@ class RandomCircuit:
             pairs.append((a, b))
         return pairs
 
+    def _sample_rotation_angle(
+        self,
+        rng: np.random.Generator,
+        angle_regime: str,
+        angle_scale: float | None,
+    ) -> float:
+        if angle_regime == "identity_like":
+            scale = 0.02 if angle_scale is None else float(angle_scale)
+            return float(rng.normal(0.0, scale))
+
+        if angle_regime == "clifford_like":
+            scale = 0.02 if angle_scale is None else float(angle_scale)
+            base = float(rng.choice([0.0, np.pi / 2, np.pi, 3 * np.pi / 2]))
+            return float(base + rng.normal(0.0, scale))
+
+        if angle_regime == "small_angles":
+            scale = 0.25 if angle_scale is None else float(angle_scale)
+            return float(rng.normal(0.0, scale))
+
+        if angle_regime == "generic":
+            return float(rng.uniform(0.0, 2 * np.pi))
+
+        raise ValueError(f"Unknown angle_regime={angle_regime}")
+
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         p_cnot = float(spec.params.get("p_cnot", self.p_cnot))
         rot_set = tuple(spec.params.get("rot_set", self.rot_set))
         n = spec.n_qubits
+        gate_probability = float(spec.params.get("gate_probability", 1.0))
+        angle_regime = str(spec.params.get("angle_regime", "generic"))
+        angle_scale = spec.params.get("angle_scale", None)
 
         allowed_edges = self._allowed_edges(n, spec.connectivity)
 
@@ -489,21 +654,27 @@ class RandomCircuit:
                     kind="random",
                 )
                 rng1 = np.random.default_rng(s1)
-                kind = str(rng1.choice(rot_set))
-                theta = rng1.uniform(0, 2 * np.pi)
-                yield GateSpec(
-                    kind=kind,
-                    wires=(wire,),
-                    d=spec.d,
-                    seed=s1,
-                    params=(theta,),
-                    tags=(
-                        "layer",
-                        f"L{step}",
-                        "1q",
-                        kind,
-                    ),
-                )
+                if rng1.random() > gate_probability:
+                    yield GateSpec(
+                        kind="I",
+                        wires=(int(wire),),
+                        d=spec.d,
+                        seed=s1,
+                        tags=("layer", f"L{step}", "random_skipped_identity", f"wire_{wire}"),
+                        params=(),
+                    )
+                else:
+                    kind = str(rng1.choice(rot_set))
+                    theta = self._sample_rotation_angle(rng1, angle_regime, angle_scale)
+
+                    yield GateSpec(
+                        kind=kind,
+                        wires=(int(wire),),
+                        d=spec.d,
+                        seed=s1,
+                        tags=("layer", f"L{step}", "random_rotation", f"wire_{wire}", f"regime_{angle_regime}"),
+                        params=(theta,),
+                    )
             s2 = gate_seed(
                 spec.global_seed,
                 layer=step,
@@ -525,7 +696,7 @@ class RandomCircuit:
                 )
                 rng3 = np.random.default_rng(s3)
 
-                if rng3.random() < p_cnot:
+                if rng3.random() < p_cnot * gate_probability:
                     ctrl, tgt = (a, b) if rng3.random() < 0.5 else (b, a)
                     yield GateSpec(
                         kind="CNOT",

@@ -185,6 +185,175 @@ def trim_memory() -> None:
     except Exception:
         pass
 
+def sample_t_count(n_layers: int, rng: np.random.Generator) -> tuple[str, int]:
+    max_t = 2 * n_layers
+
+    regime: str = rng.choice(
+        ["zero", "low", "medium", "high"],
+        p=[0.15, 0.35, 0.30, 0.20],
+    )
+    # print(f"Sampling t count with regime: {regime}")
+
+    if regime == "zero":
+        N_T: int = 0
+
+    if regime == "low":
+        N_T = rng.integers(1, max(2, max_t // 4 + 1))
+
+    if regime == "medium":
+        N_T = rng.integers(max(1, max_t // 4), max(2, max_t // 2 + 1))
+
+    if regime == "high":
+        N_T = rng.integers(max(1, max_t // 2), max_t + 1)
+
+    return (regime, int(N_T))
+
+def sample_haar_controls(rng: np.random.Generator) -> dict[str, Any]:
+    regime = str(rng.choice(
+            ["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
+            p=[0.10, 0.20, 0.20, 0.15, 0.20, 0.15],
+        ),
+    )
+
+    if regime == "none":
+        p_haar = 0.0
+        haar_strength = 0.0
+        haar_mode = "identity"
+
+    elif regime == "sparse_weak":
+        p_haar = rng.uniform(0.05, 0.25)
+        haar_strength = rng.uniform(0.02, 0.20)
+        haar_mode = "exp_hermitian"
+    elif regime == "dense_weak":
+        p_haar = rng.uniform(0.60, 1.0)
+        haar_strength = rng.uniform(0.02, 0.20)
+        haar_mode = "exp_hermitian"
+    elif regime == "sparse_full":
+        p_haar = rng.uniform(0.05, 0.25)
+        haar_strength = 1.0
+        haar_mode = "full_haar"
+    elif regime == "medium":
+        p_haar = rng.uniform(0.25, 0.70)
+        haar_strength = rng.uniform(0.20, 0.80)
+        haar_mode = "exp_hermitian"
+    elif regime == "full":
+        p_haar = rng.uniform(0.70, 1.0)
+        haar_strength = 1.0
+        haar_mode = "full_haar"
+    else:
+        raise ValueError(f"Unknown regime: {regime}")
+    return {
+        "sampling_regime": regime,
+        "gate_probability": p_haar,
+        "haar_probability": p_haar,
+        "haar_strength": haar_strength,
+        "haar_mode": haar_mode,
+    }
+
+
+
+def sample_generation_controls(
+    family: str,
+    n_layers: int,
+    seed: int,
+) -> dict[str, Any]:
+    rng = np.random.default_rng(int(seed))
+
+    controls: dict[str, Any] = {
+        "sampling_regime": "default",
+        "tdoping": None,
+        "t_count": None,
+        "gate_probability": None,
+        "angle_regime": None,
+        "angle_scale": None,
+        "haar_probability": None,
+        "param_regime": None,
+        "param_scale": None,
+    }
+
+    if family == "clifford":
+        regime, t_count = sample_t_count(int(n_layers), rng)
+
+        controls["sampling_regime"] = str(regime)
+        controls["t_count"] = int(t_count)
+        controls["tdoping"] = TdopingRules(count=int(t_count), per_layer=2)
+
+    elif family == "haar":
+        controls.update(sample_haar_controls(rng))
+
+    elif family == "random":
+        regime = str(
+            rng.choice(
+                ["identity_like", "clifford_like", "small_angles", "generic"],
+                p=[0.15, 0.20, 0.30, 0.35],
+            ),
+        )
+
+        controls["sampling_regime"] = regime
+        controls["angle_regime"] = regime
+
+        if regime == "identity_like":
+            controls["gate_probability"] = float(rng.uniform(0.05, 0.20))
+            controls["angle_scale"] = 0.02
+
+        elif regime == "clifford_like":
+            controls["gate_probability"] = float(rng.uniform(0.20, 0.60))
+            controls["angle_scale"] = 0.02
+
+        elif regime == "small_angles":
+            controls["gate_probability"] = float(rng.uniform(0.30, 0.80))
+            controls["angle_scale"] = 0.25
+
+        elif regime == "generic":
+            controls["gate_probability"] = float(rng.uniform(0.60, 1.00))
+            controls["angle_scale"] = None
+
+        else:
+            raise ValueError(f"Unknown random regime={regime}")
+
+    elif family == "quansistor":
+        regime = str(
+            rng.choice(
+                [
+                    "identity_like",
+                    "weak",
+                    "moderate",
+                    "structured_equal_ab",
+                    "structured_opposite_ab",
+                    "generic_uniform",
+                ],
+                p=[0.10, 0.20, 0.25, 0.15, 0.15, 0.15],
+            ),
+        )
+
+        controls["sampling_regime"] = regime
+        controls["param_regime"] = regime
+
+        if regime == "identity_like":
+            controls["gate_probability"] = float(rng.uniform(0.05, 0.30))
+            controls["param_scale"] = 0.02
+
+        elif regime == "weak":
+            controls["gate_probability"] = float(rng.uniform(0.20, 0.60))
+            controls["param_scale"] = 0.20
+
+        elif regime == "moderate":
+            controls["gate_probability"] = float(rng.uniform(0.40, 0.85))
+            controls["param_scale"] = 0.75
+
+        elif regime == "structured_equal_ab" or regime == "structured_opposite_ab":
+            controls["gate_probability"] = float(rng.uniform(0.30, 0.80))
+            controls["param_scale"] = 1.00
+
+        elif regime == "generic_uniform":
+            controls["gate_probability"] = float(rng.uniform(0.50, 1.00))
+            controls["param_scale"] = None
+
+        else:
+            msg = f"Unknown quansistor regime={regime}"
+            raise ValueError(msg)
+
+    return controls
 
 def compute_entry(
     config: DataGenConfig,
@@ -207,17 +376,42 @@ def compute_entry(
         if path.exists():
             return {"cid": cid, "path": str(path), "cached": True}
 
+        controls = sample_generation_controls(
+            family=family,
+            n_layers=int(n_layers),
+            seed=int(seed),
+        )
+
+        make_spec_kwargs = {
+            "d": 2,
+            "seed": int(seed),
+        }
         family_cls = FAMILY_REGISTRY[family]
         family_obj = family_cls()
 
-        tdoping = TdopingRules(count=2 * int(n_layers), per_layer=2)
+        if family == "clifford":
+            make_spec_kwargs["tdoping"] = controls["tdoping"]
+
+        elif family == "random":
+            make_spec_kwargs["angle_regime"] = controls["angle_regime"]
+            make_spec_kwargs["angle_scale"] = controls.get("angle_scale")
+            make_spec_kwargs["gate_probability"] = controls["gate_probability"]
+
+        elif family == "haar":
+            make_spec_kwargs["gate_probability"] = controls["gate_probability"]
+            make_spec_kwargs["haar_probability"] = controls["haar_probability"]
+            make_spec_kwargs["haar_strength"] = controls["haar_strength"]
+            make_spec_kwargs["haar_mode"] = controls["haar_mode"]
+
+        elif family == "quansistor":
+            make_spec_kwargs["param_regime"] = controls["param_regime"]
+            make_spec_kwargs["param_scale"] = controls.get("param_scale")
+            make_spec_kwargs["gate_probability"] = controls["gate_probability"]
 
         spec = family_obj.make_spec(
             int(n_qubits),
             int(n_layers),
-            d=2,
-            seed=int(seed),
-            tdoping=tdoping if family == "clifford" else None,
+            **make_spec_kwargs,
         )
 
         gates = cast("tuple[GateSpec, ...] | None", spec.gates)

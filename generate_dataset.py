@@ -28,14 +28,14 @@ def main(
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
-        50,
+        200,
         help="Number of seeds per (family, qubits, layers)",
     ),
     qubits_min: int = typer.Option(4, help="Minimum number of qubits"),
     qubits_max: int = typer.Option(10, help="Maximum number of qubits (inclusive)"),
     qubits_step: int = typer.Option(2, help="Step for qubits range"),
     layers_min: int = typer.Option(2, help="Minimum number of layers"),
-    layers_max: int = typer.Option(150, help="Maximum number of layers (inclusive)"),
+    layers_max: int = typer.Option(100, help="Maximum number of layers (inclusive)"),
     layers_step: int = typer.Option(2, help="Step for layers range"),
     max_configs: int | None = typer.Option(
         None,
