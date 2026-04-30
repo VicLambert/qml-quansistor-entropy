@@ -236,7 +236,7 @@ def main(
         False,
         help="Allow overwriting an existing model checkpoint with the same name",
     ),
-    family: str | None = "haar",
+    family: str | None = "clifford",
     target: str = "sre",  # "sre" | "ee"
     show_progress: bool = typer.Option(
         default=True,
@@ -298,7 +298,7 @@ def main(
         hist,
         title=f"{model_type.upper()} SRE regression",
         save_fig=True,
-        fig_path=f"outputs/figures/training_curves/training_curves_{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}.png",
+        fig_path=f"outputs/figures/training_curves/new/training_curves_{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}.png",
     )
 
     checkpoint = {
