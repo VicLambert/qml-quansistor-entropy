@@ -530,6 +530,7 @@ def compute_entry(
                 "method": config.method,
                 "representation": config.representation,
                 "n_bins": int(config.n_bins),
+                "regime": controls["sampling_regime"],
             },
         }
 

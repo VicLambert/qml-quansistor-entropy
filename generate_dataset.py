@@ -19,16 +19,16 @@ def main(
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling) or EE method (renyi or von_neumann)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
-        "outputs/data/",
+        "data/training_data",
         help="Output folder for results",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "haar,quansistor",
+        "random,clifford",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
-        200,
+        175,
         help="Number of seeds per (family, qubits, layers)",
     ),
     qubits_min: int = typer.Option(4, help="Minimum number of qubits"),
@@ -43,7 +43,7 @@ def main(
     ),
     dask_n_workers: int = typer.Option(4, help="Number of local Dask workers when --use-dask"),
     dask_memory_per_worker: str = typer.Option(
-        "64GiB",
+        "32GiB",
         help="Per-worker memory limit for Dask (for example: 6GB, 8000MB, auto)",
     ),
 ):
