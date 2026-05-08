@@ -4,12 +4,15 @@ from __future__ import annotations
 import logging
 
 from pathlib import Path
+from dataclasses import asdict, dataclass
+import torch
 
 from qqe.GNN.physics_aware_NN import GNN, NN, Regressor
 from qqe.GNN.training.datasets import build_loaders, build_loaders_NN
 from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
 from qqe.GNN.training.utils import collect_files_path, evaluate_loss
+from qqe.GNN.parameter_search.helpers import objective_GNN, objective_NN
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +30,7 @@ def _resolve_model_save_path(base_path: str, allow_overwrite: bool = False) -> s
     while True:
         candidate = parent / f"{stem}_v{counter}{suffix}"
         if not candidate.exists():
-            logger.warning(
+            print(
                 "Model checkpoint already exists at %s. Saving to %s instead.",
                 path,
                 candidate,
@@ -36,30 +39,116 @@ def _resolve_model_save_path(base_path: str, allow_overwrite: bool = False) -> s
         counter += 1
 
 
-def run_training(
-    cfg: TrainConfig,
-    model_hparams: dict | None = None,
-    train_hparams: dict | None = None,
+MODEL_REGISTRY = {
+    "gnn": {
+        "build_loaders": build_loaders,
+        "build_model": lambda node_in_dim, global_in_dim, hparams: GNN(
+            node_in_dim=node_in_dim,
+            global_in_dim=global_in_dim,
+            gnn_hidden=hparams.get("gnn_hidden", 32),
+            gnn_heads=hparams.get("gnn_heads", 8),
+            global_hidden=hparams.get("global_hidden", 16),
+            reg_hidden=hparams.get("reg_hidden", 16),
+            num_layers=hparams.get("num_layers", 5),
+            dropout_rate=hparams.get("dropout_rate", 0.1),
+        ),
+        "returns_nodes_dim": True,
+        "objective_fn": objective_GNN,
+    },
+    "nn": {
+        "build_loaders": build_loaders_NN,
+        "build_model": lambda node_in_dim, global_in_dim, hparams: NN(
+            in_dim=global_in_dim,
+            hidden_dim=hparams.get("hidden_dim", 64),
+            dropout_rate=hparams.get("dropout_rate", 0.1),
+        ),
+        "returns_nodes_dim": False,
+        "objective_fn": objective_NN,
+    },
+    "regressor": {
+        "build_loaders": build_loaders_NN,
+        "build_model": lambda node_in_dim, global_in_dim, hparams: Regressor(
+            in_dim=global_in_dim,
+            hidden_dim=hparams.get("hidden_dim", 64),
+            dropout_rate=hparams.get("dropout_rate", 0.1),
+        ),
+        "returns_nodes_dim": False,
+    },
+}
+
+def train(
+    *,
+    model_type: str = "gnn",
+    epochs: int = 150,
+    lr: float = 1e-3,
+    loss_type: str = "huber",   # "mse" | "huber"
+    batch_size: int = 32,
+    training_mode: str = "global",  # "global" | "per_family"
+    family: str | None = None,  # required if training_mode == "per_family"
+    target: str = "sre",
+    model_hparams: dict[str, int | float] | None = None,
+    train_hparams: dict[str, int | float] | None = None,
+    training_data_dir: str = "outputs/data",
+    allow_overwrite: bool = False,
+    save_checkpoint: bool = True,
+    save_fig: bool = True,
+    show_progress: bool = True,
+    show_val_progress: bool = False,
+    log_every_n_batches: int = 10,
+    heartbeat_secs: float = 60.0,
+    epoch_time_warning_secs: float = 500.0,
 ):
-    family_filter = cfg.family if cfg.training_mode == "per_family" else None
-    family_projection = cfg.family if cfg.training_mode == "per_family" else None
-
     VALID_FAMILIES = {"haar", "clifford", "quansistor", "random"}
-    if cfg.training_mode == "per_family" and cfg.family not in VALID_FAMILIES:
-        raise ValueError(
-            f"Invalid family: {cfg.family}. Must be one of {sorted(VALID_FAMILIES)}",
-        )
-    if cfg.training_mode not in {"global", "per_family"}:
-        raise ValueError("training_mode must be 'global' or 'per_family'")
-    if cfg.training_mode == "per_family" and cfg.family is None:
-        raise ValueError("family must be provided when training_mode='per_family'")
+    if model_type not in MODEL_REGISTRY:
+        raise ValueError(f"Unsupported model_type: {model_type}. Must be one of {sorted(MODEL_REGISTRY)}")
 
-    data_paths = collect_files_path("outputs/data", family=family_filter)
+    if training_mode not in {"global", "per_family"}:
+        raise ValueError("training_mode must be 'global' or 'per_family'")
+
+    if training_mode == "per_family":
+        if family is None:
+            raise ValueError("family must be provided when training_mode='per_family'")
+        if family not in VALID_FAMILIES:
+            raise ValueError(
+                f"Invalid family: {family}. Must be one of {sorted(VALID_FAMILIES)}"
+            )
+
+    print(f"Starting training | model_type={model_type} | training_mode={training_mode} | family={family} | loss_type={loss_type}")
+    cfg = TrainConfig(
+        epochs=epochs,
+        lr=lr,
+        loss_type=loss_type,
+        batch_size=batch_size,
+        training_mode=training_mode,
+        family=family,
+        target=target,
+        show_progress=show_progress,
+        show_val_progress=show_val_progress,
+        log_batch_loss_every=log_every_n_batches,
+        heartbeat=heartbeat_secs,
+        epoch_warning=epoch_time_warning_secs,
+    )
+    print("Training configuration done.")
+
+    model_hparams = {} if model_hparams is None else dict(model_hparams)
+    train_hparams = {} if train_hparams is None else dict(train_hparams)
+
+    family_filter = family if training_mode == "per_family" else None
+    family_projection = family if training_mode == "per_family" else None
+
+    print("Collecting data paths...")
+    data_paths = collect_files_path(training_data_dir, family=family_filter)
     if not data_paths:
         raise RuntimeError("No data paths found.")
+    print(f"Found {len(data_paths)} data paths.")
+    print("Data paths collected.")
 
-    train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = (
-        build_loaders(
+    spec = MODEL_REGISTRY[model_type]
+    print(f"Building loaders and model for model_type={model_type}...")
+
+    loader_fn = spec["build_loaders"]
+    if spec["returns_nodes_dim"]:
+        train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = loader_fn(
             data_paths,
             batch_size=cfg.batch_size,
             seed=cfg.seed,
@@ -69,128 +158,23 @@ def run_training(
             node_feature_variant=cfg.node_feature_backend_variant,
             family_projection=family_projection,
         )
-    )
-
-    default_model_hparams = {
-        "gnn_hidden": 32,
-        "gnn_heads": 8,
-        "global_hidden": 16,
-        "reg_hidden": 16,
-        "num_layers": 3,
-        "dropout_rate": 0.1,
-    }
-    if model_hparams:
-        default_model_hparams.update(model_hparams)
-
-    model = GNN(
-        node_in_dim=node_in_dim,
-        global_in_dim=global_in_dim,
-        gnn_hidden=default_model_hparams["gnn_hidden"],
-        gnn_heads=default_model_hparams["gnn_heads"],
-        global_hidden=default_model_hparams["global_hidden"],
-        reg_hidden=default_model_hparams["reg_hidden"],
-        num_layers=default_model_hparams["num_layers"],
-        dropout_rate=default_model_hparams["dropout_rate"],
-    )
-
-    default_train_hparams = {
-        "weight_decay": 0.0,
-        "grad_clip": 5.0,
-        "early_stopping_patience": 15,
-        "early_stopping_min_delta": 0.0,
-    }
-    if train_hparams:
-        default_train_hparams.update(train_hparams)
-
-    model, hist, dev = train_model(
-        model,
-        train_loader,
-        val_loader,
-        epochs=cfg.epochs,
-        lr=cfg.lr,
-        loss_type=cfg.loss_type,
-        scheduler="plateau",
-        show_progress=cfg.show_progress,
-        show_val_progress=cfg.show_val_progress,
-        log_every_n_batches=cfg.log_batch_loss_every,
-        heartbeat_secs=cfg.heartbeat,
-        epoch_time_warning_secs=cfg.epoch_warning,
-        weight_decay=default_train_hparams["weight_decay"],
-        grad_clip=default_train_hparams["grad_clip"],
-        early_stopping_patience=default_train_hparams["early_stopping_patience"],
-        early_stopping_min_delta=default_train_hparams["early_stopping_min_delta"],
-    )
-
-    loss_fn = build_loss(cfg.loss_type, huber_delta=1.0)
-    test_loss = evaluate_loss(
-        model,
-        test_loader,
-        dev,
-        loss_fn,
-        use_amp=True,
-        show_progress=True,
-    )
-
-    return (
-        model,
-        hist,
-        test_loss,
-        node_in_dim,
-        global_in_dim,
-        base_dataset,
-        default_model_hparams,
-    )
-
-
-def run_training_NN(
-    cfg: TrainConfig,
-    model_type: str | None = None,
-    model_params: dict | None = None,
-):
-    family_filter = cfg.family if cfg.training_mode == "per_family" else None
-    family_projection = cfg.family if cfg.training_mode == "per_family" else None
-
-    VALID_FAMILIES = {"haar", "clifford", "quansistor", "random"}
-    if cfg.training_mode == "per_family" and cfg.family not in VALID_FAMILIES:
-        raise ValueError(
-            f"Invalid family: {cfg.family}. Must be one of {sorted(VALID_FAMILIES)}",
-        )
-    if cfg.training_mode not in {"global", "per_family"}:
-        raise ValueError("training_mode must be 'global' or 'per_family'")
-    if cfg.training_mode == "per_family" and cfg.family is None:
-        raise ValueError("family must be provided when training_mode='per_family'")
-
-    data_paths = collect_files_path("outputs/data", family=family_filter)
-    if not data_paths:
-        raise RuntimeError("No data paths found.")
-
-    train_loader, val_loader, test_loader, global_in_dim, base_dataset = build_loaders_NN(
-        data_paths,
-        batch_size=cfg.batch_size,
-        seed=cfg.seed,
-        train_split=cfg.train_split,
-        val_split=cfg.val_split,
-        global_feature_variant=cfg.global_feature_variant,
-        node_feature_variant=cfg.node_feature_backend_variant,
-        family_projection=family_projection,
-    )
-    if model_type == "nn":
-        pass
-    elif model_type == "MLP":
-        model = NN(
-            in_dim = global_in_dim,
-            hidden_dim = model_params.get("hidden_dim", 128) if model_params else 64,
-            dropout_rate = model_params.get("dropout_rate", 0.0) if model_params else 0.0,
-        )
-    elif model_type == "regressor":
-        model = Regressor(
-            in_dim = global_in_dim,
-            hidden_dim = model_params.get("hidden_dim", 128) if model_params else 64,
-            dropout_rate = model_params.get("dropout_rate", 0.0) if model_params else 0.0,
-        )
     else:
-        raise ValueError(f"Unsupported model type: {model_type}")
+        train_loader, val_loader, test_loader, global_in_dim, base_dataset = loader_fn(
+            data_paths,
+            batch_size=cfg.batch_size,
+            seed=cfg.seed,
+            train_split=cfg.train_split,
+            val_split=cfg.val_split,
+            global_feature_variant=cfg.global_feature_variant,
+            node_feature_variant=cfg.node_feature_backend_variant,
+            family_projection=family_projection,
+        )
+        node_in_dim = global_in_dim
 
+    model = spec["build_model"](node_in_dim, global_in_dim, model_hparams)
+    print("Loaders and model built.")
+
+    print("Starting training...")
     model, hist, dev = train_model(
         model,
         train_loader,
@@ -204,16 +188,67 @@ def run_training_NN(
         log_every_n_batches=cfg.log_batch_loss_every,
         heartbeat_secs=cfg.heartbeat,
         epoch_time_warning_secs=cfg.epoch_warning,
+        weight_decay=train_hparams.get("weight_decay", 0.0),
+        grad_clip=train_hparams.get("grad_clip", None),
+        early_stopping_patience=train_hparams.get("early_stopping_patience", 30),
+        early_stopping_min_delta=train_hparams.get("early_stopping_min_delta", 0.0),
     )
 
     loss_fn = build_loss(cfg.loss_type, huber_delta=1.0)
+
     test_loss = evaluate_loss(
         model,
         test_loader,
         dev,
         loss_fn,
         use_amp=True,
-        show_progress=True,
+        show_progress=show_progress,
+    )
+    print("Training complete.")
+
+    run_name = f"{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}"
+
+    plot_training_curves(
+        hist,
+        title=f"{model_type.upper()} SRE regression",
+        save_fig=save_fig,
+        fig_path=f"outputs/figures/training_curves/training_curves_{run_name}.png",
     )
 
-    return model, hist, test_loss, global_in_dim, base_dataset
+    checkpoint = {
+        "model_state_dict": model.state_dict(),
+        "model_type": model_type,
+        "model_config": {
+            "node_in_dim": node_in_dim or None,
+            "global_in_dim": global_in_dim,
+            "hidden_dim": model_hparams.get("hidden_dim", 64),
+            "gnn_hidden": model_hparams["gnn_hidden"],
+            "gnn_heads": model_hparams["gnn_heads"],
+            "global_hidden": model_hparams["global_hidden"],
+            "reg_hidden": model_hparams["reg_hidden"],
+            "num_layers": model_hparams["num_layers"],
+            "dropout_rate": model_hparams["dropout_rate"],
+        },
+        "train_config": asdict(cfg),
+        "train_hparams": train_hparams,
+        "feature_config": {
+            "global_feature_variant": cfg.global_feature_variant,
+            "node_feature_backend_variant": cfg.node_feature_backend_variant,
+            "all_gate_keys": getattr(base_dataset, "all_gate_keys", None),
+            "family_projection": family_projection,
+        },
+        "final_metrics": {
+            "test_loss": float(test_loss),
+        },
+        "history": hist,
+    }
+
+    if save_checkpoint:
+        model_save_path = _resolve_model_save_path(
+            f"models/{run_name}.pt",
+            allow_overwrite=allow_overwrite,
+        )
+        torch.save(checkpoint, model_save_path)
+        print(f"Saved model checkpoint to {model_save_path}")
+
+    return model, float(test_loss), hist, checkpoint
