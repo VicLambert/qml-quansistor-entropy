@@ -723,12 +723,12 @@ def run_dataset_pipeline(
     base_output_dir.mkdir(parents=True, exist_ok=True)
     target = "sre" if config.compute_sre else "ee" if config.compute_EE else None
 
-    data_dir = f"encoding_data_{target}_{config.backend}" if target else "predictions"
+    # data_dir = f"training_data_{target}_{config.backend}" if target else "prediction_data"
 
     for family in families:
         logger.info("Processing family: %s", family)
 
-        family_output_dir = base_output_dir / data_dir / family
+        family_output_dir = base_output_dir / family
         family_output_dir.mkdir(parents=True, exist_ok=True)
 
         params = generate_dataset_params(

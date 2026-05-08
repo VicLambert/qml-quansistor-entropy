@@ -1,9 +1,10 @@
 *.md
 *.png
+*.pt
 
 example_visualization.py
 outputs/data/encoding_data_quimb_fwht.json
-notebooks/notebooks/data/processed/
+notebooks/data/
 
 *.log
 /logs/
