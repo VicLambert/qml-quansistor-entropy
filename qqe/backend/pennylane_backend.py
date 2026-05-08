@@ -39,9 +39,9 @@ class PennylaneBackend(BaseBackend):
         self,
         spec: CircuitSpec,
         *,
-        state_type: StateType = "dense",
+        representation: StateType = "dense",
         max_bond: int | None = None,
-        cutoff: int | None = None,
+        cutoff: float | None = None,
         **kwargs: Any,
     ) -> State:
         """Simulate a quantum circuit using PennyLane.
@@ -50,11 +50,11 @@ class PennylaneBackend(BaseBackend):
         ----------
         spec : CircuitSpec
             The circuit specification to simulate.
-        state_type : StateType, optional
+        representation : StateType, optional
             The type of state representation, must be "dense" (default).
         max_bond : int | None, optional
             Maximum bond dimension (not used in this backend).
-        cutoff : int | None, optional
+        cutoff : float | None, optional
             Cutoff parameter (not used in this backend).
         **kwargs : Any
             Additional keyword arguments (unused).
@@ -67,10 +67,10 @@ class PennylaneBackend(BaseBackend):
         Raises:
         ------
         NotImplementedError
-            If state_type is not "dense".
+            If representation is not "dense".
         """
-        if state_type != "dense":
-            msg = f"PennylaneBackend supports state_type='dense' only (requested {state_type!r})."
+        if representation != "dense":
+            msg = f"PennylaneBackend supports representation='dense' only (requested {representation!r})."
             raise NotImplementedError(msg)
 
         dev = qml.device(self.device_name, wires=spec.n_qubits)

@@ -36,20 +36,20 @@ class QuimbBackend(BaseBackend):
         self,
         n_qubits: int,
         *,
-        state_type: str,
+        representation: str,
         max_bond: int | None = None,
-        cutoff: int | None = None,
+        cutoff: float | None = None,
     ):
-        if state_type == "mps":
+        if representation == "mps":
             kwargs: dict[str, Any] = {}
             if max_bond is not None:
                 kwargs["max_bond"] = max_bond
             if cutoff is not None:
                 kwargs["cutoff"] = cutoff
             return qtn.CircuitMPS(n_qubits, **kwargs)
-        if state_type == "dense":
+        if representation == "dense":
             return qtn.Circuit(n_qubits)
-        msg = f"QuimbBackend does not support state_type={state_type!r}"
+        msg = f"QuimbBackend does not support representation={representation!r}"
         raise NotImplementedError(msg)
 
     def _apply_gate(self, circ: qtn.Circuit, gate: GateSpec) -> None:
@@ -60,9 +60,9 @@ class QuimbBackend(BaseBackend):
         self,
         spec: CircuitSpec,
         *,
-        state_type: str = "dense",
+        representation: str = "dense",
         max_bond: int | None = None,
-        cutoff: int | None = None,
+        cutoff: float | None = None,
         **kwargs: Any,
     ) -> State:
         """Simulate a quantum circuit using quimb.
@@ -71,11 +71,11 @@ class QuimbBackend(BaseBackend):
         ----------
         spec : CircuitSpec
             The circuit specification to simulate.
-        state_type : str, optional
-            The state type to use ("dense" or "mps"), by default "dense".
+        representation : str, optional
+            The state representation to use ("dense" or "mps"), by default "dense".
         max_bond : int | None, optional
             Maximum bond dimension for MPS, by default None.
-        cutoff : int | None, optional
+        cutoff : float | None, optional
             Cutoff for MPS truncation, by default None.
         **kwargs : Any
             Additional keyword arguments.
@@ -88,13 +88,13 @@ class QuimbBackend(BaseBackend):
         Raises:
         ------
         NotImplementedError
-            If the state_type is not supported.
+            If the representation is not supported.
         """
         self._validate_materialized(spec)
 
         circ = self._make_circuit(
             n_qubits=spec.n_qubits,
-            state_type=state_type,
+            representation=representation,
             max_bond=max_bond,
             cutoff=cutoff,
         )
@@ -104,7 +104,7 @@ class QuimbBackend(BaseBackend):
 
         psi = circ.psi
 
-        if state_type == "dense":
+        if representation == "dense":
             vec = psi.to_dense().reshape(-1).astype(complex, copy=False)
             return DenseState(vector=vec, n_qubits=spec.n_qubits, d=spec.d, backend=self.name)
 

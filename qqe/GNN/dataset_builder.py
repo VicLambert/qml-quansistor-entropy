@@ -9,6 +9,7 @@ import json
 import logging
 import os
 
+import dataclasses
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
@@ -197,14 +198,17 @@ def sample_t_count(n_layers: int, rng: np.random.Generator) -> tuple[str, int]:
     if regime == "zero":
         N_T: int = 0
 
-    if regime == "low":
+    elif regime == "low":
         N_T = rng.integers(1, max(2, max_t // 4 + 1))
 
-    if regime == "medium":
+    elif regime == "medium":
         N_T = rng.integers(max(1, max_t // 4), max(2, max_t // 2 + 1))
 
-    if regime == "high":
+    elif regime == "high":
         N_T = rng.integers(max(1, max_t // 2), max_t + 1)
+
+    else:
+        raise ValueError(f"Unknown t-count regime: {regime}")
 
     return (regime, int(N_T))
 
@@ -428,82 +432,42 @@ def compute_entry(
 
         sre_value = None
         EE_value = None
+
+
+        property_requests = []
+
         if config.compute_sre:
+            property_requests.append(PropertyRequest(name="SRE", method=config.method, params={}))
+
+        if config.compute_EE:
+            property_requests.append(PropertyRequest(name="entanglement_entropy", method=config.method, params={}))
+
+        if property_requests:
             backend_config = BackendConfig(
                 name=config.backend,
                 representation=config.representation,
                 params={},
             )
 
-            property_request = PropertyRequest(
-                name="SRE",
-                method=config.method,
-                params={},
-            )
-
             exp_config = ExperimentConfig(
                 spec=spec,
                 backend=backend_config,
-                properties=[property_request],
-            )
-
-            backend_factory = BACKEND_REGISTRY[config.backend]
-            backend_instance = (
-                backend_factory() if callable(backend_factory) else backend_factory
-            )
-
-            state = backend_instance.simulate(
-                spec,
-                representation=config.representation,
+                properties=property_requests,
             )
 
             result = run_experiment(
                 exp_config,
                 backend_registry=BACKEND_REGISTRY,
-                state=state,
                 cache=cache,
             )
-
-            sre_result = result.results.get("SRE")
+        if config.compute_sre:
+            sre_key = f"SRE:{config.method.lower()}"
+            sre_result = result.results.get(sre_key)
             sre_value = float(sre_result.value) if sre_result else None
 
         if config.compute_EE:
-            backend_config = BackendConfig(
-                name=config.backend,
-                representation=config.representation,
-                params={},
-            )
-
-            property_request = PropertyRequest(
-                name="entanglement_entropy",
-                method=config.method,
-                params={},
-            )
-
-            exp_config = ExperimentConfig(
-                spec=spec,
-                backend=backend_config,
-                properties=[property_request],
-            )
-
-            backend_factory = BACKEND_REGISTRY[config.backend]
-            backend_instance = (
-                backend_factory() if callable(backend_factory) else backend_factory
-            )
-
-            state = backend_instance.simulate(
-                spec,
-                representation=config.representation,
-            )
-
-            result = run_experiment(
-                exp_config,
-                backend_registry=BACKEND_REGISTRY,
-                state=state,
-                cache=cache,
-            )
-
-            ee_result = result.results.get("entanglement_entropy")
+            ee_key = f"entanglement_entropy:{config.method.lower()}"
+            ee_result = result.results.get(ee_key)
             EE_value = float(ee_result.value) if ee_result else None
 
         x = graph_data.x.detach().cpu()
@@ -531,6 +495,10 @@ def compute_entry(
                 "representation": config.representation,
                 "n_bins": int(config.n_bins),
                 "regime": controls["sampling_regime"],
+                "sampling_controls": {
+                    k: str(v) if isinstance(v, TdopingRules) else v
+                    for k, v in controls.items()
+                },
             },
         }
 
@@ -743,10 +711,10 @@ def run_dataset_pipeline(
 
         logger.info("Generated %d configs for %s", len(params), family)
 
-        config.output_dir = family_output_dir
+        family_config = dataclasses.replace(config, output_dir=family_output_dir)
         entries = compute_all_entries(
             params,
-            config,
+            family_config,
             use_dask=use_dask,
             dask_n_workers=dask_n_workers,
             dask_memory_per_worker=dask_memory_per_worker,
@@ -754,16 +722,16 @@ def run_dataset_pipeline(
 
         meta_path = family_output_dir / f"metadata_{family}.json"
         metadata = {
-            "backend": config.backend,
-            "method": config.method,
-            "n_bins": config.n_bins,
+            "backend": family_config.backend,
+            "method": family_config.method,
+            "n_bins": family_config.n_bins,
             "n_seeds": n_seeds,
             "families": families,
             "qubits_range": qubits_values.tolist(),
             "layers_range": layers_values.tolist(),
             "entries_completed": len(entries),
             "use_dask": use_dask,
-            "compute_sre": config.compute_sre,
+            "compute_sre": family_config.compute_sre,
             "index_file": f"index_{family}.jsonl",
         }
         meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")

@@ -163,6 +163,8 @@ def compile_job(
             f"Unknown circuit family '{job.circuit_family}'. "
             f"Available: {list(family_registry.keys())}"
         )
+        raise KeyError(msg)
+
     family_params = dict(job.family_params or {})
 
     if job.circuit_family == "clifford":
@@ -176,13 +178,14 @@ def compile_job(
             )
 
     family_cls = family_registry[job.circuit_family]
-    family = family_cls(**family_params) if callable(family_cls) else family_cls
+    family = family_cls() if callable(family_cls) else family_cls
+
     spec = family.make_spec(
         n_qubits=job.n_qubits,
         n_layers=job.n_layers,
         d=job.d,
         seed=job.run_seed,
-        **(family_params or {}),
+        **family_params,
     )
 
     backend_cfg = BackendConfig(
@@ -216,8 +219,6 @@ def compile_job(
     )
 
 
-
-
 @dataclass(frozen=True)
 class AggregateResults:
     mean: float
@@ -229,12 +230,11 @@ def aggregate_by_cond(
     job_results: list[dict[str, Any]],
     *,
     group_keys: Sequence[str],
-    value_path: tuple[str, ...] = ("results", "SRE", "value"),
+    value_path: tuple[str, ...] = ("results", "SRE:fwht", "value"),
 ) -> dict[tuple[Any, ...], AggregateResults]:
     groups: dict[tuple[Any, ...], list[float]] = {}
 
     for output in job_results:
-        tags = output.get("meta_data") or {}
         tags = output.get("tags") or output.get("meta_data") or {}
         g_key_values = [tags.get(k) for k in group_keys]
         # Skip outputs missing any required grouping tag to avoid None in grouping keys

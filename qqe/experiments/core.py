@@ -106,7 +106,7 @@ def run_experiment(
 
     results: dict[str, Any] = {}
     for req in cfg.properties:
-        key = req.name
+        key = req.key()
         t_comp = time.time()
 
         cache_key = None
@@ -148,11 +148,19 @@ def run_experiment(
                     meta = dict(res.meta or {})
                     meta.setdefault("compute_time", time.time() - t_comp)
 
+                    res = PropertyResult(
+                        name=res.name,
+                        value=res.value,
+                        error=res.error,
+                        meta=meta,
+                    )
+
                     payload = {
                         "_schema": {"type": "property_result", "version": 1},
+                        "name": res.name,
                         "value": res.value,
                         "error": res.error,
-                        "meta": meta,
+                        "meta": res.meta,
                     }
                     cache.save_json(cache_key, payload)
             else:
@@ -182,7 +190,7 @@ def run_experiment(
                     "compute_time": time.time() - t_comp,
                 },
             )
-        results[key] = res
+            results[key] = res
     total_seconds = time.time() - t0
     metadata = dict(cfg.meta_data)
     metadata.setdefault("total_time", total_seconds)

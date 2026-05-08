@@ -43,8 +43,6 @@ def eigenvalue_phase_histogram_features(
     return torch.tensor(counts, dtype=torch.float32)
 
 
-def zero_haar_descriptor() -> torch.Tensor:
-    return torch.zeros(HAAR_DESC_DIM, dtype=torch.float32)
 
 
 # ---------------- QASM parsing ----------------
@@ -294,17 +292,6 @@ def qasm_to_pyg_graph(
     for op_idx, (gate_name, params, w0, w1) in enumerate(ops):
         gate_name_norm = "haar" if gate_name == "haar2" else gate_name
 
-        haar_desc: torch.Tensor | None = None
-        if gate_name_norm == "haar" and op_descriptors is not None:
-            descriptor = op_descriptors[op_idx]
-            if descriptor is not None:
-                raw = descriptor.get("haar_descriptor")
-                if raw is not None:
-                    if torch.is_tensor(raw):
-                        haar_desc = raw.to(dtype=torch.float32)
-                    else:
-                        haar_desc = torch.tensor(raw, dtype=torch.float32)
-
         if w1 is None:
             node_idx = len(x_features)
             x_features.append(
@@ -313,7 +300,6 @@ def qasm_to_pyg_graph(
                     w0,
                     num_qubits,
                     params,
-                    haar_descriptor=haar_desc,
                 ),
             )
             edge_src.append(last_node_for_qubit[w0])
@@ -327,7 +313,6 @@ def qasm_to_pyg_graph(
                     [w0, w1],
                     num_qubits,
                     params,
-                    haar_descriptor=haar_desc,
                 ),
             )
             edge_src.extend([last_node_for_qubit[w0], last_node_for_qubit[w1]])
@@ -380,7 +365,6 @@ def _encode_node_feature(
     qubits: int | list[int],
     num_qubits: int,
     params: list[float] | None = None,
-    haar_descriptor: torch.Tensor | list[float] | np.ndarray | None = None,
 ) -> torch.Tensor:
     gate_types = [
         "input",
@@ -415,24 +399,7 @@ def _encode_node_feature(
         for q in qubits:
             qubit_mask[q] = 1.0
 
-    if haar_descriptor is None:
-        haar_descriptor = zero_haar_descriptor()
-    elif not torch.is_tensor(haar_descriptor):
-        haar_descriptor = torch.tensor(haar_descriptor, dtype=torch.float32)
-    else:
-        haar_descriptor = haar_descriptor.to(dtype=torch.float32)
-
-    if haar_descriptor.ndim != 1:
-        raise ValueError(
-            f"haar_descriptor must be 1D, got shape {tuple(haar_descriptor.shape)}",
-        )
-
-    if haar_descriptor.numel() != HAAR_DESC_DIM:
-        raise ValueError(
-            f"haar_descriptor must have length {HAAR_DESC_DIM}, got {haar_descriptor.numel()}",
-        )
-
-    return torch.cat([gate_onehot, qubit_mask, haar_descriptor], dim=0)
+    return torch.cat([gate_onehot, qubit_mask], dim=0)
 
 
 gate_types = [
@@ -453,7 +420,7 @@ gate_types = [
 
 
 def _get_node_feature_dim(num_qubits: int) -> int:
-    return len(gate_types) + num_qubits + HAAR_DESC_DIM
+    return len(gate_types) + num_qubits
 
 
 def _global_features_baseline(

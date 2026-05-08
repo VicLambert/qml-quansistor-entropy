@@ -285,13 +285,13 @@ def _sweep_jobs(
 
 
 def main(
-    run: str,  # run_once, sweep, plot...
-    n_qubits: int,
-    n_layers: int,
+    run: str = "run_once",  # run_once, sweep, plot...
+    n_qubits: int = 8,
+    n_layers: int = 16,
     *,
     circuit_family: str = "clifford",
     quantity: str = "SRE",  # SRE, entanglement_entropy...
-    backend: str = "quimb",
+    backend: str = "pennylane",
     method: str = "fwht",
     repeat: int = 5,
     seed: int = 42,

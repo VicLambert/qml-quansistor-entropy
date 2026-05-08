@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any
 import numpy as np
 
 # from quimb.tensor.tensor_arbgeom import tensor_network_apply_op_vec
-from qqe.properties.results import PropertyResult
+from qqe.properties.results import PropertyResult, registry
 from qqe.states.types import DenseState, MPSState
 
 
@@ -77,6 +77,7 @@ def pauli_expval_fast_kron(state, label, dim: int | None = None):
     v = fast_kron(mats, state)
     return np.vdot(state, v)
 
+@registry("SRE", "exact")
 def sre_exact(state: DenseState, **kwargs: Any) -> PropertyResult:
     """Computes the exact SRE for a dense state.
 
@@ -197,7 +198,7 @@ def sre_exact(state: DenseState, **kwargs: Any) -> PropertyResult:
 #     return PropertyResult(name="mps", value=0.0, meta={})
 
 # ----------- FWHT -----------
-def in_place_FHWT(arr: np.ndarray):
+def in_place_FWHT(arr: np.ndarray):
     """In-place Fast Walsh-Hadamard Transform of array a (length must be power of 2)."""
     n = arr.shape[0]
     h = 1
@@ -208,6 +209,7 @@ def in_place_FHWT(arr: np.ndarray):
             u[:], v[:] = u + v, u - v
         h *= 2
 
+@registry("SRE", "fwht")
 def sre_fwht(state: DenseState) -> PropertyResult:
     psi = np.asarray(state.vector, dtype=complex).reshape(-1)
     N = psi.size
@@ -222,7 +224,7 @@ def sre_fwht(state: DenseState) -> PropertyResult:
     acc=0.0
     for k in range(N):
         A = np.conjugate(psi[idx ^ k]) * psi   # shape (N,)
-        in_place_FHWT(A)
+        in_place_FWHT(A)
         acc += np.sum(np.abs(A)**4)
     sre = -np.log2(acc/(state.d**n))
 
@@ -230,6 +232,7 @@ def sre_fwht(state: DenseState) -> PropertyResult:
     return PropertyResult(name="SRE", value=sre, meta=details)
 
 # ----------- MCMC -----------
+@registry("SRE", "sampling")
 def sre_mcmc(state: DenseState, *, seed: int, n_samples: int = 20000, batch_size: int = 500) -> PropertyResult:
     n = state.n_qubits
     psi = np.asarray(state.vector, dtype=complex).reshape(-1)

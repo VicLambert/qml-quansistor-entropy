@@ -54,10 +54,10 @@ class FamilyNodeProjector:
 
     def __call__(self, data: Data) -> Data:
         gate = data.x[:, : self.n_gate_master]
-        qubit = data.x[:, self.n_gate_master :]
+        qubit_mask = data.x[:, self.n_gate_master:]
 
         out = data.clone()
-        out.x = torch.cat([gate[:, self.keep_gate_idx], qubit], dim=1)
+        out.x = torch.cat([gate[:, self.keep_gate_idx], qubit_mask], dim=1)
         return out
 
 
