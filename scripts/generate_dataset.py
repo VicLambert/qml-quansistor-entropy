@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+
 from pathlib import Path
 
 import numpy as np
@@ -18,7 +19,7 @@ def main(
     target: str = typer.Option("SRE", help="Property to compute (SRE or EE)"),
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling) or EE method (renyi or von_neumann)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
-    output_file: str = typer.Option(
+    output_dir: str = typer.Option(
         "data/training_data",
         help="Output folder for results",
     ),
@@ -51,7 +52,15 @@ def main(
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
     layers_values = np.arange(layers_min, layers_max + 1, layers_step)
 
-    output_dir = Path(output_file)
+    target_norm = target.strip().lower()
+
+    compute_sre = target_norm == "sre"
+    compute_EE = target_norm == "ee"
+
+    if not (compute_sre or compute_EE):
+        raise ValueError("target must be 'SRE' or 'EE'")
+
+    output_path = Path(output_dir)
 
     config = DataGenConfig(
         backend=backend,
@@ -61,13 +70,13 @@ def main(
         layers_values=layers_values,
         n_seeds=n_seeds_option,
         n_bins=n_bins_option,
-        compute_sre=target == "SRE",
-        compute_EE=target == "EE",
+        compute_sre=compute_sre,
+        compute_EE=compute_EE,
         representation="dense",
         use_dask=use_dask,
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
-        output_dir=output_dir,
+        output_dir=output_path,
         max_configs=max_configs,
     )
 

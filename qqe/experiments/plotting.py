@@ -521,3 +521,124 @@ def plot_training_curves(
 
     plt.show()
 
+
+# =========================================================
+# Plotting predictions
+# =========================================================
+
+def plot_fixed_layers_vary_qubits(
+    rows: list[dict[str, Any]],
+    *,
+    n_layers: int,
+    output_path: str | Path | None = None,
+    split_by_family: bool = True,
+):
+    filtered = [r for r in rows if int(r["n_layers"]) == int(n_layers)]
+    if not filtered:
+        logger.info("No predictions found for n_layers=%s", n_layers)
+        return
+
+    plt.figure(figsize=(8, 5))
+
+    if split_by_family:
+        families = sorted({str(r.get("family", "unknown")) for r in filtered})
+        for family in families:
+            family_rows = [r for r in filtered if str(r.get("family", "unknown")) == family]
+
+            groups: dict[int, list[float]] = {}
+            for r in family_rows:
+                q = int(r["n_qubits"])
+                groups.setdefault(q, []).append(float(r["prediction"]))
+
+            x = sorted(groups.keys())
+            y = [np.mean(groups[q]) for q in x]
+            yerr = [np.std(groups[q], ddof=0) for q in x]
+
+            plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3, label=family)
+
+        plt.legend(title="family")
+        plt.title(f"Predicted SRE vs qubits (n_layers={n_layers})")
+    else:
+        groups: dict[int, list[float]] = {}
+        for r in filtered:
+            q = int(r["n_qubits"])
+            groups.setdefault(q, []).append(float(r["prediction"]))
+
+        x = sorted(groups.keys())
+        y = [np.mean(groups[q]) for q in x]
+        yerr = [np.std(groups[q], ddof=0) for q in x]
+
+        plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+        plt.title(f"Predicted SRE vs qubits (n_layers={n_layers})")
+
+    plt.xlabel("Number of qubits")
+    plt.ylabel("Predicted SRE")
+    plt.grid(True, linestyle="--", alpha=0.3)
+    plt.tight_layout()
+
+    if output_path is not None:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(output_path, dpi=180)
+        plt.close()
+    else:
+        plt.show()
+
+def plot_fixed_qubits_vary_layers(
+    rows: list[dict[str, Any]],
+    *,
+    n_qubits: int,
+    output_path: str | Path | None = None,
+    split_by_family: bool = True,
+):
+    filtered = [r for r in rows if int(r["n_qubits"]) == int(n_qubits)]
+    if not filtered:
+        logger.info("No predictions found for n_qubits=%s", n_qubits)
+        return
+
+    plt.figure(figsize=(8, 5))
+
+    if split_by_family:
+        families = sorted({str(r.get("family", "unknown")) for r in filtered})
+        for family in families:
+            family_rows = [r for r in filtered if str(r.get("family", "unknown")) == family]
+
+            groups: dict[int, list[float]] = {}
+            for r in family_rows:
+                L = int(r["n_layers"])
+                groups.setdefault(L, []).append(float(r["prediction"]))
+
+            x = sorted(groups.keys())
+            y = [np.mean(groups[L]) for L in x]
+            yerr = [np.std(groups[L], ddof=0) for L in x]
+
+            plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3, label=family)
+
+        plt.legend(title="family")
+        plt.title(f"Predicted SRE vs layers (n_qubits={n_qubits})")
+    else:
+        groups: dict[int, list[float]] = {}
+        for r in filtered:
+            L = int(r["n_layers"])
+            groups.setdefault(L, []).append(float(r["prediction"]))
+
+        x = sorted(groups.keys())
+        y = [np.mean(groups[L]) for L in x]
+        yerr = [np.std(groups[L], ddof=0) for L in x]
+
+        plt.errorbar(x, y, yerr=yerr, marker="o", linestyle="-", capsize=3)
+        plt.title(f"Predicted SRE vs layers (n_qubits={n_qubits})")
+
+    plt.xlabel("Number of layers")
+    plt.ylabel("Predicted SRE")
+    plt.grid(True, linestyle="--", alpha=0.3)
+    plt.tight_layout()
+
+    if output_path is not None:
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        plt.savefig(output_path, dpi=180)
+        plt.close()
+    else:
+        plt.show()
+

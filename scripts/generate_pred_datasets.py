@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+
 from pathlib import Path
 
 import numpy as np
@@ -15,8 +16,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 
 def main(
     backend: str = typer.Option("pennylane", help="Backend to use (quimb or pennylane)"),
-    method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
-    use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
+    method: str = typer.Option("none", help="SRE method (exact, fwht, or sampling)"),
+    use_dask: bool = typer.Option(True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
         "notebooks/data/predictions",
         help="Output folder for results",
@@ -48,7 +49,7 @@ def main(
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
-    layers_values =  np.concatenate(([1], np.arange(layers_min, layers_max + 1, layers_step))))
+    layers_values =  np.concatenate(([1], np.arange(layers_min, layers_max + 1, layers_step)))
 
     output_dir = Path(output_file)
 

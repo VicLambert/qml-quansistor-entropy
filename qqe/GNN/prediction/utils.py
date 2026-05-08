@@ -1,6 +1,12 @@
 from __future__ import annotations
 
+import numpy as np
+import csv
+from pathlib import Path
+
 import torch
+import torch.nn.functional as F
+from typing import Any
 
 from torch_geometric.data import Data
 
@@ -97,3 +103,138 @@ class FamilyFeatureProjector:
 def out_is_same(data, g):
     # Clone lazily only when we actually need to edit global features.
     return hasattr(data, "global_features") and data.global_features is g
+
+def extract_target_value(sample: Any) -> float | None:
+    y = getattr(sample, "y", None)
+    if y is None:
+        return None
+
+    if torch.is_tensor(y):
+        if y.numel() == 0:
+            return None
+        value = float(y.flatten()[0].item())
+    else:
+        value = float(y)
+
+    if not np.isfinite(value):
+        return None
+
+    return value
+
+# =========================================================
+# Dataset wrappers
+# =========================================================
+
+class PredictionGraphWrapper:
+    def __init__(
+        self,
+        dataset,
+        target_node_dim: int | None = None,
+        target_global_dim: int | None = None,
+    ):
+        self.dataset = dataset
+        self.target_node_dim = target_node_dim
+        self.target_global_dim = target_global_dim
+
+    def __len__(self) -> int:
+        return len(self.dataset)
+
+    def __getitem__(self, idx: int):
+        data = self.dataset[idx].clone()
+
+        if self.target_node_dim is not None:
+            cur = int(data.x.shape[1])
+            if cur < self.target_node_dim:
+                data.x = F.pad(data.x, (0, self.target_node_dim - cur))
+            elif cur > self.target_node_dim:
+                data.x = data.x[:, : self.target_node_dim]
+
+        if hasattr(data, "global_features"):
+            g = data.global_features
+            if g.dim() > 1:
+                g = g.view(-1)
+
+            if self.target_global_dim is not None:
+                cur = int(g.shape[0])
+                if cur < self.target_global_dim:
+                    g = F.pad(g, (0, self.target_global_dim - cur))
+                elif cur > self.target_global_dim:
+                    g = g[: self.target_global_dim]
+
+            data.global_features = g
+
+        return data
+
+
+class PredictionTensorWrapper:
+    def __init__(self, dataset, target_global_dim: int | None = None):
+        self.dataset = dataset
+        self.target_global_dim = target_global_dim
+
+    def __len__(self) -> int:
+        return len(self.dataset)
+
+    def __getitem__(self, idx: int):
+        data = self.dataset[idx]
+        g = data.global_features
+        if not torch.is_tensor(g):
+            g = torch.as_tensor(g, dtype=torch.float32)
+        g = g.flatten().to(torch.float32)
+
+        if self.target_global_dim is not None:
+            cur = int(g.shape[0])
+            if cur < self.target_global_dim:
+                g = F.pad(g, (0, self.target_global_dim - cur))
+            elif cur > self.target_global_dim:
+                g = g[: self.target_global_dim]
+
+        meta = getattr(data, "meta", {}) or {}
+        target = extract_target_value(data)
+        return g, meta, target
+
+
+# =========================================================
+# Saving + aggregation
+# =========================================================
+
+def save_predictions_csv(rows: list[dict[str, Any]], path: str | Path) -> Path:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    fieldnames = ["cid", "family", "seed", "n_qubits", "n_layers", "target", "prediction", "error"]
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    return path
+
+
+def aggregate_mean_std(
+    rows: list[dict[str, Any]],
+    *,
+    x_key: str,
+    fixed_key: str | None = None,
+    fixed_value: int | None = None,
+) -> list[dict[str, Any]]:
+    filtered = rows
+    if fixed_key is not None and fixed_value is not None:
+        filtered = [r for r in rows if int(r[fixed_key]) == int(fixed_value)]
+
+    groups: dict[int, list[float]] = {}
+    for r in filtered:
+        x = int(r[x_key])
+        groups.setdefault(x, []).append(float(r["prediction"]))
+
+    out = []
+    for x in sorted(groups):
+        vals = np.asarray(groups[x], dtype=float)
+        out.append(
+            {
+                x_key: x,
+                "mean": float(vals.mean()),
+                "std": float(vals.std(ddof=0)),
+                "n": len(vals),
+            },
+        )
+    return out

@@ -4,30 +4,28 @@ from __future__ import annotations
 import torch
 import torch.nn.functional as F
 from torch.utils.data import random_split
-from torch_geometric.loader import DataLoader
+from torch.utils.data import DataLoader as TorchDataLoader
+from torch_geometric.loader import DataLoader as PyGDataLoader
 
 from pathlib import Path
 import hashlib
 
 from qqe.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
-from .utils import FamilyFeatureProjector, out_is_same
+from .utils import FamilyFeatureProjector, out_is_same, PredictionGraphWrapper, PredictionTensorWrapper
 
 
-def collect_pred_paths(dataset_dir: str, family: str | None = None) -> list[str]:
-    d = Path(dataset_dir)
-    pred_root = d / "predictions"
+def collect_prediction_paths(dataset_root: str, family: str | None = None) -> list[str]:
+    root = Path(dataset_root)
+    pred_root = root / "predictions"
 
     if family is not None:
         paths = sorted((pred_root / family).glob("*.pt"))
     else:
         paths = []
         if pred_root.exists():
-            for family_dir in sorted(pred_root.iterdir()):
-                if family_dir.is_dir():
-                    paths.extend(sorted(family_dir.glob("*.pt")))
-
-    if not paths:
-        paths = sorted(d.glob("*.pt"))
+            for subdir in sorted(pred_root.iterdir()):
+                if subdir.is_dir():
+                    paths.extend(sorted(subdir.glob("*.pt")))
 
     return [str(p.resolve()) for p in paths]
 
@@ -139,36 +137,61 @@ class PaddedGraphDatasetWrapper:
     def __len__(self) -> int:
         return len(self.dataset)
 
-def build_prediction_loader(
-    pt_paths: list[str],
-    batch_size: int = 32,
-    seed: int = 42,
-    global_feature_variant: str = "baseline",
-    node_feature_backend_variant: str | None = None,
-) -> tuple[QuantumCircuitGraphDataset, PaddedGraphDatasetWrapper,DataLoader, int, int]:
-    suffix = f"{global_feature_variant}_backend_{node_feature_backend_variant or 'none'}"
-    root = _cache_root_for_paths(pt_paths, suffix=suffix)
 
-    dataset = QuantumCircuitGraphDataset(
-        root=root,
+def build_prediction_dataset(
+    pt_paths: list[str],
+    *,
+    global_feature_variant: str,
+    node_feature_backend_variant: str | None,
+    fixed_all_gate_keys: list[str] | None,
+):
+    return QuantumCircuitGraphDataset(
+        root="qqe/cache/prediction_cache",
         pt_paths=pt_paths,
         global_feature_variant=global_feature_variant,
         node_feature_backend_variant=node_feature_backend_variant,
+        fixed_all_gate_keys=fixed_all_gate_keys,
     )
 
-    if len(dataset) < 3:
-        raise RuntimeError("Dataset too small for train/val/test splitting.")
 
-    padded_dataset = PaddedGraphDatasetWrapper(dataset)
-    node_in_dim = padded_dataset.target_dim
-    global_in_dim = dataset.global_feature_dim
+def build_loader(
+    model_kind: str,
+    dataset,
+    *,
+    batch_size: int,
+    target_node_dim: int | None,
+    target_global_dim: int | None,
+):
+    if model_kind == "gnn":
+        wrapped = PredictionGraphWrapper(
+            dataset,
+            target_node_dim=target_node_dim,
+            target_global_dim=target_global_dim,
+        )
+        return PyGDataLoader(
+            wrapped,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=0,
+            pin_memory=torch.cuda.is_available(),
+        )
 
-    pred_ds = padded_dataset
-    pin_mem = torch.cuda.is_available()
-    return (
-        dataset,
-        padded_dataset,
-        DataLoader(pred_ds, batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=pin_mem),
-        node_in_dim,
-        global_in_dim,
-    )
+    if model_kind == "nn":
+        wrapped = PredictionTensorWrapper(dataset, target_global_dim=target_global_dim)
+
+        def collate_fn(batch):
+            xs, metas, targets = zip(*batch)
+            return torch.stack(xs, dim=0), list(metas), list(targets)
+
+        return TorchDataLoader(
+            wrapped,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=0,
+            pin_memory=torch.cuda.is_available(),
+            collate_fn=collate_fn,
+        )
+
+    raise ValueError(f"Unsupported model_kind: {model_kind}")
+
+
