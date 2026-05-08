@@ -177,10 +177,10 @@ def collect_files_path(
     """Collects file paths matching the pattern in the given directory."""
     d = Path(data_dir)
     if family is not None:
-        paths = sorted((d / f"encoding_data_{target}_{backend}" / family).glob("*.pt"))
+        paths = sorted((d / family).glob("*.pt"))
     else:
         paths = []
-        encoding_dir = d / f"encoding_data_{target}_{backend}"
+        encoding_dir = d
         if encoding_dir.exists():
             for family_dir in sorted(encoding_dir.iterdir()):
                 if family_dir.is_dir():

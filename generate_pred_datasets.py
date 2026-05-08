@@ -18,12 +18,12 @@ def main(
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_file: str = typer.Option(
-        "data/prediction_data",
+        "notebooks/data/predictions",
         help="Output folder for results",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random,clifford",
+        "random",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
@@ -48,7 +48,7 @@ def main(
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
-    layers_values = np.arange(layers_min, layers_max + 1, layers_step)
+    layers_values =  np.concatenate(([1], np.arange(layers_min, layers_max + 1, layers_step))))
 
     output_dir = Path(output_file)
 
