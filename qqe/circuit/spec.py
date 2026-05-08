@@ -9,8 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 
-import dataclasses
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field
 from typing import Any
 
 from qqe.utils.reading import _to_jsonable

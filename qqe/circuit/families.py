@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Any, Protocol
 
 import numpy as np
 
-from qqe.circuit.gates import clifford_recipe_unitary, clifford_recipe_unitary
+from qqe.circuit.gates import clifford_recipe_unitary
 from qqe.circuit.patterns import TdopingRules, brickwork_pattern
 from qqe.circuit.spec import CircuitSpec, GateSpec
 from qqe.rng.seeds import gate_seed
@@ -25,8 +25,9 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-
-
+# ---------------------------------------------------------------------
+# General family interface
+# ---------------------------------------------------------------------
 class Family(Protocol):
     name: str
 
@@ -48,50 +49,148 @@ class Family(Protocol):
         """Returns the GatesSpec."""
         ...
 
+# ---------------------------------------------------------------------
+# Spec helpers
+# ---------------------------------------------------------------------
+def _make_spec(
+    family: Family,
+    n_qubits: int,
+    n_layers: int,
+    d: int,
+    seed: int,
+    connectivity: str,
+    pattern: str,
+    params: dict[str, Any],
+) -> CircuitSpec:
+    spec = CircuitSpec(
+        n_qubits=int(n_qubits),
+        n_layers=int(n_layers),
+        d=int(d),
+        global_seed=int(seed),
+        family=family.name,
+        connectivity=connectivity,
+        pattern=pattern,
+        params=params,
+    )
+    return replace(spec, gates=tuple(family.gates(spec)))
 
-def quansistor_blocks(n_qubits: int, n_layer: int) -> list[tuple[int, int, int, int]]:
-    start = (n_layer % 2) * 2  # shift by 2 wires each odd layer
-    blocks: list[tuple[int, int, int, int]] = []
-    for i in range(start, n_qubits - 3, 4):
-        blocks.append((i, i + 1, i + 2, i + 3))
-    return blocks
+def _sample_quansistor_params(
+    rng: np.random.Generator,
+    param_regime: str,
+    param_scale: float | None = None,
+) -> tuple[float, float, float]:
+    if param_regime == "identity_like":
+        sigma = 0.02 if param_scale is None else float(param_scale)
+        a, b, g = rng.normal(0.0, sigma, 3)
 
+    elif param_regime == "weak":
+        sigma = 0.20 if param_scale is None else float(param_scale)
+        a, b, g = rng.normal(0.0, sigma, 3)
 
-def leftover_pairs(n_qubits: int, used: set[int], connectivity: str) -> list[tuple[int, int]]:
-    left = [i for i in range(n_qubits) if i not in used]
-    leftover = set(left)
+    elif param_regime == "moderate":
+        sigma = 0.75 if param_scale is None else float(param_scale)
+        a, b, g = rng.normal(0.0, sigma, 3)
 
-    pairs: list[tuple[int, int]] = []
-    used = set()
+    elif param_regime == "structured_equal_ab":
+        scale = np.pi if param_scale is None else float(param_scale) * np.pi
+        base = rng.uniform(-scale, scale)
+        g = rng.uniform(-0.25, 0.25)
+        a, b = base, base
 
-    for i in range(n_qubits - 1):
-        a, b = i, i + 1
-        if a in leftover and b in leftover and a not in used and b not in used:
-            pairs.append((a, b))
-            used.update((a, b))
-    if connectivity in ("loop", "ring"):
-        a, b = n_qubits - 1, 0
-        if a in leftover and b in leftover and a not in used and b not in used:
-            pairs.append((a, b))
-            used.update((a, b))
-    return pairs
+    elif param_regime == "structured_opposite_ab":
+        scale = np.pi if param_scale is None else float(param_scale) * np.pi
+        base = rng.uniform(-scale, scale)
+        g = rng.uniform(-0.25, 0.25)
+        a, b = base, -base
 
+    elif param_regime == "generic_uniform":
+        a, b, g = rng.uniform(-np.pi, np.pi, 3)
 
+    else:
+        raise ValueError(f"Unknown param_regime={param_regime}")
 
-def kv(**kwargs) -> tuple[str, ...]:
-    # deterministic ordering
-    return tuple(f"{k}={v}" for k, v in sorted(kwargs.items()))
+    return float(a), float(b), float(g)
 
+# ---------------------------------------------------------------------
+# Haar random family
+# ---------------------------------------------------------------------
+@dataclass(frozen=True)
+class HaarBrickwork:
+    """Haar random circuit family with brickwork pattern."""
+    name: str = "haar"
 
-_BLOCK_STEPS = (
-    (0, 1),  # q0 q1
-    (2, 3),  # q2 q3
-    (1, 2),  # q1 q2
-    (0, 1),  # q0 q1
-    (2, 3),  # q2 q3
-)
+    def make_spec(
+        self,
+        n_qubits: int,
+        n_layers: int,
+        d: int,
+        seed: int,
+        *,
+        connectivity: str = "line",
+        pattern: str = "brickwork",
+        **kwargs: Any,
+    ) -> CircuitSpec:
+        params = dict(kwargs)
 
+        return _make_spec(
+            self,
+            n_qubits,
+            n_layers,
+            d,
+            seed,
+            connectivity,
+            pattern,
+            params,
+        )
 
+    def gates(self, spec: CircuitSpec) -> Generator[GateSpec]:
+        gate_probability = float(spec.params.get("gate_probability", 1.0))
+        haar_strength = float(spec.params.get("haar_strength", 1.0))
+        haar_mode = str(spec.params.get("haar_mode", "full_haar"))
+
+        for layer in range(spec.n_layers):
+            pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
+
+            for slot, (a, b) in enumerate(pairs):
+                s = gate_seed(
+                    spec.global_seed,
+                    layer=layer,
+                    slot=slot,
+                    wires=(a, b),
+                    kind="haar",
+                )
+                rng = np.random.default_rng(s)
+                if rng.random() > gate_probability:
+                    yield GateSpec(
+                        kind="I",
+                        wires=(int(a),),
+                        d=spec.d,
+                        seed=s,
+                        tags=("layer", f"L{layer}", "haar_skipped_identity", f"wire_{a}"),
+                        params=(),
+                    )
+                    yield GateSpec(
+                        kind="I",
+                        wires=(int(b),),
+                        d=spec.d,
+                        seed=s,
+                        tags=("layer", f"L{layer}", "haar_skipped_identity", f"wire_{b}"),
+                        params=(),
+                    )
+                    continue
+
+                yield GateSpec(
+                    kind="haar",
+                    wires=(a, b),
+                    d=spec.d,
+                    seed=s,
+                    tags=("layer", f"L{layer}", "haar"),
+                    params=(s, float(haar_strength), haar_mode),
+                )
+
+# ---------------------------------------------------------------------
+# Clifford family
+# ---------------------------------------------------------------------
 @dataclass(frozen=True)
 class CliffordBrickwork:
     """Clifford circuit family with brickwork pattern and optional T-gate doping."""
@@ -135,22 +234,19 @@ class CliffordBrickwork:
             A circuit specification object with the given parameters.
         """
         params = dict(kwargs)
-        tdoping = params.get("tdoping", self.tdoping)
+        params["tdoping"] = params.get("tdoping", self.tdoping)
 
-        params["tdoping"] = tdoping
-        spec = CircuitSpec(
-            n_qubits=n_qubits,
-            n_layers=n_layers,
-            d=d,
-            global_seed=seed,
-            family=self.name,
-            connectivity=connectivity,
-            pattern=pattern,
-            params=params,
+        return _make_spec(
+            self,
+            n_qubits,
+            n_layers,
+            d,
+            seed,
+            connectivity,
+            pattern,
+            params,
         )
-        return replace(spec, gates=tuple(self.gates(spec)))
 
-    #
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
         tdoping = spec.params.get("tdoping", None)
         logger.info(f"Generating gates for CliffordBrickwork with tdoping={tdoping}")
@@ -200,7 +296,7 @@ class CliffordBrickwork:
 
                 # Get the actual Clifford decomposition
                 u_a, u_b, _ = clifford_recipe_unitary(s)
-                decomp = f"{u_a}⊗{u_b}+CNOT"
+
                 yield GateSpec(kind=u_a, wires=(a,), d=spec.d, seed=s,
                                 tags=("layer", f"L{layer}", "clifford_1q", f"wire_{a}", f"ua_{u_a}"))
 
@@ -210,20 +306,7 @@ class CliffordBrickwork:
 
                 # entangler
                 yield GateSpec(kind="CNOT", wires=(a, b), d=spec.d, seed=s,
-                            tags=("layer", f"L{layer}", "clifford_2q", f"wire_{a}_{b}"))
-                # yield GateSpec(
-                #     kind="clifford",
-                #     wires=(a, b),
-                #     d=spec.d,
-                #     seed=s,
-                #     tags=(
-                #         "layer",
-                #         f"L{layer}",
-                #         "clifford",
-                #         f"wire_{a}_{b}",
-                #         f"decomp_{decomp}",
-                #     ),
-                # )
+                            tags=("layer", f"L{layer}", "CNOT", f"wire_{a}_{b}"))
 
             # Yield T-gates for this layer (only if not the last layer)
             if layer in t_wires_per_layer:
@@ -236,132 +319,9 @@ class CliffordBrickwork:
                         tags=("layer", f"L{layer}", "T-gate", f"wire_{wire}"),
                     )
 
-
-@dataclass(frozen=True)
-class HaarBrickwork:
-    """Haar random circuit family with brickwork pattern.
-
-    Attributes:
-        name: The name of the circuit family.
-    """
-
-    name: str = "haar"
-
-    def make_spec(
-        self,
-        n_qubits: int,
-        n_layers: int,
-        d: int,
-        seed: int,
-        *,
-        connectivity: str = "line",
-        pattern: str = "brickwork",
-        **kwargs: Any,
-    ) -> CircuitSpec:
-        params = dict(kwargs)
-
-        spec = CircuitSpec(
-            n_qubits=int(n_qubits),
-            n_layers=int(n_layers),
-            d=int(d),
-            global_seed=int(seed),
-            family=self.name,
-            connectivity=connectivity,
-            pattern=pattern,
-            params=params,
-        )
-        return replace(spec, gates=tuple(self.gates(spec)))
-
-    def gates(self, spec: CircuitSpec) -> Generator[GateSpec]:
-        gate_probability = float(spec.params.get("gate_probability", 1.0))
-        haar_strength = float(spec.params.get("haar_strength", 1.0))
-        haar_mode = str(spec.params.get("haar_mode", "full_haar"))
-
-        for layer in range(spec.n_layers):
-            pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
-
-            for slot, (a, b) in enumerate(pairs):
-                s = gate_seed(
-                    spec.global_seed,
-                    layer=layer,
-                    slot=slot,
-                    wires=(a, b),
-                    kind="haar",
-                )
-                rng = np.random.default_rng(s)
-                if rng.random() > gate_probability:
-                    yield GateSpec(
-                        kind="I",
-                        wires=(int(a),),
-                        d=spec.d,
-                        seed=s,
-                        tags=("layer", f"L{layer}", "haar_skipped_identity", f"wire_{a}"),
-                        params=(),
-                    )
-                    yield GateSpec(
-                        kind="I",
-                        wires=(int(b),),
-                        d=spec.d,
-                        seed=s,
-                        tags=("layer", f"L{layer}", "haar_skipped_identity", f"wire_{b}"),
-                        params=(),
-                    )
-                    continue
-
-                yield GateSpec(
-                    kind="haar",
-                    wires=(a, b),
-                    d=spec.d,
-                    seed=s,
-                    tags=("layer", f"L{layer}", "haar"),
-                    params=(s, float(haar_strength), haar_mode),
-                )
-
-
-
-def quansistor_blocks(n_qubits: int, n_layer: int) -> list[tuple[int, int, int, int]]:
-    start = (n_layer % 2) * 2  # shift by 2 wires each odd layer
-    blocks: list[tuple[int, int, int, int]] = []
-    for i in range(start, n_qubits - 3, 4):
-        blocks.append((i, i + 1, i + 2, i + 3))
-    return blocks
-
-def leftover_pairs(n_qubits: int, used: set[int], connectivity: str) -> list[tuple[int, int]]:
-    left = [i for i in range(n_qubits) if i not in used]
-    leftover = set(left)
-
-    pairs: list[tuple[int, int]] = []
-    used = set()
-
-    for i in range(n_qubits - 1):
-        a, b = i, i + 1
-        if a in leftover and b in leftover and a not in used and b not in used:
-            pairs.append((a, b))
-            used.update((a, b))
-    if connectivity in ("loop", "ring"):
-        a, b = n_qubits - 1, 0
-        if a in leftover and b in leftover and a not in used and b not in used:
-            pairs.append((a, b))
-            used.update((a, b))
-    return pairs
-
-def kv(**kwargs) -> tuple[str, ...]:
-    # deterministic ordering
-    return tuple(f"{k}={v}" for k, v in sorted(kwargs.items()))
-
-def _axis_from_seed(seed: int) -> str:
-    # deterministic, reproducible across runs
-    rng = np.random.default_rng(seed)
-    return "X" if rng.integers(0, 2) == 0 else "Y"
-
-_BLOCK_STEPS = (
-    (0, 1),  # q0 q1
-    (2, 3),  # q2 q3
-    (1, 2),  # q1 q2
-    (0, 1),  # q0 q1
-    (2, 3),  # q2 q3
-)
-
+# ---------------------------------------------------------------------
+# Quansistor family
+# ---------------------------------------------------------------------
 @dataclass(frozen=True)
 class QuansistorBrickwork:
     name: str = "quansistor"
@@ -378,171 +338,83 @@ class QuansistorBrickwork:
         **kwargs: Any,
     ) -> CircuitSpec:
         params = dict(kwargs)
-        spec = CircuitSpec(
-            n_qubits=n_qubits,
-            n_layers=n_layers,
-            d=d,
-            global_seed=seed,
-            family=self.name,
-            connectivity=connectivity,
-            pattern=pattern,
-            params=params,
-        )
-        return replace(spec, gates=tuple(self.gates(spec)))
-    def sample_quansistor_params(
+        return _make_spec(
             self,
-            rng: np.random.Generator,
-            param_regime: str,
-            param_scale: float | None = None,
-        ) -> tuple[float, float, float]:
-            if param_regime == "identity_like":
-                sigma = 0.02 if param_scale is None else float(param_scale)
-                a, b, g = rng.normal(0.0, sigma, 3)
-
-            elif param_regime == "weak":
-                sigma = 0.20 if param_scale is None else float(param_scale)
-                a, b, g = rng.normal(0.0, sigma, 3)
-
-            elif param_regime == "moderate":
-                sigma = 0.75 if param_scale is None else float(param_scale)
-                a, b, g = rng.normal(0.0, sigma, 3)
-
-            elif param_regime == "structured_equal_ab":
-                scale = np.pi if param_scale is None else float(param_scale) * np.pi
-                base = rng.uniform(-scale, scale)
-                g = rng.uniform(-0.25, 0.25)
-                a, b = base, base
-
-            elif param_regime == "structured_opposite_ab":
-                scale = np.pi if param_scale is None else float(param_scale) * np.pi
-                base = rng.uniform(-scale, scale)
-                g = rng.uniform(-0.25, 0.25)
-                a, b = base, -base
-
-            elif param_regime == "generic_uniform":
-                a, b, g = rng.uniform(-np.pi, np.pi, 3)
-
-            else:
-                raise ValueError(f"Unknown param_regime={param_regime}")
-
-            return float(a), float(b), float(g)
+            n_qubits,
+            n_layers,
+            d,
+            seed,
+            connectivity,
+            pattern,
+            params,
+        )
 
     def gates(self, spec: CircuitSpec) -> Iterable[GateSpec]:
-        if spec.pattern == "custom":
-            for layer in range(spec.n_layers):
-                blocks = quansistor_blocks(spec.n_qubits, layer)
-                used: set[int] = set()
+        for layer in range(spec.n_layers):
+            pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
 
-                # ---- 4-qubit blocks -> 5 two-qubit gates each
-                for block_idx, (q0, q1, q2, q3) in enumerate(blocks):
-                    used.update((q0, q1, q2, q3))
+            for slot, (q0, q1) in enumerate(pairs):
+                s = gate_seed(
+                    spec.global_seed,
+                    layer=layer,
+                    slot=slot,
+                    wires=(q0, q1),
+                    kind="quansistor",
+                )
+                rng = np.random.default_rng(s)
 
-                    # One seed namespace per block (so 5 gates share a single RNG stream conceptually)
-                    # We derive per-step seeds deterministically from that block identity.
-                    block_seed = gate_seed(
-                        spec.global_seed,
-                        kind="quansistor_block",
-                        layer=layer,
-                        slot=block_idx,
-                        wires=(q0, q1, q2, q3),
-                        ordered_wires=True,
-                    )
+                gate_probability = float(spec.params.get("gate_probability", 1.0))
+                param_regime = str(spec.params.get("param_regime", "generic_uniform"))
+                param_scale = spec.params.get("param_scale", None)
 
-                    # Emit the 5 sequential 2-qubit quansistor gates
-                    wires4 = (q0, q1, q2, q3)
-                    for step_idx, (i, j) in enumerate(_BLOCK_STEPS):
-                        a, b = wires4[i], wires4[j]
+                alpha, beta, gamma = _sample_quansistor_params(
+                    rng=rng,
+                    param_regime=param_regime,
+                    param_scale=param_scale,
+                )
 
-                        # step seed derived from block_seed (NOT spec.global_seed directly)
-                        s = gate_seed(
-                            block_seed,
-                            kind="quansistor",
-                            layer=step_idx,  # local to block
-                            slot=0,
-                            wires=(a, b),
-                            ordered_wires=True,
-                            extra=f"L{layer}_B{block_idx}_S{step_idx}",
-                        )
-
-                        yield GateSpec(
-                            kind="quansistor",
-                            wires=(a, b),
-                            d=spec.d,
-                            seed=s,
-                            tags=(
-                                "layer",
-                                f"L{layer}",
-                                "block",
-                                f"B{block_idx}",
-                                "step",
-                                f"S{step_idx}",
-                            ),
-                            params=(("block", (q0, q1, q2, q3)), ("step", step_idx)),
-                        )
-        elif spec.pattern == "brickwork":
-            for layer in range(spec.n_layers):
-                pairs = brickwork_pattern(spec.n_qubits, layer, connectivity=spec.connectivity)
-
-                for slot, (a, b) in enumerate(pairs):
-                    s = gate_seed(
-                        spec.global_seed,
-                        layer=layer,
-                        slot=slot,
-                        wires=(a, b),
-                        kind="quansistor",
-                    )
-                    rng = np.random.default_rng(s)
-
-                    gate_probability = float(spec.params.get("gate_probability", 1.0))
-                    param_regime = str(spec.params.get("param_regime", "generic_uniform"))
-                    param_scale = spec.params.get("param_scale", None)
-
-                    a_, b_, g_ = self.sample_quansistor_params(
-                        rng=rng,
-                        param_regime=param_regime,
-                        param_scale=param_scale,
-                    )
-
-                    if rng.random() > gate_probability:
-                        yield GateSpec(
-                            kind="I",
-                            wires=(int(a),),
-                            d=spec.d,
-                            seed=s,
-                            tags=("layer", f"L{layer}", "quansistor_skipped_identity", f"wire_{a}"),
-                            params=(),
-                        )
-                        yield GateSpec(
-                            kind="I",
-                            wires=(int(b),),
-                            d=spec.d,
-                            seed=s,
-                            tags=("layer", f"L{layer}", "quansistor_skipped_identity", f"wire_{b}"),
-                            params=(),
-                        )
-                        continue
-
-
-                    axis = str(rng.choice(["X", "Y"]))
-                    params = (float(a_), float(b_), float(g_), axis)
-
+                if rng.random() > gate_probability:
                     yield GateSpec(
-                        kind="quansistor",
-                        wires=(int(a), int(b)),
+                        kind="I",
+                        wires=(int(q0),),
                         d=spec.d,
                         seed=s,
-                        tags=(
-                            "layer",
-                            f"L{layer}",
-                            "quansistor",
-                            f"axis_{axis}",
-                            f"wire_{a}_{b}",
-                            f"regime_{param_regime}",
-                        ),
-                        params=params,
+                        tags=("layer", f"L{layer}", "quansistor_skipped_identity", f"wire_{q0}"),
+                        params=(),
                     )
+                    yield GateSpec(
+                        kind="I",
+                        wires=(int(q1),),
+                        d=spec.d,
+                        seed=s,
+                        tags=("layer", f"L{layer}", "quansistor_skipped_identity", f"wire_{q1}"),
+                        params=(),
+                    )
+                    continue
 
 
+                axis = str(rng.choice(["X", "Y"]))
+                params = (float(alpha), float(beta), float(gamma), axis)
+
+                yield GateSpec(
+                    kind="quansistor",
+                    wires=(int(q0), int(q1)),
+                    d=spec.d,
+                    seed=s,
+                    tags=(
+                        "layer",
+                        f"L{layer}",
+                        "quansistor",
+                        f"axis_{axis}",
+                        f"wire_{q0}_{q1}",
+                        f"regime_{param_regime}",
+                    ),
+                    params=params,
+                )
+
+# ---------------------------------------------------------------------
+# Random rotations family
+# ---------------------------------------------------------------------
 @dataclass(frozen=True)
 class RandomCircuit:
     name: str = "random"
@@ -562,17 +434,16 @@ class RandomCircuit:
     ) -> CircuitSpec:
         params = dict(kwargs)
 
-        spec = CircuitSpec(
-            n_qubits=n_qubits,
-            n_layers=n_layers,
-            d=d,
-            global_seed=seed,
-            family=self.name,
-            connectivity=connectivity,
-            pattern=pattern,
-            params=params,
+        return _make_spec(
+            self,
+            n_qubits,
+            n_layers,
+            d,
+            seed,
+            connectivity,
+            pattern,
+            params,
         )
-        return replace(spec, gates=tuple(self.gates(spec)))
 
     def _allowed_edges(self, n: int, connectivity: str) -> list[tuple[int, int]]:
         if connectivity == "line":
@@ -706,6 +577,3 @@ class RandomCircuit:
                         params=(),
                         tags=("layer", f"L{step}", "2q", "CNOT"),
                     )
-
-
-

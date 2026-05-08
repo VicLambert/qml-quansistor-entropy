@@ -1,16 +1,21 @@
 
+
 from __future__ import annotations
-from typing import Literal
 
 import numpy as np
+
 from scipy.linalg import expm
+
 from qqe.circuit.spec import GateSpec
 
 
+# ---------------------------------------------------------------------
+# Quansistor gates
+# ---------------------------------------------------------------------
 def circ_X(a, b, g):
     """Creates a matrix of symmetry class X defined in section A of
     https://doi.org/10.1103/PhysRevA.106.062610.
-    
+
     @param a: Parameter alpha defined in equation 18 of
     https://doi.org/10.1103/PhysRevA.106.062610.
     @param b: Parameter beta defined in equation 18 of
@@ -47,7 +52,6 @@ def circ_X(a, b, g):
             [e12, e13, e14, e11],
         ],
     )
-
 
 def circ_Y(a, b, g):
     """Creates a matrix of symmetry class Y defined in section B of
@@ -100,6 +104,19 @@ def circ_Y(a, b, g):
         ],
     )
 
+def random_quansistor_gate(a, b, g, axis):
+    """Generate a random quansistor gate from symmetry class X or Y.
+
+    @param rng: Random number generator.
+    @return: Random quansistor gate matrix.
+    """
+    #a, b, g = rng.standard_normal(3)
+    return circ_X(a, b, g) if axis == "X" else circ_Y(a, b, g)
+
+
+# ---------------------------------------------------------------------
+# Haar gates
+# ---------------------------------------------------------------------
 def random_hermitian(d: int, rng: np.random.Generator) -> np.ndarray:
     """Generates a random Hermitian matrix of dimension d x d."""
     A = rng.normal(size=(d, d)) + 1j * rng.normal(size=(d, d))
@@ -126,22 +143,15 @@ def haar_unitary_gate(
 
         Lambda = np.diag([R[i, i] / np.abs(R[i, i]) for i in range(d)])
         return np.dot(Q, Lambda)
-    elif mode == "exp_hermitian":
+    if mode == "exp_hermitian":
         return exp_hermitian(d, rng, strength)
-    elif mode == "identity":
+    if mode == "identity":
         return np.eye(d, dtype=complex)
     raise ValueError(f"Unknown Haar mode: {mode!r}")
 
-def random_quansistor_gate(a, b, g, axis):
-    """Generate a random quansistor gate from symmetry class X or Y.
-
-    @param rng: Random number generator.
-    @return: Random quansistor gate matrix.
-    """
-    #a, b, g = rng.standard_normal(3)
-    return circ_X(a, b, g) if axis == "X" else circ_Y(a, b, g)
-
-
+# ---------------------------------------------------------------------
+# Elementary qubit gates
+# ---------------------------------------------------------------------
 def _I() -> np.ndarray:
     return np.eye(2, dtype=complex)
 
@@ -152,6 +162,9 @@ def _H() -> np.ndarray:
 
 def _S() -> np.ndarray:
     return np.array([[1, 0], [0, 1j]], dtype=complex)
+
+def _T_matrix() -> np.ndarray:
+    return np.array([[1, 0], [0, np.exp(1j * np.pi / 4)]], dtype=complex)
 
 def _Rx(theta: float) -> np.ndarray:
     c = np.cos(theta / 2)
@@ -197,6 +210,9 @@ _ONEQ = {
     "CNOT": _CNOT(),
 }
 
+# ---------------------------------------------------------------------
+# Clifford gates
+# ---------------------------------------------------------------------
 def kron2(A: np.ndarray, B: np.ndarray) -> np.ndarray:
     return np.kron(A, B)
 
@@ -217,11 +233,9 @@ def clifford_recipe_unitary(seed: int) -> tuple[str, str, np.ndarray]:
     U = _CNOT() @ kron2(Ua, Ub)
     return str(U_a_name), str(U_b_name), U
 
-
-def _T_matrix() -> np.ndarray:
-    return np.array([[1, 0], [0, np.exp(1j * np.pi / 4)]], dtype=complex)
-
-
+# ---------------------------------------------------------------------
+# Random rotations
+# ---------------------------------------------------------------------
 def random_rot_gate(seed: int | None = None, rot_set=("RX", "RY", "RZ")) -> np.ndarray:
     """Sample a random 1-qubit rotation gate unitary from rot_set with angle in [0, 2π)."""
     rng = np.random.default_rng(seed)
@@ -230,7 +244,9 @@ def random_rot_gate(seed: int | None = None, rot_set=("RX", "RY", "RZ")) -> np.n
     return _ONEQ[gate](theta)
 
 
-
+# ---------------------------------------------------------------------
+# Unitary gate synthesis
+# ---------------------------------------------------------------------
 def gate_unitary(gate: GateSpec) -> np.ndarray:
     """Generate the unitary matrix for a quantum gate.
 
@@ -286,11 +302,14 @@ def gate_unitary(gate: GateSpec) -> np.ndarray:
         if gate.seed is None:
             msg = "Quansistor gate requires a seed."
             raise ValueError(msg)
-        rng = np.random.default_rng(gate.seed)
-        a, b, g, _ = gate.params if gate.params else rng.standard_normal(3)
-        axis = rng.choice(["X", "Y"])
+        if not gate.params or len(gate.params) != 4:
+            msg = f"Quansistor gate requires params=(a, b, g, axis), got {gate.params}"
+            raise ValueError(msg)
+
+        a, b, g, axis = gate.params
         U = random_quansistor_gate(a, b, g, axis)
         U = np.asarray(U, dtype=complex)
+
         expected = (gate.d ** len(gate.wires), gate.d ** len(gate.wires))
         if U.shape != expected:
             msg = (
@@ -298,9 +317,8 @@ def gate_unitary(gate: GateSpec) -> np.ndarray:
                 f"expected {expected}"
             )
             raise ValueError(msg)
+
         return U
-
-
 
     if kind == "clifford":
         if gate.seed is None:
