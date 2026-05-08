@@ -37,9 +37,11 @@ from tqdm import tqdm
 from qqe.experiments.plotting import plot_training_curves
 from qqe.GNN.physics_aware_NN import GNN, NN, QuantumCircuitGraphDataset, Regressor
 from qqe.GNN.training.datasets import (
+    prepare_datasets,
     GlobalTargetDatasetWrapper,
     PaddedGraphDatasetWrapper,
 )
+from qqe.GNN.training.runners import MODEL_REGISTRY
 from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
 from qqe.GNN.training.utils import (
