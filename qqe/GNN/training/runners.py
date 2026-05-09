@@ -13,6 +13,7 @@ from qqe.GNN.training.train import build_loss, train_model
 from qqe.GNN.training.train_config import TrainConfig
 from qqe.GNN.training.utils import collect_files_path, evaluate_loss
 from qqe.GNN.parameter_search.helpers import objective_GNN, objective_NN
+from qqe.experiments.plotting import plot_training_curves
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def _resolve_model_save_path(base_path: str, allow_overwrite: bool = False) -> s
     while True:
         candidate = parent / f"{stem}_v{counter}{suffix}"
         if not candidate.exists():
-            print(
+            logger.info(
                 "Model checkpoint already exists at %s. Saving to %s instead.",
                 path,
                 candidate,
@@ -113,7 +114,7 @@ def train(
                 f"Invalid family: {family}. Must be one of {sorted(VALID_FAMILIES)}"
             )
 
-    print(f"Starting training | model_type={model_type} | training_mode={training_mode} | family={family} | loss_type={loss_type}")
+    logger.info(f"Starting training | model_type={model_type} | training_mode={training_mode} | family={family} | loss_type={loss_type}")
     cfg = TrainConfig(
         epochs=epochs,
         lr=lr,
@@ -128,7 +129,7 @@ def train(
         heartbeat=heartbeat_secs,
         epoch_warning=epoch_time_warning_secs,
     )
-    print("Training configuration done.")
+    logger.info("Training configuration done.")
 
     model_hparams = {} if model_hparams is None else dict(model_hparams)
     train_hparams = {} if train_hparams is None else dict(train_hparams)
@@ -136,15 +137,15 @@ def train(
     family_filter = family if training_mode == "per_family" else None
     family_projection = family if training_mode == "per_family" else None
 
-    print("Collecting data paths...")
+    logger.info("Collecting data paths...")
     data_paths = collect_files_path(training_data_dir, family=family_filter)
     if not data_paths:
         raise RuntimeError("No data paths found.")
-    print(f"Found {len(data_paths)} data paths.")
-    print("Data paths collected.")
+    logger.info(f"Found {len(data_paths)} data paths.")
+    logger.info("Data paths collected.")
 
     spec = MODEL_REGISTRY[model_type]
-    print(f"Building loaders and model for model_type={model_type}...")
+    logger.info(f"Building loaders and model for model_type={model_type}...")
 
     loader_fn = spec["build_loaders"]
     if spec["returns_nodes_dim"]:
@@ -172,9 +173,9 @@ def train(
         node_in_dim = global_in_dim
 
     model = spec["build_model"](node_in_dim, global_in_dim, model_hparams)
-    print("Loaders and model built.")
+    logger.info("Loaders and model built.")
 
-    print("Starting training...")
+    logger.info("Starting training...")
     model, hist, dev = train_model(
         model,
         train_loader,
@@ -204,7 +205,7 @@ def train(
         use_amp=True,
         show_progress=show_progress,
     )
-    print("Training complete.")
+    logger.info("Training complete.")
 
     run_name = f"{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}"
 
@@ -249,6 +250,6 @@ def train(
             allow_overwrite=allow_overwrite,
         )
         torch.save(checkpoint, model_save_path)
-        print(f"Saved model checkpoint to {model_save_path}")
+        logger.info(f"Saved model checkpoint to {model_save_path}")
 
     return model, float(test_loss), hist, checkpoint
