@@ -503,10 +503,10 @@ def compute_entry(
         }
 
         if config.compute_sre:
-            payload["sre"] = sre_value
+            payload["sre"] = float(sre_value) if sre_value is not None else float("nan")
 
         if config.compute_EE:
-            payload["ee"] = EE_value
+            payload["ee"] = float(EE_value) if EE_value is not None else float("nan")
 
         torch.save(payload, tmp_path)
         tmp_path.replace(path)
