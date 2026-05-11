@@ -4,9 +4,7 @@ import logging
 
 import typer
 
-from src.GNN.training.runners import (
-    train,
-)
+from src.GNN.training.runners import train
 from src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
