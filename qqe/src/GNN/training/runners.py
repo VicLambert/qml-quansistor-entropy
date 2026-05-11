@@ -151,8 +151,9 @@ def train(
     spec = MODEL_REGISTRY[model_type]
     logger.info(f"Building loaders and model for model_type={model_type}...")
 
-    loader_fn = spec["build_loaders"]
-    if spec["returns_nodes_dim"]:
+    loader_fn: object = spec["build_loaders"]
+    returns_nodes_dim: bool = spec.get("returns_nodes_dim", False)
+    if returns_nodes_dim:
         train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = loader_fn(
             data_paths,
             batch_size=cfg.batch_size,
@@ -220,20 +221,26 @@ def train(
         fig_path=f"outputs/figures/training_curves/training_curves_{run_name}.png",
     )
 
+    # Build model config safely, providing defaults for missing hparams depending on model
+    model_config = {
+        "node_in_dim": node_in_dim or None,
+        "global_in_dim": global_in_dim,
+        "hidden_dim": model_hparams.get("hidden_dim", 64),
+        "dropout_rate": model_hparams.get("dropout_rate", 0.1),
+    }
+    # GNN specific params (only meaningful for gnn models)
+    model_config.update({
+        "gnn_hidden": model_hparams.get("gnn_hidden", None),
+        "gnn_heads": model_hparams.get("gnn_heads", None),
+        "global_hidden": model_hparams.get("global_hidden", None),
+        "reg_hidden": model_hparams.get("reg_hidden", None),
+        "num_layers": model_hparams.get("num_layers", None),
+    })
+
     checkpoint = {
         "model_state_dict": model.state_dict(),
         "model_type": model_type,
-        "model_config": {
-            "node_in_dim": node_in_dim or None,
-            "global_in_dim": global_in_dim,
-            "hidden_dim": model_hparams.get("hidden_dim", 64),
-            "gnn_hidden": model_hparams["gnn_hidden"],
-            "gnn_heads": model_hparams["gnn_heads"],
-            "global_hidden": model_hparams["global_hidden"],
-            "reg_hidden": model_hparams["reg_hidden"],
-            "num_layers": model_hparams["num_layers"],
-            "dropout_rate": model_hparams["dropout_rate"],
-        },
+        "model_config": model_config,
         "train_config": asdict(cfg),
         "train_hparams": train_hparams,
         "feature_config": {
