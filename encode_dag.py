@@ -1,12 +1,12 @@
 
-from qqe.circuit.families import (
+from qqe.src.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
     RandomCircuit,
 )
-from qqe.circuit.patterns import TdopingRules, to_qasm
-from qqe.GNN.encoder import qasm_to_pyg_graph
+from qqe.src.circuit.patterns import TdopingRules, to_qasm
+from qqe.src.GNN.encoder import qasm_to_pyg_graph
 
 family_registry = {
     "haar": HaarBrickwork,

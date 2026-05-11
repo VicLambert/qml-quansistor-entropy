@@ -14,16 +14,16 @@ import typer
 from dask.distributed import as_completed
 from tqdm import tqdm
 
-from qqe.backend import PennylaneBackend, QuimbBackend
-from qqe.circuit.families import (
+from qqe.src.backend import PennylaneBackend, QuimbBackend
+from qqe.src.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
     RandomCircuit,
 )
-from qqe.experiments.core import run_experiment
-from qqe.parallel import dask_client
-from qqe.utils import FileCache, configure_logger
+from qqe.src.experiments.core import run_experiment
+from qqe.src.parallel import dask_client
+from qqe.src.utils import FileCache, configure_logger
 
 logger = logging.getLogger(__name__)
 
@@ -126,9 +126,9 @@ def compute_sre_for_row(
     Returns:
         SRE value (float) or None if computation fails
     """
-    from qqe.experiments.core import ExperimentConfig
-    from qqe.properties.compute import PropertyRequest
-    from qqe.states.types import DenseState
+    from qqe.src.experiments.core import ExperimentConfig
+    from qqe.src.properties.compute import PropertyRequest
+    from qqe.src.states.types import DenseState
 
     try:
         n_qubits = int(n_qubits)
@@ -146,7 +146,7 @@ def compute_sre_for_row(
         )
 
         # Configure backend and properties
-        from qqe.states.types import BackendConfig
+        from qqe.src.states.types import BackendConfig
 
         backend_config = BackendConfig(
             name=backend,

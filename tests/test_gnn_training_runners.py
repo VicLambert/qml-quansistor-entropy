@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from qqe.GNN.training.runners import (
+from qqe.src.GNN.training.runners import (
     MODEL_REGISTRY,
     _resolve_model_save_path,
     train,

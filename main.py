@@ -18,26 +18,26 @@ import typer
 from dask.distributed import as_completed
 from tqdm import tqdm
 
-from qqe.backend import PennylaneBackend, QuimbBackend
-from qqe.circuit.families import (
+from qqe.src.backend import PennylaneBackend, QuimbBackend
+from qqe.src.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
     RandomCircuit,
 )
-from qqe.experiments.core import run_experiment
-from qqe.experiments.plotting import (
+from qqe.src.experiments.core import run_experiment
+from qqe.src.experiments.plotting import (
     plot_sre,
     plot_sredensity_v_tcount,
 )
-from qqe.experiments.sweeper import (
+from qqe.src.experiments.sweeper import (
     JobConfig,
     aggregate_by_cond,
     compile_job,
     generate_jobs,
 )
-from qqe.parallel import dask_client
-from qqe.utils import FileCache, RunStore, configure_logger, make_run_id
+from qqe.src.parallel import dask_client
+from qqe.src.utils import FileCache, RunStore, configure_logger, make_run_id
 
 logger = logging.getLogger(__name__)
 

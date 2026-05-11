@@ -13,7 +13,7 @@ from torch_geometric.data import Data, Dataset as PyGDataset
 from torch_geometric.loader import DataLoader
 
 # Reproduce the imports and setup from notebook
-from qqe.GNN.physics_aware_NN import GNN
+from qqe.src.GNN.physics_aware_NN import GNN
 
 
 class QuantumCircuitGraphDataset(PyGDataset):

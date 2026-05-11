@@ -16,8 +16,8 @@ import typer
 
 from tqdm import tqdm
 
-from qqe.GNN.training.train_config import TrainConfig
-from qqe.utils import configure_logger
+from qqe.src.GNN.training.train_config import TrainConfig
+from qqe.src.utils import configure_logger
 from train_gnn import run_training
 
 logger = logging.getLogger(__name__)

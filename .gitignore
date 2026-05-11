@@ -6,6 +6,8 @@ example_visualization.py
 cleanup.py
 outputs/data/encoding_data_quimb_fwht.json
 notebooks/data/
+qqe/outputs/data/
+qqe/outputs/cache/
 
 *.log
 /logs/

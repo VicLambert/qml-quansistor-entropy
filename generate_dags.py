@@ -9,15 +9,15 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
-from qqe.backend import PennylaneBackend, QuimbBackend
-from qqe.circuit.families import (
+from qqe.src.backend import PennylaneBackend, QuimbBackend
+from qqe.src.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
 )
-from qqe.circuit.patterns import TdopingRules
-from qqe.circuit.gates import clifford_recipe_unitary
-from qqe.GNN import circuit_spec_to_nx_dag
+from qqe.src.circuit.patterns import TdopingRules
+from qqe.src.circuit.gates import clifford_recipe_unitary
+from qqe.src.GNN import circuit_spec_to_nx_dag
 
 logger = logging.getLogger(__name__)
 
