@@ -4,12 +4,14 @@ import os
 import ast
 import logging
 
+import torch
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import pennylane as qml
 
 from matplotlib.patches import Rectangle
@@ -641,4 +643,145 @@ def plot_fixed_qubits_vary_layers(
         plt.close()
     else:
         plt.show()
+
+
+def pearson_corr_fast(df: pd.DataFrame, col_x: str, col_y: str) -> float:
+    x = df[col_x].to_numpy(dtype=float)
+    y = df[col_y].to_numpy(dtype=float)
+    return float(np.corrcoef(x, y)[0, 1])
+
+def view_correlation(
+    df: pd.DataFrame,
+    nq: int = 10,
+    nl: int = 100,
+    col_x: str = "target",
+    col_y: str = "prediction",
+):
+
+
+    subset = df[(df["n_qubits"] == nq) & (df["n_layers"] == nl)].copy()
+
+    # Reset index so "sample index" is clean
+    subset = subset.reset_index(drop=True)
+
+    plt.figure(figsize=(8, 4))
+
+    x = subset.index  # sample index (what you want)
+
+    plt.plot(x, subset[col_x], label="target", marker="o")
+    plt.plot(x, subset[col_y], label="prediction", marker="x")
+
+    plt.xlabel("Sample index")
+    plt.ylabel("Value")
+    plt.title(f"Target vs Prediction (n_qubits={nq}, n_layers={nl})")
+    plt.legend()
+    plt.grid(alpha=0.3)
+
+    plt.show()
+    r = pearson_corr_fast(subset, col_x, col_y)
+    print(f"Pearson r = {r:.4f}")
+
+def _plot_SRE_distribution(
+    dataset,
+    bins=30,
+    value_range=None,
+    density=True,
+    show_mean=True,
+    min_count=1,
+    title="SRE frequency by number of qubits",
+):
+    grouped_sre = {}
+
+    # -----------------------------
+    # Collect SRE values by qubit count
+    # -----------------------------
+    for data in dataset:
+        if not hasattr(data, "num_qubits"):
+            continue
+        if not hasattr(data, "y") or data.y is None:
+            continue
+
+        q = int(data.num_qubits)
+
+        # robust extraction of scalar y
+        y = data.y
+        if torch.is_tensor(y):
+            if y.numel() == 0:
+                continue
+            y_val = float(y.view(-1)[0].item())
+        else:
+            y_val = float(np.array(y).reshape(-1)[0])
+
+        if not np.isfinite(y_val):
+            continue
+
+        grouped_sre.setdefault(q, []).append(y_val)
+
+    # remove groups with too few points
+    grouped_sre = {q: vals for q, vals in grouped_sre.items() if len(vals) >= min_count}
+
+    if not grouped_sre:
+        raise ValueError("No valid finite SRE values found in the dataset.")
+
+    # -----------------------------
+    # Determine histogram range
+    # -----------------------------
+    all_vals = np.concatenate([np.asarray(v, dtype=float) for v in grouped_sre.values()])
+    if value_range is None:
+        xmin = float(np.nanmin(all_vals))
+        xmax = float(np.nanmax(all_vals))
+        if xmin == xmax:
+            xmin -= 0.5
+            xmax += 0.5
+        value_range = (xmin, xmax)
+
+    bin_edges = np.linspace(value_range[0], value_range[1], bins + 1)
+    bin_centers = 0.5 * (bin_edges[:-1] + bin_edges[1:])
+
+    # -----------------------------
+    # Plot
+    # -----------------------------
+    plt.figure(figsize=(9, 6))
+
+    for q in sorted(grouped_sre):
+        vals = np.array(grouped_sre[q])
+
+        counts, _ = np.histogram(vals, bins=bin_edges)
+
+        if density:
+            freq = 100 * counts / counts.sum()
+        else:
+            freq = counts
+
+        # plot curve and capture color
+        line, = plt.plot(bin_centers, freq, label=f"{q} qubits")
+        color = line.get_color()
+
+        # plot mean with SAME color
+        if show_mean:
+            mean_val = vals.mean()
+            plt.axvline(
+                mean_val,
+                linestyle="--",
+                linewidth=1.5,
+                color=color,
+                alpha=0.9,
+            )
+
+            ymax = freq.max()
+            plt.text(
+                mean_val - 0.5,
+                ymax + 0.5,
+                f"{mean_val:.2f}",
+                color=color,
+                ha="center",
+                fontsize=8,
+            )
+
+    plt.xlabel("Stabilizer Rényi Entropy")
+    plt.ylabel("Frequency (%)")
+    plt.legend()
+    plt.grid(alpha=0.25)
+    plt.tight_layout()
+    plt.show()
 
