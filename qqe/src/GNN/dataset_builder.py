@@ -94,9 +94,11 @@ class DataGenConfig:
     qubits_values: np.ndarray
     layers_values: np.ndarray
     n_seeds: int
+    prediction_n_seeds: int | None
     n_bins: int
     compute_sre: bool
     compute_EE: bool
+    target_qubits: tuple[int, ...]
     representation: str
     use_dask: bool
     dask_n_workers: int
@@ -444,13 +446,14 @@ def compute_entry(
         sre_value = None
         EE_value = None
 
+        should_compute_target = int(n_qubits) in set(config.target_qubits)
 
         property_requests = []
 
-        if config.compute_sre:
+        if should_compute_target and config.compute_sre:
             property_requests.append(PropertyRequest(name="SRE", method=config.method, params={}))
 
-        if config.compute_EE:
+        if should_compute_target and config.compute_EE:
             property_requests.append(PropertyRequest(name="entanglement_entropy", method=config.method, params={}))
 
         if property_requests:
@@ -471,12 +474,12 @@ def compute_entry(
                 backend_registry=BACKEND_REGISTRY,
                 cache=cache,
             )
-        if config.compute_sre:
+        if should_compute_target and config.compute_sre:
             sre_key = f"SRE:{config.method.lower()}"
             sre_result = result.results.get(sre_key)
             sre_value = float(sre_result.value) if sre_result else None
 
-        if config.compute_EE:
+        if should_compute_target and config.compute_EE:
             ee_key = f"entanglement_entropy:{config.method.lower()}"
             ee_result = result.results.get(ee_key)
             EE_value = float(ee_result.value) if ee_result else None
@@ -501,6 +504,8 @@ def compute_entry(
                 "n_qubits": int(n_qubits),
                 "n_layers": int(n_layers),
                 "seed": int(seed),
+                "has_target": bool(should_compute_target),
+                "target_qubits": list(config.target_qubits),
                 "backend": config.backend,
                 "method": config.method,
                 "representation": config.representation,
@@ -513,10 +518,10 @@ def compute_entry(
             },
         }
 
-        if config.compute_sre:
+        if should_compute_target and config.compute_sre:
             payload["sre"] = float(sre_value) if sre_value is not None else float("nan")
 
-        if config.compute_EE:
+        if should_compute_target and config.compute_EE:
             payload["ee"] = float(EE_value) if EE_value is not None else float("nan")
 
         torch.save(payload, tmp_path)
