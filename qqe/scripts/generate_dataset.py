@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import typer
 
-from qqe.src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline
+from qqe.src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline, SamplingConfig, RegimeDistribution
 from qqe.src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
@@ -25,9 +25,10 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random,haar,clifford,quansistor",
+        "random",
         help="Comma-separated families to include",
     ),
+    sampling_config: SamplingConfig | None = None,
     n_seeds_option: int = typer.Option(
         175,
         help="Number of seeds per (family, qubits, layers)",
@@ -61,7 +62,6 @@ def main(
         raise ValueError("target must be 'SRE' or 'EE'")
 
     output_path = Path(str(PROJECT_ROOT) + output_dir)
-
     config = DataGenConfig(
         backend=backend,
         method=method,
@@ -80,6 +80,26 @@ def main(
         max_configs=max_configs,
     )
 
+    if sampling_config is None:
+        sampling_config = SamplingConfig(
+            clifford=RegimeDistribution(
+                regimes=["zero", "low", "medium", "high"],
+                probabilities=[0.15, 0.15, 0.25, 0.45],
+            ),
+            random=RegimeDistribution(
+                regimes=["identity_like", "clifford_like", "small_angles", "generic"],
+                probabilities=[0.15, 0.20, 0.2, 0.45],
+            ),
+            quansistor=RegimeDistribution(
+                regimes=["identity_like", "weak", "moderate", "structured_equal_ab", "structured_opposite_ab", "generic_uniform"],
+                probabilities=[0.15, 0.15, 0.15, 0.15, 0.15, 0.25],
+            ),
+            haar=RegimeDistribution(
+                regimes=["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
+                probabilities=[0.15, 0.15, 0.15, 0.15, 0.15, 0.25],
+            ),
+        )
+
     run_dataset_pipeline(
         config=config,
         families=selected_families,
@@ -90,6 +110,7 @@ def main(
         max_configs=max_configs,
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
+        sampling_config=sampling_config,
     )
 
 

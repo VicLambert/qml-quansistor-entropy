@@ -57,6 +57,34 @@ FAMILY_REGISTRY = {
     "random": RandomCircuit,
 }
 
+@dataclass(frozen=True)
+class RegimeDistribution:
+    regimes: list[str]
+    probabilities: list[float]
+
+    def sample(self, rng: np.random.Generator) -> str:
+        p = np.asarray(self.probabilities, dtype=float)
+        p = p / p.sum()
+        return str(rng.choice(self.regimes, p=p))
+
+@dataclass(frozen=True)
+class SamplingConfig:
+    clifford: RegimeDistribution = RegimeDistribution(
+        regimes = ["zero", "low", "medium", "high"],
+        probabilities = [0.15, 0.35, 0.30, 0.20],
+    )
+    haar: RegimeDistribution = RegimeDistribution(
+        regimes = ["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
+        probabilities = [0.10, 0.20, 0.20, 0.15, 0.20, 0.15],
+    )
+    random: RegimeDistribution = RegimeDistribution(
+        regimes = ["identity_like", "clifford_like", "small_angles", "generic"],
+        probabilities = [0.15, 0.20, 0.30, 0.35],
+    )
+    quansistor: RegimeDistribution = RegimeDistribution(
+        regimes = ["identity_like", "weak", "moderate", "structured_equal_ab", "structured_opposite_ab", "generic_uniform"],
+        probabilities = [0.10, 0.20, 0.25, 0.15, 0.15, 0.15],
+    )
 
 @dataclass
 class DataGenConfig:
@@ -186,13 +214,9 @@ def trim_memory() -> None:
     except Exception:
         pass
 
-def sample_t_count(n_layers: int, rng: np.random.Generator) -> tuple[str, int]:
+def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tuple[str, int]:
     max_t = 2 * n_layers
 
-    regime: str = rng.choice(
-        ["zero", "low", "medium", "high"],
-        p=[0.15, 0.35, 0.30, 0.20],
-    )
     # print(f"Sampling t count with regime: {regime}")
 
     if regime == "zero":
@@ -212,13 +236,7 @@ def sample_t_count(n_layers: int, rng: np.random.Generator) -> tuple[str, int]:
 
     return (regime, int(N_T))
 
-def sample_haar_controls(rng: np.random.Generator) -> dict[str, Any]:
-    regime = str(rng.choice(
-            ["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
-            p=[0.10, 0.20, 0.20, 0.15, 0.20, 0.15],
-        ),
-    )
-
+def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
     if regime == "none":
         p_haar = 0.0
         haar_strength = 0.0
@@ -254,12 +272,64 @@ def sample_haar_controls(rng: np.random.Generator) -> dict[str, Any]:
         "haar_mode": haar_mode,
     }
 
+def sample_random_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
 
+    if regime == "identity_like":
+        gate_probability = float(rng.uniform(0.05, 0.20))
+        angle_scale = 0.02
+
+    elif regime == "clifford_like":
+        gate_probability = float(rng.uniform(0.20, 0.60))
+        angle_scale = 0.02
+
+    elif regime == "small_angles":
+        gate_probability = float(rng.uniform(0.30, 0.80))
+        angle_scale = 0.25
+
+    elif regime == "generic":
+        gate_probability = float(rng.uniform(0.60, 1.00))
+        angle_scale = None
+
+    else:
+        raise ValueError(f"Unknown random regime={regime}")
+
+    return {
+        "sampling_regime": regime,
+        "gate_probability": gate_probability,
+        "angle_regime": regime,
+        "angle_scale": angle_scale,
+    }
+
+def sample_quansistor_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
+    if regime == "identity_like":
+        gate_probability = float(rng.uniform(0.05, 0.20))
+        param_scale = 0.02
+    elif regime == "weak":
+        gate_probability = float(rng.uniform(0.20, 0.60))
+        param_scale = 0.20
+    elif regime == "moderate":
+        gate_probability = float(rng.uniform(0.40, 0.85))
+        param_scale = 0.75
+    elif regime == "structured_equal_ab" or regime == "structured_opposite_ab":
+        gate_probability = float(rng.uniform(0.30, 0.80))
+        param_scale = 1.00
+    elif regime == "generic_uniform":
+        gate_probability = float(rng.uniform(0.50, 1.00))
+        param_scale = None
+    else:
+        raise ValueError(f"Unknown quansistor regime={regime}")
+
+    return {
+        "sampling_regime": regime,
+        "gate_probability": gate_probability,
+        "param_scale": param_scale,
+    }
 
 def sample_generation_controls(
     family: str,
     n_layers: int,
     seed: int,
+    sampling_config: SamplingConfig | None = None,
 ) -> dict[str, Any]:
     rng = np.random.default_rng(int(seed))
 
@@ -276,86 +346,25 @@ def sample_generation_controls(
     }
 
     if family == "clifford":
-        regime, t_count = sample_t_count(int(n_layers), rng)
+        regime = sampling_config.clifford.sample(rng)
+        regime, t_count = sample_t_count(int(n_layers), rng, regime)
 
         controls["sampling_regime"] = str(regime)
         controls["t_count"] = int(t_count)
         controls["tdoping"] = TdopingRules(count=int(t_count), per_layer=2)
 
     elif family == "haar":
-        controls.update(sample_haar_controls(rng))
+        regime = sampling_config.haar.sample(rng)
+        controls.update(sample_haar_controls(rng, regime))
 
     elif family == "random":
-        regime = str(
-            rng.choice(
-                ["identity_like", "clifford_like", "small_angles", "generic"],
-                p=[0.15, 0.20, 0.30, 0.35],
-            ),
-        )
-
-        controls["sampling_regime"] = regime
-        controls["angle_regime"] = regime
-
-        if regime == "identity_like":
-            controls["gate_probability"] = float(rng.uniform(0.05, 0.20))
-            controls["angle_scale"] = 0.02
-
-        elif regime == "clifford_like":
-            controls["gate_probability"] = float(rng.uniform(0.20, 0.60))
-            controls["angle_scale"] = 0.02
-
-        elif regime == "small_angles":
-            controls["gate_probability"] = float(rng.uniform(0.30, 0.80))
-            controls["angle_scale"] = 0.25
-
-        elif regime == "generic":
-            controls["gate_probability"] = float(rng.uniform(0.60, 1.00))
-            controls["angle_scale"] = None
-
-        else:
-            raise ValueError(f"Unknown random regime={regime}")
+        regime = sampling_config.random.sample(rng)
+        controls.update(sample_random_controls(rng, regime))
+        
 
     elif family == "quansistor":
-        regime = str(
-            rng.choice(
-                [
-                    "identity_like",
-                    "weak",
-                    "moderate",
-                    "structured_equal_ab",
-                    "structured_opposite_ab",
-                    "generic_uniform",
-                ],
-                p=[0.10, 0.20, 0.25, 0.15, 0.15, 0.15],
-            ),
-        )
-
-        controls["sampling_regime"] = regime
-        controls["param_regime"] = regime
-
-        if regime == "identity_like":
-            controls["gate_probability"] = float(rng.uniform(0.05, 0.30))
-            controls["param_scale"] = 0.02
-
-        elif regime == "weak":
-            controls["gate_probability"] = float(rng.uniform(0.20, 0.60))
-            controls["param_scale"] = 0.20
-
-        elif regime == "moderate":
-            controls["gate_probability"] = float(rng.uniform(0.40, 0.85))
-            controls["param_scale"] = 0.75
-
-        elif regime == "structured_equal_ab" or regime == "structured_opposite_ab":
-            controls["gate_probability"] = float(rng.uniform(0.30, 0.80))
-            controls["param_scale"] = 1.00
-
-        elif regime == "generic_uniform":
-            controls["gate_probability"] = float(rng.uniform(0.50, 1.00))
-            controls["param_scale"] = None
-
-        else:
-            msg = f"Unknown quansistor regime={regime}"
-            raise ValueError(msg)
+        regime = sampling_config.quansistor.sample(rng)
+        controls.update(sample_quansistor_controls(rng, regime))
 
     return controls
 
@@ -366,6 +375,7 @@ def compute_entry(
     n_qubits: int,
     n_layers: int,
     seed: int,
+    sampling_config: SamplingConfig | None = None,
 ) -> dict[str, Any] | None:
     from qqe.src.experiments.core import ExperimentConfig
     from qqe.src.properties.compute import PropertyRequest
@@ -384,6 +394,7 @@ def compute_entry(
             family=family,
             n_layers=int(n_layers),
             seed=int(seed),
+            sampling_config=sampling_config,
         )
 
         make_spec_kwargs = {
@@ -539,6 +550,7 @@ def compute_all_entries(
     use_dask: bool = False,
     dask_n_workers: int = 4,
     dask_memory_per_worker: str | None = "auto",
+    sampling_config: SamplingConfig | None = None,
 ) -> list[dict[str, Any]]:
     if use_dask:
         return compute_all_entries_parallel(
@@ -546,13 +558,15 @@ def compute_all_entries(
             config,
             dask_n_workers=dask_n_workers,
             dask_memory_per_worker=dask_memory_per_worker,
+            sampling_config=sampling_config,
         )
-    return compute_all_entries_sequential(params, config)
+    return compute_all_entries_sequential(params, config, sampling_config=sampling_config)
 
 
 def compute_all_entries_sequential(
     params: list[CircuitConfig],
     config: DataGenConfig,
+    sampling_config: SamplingConfig | None = None,
 ) -> list[dict[str, Any]]:
     base_dir = config.output_dir or DATASET_DIR
     base_dir.mkdir(parents=True, exist_ok=True)
@@ -571,6 +585,7 @@ def compute_all_entries_sequential(
                 n_qubits=row.n_qubits,
                 n_layers=row.n_layers,
                 seed=row.seed,
+                sampling_config=sampling_config,
             )
 
             if entry is None:
@@ -593,6 +608,7 @@ def compute_all_entries_parallel(
     config: DataGenConfig,
     dask_n_workers: int,
     dask_memory_per_worker: str | None = "auto",
+    sampling_config: SamplingConfig | None = None,
 ) -> list[dict[str, Any]]:
     from dask.distributed import as_completed
 
@@ -635,6 +651,7 @@ def compute_all_entries_parallel(
                 n_qubits=row.n_qubits,
                 n_layers=row.n_layers,
                 seed=row.seed,
+                sampling_config=sampling_config,
                 pure=False,
             )
             inflight[fut] = row
@@ -680,6 +697,7 @@ def run_dataset_pipeline(
     max_configs: int | None = None,
     dask_n_workers: int = 4,
     dask_memory_per_worker: str | None = None,
+    sampling_config: SamplingConfig | None = None,
 ) -> None:
     invalid = [f for f in families if f not in FAMILY_REGISTRY]
     if invalid:
@@ -718,6 +736,7 @@ def run_dataset_pipeline(
             use_dask=use_dask,
             dask_n_workers=dask_n_workers,
             dask_memory_per_worker=dask_memory_per_worker,
+            sampling_config=sampling_config,
         )
 
         meta_path = family_output_dir / f"metadata_{family}.json"
