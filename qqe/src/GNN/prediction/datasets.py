@@ -16,9 +16,7 @@ from .utils import FamilyFeatureProjector, out_is_same, PredictionGraphWrapper, 
 
 def collect_prediction_paths(dataset_root: str, family: str | None = None) -> list[str]:
     root = Path(dataset_root)
-    print(root)
     pred_root = root / "prediction_data"
-    print(pred_root)
     if family is not None:
         paths = sorted((pred_root / family).glob("*.pt"))
     else:

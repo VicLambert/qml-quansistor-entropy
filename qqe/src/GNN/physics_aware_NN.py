@@ -312,7 +312,14 @@ class QuantumCircuitGraphDataset(PyGDataset):
         else:
             normalized_gate_counts = {key: 0 for key in self.all_gate_keys}
 
-        meta = obj.get("meta", {})
+        raw_meta = obj.get("meta", {}) or {}
+        meta = {
+            "cid": "" if raw_meta.get("cid") is None else str(raw_meta.get("cid")),
+            "family": "" if raw_meta.get("family") is None else str(raw_meta.get("family")),
+            "seed": 0 if raw_meta.get("seed") is None else int(raw_meta.get("seed")),
+            "n_qubits": 0 if raw_meta.get("n_qubits") is None else int(raw_meta.get("n_qubits")),
+            "n_layers": 0 if raw_meta.get("n_layers") is None else int(raw_meta.get("n_layers")),
+        }
 
         # Build global features uniformly from normalized gate counts (binned) or pad/truncate (other)
         if self.global_feature_variant == "binned":
