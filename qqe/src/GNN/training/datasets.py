@@ -5,11 +5,9 @@ from dataclasses import dataclass
 import torch
 import torch.nn.functional as F
 
+from qqe.src.GNN.physics_aware_NN import QuantumCircuitGraphDataset
 from torch.utils.data import DataLoader as TorchDataLoader, random_split
-from torch_geometric.data import Data, Dataset as PyGDataset
-from torch_geometric.loader import DataLoader, DataLoader as PyGDataLoader
-
-from src.GNN.physics_aware_NN import QuantumCircuitGraphDataset
+from torch_geometric.loader import DataLoader as PyGDataLoader
 
 from .utils import FamilyFeatureProjector, ProjectedDatasetWrapper, cache_root_paths
 
@@ -38,6 +36,16 @@ class PaddedGraphDatasetWrapper:
             out = data.clone()
             pad_size = self.target_dim - data.x.shape[1]
             out.x = F.pad(out.x, (0, pad_size), value=0)
+            return out
+        if hasattr(data, "global_features") and data.global_features is not None:
+            out = data.clone()
+            pad_size = self.target_dim - data.global_features.shape[0]
+            out.global_features = out.global_features.flatten().to(torch.float32)
+            return out
+        if hasattr(data, "y") and data.y is not None:
+            out = data.clone()
+            pad_size = self.target_dim - data.y.shape[0]
+            out.y = out.y.flatten().to(torch.float32)
             return out
         return data
 
@@ -179,8 +187,10 @@ def make_loaders(
 
     if prepared.loader_kind == "gnn":
         Loader = PyGDataLoader
+        loader_kwargs = {"exclude_keys": ["meta", "gate_counts"]}
     elif prepared.loader_kind == "nn":
         Loader = TorchDataLoader
+        loader_kwargs = {}
     else:
         raise ValueError(f"Unknown loader_kind: {prepared.loader_kind}")
 
@@ -191,6 +201,7 @@ def make_loaders(
             shuffle=True,
             num_workers=num_workers,
             pin_memory=pin_mem,
+            **loader_kwargs,
         ),
         Loader(
             prepared.val_ds,
@@ -198,6 +209,7 @@ def make_loaders(
             shuffle=False,
             num_workers=num_workers,
             pin_memory=pin_mem,
+            **loader_kwargs,
         ),
         Loader(
             prepared.test_ds,
@@ -205,6 +217,7 @@ def make_loaders(
             shuffle=False,
             num_workers=num_workers,
             pin_memory=pin_mem,
+            **loader_kwargs,
         ),
     )
 

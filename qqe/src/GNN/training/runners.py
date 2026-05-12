@@ -8,13 +8,13 @@ from pathlib import Path
 
 import torch
 
-from src.experiments.plotting import plot_training_curves
-from src.GNN.parameter_search.helpers import objective_GNN, objective_NN
-from src.GNN.physics_aware_NN import GNN, NN, Regressor
-from src.GNN.training.datasets import build_loaders, build_loaders_NN
-from src.GNN.training.train import build_loss, train_model
-from src.GNN.training.train_config import TrainConfig
-from src.GNN.training.utils import collect_files_path, evaluate_loss
+from qqe.src.experiments.plotting import plot_training_curves
+from qqe.src.GNN.parameter_search.helpers import objective_GNN, objective_NN
+from qqe.src.GNN.physics_aware_NN import GNN, NN, Regressor
+from qqe.src.GNN.training.datasets import build_loaders, build_loaders_NN
+from qqe.src.GNN.training.train import build_loss, train_model
+from qqe.src.GNN.training.train_config import TrainConfig
+from qqe.src.GNN.training.utils import collect_files_path, evaluate_loss
 
 logger = logging.getLogger(__name__)
 
@@ -218,7 +218,7 @@ def train(
         hist,
         title=f"{model_type.upper()} SRE regression",
         save_fig=save_fig,
-        fig_path=f"outputs/figures/training_curves/training_curves_{run_name}.png",
+        fig_path=f"../outputs/figures/training_curves/training_curves_{run_name}.png",
     )
 
     # Build model config safely, providing defaults for missing hparams depending on model
@@ -257,7 +257,7 @@ def train(
 
     if save_checkpoint:
         model_save_path = _resolve_model_save_path(
-            f"models/{run_name}.pt",
+            f"../outputs/models/{run_name}.pt",
             allow_overwrite=allow_overwrite,
         )
         torch.save(checkpoint, model_save_path)

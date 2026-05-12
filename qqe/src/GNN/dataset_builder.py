@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import ctypes
+import dataclasses
 import gc
 import hashlib
 import itertools
@@ -9,7 +10,6 @@ import json
 import logging
 import os
 
-import dataclasses
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
@@ -19,8 +19,8 @@ import torch
 
 from tqdm import tqdm
 
-from src.backend import PennylaneBackend, QuimbBackend
-from src.circuit.families import (
+from qqe.src.backend import PennylaneBackend, QuimbBackend
+from qqe.src.circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
@@ -29,14 +29,14 @@ from src.circuit.families import (
 
 # Keep this import path only if it is the correct one in your project.
 # If your real function lives in circuit.matrix_factory, switch it there.
-from src.circuit.gates import gate_unitary
-from src.circuit.patterns import TdopingRules, to_qasm
-from src.experiments.core import run_experiment
-from src.GNN.encoder import eigenvalue_phase_histogram_features, qasm_to_pyg_graph
-from src.utils import FileCache
+from qqe.src.circuit.gates import gate_unitary
+from qqe.src.circuit.patterns import TdopingRules, to_qasm
+from qqe.src.experiments.core import run_experiment
+from qqe.src.GNN.encoder import eigenvalue_phase_histogram_features, qasm_to_pyg_graph
+from qqe.src.utils import FileCache
 
 if TYPE_CHECKING:
-    from src.circuit.spec import GateSpec
+    from qqe.src.circuit.spec import GateSpec
 
 logger = logging.getLogger(__name__)
 
@@ -367,9 +367,9 @@ def compute_entry(
     n_layers: int,
     seed: int,
 ) -> dict[str, Any] | None:
-    from src.experiments.core import ExperimentConfig
-    from src.properties.compute import PropertyRequest
-    from src.states.types import BackendConfig
+    from qqe.src.experiments.core import ExperimentConfig
+    from qqe.src.properties.compute import PropertyRequest
+    from qqe.src.states.types import BackendConfig
 
     try:
         base_dir = config.output_dir or DATASET_DIR
@@ -596,7 +596,7 @@ def compute_all_entries_parallel(
 ) -> list[dict[str, Any]]:
     from dask.distributed import as_completed
 
-    from src.parallel import dask_client
+    from qqe.src.parallel import dask_client
 
     base_dir = config.output_dir or DATASET_DIR
     base_dir.mkdir(parents=True, exist_ok=True)

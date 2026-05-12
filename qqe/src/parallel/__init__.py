@@ -1,5 +1,5 @@
 
-from src.parallel.dask import (
+from qqe.src.parallel.dask import (
     DaskConfig,
     create_client,
     dask_client,
@@ -7,5 +7,8 @@ from src.parallel.dask import (
 )
 
 __all__ = [
-    "dask",
+    "DaskConfig",
+    "create_client",
+    "dask_client",
+    "run_dask_experiments",
 ]

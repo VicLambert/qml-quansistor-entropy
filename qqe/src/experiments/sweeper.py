@@ -18,11 +18,11 @@ from typing import Any
 
 import numpy as np
 
-from src.circuit.patterns import TdopingRules
-from src.experiments.core import ExperimentConfig
-from src.properties.compute import PropertyRequest
-from src.states.types import BackendConfig
-from src.utils.reading import _to_jsonable
+from qqe.src.circuit.patterns import TdopingRules
+from qqe.src.experiments.core import ExperimentConfig
+from qqe.src.properties.compute import PropertyRequest
+from qqe.src.states.types import BackendConfig
+from qqe.src.utils.reading import _to_jsonable
 
 logger = logging.getLogger(__name__)
 

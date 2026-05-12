@@ -12,7 +12,7 @@ import json
 from dataclasses import dataclass, field
 from typing import Any
 
-from src.utils.reading import _to_jsonable
+from qqe.src.utils.reading import _to_jsonable
 
 Wires = tuple[int, ...]
 

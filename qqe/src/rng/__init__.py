@@ -1,7 +1,7 @@
 
 
-from src.rng import seeds
-from src.rng.seeds import gate_seed, spawn_seed
+from qqe.src.rng import seeds
+from qqe.src.rng.seeds import gate_seed, spawn_seed
 
 __all__ = [
     "gate_seed",

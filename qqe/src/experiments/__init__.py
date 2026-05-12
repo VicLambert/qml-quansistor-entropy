@@ -4,12 +4,7 @@ This module contains tools for running experiments, analyzing quantum circuits,
 and visualizing results from different backends.
 """
 
-from src.experiments.registry import (
-    default_backend_registry,
-    default_family_registry,
-    default_property_registry,
-)
-from src.experiments.sweeper import (
+from qqe.src.experiments.sweeper import (
     JobConfig,
     aggregate_by_cond,
     compile_job,
@@ -21,5 +16,4 @@ __all__ = [
     "aggregate_by_cond",
     "compile_job",
     "generate_jobs",
-    "sweeper",
 ]

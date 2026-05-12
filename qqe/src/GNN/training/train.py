@@ -15,7 +15,7 @@ from torch.optim import Adam
 from torch_geometric.loader import DataLoader
 from tqdm import tqdm
 
-from src.GNN.training.utils import evaluate_loss, unpack_supervised_batch
+from qqe.src.GNN.training.utils import evaluate_loss, unpack_supervised_batch
 
 logger = logging.getLogger(__name__)
 

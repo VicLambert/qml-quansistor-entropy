@@ -14,10 +14,10 @@ import pennylane as qml
 
 from matplotlib.patches import Rectangle
 
-from src.circuit.gates import gate_unitary
-from src.circuit.spec import CircuitSpec
-from src.states.types import DenseState
-from src.GNN.training.train import TrainHistory
+from qqe.src.circuit.gates import gate_unitary
+from qqe.src.circuit.spec import CircuitSpec
+from qqe.src.states.types import DenseState
+from qqe.src.GNN.training.train import TrainHistory
 
 logger = logging.getLogger(__name__)
 

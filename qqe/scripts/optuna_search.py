@@ -7,14 +7,14 @@ import optuna
 import torch
 import typer
 
-from src.GNN.training.datasets import (
+from qqe.src.GNN.training.datasets import (
     prepare_datasets,
 )
-from src.GNN.training.runners import MODEL_REGISTRY
-from src.GNN.training.utils import (
+from qqe.src.GNN.training.runners import MODEL_REGISTRY
+from qqe.src.GNN.training.utils import (
     collect_files_path,
 )
-from src.utils import configure_logger
+from qqe.src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
 

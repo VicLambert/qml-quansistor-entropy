@@ -85,7 +85,7 @@ class FamilyGlobalProjector:
         if g.dim() == 1:
             g = g.unsqueeze(0)
 
-        out.global_features = g[:, self.keep_idx]
+        out.global_features = g[:, self.keep_idx].squeeze(0).to(torch.float32)
         return out
 
 

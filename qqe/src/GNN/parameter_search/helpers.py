@@ -6,11 +6,9 @@ import logging
 import optuna
 
 
-from src.GNN.physics_aware_NN import GNN, NN
-from src.GNN.training.datasets import (
-    make_loaders,
-)
-from src.GNN.training.train import train_model
+from qqe.src.GNN.physics_aware_NN import GNN, NN
+from qqe.src.GNN.training.datasets import make_loaders
+from qqe.src.GNN.training.train import train_model
 
 logger = logging.getLogger(__name__)
 

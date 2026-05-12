@@ -7,11 +7,11 @@ from pathlib import Path
 import numpy as np
 import typer
 
-from src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline
-from src.utils import configure_logger
+from qqe.src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline
+from qqe.src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def main(
@@ -20,12 +20,12 @@ def main(
     method: str = typer.Option("fwht", help="SRE method (exact, fwht, or sampling) or EE method (renyi or von_neumann)"),
     use_dask: bool = typer.Option(default=True, help="Use Dask for parallel computation"),
     output_dir: str = typer.Option(
-        "data/training_data",
+        "/outputs/data/training_data",
         help="Output folder for results",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "haar,quansistor",
+        "random,haar,clifford,quansistor",
         help="Comma-separated families to include",
     ),
     n_seeds_option: int = typer.Option(
@@ -50,7 +50,7 @@ def main(
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
-    layers_values = np.arange(layers_min, layers_max + 1, layers_step)
+    layers_values = np.concatenate(([1], np.arange(layers_min, layers_max + 1, layers_step)))
 
     target_norm = target.strip().lower()
 
@@ -60,7 +60,7 @@ def main(
     if not (compute_sre or compute_EE):
         raise ValueError("target must be 'SRE' or 'EE'")
 
-    output_path = Path(output_dir)
+    output_path = Path(str(PROJECT_ROOT) + output_dir)
 
     config = DataGenConfig(
         backend=backend,

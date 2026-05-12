@@ -10,8 +10,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Literal, Union
 
-from src.circuit.spec import CircuitSpec
-from src.states.types import DenseState, MPSState
+from qqe.src.circuit.spec import CircuitSpec
+from qqe.src.states.types import DenseState, MPSState
 
 StateType = Literal["dense", "mps", "tn"]
 State = Union[DenseState, MPSState]

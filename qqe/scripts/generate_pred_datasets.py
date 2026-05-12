@@ -7,8 +7,8 @@ from pathlib import Path
 import numpy as np
 import typer
 
-from src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline
-from src.utils import configure_logger
+from qqe.src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline
+from qqe.src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -19,7 +19,7 @@ def main(
     method: str = typer.Option("none", help="SRE method (exact, fwht, or sampling)"),
     use_dask: bool = typer.Option(True, help="Use Dask for parallel computation"),
     output_dir: str = typer.Option(
-        "notebooks/data/predictions",
+        "/outputs/data/training_data",
         help="Output folder for results",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),

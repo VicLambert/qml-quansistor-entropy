@@ -7,7 +7,7 @@ from typing import Any
 import torch
 import torch.nn as nn
 
-from src.GNN.physics_aware_NN import GNN, Regressor
+from qqe.src.GNN.physics_aware_NN import GNN, Regressor, NN
 
 import logging
 
@@ -78,8 +78,14 @@ def build_model(model_kind: str, model_config: dict[str, Any]) -> torch.nn.Modul
             dropout_rate=float(model_config.get("dropout_rate", 0.1)),
         )
 
-    if model_kind == "nn":
+    if model_kind == "regressor":
         return Regressor(
+            in_dim=int(model_config["global_in_dim"]),
+            hidden_dim=int(model_config.get("hidden_dim", 128)),
+        )
+
+    if model_kind == "nn":
+        return NN(
             in_dim=int(model_config["global_in_dim"]),
             hidden_dim=int(model_config.get("hidden_dim", 128)),
         )

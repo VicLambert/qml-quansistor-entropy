@@ -5,19 +5,19 @@ import logging
 import torch
 import typer
 
-from src.experiments.plotting import (
+from qqe.src.experiments.plotting import (
     plot_fixed_layers_vary_qubits,
     plot_fixed_qubits_vary_layers,
 )
-from src.GNN.prediction.datasets import (
+from qqe.src.GNN.prediction.datasets import (
     build_loader,
     build_prediction_dataset,
     collect_prediction_paths,
 )
-from src.GNN.prediction.inference import predict
-from src.GNN.prediction.model import build_model, checkpoint_path, load_checkpoint
-from src.GNN.prediction.utils import save_predictions_csv
-from src.utils import configure_logger
+from qqe.src.GNN.prediction.inference import predict
+from qqe.src.GNN.prediction.model import build_model, checkpoint_path, load_checkpoint
+from qqe.src.GNN.prediction.utils import save_predictions_csv
+from qqe.src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
 
@@ -38,10 +38,10 @@ def main(
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
     ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type)
-    logger.info("Loading checkpoint: %s", ckpt_path)
-    output_csv = f"outputs/figures/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
+    logger.info("Loading checkpoint: %s", model_path)
+    output_csv = f"../outputs/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
-    state_dict, model_config, feature_config = load_checkpoint(ckpt_path)
+    state_dict, model_config, feature_config = load_checkpoint(model_path)
 
     model = build_model(model_kind, model_config)
     model.load_state_dict(state_dict, strict=False)
@@ -82,7 +82,7 @@ def main(
     logger.info("Saved %d predictions to %s", len(rows), output_csv)
 
     if plot_n_layers is not None:
-        plot_path = f"outputs/figures/predictions/{training_scope}/{model_kind}_pred_layers_{model_family or 'global'}.png"
+        plot_path = f"../outputs/figures/predictions/{training_scope}/{model_kind}_pred_layers_{model_family or 'global'}.png"
         plot_fixed_layers_vary_qubits(
             rows,
             n_layers=plot_n_layers,
@@ -92,7 +92,7 @@ def main(
         logger.info("Saved fixed-layer plot to %s", plot_path)
 
     if plot_n_qubits is not None:
-        plot_path = f"outputs/figures/predictions/{training_scope}/{model_kind}_pred_qubits_{model_family or 'global'}.png"
+        plot_path = f"../outputs/figures/predictions/{training_scope}/{model_kind}_pred_qubits_{model_family or 'global'}.png"
         plot_fixed_qubits_vary_layers(
             rows,
             n_qubits=plot_n_qubits,

@@ -13,10 +13,10 @@ from typing import Any
 import numpy as np
 import pennylane as qml
 
-from src.backend.base import BaseBackend, State, StateType
-from src.circuit.gates import gate_unitary
-from src.circuit.spec import CircuitSpec
-from src.states.types import DenseState
+from qqe.src.backend.base import BaseBackend, State, StateType
+from qqe.src.circuit.gates import gate_unitary
+from qqe.src.circuit.spec import CircuitSpec
+from qqe.src.states.types import DenseState
 
 
 class PennylaneBackend(BaseBackend):

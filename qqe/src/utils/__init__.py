@@ -4,7 +4,7 @@ This package provides tools for managing cache, logging configuration,
 and data serialization operations.
 """
 
-from src.utils.reading import (
+from qqe.src.utils.reading import (
     CachePolicy,
     FileCache,
     RunStore,
@@ -16,9 +16,9 @@ from src.utils.reading import (
     store_results,
     write_json,
 )
-from src.utils.logger import configure_logger
-from src.utils.reading import RunStore, make_run_id
-from src.utils.reading import _to_jsonable, read_json, write_json
+from qqe.src.utils.logger import configure_logger
+from qqe.src.utils.reading import RunStore, make_run_id
+from qqe.src.utils.reading import _to_jsonable, read_json, write_json
 
 to_jsonable = _to_jsonable
 

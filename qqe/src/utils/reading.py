@@ -12,12 +12,13 @@ from contextlib import contextmanager, suppress
 from dataclasses import asdict, dataclass, is_dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any
+from collections.abc import Iterator
 
 import numpy as np
 
-from src.properties.results import PropertyRequest
-from src.states.types import BackendConfig
+from qqe.src.properties.results import PropertyRequest
+from qqe.src.states.types import BackendConfig
 
 logger = logging.getLogger(__name__)
 

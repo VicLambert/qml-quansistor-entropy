@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from src.circuit.spec import CircuitSpec
+from qqe.src.circuit.spec import CircuitSpec
 
 @dataclass
 class DAG:
