@@ -17,6 +17,7 @@ from qqe.src.GNN.prediction.datasets import (
 from qqe.src.GNN.prediction.inference import predict
 from qqe.src.GNN.prediction.model import build_model, checkpoint_path, load_checkpoint
 from qqe.src.GNN.prediction.utils import save_predictions_csv
+from qqe.src.GNN.training.utils import collect_dataset_paths
 from qqe.src.utils import configure_logger
 
 logger = logging.getLogger(__name__)
@@ -49,14 +50,19 @@ def main(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
 
-    pt_paths = collect_prediction_paths(dataset_root, dataset_family)
-    if not pt_paths:
+    # pt_paths = collect_prediction_paths(dataset_root, dataset_family)
+    prediction_paths = collect_dataset_paths(
+        dataset_root,
+        family=dataset_family,
+        split="prediction",
+    )
+    if not prediction_paths:
         raise RuntimeError("No prediction .pt files found.")
 
-    logger.info("Found %d prediction files", len(pt_paths))
+    logger.info("Found %d prediction files", len(prediction_paths))
 
     dataset = build_prediction_dataset(
-        pt_paths,
+        prediction_paths,
         global_feature_variant=feature_config.get("global_feature_variant", global_feature_variant),
         node_feature_backend_variant=feature_config.get("node_feature_backend_variant", node_feature_backend_variant),
         fixed_all_gate_keys=feature_config.get("all_gate_keys"),

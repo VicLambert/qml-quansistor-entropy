@@ -14,7 +14,7 @@ from qqe.src.GNN.physics_aware_NN import GNN, NN, Regressor
 from qqe.src.GNN.training.datasets import build_loaders, build_loaders_NN
 from qqe.src.GNN.training.train import build_loss, train_model
 from qqe.src.GNN.training.train_config import TrainConfig
-from qqe.src.GNN.training.utils import collect_files_path, evaluate_loss
+from qqe.src.GNN.training.utils import collect_files_path, evaluate_loss, collect_dataset_paths
 
 logger = logging.getLogger(__name__)
 
@@ -142,10 +142,15 @@ def train(
     family_projection = family if training_mode == "per_family" else None
 
     logger.info("Collecting data paths...")
-    data_paths = collect_files_path(training_data_dir, family=family_filter)
-    if not data_paths:
+    # data_paths = collect_files_path(training_data_dir, family=family_filter)
+    train_paths = collect_dataset_paths(
+        training_data_dir,
+        family=family_filter,
+        split="target",
+    )
+    if not train_paths:
         raise RuntimeError("No data paths found.")
-    logger.info(f"Found {len(data_paths)} data paths.")
+    logger.info(f"Found {len(train_paths)} data paths.")
     logger.info("Data paths collected.")
 
     spec = MODEL_REGISTRY[model_type]
@@ -155,7 +160,7 @@ def train(
     returns_nodes_dim: bool = spec.get("returns_nodes_dim", False)
     if returns_nodes_dim:
         train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = loader_fn(
-            data_paths,
+            train_paths,
             batch_size=cfg.batch_size,
             seed=cfg.seed,
             train_split=cfg.train_split,
@@ -166,7 +171,7 @@ def train(
         )
     else:
         train_loader, val_loader, test_loader, global_in_dim, base_dataset = loader_fn(
-            data_paths,
+            train_paths,
             batch_size=cfg.batch_size,
             seed=cfg.seed,
             train_split=cfg.train_split,

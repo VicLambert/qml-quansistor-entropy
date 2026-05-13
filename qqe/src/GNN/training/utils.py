@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 
 from pathlib import Path
+from typing import Literal
 
 import torch
 import torch.nn as nn
@@ -14,6 +15,8 @@ from tqdm import tqdm
 
 from .train_config import FAMILY_GATE_TYPES, MASTER_GATE_TYPES
 
+
+DatasetSplit = Literal["all", "target", "prediction"]
 
 def _amp_device_type() -> str:
     return "cuda" if torch.cuda.is_available() else "cpu"
@@ -188,6 +191,44 @@ def collect_files_path(
     if not paths:
         paths = sorted(d.glob("*.pt"))
     return [str(p) for p in paths]
+
+def collect_dataset_paths(
+    dataset_root: str | Path,
+    *,
+    family: str | None = None,
+    split: DatasetSplit = "all",
+) -> list[str]:
+    root = Path(dataset_root)
+
+    if family is not None:
+        search_dirs = [root / family]
+    else:
+        search_dirs = [p for p in sorted(root.iterdir()) if p.is_dir()] if root.exists() else []
+
+    paths: list[Path] = []
+
+    for search_dir in search_dirs:
+        if search_dir.exists():
+            paths.extend(sorted(search_dir.glob("*.pt")))
+
+    if not paths:
+        paths = sorted(root.glob("*.pt"))
+
+    if split == "all":
+        return [str(p.resolve()) for p in paths]
+
+    import torch
+
+    filtered: list[Path] = []
+
+    for path in paths:
+        payload = torch.load(path, map_location="cpu", weights_only=False)
+        has_target = bool(payload.get("meta", {}).get("has_target", "sre" in payload or "ee" in payload))
+
+        if split == "target" and has_target or (split == "prediction" and not has_target):
+            filtered.append(path)
+
+    return [str(p.resolve()) for p in filtered]
 
 
 def cache_root_paths(paths: list[str], suffix: str = "") -> str:
