@@ -26,7 +26,7 @@ def default_sampling_config() -> SamplingConfig:
         ),
         random=RegimeDistribution(
             regimes=["identity_like", "clifford_like", "small_angles", "generic"],
-            probabilities=[0.15, 0.20, 0.20, 0.45],
+            probabilities=[0.0, 0.0, 0.0, 1.0],
         ),
         quansistor=RegimeDistribution(
             regimes=[

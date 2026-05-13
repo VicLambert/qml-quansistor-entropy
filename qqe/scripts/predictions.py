@@ -54,7 +54,7 @@ def main(
     prediction_paths = collect_dataset_paths(
         dataset_root,
         family=dataset_family,
-        split="prediction",
+        split="all",
     )
     if not prediction_paths:
         raise RuntimeError("No prediction .pt files found.")

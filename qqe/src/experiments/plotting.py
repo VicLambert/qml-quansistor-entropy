@@ -668,8 +668,8 @@ def view_correlation(
 
     x = subset.index  # sample index (what you want)
 
-    plt.plot(x, subset[col_x], label="target", marker="o")
-    plt.plot(x, subset[col_y], label="prediction", marker="x")
+    plt.plot(x, subset[col_x], label="target", marker="o", linestyle="")
+    plt.plot(x, subset[col_y], label="prediction", marker="x", linestyle="")
 
     plt.xlabel("Sample index")
     plt.ylabel("Value")
