@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+
 from pathlib import Path
 
 import numpy as np
@@ -26,7 +27,7 @@ def default_sampling_config() -> SamplingConfig:
         ),
         random=RegimeDistribution(
             regimes=["identity_like", "clifford_like", "small_angles", "generic"],
-            probabilities=[0.0, 0.0, 0.0, 1.0],
+            probabilities=[0.15, 0.15, 0.25, 0.45],
         ),
         quansistor=RegimeDistribution(
             regimes=[
@@ -52,12 +53,12 @@ def main(
     method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/general_dataset",
+        "/outputs/data/dataset",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random",
+        "quansistor",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(

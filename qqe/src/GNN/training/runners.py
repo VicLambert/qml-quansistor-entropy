@@ -3,8 +3,10 @@ from __future__ import annotations
 
 import logging
 
+from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
+from typing import Any
 
 import torch
 
@@ -14,9 +16,15 @@ from qqe.src.GNN.physics_aware_NN import GNN, NN, Regressor
 from qqe.src.GNN.training.datasets import build_loaders, build_loaders_NN
 from qqe.src.GNN.training.train import build_loss, train_model
 from qqe.src.GNN.training.train_config import TrainConfig
-from qqe.src.GNN.training.utils import collect_files_path, evaluate_loss, collect_dataset_paths
+from qqe.src.GNN.training.utils import (
+    collect_dataset_paths,
+    collect_files_path,
+    evaluate_loss,
+)
 
 logger = logging.getLogger(__name__)
+
+Loader = Callable[..., Any]
 
 def _resolve_model_save_path(base_path: str, allow_overwrite: bool = False) -> str:
     """Return a non-colliding checkpoint path unless overwrite is explicitly allowed."""
@@ -93,6 +101,7 @@ def train(
     training_data_dir: str = "outputs/data",
     allow_overwrite: bool = False,
     save_checkpoint: bool = True,
+    model_save_path: str | None = None,
     save_fig: bool = True,
     show_progress: bool = True,
     show_val_progress: bool = False,
@@ -156,7 +165,7 @@ def train(
     spec = MODEL_REGISTRY[model_type]
     logger.info(f"Building loaders and model for model_type={model_type}...")
 
-    loader_fn: object = spec["build_loaders"]
+    loader_fn: Loader = spec["build_loaders"]
     returns_nodes_dim: bool = spec.get("returns_nodes_dim", False)
     if returns_nodes_dim:
         train_loader, val_loader, test_loader, node_in_dim, global_in_dim, base_dataset = loader_fn(
@@ -260,11 +269,14 @@ def train(
         "history": hist,
     }
 
-    if save_checkpoint:
+    if save_checkpoint and model_save_path is None:
         model_save_path = _resolve_model_save_path(
             f"../outputs/models/{run_name}.pt",
             allow_overwrite=allow_overwrite,
         )
+        torch.save(checkpoint, model_save_path)
+        logger.info(f"Saved model checkpoint to {model_save_path}")
+    elif save_checkpoint and model_save_path is not None:
         torch.save(checkpoint, model_save_path)
         logger.info(f"Saved model checkpoint to {model_save_path}")
 

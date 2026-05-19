@@ -59,7 +59,7 @@ def predict(
                 )
         return rows
 
-    if model_kind == "nn":
+    if model_kind == "nn" or model_kind == "regressor":
         for x, metas, targets in tqdm(
             loader,
             total=total_batches,

@@ -26,6 +26,7 @@ def main(
     model_hparams: dict[str, int | float] | None = None,
     train_hparams: dict[str, int | float] | None = None,
     training_data_dir = "../outputs/data",
+    model_save_path: str | None = None,
     show_progress: bool = typer.Option(
         default=True,
         help="Show progress bars during training",
@@ -61,6 +62,7 @@ def main(
         training_data_dir = training_data_dir,
         allow_overwrite = allow_overwrite,
         save_checkpoint = True,
+        model_save_path=model_save_path,
         save_fig = True,
         show_progress = show_progress,
         show_val_progress = show_val_progress,

@@ -33,7 +33,7 @@ def _get_model_type(family: str | None, model_type: str):
         logger.info(f"Using global model at {MODEL_STATE_PATH}")
 
 def checkpoint_path(model_kind: str, training_scope: str, family: str | None = None, loss_type: str = "mse") -> Path:
-    if model_kind not in {"gnn", "nn"}:
+    if model_kind not in {"gnn", "nn", "regressor"}:
         raise ValueError("model_kind must be 'gnn' or 'nn'")
     if training_scope not in {"global", "family"}:
         raise ValueError("training_scope must be 'global' or 'family'")

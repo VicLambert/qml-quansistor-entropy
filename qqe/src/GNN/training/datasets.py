@@ -135,14 +135,14 @@ def prepare_datasets(
         node_in_dim = int(sample0.x.shape[1])
         global_in_dim = int(sample0.global_features.numel())
 
-    elif loader_kind == "nn":
+    elif loader_kind == "nn" or loader_kind == "regressor":
         final_dataset = GlobalTargetDatasetWrapper(working_dataset)
         sample0_g, _ = final_dataset[0]
         node_in_dim = None
         global_in_dim = int(sample0_g.numel())
 
     else:
-        raise ValueError("loader_kind must be 'gnn' or 'nn'")
+        raise ValueError("loader_kind must be 'gnn', 'nn', or 'regressor'")
 
     generator = torch.Generator().manual_seed(seed)
 
@@ -188,7 +188,7 @@ def make_loaders(
     if prepared.loader_kind == "gnn":
         Loader = PyGDataLoader
         loader_kwargs = {"exclude_keys": ["meta", "gate_counts"]}
-    elif prepared.loader_kind == "nn":
+    elif prepared.loader_kind == "nn" or prepared.loader_kind == "regressor":
         Loader = TorchDataLoader
         loader_kwargs = {}
     else:

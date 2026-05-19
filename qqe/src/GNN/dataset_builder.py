@@ -362,7 +362,6 @@ def sample_generation_controls(
     elif family == "random":
         regime = sampling_config.random.sample(rng)
         controls.update(sample_random_controls(rng, regime))
-        
 
     elif family == "quansistor":
         regime = sampling_config.quansistor.sample(rng)
@@ -421,9 +420,10 @@ def compute_entry(
             make_spec_kwargs["haar_mode"] = controls["haar_mode"]
 
         elif family == "quansistor":
-            make_spec_kwargs["param_regime"] = controls["param_regime"]
+            make_spec_kwargs["param_regime"] = controls.get("sampling_regime")
             make_spec_kwargs["param_scale"] = controls.get("param_scale")
-            make_spec_kwargs["gate_probability"] = controls["gate_probability"]
+            make_spec_kwargs["gate_probability"] = controls.get("gate_probability")
+
 
         spec = family_obj.make_spec(
             int(n_qubits),

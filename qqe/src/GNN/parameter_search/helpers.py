@@ -26,7 +26,7 @@ def objective_GNN(trial: optuna.Trial, prepared_data, epochs=10):
         "grad_clip": trial.suggest_float(
             "grad_clip", 1e-2, 1e2, log=True,
         ),
-        "early_stopping_patience": 20,
+        "early_stopping_patience": 10,
         "early_stopping_min_delta": 1e-5,
     }
 
@@ -82,7 +82,7 @@ def objective_NN(trial: optuna.Trial, prepared_data, epochs=10):
         "grad_clip": trial.suggest_float(
             "grad_clip", 1e-2, 1e2, log=True,
         ),
-        "early_stopping_patience": 20,
+        "early_stopping_patience": 10,
         "early_stopping_min_delta": 1e-5,
     }
 

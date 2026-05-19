@@ -190,6 +190,21 @@ def build_loader(
             pin_memory=torch.cuda.is_available(),
             collate_fn=collate_fn,
         )
+    if model_kind == "regressor":
+        wrapped = PredictionTensorWrapper(dataset, target_global_dim=target_global_dim)
+
+        def collate_fn(batch):
+            xs, metas, targets = zip(*batch)
+            return torch.stack(xs, dim=0), list(metas), list(targets)
+
+        return TorchDataLoader(
+            wrapped,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=0,
+            pin_memory=torch.cuda.is_available(),
+            collate_fn=collate_fn,
+        )
 
     raise ValueError(f"Unsupported model_kind: {model_kind}")
 
