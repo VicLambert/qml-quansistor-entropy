@@ -87,7 +87,7 @@ def main(
 
     qubits_values = np.arange(qubits_min, qubits_max + 1, qubits_step)
     layers_values = np.concatenate(
-        ([1], np.arange(layers_min, layers_max + 1, layers_step))
+        ([1], np.arange(layers_min, layers_max + 1, layers_step)),
     )
 
     selected_target_qubits = tuple(
