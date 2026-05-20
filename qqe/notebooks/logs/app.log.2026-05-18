@@ -1,0 +1,1583 @@
+2026-05-18 11:11:41,474 - __main__ - INFO - Starting Optuna hyperparameter search...
+2026-05-18 11:12:00,503 - __main__ - INFO - Starting Optuna hyperparameter search...
+2026-05-18 11:17:44,366 - __main__ - INFO - Starting Optuna hyperparameter search...
+2026-05-18 11:21:06,051 - __main__ - INFO - Starting Optuna hyperparameter search...
+2026-05-18 11:23:09,029 - __main__ - INFO - Found 35700 dataset files for target=sre in data_dir=../outputs/data/dataset.
+2026-05-18 11:25:37,820 - __main__ - INFO - Prepared datasets with loader_kind=gnn. Starting Optuna study with name='optuna_search_gnn_per_family_clifford_sre_4119' and storage='sqlite:///optuna_studies.db'...
+2026-05-18 11:26:05,548 - __main__ - INFO - Running Optuna optimization for 5 trials...
+2026-05-18 11:26:06,010 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 11:27:06,169 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 190/804 | loss 3.912660 | elapsed 60.2s | graphs 6080
+2026-05-18 11:28:06,298 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 360/804 | loss 2.964534 | elapsed 120.3s | graphs 11520
+2026-05-18 11:29:06,470 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 523/804 | loss 2.444126 | elapsed 180.5s | graphs 16736
+2026-05-18 11:30:06,899 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 657/804 | loss 2.168187 | elapsed 240.9s | graphs 21024
+2026-05-18 11:31:07,225 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 793/804 | loss 1.951924 | elapsed 301.2s | graphs 25376
+2026-05-18 11:31:12,956 - qqe.src.GNN.training.train - INFO - Training complete (306.9s) | running validation...
+2026-05-18 11:31:30,923 - qqe.src.GNN.training.train - INFO - Losses | train 1.940783 | val 2.086186 | lr 3.52e-04 | time train=306.9s val=18.0s total=324.9s
+2026-05-18 11:31:30,924 - qqe.src.GNN.training.train - WARNING - Epoch 1 took 324.9s (>300s threshold).
+2026-05-18 11:31:30,936 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 11:32:31,373 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 130/804 | loss 0.889011 | elapsed 60.4s | graphs 4160
+2026-05-18 11:33:31,609 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 253/804 | loss 0.850204 | elapsed 120.7s | graphs 8096
+2026-05-18 11:34:31,940 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 399/804 | loss 0.828192 | elapsed 181.0s | graphs 12768
+2026-05-18 11:35:31,963 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 535/804 | loss 0.810497 | elapsed 241.0s | graphs 17120
+2026-05-18 11:36:32,998 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 677/804 | loss 0.784614 | elapsed 302.1s | graphs 21664
+2026-05-18 11:37:25,661 - qqe.src.GNN.training.train - INFO - Training complete (354.7s) | running validation...
+2026-05-18 11:37:42,847 - qqe.src.GNN.training.train - INFO - Losses | train 0.769533 | val 1.183228 | lr 3.52e-04 | time train=354.7s val=17.2s total=371.9s
+2026-05-18 11:37:42,848 - qqe.src.GNN.training.train - WARNING - Epoch 2 took 371.9s (>300s threshold).
+2026-05-18 11:37:42,862 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 11:38:43,692 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 139/804 | loss 0.660315 | elapsed 60.8s | graphs 4448
+2026-05-18 11:39:44,462 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 301/804 | loss 0.642664 | elapsed 121.6s | graphs 9632
+2026-05-18 11:40:44,479 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 444/804 | loss 0.618652 | elapsed 181.6s | graphs 14208
+2026-05-18 11:41:44,600 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 597/804 | loss 0.614830 | elapsed 241.7s | graphs 19104
+2026-05-18 11:42:44,648 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 773/804 | loss 0.603117 | elapsed 301.8s | graphs 24736
+2026-05-18 11:42:54,237 - qqe.src.GNN.training.train - INFO - Training complete (311.4s) | running validation...
+2026-05-18 11:43:07,403 - qqe.src.GNN.training.train - INFO - Losses | train 0.597550 | val 1.340087 | lr 3.52e-04 | time train=311.4s val=13.2s total=324.5s
+2026-05-18 11:43:07,403 - qqe.src.GNN.training.train - WARNING - Epoch 3 took 324.5s (>300s threshold).
+2026-05-18 11:43:07,404 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 11:44:07,564 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 184/804 | loss 0.553207 | elapsed 60.2s | graphs 5888
+2026-05-18 11:45:07,818 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 375/804 | loss 0.522445 | elapsed 120.4s | graphs 12000
+2026-05-18 11:46:08,135 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 561/804 | loss 0.508300 | elapsed 180.7s | graphs 17952
+2026-05-18 11:47:08,366 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 750/804 | loss 0.497646 | elapsed 241.0s | graphs 24000
+2026-05-18 11:47:29,410 - qqe.src.GNN.training.train - INFO - Training complete (262.0s) | running validation...
+2026-05-18 11:47:41,690 - qqe.src.GNN.training.train - INFO - Losses | train 0.496484 | val 2.075751 | lr 3.52e-04 | time train=262.0s val=12.3s total=274.3s
+2026-05-18 11:47:41,690 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 11:48:41,769 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 189/804 | loss 0.454418 | elapsed 60.1s | graphs 6048
+2026-05-18 11:49:41,847 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 378/804 | loss 0.437021 | elapsed 120.2s | graphs 12096
+2026-05-18 11:50:42,041 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 557/804 | loss 0.422071 | elapsed 180.3s | graphs 17824
+2026-05-18 11:51:42,308 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 724/804 | loss 0.417831 | elapsed 240.6s | graphs 23168
+2026-05-18 11:52:07,623 - qqe.src.GNN.training.train - INFO - Training complete (265.9s) | running validation...
+2026-05-18 11:52:21,163 - qqe.src.GNN.training.train - INFO - Losses | train 0.414109 | val 4.242402 | lr 3.52e-04 | time train=265.9s val=13.5s total=279.5s
+2026-05-18 11:52:21,165 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 11:53:21,550 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 162/804 | loss 0.405355 | elapsed 60.4s | graphs 5184
+2026-05-18 11:54:21,828 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 322/804 | loss 0.386485 | elapsed 120.7s | graphs 10304
+2026-05-18 11:55:22,187 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 488/804 | loss 0.382452 | elapsed 181.0s | graphs 15616
+2026-05-18 11:56:22,312 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 668/804 | loss 0.372448 | elapsed 241.1s | graphs 21376
+2026-05-18 11:57:05,517 - qqe.src.GNN.training.train - INFO - Training complete (284.4s) | running validation...
+2026-05-18 11:57:17,741 - qqe.src.GNN.training.train - INFO - Losses | train 0.369366 | val 3.679175 | lr 3.52e-04 | time train=284.4s val=12.2s total=296.6s
+2026-05-18 11:57:17,743 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 11:58:17,814 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 180/804 | loss 0.332507 | elapsed 60.1s | graphs 5760
+2026-05-18 11:59:18,104 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 349/804 | loss 0.325193 | elapsed 120.4s | graphs 11168
+2026-05-18 12:00:18,254 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 531/804 | loss 0.318404 | elapsed 180.5s | graphs 16992
+2026-05-18 12:01:18,453 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 698/804 | loss 0.313098 | elapsed 240.7s | graphs 22336
+2026-05-18 12:01:56,094 - qqe.src.GNN.training.train - INFO - Training complete (278.4s) | running validation...
+2026-05-18 12:02:09,196 - qqe.src.GNN.training.train - INFO - Losses | train 0.309869 | val 4.704646 | lr 3.52e-04 | time train=278.4s val=13.1s total=291.5s
+2026-05-18 12:02:09,197 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 12:03:09,391 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 164/804 | loss 0.289577 | elapsed 60.2s | graphs 5248
+2026-05-18 12:04:09,712 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 309/804 | loss 0.291987 | elapsed 120.5s | graphs 9888
+2026-05-18 12:05:09,811 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 445/804 | loss 0.290912 | elapsed 180.6s | graphs 14240
+2026-05-18 12:06:10,092 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 586/804 | loss 0.288018 | elapsed 240.9s | graphs 18752
+2026-05-18 12:07:10,525 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 703/804 | loss 0.288785 | elapsed 301.3s | graphs 22496
+2026-05-18 12:08:07,154 - qqe.src.GNN.training.train - INFO - Training complete (358.0s) | running validation...
+2026-05-18 12:08:27,296 - qqe.src.GNN.training.train - INFO - Losses | train 0.291561 | val 5.259801 | lr 1.76e-04 | time train=358.0s val=20.1s total=378.1s
+2026-05-18 12:08:27,297 - qqe.src.GNN.training.train - WARNING - Epoch 8 took 378.1s (>300s threshold).
+2026-05-18 12:08:27,298 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 12:09:27,397 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 119/804 | loss 0.266525 | elapsed 60.1s | graphs 3808
+2026-05-18 12:10:27,718 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 244/804 | loss 0.253839 | elapsed 120.4s | graphs 7808
+2026-05-18 12:11:27,889 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 378/804 | loss 0.246467 | elapsed 180.6s | graphs 12096
+2026-05-18 12:12:28,025 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 498/804 | loss 0.243488 | elapsed 240.7s | graphs 15936
+2026-05-18 12:13:28,123 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 627/804 | loss 0.242832 | elapsed 300.8s | graphs 20064
+2026-05-18 12:14:28,154 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 765/804 | loss 0.240523 | elapsed 360.9s | graphs 24480
+2026-05-18 12:14:48,485 - qqe.src.GNN.training.train - INFO - Training complete (381.2s) | running validation...
+2026-05-18 12:15:06,654 - qqe.src.GNN.training.train - INFO - Losses | train 0.240238 | val 5.331087 | lr 1.76e-04 | time train=381.2s val=18.2s total=399.4s
+2026-05-18 12:15:06,656 - qqe.src.GNN.training.train - WARNING - Epoch 9 took 399.4s (>300s threshold).
+2026-05-18 12:15:06,656 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 12:16:06,924 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 130/804 | loss 0.248112 | elapsed 60.3s | graphs 4160
+2026-05-18 12:17:07,264 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 285/804 | loss 0.238088 | elapsed 120.6s | graphs 9120
+2026-05-18 12:18:07,580 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 431/804 | loss 0.236924 | elapsed 180.9s | graphs 13792
+2026-05-18 12:19:07,733 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 563/804 | loss 0.235611 | elapsed 241.1s | graphs 18016
+2026-05-18 12:20:07,868 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 706/804 | loss 0.235960 | elapsed 301.2s | graphs 22592
+2026-05-18 12:20:55,613 - qqe.src.GNN.training.train - INFO - Training complete (349.0s) | running validation...
+2026-05-18 12:21:10,576 - qqe.src.GNN.training.train - INFO - Losses | train 0.235366 | val 4.768550 | lr 1.76e-04 | time train=349.0s val=15.0s total=363.9s
+2026-05-18 12:21:10,576 - qqe.src.GNN.training.train - WARNING - Epoch 10 took 363.9s (>300s threshold).
+2026-05-18 12:21:10,577 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 12:22:10,903 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 151/804 | loss 0.214192 | elapsed 60.3s | graphs 4832
+2026-05-18 12:23:11,471 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 305/804 | loss 0.224227 | elapsed 120.9s | graphs 9760
+2026-05-18 12:24:11,581 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 477/804 | loss 0.222760 | elapsed 181.0s | graphs 15264
+2026-05-18 12:25:11,600 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 644/804 | loss 0.223792 | elapsed 241.0s | graphs 20608
+2026-05-18 12:26:09,239 - qqe.src.GNN.training.train - INFO - Training complete (298.7s) | running validation...
+2026-05-18 12:26:22,121 - qqe.src.GNN.training.train - INFO - Losses | train 0.224271 | val 5.130063 | lr 1.76e-04 | time train=298.7s val=12.9s total=311.5s
+2026-05-18 12:26:22,121 - qqe.src.GNN.training.train - WARNING - Epoch 11 took 311.5s (>300s threshold).
+2026-05-18 12:26:22,121 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 12:27:22,605 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 187/804 | loss 0.227097 | elapsed 60.5s | graphs 5984
+2026-05-18 12:28:22,769 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 376/804 | loss 0.224299 | elapsed 120.6s | graphs 12032
+2026-05-18 12:29:22,771 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 553/804 | loss 0.223267 | elapsed 180.6s | graphs 17696
+2026-05-18 12:30:22,888 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 726/804 | loss 0.223376 | elapsed 240.8s | graphs 23232
+2026-05-18 12:30:53,060 - qqe.src.GNN.training.train - INFO - Training complete (270.9s) | running validation...
+2026-05-18 12:31:05,644 - qqe.src.GNN.training.train - INFO - Losses | train 0.222355 | val 5.172250 | lr 1.76e-04 | time train=270.9s val=12.6s total=283.5s
+2026-05-18 12:31:05,646 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 012 | best val 1.183228 | patience exhausted (10/10)
+2026-05-18 12:31:09,517 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 12:32:04,286 - qqe.src.GNN.training.train - INFO - Training complete (54.8s) | running validation...
+2026-05-18 12:32:08,115 - qqe.src.GNN.training.train - INFO - Losses | train 1.442831 | val 0.823770 | lr 2.66e-03 | time train=54.8s val=3.8s total=58.6s
+2026-05-18 12:32:08,118 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 12:32:51,881 - qqe.src.GNN.training.train - INFO - Training complete (43.8s) | running validation...
+2026-05-18 12:32:55,713 - qqe.src.GNN.training.train - INFO - Losses | train 0.542440 | val 1.232839 | lr 2.66e-03 | time train=43.8s val=3.8s total=47.6s
+2026-05-18 12:32:55,713 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 12:33:39,279 - qqe.src.GNN.training.train - INFO - Training complete (43.6s) | running validation...
+2026-05-18 12:33:43,080 - qqe.src.GNN.training.train - INFO - Losses | train 0.476900 | val 1.425451 | lr 2.66e-03 | time train=43.6s val=3.8s total=47.4s
+2026-05-18 12:33:43,082 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 12:34:26,625 - qqe.src.GNN.training.train - INFO - Training complete (43.5s) | running validation...
+2026-05-18 12:34:30,428 - qqe.src.GNN.training.train - INFO - Losses | train 0.461508 | val 1.715284 | lr 2.66e-03 | time train=43.5s val=3.8s total=47.3s
+2026-05-18 12:34:30,428 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 12:35:14,014 - qqe.src.GNN.training.train - INFO - Training complete (43.6s) | running validation...
+2026-05-18 12:35:17,801 - qqe.src.GNN.training.train - INFO - Losses | train 0.450272 | val 1.509154 | lr 2.66e-03 | time train=43.6s val=3.8s total=47.4s
+2026-05-18 12:35:17,801 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 12:36:01,276 - qqe.src.GNN.training.train - INFO - Training complete (43.5s) | running validation...
+2026-05-18 12:36:05,032 - qqe.src.GNN.training.train - INFO - Losses | train 0.432298 | val 1.253240 | lr 2.66e-03 | time train=43.5s val=3.8s total=47.2s
+2026-05-18 12:36:05,032 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 12:36:48,598 - qqe.src.GNN.training.train - INFO - Training complete (43.6s) | running validation...
+2026-05-18 12:36:52,451 - qqe.src.GNN.training.train - INFO - Losses | train 0.426131 | val 1.268444 | lr 1.33e-03 | time train=43.6s val=3.9s total=47.4s
+2026-05-18 12:36:52,452 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 12:37:36,051 - qqe.src.GNN.training.train - INFO - Training complete (43.6s) | running validation...
+2026-05-18 12:37:39,867 - qqe.src.GNN.training.train - INFO - Losses | train 0.381899 | val 0.942676 | lr 1.33e-03 | time train=43.6s val=3.8s total=47.4s
+2026-05-18 12:37:39,868 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 12:38:24,300 - qqe.src.GNN.training.train - INFO - Training complete (44.4s) | running validation...
+2026-05-18 12:38:28,169 - qqe.src.GNN.training.train - INFO - Losses | train 0.375603 | val 1.157760 | lr 1.33e-03 | time train=44.4s val=3.9s total=48.3s
+2026-05-18 12:38:28,170 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 12:39:12,088 - qqe.src.GNN.training.train - INFO - Training complete (43.9s) | running validation...
+2026-05-18 12:39:15,875 - qqe.src.GNN.training.train - INFO - Losses | train 0.366895 | val 1.119596 | lr 1.33e-03 | time train=43.9s val=3.8s total=47.7s
+2026-05-18 12:39:15,876 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 12:39:59,822 - qqe.src.GNN.training.train - INFO - Training complete (43.9s) | running validation...
+2026-05-18 12:40:03,641 - qqe.src.GNN.training.train - INFO - Losses | train 0.370180 | val 1.260808 | lr 1.33e-03 | time train=43.9s val=3.8s total=47.8s
+2026-05-18 12:40:03,643 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.823770 | patience exhausted (10/10)
+2026-05-18 12:40:04,205 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 12:40:53,133 - qqe.src.GNN.training.train - INFO - Training complete (48.9s) | running validation...
+2026-05-18 12:40:56,916 - qqe.src.GNN.training.train - INFO - Losses | train 2.618519 | val 1.832041 | lr 1.25e-03 | time train=48.9s val=3.8s total=52.7s
+2026-05-18 12:40:56,919 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 12:41:43,857 - qqe.src.GNN.training.train - INFO - Training complete (46.9s) | running validation...
+2026-05-18 12:41:47,663 - qqe.src.GNN.training.train - INFO - Losses | train 1.391003 | val 1.110199 | lr 1.25e-03 | time train=46.9s val=3.8s total=50.7s
+2026-05-18 12:41:47,666 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 12:42:34,338 - qqe.src.GNN.training.train - INFO - Training complete (46.7s) | running validation...
+2026-05-18 12:42:38,240 - qqe.src.GNN.training.train - INFO - Losses | train 1.184697 | val 1.202072 | lr 1.25e-03 | time train=46.7s val=3.9s total=50.6s
+2026-05-18 12:42:38,241 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 12:43:27,031 - qqe.src.GNN.training.train - INFO - Training complete (48.8s) | running validation...
+2026-05-18 12:43:30,977 - qqe.src.GNN.training.train - INFO - Losses | train 1.073669 | val 1.104046 | lr 1.25e-03 | time train=48.8s val=3.9s total=52.7s
+2026-05-18 12:43:30,980 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 12:44:19,840 - qqe.src.GNN.training.train - INFO - Training complete (48.9s) | running validation...
+2026-05-18 12:44:23,742 - qqe.src.GNN.training.train - INFO - Losses | train 0.989153 | val 1.205305 | lr 1.25e-03 | time train=48.9s val=3.9s total=52.8s
+2026-05-18 12:44:23,742 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 12:45:19,718 - qqe.src.GNN.training.train - INFO - Training complete (56.0s) | running validation...
+2026-05-18 12:45:24,866 - qqe.src.GNN.training.train - INFO - Losses | train 0.911474 | val 1.482998 | lr 1.25e-03 | time train=56.0s val=5.1s total=61.1s
+2026-05-18 12:45:24,868 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 12:46:16,680 - qqe.src.GNN.training.train - INFO - Training complete (51.8s) | running validation...
+2026-05-18 12:46:21,758 - qqe.src.GNN.training.train - INFO - Losses | train 0.845880 | val 0.666875 | lr 1.25e-03 | time train=51.8s val=5.1s total=56.9s
+2026-05-18 12:46:21,762 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 12:47:14,711 - qqe.src.GNN.training.train - INFO - Training complete (52.9s) | running validation...
+2026-05-18 12:47:18,622 - qqe.src.GNN.training.train - INFO - Losses | train 0.801489 | val 0.948097 | lr 1.25e-03 | time train=52.9s val=3.9s total=56.9s
+2026-05-18 12:47:18,624 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 12:48:13,067 - qqe.src.GNN.training.train - INFO - Training complete (54.4s) | running validation...
+2026-05-18 12:48:18,408 - qqe.src.GNN.training.train - INFO - Losses | train 0.764095 | val 0.942013 | lr 1.25e-03 | time train=54.4s val=5.3s total=59.8s
+2026-05-18 12:48:18,409 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 12:49:14,289 - qqe.src.GNN.training.train - INFO - Training complete (55.9s) | running validation...
+2026-05-18 12:49:18,593 - qqe.src.GNN.training.train - INFO - Losses | train 0.685247 | val 1.252310 | lr 1.25e-03 | time train=55.9s val=4.3s total=60.2s
+2026-05-18 12:49:18,594 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 12:50:13,146 - qqe.src.GNN.training.train - INFO - Training complete (54.6s) | running validation...
+2026-05-18 12:50:18,253 - qqe.src.GNN.training.train - INFO - Losses | train 0.590746 | val 1.314503 | lr 1.25e-03 | time train=54.6s val=5.1s total=59.7s
+2026-05-18 12:50:18,255 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 12:51:17,338 - qqe.src.GNN.training.train - INFO - Training complete (59.1s) | running validation...
+2026-05-18 12:51:22,452 - qqe.src.GNN.training.train - INFO - Losses | train 0.547301 | val 1.839749 | lr 1.25e-03 | time train=59.1s val=5.1s total=64.2s
+2026-05-18 12:51:22,454 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 12:52:15,939 - qqe.src.GNN.training.train - INFO - Training complete (53.5s) | running validation...
+2026-05-18 12:52:20,085 - qqe.src.GNN.training.train - INFO - Losses | train 0.539538 | val 1.512139 | lr 6.24e-04 | time train=53.5s val=4.1s total=57.6s
+2026-05-18 12:52:20,085 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 12:53:10,957 - qqe.src.GNN.training.train - INFO - Training complete (50.9s) | running validation...
+2026-05-18 12:53:15,086 - qqe.src.GNN.training.train - INFO - Losses | train 0.481512 | val 1.723175 | lr 6.24e-04 | time train=50.9s val=4.1s total=55.0s
+2026-05-18 12:53:15,087 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 12:54:03,787 - qqe.src.GNN.training.train - INFO - Training complete (48.7s) | running validation...
+2026-05-18 12:54:07,839 - qqe.src.GNN.training.train - INFO - Losses | train 0.482399 | val 1.800012 | lr 6.24e-04 | time train=48.7s val=4.1s total=52.8s
+2026-05-18 12:54:07,839 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 12:55:00,087 - qqe.src.GNN.training.train - INFO - Training complete (52.2s) | running validation...
+2026-05-18 12:55:04,251 - qqe.src.GNN.training.train - INFO - Losses | train 0.476599 | val 1.755543 | lr 6.24e-04 | time train=52.2s val=4.2s total=56.4s
+2026-05-18 12:55:04,252 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 12:55:58,531 - qqe.src.GNN.training.train - INFO - Training complete (54.3s) | running validation...
+2026-05-18 12:56:02,517 - qqe.src.GNN.training.train - INFO - Losses | train 0.477300 | val 1.553413 | lr 6.24e-04 | time train=54.3s val=4.0s total=58.3s
+2026-05-18 12:56:02,519 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 017 | best val 0.666875 | patience exhausted (10/10)
+2026-05-18 12:56:03,060 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 12:56:48,630 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 12:56:52,584 - qqe.src.GNN.training.train - INFO - Losses | train 1.334028 | val 0.698489 | lr 2.46e-04 | time train=45.6s val=4.0s total=49.5s
+2026-05-18 12:56:52,586 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 12:57:35,421 - qqe.src.GNN.training.train - INFO - Training complete (42.8s) | running validation...
+2026-05-18 12:57:39,478 - qqe.src.GNN.training.train - INFO - Losses | train 0.893508 | val 1.091907 | lr 2.46e-04 | time train=42.8s val=4.1s total=46.9s
+2026-05-18 12:57:39,479 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 12:58:26,500 - qqe.src.GNN.training.train - INFO - Training complete (47.0s) | running validation...
+2026-05-18 12:58:31,402 - qqe.src.GNN.training.train - INFO - Losses | train 0.866521 | val 0.684740 | lr 2.46e-04 | time train=47.0s val=4.9s total=51.9s
+2026-05-18 12:58:31,405 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 12:59:17,480 - qqe.src.GNN.training.train - INFO - Training complete (46.1s) | running validation...
+2026-05-18 12:59:22,377 - qqe.src.GNN.training.train - INFO - Losses | train 0.826048 | val 0.672216 | lr 2.46e-04 | time train=46.1s val=4.9s total=51.0s
+2026-05-18 12:59:22,379 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 13:00:05,954 - qqe.src.GNN.training.train - INFO - Training complete (43.6s) | running validation...
+2026-05-18 13:00:10,028 - qqe.src.GNN.training.train - INFO - Losses | train 0.791000 | val 0.646214 | lr 2.46e-04 | time train=43.6s val=4.1s total=47.6s
+2026-05-18 13:00:10,030 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 13:00:50,965 - qqe.src.GNN.training.train - INFO - Training complete (40.9s) | running validation...
+2026-05-18 13:00:55,178 - qqe.src.GNN.training.train - INFO - Losses | train 0.762518 | val 0.630972 | lr 2.46e-04 | time train=40.9s val=4.2s total=45.1s
+2026-05-18 13:00:55,181 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 13:01:36,494 - qqe.src.GNN.training.train - INFO - Training complete (41.3s) | running validation...
+2026-05-18 13:01:40,319 - qqe.src.GNN.training.train - INFO - Losses | train 0.752183 | val 0.639850 | lr 2.46e-04 | time train=41.3s val=3.8s total=45.1s
+2026-05-18 13:01:40,320 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 13:02:21,137 - qqe.src.GNN.training.train - INFO - Training complete (40.8s) | running validation...
+2026-05-18 13:02:24,854 - qqe.src.GNN.training.train - INFO - Losses | train 0.742593 | val 0.610018 | lr 2.46e-04 | time train=40.8s val=3.7s total=44.5s
+2026-05-18 13:02:24,855 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 13:03:05,948 - qqe.src.GNN.training.train - INFO - Training complete (41.1s) | running validation...
+2026-05-18 13:03:10,184 - qqe.src.GNN.training.train - INFO - Losses | train 0.727090 | val 0.595128 | lr 2.46e-04 | time train=41.1s val=4.2s total=45.3s
+2026-05-18 13:03:10,186 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 13:03:50,009 - qqe.src.GNN.training.train - INFO - Training complete (39.8s) | running validation...
+2026-05-18 13:03:54,069 - qqe.src.GNN.training.train - INFO - Losses | train 0.740583 | val 0.618043 | lr 2.46e-04 | time train=39.8s val=4.1s total=43.9s
+2026-05-18 13:03:54,069 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 13:04:35,121 - qqe.src.GNN.training.train - INFO - Training complete (41.1s) | running validation...
+2026-05-18 13:04:38,650 - qqe.src.GNN.training.train - INFO - Losses | train 0.737017 | val 0.704786 | lr 2.46e-04 | time train=41.1s val=3.5s total=44.6s
+2026-05-18 13:04:38,650 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 13:05:19,481 - qqe.src.GNN.training.train - INFO - Training complete (40.8s) | running validation...
+2026-05-18 13:05:23,435 - qqe.src.GNN.training.train - INFO - Losses | train 0.730860 | val 0.609163 | lr 2.46e-04 | time train=40.8s val=4.0s total=44.8s
+2026-05-18 13:05:23,435 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 13:06:04,991 - qqe.src.GNN.training.train - INFO - Training complete (41.6s) | running validation...
+2026-05-18 13:06:08,711 - qqe.src.GNN.training.train - INFO - Losses | train 0.735154 | val 0.595926 | lr 2.46e-04 | time train=41.6s val=3.7s total=45.3s
+2026-05-18 13:06:08,712 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 13:06:49,807 - qqe.src.GNN.training.train - INFO - Training complete (41.1s) | running validation...
+2026-05-18 13:06:53,741 - qqe.src.GNN.training.train - INFO - Losses | train 0.735828 | val 0.651869 | lr 2.46e-04 | time train=41.1s val=3.9s total=45.0s
+2026-05-18 13:06:53,741 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 13:07:34,576 - qqe.src.GNN.training.train - INFO - Training complete (40.8s) | running validation...
+2026-05-18 13:07:38,543 - qqe.src.GNN.training.train - INFO - Losses | train 0.731281 | val 0.600325 | lr 1.23e-04 | time train=40.8s val=4.0s total=44.8s
+2026-05-18 13:07:38,543 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 13:08:18,599 - qqe.src.GNN.training.train - INFO - Training complete (40.1s) | running validation...
+2026-05-18 13:08:22,616 - qqe.src.GNN.training.train - INFO - Losses | train 0.687369 | val 0.615237 | lr 1.23e-04 | time train=40.1s val=4.0s total=44.1s
+2026-05-18 13:08:22,618 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 13:09:03,400 - qqe.src.GNN.training.train - INFO - Training complete (40.8s) | running validation...
+2026-05-18 13:09:07,250 - qqe.src.GNN.training.train - INFO - Losses | train 0.695055 | val 0.588065 | lr 1.23e-04 | time train=40.8s val=3.8s total=44.6s
+2026-05-18 13:09:07,252 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 13:09:47,668 - qqe.src.GNN.training.train - INFO - Training complete (40.4s) | running validation...
+2026-05-18 13:09:52,002 - qqe.src.GNN.training.train - INFO - Losses | train 0.697693 | val 0.583299 | lr 1.23e-04 | time train=40.4s val=4.3s total=44.7s
+2026-05-18 13:09:52,004 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 13:10:32,186 - qqe.src.GNN.training.train - INFO - Training complete (40.2s) | running validation...
+2026-05-18 13:10:36,135 - qqe.src.GNN.training.train - INFO - Losses | train 0.695894 | val 0.573815 | lr 1.23e-04 | time train=40.2s val=3.9s total=44.1s
+2026-05-18 13:10:36,139 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 13:11:16,401 - qqe.src.GNN.training.train - INFO - Training complete (40.3s) | running validation...
+2026-05-18 13:11:20,136 - qqe.src.GNN.training.train - INFO - Losses | train 0.687426 | val 0.618287 | lr 1.23e-04 | time train=40.3s val=3.7s total=44.0s
+2026-05-18 13:11:20,136 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 13:12:02,299 - qqe.src.GNN.training.train - INFO - Training complete (42.2s) | running validation...
+2026-05-18 13:12:06,315 - qqe.src.GNN.training.train - INFO - Losses | train 0.678756 | val 0.582223 | lr 1.23e-04 | time train=42.2s val=4.0s total=46.2s
+2026-05-18 13:12:06,316 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 13:12:47,943 - qqe.src.GNN.training.train - INFO - Training complete (41.6s) | running validation...
+2026-05-18 13:12:51,558 - qqe.src.GNN.training.train - INFO - Losses | train 0.685675 | val 0.765307 | lr 1.23e-04 | time train=41.6s val=3.6s total=45.2s
+2026-05-18 13:12:51,559 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 13:13:32,253 - qqe.src.GNN.training.train - INFO - Training complete (40.7s) | running validation...
+2026-05-18 13:13:35,971 - qqe.src.GNN.training.train - INFO - Losses | train 0.678678 | val 0.570763 | lr 1.23e-04 | time train=40.7s val=3.7s total=44.4s
+2026-05-18 13:13:35,973 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 13:14:15,429 - qqe.src.GNN.training.train - INFO - Training complete (39.5s) | running validation...
+2026-05-18 13:14:19,137 - qqe.src.GNN.training.train - INFO - Losses | train 0.677135 | val 0.572484 | lr 1.23e-04 | time train=39.5s val=3.7s total=43.2s
+2026-05-18 13:14:19,137 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 13:14:59,535 - qqe.src.GNN.training.train - INFO - Training complete (40.4s) | running validation...
+2026-05-18 13:15:03,272 - qqe.src.GNN.training.train - INFO - Losses | train 0.677992 | val 0.603589 | lr 1.23e-04 | time train=40.4s val=3.7s total=44.1s
+2026-05-18 13:15:03,273 - qqe.src.GNN.training.train - INFO - -------- EPOCH 026 --------
+2026-05-18 13:15:43,075 - qqe.src.GNN.training.train - INFO - Training complete (39.8s) | running validation...
+2026-05-18 13:15:46,667 - qqe.src.GNN.training.train - INFO - Losses | train 0.677480 | val 0.617259 | lr 1.23e-04 | time train=39.8s val=3.6s total=43.4s
+2026-05-18 13:15:46,667 - qqe.src.GNN.training.train - INFO - -------- EPOCH 027 --------
+2026-05-18 13:16:28,094 - qqe.src.GNN.training.train - INFO - Training complete (41.4s) | running validation...
+2026-05-18 13:16:31,793 - qqe.src.GNN.training.train - INFO - Losses | train 0.672160 | val 0.590227 | lr 1.23e-04 | time train=41.4s val=3.7s total=45.1s
+2026-05-18 13:16:31,794 - qqe.src.GNN.training.train - INFO - -------- EPOCH 028 --------
+2026-05-18 13:17:12,538 - qqe.src.GNN.training.train - INFO - Training complete (40.7s) | running validation...
+2026-05-18 13:17:16,348 - qqe.src.GNN.training.train - INFO - Losses | train 0.687447 | val 0.589252 | lr 1.23e-04 | time train=40.7s val=3.8s total=44.6s
+2026-05-18 13:17:16,349 - qqe.src.GNN.training.train - INFO - -------- EPOCH 029 --------
+2026-05-18 13:17:56,177 - qqe.src.GNN.training.train - INFO - Training complete (39.8s) | running validation...
+2026-05-18 13:17:59,989 - qqe.src.GNN.training.train - INFO - Losses | train 0.678793 | val 0.569052 | lr 1.23e-04 | time train=39.8s val=3.8s total=43.6s
+2026-05-18 13:17:59,992 - qqe.src.GNN.training.train - INFO - -------- EPOCH 030 --------
+2026-05-18 13:18:39,459 - qqe.src.GNN.training.train - INFO - Training complete (39.5s) | running validation...
+2026-05-18 13:18:43,861 - qqe.src.GNN.training.train - INFO - Losses | train 0.672453 | val 0.582079 | lr 1.23e-04 | time train=39.5s val=4.4s total=43.9s
+2026-05-18 13:18:44,547 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 13:19:44,813 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 185/402 | loss 3.773216 | elapsed 60.3s | graphs 11840
+2026-05-18 13:20:45,122 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 353/402 | loss 2.825375 | elapsed 120.6s | graphs 22592
+2026-05-18 13:21:03,827 - qqe.src.GNN.training.train - INFO - Training complete (139.3s) | running validation...
+2026-05-18 13:21:11,596 - qqe.src.GNN.training.train - INFO - Losses | train 2.673259 | val 0.894347 | lr 1.48e-04 | time train=139.3s val=7.8s total=147.0s
+2026-05-18 13:21:11,605 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 13:22:11,783 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 160/402 | loss 1.292124 | elapsed 60.2s | graphs 10240
+2026-05-18 13:23:12,777 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 314/402 | loss 1.207056 | elapsed 121.2s | graphs 20096
+2026-05-18 13:23:45,747 - qqe.src.GNN.training.train - INFO - Training complete (154.1s) | running validation...
+2026-05-18 13:23:53,490 - qqe.src.GNN.training.train - INFO - Losses | train 1.159421 | val 1.314189 | lr 1.48e-04 | time train=154.1s val=7.7s total=161.9s
+2026-05-18 13:23:53,491 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 13:24:53,497 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 158/402 | loss 0.896256 | elapsed 60.0s | graphs 10112
+2026-05-18 13:25:53,519 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 314/402 | loss 0.874223 | elapsed 120.0s | graphs 20096
+2026-05-18 13:26:27,294 - qqe.src.GNN.training.train - INFO - Training complete (153.8s) | running validation...
+2026-05-18 13:26:34,904 - qqe.src.GNN.training.train - INFO - Losses | train 0.847309 | val 1.468518 | lr 1.48e-04 | time train=153.8s val=7.6s total=161.4s
+2026-05-18 13:26:34,904 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 13:27:35,052 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 161/402 | loss 0.770713 | elapsed 60.1s | graphs 10304
+2026-05-18 13:28:35,242 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 317/402 | loss 0.751022 | elapsed 120.3s | graphs 20288
+2026-05-18 13:29:06,086 - qqe.src.GNN.training.train - INFO - Training complete (151.2s) | running validation...
+2026-05-18 13:29:13,409 - qqe.src.GNN.training.train - INFO - Losses | train 0.730981 | val 1.490556 | lr 1.48e-04 | time train=151.2s val=7.3s total=158.5s
+2026-05-18 13:29:13,410 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 13:30:13,526 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 167/402 | loss 0.618701 | elapsed 60.1s | graphs 10688
+2026-05-18 13:31:13,738 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 336/402 | loss 0.607097 | elapsed 120.3s | graphs 21504
+2026-05-18 13:31:37,296 - qqe.src.GNN.training.train - INFO - Training complete (143.9s) | running validation...
+2026-05-18 13:31:44,732 - qqe.src.GNN.training.train - INFO - Losses | train 0.603811 | val 1.262605 | lr 1.48e-04 | time train=143.9s val=7.4s total=151.3s
+2026-05-18 13:31:44,734 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 13:32:45,047 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 158/402 | loss 0.547229 | elapsed 60.3s | graphs 10112
+2026-05-18 13:33:45,196 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 316/402 | loss 0.546743 | elapsed 120.5s | graphs 20224
+2026-05-18 13:34:16,564 - qqe.src.GNN.training.train - INFO - Training complete (151.8s) | running validation...
+2026-05-18 13:34:24,268 - qqe.src.GNN.training.train - INFO - Losses | train 0.542388 | val 1.416711 | lr 1.48e-04 | time train=151.8s val=7.7s total=159.5s
+2026-05-18 13:34:24,270 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 13:35:24,475 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 156/402 | loss 0.497644 | elapsed 60.2s | graphs 9984
+2026-05-18 13:36:24,685 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 315/402 | loss 0.509351 | elapsed 120.4s | graphs 20160
+2026-05-18 13:36:57,735 - qqe.src.GNN.training.train - INFO - Training complete (153.5s) | running validation...
+2026-05-18 13:37:05,181 - qqe.src.GNN.training.train - INFO - Losses | train 0.498383 | val 1.680120 | lr 7.40e-05 | time train=153.5s val=7.4s total=160.9s
+2026-05-18 13:37:05,183 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 13:38:05,416 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 160/402 | loss 0.474951 | elapsed 60.2s | graphs 10240
+2026-05-18 13:39:05,637 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 319/402 | loss 0.454096 | elapsed 120.5s | graphs 20416
+2026-05-18 13:39:38,550 - qqe.src.GNN.training.train - INFO - Training complete (153.4s) | running validation...
+2026-05-18 13:39:46,464 - qqe.src.GNN.training.train - INFO - Losses | train 0.460821 | val 1.294660 | lr 7.40e-05 | time train=153.4s val=7.9s total=161.3s
+2026-05-18 13:39:46,464 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 13:40:46,644 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 159/402 | loss 0.440165 | elapsed 60.2s | graphs 10176
+2026-05-18 13:41:46,755 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 333/402 | loss 0.435541 | elapsed 120.3s | graphs 21312
+2026-05-18 13:42:10,754 - qqe.src.GNN.training.train - INFO - Training complete (144.3s) | running validation...
+2026-05-18 13:42:17,977 - qqe.src.GNN.training.train - INFO - Losses | train 0.435824 | val 1.183818 | lr 7.40e-05 | time train=144.3s val=7.2s total=151.5s
+2026-05-18 13:42:17,979 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 13:43:18,042 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 175/402 | loss 0.413370 | elapsed 60.1s | graphs 11200
+2026-05-18 13:44:18,260 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 339/402 | loss 0.412495 | elapsed 120.3s | graphs 21696
+2026-05-18 13:44:41,106 - qqe.src.GNN.training.train - INFO - Training complete (143.1s) | running validation...
+2026-05-18 13:44:48,552 - qqe.src.GNN.training.train - INFO - Losses | train 0.411831 | val 1.410938 | lr 7.40e-05 | time train=143.1s val=7.4s total=150.6s
+2026-05-18 13:44:48,552 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 13:45:48,612 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 169/402 | loss 0.402228 | elapsed 60.1s | graphs 10816
+2026-05-18 13:46:48,879 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 343/402 | loss 0.398743 | elapsed 120.3s | graphs 21952
+2026-05-18 13:47:08,910 - qqe.src.GNN.training.train - INFO - Training complete (140.4s) | running validation...
+2026-05-18 13:47:16,312 - qqe.src.GNN.training.train - INFO - Losses | train 0.397272 | val 1.572288 | lr 7.40e-05 | time train=140.4s val=7.4s total=147.8s
+2026-05-18 13:47:16,313 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.894347 | patience exhausted (10/10)
+2026-05-18 14:01:46,770 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-05-18 14:04:06,760 - scripts.optuna_search - INFO - Found 35700 dataset files for target=sre in data_dir=../outputs/data/dataset.
+2026-05-18 14:05:51,978 - scripts.optuna_search - INFO - Prepared datasets with loader_kind=gnn. Starting Optuna study with name='optuna_search_gnn_per_family_random_sre_4119' and storage='sqlite:///optuna_studies.db'...
+2026-05-18 14:05:52,047 - scripts.optuna_search - INFO - Running Optuna optimization for 10 trials...
+2026-05-18 14:05:52,162 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 14:06:52,341 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 165/201 | loss 1.430501 | elapsed 60.2s | graphs 21120
+2026-05-18 14:07:05,257 - qqe.src.GNN.training.train - INFO - Training complete (73.1s) | running validation...
+2026-05-18 14:07:12,705 - qqe.src.GNN.training.train - INFO - Losses | train 1.309284 | val 0.906277 | lr 2.99e-04 | time train=73.1s val=7.4s total=80.5s
+2026-05-18 14:07:12,709 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 14:08:12,806 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 167/201 | loss 0.667149 | elapsed 60.1s | graphs 21376
+2026-05-18 14:08:24,995 - qqe.src.GNN.training.train - INFO - Training complete (72.3s) | running validation...
+2026-05-18 14:08:31,822 - qqe.src.GNN.training.train - INFO - Losses | train 0.657490 | val 0.733231 | lr 2.99e-04 | time train=72.3s val=6.8s total=79.1s
+2026-05-18 14:08:31,824 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 14:09:32,169 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 166/201 | loss 0.579769 | elapsed 60.3s | graphs 21248
+2026-05-18 14:09:44,720 - qqe.src.GNN.training.train - INFO - Training complete (72.9s) | running validation...
+2026-05-18 14:09:51,731 - qqe.src.GNN.training.train - INFO - Losses | train 0.578700 | val 0.776905 | lr 2.99e-04 | time train=72.9s val=7.0s total=79.9s
+2026-05-18 14:09:51,732 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 14:10:52,057 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 169/201 | loss 0.515226 | elapsed 60.3s | graphs 21632
+2026-05-18 14:11:03,644 - qqe.src.GNN.training.train - INFO - Training complete (71.9s) | running validation...
+2026-05-18 14:11:11,606 - qqe.src.GNN.training.train - INFO - Losses | train 0.510803 | val 0.750946 | lr 2.99e-04 | time train=71.9s val=8.0s total=79.9s
+2026-05-18 14:11:11,607 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 14:12:11,715 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 171/201 | loss 0.462438 | elapsed 60.1s | graphs 21888
+2026-05-18 14:12:22,370 - qqe.src.GNN.training.train - INFO - Training complete (70.8s) | running validation...
+2026-05-18 14:12:29,356 - qqe.src.GNN.training.train - INFO - Losses | train 0.459452 | val 0.746961 | lr 2.99e-04 | time train=70.8s val=7.0s total=77.7s
+2026-05-18 14:12:29,356 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 14:13:29,521 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 166/201 | loss 0.415625 | elapsed 60.2s | graphs 21248
+2026-05-18 14:13:42,072 - qqe.src.GNN.training.train - INFO - Training complete (72.7s) | running validation...
+2026-05-18 14:13:48,965 - qqe.src.GNN.training.train - INFO - Losses | train 0.413875 | val 0.610313 | lr 2.99e-04 | time train=72.7s val=6.9s total=79.6s
+2026-05-18 14:13:48,967 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 14:14:49,075 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 169/201 | loss 0.390189 | elapsed 60.1s | graphs 21632
+2026-05-18 14:15:00,519 - qqe.src.GNN.training.train - INFO - Training complete (71.6s) | running validation...
+2026-05-18 14:15:08,137 - qqe.src.GNN.training.train - INFO - Losses | train 0.386032 | val 0.747026 | lr 2.99e-04 | time train=71.6s val=7.6s total=79.2s
+2026-05-18 14:15:08,138 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 14:16:08,314 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 167/201 | loss 0.358453 | elapsed 60.2s | graphs 21376
+2026-05-18 14:16:20,562 - qqe.src.GNN.training.train - INFO - Training complete (72.4s) | running validation...
+2026-05-18 14:16:27,980 - qqe.src.GNN.training.train - INFO - Losses | train 0.354753 | val 0.809273 | lr 2.99e-04 | time train=72.4s val=7.4s total=79.8s
+2026-05-18 14:16:27,980 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 14:17:28,147 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 166/201 | loss 0.338885 | elapsed 60.2s | graphs 21248
+2026-05-18 14:17:40,772 - qqe.src.GNN.training.train - INFO - Training complete (72.8s) | running validation...
+2026-05-18 14:17:48,438 - qqe.src.GNN.training.train - INFO - Losses | train 0.334647 | val 0.966976 | lr 2.99e-04 | time train=72.8s val=7.7s total=80.5s
+2026-05-18 14:17:48,438 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 14:18:48,500 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 168/201 | loss 0.313596 | elapsed 60.1s | graphs 21504
+2026-05-18 14:19:00,331 - qqe.src.GNN.training.train - INFO - Training complete (71.9s) | running validation...
+2026-05-18 14:19:07,808 - qqe.src.GNN.training.train - INFO - Losses | train 0.309021 | val 1.042951 | lr 2.99e-04 | time train=71.9s val=7.5s total=79.4s
+2026-05-18 14:19:07,809 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 14:20:08,017 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 168/201 | loss 0.269994 | elapsed 60.2s | graphs 21504
+2026-05-18 14:20:19,853 - qqe.src.GNN.training.train - INFO - Training complete (72.0s) | running validation...
+2026-05-18 14:20:27,506 - qqe.src.GNN.training.train - INFO - Losses | train 0.266552 | val 1.298000 | lr 2.99e-04 | time train=72.0s val=7.7s total=79.7s
+2026-05-18 14:20:27,506 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 14:21:27,740 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 173/201 | loss 0.234580 | elapsed 60.2s | graphs 22144
+2026-05-18 14:21:37,495 - qqe.src.GNN.training.train - INFO - Training complete (70.0s) | running validation...
+2026-05-18 14:21:44,896 - qqe.src.GNN.training.train - INFO - Losses | train 0.232509 | val 1.374233 | lr 1.50e-04 | time train=70.0s val=7.4s total=77.4s
+2026-05-18 14:21:44,898 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 14:22:44,967 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 174/201 | loss 0.211982 | elapsed 60.1s | graphs 22272
+2026-05-18 14:22:54,393 - qqe.src.GNN.training.train - INFO - Training complete (69.5s) | running validation...
+2026-05-18 14:23:01,728 - qqe.src.GNN.training.train - INFO - Losses | train 0.211190 | val 1.402371 | lr 1.50e-04 | time train=69.5s val=7.3s total=76.8s
+2026-05-18 14:23:01,730 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 14:24:02,002 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 186/201 | loss 0.201111 | elapsed 60.3s | graphs 23808
+2026-05-18 14:24:06,665 - qqe.src.GNN.training.train - INFO - Training complete (64.9s) | running validation...
+2026-05-18 14:24:12,870 - qqe.src.GNN.training.train - INFO - Losses | train 0.199801 | val 1.462076 | lr 1.50e-04 | time train=64.9s val=6.2s total=71.1s
+2026-05-18 14:24:12,871 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 14:25:12,919 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 191/201 | loss 0.191118 | elapsed 60.0s | graphs 24448
+2026-05-18 14:25:16,090 - qqe.src.GNN.training.train - INFO - Training complete (63.2s) | running validation...
+2026-05-18 14:25:22,490 - qqe.src.GNN.training.train - INFO - Losses | train 0.191402 | val 1.437371 | lr 1.50e-04 | time train=63.2s val=6.4s total=69.6s
+2026-05-18 14:25:22,492 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 14:26:22,533 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 187/201 | loss 0.183558 | elapsed 60.0s | graphs 23936
+2026-05-18 14:26:26,989 - qqe.src.GNN.training.train - INFO - Training complete (64.5s) | running validation...
+2026-05-18 14:26:33,535 - qqe.src.GNN.training.train - INFO - Losses | train 0.183390 | val 1.481995 | lr 1.50e-04 | time train=64.5s val=6.5s total=71.0s
+2026-05-18 14:26:33,535 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 016 | best val 0.610313 | patience exhausted (10/10)
+2026-05-18 14:26:34,061 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 14:27:34,075 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1123/1607 | loss 6.228060 | elapsed 60.0s | graphs 17968
+2026-05-18 14:28:00,844 - qqe.src.GNN.training.train - INFO - Training complete (86.8s) | running validation...
+2026-05-18 14:28:08,653 - qqe.src.GNN.training.train - INFO - Losses | train 5.279123 | val 1.785224 | lr 4.71e-05 | time train=86.8s val=7.8s total=94.6s
+2026-05-18 14:28:08,656 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 14:29:08,704 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1111/1607 | loss 2.775035 | elapsed 60.0s | graphs 17776
+2026-05-18 14:29:34,293 - qqe.src.GNN.training.train - INFO - Training complete (85.6s) | running validation...
+2026-05-18 14:29:42,039 - qqe.src.GNN.training.train - INFO - Losses | train 2.686919 | val 1.308453 | lr 4.71e-05 | time train=85.6s val=7.7s total=93.4s
+2026-05-18 14:29:42,041 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 14:30:42,051 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1113/1607 | loss 2.241885 | elapsed 60.0s | graphs 17808
+2026-05-18 14:31:08,549 - qqe.src.GNN.training.train - INFO - Training complete (86.5s) | running validation...
+2026-05-18 14:31:16,037 - qqe.src.GNN.training.train - INFO - Losses | train 2.182790 | val 1.064987 | lr 4.71e-05 | time train=86.5s val=7.5s total=94.0s
+2026-05-18 14:31:16,041 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 14:32:16,045 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1132/1607 | loss 1.948470 | elapsed 60.0s | graphs 18112
+2026-05-18 14:32:41,517 - qqe.src.GNN.training.train - INFO - Training complete (85.5s) | running validation...
+2026-05-18 14:32:49,242 - qqe.src.GNN.training.train - INFO - Losses | train 1.917396 | val 0.990585 | lr 4.71e-05 | time train=85.5s val=7.7s total=93.2s
+2026-05-18 14:32:49,244 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 14:33:49,252 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1118/1607 | loss 1.705459 | elapsed 60.0s | graphs 17888
+2026-05-18 14:34:15,352 - qqe.src.GNN.training.train - INFO - Training complete (86.1s) | running validation...
+2026-05-18 14:34:23,057 - qqe.src.GNN.training.train - INFO - Losses | train 1.685911 | val 0.817186 | lr 4.71e-05 | time train=86.1s val=7.7s total=93.8s
+2026-05-18 14:34:23,062 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 14:35:23,072 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1105/1607 | loss 1.549132 | elapsed 60.0s | graphs 17680
+2026-05-18 14:35:49,465 - qqe.src.GNN.training.train - INFO - Training complete (86.4s) | running validation...
+2026-05-18 14:35:57,322 - qqe.src.GNN.training.train - INFO - Losses | train 1.539099 | val 0.743370 | lr 4.71e-05 | time train=86.4s val=7.9s total=94.3s
+2026-05-18 14:35:57,323 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 14:36:57,341 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1132/1607 | loss 1.394016 | elapsed 60.0s | graphs 18112
+2026-05-18 14:37:22,535 - qqe.src.GNN.training.train - INFO - Training complete (85.2s) | running validation...
+2026-05-18 14:37:30,488 - qqe.src.GNN.training.train - INFO - Losses | train 1.384187 | val 0.568113 | lr 4.71e-05 | time train=85.2s val=8.0s total=93.2s
+2026-05-18 14:37:30,492 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 14:38:30,524 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1049/1607 | loss 1.298530 | elapsed 60.0s | graphs 16784
+2026-05-18 14:39:03,331 - qqe.src.GNN.training.train - INFO - Training complete (92.8s) | running validation...
+2026-05-18 14:39:11,833 - qqe.src.GNN.training.train - INFO - Losses | train 1.276376 | val 0.503711 | lr 4.71e-05 | time train=92.8s val=8.5s total=101.3s
+2026-05-18 14:39:11,835 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 14:40:11,885 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1030/1607 | loss 1.254324 | elapsed 60.0s | graphs 16480
+2026-05-18 14:40:46,072 - qqe.src.GNN.training.train - INFO - Training complete (94.2s) | running validation...
+2026-05-18 14:40:54,572 - qqe.src.GNN.training.train - INFO - Losses | train 1.229772 | val 0.474556 | lr 4.71e-05 | time train=94.2s val=8.5s total=102.7s
+2026-05-18 14:40:54,574 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 14:41:54,626 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1029/1607 | loss 1.169409 | elapsed 60.1s | graphs 16464
+2026-05-18 14:42:27,438 - qqe.src.GNN.training.train - INFO - Training complete (92.9s) | running validation...
+2026-05-18 14:42:35,755 - qqe.src.GNN.training.train - INFO - Losses | train 1.175648 | val 0.469169 | lr 4.71e-05 | time train=92.9s val=8.3s total=101.2s
+2026-05-18 14:42:35,758 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 14:43:35,774 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1044/1607 | loss 1.140858 | elapsed 60.0s | graphs 16704
+2026-05-18 14:44:08,569 - qqe.src.GNN.training.train - INFO - Training complete (92.8s) | running validation...
+2026-05-18 14:44:17,143 - qqe.src.GNN.training.train - INFO - Losses | train 1.136521 | val 0.432044 | lr 4.71e-05 | time train=92.8s val=8.6s total=101.4s
+2026-05-18 14:44:17,147 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 14:45:17,205 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 1043/1607 | loss 1.106158 | elapsed 60.1s | graphs 16688
+2026-05-18 14:45:50,096 - qqe.src.GNN.training.train - INFO - Training complete (92.9s) | running validation...
+2026-05-18 14:45:58,723 - qqe.src.GNN.training.train - INFO - Losses | train 1.101956 | val 0.492516 | lr 4.71e-05 | time train=92.9s val=8.6s total=101.6s
+2026-05-18 14:45:58,724 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 14:46:58,776 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 1020/1607 | loss 1.078495 | elapsed 60.1s | graphs 16320
+2026-05-18 14:47:33,227 - qqe.src.GNN.training.train - INFO - Training complete (94.5s) | running validation...
+2026-05-18 14:47:41,777 - qqe.src.GNN.training.train - INFO - Losses | train 1.075356 | val 0.419396 | lr 4.71e-05 | time train=94.5s val=8.5s total=103.1s
+2026-05-18 14:47:41,779 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 14:48:41,834 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 1021/1607 | loss 1.049687 | elapsed 60.1s | graphs 16336
+2026-05-18 14:49:16,069 - qqe.src.GNN.training.train - INFO - Training complete (94.3s) | running validation...
+2026-05-18 14:49:24,629 - qqe.src.GNN.training.train - INFO - Losses | train 1.045345 | val 0.371199 | lr 4.71e-05 | time train=94.3s val=8.6s total=102.9s
+2026-05-18 14:49:24,632 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 14:50:24,652 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 1019/1607 | loss 1.065818 | elapsed 60.0s | graphs 16304
+2026-05-18 14:50:58,538 - qqe.src.GNN.training.train - INFO - Training complete (93.9s) | running validation...
+2026-05-18 14:51:07,164 - qqe.src.GNN.training.train - INFO - Losses | train 1.057732 | val 0.384818 | lr 4.71e-05 | time train=93.9s val=8.6s total=102.5s
+2026-05-18 14:51:07,165 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 14:52:07,167 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 1025/1607 | loss 1.051452 | elapsed 60.0s | graphs 16400
+2026-05-18 14:52:40,756 - qqe.src.GNN.training.train - INFO - Training complete (93.6s) | running validation...
+2026-05-18 14:52:49,164 - qqe.src.GNN.training.train - INFO - Losses | train 1.056904 | val 0.303767 | lr 4.71e-05 | time train=93.6s val=8.4s total=102.0s
+2026-05-18 14:52:49,167 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 14:53:49,216 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 1034/1607 | loss 1.064157 | elapsed 60.0s | graphs 16544
+2026-05-18 14:54:22,845 - qqe.src.GNN.training.train - INFO - Training complete (93.7s) | running validation...
+2026-05-18 14:54:31,429 - qqe.src.GNN.training.train - INFO - Losses | train 1.058968 | val 0.345931 | lr 4.71e-05 | time train=93.7s val=8.6s total=102.3s
+2026-05-18 14:54:31,430 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 14:55:31,459 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 1016/1607 | loss 1.029838 | elapsed 60.0s | graphs 16256
+2026-05-18 14:56:07,213 - qqe.src.GNN.training.train - INFO - Training complete (95.8s) | running validation...
+2026-05-18 14:56:16,064 - qqe.src.GNN.training.train - INFO - Losses | train 1.032646 | val 0.326085 | lr 4.71e-05 | time train=95.8s val=8.9s total=104.6s
+2026-05-18 14:56:16,065 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 14:57:16,117 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 997/1607 | loss 1.033085 | elapsed 60.1s | graphs 15952
+2026-05-18 14:57:53,111 - qqe.src.GNN.training.train - INFO - Training complete (97.0s) | running validation...
+2026-05-18 14:58:02,023 - qqe.src.GNN.training.train - INFO - Losses | train 1.024257 | val 0.313385 | lr 4.71e-05 | time train=97.0s val=8.9s total=106.0s
+2026-05-18 14:58:02,024 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 14:59:02,038 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 1012/1607 | loss 1.037610 | elapsed 60.0s | graphs 16192
+2026-05-18 14:59:37,987 - qqe.src.GNN.training.train - INFO - Training complete (96.0s) | running validation...
+2026-05-18 14:59:46,770 - qqe.src.GNN.training.train - INFO - Losses | train 1.043448 | val 0.305152 | lr 4.71e-05 | time train=96.0s val=8.8s total=104.7s
+2026-05-18 14:59:46,770 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 15:00:46,805 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 990/1607 | loss 1.007988 | elapsed 60.0s | graphs 15840
+2026-05-18 15:01:23,419 - qqe.src.GNN.training.train - INFO - Training complete (96.6s) | running validation...
+2026-05-18 15:01:31,356 - qqe.src.GNN.training.train - INFO - Losses | train 1.003673 | val 0.376673 | lr 4.71e-05 | time train=96.6s val=7.9s total=104.6s
+2026-05-18 15:01:31,358 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 15:02:31,361 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 992/1607 | loss 0.990577 | elapsed 60.0s | graphs 15872
+2026-05-18 15:03:08,355 - qqe.src.GNN.training.train - INFO - Training complete (97.0s) | running validation...
+2026-05-18 15:03:16,191 - qqe.src.GNN.training.train - INFO - Losses | train 0.997561 | val 0.313300 | lr 2.36e-05 | time train=97.0s val=7.8s total=104.8s
+2026-05-18 15:03:16,192 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 15:04:16,200 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 1042/1607 | loss 0.982683 | elapsed 60.0s | graphs 16672
+2026-05-18 15:04:50,564 - qqe.src.GNN.training.train - INFO - Training complete (94.4s) | running validation...
+2026-05-18 15:04:59,563 - qqe.src.GNN.training.train - INFO - Losses | train 0.982414 | val 0.299198 | lr 2.36e-05 | time train=94.4s val=9.0s total=103.4s
+2026-05-18 15:04:59,567 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 15:05:59,596 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 1007/1607 | loss 0.978384 | elapsed 60.0s | graphs 16112
+2026-05-18 15:06:33,502 - qqe.src.GNN.training.train - INFO - Training complete (93.9s) | running validation...
+2026-05-18 15:06:42,798 - qqe.src.GNN.training.train - INFO - Losses | train 0.998747 | val 0.352386 | lr 2.36e-05 | time train=93.9s val=9.3s total=103.2s
+2026-05-18 15:06:42,799 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 15:07:42,836 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 1030/1607 | loss 0.983794 | elapsed 60.0s | graphs 16480
+2026-05-18 15:08:16,310 - qqe.src.GNN.training.train - INFO - Training complete (93.5s) | running validation...
+2026-05-18 15:08:24,802 - qqe.src.GNN.training.train - INFO - Losses | train 0.985088 | val 0.313392 | lr 2.36e-05 | time train=93.5s val=8.5s total=102.0s
+2026-05-18 15:08:25,370 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 15:09:25,395 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 887/1607 | loss 2.833962 | elapsed 60.0s | graphs 14192
+2026-05-18 15:10:13,723 - qqe.src.GNN.training.train - INFO - Training complete (108.4s) | running validation...
+2026-05-18 15:10:22,873 - qqe.src.GNN.training.train - INFO - Losses | train 1.973512 | val 0.936810 | lr 8.08e-05 | time train=108.4s val=9.1s total=117.5s
+2026-05-18 15:10:22,878 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 15:11:22,888 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 884/1607 | loss 0.659013 | elapsed 60.0s | graphs 14144
+2026-05-18 15:12:11,549 - qqe.src.GNN.training.train - INFO - Training complete (108.7s) | running validation...
+2026-05-18 15:12:20,869 - qqe.src.GNN.training.train - INFO - Losses | train 0.621122 | val 0.861870 | lr 8.08e-05 | time train=108.7s val=9.3s total=118.0s
+2026-05-18 15:12:20,875 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 15:13:20,910 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 890/1607 | loss 0.507628 | elapsed 60.0s | graphs 14240
+2026-05-18 15:14:09,104 - qqe.src.GNN.training.train - INFO - Training complete (108.2s) | running validation...
+2026-05-18 15:14:18,241 - qqe.src.GNN.training.train - INFO - Losses | train 0.510919 | val 0.926915 | lr 8.08e-05 | time train=108.2s val=9.1s total=117.4s
+2026-05-18 15:14:18,241 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 15:15:18,251 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 891/1607 | loss 0.459347 | elapsed 60.0s | graphs 14256
+2026-05-18 15:16:06,587 - qqe.src.GNN.training.train - INFO - Training complete (108.3s) | running validation...
+2026-05-18 15:16:15,741 - qqe.src.GNN.training.train - INFO - Losses | train 0.454094 | val 0.462475 | lr 8.08e-05 | time train=108.3s val=9.2s total=117.5s
+2026-05-18 15:16:15,746 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 15:17:15,804 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 893/1607 | loss 0.428717 | elapsed 60.1s | graphs 14288
+2026-05-18 15:18:04,214 - qqe.src.GNN.training.train - INFO - Training complete (108.5s) | running validation...
+2026-05-18 15:18:13,512 - qqe.src.GNN.training.train - INFO - Losses | train 0.415758 | val 0.866003 | lr 8.08e-05 | time train=108.5s val=9.3s total=117.8s
+2026-05-18 15:18:13,513 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 15:19:13,539 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 887/1607 | loss 0.396375 | elapsed 60.0s | graphs 14192
+2026-05-18 15:20:02,022 - qqe.src.GNN.training.train - INFO - Training complete (108.5s) | running validation...
+2026-05-18 15:20:11,307 - qqe.src.GNN.training.train - INFO - Losses | train 0.388413 | val 0.878322 | lr 8.08e-05 | time train=108.5s val=9.3s total=117.8s
+2026-05-18 15:20:11,308 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 15:21:11,332 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 895/1607 | loss 0.359160 | elapsed 60.0s | graphs 14320
+2026-05-18 15:21:59,473 - qqe.src.GNN.training.train - INFO - Training complete (108.2s) | running validation...
+2026-05-18 15:22:08,601 - qqe.src.GNN.training.train - INFO - Losses | train 0.349941 | val 1.185172 | lr 8.08e-05 | time train=108.2s val=9.1s total=117.3s
+2026-05-18 15:22:08,602 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 15:23:08,650 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 890/1607 | loss 0.326937 | elapsed 60.0s | graphs 14240
+2026-05-18 15:23:57,074 - qqe.src.GNN.training.train - INFO - Training complete (108.5s) | running validation...
+2026-05-18 15:24:06,311 - qqe.src.GNN.training.train - INFO - Losses | train 0.320000 | val 1.574319 | lr 8.08e-05 | time train=108.5s val=9.2s total=117.7s
+2026-05-18 15:24:06,312 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 15:25:06,320 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 888/1607 | loss 0.289687 | elapsed 60.0s | graphs 14208
+2026-05-18 15:25:55,728 - qqe.src.GNN.training.train - INFO - Training complete (109.4s) | running validation...
+2026-05-18 15:26:05,237 - qqe.src.GNN.training.train - INFO - Losses | train 0.286732 | val 2.535610 | lr 8.08e-05 | time train=109.4s val=9.5s total=118.9s
+2026-05-18 15:26:05,238 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 15:27:05,297 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 866/1607 | loss 0.272672 | elapsed 60.1s | graphs 13856
+2026-05-18 15:27:56,361 - qqe.src.GNN.training.train - INFO - Training complete (111.1s) | running validation...
+2026-05-18 15:28:06,144 - qqe.src.GNN.training.train - INFO - Losses | train 0.261226 | val 3.519460 | lr 4.04e-05 | time train=111.1s val=9.8s total=120.9s
+2026-05-18 15:28:06,145 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 15:29:06,158 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 869/1607 | loss 0.232155 | elapsed 60.0s | graphs 13904
+2026-05-18 15:29:56,742 - qqe.src.GNN.training.train - INFO - Training complete (110.6s) | running validation...
+2026-05-18 15:30:06,322 - qqe.src.GNN.training.train - INFO - Losses | train 0.226770 | val 3.958114 | lr 4.04e-05 | time train=110.6s val=9.6s total=120.2s
+2026-05-18 15:30:06,323 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 15:31:06,392 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 870/1607 | loss 0.216137 | elapsed 60.1s | graphs 13920
+2026-05-18 15:31:56,697 - qqe.src.GNN.training.train - INFO - Training complete (110.4s) | running validation...
+2026-05-18 15:32:06,427 - qqe.src.GNN.training.train - INFO - Losses | train 0.217191 | val 3.946478 | lr 4.04e-05 | time train=110.4s val=9.7s total=120.1s
+2026-05-18 15:32:06,428 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 15:33:06,447 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 868/1607 | loss 0.196480 | elapsed 60.0s | graphs 13888
+2026-05-18 15:33:57,051 - qqe.src.GNN.training.train - INFO - Training complete (110.6s) | running validation...
+2026-05-18 15:34:06,529 - qqe.src.GNN.training.train - INFO - Losses | train 0.198425 | val 4.612074 | lr 4.04e-05 | time train=110.6s val=9.5s total=120.1s
+2026-05-18 15:34:06,530 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 15:35:06,577 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 878/1607 | loss 0.199621 | elapsed 60.0s | graphs 14048
+2026-05-18 15:35:56,624 - qqe.src.GNN.training.train - INFO - Training complete (110.1s) | running validation...
+2026-05-18 15:36:06,302 - qqe.src.GNN.training.train - INFO - Losses | train 0.194974 | val 4.593553 | lr 4.04e-05 | time train=110.1s val=9.7s total=119.8s
+2026-05-18 15:36:06,304 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 014 | best val 0.462475 | patience exhausted (10/10)
+2026-05-18 15:36:06,855 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 15:37:06,881 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1102/1607 | loss 1.034271 | elapsed 60.0s | graphs 17632
+2026-05-18 15:37:34,971 - qqe.src.GNN.training.train - INFO - Training complete (88.1s) | running validation...
+2026-05-18 15:37:42,885 - qqe.src.GNN.training.train - INFO - Losses | train 0.950848 | val 0.512783 | lr 1.58e-04 | time train=88.1s val=7.9s total=96.0s
+2026-05-18 15:37:42,888 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 15:38:42,939 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1130/1607 | loss 0.663626 | elapsed 60.1s | graphs 18080
+2026-05-18 15:39:07,946 - qqe.src.GNN.training.train - INFO - Training complete (85.1s) | running validation...
+2026-05-18 15:39:15,734 - qqe.src.GNN.training.train - INFO - Losses | train 0.635804 | val 0.860318 | lr 1.58e-04 | time train=85.1s val=7.8s total=92.8s
+2026-05-18 15:39:15,735 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 15:40:15,761 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1131/1607 | loss 0.504478 | elapsed 60.0s | graphs 18096
+2026-05-18 15:40:41,129 - qqe.src.GNN.training.train - INFO - Training complete (85.4s) | running validation...
+2026-05-18 15:40:48,954 - qqe.src.GNN.training.train - INFO - Losses | train 0.484186 | val 1.093235 | lr 1.58e-04 | time train=85.4s val=7.8s total=93.2s
+2026-05-18 15:40:48,954 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 15:41:48,980 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1141/1607 | loss 0.393354 | elapsed 60.0s | graphs 18256
+2026-05-18 15:42:13,484 - qqe.src.GNN.training.train - INFO - Training complete (84.5s) | running validation...
+2026-05-18 15:42:21,511 - qqe.src.GNN.training.train - INFO - Losses | train 0.381869 | val 0.958563 | lr 1.58e-04 | time train=84.5s val=8.0s total=92.6s
+2026-05-18 15:42:21,511 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 15:43:21,554 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1124/1607 | loss 0.328034 | elapsed 60.0s | graphs 17984
+2026-05-18 15:43:46,882 - qqe.src.GNN.training.train - INFO - Training complete (85.4s) | running validation...
+2026-05-18 15:43:54,806 - qqe.src.GNN.training.train - INFO - Losses | train 0.324899 | val 1.099120 | lr 1.58e-04 | time train=85.4s val=7.9s total=93.3s
+2026-05-18 15:43:54,807 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 15:44:54,827 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1140/1607 | loss 0.295607 | elapsed 60.0s | graphs 18240
+2026-05-18 15:45:19,404 - qqe.src.GNN.training.train - INFO - Training complete (84.6s) | running validation...
+2026-05-18 15:45:26,954 - qqe.src.GNN.training.train - INFO - Losses | train 0.290923 | val 0.925094 | lr 1.58e-04 | time train=84.6s val=7.5s total=92.1s
+2026-05-18 15:45:26,955 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 15:46:26,992 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1117/1607 | loss 0.276209 | elapsed 60.0s | graphs 17872
+2026-05-18 15:46:53,638 - qqe.src.GNN.training.train - INFO - Training complete (86.7s) | running validation...
+2026-05-18 15:47:01,499 - qqe.src.GNN.training.train - INFO - Losses | train 0.270832 | val 1.021412 | lr 7.88e-05 | time train=86.7s val=7.9s total=94.5s
+2026-05-18 15:47:01,500 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 15:48:01,543 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1140/1607 | loss 0.249229 | elapsed 60.0s | graphs 18240
+2026-05-18 15:48:25,789 - qqe.src.GNN.training.train - INFO - Training complete (84.3s) | running validation...
+2026-05-18 15:48:33,212 - qqe.src.GNN.training.train - INFO - Losses | train 0.246339 | val 0.870213 | lr 7.88e-05 | time train=84.3s val=7.4s total=91.7s
+2026-05-18 15:48:33,213 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 15:49:33,253 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1166/1607 | loss 0.242397 | elapsed 60.0s | graphs 18656
+2026-05-18 15:49:56,215 - qqe.src.GNN.training.train - INFO - Training complete (83.0s) | running validation...
+2026-05-18 15:50:04,359 - qqe.src.GNN.training.train - INFO - Losses | train 0.242175 | val 0.930079 | lr 7.88e-05 | time train=83.0s val=8.1s total=91.1s
+2026-05-18 15:50:04,360 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 15:51:04,361 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1156/1607 | loss 0.234435 | elapsed 60.0s | graphs 18496
+2026-05-18 15:51:27,697 - qqe.src.GNN.training.train - INFO - Training complete (83.3s) | running validation...
+2026-05-18 15:51:35,439 - qqe.src.GNN.training.train - INFO - Losses | train 0.232062 | val 0.892090 | lr 7.88e-05 | time train=83.3s val=7.7s total=91.1s
+2026-05-18 15:51:35,440 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 15:52:35,467 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1165/1607 | loss 0.226153 | elapsed 60.0s | graphs 18640
+2026-05-18 15:52:57,771 - qqe.src.GNN.training.train - INFO - Training complete (82.3s) | running validation...
+2026-05-18 15:53:06,023 - qqe.src.GNN.training.train - INFO - Losses | train 0.224052 | val 0.907366 | lr 7.88e-05 | time train=82.3s val=8.3s total=90.6s
+2026-05-18 15:53:06,023 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.512783 | patience exhausted (10/10)
+2026-05-18 15:53:06,573 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 15:54:06,615 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1100/1607 | loss 2.072549 | elapsed 60.0s | graphs 17600
+2026-05-18 15:54:33,184 - qqe.src.GNN.training.train - INFO - Training complete (86.6s) | running validation...
+2026-05-18 15:54:41,030 - qqe.src.GNN.training.train - INFO - Losses | train 1.644790 | val 4.561904 | lr 8.77e-04 | time train=86.6s val=7.8s total=94.5s
+2026-05-18 15:54:41,033 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 15:55:41,074 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1192/1607 | loss 0.374676 | elapsed 60.0s | graphs 19072
+2026-05-18 15:56:01,945 - qqe.src.GNN.training.train - INFO - Training complete (80.9s) | running validation...
+2026-05-18 15:56:09,732 - qqe.src.GNN.training.train - INFO - Losses | train 0.349696 | val 5.401056 | lr 8.77e-04 | time train=80.9s val=7.8s total=88.7s
+2026-05-18 15:56:09,733 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 15:57:09,779 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1199/1607 | loss 0.257875 | elapsed 60.0s | graphs 19184
+2026-05-18 15:57:30,594 - qqe.src.GNN.training.train - INFO - Training complete (80.9s) | running validation...
+2026-05-18 15:57:38,145 - qqe.src.GNN.training.train - INFO - Losses | train 0.248893 | val 5.396574 | lr 8.77e-04 | time train=80.9s val=7.6s total=88.4s
+2026-05-18 15:57:38,147 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 15:58:38,156 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1202/1607 | loss 0.216189 | elapsed 60.0s | graphs 19232
+2026-05-18 15:58:58,919 - qqe.src.GNN.training.train - INFO - Training complete (80.8s) | running validation...
+2026-05-18 15:59:06,705 - qqe.src.GNN.training.train - INFO - Losses | train 0.220733 | val 5.633876 | lr 8.77e-04 | time train=80.8s val=7.8s total=88.6s
+2026-05-18 15:59:06,706 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 16:00:06,708 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1192/1607 | loss 0.214836 | elapsed 60.0s | graphs 19072
+2026-05-18 16:00:27,779 - qqe.src.GNN.training.train - INFO - Training complete (81.1s) | running validation...
+2026-05-18 16:00:35,585 - qqe.src.GNN.training.train - INFO - Losses | train 0.215018 | val 5.560889 | lr 8.77e-04 | time train=81.1s val=7.8s total=88.9s
+2026-05-18 16:00:35,586 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 16:01:35,591 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1194/1607 | loss 0.209955 | elapsed 60.0s | graphs 19104
+2026-05-18 16:01:56,455 - qqe.src.GNN.training.train - INFO - Training complete (80.9s) | running validation...
+2026-05-18 16:02:04,482 - qqe.src.GNN.training.train - INFO - Losses | train 0.206579 | val 5.117114 | lr 8.77e-04 | time train=80.9s val=8.0s total=88.9s
+2026-05-18 16:02:04,483 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 16:03:04,510 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1179/1607 | loss 0.197738 | elapsed 60.0s | graphs 18864
+2026-05-18 16:03:25,995 - qqe.src.GNN.training.train - INFO - Training complete (81.5s) | running validation...
+2026-05-18 16:03:33,467 - qqe.src.GNN.training.train - INFO - Losses | train 0.194507 | val 5.146737 | lr 4.38e-04 | time train=81.5s val=7.5s total=89.0s
+2026-05-18 16:03:33,468 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 16:04:33,508 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1194/1607 | loss 0.161721 | elapsed 60.0s | graphs 19104
+2026-05-18 16:04:54,669 - qqe.src.GNN.training.train - INFO - Training complete (81.2s) | running validation...
+2026-05-18 16:05:02,587 - qqe.src.GNN.training.train - INFO - Losses | train 0.162241 | val 5.150983 | lr 4.38e-04 | time train=81.2s val=7.9s total=89.1s
+2026-05-18 16:05:02,588 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 16:06:02,597 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1186/1607 | loss 0.161079 | elapsed 60.0s | graphs 18976
+2026-05-18 16:06:23,720 - qqe.src.GNN.training.train - INFO - Training complete (81.1s) | running validation...
+2026-05-18 16:06:31,409 - qqe.src.GNN.training.train - INFO - Losses | train 0.163368 | val 5.314724 | lr 4.38e-04 | time train=81.1s val=7.7s total=88.8s
+2026-05-18 16:06:31,411 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 16:07:31,440 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1190/1607 | loss 0.157421 | elapsed 60.0s | graphs 19040
+2026-05-18 16:07:52,529 - qqe.src.GNN.training.train - INFO - Training complete (81.1s) | running validation...
+2026-05-18 16:08:00,299 - qqe.src.GNN.training.train - INFO - Losses | train 0.156827 | val 5.573107 | lr 4.38e-04 | time train=81.1s val=7.8s total=88.9s
+2026-05-18 16:08:00,300 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 16:09:00,303 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1157/1607 | loss 0.159203 | elapsed 60.0s | graphs 18512
+2026-05-18 16:09:24,915 - qqe.src.GNN.training.train - INFO - Training complete (84.6s) | running validation...
+2026-05-18 16:09:32,867 - qqe.src.GNN.training.train - INFO - Losses | train 0.160226 | val 5.340138 | lr 4.38e-04 | time train=84.6s val=8.0s total=92.6s
+2026-05-18 16:09:32,868 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 4.561904 | patience exhausted (10/10)
+2026-05-18 16:09:33,439 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 16:10:33,551 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 377/804 | loss 1.139674 | elapsed 60.1s | graphs 12064
+2026-05-18 16:11:33,661 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 758/804 | loss 0.933831 | elapsed 120.2s | graphs 24256
+2026-05-18 16:11:40,776 - qqe.src.GNN.training.train - INFO - Training complete (127.3s) | running validation...
+2026-05-18 16:11:50,363 - qqe.src.GNN.training.train - INFO - Losses | train 0.916673 | val 0.958568 | lr 1.58e-04 | time train=127.3s val=9.6s total=136.9s
+2026-05-18 16:11:50,369 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 16:12:50,501 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 382/804 | loss 0.582347 | elapsed 60.1s | graphs 12224
+2026-05-18 16:13:50,565 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 786/804 | loss 0.558660 | elapsed 120.2s | graphs 25152
+2026-05-18 16:13:53,038 - qqe.src.GNN.training.train - INFO - Training complete (122.7s) | running validation...
+2026-05-18 16:14:01,462 - qqe.src.GNN.training.train - INFO - Losses | train 0.556347 | val 0.603896 | lr 1.58e-04 | time train=122.7s val=8.4s total=131.1s
+2026-05-18 16:14:01,468 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 16:15:01,573 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 431/804 | loss 0.476520 | elapsed 60.1s | graphs 13792
+2026-05-18 16:15:53,452 - qqe.src.GNN.training.train - INFO - Training complete (112.0s) | running validation...
+2026-05-18 16:16:01,807 - qqe.src.GNN.training.train - INFO - Losses | train 0.467253 | val 0.545727 | lr 1.58e-04 | time train=112.0s val=8.4s total=120.3s
+2026-05-18 16:16:01,813 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 16:17:01,825 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 409/804 | loss 0.422219 | elapsed 60.0s | graphs 13088
+2026-05-18 16:18:01,845 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 784/804 | loss 0.398791 | elapsed 120.0s | graphs 25088
+2026-05-18 16:18:04,944 - qqe.src.GNN.training.train - INFO - Training complete (123.1s) | running validation...
+2026-05-18 16:18:14,373 - qqe.src.GNN.training.train - INFO - Losses | train 0.397970 | val 1.003487 | lr 1.58e-04 | time train=123.1s val=9.4s total=132.6s
+2026-05-18 16:18:14,374 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 16:19:14,431 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 378/804 | loss 0.343531 | elapsed 60.1s | graphs 12096
+2026-05-18 16:20:14,565 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 760/804 | loss 0.331938 | elapsed 120.2s | graphs 24320
+2026-05-18 16:20:21,305 - qqe.src.GNN.training.train - INFO - Training complete (126.9s) | running validation...
+2026-05-18 16:20:30,590 - qqe.src.GNN.training.train - INFO - Losses | train 0.328635 | val 1.262968 | lr 1.58e-04 | time train=126.9s val=9.3s total=136.2s
+2026-05-18 16:20:30,592 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 16:21:30,666 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 384/804 | loss 0.263065 | elapsed 60.1s | graphs 12288
+2026-05-18 16:22:30,714 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 765/804 | loss 0.248182 | elapsed 120.1s | graphs 24480
+2026-05-18 16:22:36,749 - qqe.src.GNN.training.train - INFO - Training complete (126.2s) | running validation...
+2026-05-18 16:22:46,233 - qqe.src.GNN.training.train - INFO - Losses | train 0.245387 | val 1.474706 | lr 1.58e-04 | time train=126.2s val=9.5s total=135.6s
+2026-05-18 16:22:46,234 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 16:23:46,297 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 379/804 | loss 0.213079 | elapsed 60.1s | graphs 12128
+2026-05-18 16:24:46,382 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 761/804 | loss 0.209522 | elapsed 120.1s | graphs 24352
+2026-05-18 16:24:52,979 - qqe.src.GNN.training.train - INFO - Training complete (126.7s) | running validation...
+2026-05-18 16:25:02,068 - qqe.src.GNN.training.train - INFO - Losses | train 0.209402 | val 1.428909 | lr 1.58e-04 | time train=126.7s val=9.1s total=135.8s
+2026-05-18 16:25:02,069 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 16:26:02,233 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 384/804 | loss 0.192273 | elapsed 60.2s | graphs 12288
+2026-05-18 16:27:02,303 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 769/804 | loss 0.187519 | elapsed 120.2s | graphs 24608
+2026-05-18 16:27:07,434 - qqe.src.GNN.training.train - INFO - Training complete (125.4s) | running validation...
+2026-05-18 16:27:16,719 - qqe.src.GNN.training.train - INFO - Losses | train 0.187727 | val 1.496834 | lr 1.58e-04 | time train=125.4s val=9.3s total=134.7s
+2026-05-18 16:27:16,720 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 16:28:16,824 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 389/804 | loss 0.179586 | elapsed 60.1s | graphs 12448
+2026-05-18 16:29:16,870 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 766/804 | loss 0.177416 | elapsed 120.1s | graphs 24512
+2026-05-18 16:29:22,850 - qqe.src.GNN.training.train - INFO - Training complete (126.1s) | running validation...
+2026-05-18 16:29:32,289 - qqe.src.GNN.training.train - INFO - Losses | train 0.177070 | val 1.505411 | lr 7.90e-05 | time train=126.1s val=9.4s total=135.6s
+2026-05-18 16:29:32,289 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 16:30:32,370 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 374/804 | loss 0.167509 | elapsed 60.1s | graphs 11968
+2026-05-18 16:31:32,497 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 775/804 | loss 0.164872 | elapsed 120.2s | graphs 24800
+2026-05-18 16:31:36,870 - qqe.src.GNN.training.train - INFO - Training complete (124.6s) | running validation...
+2026-05-18 16:31:46,360 - qqe.src.GNN.training.train - INFO - Losses | train 0.164989 | val 1.529495 | lr 7.90e-05 | time train=124.6s val=9.5s total=134.1s
+2026-05-18 16:31:46,360 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 16:32:46,497 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 403/804 | loss 0.157713 | elapsed 60.1s | graphs 12896
+2026-05-18 16:33:46,146 - qqe.src.GNN.training.train - INFO - Training complete (119.8s) | running validation...
+2026-05-18 16:33:55,516 - qqe.src.GNN.training.train - INFO - Losses | train 0.156731 | val 1.529242 | lr 7.90e-05 | time train=119.8s val=9.4s total=129.2s
+2026-05-18 16:33:55,516 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 16:34:55,628 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 397/804 | loss 0.159257 | elapsed 60.1s | graphs 12704
+2026-05-18 16:35:55,742 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 793/804 | loss 0.155294 | elapsed 120.2s | graphs 25376
+2026-05-18 16:35:57,257 - qqe.src.GNN.training.train - INFO - Training complete (121.7s) | running validation...
+2026-05-18 16:36:06,725 - qqe.src.GNN.training.train - INFO - Losses | train 0.155453 | val 1.536453 | lr 7.90e-05 | time train=121.7s val=9.5s total=131.2s
+2026-05-18 16:36:06,726 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 16:37:06,794 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 399/804 | loss 0.150498 | elapsed 60.1s | graphs 12768
+2026-05-18 16:38:06,833 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 802/804 | loss 0.150694 | elapsed 120.1s | graphs 25664
+2026-05-18 16:38:07,040 - qqe.src.GNN.training.train - INFO - Training complete (120.3s) | running validation...
+2026-05-18 16:38:16,360 - qqe.src.GNN.training.train - INFO - Losses | train 0.150625 | val 1.511831 | lr 7.90e-05 | time train=120.3s val=9.3s total=129.6s
+2026-05-18 16:38:16,361 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 013 | best val 0.545727 | patience exhausted (10/10)
+2026-05-18 16:38:16,915 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 16:39:16,922 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1046/1607 | loss 0.861298 | elapsed 60.0s | graphs 16736
+2026-05-18 16:39:48,591 - qqe.src.GNN.training.train - INFO - Training complete (91.7s) | running validation...
+2026-05-18 16:39:57,064 - qqe.src.GNN.training.train - INFO - Losses | train 0.778189 | val 1.383214 | lr 2.22e-03 | time train=91.7s val=8.5s total=100.1s
+2026-05-18 16:39:57,067 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 16:40:57,069 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1037/1607 | loss 0.562832 | elapsed 60.0s | graphs 16592
+2026-05-18 16:41:30,223 - qqe.src.GNN.training.train - INFO - Training complete (93.2s) | running validation...
+2026-05-18 16:41:38,601 - qqe.src.GNN.training.train - INFO - Losses | train 0.548948 | val 0.999763 | lr 2.22e-03 | time train=93.2s val=8.4s total=101.5s
+2026-05-18 16:41:38,604 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 16:42:38,653 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1050/1607 | loss 0.516791 | elapsed 60.0s | graphs 16800
+2026-05-18 16:43:10,109 - qqe.src.GNN.training.train - INFO - Training complete (91.5s) | running validation...
+2026-05-18 16:43:18,414 - qqe.src.GNN.training.train - INFO - Losses | train 0.512631 | val 1.050638 | lr 2.22e-03 | time train=91.5s val=8.3s total=99.8s
+2026-05-18 16:43:18,415 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 16:44:18,435 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1053/1607 | loss 0.488378 | elapsed 60.0s | graphs 16848
+2026-05-18 16:44:50,103 - qqe.src.GNN.training.train - INFO - Training complete (91.7s) | running validation...
+2026-05-18 16:44:58,439 - qqe.src.GNN.training.train - INFO - Losses | train 0.478450 | val 1.038156 | lr 2.22e-03 | time train=91.7s val=8.3s total=100.0s
+2026-05-18 16:44:58,439 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 16:45:58,490 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1048/1607 | loss 0.450028 | elapsed 60.0s | graphs 16768
+2026-05-18 16:46:30,208 - qqe.src.GNN.training.train - INFO - Training complete (91.8s) | running validation...
+2026-05-18 16:46:38,224 - qqe.src.GNN.training.train - INFO - Losses | train 0.448948 | val 0.995745 | lr 2.22e-03 | time train=91.8s val=8.0s total=99.8s
+2026-05-18 16:46:38,226 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 16:47:38,246 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1058/1607 | loss 0.430464 | elapsed 60.0s | graphs 16928
+2026-05-18 16:48:09,093 - qqe.src.GNN.training.train - INFO - Training complete (90.9s) | running validation...
+2026-05-18 16:48:17,192 - qqe.src.GNN.training.train - INFO - Losses | train 0.436241 | val 0.944354 | lr 2.22e-03 | time train=90.9s val=8.1s total=99.0s
+2026-05-18 16:48:17,195 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 16:49:17,220 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1158/1607 | loss 0.436623 | elapsed 60.0s | graphs 18528
+2026-05-18 16:49:40,674 - qqe.src.GNN.training.train - INFO - Training complete (83.5s) | running validation...
+2026-05-18 16:49:48,754 - qqe.src.GNN.training.train - INFO - Losses | train 0.441672 | val 0.898614 | lr 2.22e-03 | time train=83.5s val=8.1s total=91.6s
+2026-05-18 16:49:48,756 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 16:50:48,760 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1103/1607 | loss 0.414640 | elapsed 60.0s | graphs 17648
+2026-05-18 16:51:15,751 - qqe.src.GNN.training.train - INFO - Training complete (87.0s) | running validation...
+2026-05-18 16:51:24,268 - qqe.src.GNN.training.train - INFO - Losses | train 0.411853 | val 0.941147 | lr 2.22e-03 | time train=87.0s val=8.5s total=95.5s
+2026-05-18 16:51:24,269 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 16:52:24,284 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1105/1607 | loss 0.417500 | elapsed 60.0s | graphs 17680
+2026-05-18 16:52:49,816 - qqe.src.GNN.training.train - INFO - Training complete (85.5s) | running validation...
+2026-05-18 16:52:57,537 - qqe.src.GNN.training.train - INFO - Losses | train 0.419038 | val 1.114487 | lr 2.22e-03 | time train=85.5s val=7.7s total=93.3s
+2026-05-18 16:52:57,538 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 16:53:57,572 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1210/1607 | loss 0.414572 | elapsed 60.0s | graphs 19360
+2026-05-18 16:54:16,901 - qqe.src.GNN.training.train - INFO - Training complete (79.4s) | running validation...
+2026-05-18 16:54:24,518 - qqe.src.GNN.training.train - INFO - Losses | train 0.414504 | val 1.103453 | lr 2.22e-03 | time train=79.4s val=7.6s total=87.0s
+2026-05-18 16:54:24,518 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 16:55:24,527 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1207/1607 | loss 0.409227 | elapsed 60.0s | graphs 19312
+2026-05-18 16:55:44,015 - qqe.src.GNN.training.train - INFO - Training complete (79.5s) | running validation...
+2026-05-18 16:55:51,846 - qqe.src.GNN.training.train - INFO - Losses | train 0.415098 | val 1.089957 | lr 2.22e-03 | time train=79.5s val=7.8s total=87.3s
+2026-05-18 16:55:51,846 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 16:56:51,867 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 1212/1607 | loss 0.410946 | elapsed 60.0s | graphs 19392
+2026-05-18 16:57:11,784 - qqe.src.GNN.training.train - INFO - Training complete (79.9s) | running validation...
+2026-05-18 16:57:19,134 - qqe.src.GNN.training.train - INFO - Losses | train 0.405281 | val 1.079182 | lr 2.22e-03 | time train=79.9s val=7.3s total=87.3s
+2026-05-18 16:57:19,135 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 16:58:19,148 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 1163/1607 | loss 0.419638 | elapsed 60.0s | graphs 18608
+2026-05-18 16:58:46,264 - qqe.src.GNN.training.train - INFO - Training complete (87.1s) | running validation...
+2026-05-18 16:58:54,620 - qqe.src.GNN.training.train - INFO - Losses | train 0.424195 | val 0.998791 | lr 1.11e-03 | time train=87.1s val=8.4s total=95.5s
+2026-05-18 16:58:54,622 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 16:59:54,640 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 979/1607 | loss 0.343221 | elapsed 60.0s | graphs 15664
+2026-05-18 17:00:35,781 - qqe.src.GNN.training.train - INFO - Training complete (101.2s) | running validation...
+2026-05-18 17:00:44,336 - qqe.src.GNN.training.train - INFO - Losses | train 0.334676 | val 1.082158 | lr 1.11e-03 | time train=101.2s val=8.6s total=109.7s
+2026-05-18 17:00:44,336 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 17:01:44,346 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 1002/1607 | loss 0.335541 | elapsed 60.0s | graphs 16032
+2026-05-18 17:02:20,339 - qqe.src.GNN.training.train - INFO - Training complete (96.0s) | running validation...
+2026-05-18 17:02:29,318 - qqe.src.GNN.training.train - INFO - Losses | train 0.329850 | val 1.196467 | lr 1.11e-03 | time train=96.0s val=9.0s total=105.0s
+2026-05-18 17:02:29,318 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 17:03:29,322 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 1073/1607 | loss 0.334512 | elapsed 60.0s | graphs 17168
+2026-05-18 17:03:59,384 - qqe.src.GNN.training.train - INFO - Training complete (90.1s) | running validation...
+2026-05-18 17:04:07,354 - qqe.src.GNN.training.train - INFO - Losses | train 0.329603 | val 1.104534 | lr 1.11e-03 | time train=90.1s val=8.0s total=98.0s
+2026-05-18 17:04:07,355 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 17:05:07,407 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 1058/1607 | loss 0.321173 | elapsed 60.1s | graphs 16928
+2026-05-18 17:05:38,563 - qqe.src.GNN.training.train - INFO - Training complete (91.2s) | running validation...
+2026-05-18 17:05:46,940 - qqe.src.GNN.training.train - INFO - Losses | train 0.324456 | val 1.047679 | lr 1.11e-03 | time train=91.2s val=8.4s total=99.6s
+2026-05-18 17:05:46,941 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 017 | best val 0.898614 | patience exhausted (10/10)
+2026-05-18 17:05:47,487 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 17:06:47,494 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1130/1607 | loss 2.143765 | elapsed 60.0s | graphs 18080
+2026-05-18 17:07:12,780 - qqe.src.GNN.training.train - INFO - Training complete (85.3s) | running validation...
+2026-05-18 17:07:21,135 - qqe.src.GNN.training.train - INFO - Losses | train 1.760716 | val 2.770695 | lr 3.04e-04 | time train=85.3s val=8.4s total=93.6s
+2026-05-18 17:07:21,140 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 17:08:21,150 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1163/1607 | loss 0.550930 | elapsed 60.0s | graphs 18608
+2026-05-18 17:08:44,272 - qqe.src.GNN.training.train - INFO - Training complete (83.1s) | running validation...
+2026-05-18 17:08:52,647 - qqe.src.GNN.training.train - INFO - Losses | train 0.508550 | val 4.395821 | lr 3.04e-04 | time train=83.1s val=8.4s total=91.5s
+2026-05-18 17:08:52,647 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 17:09:52,692 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1163/1607 | loss 0.314441 | elapsed 60.0s | graphs 18608
+2026-05-18 17:10:15,744 - qqe.src.GNN.training.train - INFO - Training complete (83.1s) | running validation...
+2026-05-18 17:10:24,093 - qqe.src.GNN.training.train - INFO - Losses | train 0.300216 | val 4.476675 | lr 3.04e-04 | time train=83.1s val=8.3s total=91.4s
+2026-05-18 17:10:24,093 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 17:11:24,136 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1166/1607 | loss 0.232869 | elapsed 60.0s | graphs 18656
+2026-05-18 17:11:47,050 - qqe.src.GNN.training.train - INFO - Training complete (83.0s) | running validation...
+2026-05-18 17:11:55,312 - qqe.src.GNN.training.train - INFO - Losses | train 0.227785 | val 4.428272 | lr 3.04e-04 | time train=83.0s val=8.3s total=91.2s
+2026-05-18 17:11:55,312 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 17:12:55,345 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1159/1607 | loss 0.179849 | elapsed 60.0s | graphs 18544
+2026-05-18 17:13:18,884 - qqe.src.GNN.training.train - INFO - Training complete (83.6s) | running validation...
+2026-05-18 17:13:27,063 - qqe.src.GNN.training.train - INFO - Losses | train 0.182391 | val 4.544680 | lr 3.04e-04 | time train=83.6s val=8.2s total=91.8s
+2026-05-18 17:13:27,064 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 17:14:27,065 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1157/1607 | loss 0.170577 | elapsed 60.0s | graphs 18512
+2026-05-18 17:14:50,558 - qqe.src.GNN.training.train - INFO - Training complete (83.5s) | running validation...
+2026-05-18 17:14:58,957 - qqe.src.GNN.training.train - INFO - Losses | train 0.170589 | val 4.405444 | lr 3.04e-04 | time train=83.5s val=8.4s total=91.9s
+2026-05-18 17:14:58,958 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 17:15:58,970 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1168/1607 | loss 0.155106 | elapsed 60.0s | graphs 18688
+2026-05-18 17:16:21,846 - qqe.src.GNN.training.train - INFO - Training complete (82.9s) | running validation...
+2026-05-18 17:16:30,150 - qqe.src.GNN.training.train - INFO - Losses | train 0.151543 | val 4.397324 | lr 1.52e-04 | time train=82.9s val=8.3s total=91.2s
+2026-05-18 17:16:30,150 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 17:17:30,203 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1169/1607 | loss 0.137966 | elapsed 60.1s | graphs 18704
+2026-05-18 17:17:52,977 - qqe.src.GNN.training.train - INFO - Training complete (82.8s) | running validation...
+2026-05-18 17:18:01,375 - qqe.src.GNN.training.train - INFO - Losses | train 0.139060 | val 4.278341 | lr 1.52e-04 | time train=82.8s val=8.4s total=91.2s
+2026-05-18 17:18:01,376 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 17:19:01,404 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1167/1607 | loss 0.138320 | elapsed 60.0s | graphs 18672
+2026-05-18 17:19:24,396 - qqe.src.GNN.training.train - INFO - Training complete (83.0s) | running validation...
+2026-05-18 17:19:32,743 - qqe.src.GNN.training.train - INFO - Losses | train 0.137034 | val 4.341725 | lr 1.52e-04 | time train=83.0s val=8.3s total=91.4s
+2026-05-18 17:19:32,743 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 17:20:32,772 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1166/1607 | loss 0.131637 | elapsed 60.0s | graphs 18656
+2026-05-18 17:20:55,980 - qqe.src.GNN.training.train - INFO - Training complete (83.2s) | running validation...
+2026-05-18 17:21:04,530 - qqe.src.GNN.training.train - INFO - Losses | train 0.128316 | val 4.558963 | lr 1.52e-04 | time train=83.2s val=8.5s total=91.8s
+2026-05-18 17:21:04,530 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 17:22:04,578 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1157/1607 | loss 0.125582 | elapsed 60.0s | graphs 18512
+2026-05-18 17:22:27,962 - qqe.src.GNN.training.train - INFO - Training complete (83.4s) | running validation...
+2026-05-18 17:22:36,407 - qqe.src.GNN.training.train - INFO - Losses | train 0.125200 | val 4.403831 | lr 1.52e-04 | time train=83.4s val=8.4s total=91.9s
+2026-05-18 17:22:36,408 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 2.770695 | patience exhausted (10/10)
+2026-05-18 17:22:36,926 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 17:23:36,964 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 674/804 | loss 2.640480 | elapsed 60.0s | graphs 21568
+2026-05-18 17:23:48,625 - qqe.src.GNN.training.train - INFO - Training complete (71.7s) | running validation...
+2026-05-18 17:23:55,880 - qqe.src.GNN.training.train - INFO - Losses | train 2.360260 | val 2.506228 | lr 1.04e-03 | time train=71.7s val=7.3s total=79.0s
+2026-05-18 17:23:55,882 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 17:24:55,960 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 673/804 | loss 0.603683 | elapsed 60.1s | graphs 21536
+2026-05-18 17:25:07,794 - qqe.src.GNN.training.train - INFO - Training complete (71.9s) | running validation...
+2026-05-18 17:25:15,126 - qqe.src.GNN.training.train - INFO - Losses | train 0.579334 | val 3.672533 | lr 1.04e-03 | time train=71.9s val=7.3s total=79.2s
+2026-05-18 17:25:15,127 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 17:26:15,171 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 667/804 | loss 0.364376 | elapsed 60.0s | graphs 21344
+2026-05-18 17:26:27,441 - qqe.src.GNN.training.train - INFO - Training complete (72.3s) | running validation...
+2026-05-18 17:26:35,323 - qqe.src.GNN.training.train - INFO - Losses | train 0.354742 | val 3.646822 | lr 1.04e-03 | time train=72.3s val=7.9s total=80.2s
+2026-05-18 17:26:35,324 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 17:27:35,376 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 671/804 | loss 0.249513 | elapsed 60.1s | graphs 21472
+2026-05-18 17:27:47,543 - qqe.src.GNN.training.train - INFO - Training complete (72.2s) | running validation...
+2026-05-18 17:27:55,210 - qqe.src.GNN.training.train - INFO - Losses | train 0.249726 | val 3.582269 | lr 1.04e-03 | time train=72.2s val=7.7s total=79.9s
+2026-05-18 17:27:55,211 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 17:28:55,295 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 676/804 | loss 0.203275 | elapsed 60.1s | graphs 21632
+2026-05-18 17:29:07,050 - qqe.src.GNN.training.train - INFO - Training complete (71.8s) | running validation...
+2026-05-18 17:29:15,070 - qqe.src.GNN.training.train - INFO - Losses | train 0.200491 | val 4.166913 | lr 1.04e-03 | time train=71.8s val=8.0s total=79.9s
+2026-05-18 17:29:15,070 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 17:30:15,090 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 669/804 | loss 0.175893 | elapsed 60.0s | graphs 21408
+2026-05-18 17:30:27,257 - qqe.src.GNN.training.train - INFO - Training complete (72.2s) | running validation...
+2026-05-18 17:30:34,500 - qqe.src.GNN.training.train - INFO - Losses | train 0.176163 | val 3.495593 | lr 1.04e-03 | time train=72.2s val=7.2s total=79.4s
+2026-05-18 17:30:34,500 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 17:31:34,501 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 673/804 | loss 0.172687 | elapsed 60.0s | graphs 21536
+2026-05-18 17:31:46,339 - qqe.src.GNN.training.train - INFO - Training complete (71.8s) | running validation...
+2026-05-18 17:31:53,807 - qqe.src.GNN.training.train - INFO - Losses | train 0.172020 | val 3.878744 | lr 5.18e-04 | time train=71.8s val=7.5s total=79.3s
+2026-05-18 17:31:53,807 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 17:32:53,868 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 673/804 | loss 0.144755 | elapsed 60.1s | graphs 21536
+2026-05-18 17:33:05,490 - qqe.src.GNN.training.train - INFO - Training complete (71.7s) | running validation...
+2026-05-18 17:33:13,461 - qqe.src.GNN.training.train - INFO - Losses | train 0.145338 | val 3.691698 | lr 5.18e-04 | time train=71.7s val=8.0s total=79.7s
+2026-05-18 17:33:13,462 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 17:34:13,499 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 677/804 | loss 0.145646 | elapsed 60.0s | graphs 21664
+2026-05-18 17:34:24,899 - qqe.src.GNN.training.train - INFO - Training complete (71.4s) | running validation...
+2026-05-18 17:34:32,857 - qqe.src.GNN.training.train - INFO - Losses | train 0.147145 | val 3.698860 | lr 5.18e-04 | time train=71.4s val=8.0s total=79.4s
+2026-05-18 17:34:32,857 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 17:35:32,936 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 667/804 | loss 0.140977 | elapsed 60.1s | graphs 21344
+2026-05-18 17:35:45,394 - qqe.src.GNN.training.train - INFO - Training complete (72.5s) | running validation...
+2026-05-18 17:35:53,623 - qqe.src.GNN.training.train - INFO - Losses | train 0.139339 | val 3.863970 | lr 5.18e-04 | time train=72.5s val=8.2s total=80.8s
+2026-05-18 17:35:53,623 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 17:36:53,692 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 661/804 | loss 0.144275 | elapsed 60.1s | graphs 21152
+2026-05-18 17:37:06,227 - qqe.src.GNN.training.train - INFO - Training complete (72.6s) | running validation...
+2026-05-18 17:37:14,110 - qqe.src.GNN.training.train - INFO - Losses | train 0.142295 | val 4.002040 | lr 5.18e-04 | time train=72.6s val=7.9s total=80.5s
+2026-05-18 17:37:14,110 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 2.506228 | patience exhausted (10/10)
+2026-05-18 17:37:14,704 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 17:38:14,813 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 216/804 | loss 2.162535 | elapsed 60.1s | graphs 6912
+2026-05-18 17:39:14,997 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 436/804 | loss 1.910218 | elapsed 120.3s | graphs 13952
+2026-05-18 17:40:15,000 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 658/804 | loss 1.745764 | elapsed 180.3s | graphs 21056
+2026-05-18 17:40:54,536 - qqe.src.GNN.training.train - INFO - Training complete (219.8s) | running validation...
+2026-05-18 17:41:06,623 - qqe.src.GNN.training.train - INFO - Losses | train 1.666854 | val 1.217668 | lr 4.52e-05 | time train=219.8s val=12.1s total=231.9s
+2026-05-18 17:41:06,633 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 17:42:06,800 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 220/804 | loss 1.181709 | elapsed 60.2s | graphs 7040
+2026-05-18 17:43:06,887 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 442/804 | loss 1.058362 | elapsed 120.3s | graphs 14144
+2026-05-18 17:44:07,183 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 662/804 | loss 0.947400 | elapsed 180.5s | graphs 21184
+2026-05-18 17:44:45,687 - qqe.src.GNN.training.train - INFO - Training complete (219.1s) | running validation...
+2026-05-18 17:44:57,808 - qqe.src.GNN.training.train - INFO - Losses | train 0.904331 | val 0.591003 | lr 4.52e-05 | time train=219.1s val=12.1s total=231.2s
+2026-05-18 17:44:57,828 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 17:45:57,930 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 219/804 | loss 0.666066 | elapsed 60.1s | graphs 7008
+2026-05-18 17:46:58,176 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 442/804 | loss 0.668074 | elapsed 120.3s | graphs 14144
+2026-05-18 17:47:58,408 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 661/804 | loss 0.674662 | elapsed 180.6s | graphs 21152
+2026-05-18 17:48:36,532 - qqe.src.GNN.training.train - INFO - Training complete (218.7s) | running validation...
+2026-05-18 17:48:48,642 - qqe.src.GNN.training.train - INFO - Losses | train 0.672132 | val 0.562935 | lr 4.52e-05 | time train=218.7s val=12.1s total=230.8s
+2026-05-18 17:48:48,654 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 17:49:48,675 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 222/804 | loss 0.645885 | elapsed 60.0s | graphs 7104
+2026-05-18 17:50:48,810 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 442/804 | loss 0.641801 | elapsed 120.2s | graphs 14144
+2026-05-18 17:51:48,997 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 657/804 | loss 0.644650 | elapsed 180.3s | graphs 21024
+2026-05-18 17:52:32,170 - qqe.src.GNN.training.train - INFO - Training complete (223.5s) | running validation...
+2026-05-18 17:52:45,713 - qqe.src.GNN.training.train - INFO - Losses | train 0.646025 | val 0.542910 | lr 4.52e-05 | time train=223.5s val=13.5s total=237.1s
+2026-05-18 17:52:45,727 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 17:53:45,897 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 215/804 | loss 0.619572 | elapsed 60.2s | graphs 6880
+2026-05-18 17:54:45,950 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 431/804 | loss 0.623708 | elapsed 120.2s | graphs 13792
+2026-05-18 17:55:46,194 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 643/804 | loss 0.626971 | elapsed 180.5s | graphs 20576
+2026-05-18 17:56:32,025 - qqe.src.GNN.training.train - INFO - Training complete (226.3s) | running validation...
+2026-05-18 17:56:44,078 - qqe.src.GNN.training.train - INFO - Losses | train 0.628401 | val 0.531320 | lr 4.52e-05 | time train=226.3s val=12.1s total=238.4s
+2026-05-18 17:56:44,091 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 17:57:44,123 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 221/804 | loss 0.615978 | elapsed 60.0s | graphs 7072
+2026-05-18 17:58:44,381 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 444/804 | loss 0.612174 | elapsed 120.3s | graphs 14208
+2026-05-18 17:59:44,519 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 665/804 | loss 0.615163 | elapsed 180.4s | graphs 21280
+2026-05-18 18:00:22,067 - qqe.src.GNN.training.train - INFO - Training complete (218.0s) | running validation...
+2026-05-18 18:00:34,070 - qqe.src.GNN.training.train - INFO - Losses | train 0.616982 | val 0.521373 | lr 4.52e-05 | time train=218.0s val=12.0s total=230.0s
+2026-05-18 18:00:34,083 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 18:01:34,292 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 224/804 | loss 0.608145 | elapsed 60.2s | graphs 7168
+2026-05-18 18:02:34,324 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 448/804 | loss 0.606288 | elapsed 120.2s | graphs 14336
+2026-05-18 18:03:34,342 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 668/804 | loss 0.602410 | elapsed 180.3s | graphs 21376
+2026-05-18 18:04:11,022 - qqe.src.GNN.training.train - INFO - Training complete (216.9s) | running validation...
+2026-05-18 18:04:23,089 - qqe.src.GNN.training.train - INFO - Losses | train 0.601149 | val 0.505178 | lr 4.52e-05 | time train=216.9s val=12.1s total=229.0s
+2026-05-18 18:04:23,101 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 18:05:23,356 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 220/804 | loss 0.589903 | elapsed 60.3s | graphs 7040
+2026-05-18 18:06:23,524 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 440/804 | loss 0.600691 | elapsed 120.4s | graphs 14080
+2026-05-18 18:07:23,608 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 664/804 | loss 0.595176 | elapsed 180.5s | graphs 21248
+2026-05-18 18:08:01,726 - qqe.src.GNN.training.train - INFO - Training complete (218.6s) | running validation...
+2026-05-18 18:08:13,778 - qqe.src.GNN.training.train - INFO - Losses | train 0.590589 | val 0.500515 | lr 4.52e-05 | time train=218.6s val=12.1s total=230.7s
+2026-05-18 18:08:13,792 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 18:09:13,808 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 222/804 | loss 0.586799 | elapsed 60.0s | graphs 7104
+2026-05-18 18:10:14,050 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 445/804 | loss 0.582788 | elapsed 120.3s | graphs 14240
+2026-05-18 18:11:14,181 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 669/804 | loss 0.581634 | elapsed 180.4s | graphs 21408
+2026-05-18 18:11:50,249 - qqe.src.GNN.training.train - INFO - Training complete (216.5s) | running validation...
+2026-05-18 18:12:02,377 - qqe.src.GNN.training.train - INFO - Losses | train 0.582308 | val 0.492144 | lr 4.52e-05 | time train=216.5s val=12.1s total=228.6s
+2026-05-18 18:12:02,388 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 18:13:02,546 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 224/804 | loss 0.578502 | elapsed 60.2s | graphs 7168
+2026-05-18 18:14:02,707 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 448/804 | loss 0.563988 | elapsed 120.3s | graphs 14336
+2026-05-18 18:15:02,899 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 671/804 | loss 0.564771 | elapsed 180.5s | graphs 21472
+2026-05-18 18:15:38,863 - qqe.src.GNN.training.train - INFO - Training complete (216.5s) | running validation...
+2026-05-18 18:15:50,884 - qqe.src.GNN.training.train - INFO - Losses | train 0.561621 | val 0.491892 | lr 4.52e-05 | time train=216.5s val=12.0s total=228.5s
+2026-05-18 18:15:50,895 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 18:16:50,896 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 222/804 | loss 0.572761 | elapsed 60.0s | graphs 7104
+2026-05-18 18:17:51,165 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 447/804 | loss 0.561131 | elapsed 120.3s | graphs 14304
+2026-05-18 18:18:51,447 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 670/804 | loss 0.565232 | elapsed 180.6s | graphs 21440
+2026-05-18 18:19:27,827 - qqe.src.GNN.training.train - INFO - Training complete (216.9s) | running validation...
+2026-05-18 18:19:39,911 - qqe.src.GNN.training.train - INFO - Losses | train 0.562072 | val 0.476555 | lr 4.52e-05 | time train=216.9s val=12.1s total=229.0s
+2026-05-18 18:19:39,923 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 18:20:40,026 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 221/804 | loss 0.569367 | elapsed 60.1s | graphs 7072
+2026-05-18 18:21:40,079 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 442/804 | loss 0.560187 | elapsed 120.2s | graphs 14144
+2026-05-18 18:22:40,130 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 12 batch 666/804 | loss 0.554068 | elapsed 180.2s | graphs 21312
+2026-05-18 18:23:17,398 - qqe.src.GNN.training.train - INFO - Training complete (217.5s) | running validation...
+2026-05-18 18:23:29,437 - qqe.src.GNN.training.train - INFO - Losses | train 0.552032 | val 0.474945 | lr 4.52e-05 | time train=217.5s val=12.0s total=229.5s
+2026-05-18 18:23:29,448 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 18:24:29,479 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 223/804 | loss 0.551926 | elapsed 60.0s | graphs 7136
+2026-05-18 18:25:29,635 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 445/804 | loss 0.548646 | elapsed 120.2s | graphs 14240
+2026-05-18 18:26:29,687 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 13 batch 668/804 | loss 0.546063 | elapsed 180.2s | graphs 21376
+2026-05-18 18:27:06,481 - qqe.src.GNN.training.train - INFO - Training complete (217.0s) | running validation...
+2026-05-18 18:27:18,530 - qqe.src.GNN.training.train - INFO - Losses | train 0.545546 | val 0.471880 | lr 4.52e-05 | time train=217.0s val=12.0s total=229.1s
+2026-05-18 18:27:18,542 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 18:28:18,547 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 223/804 | loss 0.549820 | elapsed 60.0s | graphs 7136
+2026-05-18 18:29:18,607 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 444/804 | loss 0.546337 | elapsed 120.1s | graphs 14208
+2026-05-18 18:30:18,875 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 14 batch 668/804 | loss 0.542101 | elapsed 180.3s | graphs 21376
+2026-05-18 18:30:55,515 - qqe.src.GNN.training.train - INFO - Training complete (217.0s) | running validation...
+2026-05-18 18:31:07,602 - qqe.src.GNN.training.train - INFO - Losses | train 0.541451 | val 0.464060 | lr 4.52e-05 | time train=217.0s val=12.1s total=229.1s
+2026-05-18 18:31:07,613 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 18:32:07,700 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 223/804 | loss 0.535200 | elapsed 60.1s | graphs 7136
+2026-05-18 18:33:07,842 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 445/804 | loss 0.540749 | elapsed 120.2s | graphs 14240
+2026-05-18 18:34:08,085 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 15 batch 665/804 | loss 0.538127 | elapsed 180.5s | graphs 21280
+2026-05-18 18:34:45,519 - qqe.src.GNN.training.train - INFO - Training complete (217.9s) | running validation...
+2026-05-18 18:34:58,111 - qqe.src.GNN.training.train - INFO - Losses | train 0.539652 | val 0.459804 | lr 4.52e-05 | time train=217.9s val=12.6s total=230.5s
+2026-05-18 18:34:58,121 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 18:35:58,241 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 223/804 | loss 0.539632 | elapsed 60.1s | graphs 7136
+2026-05-18 18:36:58,326 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 444/804 | loss 0.539647 | elapsed 120.2s | graphs 14208
+2026-05-18 18:37:58,417 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 16 batch 668/804 | loss 0.535353 | elapsed 180.3s | graphs 21376
+2026-05-18 18:38:35,349 - qqe.src.GNN.training.train - INFO - Training complete (217.2s) | running validation...
+2026-05-18 18:38:47,417 - qqe.src.GNN.training.train - INFO - Losses | train 0.536098 | val 0.457623 | lr 4.52e-05 | time train=217.2s val=12.1s total=229.3s
+2026-05-18 18:38:47,427 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 18:39:47,595 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 223/804 | loss 0.526973 | elapsed 60.2s | graphs 7136
+2026-05-18 18:40:47,825 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 447/804 | loss 0.528672 | elapsed 120.4s | graphs 14304
+2026-05-18 18:41:47,929 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 17 batch 669/804 | loss 0.529343 | elapsed 180.5s | graphs 21408
+2026-05-18 18:42:23,636 - qqe.src.GNN.training.train - INFO - Training complete (216.2s) | running validation...
+2026-05-18 18:42:35,657 - qqe.src.GNN.training.train - INFO - Losses | train 0.527664 | val 0.463191 | lr 4.52e-05 | time train=216.2s val=12.0s total=228.2s
+2026-05-18 18:42:35,658 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 18:43:35,797 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 225/804 | loss 0.532840 | elapsed 60.1s | graphs 7200
+2026-05-18 18:44:35,865 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 447/804 | loss 0.524694 | elapsed 120.2s | graphs 14304
+2026-05-18 18:45:36,050 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 18 batch 672/804 | loss 0.528148 | elapsed 180.4s | graphs 21504
+2026-05-18 18:46:12,025 - qqe.src.GNN.training.train - INFO - Training complete (216.4s) | running validation...
+2026-05-18 18:46:23,911 - qqe.src.GNN.training.train - INFO - Losses | train 0.533311 | val 0.452460 | lr 4.52e-05 | time train=216.4s val=11.9s total=228.3s
+2026-05-18 18:46:23,923 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 18:47:24,044 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 223/804 | loss 0.528070 | elapsed 60.1s | graphs 7136
+2026-05-18 18:48:24,160 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 444/804 | loss 0.529621 | elapsed 120.2s | graphs 14208
+2026-05-18 18:49:24,329 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 19 batch 664/804 | loss 0.525724 | elapsed 180.4s | graphs 21248
+2026-05-18 18:50:02,077 - qqe.src.GNN.training.train - INFO - Training complete (218.2s) | running validation...
+2026-05-18 18:50:14,055 - qqe.src.GNN.training.train - INFO - Losses | train 0.523097 | val 0.458795 | lr 4.52e-05 | time train=218.2s val=12.0s total=230.1s
+2026-05-18 18:50:14,057 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 18:51:14,311 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 224/804 | loss 0.523929 | elapsed 60.3s | graphs 7168
+2026-05-18 18:52:14,461 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 448/804 | loss 0.521606 | elapsed 120.4s | graphs 14336
+2026-05-18 18:53:14,478 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 20 batch 669/804 | loss 0.518440 | elapsed 180.4s | graphs 21408
+2026-05-18 18:53:50,826 - qqe.src.GNN.training.train - INFO - Training complete (216.8s) | running validation...
+2026-05-18 18:54:02,870 - qqe.src.GNN.training.train - INFO - Losses | train 0.520672 | val 0.456576 | lr 4.52e-05 | time train=216.8s val=12.0s total=228.8s
+2026-05-18 18:54:02,871 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 18:55:03,093 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 224/804 | loss 0.518467 | elapsed 60.2s | graphs 7168
+2026-05-18 18:56:03,248 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 447/804 | loss 0.526984 | elapsed 120.4s | graphs 14304
+2026-05-18 18:57:03,418 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 21 batch 669/804 | loss 0.524898 | elapsed 180.5s | graphs 21408
+2026-05-18 18:57:39,364 - qqe.src.GNN.training.train - INFO - Training complete (216.5s) | running validation...
+2026-05-18 18:57:51,391 - qqe.src.GNN.training.train - INFO - Losses | train 0.520498 | val 0.450458 | lr 4.52e-05 | time train=216.5s val=12.0s total=228.5s
+2026-05-18 18:57:51,400 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 18:58:51,635 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 224/804 | loss 0.509605 | elapsed 60.2s | graphs 7168
+2026-05-18 18:59:51,783 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 449/804 | loss 0.517367 | elapsed 120.4s | graphs 14368
+2026-05-18 19:00:52,038 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 22 batch 671/804 | loss 0.517942 | elapsed 180.6s | graphs 21472
+2026-05-18 19:01:28,195 - qqe.src.GNN.training.train - INFO - Training complete (216.8s) | running validation...
+2026-05-18 19:01:40,227 - qqe.src.GNN.training.train - INFO - Losses | train 0.519168 | val 0.453411 | lr 4.52e-05 | time train=216.8s val=12.0s total=228.8s
+2026-05-18 19:01:40,227 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 19:02:40,231 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 221/804 | loss 0.505349 | elapsed 60.0s | graphs 7072
+2026-05-18 19:03:40,342 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 441/804 | loss 0.511412 | elapsed 120.1s | graphs 14112
+2026-05-18 19:04:40,434 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 23 batch 663/804 | loss 0.515582 | elapsed 180.2s | graphs 21216
+2026-05-18 19:05:18,292 - qqe.src.GNN.training.train - INFO - Training complete (218.1s) | running validation...
+2026-05-18 19:05:30,378 - qqe.src.GNN.training.train - INFO - Losses | train 0.517941 | val 0.447223 | lr 4.52e-05 | time train=218.1s val=12.1s total=230.2s
+2026-05-18 19:05:30,390 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 19:06:30,539 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 223/804 | loss 0.524370 | elapsed 60.1s | graphs 7136
+2026-05-18 19:07:30,809 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 445/804 | loss 0.524677 | elapsed 120.4s | graphs 14240
+2026-05-18 19:08:30,887 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 24 batch 669/804 | loss 0.519662 | elapsed 180.5s | graphs 21408
+2026-05-18 19:09:07,406 - qqe.src.GNN.training.train - INFO - Training complete (217.0s) | running validation...
+2026-05-18 19:09:19,500 - qqe.src.GNN.training.train - INFO - Losses | train 0.517941 | val 0.447756 | lr 4.52e-05 | time train=217.0s val=12.1s total=229.1s
+2026-05-18 19:09:19,501 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 19:10:19,600 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 221/804 | loss 0.518217 | elapsed 60.1s | graphs 7072
+2026-05-18 19:11:19,655 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 443/804 | loss 0.514447 | elapsed 120.2s | graphs 14176
+2026-05-18 19:12:19,773 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 25 batch 666/804 | loss 0.516156 | elapsed 180.3s | graphs 21312
+2026-05-18 19:12:56,772 - qqe.src.GNN.training.train - INFO - Training complete (217.3s) | running validation...
+2026-05-18 19:13:08,854 - qqe.src.GNN.training.train - INFO - Losses | train 0.515666 | val 0.449483 | lr 4.52e-05 | time train=217.3s val=12.1s total=229.4s
+2026-05-18 19:13:11,169 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-05-18 19:15:20,612 - scripts.optuna_search - INFO - Found 35700 dataset files for target=sre in data_dir=../outputs/data/dataset.
+2026-05-18 19:16:00,540 - scripts.optuna_search - INFO - Prepared datasets with loader_kind=nn. Starting Optuna study with name='optuna_search_nn_per_family_random_sre_4119' and storage='sqlite:///optuna_studies.db'...
+2026-05-18 19:16:00,604 - scripts.optuna_search - INFO - Running Optuna optimization for 10 trials...
+2026-05-18 19:16:00,670 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 19:17:00,697 - qqe.src.GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 791/804 | loss 0.669555 | elapsed 60.0s | graphs 25312
+2026-05-18 19:17:01,579 - qqe.src.GNN.training.train - INFO - Training complete (60.9s) | running validation...
+2026-05-18 19:17:08,124 - qqe.src.GNN.training.train - INFO - Losses | train 0.665676 | val 0.818040 | lr 6.87e-04 | time train=60.9s val=6.5s total=67.5s
+2026-05-18 19:17:08,126 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 19:17:59,544 - qqe.src.GNN.training.train - INFO - Training complete (51.4s) | running validation...
+2026-05-18 19:18:04,889 - qqe.src.GNN.training.train - INFO - Losses | train 0.404008 | val 0.683569 | lr 6.87e-04 | time train=51.4s val=5.3s total=56.8s
+2026-05-18 19:18:04,890 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 19:18:56,140 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 19:19:01,526 - qqe.src.GNN.training.train - INFO - Losses | train 0.279985 | val 0.779290 | lr 6.87e-04 | time train=51.2s val=5.4s total=56.6s
+2026-05-18 19:19:01,527 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 19:19:56,215 - qqe.src.GNN.training.train - INFO - Training complete (54.7s) | running validation...
+2026-05-18 19:20:01,648 - qqe.src.GNN.training.train - INFO - Losses | train 0.215063 | val 1.032416 | lr 6.87e-04 | time train=54.7s val=5.4s total=60.1s
+2026-05-18 19:20:01,649 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 19:20:51,962 - qqe.src.GNN.training.train - INFO - Training complete (50.3s) | running validation...
+2026-05-18 19:20:57,313 - qqe.src.GNN.training.train - INFO - Losses | train 0.173014 | val 0.975008 | lr 6.87e-04 | time train=50.3s val=5.4s total=55.7s
+2026-05-18 19:20:57,313 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 19:21:48,494 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 19:21:53,849 - qqe.src.GNN.training.train - INFO - Losses | train 0.145804 | val 0.985537 | lr 6.87e-04 | time train=51.2s val=5.4s total=56.5s
+2026-05-18 19:21:53,851 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 19:22:44,946 - qqe.src.GNN.training.train - INFO - Training complete (51.1s) | running validation...
+2026-05-18 19:22:51,109 - qqe.src.GNN.training.train - INFO - Losses | train 0.130593 | val 1.142689 | lr 6.87e-04 | time train=51.1s val=6.2s total=57.3s
+2026-05-18 19:22:51,110 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 19:23:45,649 - qqe.src.GNN.training.train - INFO - Training complete (54.5s) | running validation...
+2026-05-18 19:23:50,979 - qqe.src.GNN.training.train - INFO - Losses | train 0.118244 | val 1.076178 | lr 3.44e-04 | time train=54.5s val=5.3s total=59.9s
+2026-05-18 19:23:50,979 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 19:24:39,563 - qqe.src.GNN.training.train - INFO - Training complete (48.6s) | running validation...
+2026-05-18 19:24:44,700 - qqe.src.GNN.training.train - INFO - Losses | train 0.098137 | val 1.093909 | lr 3.44e-04 | time train=48.6s val=5.1s total=53.7s
+2026-05-18 19:24:44,701 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 19:25:32,185 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 19:25:37,172 - qqe.src.GNN.training.train - INFO - Losses | train 0.093056 | val 1.152809 | lr 3.44e-04 | time train=47.5s val=5.0s total=52.5s
+2026-05-18 19:25:37,172 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 19:26:24,685 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 19:26:29,752 - qqe.src.GNN.training.train - INFO - Losses | train 0.090816 | val 1.106149 | lr 3.44e-04 | time train=47.5s val=5.1s total=52.6s
+2026-05-18 19:26:29,752 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 19:27:17,418 - qqe.src.GNN.training.train - INFO - Training complete (47.7s) | running validation...
+2026-05-18 19:27:22,553 - qqe.src.GNN.training.train - INFO - Losses | train 0.083824 | val 1.115930 | lr 3.44e-04 | time train=47.7s val=5.1s total=52.8s
+2026-05-18 19:27:22,553 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 012 | best val 0.683569 | patience exhausted (10/10)
+2026-05-18 19:27:23,077 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 19:28:08,529 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 19:28:13,481 - qqe.src.GNN.training.train - INFO - Losses | train 1.394124 | val 0.371896 | lr 1.56e-03 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 19:28:13,482 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 19:28:59,934 - qqe.src.GNN.training.train - INFO - Training complete (46.5s) | running validation...
+2026-05-18 19:29:04,856 - qqe.src.GNN.training.train - INFO - Losses | train 0.781353 | val 0.478981 | lr 1.56e-03 | time train=46.5s val=4.9s total=51.4s
+2026-05-18 19:29:04,857 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 19:29:50,352 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 19:29:55,203 - qqe.src.GNN.training.train - INFO - Losses | train 0.666118 | val 0.617623 | lr 1.56e-03 | time train=45.5s val=4.9s total=50.3s
+2026-05-18 19:29:55,205 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 19:30:40,910 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 19:30:45,809 - qqe.src.GNN.training.train - INFO - Losses | train 0.640457 | val 0.294954 | lr 1.56e-03 | time train=45.7s val=4.9s total=50.6s
+2026-05-18 19:30:45,810 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 19:31:31,823 - qqe.src.GNN.training.train - INFO - Training complete (46.0s) | running validation...
+2026-05-18 19:31:36,658 - qqe.src.GNN.training.train - INFO - Losses | train 0.700727 | val 0.592137 | lr 1.56e-03 | time train=46.0s val=4.8s total=50.8s
+2026-05-18 19:31:36,658 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 19:32:22,894 - qqe.src.GNN.training.train - INFO - Training complete (46.2s) | running validation...
+2026-05-18 19:32:27,777 - qqe.src.GNN.training.train - INFO - Losses | train 0.701273 | val 1.100039 | lr 1.56e-03 | time train=46.2s val=4.9s total=51.1s
+2026-05-18 19:32:27,777 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 19:33:14,852 - qqe.src.GNN.training.train - INFO - Training complete (47.1s) | running validation...
+2026-05-18 19:33:19,777 - qqe.src.GNN.training.train - INFO - Losses | train 0.640203 | val 0.272008 | lr 1.56e-03 | time train=47.1s val=4.9s total=52.0s
+2026-05-18 19:33:19,779 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 19:34:06,104 - qqe.src.GNN.training.train - INFO - Training complete (46.3s) | running validation...
+2026-05-18 19:34:10,966 - qqe.src.GNN.training.train - INFO - Losses | train 0.742714 | val 0.363727 | lr 1.56e-03 | time train=46.3s val=4.9s total=51.2s
+2026-05-18 19:34:10,967 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 19:34:56,659 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 19:35:01,577 - qqe.src.GNN.training.train - INFO - Losses | train 0.684642 | val 0.374908 | lr 1.56e-03 | time train=45.7s val=4.9s total=50.6s
+2026-05-18 19:35:01,578 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 19:35:47,426 - qqe.src.GNN.training.train - INFO - Training complete (45.8s) | running validation...
+2026-05-18 19:35:52,301 - qqe.src.GNN.training.train - INFO - Losses | train 0.688928 | val 0.772843 | lr 1.56e-03 | time train=45.8s val=4.9s total=50.7s
+2026-05-18 19:35:52,303 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 19:36:37,726 - qqe.src.GNN.training.train - INFO - Training complete (45.4s) | running validation...
+2026-05-18 19:36:42,633 - qqe.src.GNN.training.train - INFO - Losses | train 0.724123 | val 0.257033 | lr 1.56e-03 | time train=45.4s val=4.9s total=50.3s
+2026-05-18 19:36:42,634 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 19:37:28,257 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 19:37:33,148 - qqe.src.GNN.training.train - INFO - Losses | train 0.719382 | val 0.380102 | lr 1.56e-03 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 19:37:33,149 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 19:38:18,833 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 19:38:23,738 - qqe.src.GNN.training.train - INFO - Losses | train 0.772518 | val 0.215423 | lr 1.56e-03 | time train=45.7s val=4.9s total=50.6s
+2026-05-18 19:38:23,740 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 19:39:09,360 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 19:39:14,214 - qqe.src.GNN.training.train - INFO - Losses | train 0.720276 | val 0.435836 | lr 1.56e-03 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 19:39:14,215 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 19:39:59,792 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 19:40:04,652 - qqe.src.GNN.training.train - INFO - Losses | train 0.654433 | val 0.364931 | lr 1.56e-03 | time train=45.6s val=4.9s total=50.4s
+2026-05-18 19:40:04,654 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 19:40:50,268 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 19:40:55,185 - qqe.src.GNN.training.train - INFO - Losses | train 0.712897 | val 0.500306 | lr 1.56e-03 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 19:40:55,185 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 19:41:40,515 - qqe.src.GNN.training.train - INFO - Training complete (45.3s) | running validation...
+2026-05-18 19:41:45,455 - qqe.src.GNN.training.train - INFO - Losses | train 0.688257 | val 0.431648 | lr 1.56e-03 | time train=45.3s val=4.9s total=50.3s
+2026-05-18 19:41:45,456 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 19:42:30,942 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 19:42:35,810 - qqe.src.GNN.training.train - INFO - Losses | train 0.675271 | val 0.229507 | lr 1.56e-03 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 19:42:35,810 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 19:43:21,204 - qqe.src.GNN.training.train - INFO - Training complete (45.4s) | running validation...
+2026-05-18 19:43:26,346 - qqe.src.GNN.training.train - INFO - Losses | train 0.706957 | val 0.244847 | lr 7.78e-04 | time train=45.4s val=5.1s total=50.5s
+2026-05-18 19:43:26,347 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 19:44:11,901 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 19:44:16,793 - qqe.src.GNN.training.train - INFO - Losses | train 0.514190 | val 0.165060 | lr 7.78e-04 | time train=45.6s val=4.9s total=50.4s
+2026-05-18 19:44:16,796 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 19:45:02,713 - qqe.src.GNN.training.train - INFO - Training complete (45.9s) | running validation...
+2026-05-18 19:45:07,827 - qqe.src.GNN.training.train - INFO - Losses | train 0.481575 | val 0.184586 | lr 7.78e-04 | time train=45.9s val=5.1s total=51.0s
+2026-05-18 19:45:07,829 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 19:45:53,577 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 19:45:58,463 - qqe.src.GNN.training.train - INFO - Losses | train 0.462351 | val 0.129306 | lr 7.78e-04 | time train=45.7s val=4.9s total=50.6s
+2026-05-18 19:45:58,464 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 19:46:43,991 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 19:46:48,957 - qqe.src.GNN.training.train - INFO - Losses | train 0.465502 | val 0.214640 | lr 7.78e-04 | time train=45.5s val=5.0s total=50.5s
+2026-05-18 19:46:48,959 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 19:47:34,492 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 19:47:39,387 - qqe.src.GNN.training.train - INFO - Losses | train 0.468433 | val 0.273236 | lr 7.78e-04 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 19:47:39,389 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 19:48:24,971 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 19:48:29,925 - qqe.src.GNN.training.train - INFO - Losses | train 0.478817 | val 0.165928 | lr 7.78e-04 | time train=45.6s val=5.0s total=50.5s
+2026-05-18 19:48:30,438 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 19:49:15,493 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 19:49:20,359 - qqe.src.GNN.training.train - INFO - Losses | train 3.074638 | val 1.181267 | lr 3.18e-05 | time train=45.1s val=4.9s total=49.9s
+2026-05-18 19:49:20,360 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 19:50:05,532 - qqe.src.GNN.training.train - INFO - Training complete (45.2s) | running validation...
+2026-05-18 19:50:10,456 - qqe.src.GNN.training.train - INFO - Losses | train 1.278736 | val 1.014434 | lr 3.18e-05 | time train=45.2s val=4.9s total=50.1s
+2026-05-18 19:50:10,457 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 19:50:55,689 - qqe.src.GNN.training.train - INFO - Training complete (45.2s) | running validation...
+2026-05-18 19:51:00,554 - qqe.src.GNN.training.train - INFO - Losses | train 1.121151 | val 0.895372 | lr 3.18e-05 | time train=45.2s val=4.9s total=50.1s
+2026-05-18 19:51:00,556 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 19:51:45,398 - qqe.src.GNN.training.train - INFO - Training complete (44.8s) | running validation...
+2026-05-18 19:51:50,330 - qqe.src.GNN.training.train - INFO - Losses | train 0.972994 | val 0.757340 | lr 3.18e-05 | time train=44.8s val=4.9s total=49.8s
+2026-05-18 19:51:50,330 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 19:52:35,270 - qqe.src.GNN.training.train - INFO - Training complete (44.9s) | running validation...
+2026-05-18 19:52:40,189 - qqe.src.GNN.training.train - INFO - Losses | train 0.841301 | val 0.678632 | lr 3.18e-05 | time train=44.9s val=4.9s total=49.9s
+2026-05-18 19:52:40,190 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 19:53:25,268 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 19:53:30,136 - qqe.src.GNN.training.train - INFO - Losses | train 0.701521 | val 0.465596 | lr 3.18e-05 | time train=45.1s val=4.9s total=49.9s
+2026-05-18 19:53:30,138 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 19:54:15,062 - qqe.src.GNN.training.train - INFO - Training complete (44.9s) | running validation...
+2026-05-18 19:54:19,995 - qqe.src.GNN.training.train - INFO - Losses | train 0.579928 | val 0.337389 | lr 3.18e-05 | time train=44.9s val=4.9s total=49.9s
+2026-05-18 19:54:19,997 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 19:55:05,081 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 19:55:09,999 - qqe.src.GNN.training.train - INFO - Losses | train 0.486816 | val 0.260522 | lr 3.18e-05 | time train=45.1s val=4.9s total=50.0s
+2026-05-18 19:55:10,000 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 19:55:55,128 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 19:56:00,042 - qqe.src.GNN.training.train - INFO - Losses | train 0.402833 | val 0.214482 | lr 3.18e-05 | time train=45.1s val=4.9s total=50.0s
+2026-05-18 19:56:00,043 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 19:56:45,092 - qqe.src.GNN.training.train - INFO - Training complete (45.0s) | running validation...
+2026-05-18 19:56:50,028 - qqe.src.GNN.training.train - INFO - Losses | train 0.353975 | val 0.172537 | lr 3.18e-05 | time train=45.0s val=4.9s total=50.0s
+2026-05-18 19:56:50,029 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 19:57:35,201 - qqe.src.GNN.training.train - INFO - Training complete (45.2s) | running validation...
+2026-05-18 19:57:40,113 - qqe.src.GNN.training.train - INFO - Losses | train 0.315329 | val 0.211098 | lr 3.18e-05 | time train=45.2s val=4.9s total=50.1s
+2026-05-18 19:57:40,114 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 19:58:25,282 - qqe.src.GNN.training.train - INFO - Training complete (45.2s) | running validation...
+2026-05-18 19:58:30,189 - qqe.src.GNN.training.train - INFO - Losses | train 0.277587 | val 0.134384 | lr 3.18e-05 | time train=45.2s val=4.9s total=50.1s
+2026-05-18 19:58:30,192 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 19:59:15,357 - qqe.src.GNN.training.train - INFO - Training complete (45.2s) | running validation...
+2026-05-18 19:59:20,227 - qqe.src.GNN.training.train - INFO - Losses | train 0.255590 | val 0.137549 | lr 3.18e-05 | time train=45.2s val=4.9s total=50.0s
+2026-05-18 19:59:20,228 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 20:00:05,328 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 20:00:10,199 - qqe.src.GNN.training.train - INFO - Losses | train 0.233967 | val 0.126612 | lr 3.18e-05 | time train=45.1s val=4.9s total=50.0s
+2026-05-18 20:00:10,201 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 20:00:55,283 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 20:01:00,187 - qqe.src.GNN.training.train - INFO - Losses | train 0.217532 | val 0.133863 | lr 3.18e-05 | time train=45.1s val=4.9s total=50.0s
+2026-05-18 20:01:00,188 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 20:01:45,134 - qqe.src.GNN.training.train - INFO - Training complete (44.9s) | running validation...
+2026-05-18 20:01:50,065 - qqe.src.GNN.training.train - INFO - Losses | train 0.204180 | val 0.104473 | lr 3.18e-05 | time train=44.9s val=4.9s total=49.9s
+2026-05-18 20:01:50,066 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 20:02:35,064 - qqe.src.GNN.training.train - INFO - Training complete (45.0s) | running validation...
+2026-05-18 20:02:39,936 - qqe.src.GNN.training.train - INFO - Losses | train 0.200692 | val 0.134961 | lr 3.18e-05 | time train=45.0s val=4.9s total=49.9s
+2026-05-18 20:02:39,936 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 20:03:24,968 - qqe.src.GNN.training.train - INFO - Training complete (45.0s) | running validation...
+2026-05-18 20:03:29,882 - qqe.src.GNN.training.train - INFO - Losses | train 0.192448 | val 0.112152 | lr 3.18e-05 | time train=45.0s val=4.9s total=49.9s
+2026-05-18 20:03:29,883 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 20:04:14,993 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 20:04:19,887 - qqe.src.GNN.training.train - INFO - Losses | train 0.185485 | val 0.113724 | lr 3.18e-05 | time train=45.1s val=4.9s total=50.0s
+2026-05-18 20:04:19,888 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 20:05:04,988 - qqe.src.GNN.training.train - INFO - Training complete (45.1s) | running validation...
+2026-05-18 20:05:09,896 - qqe.src.GNN.training.train - INFO - Losses | train 0.180202 | val 0.088220 | lr 3.18e-05 | time train=45.1s val=4.9s total=50.0s
+2026-05-18 20:05:09,898 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 20:05:55,206 - qqe.src.GNN.training.train - INFO - Training complete (45.3s) | running validation...
+2026-05-18 20:06:00,314 - qqe.src.GNN.training.train - INFO - Losses | train 0.171464 | val 0.127520 | lr 3.18e-05 | time train=45.3s val=5.1s total=50.4s
+2026-05-18 20:06:00,314 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 20:06:45,918 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 20:06:51,178 - qqe.src.GNN.training.train - INFO - Losses | train 0.169131 | val 0.136326 | lr 3.18e-05 | time train=45.6s val=5.3s total=50.9s
+2026-05-18 20:06:51,180 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 20:07:37,511 - qqe.src.GNN.training.train - INFO - Training complete (46.3s) | running validation...
+2026-05-18 20:07:42,482 - qqe.src.GNN.training.train - INFO - Losses | train 0.162076 | val 0.113972 | lr 3.18e-05 | time train=46.3s val=5.0s total=51.3s
+2026-05-18 20:07:42,484 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 20:08:28,638 - qqe.src.GNN.training.train - INFO - Training complete (46.2s) | running validation...
+2026-05-18 20:08:33,563 - qqe.src.GNN.training.train - INFO - Losses | train 0.159425 | val 0.109515 | lr 3.18e-05 | time train=46.2s val=4.9s total=51.1s
+2026-05-18 20:08:33,564 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 20:09:19,042 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:09:23,906 - qqe.src.GNN.training.train - INFO - Losses | train 0.158398 | val 0.111111 | lr 3.18e-05 | time train=45.5s val=4.9s total=50.3s
+2026-05-18 20:09:24,405 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 20:10:15,672 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 20:10:20,891 - qqe.src.GNN.training.train - INFO - Losses | train 7.709338 | val 2.391243 | lr 6.82e-05 | time train=51.3s val=5.2s total=56.5s
+2026-05-18 20:10:20,893 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 20:11:12,155 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 20:11:17,391 - qqe.src.GNN.training.train - INFO - Losses | train 3.689996 | val 2.291223 | lr 6.82e-05 | time train=51.3s val=5.2s total=56.5s
+2026-05-18 20:11:17,393 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 20:12:08,643 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 20:12:13,855 - qqe.src.GNN.training.train - INFO - Losses | train 2.960497 | val 2.776206 | lr 6.82e-05 | time train=51.2s val=5.2s total=56.5s
+2026-05-18 20:12:13,855 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 20:13:04,808 - qqe.src.GNN.training.train - INFO - Training complete (51.0s) | running validation...
+2026-05-18 20:13:10,115 - qqe.src.GNN.training.train - INFO - Losses | train 2.482771 | val 3.485576 | lr 6.82e-05 | time train=51.0s val=5.3s total=56.3s
+2026-05-18 20:13:10,115 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 20:14:01,309 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 20:14:06,548 - qqe.src.GNN.training.train - INFO - Losses | train 2.102569 | val 4.155012 | lr 6.82e-05 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 20:14:06,550 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 20:14:57,530 - qqe.src.GNN.training.train - INFO - Training complete (51.0s) | running validation...
+2026-05-18 20:15:02,743 - qqe.src.GNN.training.train - INFO - Losses | train 1.912982 | val 4.882178 | lr 6.82e-05 | time train=51.0s val=5.2s total=56.2s
+2026-05-18 20:15:02,744 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 20:15:53,537 - qqe.src.GNN.training.train - INFO - Training complete (50.8s) | running validation...
+2026-05-18 20:15:58,725 - qqe.src.GNN.training.train - INFO - Losses | train 1.724064 | val 5.275997 | lr 6.82e-05 | time train=50.8s val=5.2s total=56.0s
+2026-05-18 20:15:58,727 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 20:16:49,285 - qqe.src.GNN.training.train - INFO - Training complete (50.6s) | running validation...
+2026-05-18 20:16:54,461 - qqe.src.GNN.training.train - INFO - Losses | train 1.580602 | val 5.091829 | lr 3.41e-05 | time train=50.6s val=5.2s total=55.7s
+2026-05-18 20:16:54,462 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 20:17:44,947 - qqe.src.GNN.training.train - INFO - Training complete (50.5s) | running validation...
+2026-05-18 20:17:50,141 - qqe.src.GNN.training.train - INFO - Losses | train 1.466602 | val 5.126976 | lr 3.41e-05 | time train=50.5s val=5.2s total=55.7s
+2026-05-18 20:17:50,142 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 20:18:40,738 - qqe.src.GNN.training.train - INFO - Training complete (50.6s) | running validation...
+2026-05-18 20:18:45,996 - qqe.src.GNN.training.train - INFO - Losses | train 1.414159 | val 4.977324 | lr 3.41e-05 | time train=50.6s val=5.3s total=55.9s
+2026-05-18 20:18:45,996 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 20:19:36,763 - qqe.src.GNN.training.train - INFO - Training complete (50.8s) | running validation...
+2026-05-18 20:19:42,050 - qqe.src.GNN.training.train - INFO - Losses | train 1.339993 | val 5.130447 | lr 3.41e-05 | time train=50.8s val=5.3s total=56.1s
+2026-05-18 20:19:42,052 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 20:20:33,035 - qqe.src.GNN.training.train - INFO - Training complete (51.0s) | running validation...
+2026-05-18 20:20:38,179 - qqe.src.GNN.training.train - INFO - Losses | train 1.279904 | val 4.884537 | lr 3.41e-05 | time train=51.0s val=5.1s total=56.1s
+2026-05-18 20:20:38,180 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 012 | best val 2.291223 | patience exhausted (10/10)
+2026-05-18 20:20:38,667 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 20:21:29,601 - qqe.src.GNN.training.train - INFO - Training complete (50.9s) | running validation...
+2026-05-18 20:21:34,760 - qqe.src.GNN.training.train - INFO - Losses | train 0.632581 | val 0.310331 | lr 8.49e-04 | time train=50.9s val=5.2s total=56.1s
+2026-05-18 20:21:34,761 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 20:22:25,738 - qqe.src.GNN.training.train - INFO - Training complete (51.0s) | running validation...
+2026-05-18 20:22:30,888 - qqe.src.GNN.training.train - INFO - Losses | train 0.394245 | val 0.564099 | lr 8.49e-04 | time train=51.0s val=5.2s total=56.1s
+2026-05-18 20:22:30,888 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 20:23:21,750 - qqe.src.GNN.training.train - INFO - Training complete (50.9s) | running validation...
+2026-05-18 20:23:26,954 - qqe.src.GNN.training.train - INFO - Losses | train 0.287029 | val 0.897663 | lr 8.49e-04 | time train=50.9s val=5.2s total=56.1s
+2026-05-18 20:23:26,956 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 20:24:18,141 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 20:24:23,372 - qqe.src.GNN.training.train - INFO - Losses | train 0.241787 | val 1.183957 | lr 8.49e-04 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 20:24:23,372 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 20:25:14,172 - qqe.src.GNN.training.train - INFO - Training complete (50.8s) | running validation...
+2026-05-18 20:25:19,317 - qqe.src.GNN.training.train - INFO - Losses | train 0.223748 | val 1.165848 | lr 8.49e-04 | time train=50.8s val=5.1s total=55.9s
+2026-05-18 20:25:19,318 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 20:26:10,389 - qqe.src.GNN.training.train - INFO - Training complete (51.1s) | running validation...
+2026-05-18 20:26:15,518 - qqe.src.GNN.training.train - INFO - Losses | train 0.205971 | val 1.335480 | lr 8.49e-04 | time train=51.1s val=5.1s total=56.2s
+2026-05-18 20:26:15,520 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 20:27:06,372 - qqe.src.GNN.training.train - INFO - Training complete (50.9s) | running validation...
+2026-05-18 20:27:11,503 - qqe.src.GNN.training.train - INFO - Losses | train 0.192004 | val 1.277249 | lr 4.24e-04 | time train=50.9s val=5.1s total=56.0s
+2026-05-18 20:27:11,505 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 20:28:03,050 - qqe.src.GNN.training.train - INFO - Training complete (51.5s) | running validation...
+2026-05-18 20:28:08,184 - qqe.src.GNN.training.train - INFO - Losses | train 0.163545 | val 1.338907 | lr 4.24e-04 | time train=51.5s val=5.1s total=56.7s
+2026-05-18 20:28:08,184 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 20:28:59,312 - qqe.src.GNN.training.train - INFO - Training complete (51.1s) | running validation...
+2026-05-18 20:29:04,610 - qqe.src.GNN.training.train - INFO - Losses | train 0.156890 | val 1.317972 | lr 4.24e-04 | time train=51.1s val=5.3s total=56.4s
+2026-05-18 20:29:04,610 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 20:29:55,089 - qqe.src.GNN.training.train - INFO - Training complete (50.5s) | running validation...
+2026-05-18 20:30:00,291 - qqe.src.GNN.training.train - INFO - Losses | train 0.156899 | val 1.337988 | lr 4.24e-04 | time train=50.5s val=5.2s total=55.7s
+2026-05-18 20:30:00,293 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 20:30:51,642 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 20:30:56,836 - qqe.src.GNN.training.train - INFO - Losses | train 0.150570 | val 1.350407 | lr 4.24e-04 | time train=51.3s val=5.2s total=56.5s
+2026-05-18 20:30:56,836 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.310331 | patience exhausted (10/10)
+2026-05-18 20:30:57,332 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 20:31:42,796 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:31:47,744 - qqe.src.GNN.training.train - INFO - Losses | train 2.051964 | val 1.160356 | lr 5.20e-04 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 20:31:47,747 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 20:32:33,332 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 20:32:38,212 - qqe.src.GNN.training.train - INFO - Losses | train 1.230309 | val 0.735664 | lr 5.20e-04 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 20:32:38,214 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 20:33:23,727 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:33:28,608 - qqe.src.GNN.training.train - INFO - Losses | train 1.044229 | val 0.525575 | lr 5.20e-04 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 20:33:28,609 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 20:34:14,084 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:34:19,014 - qqe.src.GNN.training.train - INFO - Losses | train 0.970199 | val 0.531130 | lr 5.20e-04 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 20:34:19,015 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 20:35:05,012 - qqe.src.GNN.training.train - INFO - Training complete (46.0s) | running validation...
+2026-05-18 20:35:09,803 - qqe.src.GNN.training.train - INFO - Losses | train 0.935033 | val 0.524121 | lr 5.20e-04 | time train=46.0s val=4.8s total=50.8s
+2026-05-18 20:35:09,806 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 20:35:55,597 - qqe.src.GNN.training.train - INFO - Training complete (45.8s) | running validation...
+2026-05-18 20:36:00,519 - qqe.src.GNN.training.train - INFO - Losses | train 0.886498 | val 0.580487 | lr 5.20e-04 | time train=45.8s val=4.9s total=50.7s
+2026-05-18 20:36:00,519 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 20:36:46,441 - qqe.src.GNN.training.train - INFO - Training complete (45.9s) | running validation...
+2026-05-18 20:36:51,344 - qqe.src.GNN.training.train - INFO - Losses | train 0.932347 | val 0.562169 | lr 5.20e-04 | time train=45.9s val=4.9s total=50.8s
+2026-05-18 20:36:51,344 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 20:37:37,169 - qqe.src.GNN.training.train - INFO - Training complete (45.8s) | running validation...
+2026-05-18 20:37:42,033 - qqe.src.GNN.training.train - INFO - Losses | train 0.925656 | val 0.491848 | lr 5.20e-04 | time train=45.8s val=4.9s total=50.7s
+2026-05-18 20:37:42,035 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 20:38:27,533 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:38:32,451 - qqe.src.GNN.training.train - INFO - Losses | train 0.893514 | val 0.455073 | lr 5.20e-04 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 20:38:32,452 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 20:39:18,490 - qqe.src.GNN.training.train - INFO - Training complete (46.0s) | running validation...
+2026-05-18 20:39:23,473 - qqe.src.GNN.training.train - INFO - Losses | train 0.914879 | val 0.507620 | lr 5.20e-04 | time train=46.0s val=5.0s total=51.0s
+2026-05-18 20:39:23,474 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 20:40:09,218 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 20:40:14,149 - qqe.src.GNN.training.train - INFO - Losses | train 0.911222 | val 0.503325 | lr 5.20e-04 | time train=45.7s val=4.9s total=50.7s
+2026-05-18 20:40:14,149 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 20:40:59,952 - qqe.src.GNN.training.train - INFO - Training complete (45.8s) | running validation...
+2026-05-18 20:41:04,778 - qqe.src.GNN.training.train - INFO - Losses | train 0.906081 | val 0.531833 | lr 5.20e-04 | time train=45.8s val=4.8s total=50.6s
+2026-05-18 20:41:04,778 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 20:41:50,203 - qqe.src.GNN.training.train - INFO - Training complete (45.4s) | running validation...
+2026-05-18 20:41:55,121 - qqe.src.GNN.training.train - INFO - Losses | train 0.915845 | val 0.907781 | lr 5.20e-04 | time train=45.4s val=4.9s total=50.3s
+2026-05-18 20:41:55,123 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 20:42:40,661 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:42:45,641 - qqe.src.GNN.training.train - INFO - Losses | train 0.930410 | val 0.562389 | lr 5.20e-04 | time train=45.5s val=5.0s total=50.5s
+2026-05-18 20:42:45,642 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 20:43:31,303 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 20:43:36,213 - qqe.src.GNN.training.train - INFO - Losses | train 0.903231 | val 0.468971 | lr 2.60e-04 | time train=45.7s val=4.9s total=50.6s
+2026-05-18 20:43:36,214 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 20:44:21,640 - qqe.src.GNN.training.train - INFO - Training complete (45.4s) | running validation...
+2026-05-18 20:44:26,544 - qqe.src.GNN.training.train - INFO - Losses | train 0.790347 | val 0.500404 | lr 2.60e-04 | time train=45.4s val=4.9s total=50.3s
+2026-05-18 20:44:26,546 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 20:45:12,107 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 20:45:17,001 - qqe.src.GNN.training.train - INFO - Losses | train 0.783812 | val 0.434356 | lr 2.60e-04 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 20:45:17,002 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 20:46:02,844 - qqe.src.GNN.training.train - INFO - Training complete (45.8s) | running validation...
+2026-05-18 20:46:07,711 - qqe.src.GNN.training.train - INFO - Losses | train 0.778590 | val 0.494661 | lr 2.60e-04 | time train=45.8s val=4.9s total=50.7s
+2026-05-18 20:46:07,711 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 20:46:53,250 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:46:58,161 - qqe.src.GNN.training.train - INFO - Losses | train 0.799233 | val 0.410344 | lr 2.60e-04 | time train=45.5s val=4.9s total=50.4s
+2026-05-18 20:46:58,164 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 20:47:43,546 - qqe.src.GNN.training.train - INFO - Training complete (45.4s) | running validation...
+2026-05-18 20:47:48,512 - qqe.src.GNN.training.train - INFO - Losses | train 0.785975 | val 0.470456 | lr 2.60e-04 | time train=45.4s val=5.0s total=50.3s
+2026-05-18 20:47:48,513 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 20:48:34,406 - qqe.src.GNN.training.train - INFO - Training complete (45.9s) | running validation...
+2026-05-18 20:48:39,350 - qqe.src.GNN.training.train - INFO - Losses | train 0.784601 | val 0.428206 | lr 2.60e-04 | time train=45.9s val=4.9s total=50.8s
+2026-05-18 20:48:39,351 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 20:49:25,087 - qqe.src.GNN.training.train - INFO - Training complete (45.7s) | running validation...
+2026-05-18 20:49:30,003 - qqe.src.GNN.training.train - INFO - Losses | train 0.773196 | val 0.465593 | lr 2.60e-04 | time train=45.7s val=4.9s total=50.7s
+2026-05-18 20:49:30,004 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 20:50:15,579 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 20:50:20,491 - qqe.src.GNN.training.train - INFO - Losses | train 0.810148 | val 0.454231 | lr 2.60e-04 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 20:50:20,493 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 20:51:06,070 - qqe.src.GNN.training.train - INFO - Training complete (45.6s) | running validation...
+2026-05-18 20:51:10,981 - qqe.src.GNN.training.train - INFO - Losses | train 0.783690 | val 0.474629 | lr 2.60e-04 | time train=45.6s val=4.9s total=50.5s
+2026-05-18 20:51:10,983 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 20:51:56,482 - qqe.src.GNN.training.train - INFO - Training complete (45.5s) | running validation...
+2026-05-18 20:52:01,434 - qqe.src.GNN.training.train - INFO - Losses | train 0.763404 | val 0.379490 | lr 2.60e-04 | time train=45.5s val=5.0s total=50.5s
+2026-05-18 20:52:01,936 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 20:52:52,781 - qqe.src.GNN.training.train - INFO - Training complete (50.8s) | running validation...
+2026-05-18 20:52:57,942 - qqe.src.GNN.training.train - INFO - Losses | train 1.122420 | val 0.267779 | lr 1.19e-03 | time train=50.8s val=5.2s total=56.0s
+2026-05-18 20:52:57,945 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 20:53:48,699 - qqe.src.GNN.training.train - INFO - Training complete (50.8s) | running validation...
+2026-05-18 20:53:53,873 - qqe.src.GNN.training.train - INFO - Losses | train 0.461404 | val 1.509496 | lr 1.19e-03 | time train=50.8s val=5.2s total=55.9s
+2026-05-18 20:53:53,875 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 20:54:44,516 - qqe.src.GNN.training.train - INFO - Training complete (50.6s) | running validation...
+2026-05-18 20:54:49,730 - qqe.src.GNN.training.train - INFO - Losses | train 0.323114 | val 1.480781 | lr 1.19e-03 | time train=50.6s val=5.2s total=55.9s
+2026-05-18 20:54:49,730 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 20:55:40,532 - qqe.src.GNN.training.train - INFO - Training complete (50.8s) | running validation...
+2026-05-18 20:55:45,837 - qqe.src.GNN.training.train - INFO - Losses | train 0.231226 | val 1.772589 | lr 1.19e-03 | time train=50.8s val=5.3s total=56.1s
+2026-05-18 20:55:45,837 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 20:56:37,033 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 20:56:42,157 - qqe.src.GNN.training.train - INFO - Losses | train 0.192039 | val 1.698899 | lr 1.19e-03 | time train=51.2s val=5.1s total=56.3s
+2026-05-18 20:56:42,158 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 20:57:33,381 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 20:57:38,523 - qqe.src.GNN.training.train - INFO - Losses | train 0.171514 | val 1.986340 | lr 1.19e-03 | time train=51.2s val=5.1s total=56.4s
+2026-05-18 20:57:38,523 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 20:58:31,064 - qqe.src.GNN.training.train - INFO - Training complete (52.5s) | running validation...
+2026-05-18 20:58:36,344 - qqe.src.GNN.training.train - INFO - Losses | train 0.156360 | val 1.645432 | lr 5.97e-04 | time train=52.5s val=5.3s total=57.8s
+2026-05-18 20:58:36,344 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 20:59:32,858 - qqe.src.GNN.training.train - INFO - Training complete (56.5s) | running validation...
+2026-05-18 20:59:38,491 - qqe.src.GNN.training.train - INFO - Losses | train 0.111128 | val 1.817695 | lr 5.97e-04 | time train=56.5s val=5.6s total=62.1s
+2026-05-18 20:59:38,492 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 21:00:36,112 - qqe.src.GNN.training.train - INFO - Training complete (57.6s) | running validation...
+2026-05-18 21:00:41,376 - qqe.src.GNN.training.train - INFO - Losses | train 0.106823 | val 1.760496 | lr 5.97e-04 | time train=57.6s val=5.3s total=62.9s
+2026-05-18 21:00:41,377 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 21:01:32,592 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:01:37,794 - qqe.src.GNN.training.train - INFO - Losses | train 0.103997 | val 1.793379 | lr 5.97e-04 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 21:01:37,794 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 21:02:29,020 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:02:34,211 - qqe.src.GNN.training.train - INFO - Losses | train 0.098159 | val 1.796873 | lr 5.97e-04 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 21:02:34,212 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.267779 | patience exhausted (10/10)
+2026-05-18 21:02:34,726 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 21:03:22,275 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 21:03:27,288 - qqe.src.GNN.training.train - INFO - Losses | train 0.530356 | val 0.228629 | lr 2.83e-03 | time train=47.5s val=5.0s total=52.6s
+2026-05-18 21:03:27,288 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 21:04:14,607 - qqe.src.GNN.training.train - INFO - Training complete (47.3s) | running validation...
+2026-05-18 21:04:19,654 - qqe.src.GNN.training.train - INFO - Losses | train 0.375414 | val 0.679049 | lr 2.83e-03 | time train=47.3s val=5.0s total=52.4s
+2026-05-18 21:04:19,656 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 21:05:07,003 - qqe.src.GNN.training.train - INFO - Training complete (47.3s) | running validation...
+2026-05-18 21:05:12,012 - qqe.src.GNN.training.train - INFO - Losses | train 0.323783 | val 0.595412 | lr 2.83e-03 | time train=47.3s val=5.0s total=52.4s
+2026-05-18 21:05:12,013 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 21:05:59,479 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 21:06:04,498 - qqe.src.GNN.training.train - INFO - Losses | train 0.320879 | val 0.864269 | lr 2.83e-03 | time train=47.5s val=5.0s total=52.5s
+2026-05-18 21:06:04,499 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 21:06:51,847 - qqe.src.GNN.training.train - INFO - Training complete (47.3s) | running validation...
+2026-05-18 21:06:56,849 - qqe.src.GNN.training.train - INFO - Losses | train 0.319533 | val 0.879589 | lr 2.83e-03 | time train=47.3s val=5.0s total=52.3s
+2026-05-18 21:06:56,849 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 21:07:44,195 - qqe.src.GNN.training.train - INFO - Training complete (47.3s) | running validation...
+2026-05-18 21:07:49,289 - qqe.src.GNN.training.train - INFO - Losses | train 0.290241 | val 0.974916 | lr 2.83e-03 | time train=47.3s val=5.1s total=52.4s
+2026-05-18 21:07:49,290 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 21:08:36,797 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 21:08:41,856 - qqe.src.GNN.training.train - INFO - Losses | train 0.284246 | val 0.864849 | lr 1.41e-03 | time train=47.5s val=5.1s total=52.6s
+2026-05-18 21:08:41,856 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 21:09:29,304 - qqe.src.GNN.training.train - INFO - Training complete (47.4s) | running validation...
+2026-05-18 21:09:34,293 - qqe.src.GNN.training.train - INFO - Losses | train 0.237813 | val 0.944808 | lr 1.41e-03 | time train=47.4s val=5.0s total=52.4s
+2026-05-18 21:09:34,294 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 21:10:21,764 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 21:10:26,827 - qqe.src.GNN.training.train - INFO - Losses | train 0.233122 | val 0.848908 | lr 1.41e-03 | time train=47.5s val=5.1s total=52.5s
+2026-05-18 21:10:26,829 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 21:11:14,301 - qqe.src.GNN.training.train - INFO - Training complete (47.5s) | running validation...
+2026-05-18 21:11:19,429 - qqe.src.GNN.training.train - INFO - Losses | train 0.222381 | val 0.888466 | lr 1.41e-03 | time train=47.5s val=5.1s total=52.6s
+2026-05-18 21:11:19,429 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 21:12:06,848 - qqe.src.GNN.training.train - INFO - Training complete (47.4s) | running validation...
+2026-05-18 21:12:11,837 - qqe.src.GNN.training.train - INFO - Losses | train 0.226220 | val 0.900991 | lr 1.41e-03 | time train=47.4s val=5.0s total=52.4s
+2026-05-18 21:12:11,837 - qqe.src.GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.228629 | patience exhausted (10/10)
+2026-05-18 21:12:12,353 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 21:13:00,568 - qqe.src.GNN.training.train - INFO - Training complete (48.2s) | running validation...
+2026-05-18 21:13:05,621 - qqe.src.GNN.training.train - INFO - Losses | train 0.835152 | val 0.189253 | lr 1.98e-03 | time train=48.2s val=5.1s total=53.3s
+2026-05-18 21:13:05,623 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 21:13:54,085 - qqe.src.GNN.training.train - INFO - Training complete (48.5s) | running validation...
+2026-05-18 21:13:59,214 - qqe.src.GNN.training.train - INFO - Losses | train 0.309764 | val 0.193229 | lr 1.98e-03 | time train=48.5s val=5.1s total=53.6s
+2026-05-18 21:13:59,214 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 21:14:47,629 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:14:52,663 - qqe.src.GNN.training.train - INFO - Losses | train 0.276615 | val 0.281740 | lr 1.98e-03 | time train=48.4s val=5.0s total=53.4s
+2026-05-18 21:14:52,663 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 21:15:41,101 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:15:46,177 - qqe.src.GNN.training.train - INFO - Losses | train 0.278183 | val 0.106301 | lr 1.98e-03 | time train=48.4s val=5.1s total=53.5s
+2026-05-18 21:15:46,178 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 21:16:34,762 - qqe.src.GNN.training.train - INFO - Training complete (48.6s) | running validation...
+2026-05-18 21:16:39,804 - qqe.src.GNN.training.train - INFO - Losses | train 0.244198 | val 0.220122 | lr 1.98e-03 | time train=48.6s val=5.0s total=53.6s
+2026-05-18 21:16:39,805 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 21:17:28,453 - qqe.src.GNN.training.train - INFO - Training complete (48.6s) | running validation...
+2026-05-18 21:17:33,465 - qqe.src.GNN.training.train - INFO - Losses | train 0.223114 | val 0.110035 | lr 1.98e-03 | time train=48.6s val=5.0s total=53.7s
+2026-05-18 21:17:33,466 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 21:18:21,878 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:18:26,852 - qqe.src.GNN.training.train - INFO - Losses | train 0.204870 | val 0.168182 | lr 1.98e-03 | time train=48.4s val=5.0s total=53.4s
+2026-05-18 21:18:26,854 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 21:19:15,215 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:19:20,345 - qqe.src.GNN.training.train - INFO - Losses | train 0.215287 | val 0.147312 | lr 1.98e-03 | time train=48.4s val=5.1s total=53.5s
+2026-05-18 21:19:20,345 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 21:20:08,793 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:20:13,810 - qqe.src.GNN.training.train - INFO - Losses | train 0.200598 | val 0.089414 | lr 1.98e-03 | time train=48.4s val=5.0s total=53.5s
+2026-05-18 21:20:13,811 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 21:21:02,074 - qqe.src.GNN.training.train - INFO - Training complete (48.3s) | running validation...
+2026-05-18 21:21:07,072 - qqe.src.GNN.training.train - INFO - Losses | train 0.206310 | val 0.128514 | lr 1.98e-03 | time train=48.3s val=5.0s total=53.3s
+2026-05-18 21:21:07,072 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 21:21:55,483 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:22:00,494 - qqe.src.GNN.training.train - INFO - Losses | train 0.181827 | val 0.126163 | lr 1.98e-03 | time train=48.4s val=5.0s total=53.4s
+2026-05-18 21:22:00,495 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 21:22:48,911 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:22:53,922 - qqe.src.GNN.training.train - INFO - Losses | train 0.193080 | val 0.150756 | lr 1.98e-03 | time train=48.4s val=5.0s total=53.4s
+2026-05-18 21:22:53,922 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 21:23:42,136 - qqe.src.GNN.training.train - INFO - Training complete (48.2s) | running validation...
+2026-05-18 21:23:47,262 - qqe.src.GNN.training.train - INFO - Losses | train 0.177117 | val 0.089900 | lr 1.98e-03 | time train=48.2s val=5.1s total=53.3s
+2026-05-18 21:23:47,263 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 21:24:35,484 - qqe.src.GNN.training.train - INFO - Training complete (48.2s) | running validation...
+2026-05-18 21:24:40,495 - qqe.src.GNN.training.train - INFO - Losses | train 0.180925 | val 0.085307 | lr 1.98e-03 | time train=48.2s val=5.0s total=53.2s
+2026-05-18 21:24:40,497 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 21:25:28,913 - qqe.src.GNN.training.train - INFO - Training complete (48.4s) | running validation...
+2026-05-18 21:25:33,947 - qqe.src.GNN.training.train - INFO - Losses | train 0.192737 | val 0.157375 | lr 1.98e-03 | time train=48.4s val=5.0s total=53.4s
+2026-05-18 21:25:33,948 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 21:26:22,447 - qqe.src.GNN.training.train - INFO - Training complete (48.5s) | running validation...
+2026-05-18 21:26:27,501 - qqe.src.GNN.training.train - INFO - Losses | train 0.169252 | val 0.147332 | lr 1.98e-03 | time train=48.5s val=5.1s total=53.6s
+2026-05-18 21:26:27,501 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 21:27:16,744 - qqe.src.GNN.training.train - INFO - Training complete (49.2s) | running validation...
+2026-05-18 21:27:21,862 - qqe.src.GNN.training.train - INFO - Losses | train 0.161940 | val 0.102958 | lr 1.98e-03 | time train=49.2s val=5.1s total=54.4s
+2026-05-18 21:27:21,862 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 21:28:10,519 - qqe.src.GNN.training.train - INFO - Training complete (48.7s) | running validation...
+2026-05-18 21:28:15,510 - qqe.src.GNN.training.train - INFO - Losses | train 0.188016 | val 0.173494 | lr 1.98e-03 | time train=48.7s val=5.0s total=53.6s
+2026-05-18 21:28:15,510 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 21:29:04,202 - qqe.src.GNN.training.train - INFO - Training complete (48.7s) | running validation...
+2026-05-18 21:29:09,589 - qqe.src.GNN.training.train - INFO - Losses | train 0.176956 | val 0.089682 | lr 1.98e-03 | time train=48.7s val=5.4s total=54.1s
+2026-05-18 21:29:09,589 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 21:29:58,124 - qqe.src.GNN.training.train - INFO - Training complete (48.5s) | running validation...
+2026-05-18 21:30:03,215 - qqe.src.GNN.training.train - INFO - Losses | train 0.169532 | val 0.144832 | lr 9.88e-04 | time train=48.5s val=5.1s total=53.6s
+2026-05-18 21:30:03,216 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 21:30:51,827 - qqe.src.GNN.training.train - INFO - Training complete (48.6s) | running validation...
+2026-05-18 21:30:56,887 - qqe.src.GNN.training.train - INFO - Losses | train 0.117217 | val 0.071077 | lr 9.88e-04 | time train=48.6s val=5.1s total=53.7s
+2026-05-18 21:30:56,889 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 21:31:45,155 - qqe.src.GNN.training.train - INFO - Training complete (48.3s) | running validation...
+2026-05-18 21:31:50,218 - qqe.src.GNN.training.train - INFO - Losses | train 0.123753 | val 0.120316 | lr 9.88e-04 | time train=48.3s val=5.1s total=53.3s
+2026-05-18 21:31:50,219 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 21:32:38,719 - qqe.src.GNN.training.train - INFO - Training complete (48.5s) | running validation...
+2026-05-18 21:32:44,116 - qqe.src.GNN.training.train - INFO - Losses | train 0.117356 | val 0.070834 | lr 9.88e-04 | time train=48.5s val=5.4s total=53.9s
+2026-05-18 21:32:44,118 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 21:33:32,578 - qqe.src.GNN.training.train - INFO - Training complete (48.5s) | running validation...
+2026-05-18 21:33:37,606 - qqe.src.GNN.training.train - INFO - Losses | train 0.118861 | val 0.127603 | lr 9.88e-04 | time train=48.5s val=5.0s total=53.5s
+2026-05-18 21:33:37,607 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 21:34:26,119 - qqe.src.GNN.training.train - INFO - Training complete (48.5s) | running validation...
+2026-05-18 21:34:31,160 - qqe.src.GNN.training.train - INFO - Losses | train 0.109953 | val 0.070992 | lr 9.88e-04 | time train=48.5s val=5.0s total=53.6s
+2026-05-18 21:34:31,672 - qqe.src.GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-05-18 21:35:24,754 - qqe.src.GNN.training.train - INFO - Training complete (53.1s) | running validation...
+2026-05-18 21:35:30,009 - qqe.src.GNN.training.train - INFO - Losses | train 0.526174 | val 0.432263 | lr 2.99e-03 | time train=53.1s val=5.3s total=58.3s
+2026-05-18 21:35:30,011 - qqe.src.GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-05-18 21:36:21,550 - qqe.src.GNN.training.train - INFO - Training complete (51.5s) | running validation...
+2026-05-18 21:36:26,737 - qqe.src.GNN.training.train - INFO - Losses | train 0.468750 | val 0.335538 | lr 2.99e-03 | time train=51.5s val=5.2s total=56.7s
+2026-05-18 21:36:26,738 - qqe.src.GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-05-18 21:37:18,083 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 21:37:23,272 - qqe.src.GNN.training.train - INFO - Losses | train 0.466057 | val 0.315065 | lr 2.99e-03 | time train=51.3s val=5.2s total=56.5s
+2026-05-18 21:37:23,272 - qqe.src.GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-05-18 21:38:14,490 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:38:19,677 - qqe.src.GNN.training.train - INFO - Losses | train 0.492727 | val 0.254688 | lr 2.99e-03 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 21:38:19,679 - qqe.src.GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-05-18 21:39:10,832 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:39:15,997 - qqe.src.GNN.training.train - INFO - Losses | train 0.464035 | val 0.253796 | lr 2.99e-03 | time train=51.2s val=5.2s total=56.3s
+2026-05-18 21:39:15,998 - qqe.src.GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-05-18 21:40:07,116 - qqe.src.GNN.training.train - INFO - Training complete (51.1s) | running validation...
+2026-05-18 21:40:12,309 - qqe.src.GNN.training.train - INFO - Losses | train 0.471534 | val 0.362767 | lr 2.99e-03 | time train=51.1s val=5.2s total=56.3s
+2026-05-18 21:40:12,309 - qqe.src.GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-05-18 21:41:03,661 - qqe.src.GNN.training.train - INFO - Training complete (51.4s) | running validation...
+2026-05-18 21:41:08,986 - qqe.src.GNN.training.train - INFO - Losses | train 0.460564 | val 0.547333 | lr 2.99e-03 | time train=51.4s val=5.3s total=56.7s
+2026-05-18 21:41:08,986 - qqe.src.GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-05-18 21:42:00,279 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 21:42:05,485 - qqe.src.GNN.training.train - INFO - Losses | train 0.485295 | val 0.291436 | lr 2.99e-03 | time train=51.3s val=5.2s total=56.5s
+2026-05-18 21:42:05,487 - qqe.src.GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-05-18 21:42:56,664 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:43:01,894 - qqe.src.GNN.training.train - INFO - Losses | train 0.476547 | val 0.428467 | lr 2.99e-03 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 21:43:01,895 - qqe.src.GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-05-18 21:43:53,238 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 21:43:58,496 - qqe.src.GNN.training.train - INFO - Losses | train 0.472765 | val 0.256408 | lr 2.99e-03 | time train=51.3s val=5.3s total=56.6s
+2026-05-18 21:43:58,496 - qqe.src.GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-05-18 21:44:49,708 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:44:54,881 - qqe.src.GNN.training.train - INFO - Losses | train 0.473928 | val 0.268226 | lr 1.50e-03 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 21:44:54,881 - qqe.src.GNN.training.train - INFO - -------- EPOCH 012 --------
+2026-05-18 21:45:46,274 - qqe.src.GNN.training.train - INFO - Training complete (51.4s) | running validation...
+2026-05-18 21:45:51,470 - qqe.src.GNN.training.train - INFO - Losses | train 0.401744 | val 0.287962 | lr 1.50e-03 | time train=51.4s val=5.2s total=56.6s
+2026-05-18 21:45:51,470 - qqe.src.GNN.training.train - INFO - -------- EPOCH 013 --------
+2026-05-18 21:46:42,740 - qqe.src.GNN.training.train - INFO - Training complete (51.3s) | running validation...
+2026-05-18 21:46:48,031 - qqe.src.GNN.training.train - INFO - Losses | train 0.404185 | val 0.270522 | lr 1.50e-03 | time train=51.3s val=5.3s total=56.6s
+2026-05-18 21:46:48,033 - qqe.src.GNN.training.train - INFO - -------- EPOCH 014 --------
+2026-05-18 21:47:39,234 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:47:44,448 - qqe.src.GNN.training.train - INFO - Losses | train 0.403731 | val 0.233861 | lr 1.50e-03 | time train=51.2s val=5.2s total=56.4s
+2026-05-18 21:47:44,449 - qqe.src.GNN.training.train - INFO - -------- EPOCH 015 --------
+2026-05-18 21:48:35,677 - qqe.src.GNN.training.train - INFO - Training complete (51.2s) | running validation...
+2026-05-18 21:48:40,904 - qqe.src.GNN.training.train - INFO - Losses | train 0.405931 | val 0.225168 | lr 1.50e-03 | time train=51.2s val=5.2s total=56.5s
+2026-05-18 21:48:40,905 - qqe.src.GNN.training.train - INFO - -------- EPOCH 016 --------
+2026-05-18 21:49:32,304 - qqe.src.GNN.training.train - INFO - Training complete (51.4s) | running validation...
+2026-05-18 21:49:37,479 - qqe.src.GNN.training.train - INFO - Losses | train 0.403150 | val 0.254211 | lr 1.50e-03 | time train=51.4s val=5.2s total=56.6s
+2026-05-18 21:49:37,480 - qqe.src.GNN.training.train - INFO - -------- EPOCH 017 --------
+2026-05-18 21:50:29,588 - qqe.src.GNN.training.train - INFO - Training complete (52.1s) | running validation...
+2026-05-18 21:50:34,796 - qqe.src.GNN.training.train - INFO - Losses | train 0.402441 | val 0.263999 | lr 1.50e-03 | time train=52.1s val=5.2s total=57.3s
+2026-05-18 21:50:34,796 - qqe.src.GNN.training.train - INFO - -------- EPOCH 018 --------
+2026-05-18 21:51:26,247 - qqe.src.GNN.training.train - INFO - Training complete (51.4s) | running validation...
+2026-05-18 21:51:31,503 - qqe.src.GNN.training.train - INFO - Losses | train 0.389361 | val 0.337132 | lr 1.50e-03 | time train=51.4s val=5.3s total=56.7s
+2026-05-18 21:51:31,504 - qqe.src.GNN.training.train - INFO - -------- EPOCH 019 --------
+2026-05-18 21:52:23,536 - qqe.src.GNN.training.train - INFO - Training complete (52.0s) | running validation...
+2026-05-18 21:52:28,860 - qqe.src.GNN.training.train - INFO - Losses | train 0.394784 | val 0.255371 | lr 1.50e-03 | time train=52.0s val=5.3s total=57.4s
+2026-05-18 21:52:28,861 - qqe.src.GNN.training.train - INFO - -------- EPOCH 020 --------
+2026-05-18 21:53:20,505 - qqe.src.GNN.training.train - INFO - Training complete (51.6s) | running validation...
+2026-05-18 21:53:25,667 - qqe.src.GNN.training.train - INFO - Losses | train 0.408025 | val 0.290339 | lr 1.50e-03 | time train=51.6s val=5.2s total=56.8s
+2026-05-18 21:53:25,668 - qqe.src.GNN.training.train - INFO - -------- EPOCH 021 --------
+2026-05-18 21:54:17,483 - qqe.src.GNN.training.train - INFO - Training complete (51.8s) | running validation...
+2026-05-18 21:54:22,777 - qqe.src.GNN.training.train - INFO - Losses | train 0.401727 | val 0.270671 | lr 7.48e-04 | time train=51.8s val=5.3s total=57.1s
+2026-05-18 21:54:22,778 - qqe.src.GNN.training.train - INFO - -------- EPOCH 022 --------
+2026-05-18 21:55:14,640 - qqe.src.GNN.training.train - INFO - Training complete (51.9s) | running validation...
+2026-05-18 21:55:19,908 - qqe.src.GNN.training.train - INFO - Losses | train 0.354351 | val 0.228417 | lr 7.48e-04 | time train=51.9s val=5.3s total=57.1s
+2026-05-18 21:55:19,909 - qqe.src.GNN.training.train - INFO - -------- EPOCH 023 --------
+2026-05-18 21:56:11,572 - qqe.src.GNN.training.train - INFO - Training complete (51.7s) | running validation...
+2026-05-18 21:56:16,779 - qqe.src.GNN.training.train - INFO - Losses | train 0.354620 | val 0.223538 | lr 7.48e-04 | time train=51.7s val=5.2s total=56.9s
+2026-05-18 21:56:16,780 - qqe.src.GNN.training.train - INFO - -------- EPOCH 024 --------
+2026-05-18 21:57:08,314 - qqe.src.GNN.training.train - INFO - Training complete (51.5s) | running validation...
+2026-05-18 21:57:13,575 - qqe.src.GNN.training.train - INFO - Losses | train 0.361443 | val 0.192610 | lr 7.48e-04 | time train=51.5s val=5.3s total=56.8s
+2026-05-18 21:57:13,576 - qqe.src.GNN.training.train - INFO - -------- EPOCH 025 --------
+2026-05-18 21:58:05,310 - qqe.src.GNN.training.train - INFO - Training complete (51.7s) | running validation...
+2026-05-18 21:58:10,465 - qqe.src.GNN.training.train - INFO - Losses | train 0.355037 | val 0.241560 | lr 7.48e-04 | time train=51.7s val=5.2s total=56.9s

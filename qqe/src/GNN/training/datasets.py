@@ -37,16 +37,6 @@ class PaddedGraphDatasetWrapper:
             pad_size = self.target_dim - data.x.shape[1]
             out.x = F.pad(out.x, (0, pad_size), value=0)
             return out
-        if hasattr(data, "global_features") and data.global_features is not None:
-            out = data.clone()
-            pad_size = self.target_dim - data.global_features.shape[0]
-            out.global_features = out.global_features.flatten().to(torch.float32)
-            return out
-        if hasattr(data, "y") and data.y is not None:
-            out = data.clone()
-            pad_size = self.target_dim - data.y.shape[0]
-            out.y = out.y.flatten().to(torch.float32)
-            return out
         return data
 
 

@@ -505,6 +505,8 @@ def plot_training_curves(
     save_fig: bool = False,
     fig_path: str | None = None,
 ):
+    if fig_path is None:
+        raise ValueError("fig_path must be provided if save_fig is True")
     os.makedirs(fig_path, exist_ok=True)
     epochs = list(range(1, len(hist.train_loss) + 1))
 
@@ -668,8 +670,8 @@ def view_correlation(
 
     x = subset.index  # sample index (what you want)
 
-    plt.plot(x, subset[col_x], label="target", marker="o", linestyle="")
-    plt.plot(x, subset[col_y], label="prediction", marker="x", linestyle="")
+    plt.plot(x, subset[col_x], label="target", marker="o")
+    plt.plot(x, subset[col_y], label="prediction", marker="x")
 
     plt.xlabel("Sample index")
     plt.ylabel("Value")
