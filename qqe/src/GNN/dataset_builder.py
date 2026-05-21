@@ -304,19 +304,19 @@ def sample_random_controls(rng: np.random.Generator, regime: str) -> dict[str, A
 
 def sample_quansistor_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
     if regime == "identity_like":
-        gate_probability = float(rng.uniform(0.05, 0.20))
+        gate_probability = float(rng.uniform(0.00, 0.10))
         param_scale = 0.02
     elif regime == "weak":
-        gate_probability = float(rng.uniform(0.20, 0.60))
+        gate_probability = float(rng.uniform(0.10, 0.40))
         param_scale = 0.20
     elif regime == "moderate":
         gate_probability = float(rng.uniform(0.40, 0.85))
         param_scale = 0.75
     elif regime == "structured_equal_ab" or regime == "structured_opposite_ab":
-        gate_probability = float(rng.uniform(0.30, 0.80))
+        gate_probability = float(rng.uniform(0.40, 0.80))
         param_scale = 1.00
     elif regime == "generic_uniform":
-        gate_probability = float(rng.uniform(0.50, 1.00))
+        gate_probability = float(rng.uniform(0.60, 1.00))
         param_scale = None
     else:
         raise ValueError(f"Unknown quansistor regime={regime}")
