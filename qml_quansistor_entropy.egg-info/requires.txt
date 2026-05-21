@@ -26,6 +26,8 @@ optuna>=4.8.0
 torchvision>=0.26.0
 optuna-dashboard>=0.20.0
 plotly>=6.7.0
+ipython>=9.13.0
+jupyter>=1.1.1
 
 [dev]
 black>=23.0.0

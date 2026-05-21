@@ -782,6 +782,7 @@ def _plot_SRE_distribution(
 
     plt.xlabel("Stabilizer Rényi Entropy")
     plt.ylabel("Frequency (%)")
+    plt.title(title, fontweight="bold")
     plt.legend()
     plt.grid(alpha=0.25)
     plt.tight_layout()
