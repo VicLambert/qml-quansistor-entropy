@@ -255,8 +255,8 @@ def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any
         haar_strength = 1.0
         haar_mode = "full_haar"
     elif regime == "medium":
-        p_haar = rng.uniform(0.25, 0.70)
-        haar_strength = rng.uniform(0.20, 0.80)
+        p_haar = rng.uniform(0.15, 0.75)
+        haar_strength = rng.uniform(0.10, 0.80)
         haar_mode = "exp_hermitian"
     elif regime == "full":
         p_haar = rng.uniform(0.70, 1.0)
@@ -275,16 +275,16 @@ def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any
 def sample_random_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
 
     if regime == "identity_like":
-        gate_probability = float(rng.uniform(0.00, 0.15))
+        gate_probability = float(rng.uniform(0.05, 0.20))
         angle_scale = 0.02
 
     elif regime == "clifford_like":
-        gate_probability = float(rng.uniform(0.15, 0.60))
+        gate_probability = float(rng.uniform(0.20, 0.60))
         angle_scale = 0.10
 
     elif regime == "small_angles":
-        gate_probability = float(rng.uniform(0.30, 0.80))
-        angle_scale = 0.25
+        gate_probability = float(rng.uniform(0.20, 0.70))
+        angle_scale = float(rng.uniform(0.05, 0.30))
 
     elif regime == "generic":
         gate_probability = float(rng.uniform(0.60, 1.00))
@@ -305,11 +305,11 @@ def sample_quansistor_controls(rng: np.random.Generator, regime: str) -> dict[st
         gate_probability = float(rng.uniform(0.00, 0.10))
         param_scale = 0.02
     elif regime == "weak":
-        gate_probability = float(rng.uniform(0.10, 0.40))
-        param_scale = 0.20
+        gate_probability = float(rng.uniform(0.10, 0.45))
+        param_scale = float(rng.uniform(0.05, 0.30))
     elif regime == "moderate":
         gate_probability = float(rng.uniform(0.40, 0.85))
-        param_scale = 0.75
+        param_scale = float(rng.uniform(0.30, 0.90))
     elif regime == "structured_equal_ab" or regime == "structured_opposite_ab":
         gate_probability = float(rng.uniform(0.40, 0.80))
         param_scale = 1.00
