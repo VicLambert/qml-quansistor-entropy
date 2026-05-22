@@ -275,12 +275,12 @@ def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any
 def sample_random_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
 
     if regime == "identity_like":
-        gate_probability = float(rng.uniform(0.05, 0.20))
+        gate_probability = float(rng.uniform(0.00, 0.15))
         angle_scale = 0.02
 
     elif regime == "clifford_like":
-        gate_probability = float(rng.uniform(0.20, 0.60))
-        angle_scale = 0.02
+        gate_probability = float(rng.uniform(0.15, 0.60))
+        angle_scale = 0.10
 
     elif regime == "small_angles":
         gate_probability = float(rng.uniform(0.30, 0.80))
