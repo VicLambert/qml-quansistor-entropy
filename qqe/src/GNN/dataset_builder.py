@@ -226,10 +226,10 @@ def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tupl
         N_T = int(rng.integers(0, max(2, max_t // 8 + 1)))
 
     elif regime == "medium":
-        N_T = int(rng.integers(max(10, max_t // 8), max(2, max_t // 4 + 1)))
+        N_T = int(rng.integers(max(10, max_t // 8), max(2, max_t // 2 + 1)))
 
     elif regime == "high":
-        N_T = int(rng.integers(max(10, max_t // 4), max_t + 1))
+        N_T = int(rng.integers(max(10, max_t // 2), max_t + 1))
 
     else:
         raise ValueError(f"Unknown t-count regime: {regime}")
