@@ -23,11 +23,11 @@ def default_sampling_config() -> SamplingConfig:
     return SamplingConfig(
         clifford=RegimeDistribution(
             regimes=["zero", "low", "medium", "high"],
-            probabilities=[0.15, 0.15, 0.25, 0.45],
+            probabilities=[0.10, 0.10, 0.30, 0.50],
         ),
         random=RegimeDistribution(
             regimes=["identity_like", "clifford_like", "small_angles", "generic"],
-            probabilities=[0.15, 0.15, 0.25, 0.45],
+            probabilities=[0.10, 0.10, 0.30, 0.50],
         ),
         quansistor=RegimeDistribution(
             regimes=[
@@ -38,11 +38,11 @@ def default_sampling_config() -> SamplingConfig:
                 "structured_opposite_ab",
                 "generic_uniform",
             ],
-            probabilities=[0.15, 0.15, 0.15, 0.15, 0.15, 0.25],
+            probabilities=[0.2, 0.15, 0.15, 0.15, 0.15, 0.2],
         ),
         haar=RegimeDistribution(
             regimes=["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
-            probabilities=[0.15, 0.15, 0.15, 0.15, 0.15, 0.25],
+            probabilities=[0.1, 0.15, 0.15, 0.15, 0.15, 0.3],
         ),
     )
 
@@ -53,12 +53,12 @@ def main(
     method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/dataset",
+        "/outputs/data/new_dataset",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "quansistor",
+        "random,clifford",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
@@ -76,7 +76,7 @@ def main(
     layers_max: int = typer.Option(100),
     layers_step: int = typer.Option(2),
     target_qubits: str = typer.Option(
-        "4,6,8,10",
+        "4,6,8",
         help="Comma-separated qubit values for which the target is computed",
     ),
     max_configs: int | None = typer.Option(None),

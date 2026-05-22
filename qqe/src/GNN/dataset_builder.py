@@ -219,24 +219,22 @@ def trim_memory() -> None:
 def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tuple[str, int]:
     max_t = 2 * n_layers
 
-    # print(f"Sampling t count with regime: {regime}")
-
     if regime == "zero":
         N_T: int = 0
 
     elif regime == "low":
-        N_T = rng.integers(1, max(2, max_t // 4 + 1))
+        N_T = int(rng.integers(0, max(2, max_t // 8 + 1)))
 
     elif regime == "medium":
-        N_T = rng.integers(max(1, max_t // 4), max(2, max_t // 2 + 1))
+        N_T = int(rng.integers(max(10, max_t // 8), max(2, max_t // 4 + 1)))
 
     elif regime == "high":
-        N_T = rng.integers(max(1, max_t // 2), max_t + 1)
+        N_T = int(rng.integers(max(10, max_t // 4), max_t + 1))
 
     else:
         raise ValueError(f"Unknown t-count regime: {regime}")
 
-    return (regime, int(N_T))
+    return (regime, N_T)
 
 def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
     if regime == "none":
