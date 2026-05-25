@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING, Any
 import numpy as np
 
 # from quimb.tensor.tensor_arbgeom import tensor_network_apply_op_vec
-from qqe.src.properties.results import PropertyResult, registry
-from qqe.src.states.types import DenseState, MPSState
+from properties.results import PropertyResult, registry
+from states.types import DenseState, MPSState
 
 
 @dataclass

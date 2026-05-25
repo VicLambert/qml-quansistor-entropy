@@ -10,13 +10,13 @@ from typing import Any
 
 import torch
 
-from qqe.src.experiments.plotting import plot_training_curves
-from qqe.src.GNN.parameter_search.helpers import objective_GNN, objective_NN
-from qqe.src.GNN.physics_aware_NN import GNN, NN, Regressor
-from qqe.src.GNN.training.datasets import build_loaders, build_loaders_NN
-from qqe.src.GNN.training.train import build_loss, train_model
-from qqe.src.GNN.training.train_config import TrainConfig
-from qqe.src.GNN.training.utils import (
+from experiments.plotting import plot_training_curves
+from GNN.parameter_search.helpers import objective_GNN, objective_NN
+from GNN.physics_aware_NN import GNN, NN, Regressor
+from GNN.training.datasets import build_loaders, build_loaders_NN
+from GNN.training.train import build_loss, train_model
+from GNN.training.train_config import TrainConfig
+from GNN.training.utils import (
     collect_dataset_paths,
     collect_files_path,
     evaluate_loss,

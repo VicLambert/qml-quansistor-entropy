@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
-from qqe.src.circuit.spec import CircuitSpec, GateSpec
+from circuit.spec import CircuitSpec, GateSpec
 
 import numpy as np
 

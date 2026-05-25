@@ -7,8 +7,8 @@ from pathlib import Path
 import numpy as np
 import typer
 
-from qqe.src.GNN.dataset_builder import DataGenConfig, run_dataset_pipeline, SamplingConfig, RegimeDistribution
-from qqe.src.utils import configure_logger
+from GNN.dataset_builder import DataGenConfig, run_dataset_pipeline, SamplingConfig, RegimeDistribution
+from utils import configure_logger
 
 logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent

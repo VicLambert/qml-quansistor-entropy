@@ -7,7 +7,7 @@ from typing import Any
 import torch
 import torch.nn as nn
 
-from qqe.src.GNN.physics_aware_NN import GNN, Regressor, NN
+from GNN.physics_aware_NN import GNN, Regressor, NN
 
 import logging
 

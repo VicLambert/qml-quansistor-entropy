@@ -15,10 +15,10 @@ from typing import TYPE_CHECKING, Any, Protocol
 
 import numpy as np
 
-from qqe.src.circuit.gates import clifford_recipe_unitary
-from qqe.src.circuit.patterns import TdopingRules, brickwork_pattern
-from qqe.src.circuit.spec import CircuitSpec, GateSpec
-from qqe.src.rng.seeds import gate_seed
+from circuit.gates import clifford_recipe_unitary
+from circuit.patterns import TdopingRules, brickwork_pattern
+from circuit.spec import CircuitSpec, GateSpec
+from rng.seeds import gate_seed
 
 if TYPE_CHECKING:
     from collections.abc import Generator

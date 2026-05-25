@@ -1,0 +1,16 @@
+*.md
+*.png
+*.pt
+
+example_visualization.py
+cleanup.py
+notebooks/temp
+outputs/data/encoding_data_quimb_fwht.json
+notebooks/data/
+qqe/outputs/data/
+qqe/outputs/cache/
+
+*.log
+/logs/
+/outputs/
+/data/

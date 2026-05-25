@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from collections.abc import Iterable
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 import networkx as nx
 
-from qqe.src.circuit.spec import CircuitSpec, GateSpec
+if TYPE_CHECKING:
+    from circuit.spec import CircuitSpec, GateSpec
 
 Wires = tuple[int, ...]
 

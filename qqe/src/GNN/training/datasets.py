@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import torch
 import torch.nn.functional as F
 
-from qqe.src.GNN.physics_aware_NN import QuantumCircuitGraphDataset
+from GNN.physics_aware_NN import QuantumCircuitGraphDataset
 from torch.utils.data import DataLoader as TorchDataLoader, random_split
 from torch_geometric.loader import DataLoader as PyGDataLoader
 

@@ -6,7 +6,7 @@ import torch
 import numpy as np
 from typing import TYPE_CHECKING, Any
 
-from qqe.src.GNN.prediction.utils import extract_target_value
+from GNN.prediction.utils import extract_target_value
 
 if TYPE_CHECKING:
     from .pred_config import PredConfig

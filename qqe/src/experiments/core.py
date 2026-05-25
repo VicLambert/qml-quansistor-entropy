@@ -7,16 +7,16 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
 # from circuit.DAG import circuit_spec_to_dag
-from qqe.src.properties.compute import (
+from properties.compute import (
     PropertyRequest,
     PropertyResult,
     compute_property,
 )
-from qqe.src.states.types import BackendConfig, DenseState, MPSState
-from qqe.src.utils.reading import FileCache, cache_lock, make_property_cache_key
+from states.types import BackendConfig, DenseState, MPSState
+from utils.reading import FileCache, cache_lock, make_property_cache_key
 
 if TYPE_CHECKING:
-    from qqe.src.circuit.spec import CircuitSpec
+    from circuit.spec import CircuitSpec
 
 
 @dataclass(frozen=True)

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import os
 import ast
 import logging
+import os
 
-import torch
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -13,13 +12,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pennylane as qml
+import torch
 
 from matplotlib.patches import Rectangle
 
-from qqe.src.circuit.gates import gate_unitary
-from qqe.src.circuit.spec import CircuitSpec
-from qqe.src.states.types import DenseState
-from qqe.src.GNN.training.train import TrainHistory
+from circuit.gates import gate_unitary
+from circuit.spec import CircuitSpec
+from GNN.training.train import TrainHistory
+from states.types import DenseState
 
 logger = logging.getLogger(__name__)
 

@@ -1,5 +1,5 @@
 
-from qqe.src.parallel.dask import (
+from parallel.dask import (
     DaskConfig,
     create_client,
     dask_client,

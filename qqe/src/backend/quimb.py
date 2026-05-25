@@ -11,12 +11,12 @@ from typing import TYPE_CHECKING, Any
 
 import quimb.tensor as qtn
 
-from qqe.src.backend.base import BaseBackend, State
-from qqe.src.circuit.gates import gate_unitary
-from qqe.src.states.types import DenseState, MPSState
+from backend.base import BaseBackend, State
+from circuit.gates import gate_unitary
+from states.types import DenseState, MPSState
 
 if TYPE_CHECKING:
-    from qqe.src.circuit.spec import CircuitSpec, GateSpec
+    from circuit.spec import CircuitSpec, GateSpec
 
 
 class QuimbBackend(BaseBackend):

@@ -17,8 +17,8 @@ from collections.abc import Iterator
 
 import numpy as np
 
-from qqe.src.properties.results import PropertyRequest
-from qqe.src.states.types import BackendConfig
+from properties.results import PropertyRequest
+from states.types import BackendConfig
 
 logger = logging.getLogger(__name__)
 

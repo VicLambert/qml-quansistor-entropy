@@ -1,0 +1,136 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qml-quansistor-entropy"
+version = "0.1.0"
+description = "Quantum machine learning with quansistor and entropy analysis"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+authors = [
+    {name = "Victor Lambert", email = "victor.lambert@umontreal.ca"}
+]
+keywords = ["quantum", "machine-learning", "entropy"]
+
+dependencies = [
+    "numpy",
+    "numba>=0.55.0",
+    "pandas",
+    "scikit-learn",
+    "pennylane",
+    "matplotlib",
+    "quimb>=1.7.0",
+    "dask",
+    "distributed>=2021.6.0",
+    "dask-jobqueue>=0.8.0",
+    "tqdm",
+    "typer",
+    "networkx",
+    "pytest>=9.0.2",
+    "torch>=2.10.0",
+    "torch-geometric>=2.7.0",
+    "qiskit>=2.3.0",
+    "ipywidgets>=8.1.8",
+    "pylatexenc>=2.10",
+    "bokeh>=3.8.2",
+    "tensorboard>=2.20.0",
+    "ruff>=0.15.0",
+    "scipy-stubs~=1.17.0",
+    "ipykernel>=7.2.0",
+    "optuna>=4.8.0",
+    "torchvision>=0.26.0",
+    "optuna-dashboard>=0.20.0",
+    "plotly>=6.7.0",
+    "ipython>=9.13.0",
+    "jupyter>=1.1.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "pyright>=1.1.200",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+docs = [
+    "sphinx>=5.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[tool.black]
+line-length = 95
+
+[tool.isort]
+profile = "black"
+known_first_party = ["qqe"]
+
+[tool.uv]
+extra-index-url = ["https://download.pytorch.org/whl/cu126"]
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # Pyflakes
+    "I",     # isort
+    "C",     # flake8-comprehensions
+    "B",     # flake8-bugbear
+    "UP",    # pyupgrade
+    "SIM",   # flake8-simplify
+    "DTZ",   # flake8-datetimez
+    "T20",   # flake8-print
+    "PT",    # flake8-pytest-style
+    "RUF",   # Ruff-specific rules
+    "ASYNC", # flake8-async
+    "BLE",   # flake8-blind-except
+    "COM",   # flake8-commas
+    "C90",   # mccabe
+    "D",     # pydocstyle
+    "EM",    # flake8-errmsg
+    "EXE",   # flake8-executable
+    "FA",    # flake8-future-annotations
+    "ISC",   # flake8-implicit-str-concat
+    "ICN",   # flake8-import-conventions
+    "G",     # flake8-logging-format
+    "INP",   # flake8-no-pep420
+    "PIE",   # flake8-pie
+    "T10",   # flake8-debugger
+    "Q",     # flake8-quotes
+    "RSE",   # flake8-raise
+    "RET",   # flake8-return
+    "SLF",   # flake8-self
+    "SLOT",  # flake8-slots
+    "TCH",   # flake8-type-checking
+    "INT",   # flake8-gettext
+    "TRY",   # tryceratops
+    "FBT",   # flake8-boolean-trap
+    "LOG",   # flake8-logging
+    "PERF",  # perflint
+    "FURB",  # refurb
+    "RUF",   # Ruff-specific rules
+]
+
+ignore = [
+    "E501",   # Line too long (handled by Black)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["qqe"]
+combine-as-imports = true
+force-single-line = false
+lines-between-types = 1
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff]
+fix=true

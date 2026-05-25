@@ -6,14 +6,13 @@ from pathlib import Path
 
 import numpy as np
 import typer
-
-from qqe.src.GNN.dataset_builder import (
+from GNN.dataset_builder import (
     DataGenConfig,
     RegimeDistribution,
     SamplingConfig,
     run_dataset_pipeline,
 )
-from qqe.src.utils import configure_logger
+from utils import configure_logger
 
 logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -22,12 +21,27 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 def default_sampling_config() -> SamplingConfig:
     return SamplingConfig(
         clifford=RegimeDistribution(
-            regimes=["zero", "low", "medium", "high"],
-            probabilities=[0.10, 0.10, 0.30, 0.50],
+            regimes=[
+                "zero",
+                "few",
+                "low",
+                "medium_low",
+                "medium",
+                "medium_high",
+                "high",
+            ],
+            probabilities=[0.1, 0.3, 0.4, 0.1, 0.1, 0.1, 0.1],
         ),
         random=RegimeDistribution(
-            regimes=["identity_like", "clifford_like", "small_angles", "generic"],
-            probabilities=[0.10, 0.10, 0.30, 0.50],
+            regimes=[
+                "identity_like",
+                "near_clifford",
+                "small_angles",
+                "medium_angles",
+                "generic_sparse",
+                "generic_dense",
+            ],
+            probabilities=[0.005, 0.155, 0.3, 0.25, 0.15, 0.14],
         ),
         quansistor=RegimeDistribution(
             regimes=[
@@ -38,11 +52,18 @@ def default_sampling_config() -> SamplingConfig:
                 "structured_opposite_ab",
                 "generic_uniform",
             ],
-            probabilities=[0.2, 0.15, 0.15, 0.15, 0.15, 0.2],
+            probabilities=[0.1, 0.4, 0.4, 0.1, 0.1, 0.1],
         ),
         haar=RegimeDistribution(
-            regimes=["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
-            probabilities=[0.1, 0.15, 0.15, 0.15, 0.15, 0.3],
+            regimes=[
+                "none",
+                "sparse_weak",
+                "dense_weak",
+                "sparse_full",
+                "medium",
+                "full",
+            ],
+            probabilities=[0.1, 0.4, 0.4, 0.1, 0.1, 0.1],
         ),
     )
 
@@ -53,7 +74,7 @@ def main(
     method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/new_dataset",
+        "/outputs/data/temp_dataset",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
@@ -62,15 +83,15 @@ def main(
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
-        175,
+        50,
         help="Seeds per (family, qubits, layers)",
     ),
     prediction_n_seeds_option: int | None = typer.Option(
-        75,
+        5,
         help="Optional different number of seeds for qubits without target",
     ),
     qubits_min: int = typer.Option(4),
-    qubits_max: int = typer.Option(30),
+    qubits_max: int = typer.Option(8),
     qubits_step: int = typer.Option(2),
     layers_min: int = typer.Option(2),
     layers_max: int = typer.Option(100),

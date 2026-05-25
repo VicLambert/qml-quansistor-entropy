@@ -4,7 +4,7 @@ This module contains tools for running experiments, analyzing quantum circuits,
 and visualizing results from different backends.
 """
 
-from qqe.src.experiments.sweeper import (
+from experiments.sweeper import (
     JobConfig,
     aggregate_by_cond,
     compile_job,

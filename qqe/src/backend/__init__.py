@@ -4,9 +4,9 @@ This package provides interfaces to different quantum simulation backends,
 including PennyLane and QuimB.
 """
 
-from qqe.src.backend.base import BaseBackend
-from qqe.src.backend.pennylane_backend import PennylaneBackend
-from qqe.src.backend.quimb import QuimbBackend
+from backend.base import BaseBackend
+from backend.pennylane_backend import PennylaneBackend
+from backend.quimb import QuimbBackend
 
 __all__ = [
     "BaseBackend",

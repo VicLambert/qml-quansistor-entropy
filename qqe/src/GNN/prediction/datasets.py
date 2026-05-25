@@ -10,7 +10,7 @@ from torch_geometric.loader import DataLoader as PyGDataLoader
 from pathlib import Path
 import hashlib
 
-from qqe.src.GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
+from GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
 from .utils import FamilyFeatureProjector, out_is_same, PredictionGraphWrapper, PredictionTensorWrapper
 
 

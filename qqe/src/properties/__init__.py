@@ -1,8 +1,8 @@
 
-from qqe.src.properties.compute import compute_property
-from qqe.src.properties.entanglement_entropy import von_neumann_ee, renyi_ee
-from qqe.src.properties.SRE import sre_fwht, sre_mcmc, sre_exact
-from qqe.src.properties.results import PropertyRequest, PropertyResult, registry, get
+from properties.compute import compute_property
+from properties.entanglement_entropy import von_neumann_ee, renyi_ee
+from properties.SRE import sre_fwht, sre_mcmc, sre_exact
+from properties.results import PropertyRequest, PropertyResult, registry, get
 
 __all__ = [
     "compute_property",

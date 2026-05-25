@@ -6,7 +6,7 @@ import numpy as np
 
 from scipy.linalg import expm
 
-from qqe.src.circuit.spec import GateSpec
+from circuit.spec import GateSpec
 
 
 # ---------------------------------------------------------------------

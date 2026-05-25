@@ -11,8 +11,8 @@ from typing import Any, Generator, Literal, Sequence
 from dask.distributed import Client, LocalCluster, as_completed, performance_report
 from dask_jobqueue.slurm import SLURMCluster
 
-from qqe.src.experiments.core import run_experiment
-from qqe.src.experiments.sweeper import ExperimentConfig
+from experiments.core import run_experiment
+from experiments.sweeper import ExperimentConfig
 
 logger = logging.getLogger(__name__)
 _global_client: Client | None = None

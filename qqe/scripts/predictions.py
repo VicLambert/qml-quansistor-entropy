@@ -5,20 +5,20 @@ import logging
 import torch
 import typer
 
-from qqe.src.experiments.plotting import (
+from experiments.plotting import (
     plot_fixed_layers_vary_qubits,
     plot_fixed_qubits_vary_layers,
 )
-from qqe.src.GNN.prediction.datasets import (
+from GNN.prediction.datasets import (
     build_loader,
     build_prediction_dataset,
     collect_prediction_paths,
 )
-from qqe.src.GNN.prediction.inference import predict
-from qqe.src.GNN.prediction.model import build_model, checkpoint_path, load_checkpoint
-from qqe.src.GNN.prediction.utils import save_predictions_csv
-from qqe.src.GNN.training.utils import collect_dataset_paths
-from qqe.src.utils import configure_logger
+from GNN.prediction.inference import predict
+from GNN.prediction.model import build_model, checkpoint_path, load_checkpoint
+from GNN.prediction.utils import save_predictions_csv
+from GNN.training.utils import collect_dataset_paths
+from utils import configure_logger
 
 logger = logging.getLogger(__name__)
 

@@ -10,9 +10,9 @@ from typing import Any, Callable, Union
 
 import numpy as np
 
-from qqe.src.properties.entanglement_entropy import renyi_ee, von_neumann_ee
-from qqe.src.properties.results import PropertyRequest, PropertyResult
-from qqe.src.properties.SRE import sre_exact, sre_fwht, sre_mcmc
+from properties.entanglement_entropy import renyi_ee, von_neumann_ee
+from properties.results import PropertyRequest, PropertyResult
+from properties.SRE import sre_exact, sre_fwht, sre_mcmc
 
 PROPERTY_REGISTRY: dict[str, dict[str, Any]] = {
     "SRE": {

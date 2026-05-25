@@ -22,7 +22,7 @@ from torch.amp.grad_scaler import GradScaler
 from torch.optim import Adam
 from tqdm import tqdm
 
-from qqe.src.GNN.training.utils import evaluate_loss, unpack_supervised_batch
+from GNN.training.utils import evaluate_loss, unpack_supervised_batch
 
 if TYPE_CHECKING:
     from torch_geometric.loader import DataLoader

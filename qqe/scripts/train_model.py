@@ -4,8 +4,8 @@ import logging
 
 import typer
 
-from qqe.src.GNN.training.runners import train
-from qqe.src.utils import configure_logger
+from GNN.training.runners import train
+from utils import configure_logger
 
 logger = logging.getLogger(__name__)
 

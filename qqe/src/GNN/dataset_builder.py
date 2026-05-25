@@ -19,8 +19,8 @@ import torch
 
 from tqdm import tqdm
 
-from qqe.src.backend import PennylaneBackend, QuimbBackend
-from qqe.src.circuit.families import (
+from backend import PennylaneBackend, QuimbBackend
+from circuit.families import (
     CliffordBrickwork,
     HaarBrickwork,
     QuansistorBrickwork,
@@ -29,14 +29,14 @@ from qqe.src.circuit.families import (
 
 # Keep this import path only if it is the correct one in your project.
 # If your real function lives in circuit.matrix_factory, switch it there.
-from qqe.src.circuit.gates import gate_unitary
-from qqe.src.circuit.patterns import TdopingRules, to_qasm
-from qqe.src.experiments.core import run_experiment
-from qqe.src.GNN.encoder import eigenvalue_phase_histogram_features, qasm_to_pyg_graph
-from qqe.src.utils import FileCache
+from circuit.gates import gate_unitary
+from circuit.patterns import TdopingRules, to_qasm
+from experiments.core import run_experiment
+from GNN.encoder import eigenvalue_phase_histogram_features, qasm_to_pyg_graph
+from utils import FileCache
 
 if TYPE_CHECKING:
-    from qqe.src.circuit.spec import GateSpec
+    from circuit.spec import GateSpec
 
 logger = logging.getLogger(__name__)
 
@@ -222,14 +222,23 @@ def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tupl
     if regime == "zero":
         N_T: int = 0
 
+    elif regime == "few":
+        N_T = int(rng.integers(2, 6))
+
     elif regime == "low":
-        N_T = int(rng.integers(0, max(2, max_t // 8 + 1)))
+        N_T = int(rng.integers(2, max(2, max_t // 8 + 1)))
+
+    elif regime == "medium_low":
+        N_T = int(rng.integers(max(2, max_t // 8), max(2, max_t // 4 + 1)))
 
     elif regime == "medium":
-        N_T = int(rng.integers(max(10, max_t // 8), max(2, max_t // 2 + 1)))
+        N_T = int(rng.integers(max(2, max_t // 4), max(2, max_t // 2 + 1)))
+
+    elif regime == "medium_high":
+        N_T = int(rng.integers(max(2, max_t // 2), max(2, 3 * max_t // 4 + 1)))
 
     elif regime == "high":
-        N_T = int(rng.integers(max(10, max_t // 2), max_t + 1))
+        N_T = int(rng.integers(max(2, 3 * max_t // 4), max_t + 1))
 
     else:
         raise ValueError(f"Unknown t-count regime: {regime}")
@@ -256,7 +265,7 @@ def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any
         haar_mode = "full_haar"
     elif regime == "medium":
         p_haar = rng.uniform(0.15, 0.75)
-        haar_strength = rng.uniform(0.10, 0.80)
+        haar_strength = rng.uniform(0.25, 0.80)
         haar_mode = "exp_hermitian"
     elif regime == "full":
         p_haar = rng.uniform(0.70, 1.0)
@@ -276,18 +285,32 @@ def sample_random_controls(rng: np.random.Generator, regime: str) -> dict[str, A
 
     if regime == "identity_like":
         gate_probability = float(rng.uniform(0.05, 0.20))
-        angle_scale = 0.02
+        angle_regime = "identity_like"
+        angle_scale = float(rng.uniform(0.00, 0.03))
 
-    elif regime == "clifford_like":
-        gate_probability = float(rng.uniform(0.20, 0.60))
-        angle_scale = 0.10
+    elif regime == "near_clifford":
+        gate_probability = float(rng.uniform(0.25, 0.65))
+        angle_regime = "clifford_like"
+        angle_scale = float(rng.uniform(0.005, 0.07))
 
     elif regime == "small_angles":
-        gate_probability = float(rng.uniform(0.20, 0.70))
-        angle_scale = float(rng.uniform(0.05, 0.30))
+        gate_probability = float(rng.uniform(0.30, 0.70))
+        angle_regime = "small_angles"
+        angle_scale = float(rng.uniform(0.10, np.pi/4))
 
-    elif regime == "generic":
+    elif regime == "medium_angles":
+        gate_probability = float(rng.uniform(0.60, 0.90))
+        angle_regime = "small_angles"
+        angle_scale = float(rng.uniform(np.pi/4, np.pi/2))
+
+    elif regime == "generic_sparse":
+        gate_probability = float(rng.uniform(0.10, 0.40))
+        angle_regime = "generic"
+        angle_scale = None
+
+    elif regime == "generic_dense":
         gate_probability = float(rng.uniform(0.60, 1.00))
+        angle_regime = "generic"
         angle_scale = None
 
     else:
@@ -296,7 +319,7 @@ def sample_random_controls(rng: np.random.Generator, regime: str) -> dict[str, A
     return {
         "sampling_regime": regime,
         "gate_probability": gate_probability,
-        "angle_regime": regime,
+        "angle_regime": angle_regime,
         "angle_scale": angle_scale,
     }
 
@@ -312,7 +335,7 @@ def sample_quansistor_controls(rng: np.random.Generator, regime: str) -> dict[st
         param_scale = float(rng.uniform(0.30, 0.90))
     elif regime == "structured_equal_ab" or regime == "structured_opposite_ab":
         gate_probability = float(rng.uniform(0.40, 0.80))
-        param_scale = 1.00
+        param_scale = float(rng.uniform(0.30, 1.0))
     elif regime == "generic_uniform":
         gate_probability = float(rng.uniform(0.60, 1.00))
         param_scale = None
@@ -376,9 +399,9 @@ def compute_entry(
     seed: int,
     sampling_config: SamplingConfig | None = None,
 ) -> dict[str, Any] | None:
-    from qqe.src.experiments.core import ExperimentConfig
-    from qqe.src.properties.compute import PropertyRequest
-    from qqe.src.states.types import BackendConfig
+    from experiments.core import ExperimentConfig
+    from properties.compute import PropertyRequest
+    from states.types import BackendConfig
 
     try:
         base_dir = config.output_dir or DATASET_DIR
@@ -615,7 +638,7 @@ def compute_all_entries_parallel(
 ) -> list[dict[str, Any]]:
     from dask.distributed import as_completed
 
-    from qqe.src.parallel import dask_client
+    from parallel import dask_client
 
     base_dir = config.output_dir or DATASET_DIR
     base_dir.mkdir(parents=True, exist_ok=True)
