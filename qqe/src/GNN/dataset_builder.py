@@ -217,28 +217,31 @@ def trim_memory() -> None:
         pass
 
 def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tuple[str, int]:
-    max_t = 2 * n_layers
+    effective_max_t = min(2 * n_layers, 80)
 
     if regime == "zero":
-        N_T: int = 0
+        N_T = 0
 
-    elif regime == "few":
-        N_T = int(rng.integers(2, 6))
+    elif regime == "single_t":
+        N_T = 2
 
-    elif regime == "low":
-        N_T = int(rng.integers(2, max(2, max_t // 8 + 1)))
+    elif regime == "few_t":
+        N_T = int(rng.integers(2, 7))
 
     elif regime == "medium_low":
-        N_T = int(rng.integers(max(2, max_t // 8), max(2, max_t // 4 + 1)))
+        N_T = int(rng.integers(6, 11))
 
     elif regime == "medium":
-        N_T = int(rng.integers(max(2, max_t // 4), max(2, max_t // 2 + 1)))
+        N_T = int(rng.integers(10, 21))
 
     elif regime == "medium_high":
-        N_T = int(rng.integers(max(2, max_t // 2), max(2, 3 * max_t // 4 + 1)))
+        N_T = int(rng.integers(20, 41))
 
-    elif regime == "high":
-        N_T = int(rng.integers(max(2, 3 * max_t // 4), max_t + 1))
+    elif regime == "start_plateau":
+        N_T = int(rng.integers(40, effective_max_t + 1))
+
+    elif regime == "plateau":
+        N_T = int(rng.integers(effective_max_t, 2 * n_layers + 1))
 
     else:
         raise ValueError(f"Unknown t-count regime: {regime}")
