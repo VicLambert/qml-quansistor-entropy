@@ -276,3 +276,45 @@ def evaluate_loss(
         total_graphs += batch_size
 
     return total_loss / max(1, total_graphs)
+
+@torch.no_grad()
+def evaluate_r2(
+    model: nn.Module,
+    loader: DataLoader,
+    device: torch.device,
+    use_amp: bool = True,
+    show_progress: bool = False,
+) -> float:
+    model.eval()
+    total_ss_res = 0.0
+    total_ss_tot = 0.0
+    total_graphs = 0
+
+    loader_iter = tqdm(loader, desc="R² Evaluation", leave=False) if show_progress else loader
+
+    for batch in loader_iter:
+        model_input, y, batch_size = unpack_supervised_batch(batch, device)
+
+        with autocast(
+            device_type=_amp_device_type(),
+            enabled=(use_amp and device.type == "cuda"),
+        ):
+            pred = model(model_input).view(-1).float()
+
+            mask = torch.isfinite(y)
+            if mask.sum() == 0:
+                continue
+
+            y_true = y[mask]
+            y_pred = pred[mask]
+
+            ss_res = torch.sum((y_true - y_pred) ** 2).item()
+            ss_tot = torch.sum((y_true - torch.mean(y_true)) ** 2).item()
+
+        total_ss_res += ss_res
+        total_ss_tot += ss_tot
+        total_graphs += batch_size
+
+    r2_score = 1 - (total_ss_res / total_ss_tot) if total_ss_tot > 0 else float("nan")
+    return r2_score
+
