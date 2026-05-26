@@ -217,35 +217,67 @@ def trim_memory() -> None:
         pass
 
 def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tuple[str, int]:
-    effective_max_t = min(2 * n_layers, 80)
+    max_t = max(0, 2 * n_layers)
+    transistion_cap = min(max_t, 100)
 
-    if regime == "zero":
-        N_T = 0
+    if max_t == 0 or regime == "zero":
+        return regime, 0
+    if max_t < 40:
+        if regime == "tiny":
+            low, high = 2, max(2, int(0.15 * max_t))
 
-    elif regime == "single_t":
-        N_T = 2
+        elif regime == "very_low":
+            low, high = max(2, int(0.15 * max_t)), max(4, int(0.30 * max_t))
 
-    elif regime == "few_t":
-        N_T = int(rng.integers(2, 7))
+        elif regime == "low":
+            low, high = max(2, int(0.30 * max_t)), max(4, int(0.50 * max_t))
+
+        elif regime == "medium_low":
+            low, high = max(2, int(0.50 * max_t)), max(4, int(0.70 * max_t))
+
+        elif regime == "medium":
+            low, high = max(2, int(0.70 * max_t)), max(4, int(0.90 * max_t))
+
+        elif regime in {"medium_high", "high"}:
+            low, high = max(2, int(0.90 * max_t)), max_t
+
+        else:
+            raise ValueError(f"Unknown t-count regime: {regime}")
+
+        if low > high:
+            low = high
+        N_T = int(rng.integers(low, high + 1))
+        return regime, N_T
+
+    if regime == "tiny":
+        low, high = 2, 6
+
+    elif regime == "very_low":
+        low, high = 6, 10
+
+    elif regime == "low":
+        low, high = 10, 15
 
     elif regime == "medium_low":
-        N_T = int(rng.integers(6, 11))
+        low, high = 15, 25
 
     elif regime == "medium":
-        N_T = int(rng.integers(10, 21))
+        low, high = 25, 41
 
     elif regime == "medium_high":
-        N_T = int(rng.integers(20, 41))
+        low, high = 40, transistion_cap+1
 
-    elif regime == "start_plateau":
-        N_T = int(rng.integers(40, effective_max_t + 1))
-
-    elif regime == "plateau":
-        N_T = int(rng.integers(effective_max_t, 2 * n_layers + 1))
+    elif regime == "high":
+        low, high = transistion_cap, max_t + 1
 
     else:
         raise ValueError(f"Unknown t-count regime: {regime}")
 
+    high = min(high, max_t)
+    if low > high:
+        low = high
+
+    N_T = int(rng.integers(low, high + 1))
     return (regime, N_T)
 
 def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:

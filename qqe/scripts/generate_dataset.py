@@ -23,14 +23,24 @@ def default_sampling_config() -> SamplingConfig:
         clifford=RegimeDistribution(
             regimes=[
                 "zero",
-                "few",
+                "tiny",
+                "very_low",
                 "low",
                 "medium_low",
                 "medium",
                 "medium_high",
                 "high",
             ],
-            probabilities=[0.1, 0.3, 0.4, 0.1, 0.1, 0.1, 0.1],
+            probabilities=[
+                0.05,
+                0.05,
+                0.10,
+                0.10,
+                0.20,
+                0.20,
+                0.20,
+                0.10,
+            ],
         ),
         random=RegimeDistribution(
             regimes=[
@@ -74,12 +84,12 @@ def main(
     method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/temp_dataset",
+        "/outputs/data/temp_dataset_3",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random,clifford",
+        "clifford",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
