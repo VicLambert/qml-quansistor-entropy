@@ -66,14 +66,19 @@ def default_sampling_config() -> SamplingConfig:
         ),
         haar=RegimeDistribution(
             regimes=[
-                "none",
+                "identity_like",
+                "very_weak",
                 "sparse_weak",
+                "medium_weak",
                 "dense_weak",
                 "sparse_full",
                 "medium",
+                "dense_medium",
+                "sparse_full",
+                "medium_full",
                 "full",
             ],
-            probabilities=[0.1, 0.4, 0.4, 0.1, 0.1, 0.1],
+            probabilities=[0.01, 0.01, 0.05, 0.1, 0.1, 0.12, 0.1, 0.12, 0.12, 0.12, 0.15],
         ),
     )
 

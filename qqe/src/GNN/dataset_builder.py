@@ -281,29 +281,58 @@ def sample_t_count(n_layers: int, rng: np.random.Generator, regime: str) -> tupl
     return (regime, N_T)
 
 def sample_haar_controls(rng: np.random.Generator, regime: str) -> dict[str, Any]:
-    if regime == "none":
+    if regime == "identity_like":
         p_haar = 0.0
         haar_strength = 0.0
         haar_mode = "identity"
+
+    elif regime == "very_weak":
+        p_haar = rng.uniform(0.01, 0.10)
+        haar_strength = rng.uniform(0.01, 0.10)
+        haar_mode = "exp_hermitian"
 
     elif regime == "sparse_weak":
         p_haar = rng.uniform(0.05, 0.25)
         haar_strength = rng.uniform(0.02, 0.20)
         haar_mode = "exp_hermitian"
+
+    elif regime == "medium_weak":
+        p_haar = rng.uniform(0.25, 0.55)
+        haar_strength = rng.uniform(0.02, 0.20)
+        haar_mode = "exp_hermitian"
+
     elif regime == "dense_weak":
         p_haar = rng.uniform(0.60, 1.0)
         haar_strength = rng.uniform(0.02, 0.20)
         haar_mode = "exp_hermitian"
+
     elif regime == "sparse_full":
         p_haar = rng.uniform(0.05, 0.25)
         haar_strength = 1.0
         haar_mode = "full_haar"
+
     elif regime == "medium":
         p_haar = rng.uniform(0.15, 0.75)
         haar_strength = rng.uniform(0.25, 0.80)
         haar_mode = "exp_hermitian"
+
+    elif regime == "dense_medium":
+        p_haar = float(rng.uniform(0.60, 1.00))
+        haar_strength = float(rng.uniform(0.20, 0.70))
+        haar_mode = "exp_hermitian"
+
+    elif regime == "sparse_full":
+        p_haar = float(rng.uniform(0.05, 0.25))
+        haar_strength = 1.0
+        haar_mode = "full_haar"
+
+    elif regime == "medium_full":
+        p_haar = float(rng.uniform(0.25, 0.60))
+        haar_strength = 1.0
+        haar_mode = "full_haar"
+
     elif regime == "full":
-        p_haar = rng.uniform(0.70, 1.0)
+        p_haar = float(rng.uniform(0.70, 1.00))
         haar_strength = 1.0
         haar_mode = "full_haar"
     else:
