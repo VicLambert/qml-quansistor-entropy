@@ -84,12 +84,12 @@ def main(
     method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/temp_dataset_3",
+        "/outputs/data/datasets",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "clifford,random,quansistor",
+        "haar,quansistor",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
