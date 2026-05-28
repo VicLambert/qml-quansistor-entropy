@@ -102,6 +102,7 @@ def prepare_datasets(
         pt_paths=pt_paths,
         global_feature_variant=global_feature_variant,
         node_feature_backend_variant=node_feature_variant,
+        target_variant="sre_density",  # for now we use the same variant for target processing
     )
 
     if len(base_dataset) < 3:
