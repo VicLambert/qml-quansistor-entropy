@@ -133,7 +133,6 @@ def _safe_y(batch) -> torch.Tensor:
 
     return y.float()
 
-
 def _move_to_device(x, device: torch.device):
     if torch.is_tensor(x):
         return x.to(device, non_blocking=True)

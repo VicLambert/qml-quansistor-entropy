@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import warnings
 
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -225,6 +226,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
         fixed_all_gate_keys: list[str] | None = None,
         transform=None,
         pre_transform=None,
+        target_variant: str = "sre",
     ):
         self.pt_paths = [str(p) for p in pt_paths]
         self.global_feature_variant = global_feature_variant
@@ -236,6 +238,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
             self.all_gate_keys = list(fixed_all_gate_keys)
 
         self.global_feature_dim = self._collect_global_feature_dim()
+        self.target_variant = target_variant
 
         super().__init__(root=root, transform=transform, pre_transform=pre_transform)
 
@@ -285,6 +288,26 @@ class QuantumCircuitGraphDataset(PyGDataset):
             )
         return max(dim_counts)
 
+    def _make_target(self, data):
+        sre = float(data.get("sre", float("nan")))
+        meta = data.get("meta", {})
+        n = int(meta.get("n_qubits", 0))
+
+        if self.target_variant == "sre":
+            y = sre
+        elif self.target_variant == "sre_density":
+            y = sre / n if n > 0 else float("nan")
+
+        elif self.target_variant == "log_sre":
+            y = np.log1p(sre)
+
+        elif self.target_variant == "sqrt_sre":
+            y = np.sqrt(max(sre, 0.0))
+
+        else:
+            raise ValueError(f"Unsupported target_variant: {self.target_variant}")
+        return torch.tensor([y], dtype=torch.float32)
+
     @property
     def raw_file_names(self) -> list[str]:
         # Not used (we bypass PyG raw/processed system), but required by base class.
@@ -303,7 +326,7 @@ class QuantumCircuitGraphDataset(PyGDataset):
         x = obj["x"]
         edge_index = obj["edge_index"]
         g = obj["global_features"]
-        y_val = obj.get("sre", None)
+        y_val = self._make_target(obj)
 
         # Normalize gate_counts: add missing keys with value 0
         gate_counts = obj.get("gate_counts", {})

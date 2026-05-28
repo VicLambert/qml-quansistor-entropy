@@ -45,6 +45,7 @@ def predict(
             for sample, pred in zip(samples, preds):
                 meta = getattr(sample, "meta", {}) or {}
                 target = extract_target_value(sample)
+                pred = pred * meta.get("n_qubits")
                 rows.append(
                     {
                         "cid": meta.get("cid"),
@@ -71,6 +72,7 @@ def predict(
             preds = model(x).view(-1).cpu().tolist()
 
             for meta, pred, target in zip(metas, preds, targets):
+                pred = pred * meta.get("n_qubits")
                 rows.append(
                     {
                         "cid": meta.get("cid"),
