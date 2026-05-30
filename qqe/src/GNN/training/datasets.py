@@ -89,6 +89,7 @@ def prepare_datasets(
     global_feature_variant: str = "binned",
     node_feature_variant: str | None = None,
     family_projection: str | None = None,
+    target_variant: str = "sre",
 ) -> PreparedData:
     suffix = (
         f"{global_feature_variant}"
@@ -102,7 +103,7 @@ def prepare_datasets(
         pt_paths=pt_paths,
         global_feature_variant=global_feature_variant,
         node_feature_backend_variant=node_feature_variant,
-        target_variant="sre_density",  # for now we use the same variant for target processing
+        target_variant=target_variant,
     )
 
     if len(base_dataset) < 3:
@@ -223,6 +224,7 @@ def build_loaders(
     global_feature_variant: str = "binned",
     node_feature_variant: str | None = None,
     family_projection: str | None = None,
+    target_variant: str = "sre",
 ):
     prepared = prepare_datasets(
         pt_paths,
@@ -233,6 +235,7 @@ def build_loaders(
         global_feature_variant=global_feature_variant,
         node_feature_variant=node_feature_variant,
         family_projection=family_projection,
+        target_variant=target_variant,
     )
 
     train_loader, val_loader, test_loader = make_loaders(
@@ -260,6 +263,7 @@ def build_loaders_NN(
     global_feature_variant: str = "binned",
     node_feature_variant: str | None = None,
     family_projection: str | None = None,
+    target_variant: str = "sre",
 ):
     prepared = prepare_datasets(
         pt_paths,
@@ -270,6 +274,7 @@ def build_loaders_NN(
         global_feature_variant=global_feature_variant,
         node_feature_variant=node_feature_variant,
         family_projection=family_projection,
+        target_variant=target_variant,
     )
 
     train_loader, val_loader, test_loader = make_loaders(
