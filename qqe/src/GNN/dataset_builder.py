@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
 import torch
+from torch_geometric.data import Data, InMemoryDataset
 
 from tqdm import tqdm
 
@@ -85,6 +86,14 @@ class SamplingConfig:
         regimes = ["identity_like", "weak", "moderate", "structured_equal_ab", "structured_opposite_ab", "generic_uniform"],
         probabilities = [0.10, 0.20, 0.25, 0.15, 0.15, 0.15],
     )
+
+@dataclass(frozen=True)
+class ShardConfig:
+    family: str
+    n_qubits: int
+    layers: tuple[int, ...]
+    seeds: tuple[int, ...]
+    shard_id: str
 
 @dataclass
 class DataGenConfig:
@@ -185,6 +194,46 @@ def generate_dataset_params(
                 ),
             )
     return config
+
+
+def generate_pyg_shard(
+    family: str,
+    qubits_values: np.ndarray,
+    layers_values: np.ndarray,
+    n_seeds: int,
+    layer_blocks_size: int=10,
+) -> list[dict[str, Any]]:
+    shards = []
+
+    seeds = tuple(range(int(n_seeds)))
+    layers_list = [int(x) for x in layers_values.tolist()]
+
+    for qubit in qubits_values:
+        q = int(qubit)
+
+        for block_start in range(0, len(layers_list), layer_blocks_size):
+            layer_block = tuple(
+                layers_list[block_start: block_start + layer_blocks_size],
+            )
+            if not layer_block:
+                continue
+
+            shard_id = (
+                f"{family}"
+                f"_q{q:03d}"
+                f"_layers_{min(layer_block):03d}_{max(layer_block):03d}"
+            )
+
+            shards.append(
+                {
+                    "family": family,
+                    "n_qubits": q,
+                    "layers": layer_block,
+                    "seeds": seeds,
+                    "shard_id": shard_id,
+                },
+            )
+    return shards
 
 
 def sanitize_gate_counts(gate_counts: dict[str, int]) -> dict[str, int]:
@@ -454,6 +503,302 @@ def sample_generation_controls(
 
     return controls
 
+def build_data_object(
+    config: DataGenConfig,
+    cid: str,
+    family: str,
+    n_qubits: int,
+    n_layers: int,
+    seed: int,
+    sampling_config: SamplingConfig | None = None,
+) -> Data | None:
+    from experiments.core import ExperimentConfig
+    from properties.compute import PropertyRequest
+    from states.types import BackendConfig
+
+    try:
+        base_dir = config.output_dir or DATASET_DIR
+        base_dir.mkdir(parents=True, exist_ok=True)
+        path = base_dir / f"{cid}.pt"
+        tmp_path = path.with_suffix(".pt.tmp")
+
+        if path.exists():
+            return {"cid": cid, "path": str(path), "cached": True}
+
+        controls = sample_generation_controls(
+            family=family,
+            n_layers=int(n_layers),
+            seed=int(seed),
+            sampling_config=sampling_config,
+        )
+
+        make_spec_kwargs = {
+            "d": 2,
+            "seed": int(seed),
+        }
+        family_cls = FAMILY_REGISTRY[family]
+        family_obj = family_cls()
+
+        if family == "clifford":
+            make_spec_kwargs["tdoping"] = controls["tdoping"]
+
+        elif family == "random":
+            make_spec_kwargs["angle_regime"] = controls["angle_regime"]
+            make_spec_kwargs["angle_scale"] = controls.get("angle_scale")
+            make_spec_kwargs["gate_probability"] = controls["gate_probability"]
+
+        elif family == "haar":
+            make_spec_kwargs["gate_probability"] = controls["gate_probability"]
+            make_spec_kwargs["haar_probability"] = controls["haar_probability"]
+            make_spec_kwargs["haar_strength"] = controls["haar_strength"]
+            make_spec_kwargs["haar_mode"] = controls["haar_mode"]
+
+        elif family == "quansistor":
+            make_spec_kwargs["param_regime"] = controls.get("sampling_regime")
+            make_spec_kwargs["param_scale"] = controls.get("param_scale")
+            make_spec_kwargs["gate_probability"] = controls.get("gate_probability")
+
+
+        spec = family_obj.make_spec(
+            int(n_qubits),
+            int(n_layers),
+            **make_spec_kwargs,
+        )
+
+        gates = cast("tuple[GateSpec, ...] | None", spec.gates)
+        qasm = to_qasm(spec, gates)
+        op_descriptors = build_op_descriptors_from_spec(gates, family)
+
+        graph_data, gate_counts = qasm_to_pyg_graph(
+            qasm_str=qasm,
+            n_bins=config.n_bins,
+            family=family,
+            global_feature_variant="binned",
+            op_descriptors=op_descriptors,
+        )
+
+        sre_value = None
+        EE_value = None
+
+        should_compute_target = int(n_qubits) in set(config.target_qubits)
+
+        property_requests = []
+
+        if should_compute_target and config.compute_sre:
+            property_requests.append(PropertyRequest(name="SRE", method=config.method, params={}))
+
+        if should_compute_target and config.compute_EE:
+            property_requests.append(PropertyRequest(name="entanglement_entropy", method=config.method, params={}))
+
+        if property_requests:
+            backend_config = BackendConfig(
+                name=config.backend,
+                representation=config.representation,
+                params={},
+            )
+
+            exp_config = ExperimentConfig(
+                spec=spec,
+                backend=backend_config,
+                properties=property_requests,
+            )
+
+            result = run_experiment(
+                exp_config,
+                backend_registry=BACKEND_REGISTRY,
+                cache=cache,
+            )
+        if should_compute_target and config.compute_sre:
+            sre_key = f"SRE:{config.method.lower()}"
+            sre_result = result.results.get(sre_key)
+            sre_value = float(sre_result.value) if sre_result else None
+
+        if should_compute_target and config.compute_EE:
+            ee_key = f"entanglement_entropy:{config.method.lower()}"
+            ee_result = result.results.get(ee_key)
+            EE_value = float(ee_result.value) if ee_result else None
+
+        x = graph_data.x.detach().cpu()
+        if x.numel() > 0 and x.min().item() >= 0 and x.max().item() <= 1:
+            x = x.to(torch.uint8)
+        else:
+            x = x.to(torch.float16)
+
+        edge_index = graph_data.edge_index.detach().cpu().to(torch.int32)
+        global_features = graph_data.global_features.detach().cpu().to(torch.float32)
+
+        data = Data(
+            x = x,
+            edge_index=edge_index,
+            global_features=global_features,
+        )
+        if should_compute_target and config.compute_sre:
+            sre = float(sre_value) if sre_value is not None else float("nan")
+            data.y = torch.tensor([sre], dtype=torch.float32)
+            data.sre = torch.tensor([sre], dtype=torch.float32)
+
+        if should_compute_target and config.compute_EE:
+            ee = float(EE_value) if EE_value is not None else float("nan")
+            data.ee = torch.tensor([ee], dtype=torch.float32)
+
+        if not hasattr(data, "y"):
+            data.y = torch.tensor([float("nan")], dtype=torch.float32)
+
+
+        data.cid = cid
+        data.family = family
+        data.regime = str(controls["sampling_regime"])
+
+        data.n_qubits = torch.tensor([int(n_qubits)])
+        data.n_layers = torch.tensor([int(n_layers)])
+        data.seed = torch.tensor([int(seed)], dtype=torch.long)
+        data.has_target = torch.tensor([bool(should_compute_target)], dtype=torch.bool)
+
+        data.backend = config.backend
+        data.method = config.method
+        data.representation = config.representation
+        data.n_bins = torch.tensor([int(config.n_bins)], dtype=torch.long)
+
+        clean_counts = sanitize_gate_counts(gate_counts)
+        for key, value in clean_counts.items():
+            if isinstance(value, (int, float)):
+                setattr(
+                    data,
+                    f"count_{key}",
+                    torch.tensor([value], dtype=torch.float32),
+                )
+        return data
+
+    except Exception:
+        logger.exception(
+            "Error computing entry for family=%s Q%s L%s S%s",
+            family,
+            n_qubits,
+            n_layers,
+            seed,
+        )
+        return None
+
+    finally:
+        trim_memory()
+
+
+def compute_pyg_shard(
+    config: DataGenConfig,
+    family: str,
+    n_qubits: int,
+    layers: list[int],
+    seeds: list[int],
+    shard_id: str,
+    sampling_config: SamplingConfig | None = None,
+) -> dict[str, Any] | None:
+    base_dir = config.output_dir or DATASET_DIR
+    processed_dir = base_dir / "processed"
+    processed_dir.mkdir(parents=True, exist_ok=True)
+
+    shard_path = processed_dir / f"{shard_id}.pt"
+    tmp_path = shard_path.with_suffix(".pt.tmp")
+
+    if shard_path.exists():
+        return {
+            "shard_id": shard_id,
+            "path": str(shard_path),
+            "cached": True,
+        }
+
+    data_list = []
+    index_rows = []
+    failures = []
+
+    for n_layers in layers:
+        for seed in seeds:
+            cid = (
+                f"{family}"
+                f"_q{int(n_qubits):03d}"
+                f"_l{int(n_layers):03d}"
+                f"_s{int(seed):05d}"
+            )
+
+            data = build_data_object(
+                config=config,
+                cid=cid,
+                family=family,
+                n_qubits=int(n_qubits),
+                n_layers=int(n_layers),
+                seed=int(seed),
+                sampling_config=sampling_config,
+            )
+
+            if data is None:
+                failures.append(
+                    {
+                        "cid": cid,
+                        "family": family,
+                        "n_qubits": int(n_qubits),
+                        "n_layers": int(n_layers),
+                        "seed": int(seed),
+                    },
+                )
+                continue
+
+            local_idx = len(data_list)
+            data_list.append(data)
+
+            row = {
+                "cid": cid,
+                "family": family,
+                "n_qubits": int(n_qubits),
+                "n_layers": int(n_layers),
+                "seed": int(seed),
+                "shard_id": shard_id,
+                "shard_path": shard_path,
+                "local_idx": local_idx,
+                "regime": getattr(data, "regime", None),
+                "has_target": bool(data.has_target.item())
+            }
+
+            if hasattr(data, "sre"):
+                row["sre"] = float(data.sre.item())
+            if hasattr(data, "ee"):
+                row["ee"] = float(data.ee.item())
+
+            index_rows.append(row)
+    if len(data_list) == 0:
+        logger.warning("Shard %s produced no valid samples", shard_id)
+        return None
+
+    data, slices = InMemoryDataset.collate(data_list)
+
+    shard_meta = {
+        "format": "qqe_pyg_inmemory_shard_v1",
+        "shard_id": shard_id,
+        "family": family,
+        "n_qubits": int(n_qubits),
+        "layers": [int(x) for x in layers],
+        "seeds": [int(x) for x in seeds],
+        "num_samples": len(data_list),
+        "failures": len(failures),
+        "backend": config.backend,
+        "method": config.method,
+        "representation": config.representation,
+        "n_bins": int(config.n_bins),
+        "compute_SRE": bool(config.compute_sre),
+        "compute_EE": bool(config.compute_EE),
+        "target_qubits": list(config.target_qubits),
+        "index_rows": index_rows,
+        "failures": failures,
+    }
+    torch.save((data, slices, shard_meta), tmp_path)
+    tmp_path.replace(shard_path)
+
+    return {
+            "shard_id": shard_id,
+            "path": str(shard_path),
+            "num_samples": len(data_list),
+            "num_failures": len(failures),
+        }
+
+
 def compute_entry(
     config: DataGenConfig,
     cid: str,
@@ -609,15 +954,8 @@ def compute_entry(
         if should_compute_target and config.compute_EE:
             payload["ee"] = float(EE_value) if EE_value is not None else float("nan")
 
-        torch.save(payload, tmp_path)
-        tmp_path.replace(path)
 
-        return {
-            "cid": cid,
-            "path": str(path),
-            **({"sre": sre_value} if config.compute_sre else {}),
-            **({"ee": EE_value} if config.compute_EE else {}),
-        }
+        return payload
 
     except Exception:
         logger.exception(
@@ -652,6 +990,24 @@ def compute_all_entries(
         )
     return compute_all_entries_sequential(params, config, sampling_config=sampling_config)
 
+def compute_all_shards(
+    shards: list[ShardConfig],
+    config: DataGenConfig,
+    *,
+    use_dask: bool = False,
+    dask_n_workers: int = 4,
+    dask_memory_per_worker: str | None = "auto",
+    sampling_config: SamplingConfig | None = None,
+) -> list[dict[str, Any]]:
+    if use_dask:
+        return compute_all_shards_parallel(
+            shards,
+            config,
+            dask_n_workers=dask_n_workers,
+            dask_memory_per_worker=dask_memory_per_worker,
+            sampling_config=sampling_config,
+        )
+    return compute_all_shards_sequential(shards, config, sampling_config=sampling_config)
 
 def compute_all_entries_sequential(
     params: list[CircuitConfig],
@@ -692,6 +1048,56 @@ def compute_all_entries_sequential(
 
     return entries
 
+def compute_all_shards_sequential(
+    shards: list[ShardConfig],
+    config: DataGenConfig,
+    sampling_config: SamplingConfig | None = None,
+) -> list[dict[str, Any]]:
+    base_dir = config.output_dir or DATASET_DIR
+    base_dir.mkdir(parents=True, exist_ok=True)
+
+    family = shards[0].family if shards else "unknown"
+    index_path = base_dir / f"index_{family}.jsonl"
+
+    if index_path.exists():
+        index_path.unlink()
+    entries: list[dict[str, Any]] = []
+
+    with index_path.open("w", encoding="utf-8") as f:
+        for row in tqdm(shards, desc="Computing dataset entries"):
+            entry = compute_pyg_shard(
+                config,
+                family=family,
+                n_qubits=row.n_qubits,
+                layers=list(row.layers),
+                seeds=list(row.seeds),
+                shard_id=row.shard_id,
+                sampling_config=sampling_config,
+            )
+
+            if entry is None:
+                continue
+
+            entries.append(entry)
+
+            shard_data, shard_slice, shard_meta = torch.load(
+                entry["path"],
+                map_location="cpu",
+                weights_only=False,
+            )
+
+            for row in shard_meta.get("index_rows", []):
+                f.write(json.dumps(row) + "\n")
+            f.flush()
+
+            logger.info(
+                "Computed shard %s: %s samples, %s failures",
+                entry.get("shard_id"),
+                entry.get("num_samples"),
+                entry.get("num_failures"),
+            )
+
+    return entries
 
 def compute_all_entries_parallel(
     params: list[CircuitConfig],
@@ -775,6 +1181,94 @@ def compute_all_entries_parallel(
 
     return rows_out
 
+def compute_all_shards_parallel(
+    shards: list[ShardConfig],
+    config: DataGenConfig,
+    dask_n_workers: int,
+    dask_memory_per_worker: str | None = "auto",
+    sampling_config: SamplingConfig | None = None,
+) -> list[dict[str, Any]]:
+    from dask.distributed import as_completed
+
+    from parallel import dask_client
+
+    base_dir = config.output_dir or DATASET_DIR
+    base_dir.mkdir(parents=True, exist_ok=True)
+
+    family = shards[0].family if shards else "unknown"
+    index_path = base_dir / f"index_{family}.jsonl"
+
+    cpu_count = os.cpu_count() or 2
+    safe_workers = max(1, min(int(dask_n_workers), cpu_count))
+    max_inflight = max(safe_workers, safe_workers * 3)
+
+    rows_out: list[dict[str, Any]] = []
+
+    with dask_client(
+        mode="local",
+        n_workers=safe_workers,
+        threads_per_worker=1,
+        memory_per_worker=dask_memory_per_worker or "2GB",
+        dashboard=True,
+        walltime="0-2:30:00",
+    ) as client:
+        client.wait_for_workers(1)
+
+        ac = as_completed()
+        inflight = {}
+        it = iter(shards)
+
+        def submit_one(shard: ShardConfig) -> None:
+            fut = client.submit(
+                compute_pyg_shard,
+                shard,
+                family=family,
+                n_qubits=shard.n_qubits,
+                layers=list(shard.layers),
+                seeds=list(shard.seeds),
+                shard_id=shard.shard_id,
+                sampling_config=sampling_config,
+                pure=False,
+            )
+            inflight[fut] = shard
+            ac.add(fut)
+
+        for _ in range(min(max_inflight, len(shards))):
+            shard = next(it, None)
+            if shard is None:
+                break
+            submit_one(shard)
+
+        with index_path.open("w", encoding="utf-8") as f:
+            for fut in tqdm(ac, total=len(shards), desc="Parallel dataset generation"):
+                shard = inflight.pop(fut, None)
+
+                try:
+                    entry = fut.result()
+                    if entry is not None:
+                        rows_out.append(entry)
+
+                        shard_data, shard_slice, shard_meta = torch.load(
+                            entry["path"],
+                            map_location="cpu",
+                            weights_only=False,
+                        )
+
+                        for row in shard_meta.get("index_rows", []):
+                            f.write(json.dumps(entry) + "\n")
+                        f.flush()
+
+                except Exception as exc:
+                    cid = shard.cid if shard else "unknown"
+                    logger.error("Failed (%s): %s", cid, exc)
+                finally:
+                    fut.release()
+
+                next_shard = next(it, None)
+                if next_shard is not None:
+                    submit_one(next_shard)
+
+    return rows_out
 
 def run_dataset_pipeline(
     *,
@@ -788,6 +1282,7 @@ def run_dataset_pipeline(
     dask_n_workers: int = 4,
     dask_memory_per_worker: str | None = None,
     sampling_config: SamplingConfig | None = None,
+    layer_block_size: int = 10,
 ) -> None:
     invalid = [f for f in families if f not in FAMILY_REGISTRY]
     if invalid:
@@ -797,9 +1292,6 @@ def run_dataset_pipeline(
 
     base_output_dir: Path = config.output_dir
     base_output_dir.mkdir(parents=True, exist_ok=True)
-    target = "sre" if config.compute_sre else "ee" if config.compute_EE else None
-
-    # data_dir = f"training_data_{target}_{config.backend}" if target else "prediction_data"
 
     for family in families:
         logger.info("Processing family: %s", family)
@@ -807,21 +1299,23 @@ def run_dataset_pipeline(
         family_output_dir = base_output_dir / family
         family_output_dir.mkdir(parents=True, exist_ok=True)
 
-        params = generate_dataset_params(
+        shards = generate_pyg_shard(
             [family],
             qubits_values,
             layers_values,
             n_seeds,
+            layer_blocks_size=layer_block_size,
         )
 
         if max_configs is not None:
-            params = params[:max_configs]
+            shards = shards[:max_configs]
 
-        logger.info("Generated %d configs for %s", len(params), family)
+        logger.info("Generated %d shards for %s", len(shards), family)
 
         family_config = dataclasses.replace(config, output_dir=family_output_dir)
-        entries = compute_all_entries(
-            params,
+
+        entries = compute_all_shards(
+            shards,
             family_config,
             use_dask=use_dask,
             dask_n_workers=dask_n_workers,
@@ -831,6 +1325,7 @@ def run_dataset_pipeline(
 
         meta_path = family_output_dir / f"metadata_{family}.json"
         metadata = {
+            "format": "qqe_pyg_inmemory_shard_v1",
             "backend": family_config.backend,
             "method": family_config.method,
             "n_bins": family_config.n_bins,
@@ -841,11 +1336,15 @@ def run_dataset_pipeline(
             "entries_completed": len(entries),
             "use_dask": use_dask,
             "compute_sre": family_config.compute_sre,
+            "compute_EE": family_config.compute_EE,
             "index_file": f"index_{family}.jsonl",
+            "processed_dir": "processed",
+            "layer_block_size": int(layer_block_size),
         }
+
         meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
-        logger.info("Completed %s: %d entries", family, len(entries))
+        logger.info("Completed %s: %d shards", family, len(entries))
         logger.info("Metadata: %s", meta_path)
         logger.info("Samples: %s", family_output_dir)
 
