@@ -20,6 +20,7 @@ from GNN.training.utils import (
     collect_dataset_paths,
     collect_files_path,
     evaluate_loss,
+    evaluate_r2,
 )
 
 logger = logging.getLogger(__name__)
@@ -96,6 +97,7 @@ def train(
     training_mode: str = "global",  # "global" | "per_family"
     family: str | None = None,  # required if training_mode == "per_family"
     target: str = "sre",
+    target_variant: str = "sre",
     model_hparams: dict[str, int | float] | None = None,
     train_hparams: dict[str, int | float] | None = None,
     training_data_dir: str = "outputs/data",
@@ -177,6 +179,7 @@ def train(
             global_feature_variant=cfg.global_feature_variant,
             node_feature_variant=cfg.node_feature_backend_variant,
             family_projection=family_projection,
+            target_variant=target_variant,
         )
     else:
         train_loader, val_loader, test_loader, global_in_dim, base_dataset = loader_fn(
@@ -188,6 +191,7 @@ def train(
             global_feature_variant=cfg.global_feature_variant,
             node_feature_variant=cfg.node_feature_backend_variant,
             family_projection=family_projection,
+            target_variant=target_variant,
         )
         node_in_dim = global_in_dim
 
@@ -222,6 +226,24 @@ def train(
         dev,
         loss_fn,
         use_amp=True,
+        show_progress=show_progress,
+    )
+    train_r2_score = evaluate_r2(
+        model,
+        train_loader,
+        dev,
+        show_progress=show_progress,
+    )
+    val_r2_score = evaluate_r2(
+        model,
+        val_loader,
+        dev,
+        show_progress=show_progress,
+    )
+    test_r2_score = evaluate_r2(
+        model,
+        test_loader,
+        dev,
         show_progress=show_progress,
     )
     logger.info("Training complete.")
@@ -265,6 +287,9 @@ def train(
         },
         "final_metrics": {
             "test_loss": float(test_loss),
+            "test_r2_score": float(test_r2_score),
+            "train_r2_score": float(train_r2_score),
+            "val_r2_score": float(val_r2_score),
         },
         "history": hist,
     }

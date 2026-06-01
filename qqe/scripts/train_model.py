@@ -23,6 +23,7 @@ def main(
     ),
     family: str | None = "clifford",
     target: str = "sre",  # "sre" | "ee"
+    target_variant: str = "sre",  # "sre" | "sre_density" ...
     model_hparams: dict[str, int | float] | None = None,
     train_hparams: dict[str, int | float] | None = None,
     training_data_dir = "../outputs/data",
@@ -57,6 +58,7 @@ def main(
         training_mode = training_mode,  # "global" | "per_family"
         family = family,  # required if training_mode == "per_family"
         target = target,
+        target_variant = target_variant,
         model_hparams = model_hparams,
         train_hparams = train_hparams,
         training_data_dir = training_data_dir,
