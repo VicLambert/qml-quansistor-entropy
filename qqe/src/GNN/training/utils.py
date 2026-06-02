@@ -170,26 +170,31 @@ def unpack_supervised_batch(
     return moved_batch, y, max(1, batch_size)
 
 
-def collect_files_path(
-    data_dir: str,
+def collect_dataset_indices(
+    dataset_root: str | Path,
+    *,
     family: str | None = None,
-    backend: str | None = "pennylane",
-    target: str | None = "sre",
 ) -> list[str]:
-    """Collects file paths matching the pattern in the given directory."""
-    d = Path(data_dir)
+    root = Path(dataset_root)
+
     if family is not None:
-        paths = sorted((d / family).glob("*.pt"))
+        search_dirs = [root / family]
     else:
-        paths = []
-        encoding_dir = d
-        if encoding_dir.exists():
-            for family_dir in sorted(encoding_dir.iterdir()):
-                if family_dir.is_dir():
-                    paths.extend(sorted(family_dir.glob("*.pt")))
-    if not paths:
-        paths = sorted(d.glob("*.pt"))
-    return [str(p) for p in paths]
+        search_dirs = [
+            p for p in sorted(root.iterdir())
+            if p.is_dir()
+        ] if root.exists() else []
+
+    index_paths: list[Path] = []
+
+    for search_dir in search_dirs:
+        if search_dir.exists():
+            index_paths.extend(sorted(search_dir.glob("index_*.jsonl")))
+
+    if not index_paths:
+        index_paths = sorted(root.glob("index_*.jsonl"))
+
+    return [str(p.resolve()) for p in index_paths]
 
 def collect_dataset_paths(
     dataset_root: str | Path,

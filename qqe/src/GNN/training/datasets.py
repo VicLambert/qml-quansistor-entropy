@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 
 import torch
 import torch.nn.functional as F
 
-from GNN.physics_aware_NN import QuantumCircuitGraphDataset
+from GNN.physics_aware_NN import QuantumCircuitGraphDataset, ShardedQuantumCircuitGraphDataset
 from torch.utils.data import DataLoader as TorchDataLoader, random_split
 from torch_geometric.loader import DataLoader as PyGDataLoader
 
@@ -80,31 +81,30 @@ class PreparedData:
 
 
 def prepare_datasets(
-    pt_paths: list[str],
+    index_paths: list[str],
     *,
     loader_kind: str,  # "gnn" | "nn"
     seed: int = 42,
     train_split: float = 0.8,
     val_split: float = 0.1,
-    global_feature_variant: str = "binned",
-    node_feature_variant: str | None = None,
     family_projection: str | None = None,
     target_variant: str = "sre",
+    split = "target",
 ) -> PreparedData:
-    suffix = (
-        f"{global_feature_variant}"
-        f"__backend_{node_feature_variant or 'none'}"
-        f"_familyproj_{family_projection or 'none'}"
-    )
-    root = cache_root_paths(pt_paths, suffix=suffix)
+    # root = cache_root_paths(pt_paths, suffix=suffix)
 
-    base_dataset = QuantumCircuitGraphDataset(
-        root=root,
-        pt_paths=pt_paths,
-        global_feature_variant=global_feature_variant,
-        node_feature_backend_variant=node_feature_variant,
-        target_variant=target_variant,
-    )
+    # base_dataset = QuantumCircuitGraphDataset(
+    #     root=root,
+    #     pt_paths=pt_paths,
+    #     global_feature_variant=global_feature_variant,
+    #     node_feature_backend_variant=node_feature_variant,
+    #     target_variant=target_variant,
+    # )
+    base_dataset = ShardedQuantumCircuitGraphDataset(
+            index_paths=index_paths,
+            target_variant=target_variant,
+            split=split,
+        )
 
     if len(base_dataset) < 3:
         raise RuntimeError("Dataset too small for train/val/test splitting.")
@@ -179,7 +179,7 @@ def make_loaders(
 
     if prepared.loader_kind == "gnn":
         Loader = PyGDataLoader
-        loader_kwargs = {"exclude_keys": ["meta", "gate_counts"]}
+        loader_kwargs = {"exclude_keys": ["cid", "family", "regime"]}
     elif prepared.loader_kind == "nn" or prepared.loader_kind == "regressor":
         Loader = TorchDataLoader
         loader_kwargs = {}
@@ -215,32 +215,32 @@ def make_loaders(
 
 
 def build_loaders(
-    pt_paths: list[str],
+    index_paths: list[str],
     *,
     batch_size: int = 32,
     seed: int = 42,
-    train_split: float = 0.8,
+    train_split: float = 0.9,
     val_split: float = 0.1,
-    global_feature_variant: str = "binned",
-    node_feature_variant: str | None = None,
     family_projection: str | None = None,
+    num_workers: int = 0,
     target_variant: str = "sre",
+    split = "target",
 ):
     prepared = prepare_datasets(
-        pt_paths,
+        index_paths,
         loader_kind="gnn",
         seed=seed,
         train_split=train_split,
         val_split=val_split,
-        global_feature_variant=global_feature_variant,
-        node_feature_variant=node_feature_variant,
         family_projection=family_projection,
         target_variant=target_variant,
+        split = split,
     )
 
     train_loader, val_loader, test_loader = make_loaders(
         prepared,
         batch_size=batch_size,
+        num_workers=num_workers,
     )
 
     return (
@@ -254,32 +254,32 @@ def build_loaders(
 
 
 def build_loaders_NN(
-    pt_paths: list[str],
+    index_paths: list[str],
     *,
     batch_size: int = 32,
     seed: int = 42,
-    train_split: float = 0.8,
+    train_split: float = 0.9,
     val_split: float = 0.1,
-    global_feature_variant: str = "binned",
-    node_feature_variant: str | None = None,
     family_projection: str | None = None,
+    num_workers: int = 0,
     target_variant: str = "sre",
+    split = "target",
 ):
     prepared = prepare_datasets(
-        pt_paths,
+        index_paths,
         loader_kind="nn",
         seed=seed,
         train_split=train_split,
         val_split=val_split,
-        global_feature_variant=global_feature_variant,
-        node_feature_variant=node_feature_variant,
         family_projection=family_projection,
         target_variant=target_variant,
+        split = split,
     )
 
     train_loader, val_loader, test_loader = make_loaders(
         prepared,
         batch_size=batch_size,
+        num_workers=num_workers,
     )
 
     return (

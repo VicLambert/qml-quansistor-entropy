@@ -27,6 +27,7 @@ def main(
     model_hparams: dict[str, int | float] | None = None,
     train_hparams: dict[str, int | float] | None = None,
     training_data_dir = "../outputs/data",
+    split: str = "target",
     model_save_path: str | None = None,
     show_progress: bool = typer.Option(
         default=True,
@@ -62,6 +63,7 @@ def main(
         model_hparams = model_hparams,
         train_hparams = train_hparams,
         training_data_dir = training_data_dir,
+        split = split,
         allow_overwrite = allow_overwrite,
         save_checkpoint = True,
         model_save_path=model_save_path,

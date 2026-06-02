@@ -18,7 +18,7 @@ from GNN.training.train import build_loss, train_model
 from GNN.training.train_config import TrainConfig
 from GNN.training.utils import (
     collect_dataset_paths,
-    collect_files_path,
+    collect_dataset_indices,
     evaluate_loss,
     evaluate_r2,
 )
@@ -100,7 +100,8 @@ def train(
     target_variant: str = "sre",
     model_hparams: dict[str, int | float] | None = None,
     train_hparams: dict[str, int | float] | None = None,
-    training_data_dir: str = "outputs/data",
+    training_data_dir: str = "outputs/data/SRE_datasets",
+    split: str = "target",
     allow_overwrite: bool = False,
     save_checkpoint: bool = True,
     model_save_path: str | None = None,
@@ -154,10 +155,9 @@ def train(
 
     logger.info("Collecting data paths...")
     # data_paths = collect_files_path(training_data_dir, family=family_filter)
-    train_paths = collect_dataset_paths(
+    train_paths = collect_dataset_indices(
         training_data_dir,
         family=family_filter,
-        split="target",
     )
     if not train_paths:
         raise RuntimeError("No data paths found.")
@@ -176,10 +176,9 @@ def train(
             seed=cfg.seed,
             train_split=cfg.train_split,
             val_split=cfg.val_split,
-            global_feature_variant=cfg.global_feature_variant,
-            node_feature_variant=cfg.node_feature_backend_variant,
             family_projection=family_projection,
             target_variant=target_variant,
+            split = split,
         )
     else:
         train_loader, val_loader, test_loader, global_in_dim, base_dataset = loader_fn(
@@ -188,10 +187,9 @@ def train(
             seed=cfg.seed,
             train_split=cfg.train_split,
             val_split=cfg.val_split,
-            global_feature_variant=cfg.global_feature_variant,
-            node_feature_variant=cfg.node_feature_backend_variant,
             family_projection=family_projection,
             target_variant=target_variant,
+            split = split,
         )
         node_in_dim = global_in_dim
 

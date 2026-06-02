@@ -11,6 +11,7 @@ import logging
 import os
 
 from dataclasses import dataclass
+from collections import defaultdict
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
@@ -89,11 +90,11 @@ class SamplingConfig:
 
 @dataclass(frozen=True)
 class ShardConfig:
+    shard_id: str
     family: str
     n_qubits: int
     layers: tuple[int, ...]
-    seeds: tuple[int, ...]
-    shard_id: str
+    configs: tuple[CircuitConfig, ...]
 
 @dataclass
 class DataGenConfig:
@@ -197,42 +198,65 @@ def generate_dataset_params(
 
 
 def generate_pyg_shard(
-    family: str,
+    families: list[str],
     qubits_values: np.ndarray,
     layers_values: np.ndarray,
     n_seeds: int,
     layer_blocks_size: int=10,
-) -> list[dict[str, Any]]:
-    shards = []
+) -> list[ShardConfig]:
+    shards: list[ShardConfig] = []
 
-    seeds = tuple(range(int(n_seeds)))
+    circuit_configs = generate_dataset_params(
+        families=families,
+        qubits_values=qubits_values,
+        layers_values=layers_values,
+        num_seeds=n_seeds, 
+    )
     layers_list = [int(x) for x in layers_values.tolist()]
 
-    for qubit in qubits_values:
-        q = int(qubit)
+    layer_to_block: dict[int, tuple[int, tuple[int, ...]]] = {}
 
-        for block_start in range(0, len(layers_list), layer_blocks_size):
-            layer_block = tuple(
-                layers_list[block_start: block_start + layer_blocks_size],
-            )
-            if not layer_block:
-                continue
+    for block_idx, start in enumerate(range(0, len(layers_list), layer_blocks_size)):
+        layer_block = tuple(layers_list[start:start + layer_blocks_size])
 
-            shard_id = (
-                f"{family}"
-                f"_q{q:03d}"
-                f"_layers_{min(layer_block):03d}_{max(layer_block):03d}"
-            )
+        for layer in layer_block:
+            layer_to_block[int(layer)] = (block_idx, layer_block)
 
-            shards.append(
-                {
-                    "family": family,
-                    "n_qubits": q,
-                    "layers": layer_block,
-                    "seeds": seeds,
-                    "shard_id": shard_id,
-                },
+    grouped: dict[tuple[str, int, int], list[CircuitConfig]] = defaultdict(list)
+
+    for cfg in circuit_configs:
+        block_idx, _ = layer_to_block[int(cfg.n_layers)]
+        key = (cfg.family, int(cfg.n_qubits), block_idx)
+        grouped[key].append(cfg)
+
+    shards: list[ShardConfig] = []
+
+    for (family, n_qubits, block_idx), configs in sorted(grouped.items()):
+        _, layer_block = layer_to_block[int(configs[0].n_layers)]
+
+        layer_min = min(layer_block)
+        layer_max = max(layer_block)
+
+        shard_id = (
+            f"{family}"
+            f"_q{int(n_qubits):03d}"
+            f"_layers_{layer_min:03d}_{layer_max:03d}"
+        )
+
+        configs_sorted = tuple(
+            sorted(configs, key=lambda c: (int(c.n_layers), int(c.seed)))
+        )
+
+        shards.append(
+            ShardConfig(
+                shard_id=shard_id,
+                family=family,
+                n_qubits=int(n_qubits),
+                layers=layer_block,
+                configs=configs_sorted,
             )
+        )
+
     return shards
 
 
@@ -684,119 +708,122 @@ def build_data_object(
 
 
 def compute_pyg_shard(
+    shard: ShardConfig,
     config: DataGenConfig,
-    family: str,
-    n_qubits: int,
-    layers: list[int],
-    seeds: list[int],
-    shard_id: str,
+    *,
     sampling_config: SamplingConfig | None = None,
 ) -> dict[str, Any] | None:
     base_dir = config.output_dir or DATASET_DIR
     processed_dir = base_dir / "processed"
     processed_dir.mkdir(parents=True, exist_ok=True)
 
-    shard_path = processed_dir / f"{shard_id}.pt"
+    shard_path = processed_dir / f"{shard.shard_id}.pt"
     tmp_path = shard_path.with_suffix(".pt.tmp")
 
     if shard_path.exists():
         return {
-            "shard_id": shard_id,
+            "shard_id": shard.shard_id,
             "path": str(shard_path),
             "cached": True,
         }
 
-    data_list = []
-    index_rows = []
-    failures = []
+    data_list: list[Data] = []
+    index_rows: list[dict[str, Any]] = []
+    failures: list[dict[str, Any]] = []
 
-    for n_layers in layers:
-        for seed in seeds:
-            cid = (
-                f"{family}"
-                f"_q{int(n_qubits):03d}"
-                f"_l{int(n_layers):03d}"
-                f"_s{int(seed):05d}"
+    for cfg in shard.configs:
+        cid = (
+            f"{shard.family}"
+            f"_q{shard.n_qubits:03d}"
+            f"_L{int(cfg.n_layers):03d}"
+            f"_s{int(cfg.seed):05d}"
+        )
+
+        data = build_data_object(
+            config=config,
+            cid=cid,
+            family=shard.family,
+            n_qubits=shard.n_qubits,
+            n_layers=int(cfg.n_layers),
+            seed=int(cfg.seed),
+            sampling_config=sampling_config,
+        )
+
+        if data is None:
+            failures.append(
+                {
+                    "cid": cid,
+                    "family": shard.family,
+                    "n_qubits": shard.n_qubits,
+                    "n_layers": int(cfg.n_layers),
+                    "seed": int(cfg.seed),
+                }
             )
+            continue
 
-            data = build_data_object(
-                config=config,
-                cid=cid,
-                family=family,
-                n_qubits=int(n_qubits),
-                n_layers=int(n_layers),
-                seed=int(seed),
-                sampling_config=sampling_config,
-            )
+        local_idx = len(data_list)
+        data_list.append(data)
 
-            if data is None:
-                failures.append(
-                    {
-                        "cid": cid,
-                        "family": family,
-                        "n_qubits": int(n_qubits),
-                        "n_layers": int(n_layers),
-                        "seed": int(seed),
-                    },
-                )
-                continue
+        row = {
+            "cid": cid,
+            "family": shard.family,
+            "n_qubits": shard.n_qubits,
+            "n_layers": int(cfg.n_layers),
+            "seed": int(cfg.seed),
+            "shard_id": shard.shard_id,
+            "shard_path": str(Path("processed") / f"{shard.shard_id}.pt"),
+            "local_idx": local_idx,
+            "regime": getattr(data, "regime", None),
+            "has_target": bool(data.has_target.item()),
+        }
 
-            local_idx = len(data_list)
-            data_list.append(data)
+        if hasattr(data, "sre"):
+            row["sre"] = float(data.sre.item())
 
-            row = {
-                "cid": cid,
-                "family": family,
-                "n_qubits": int(n_qubits),
-                "n_layers": int(n_layers),
-                "seed": int(seed),
-                "shard_id": shard_id,
-                "shard_path": shard_path,
-                "local_idx": local_idx,
-                "regime": getattr(data, "regime", None),
-                "has_target": bool(data.has_target.item())
-            }
+        if hasattr(data, "sre_density"):
+            row["sre_density"] = float(data.sre_density.item())
 
-            if hasattr(data, "sre"):
-                row["sre"] = float(data.sre.item())
-            if hasattr(data, "ee"):
-                row["ee"] = float(data.ee.item())
+        if hasattr(data, "ee"):
+            row["ee"] = float(data.ee.item())
 
-            index_rows.append(row)
-    if len(data_list) == 0:
-        logger.warning("Shard %s produced no valid samples", shard_id)
+        index_rows.append(row)
+
+    if not data_list:
+        logger.warning("Shard %s produced no valid samples", shard.shard_id)
         return None
 
     data, slices = InMemoryDataset.collate(data_list)
 
     shard_meta = {
         "format": "qqe_pyg_inmemory_shard_v1",
-        "shard_id": shard_id,
-        "family": family,
-        "n_qubits": int(n_qubits),
-        "layers": [int(x) for x in layers],
-        "seeds": [int(x) for x in seeds],
+        "shard_id": shard.shard_id,
+        "cids": [c.cid for c in shard.configs],
+        "family": shard.family,
+        "n_qubits": int(shard.n_qubits),
+        "layers": [int(x) for x in shard.layers],
+        "seeds": sorted({int(c.seed) for c in shard.configs}),
         "num_samples": len(data_list),
-        "failures": len(failures),
+        "num_failures": len(failures),
         "backend": config.backend,
         "method": config.method,
         "representation": config.representation,
         "n_bins": int(config.n_bins),
-        "compute_SRE": bool(config.compute_sre),
+        "compute_sre": bool(config.compute_sre),
         "compute_EE": bool(config.compute_EE),
         "target_qubits": list(config.target_qubits),
         "index_rows": index_rows,
         "failures": failures,
     }
+
     torch.save((data, slices, shard_meta), tmp_path)
     tmp_path.replace(shard_path)
 
     return {
-            "shard_id": shard_id,
-            "path": str(shard_path),
-            "num_samples": len(data_list),
-            "num_failures": len(failures),
-        }
+        "shard_id": shard.shard_id,
+        "path": str(shard_path),
+        "num_samples": len(data_list),
+        "num_failures": len(failures),
+    }
 
 
 def compute_entry(
@@ -1064,14 +1091,10 @@ def compute_all_shards_sequential(
     entries: list[dict[str, Any]] = []
 
     with index_path.open("w", encoding="utf-8") as f:
-        for row in tqdm(shards, desc="Computing dataset entries"):
+        for shard in tqdm(shards, desc="Computing dataset entries"):
             entry = compute_pyg_shard(
-                config,
-                family=family,
-                n_qubits=row.n_qubits,
-                layers=list(row.layers),
-                seeds=list(row.seeds),
-                shard_id=row.shard_id,
+                shard=shard,
+                config=config,
                 sampling_config=sampling_config,
             )
 
@@ -1222,11 +1245,7 @@ def compute_all_shards_parallel(
             fut = client.submit(
                 compute_pyg_shard,
                 shard,
-                family=family,
-                n_qubits=shard.n_qubits,
-                layers=list(shard.layers),
-                seeds=list(shard.seeds),
-                shard_id=shard.shard_id,
+                config,
                 sampling_config=sampling_config,
                 pure=False,
             )
@@ -1255,7 +1274,7 @@ def compute_all_shards_parallel(
                         )
 
                         for row in shard_meta.get("index_rows", []):
-                            f.write(json.dumps(entry) + "\n")
+                            f.write(json.dumps(row) + "\n")
                         f.flush()
 
                 except Exception as exc:

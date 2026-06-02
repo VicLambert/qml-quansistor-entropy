@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import warnings
+from pathlib import Path
+from collections import OrderedDict
 
+import json
 import numpy as np
 import torch
 import torch.nn as nn
@@ -10,6 +13,7 @@ import torch.nn.functional as F
 
 from torch.amp.autocast_mode import autocast
 from torch_geometric.data import Data, Dataset as PyGDataset
+from torch_geometric.data.separate import separate
 
 _AMP_DEVICE_TYPE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -379,4 +383,149 @@ class QuantumCircuitGraphDataset(PyGDataset):
 
         return data
 
+class ShardedQuantumCircuitGraphDataset(PyGDataset):
+    def __init__(
+        self,
+        index_paths,
+        *,
+        target_variant="sre",
+        split = "target",
+        cache_size = 4,
+    ):
+        self.index_paths = [Path(p) for p in index_paths]
+        self.target_variant = target_variant
 
+        self.split = split
+        self.cache_size = cache_size
+        self._cache = OrderedDict()
+        self.rows = self._load_index_rows()
+
+        self.all_gate_keys = self._collect_all_gate_keys_from_shards()
+
+    def _load_index_rows(self):
+        rows = []
+        for index_path in self.index_paths:
+            index_path = Path(index_path)
+            if not index_path.exists():
+                raise FileNotFoundError(f"Index file not found: {index_path}")
+            with index_path.open("r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+
+                    row = json.loads(line)
+
+                    if self.split == "target":
+                        if not bool(row.get("has_target", False)):
+                            continue
+
+                    elif self.split == "prediction":
+                        if bool(row.get("has_target", False)):
+                            continue
+
+                    elif self.split == "all":
+                        pass
+
+                    else:
+                        raise ValueError(f"Unknown split={self.split}")
+                    if "shard_path" not in row:
+                        raise KeyError(f"Missing 'shard_path' in row: {row}")
+
+                    if "local_idx" not in row:
+                        raise KeyError(f"Missing 'local_idx' in row: {row}")
+                    raw_shard_path = Path(row["shard_path"])
+
+                    if raw_shard_path.is_absolute():
+                        shard_path = raw_shard_path
+                    else:
+                        # Important: resolve relative to the index file location
+                        shard_path = index_path.parent / raw_shard_path
+
+                    if not shard_path.exists():
+                        raise FileNotFoundError(
+                            "Shard file not found.\n"
+                            f"Index file: {index_path}\n"
+                            f"Stored shard_path: {row['shard_path']}\n"
+                            f"Resolved shard_path: {shard_path}"
+                        )
+
+                    row["shard_path"] = str(shard_path.resolve())
+                    rows.append(row)
+
+        return rows
+
+    def _collect_all_gate_keys_from_shards(self) -> list[str]:
+        keys = set()
+        seen = set()
+
+        for row in self.rows:
+            shard_path = row["shard_path"]
+
+            if shard_path in seen:
+                continue
+
+            seen.add(shard_path)
+
+            _, _, shard_meta = torch.load(
+                shard_path,
+                map_location="cpu",
+                weights_only=False,
+            )
+
+            keys.update(shard_meta.get("all_gate_keys", []))
+
+        return sorted(keys)
+
+    def __len__(self):
+        return len(self.rows)
+
+    def _load_shard(self, shard_path):
+        shard_path = str(shard_path)
+        if shard_path in self._cache:
+            self._cache.move_to_end(shard_path)
+            return self._cache[shard_path]
+        data, slices, shard_meta = torch.load(shard_path, map_location="cpu", weights_only=False)
+        self._cache[shard_path] = (data, slices, shard_meta)
+
+        if len(self._cache) > self.cache_size:
+            self._cache.popitem(last=False)
+
+        return data, slices, shard_meta
+
+    def _apply_target_transform(self, data: Data) -> Data:
+        if not hasattr(data, "sre"):
+            return data
+        sre = data.sre.float().view(-1)
+
+        if self.target_variant == "sre":
+            y = sre
+        elif self.target_variant == "sre_density":
+            n = data.n_qubits.float().view(-1)
+            y = sre / n
+        elif self.target_variant == "log_sre":
+            y = torch.log1p(torch.clamp(sre, min=0.0))
+        else:
+            raise ValueError(f"Unsupported target_variant: {self.target_variant}")
+
+        data.raw_sre = sre.clone()
+        data.y = y
+
+        return data
+
+    def __getitem__(self, idx: int):
+        row = self.rows[idx]
+
+        data, slices, shard_meta = self._load_shard(row["shard_path"])
+
+        sample = separate(
+            cls=data.__class__,
+            batch=data,
+            idx=int(row["local_idx"]),
+            slice_dict=slices,
+            decrement=False,
+        )
+
+        sample = self._apply_target_transform(sample)
+
+        return sample

@@ -118,6 +118,7 @@ def main(
     max_configs: int | None = typer.Option(None),
     dask_n_workers: int = typer.Option(4),
     dask_memory_per_worker: str = typer.Option("32GiB"),
+    block_size: int = typer.Option(10, help="Number of layers per block for layer-wise processing"),
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
 
@@ -171,6 +172,7 @@ def main(
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
         sampling_config=default_sampling_config(),
+        layer_block_size = block_size,
     )
 
 
