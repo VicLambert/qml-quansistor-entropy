@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from pathlib import Path
 import numpy as np
 import csv
 from pathlib import Path
 
+import math
 import torch
 import torch.nn.functional as F
 from typing import Any
@@ -118,8 +120,40 @@ def extract_target_value(sample: Any) -> float | None:
 
     if not np.isfinite(value):
         return None
+    if math.isnan(value):
+        return None
 
     return value
+
+
+from pathlib import Path
+
+
+def collect_dataset_indices(
+    dataset_root: str | Path,
+    *,
+    family: str | None = None,
+) -> list[str]:
+    root = Path(dataset_root)
+
+    if family is not None:
+        search_dirs = [root / family]
+    else:
+        search_dirs = [
+            p for p in sorted(root.iterdir())
+            if p.is_dir()
+        ] if root.exists() else []
+
+    index_paths: list[Path] = []
+
+    for search_dir in search_dirs:
+        if search_dir.exists():
+            index_paths.extend(sorted(search_dir.glob("index_*.jsonl")))
+
+    if not index_paths:
+        index_paths = sorted(root.glob("index_*.jsonl"))
+
+    return [str(p.resolve()) for p in index_paths]
 
 # =========================================================
 # Dataset wrappers
@@ -197,17 +231,51 @@ class PredictionTensorWrapper:
 # Saving + aggregation
 # =========================================================
 
-def save_predictions_csv(rows: list[dict[str, Any]], path: str | Path) -> Path:
+def save_predictions_csv(rows: list[dict[str, Any]], path: str | Path) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    fieldnames = ["cid", "family", "seed", "n_qubits", "n_layers", "target", "prediction", "error"]
+    if not rows:
+        raise ValueError("No prediction rows to save.")
+
+    preferred_order = [
+        "cid",
+        "family",
+        "regime",
+        "seed",
+        "n_qubits",
+        "n_layers",
+
+        # model-space values
+        "target",
+        "prediction_model_output",
+
+        # raw SRE values
+        "target_sre",
+        "prediction",
+        "error",
+    ]
+
+    # Add any extra keys that were not listed above.
+    all_keys = set()
+    for row in rows:
+        all_keys.update(row.keys())
+
+    fieldnames = [
+        key for key in preferred_order
+        if key in all_keys
+    ]
+
+    fieldnames += sorted(all_keys - set(fieldnames))
+
     with path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            extrasaction="ignore",
+        )
         writer.writeheader()
         writer.writerows(rows)
-
-    return path
 
 
 def aggregate_mean_std(

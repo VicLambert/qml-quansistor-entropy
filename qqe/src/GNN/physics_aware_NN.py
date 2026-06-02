@@ -391,6 +391,7 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         target_variant="sre",
         split = "target",
         cache_size = 4,
+        fixed_all_gate_keys = None,
     ):
         self.index_paths = [Path(p) for p in index_paths]
         self.target_variant = target_variant
@@ -494,7 +495,11 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         return data, slices, shard_meta
 
     def _apply_target_transform(self, data: Data) -> Data:
+        nan = torch.tensor([float("nan")], dtype=torch.float32)
         if not hasattr(data, "sre"):
+            data.sre = nan.clone()
+            data.raw_sre = nan.clone()
+            data.y = nan.clone()
             return data
         sre = data.sre.float().view(-1)
 
@@ -509,7 +514,7 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
             raise ValueError(f"Unsupported target_variant: {self.target_variant}")
 
         data.raw_sre = sre.clone()
-        data.y = y
+        data.y = y.float().view(1)
 
         return data
 

@@ -6,27 +6,14 @@ import torch.nn.functional as F
 from torch.utils.data import random_split
 from torch.utils.data import DataLoader as TorchDataLoader
 from torch_geometric.loader import DataLoader as PyGDataLoader
+from torch_geometric.data import Data, InMemoryDataset
 
 from pathlib import Path
 import hashlib
 
-from GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset
+from GNN.physics_aware_NN import GNN, QuantumCircuitGraphDataset, ShardedQuantumCircuitGraphDataset
 from .utils import FamilyFeatureProjector, out_is_same, PredictionGraphWrapper, PredictionTensorWrapper
 
-
-def collect_prediction_paths(dataset_root: str, family: str | None = None) -> list[str]:
-    root = Path(dataset_root)
-    pred_root = root / "training_data"
-    if family is not None:
-        paths = sorted((pred_root / family).glob("*.pt"))
-    else:
-        paths = []
-        if pred_root.exists():
-            for subdir in sorted(pred_root.iterdir()):
-                if subdir.is_dir():
-                    paths.extend(sorted(subdir.glob("*.pt")))
-
-    return [str(p.resolve()) for p in paths]
 
 
 def _cache_root_for_paths(paths: list[str], suffix: str = "") -> str:
@@ -136,22 +123,54 @@ class PaddedGraphDatasetWrapper:
     def __len__(self) -> int:
         return len(self.dataset)
 
+class PredictionShardDataset(torch.utils.data.Dataset):
+    def __init__(self, shard_paths):
+        self.lookup = []
+
+        for shard_path in shard_paths:
+            _, _, meta = torch.load(
+                shard_path,
+                map_location="cpu",
+                weights_only=False,
+            )
+
+            for row in meta["index_rows"]:
+                self.lookup.append(
+                    (shard_path, row["local_idx"])
+                )
+
+    def __len__(self):
+        return len(self.lookup)
+
+    def __getitem__(self, idx):
+        shard_path, local_idx = self.lookup[idx]
+
+        data, slices, _ = torch.load(
+            shard_path,
+            map_location="cpu",
+            weights_only=False,
+        )
+
+        return separate(
+            cls=Data,
+            batch=data,
+            idx=local_idx,
+            slice_dict=slices,
+        )
 
 def build_prediction_dataset(
-    pt_paths: list[str],
+    index_paths: list[str],
     *,
-    global_feature_variant: str,
-    node_feature_backend_variant: str | None,
-    fixed_all_gate_keys: list[str] | None,
+    target_variant: str = "sre",
+    split: str = "prediction",
+    fixed_all_gate_keys: list[str] | None = None,
 ):
-    return QuantumCircuitGraphDataset(
-        root="qqe/cache/prediction_cache",
-        pt_paths=pt_paths,
-        global_feature_variant=global_feature_variant,
-        node_feature_backend_variant=node_feature_backend_variant,
+    return ShardedQuantumCircuitGraphDataset(
+        index_paths=index_paths,
+        target_variant=target_variant,
+        split=split,
         fixed_all_gate_keys=fixed_all_gate_keys,
     )
-
 
 def build_loader(
     model_kind: str,

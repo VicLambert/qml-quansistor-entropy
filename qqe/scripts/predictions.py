@@ -12,18 +12,19 @@ from experiments.plotting import (
 from GNN.prediction.datasets import (
     build_loader,
     build_prediction_dataset,
-    collect_prediction_paths,
 )
 from GNN.prediction.inference import predict
 from GNN.prediction.model import build_model, checkpoint_path, load_checkpoint
 from GNN.prediction.utils import save_predictions_csv
-from GNN.training.utils import collect_dataset_paths
+from GNN.training.utils import collect_dataset_indices
 from utils import configure_logger
 
 logger = logging.getLogger(__name__)
 
+
+
 def main(
-    model_path: str = typer.Option(" models/nn_model_huber_global.pt", help="Path to model checkpoint."),
+    model_path: str = typer.Option("models/nn_model_huber_global.pt", help="Path to model checkpoint."),
     model_kind: str = typer.Option("gnn", help="Model type: 'gnn' or 'nn'."),
     training_scope: str = typer.Option("family", help="'global' or 'family'."),
     loss_type: str = typer.Option("huber", help="Loss type used during training, e.g. 'mse' or 'huber'."),
@@ -51,10 +52,9 @@ def main(
     model = model.to(device)
 
     # pt_paths = collect_prediction_paths(dataset_root, dataset_family)
-    prediction_paths = collect_dataset_paths(
+    prediction_paths = collect_dataset_indices(
         dataset_root,
         family=dataset_family,
-        split="all",
     )
     if not prediction_paths:
         raise RuntimeError("No prediction .pt files found.")
@@ -63,9 +63,7 @@ def main(
 
     dataset = build_prediction_dataset(
         prediction_paths,
-        global_feature_variant=feature_config.get("global_feature_variant", global_feature_variant),
-        node_feature_backend_variant=feature_config.get("node_feature_backend_variant", node_feature_backend_variant),
-        fixed_all_gate_keys=feature_config.get("all_gate_keys"),
+        split="all",
     )
 
     loader = build_loader(

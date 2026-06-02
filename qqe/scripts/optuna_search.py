@@ -13,7 +13,6 @@ from GNN.training.datasets import (
 from GNN.training.runners import MODEL_REGISTRY
 from GNN.training.utils import (
     collect_dataset_paths,
-    collect_files_path,
 )
 from utils import configure_logger
 

@@ -14,7 +14,63 @@ if TYPE_CHECKING:
 # =========================================================
 # Prediction
 # =========================================================
+def _to_python_scalar(value, default=None):
+    if value is None:
+        return default
 
+    if torch.is_tensor(value):
+        value = value.detach().cpu().flatten()
+        if value.numel() == 0:
+            return default
+        return value[0].item()
+
+    if isinstance(value, (list, tuple)):
+        if len(value) == 0:
+            return default
+        return value[0]
+
+    return value
+
+
+def get_sample_field(sample, name: str, default=None):
+    """
+    Read metadata from either:
+      - new sharded Data attributes: sample.n_qubits, sample.seed, ...
+      - old format: sample.meta["n_qubits"], sample.meta["seed"], ...
+    """
+    if hasattr(sample, name):
+        return _to_python_scalar(getattr(sample, name), default)
+
+    meta = getattr(sample, "meta", {}) or {}
+    if isinstance(meta, dict):
+        return meta.get(name, default)
+
+    return default
+
+
+def denormalize_prediction(pred: float, sample, target_variant: str) -> float:
+    """
+    Convert model output back to raw SRE if needed.
+    """
+    if target_variant == "sre":
+        return float(pred)
+
+    if target_variant == "sre_density":
+        n_qubits = get_sample_field(sample, "n_qubits")
+        if n_qubits is None:
+            raise ValueError(
+                "Cannot convert SRE density prediction to raw SRE: "
+                "sample is missing n_qubits."
+            )
+        return float(pred) * float(n_qubits)
+
+    if target_variant == "log_sre":
+        return float(torch.expm1(torch.tensor(float(pred))).item())
+
+    if target_variant == "sqrt_sre":
+        return float(pred) ** 2
+
+    raise ValueError(f"Unsupported target_variant={target_variant}")
 
 
 @torch.no_grad()
@@ -24,6 +80,7 @@ def predict(
     *,
     model_kind: str,
     device: torch.device,
+    target_variant: str = "sre",
     show_progress: bool = True,
 ) -> list[dict[str, Any]]:
     model.eval()
@@ -42,20 +99,41 @@ def predict(
             batch = batch.to(device)
             preds = model(batch).view(-1).cpu().tolist()
 
-            for sample, pred in zip(samples, preds):
-                meta = getattr(sample, "meta", {}) or {}
+            for sample, pred_model_output in zip(samples, preds):
+                pred_model_output = float(pred_model_output)
+                pred_sre = denormalize_prediction(pred_model_output, sample, target_variant)
+
                 target = extract_target_value(sample)
-                pred = pred * meta.get("n_qubits")
+
+                if target is not None:
+                    if target_variant == "sre_density":
+                        n_qubits = (get_sample_field(sample, "n_qubits"))
+                        target_sre = float(target) * float(n_qubits) if n_qubits is not None else None
+                    elif target_variant == "log_sre":
+                        target_sre = float(torch.expm1(torch.tensor(float(target))).item())
+                    elif target_variant == "sqrt_sre":
+                        target_sre = float(target) ** 2
+                    else:
+                        target_sre = float(target)
+                else:
+                    target_sre = None
                 rows.append(
                     {
-                        "cid": meta.get("cid"),
-                        "family": meta.get("family"),
-                        "seed": meta.get("seed"),
-                        "n_qubits": meta.get("n_qubits"),
-                        "n_layers": meta.get("n_layers"),
+                        "cid": get_sample_field(sample, "cid"),
+                        "family": get_sample_field(sample, "family"),
+                        "regime": get_sample_field(sample, "regime"),
+                        "seed": get_sample_field(sample, "seed"),
+                        "n_qubits": get_sample_field(sample, "n_qubits"),
+                        "n_layers": get_sample_field(sample, "n_layers"),
+
+                        # model-space values
                         "target": target,
-                        "prediction": float(pred),
-                        "error": abs(float(pred - target)) if target is not None else None,
+                        "prediction_model_output": pred_model_output,
+
+                        # raw-SRE values
+                        "target_sre": target_sre,
+                        "prediction": pred_sre,
+                        "error": abs(pred_sre - target_sre) if target_sre is not None else None,
                     },
                 )
         return rows
