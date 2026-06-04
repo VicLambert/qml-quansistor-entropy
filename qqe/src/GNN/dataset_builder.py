@@ -72,20 +72,64 @@ class RegimeDistribution:
 @dataclass(frozen=True)
 class SamplingConfig:
     clifford: RegimeDistribution = RegimeDistribution(
-        regimes = ["zero", "low", "medium", "high"],
-        probabilities = [0.15, 0.35, 0.30, 0.20],
-    )
-    haar: RegimeDistribution = RegimeDistribution(
-        regimes = ["none", "sparse_weak", "dense_weak", "sparse_full", "medium", "full"],
-        probabilities = [0.10, 0.20, 0.20, 0.15, 0.20, 0.15],
+        regimes=[
+                "zero",
+                "tiny",
+                "very_low",
+                "low",
+                "medium_low",
+                "medium",
+                "medium_high",
+                "high",
+            ],
+        probabilities=[
+                0.05,
+                0.05,
+                0.10,
+                0.10,
+                0.20,
+                0.20,
+                0.20,
+                0.10,
+            ],
     )
     random: RegimeDistribution = RegimeDistribution(
-        regimes = ["identity_like", "clifford_like", "small_angles", "generic"],
-        probabilities = [0.15, 0.20, 0.30, 0.35],
+        regimes=[
+                "identity_like",
+                "near_clifford",
+                "small_angles",
+                "medium_angles",
+                "generic_sparse",
+                "generic_dense",
+            ],
+        probabilities=[0.005, 0.155, 0.3, 0.25, 0.15, 0.14],
+    )
+    haar: RegimeDistribution = RegimeDistribution(
+        regimes=[
+                "identity_like",
+                "very_weak",
+                "sparse_weak",
+                "medium_weak",
+                "dense_weak",
+                "sparse_full",
+                "medium",
+                "dense_medium",
+                "sparse_full",
+                "medium_full",
+                "full",
+            ],
+        probabilities=[0.01, 0.01, 0.05, 0.1, 0.1, 0.12, 0.1, 0.12, 0.12, 0.12, 0.15],
     )
     quansistor: RegimeDistribution = RegimeDistribution(
-        regimes = ["identity_like", "weak", "moderate", "structured_equal_ab", "structured_opposite_ab", "generic_uniform"],
-        probabilities = [0.10, 0.20, 0.25, 0.15, 0.15, 0.15],
+        regimes=[
+                "identity_like",
+                "weak",
+                "moderate",
+                "structured_equal_ab",
+                "structured_opposite_ab",
+                "generic_uniform",
+            ],
+        probabilities=[0.1, 0.4, 0.4, 0.1, 0.1, 0.1],
     )
 
 @dataclass(frozen=True)
@@ -218,7 +262,7 @@ def generate_pyg_shard(
 
     for block_idx, start in enumerate(range(0, len(layers_list), layer_blocks_size)):
         layer_block = tuple(layers_list[start:start + layer_blocks_size])
-
+        print("Layer block : %s", layer_block)
         for layer in layer_block:
             layer_to_block[int(layer)] = (block_idx, layer_block)
 
@@ -492,6 +536,8 @@ def sample_generation_controls(
     sampling_config: SamplingConfig | None = None,
 ) -> dict[str, Any]:
     rng = np.random.default_rng(int(seed))
+    if sampling_config is None:
+        sampling_config = SamplingConfig()
 
     controls: dict[str, Any] = {
         "sampling_regime": "default",
@@ -721,11 +767,13 @@ def compute_pyg_shard(
     tmp_path = shard_path.with_suffix(".pt.tmp")
 
     if shard_path.exists():
-        return {
-            "shard_id": shard.shard_id,
-            "path": str(shard_path),
-            "cached": True,
-        }
+        _, _, old_meta = torch.load(shard_path, map_location="cpu", weights_only=False)
+        if int(old_meta.get("num_failures", 0)) == 0:
+            return {
+                "shard_id": shard.shard_id,
+                "path": str(shard_path),
+                "cached": True,
+            }
 
     data_list: list[Data] = []
     index_rows: list[dict[str, Any]] = []
@@ -757,7 +805,7 @@ def compute_pyg_shard(
                     "n_qubits": shard.n_qubits,
                     "n_layers": int(cfg.n_layers),
                     "seed": int(cfg.seed),
-                }
+                },
             )
             continue
 
@@ -814,7 +862,15 @@ def compute_pyg_shard(
         "index_rows": index_rows,
         "failures": failures,
     }
-
+    if failures:
+        logger.warning(
+            "Shard %s had %d failures out of %d samples",
+            shard.shard_id,
+            len(failures),
+            len(data_list) + len(failures),
+            "First 5 failures: %s",
+            failures[:5],
+        )
     torch.save((data, slices, shard_meta), tmp_path)
     tmp_path.replace(shard_path)
 
@@ -1308,6 +1364,8 @@ def run_dataset_pipeline(
         raise ValueError(
             f"Unknown families: {invalid}. Valid: {list(FAMILY_REGISTRY.keys())}",
         )
+    
+
 
     base_output_dir: Path = config.output_dir
     base_output_dir.mkdir(parents=True, exist_ok=True)
