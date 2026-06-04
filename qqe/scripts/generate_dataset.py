@@ -85,11 +85,11 @@ def default_sampling_config() -> SamplingConfig:
 
 def main(
     backend: str = typer.Option("pennylane", help="Backend to use"),
-    target: str = typer.Option("EE", help="Target to compute: SRE, EE, or none"),
-    method: str = typer.Option("renyi", help="SRE/EE computation method"),
+    target: str = typer.Option("SRE", help="Target to compute: SRE, EE, or none"),
+    method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/datasets_renyi_EE",
+        "/outputs/data/dataset_SRE",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
@@ -98,11 +98,11 @@ def main(
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
-        175,
+        250,
         help="Seeds per (family, qubits, layers)",
     ),
     prediction_n_seeds_option: int | None = typer.Option(
-        75,
+        100,
         help="Optional different number of seeds for qubits without target",
     ),
     qubits_min: int = typer.Option(4),

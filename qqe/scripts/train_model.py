@@ -10,6 +10,22 @@ from utils import configure_logger
 logger = logging.getLogger(__name__)
 
 
+default_model_hparams = {
+    "gnn_hidden": 32,
+    "gnn_heads": 4,
+    "global_hidden": 128,
+    "reg_hidden": 128,
+    "num_layers": 3,
+    "dropout_rate": 0.13173830279748305,
+}
+
+default_train_hparams = {
+    "weight_decay": 0.0003324725858640221,
+    "grad_clip": 1.0289214665544766,
+    "early_stopping_patience": 10,
+    "early_stopping_min_delta": 0.0,
+}
+
 def main(
     epochs: int = 40,
     lr: float = 0.001,
@@ -24,8 +40,8 @@ def main(
     family: str | None = "clifford",
     target: str = "sre",  # "sre" | "ee"
     target_variant: str = "sre",  # "sre" | "sre_density" ...
-    model_hparams: dict[str, int | float] | None = None,
-    train_hparams: dict[str, int | float] | None = None,
+    model_hparams = None,
+    train_hparams = None,
     training_data_dir = "../outputs/data",
     split: str = "target",
     model_save_path: str | None = None,
@@ -60,8 +76,8 @@ def main(
         family = family,  # required if training_mode == "per_family"
         target = target,
         target_variant = target_variant,
-        model_hparams = model_hparams,
-        train_hparams = train_hparams,
+        model_hparams = default_model_hparams,
+        train_hparams = default_train_hparams,
         training_data_dir = training_data_dir,
         split = split,
         allow_overwrite = allow_overwrite,
