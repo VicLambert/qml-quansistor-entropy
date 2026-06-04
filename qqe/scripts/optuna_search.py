@@ -12,7 +12,7 @@ from GNN.training.datasets import (
 )
 from GNN.training.runners import MODEL_REGISTRY
 from GNN.training.utils import (
-    collect_dataset_paths,
+    collect_dataset_indices,
 )
 from utils import configure_logger
 
@@ -27,6 +27,7 @@ def main(
     family: str | None = "random",
     data_dir: str = "../outputs/data/general_dataset",
     target: str = "sre",
+    target_variant: str = "sre_density",
     epochs: int = 25,
     n_trials: int = 10,
     study_name: str = typer.Option("gnn_optuna_study", help="Optuna study name"),
@@ -34,10 +35,9 @@ def main(
 ):
     seed = np.random.randint(0, 10000)
     logger.info(f"Starting Optuna hyperparameter search...")
-    data_paths = collect_dataset_paths(
+    data_paths = collect_dataset_indices(
         data_dir,
         family=family if training_mode == "per_family" else None,
-        split="target",
     )
 
     logger.info(f"Found {len(data_paths)} dataset files for target={target} in data_dir={data_dir}.")
@@ -48,9 +48,8 @@ def main(
         seed=seed,
         train_split=0.8,
         val_split=0.1,
-        global_feature_variant="binned",
-        node_feature_variant=None,
         family_projection=family if training_mode == "per_family" else None,
+        target_variant=target_variant,
     )
 
     logger.info(f"Prepared datasets with loader_kind={model_type}. Starting Optuna study with name='{study_name}' and storage='{storage_url}'...")

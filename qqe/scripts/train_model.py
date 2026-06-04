@@ -23,7 +23,7 @@ def main(
     ),
     family: str | None = "clifford",
     target: str = "sre",  # "sre" | "ee"
-    target_variant: str = "sre",  # "sre" | "sre_density" ...
+    target_variant: str = "sre_density",  # "sre" | "sre_density" ...
     model_hparams: dict[str, int | float] | None = None,
     train_hparams: dict[str, int | float] | None = None,
     training_data_dir = "../outputs/data",

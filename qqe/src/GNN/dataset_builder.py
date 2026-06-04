@@ -774,6 +774,13 @@ def compute_pyg_shard(
                 "path": str(shard_path),
                 "cached": True,
             }
+        logger.warning(
+            "Recomputing shard %s due to previous failures: %d failures out of %d samples",
+            shard.shard_id,
+            int(old_meta.get("num_failures", 0)),
+            int(old_meta.get("num_samples", 0)),
+        )
+        shard_path.unlink()
 
     data_list: list[Data] = []
     index_rows: list[dict[str, Any]] = []
@@ -1334,8 +1341,8 @@ def compute_all_shards_parallel(
                         f.flush()
 
                 except Exception as exc:
-                    cid = shard.cid if shard else "unknown"
-                    logger.error("Failed (%s): %s", cid, exc)
+                    sid = shard.shard_id if shard else "unknown"
+                    logger.exception("Failed (%s): %s", sid, exc)
                 finally:
                     fut.release()
 
@@ -1353,7 +1360,7 @@ def run_dataset_pipeline(
     layers_values: np.ndarray,
     n_seeds: int,
     use_dask: bool = False,
-    max_configs: int | None = None,
+    max_shards: int | None = None,
     dask_n_workers: int = 4,
     dask_memory_per_worker: str | None = None,
     sampling_config: SamplingConfig | None = None,
@@ -1384,8 +1391,8 @@ def run_dataset_pipeline(
             layer_blocks_size=layer_block_size,
         )
 
-        if max_configs is not None:
-            shards = shards[:max_configs]
+        if max_shards is not None:
+            shards = shards[:max_shards]
 
         logger.info("Generated %d shards for %s", len(shards), family)
 
