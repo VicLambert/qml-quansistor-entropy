@@ -28,21 +28,21 @@ default_train_hparams = {
 
 def main(
     epochs: int = 40,
-    lr: float = 0.001,
-    loss_type: str = "mse",  # "mse" | "huber" | "l1"
-    batch_size: int = 64,
+    lr: float = 1.5131621801102364e-05,
+    loss_type: str = "huber",  # "mse" | "huber" | "l1"
+    batch_size: int = 16,
     training_mode: str = "per_family",  # "global" | "per_family"
-    model_type: str = "nn",  # "gnn" | "nn"
+    model_type: str = "gnn",  # "gnn" | "nn"
     allow_overwrite: bool = typer.Option(
         False,
         help="Allow overwriting an existing model checkpoint with the same name",
     ),
-    family: str | None = "clifford",
+    family: str | None = "random",
     target: str = "sre",  # "sre" | "ee"
     target_variant: str = "sre_density",  # "sre" | "sre_density" ...
-    model_hparams: dict[str, int | float] | None = None,
-    train_hparams: dict[str, int | float] | None = None,
-    training_data_dir = "../outputs/data",
+    model_hparams = None,
+    train_hparams = None,
+    training_data_dir = "outputs/data/datasets_SRE",
     split: str = "target",
     model_save_path: str | None = None,
     show_progress: bool = typer.Option(
@@ -92,8 +92,9 @@ def main(
     )
 
     logger.info(f"Final test loss: {loss:.6f}")
-
-
+    logger.info(f"Test R2 score: {chkpt['test_r2_score']:.4f}")
+    logger.info(f"Validation R2 score: {chkpt['val_r2_score']:.4f}")
+    logger.info(f"Training R2 score: {chkpt['train_r2_score']:.4f}")
 
 if __name__ == "__main__":
     configure_logger(logging.INFO, logging.INFO)

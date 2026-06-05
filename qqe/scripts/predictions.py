@@ -32,6 +32,7 @@ def main(
     dataset_root: str = typer.Option("outputs/data", help="Root folder containing prediction files."),
     dataset_family: str | None = typer.Option("haar", help="Optional family to predict on."),
     batch_size: int = typer.Option(32, help="Batch size."),
+    target_variant: str = typer.Option("sre_density", help="Target variant, e.g. 'sre', 'sre_density', 'log_sre', or 'sqrt_sre'."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
     node_feature_backend_variant: str | None = typer.Option(None, help="Optional node feature backend variant."),
     plot_n_layers: int | None = typer.Option(80, help="Make plot at fixed n_layers, varying n_qubits."),
@@ -80,6 +81,7 @@ def main(
         model_kind=model_kind,
         device=device,
         show_progress=show_progress,
+        target_variant=target_variant,
     )
     save_predictions_csv(rows, output_csv)
 

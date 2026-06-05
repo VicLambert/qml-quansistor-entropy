@@ -660,7 +660,6 @@ def view_correlation(
     col_y: str = "prediction",
 ):
 
-
     subset = df[(df["n_qubits"] == nq) & (df["n_layers"] == nl)].copy()
 
     # Reset index so "sample index" is clean
@@ -671,7 +670,7 @@ def view_correlation(
     x = subset.index  # sample index (what you want)
 
     plt.plot(x, subset[col_x], label="target", marker="o")
-    plt.plot(x, subset[col_y], label="prediction", marker="x")
+    plt.plot(x, subset[col_y]*nq, label="prediction", marker="x")
 
     plt.xlabel("Sample index")
     plt.ylabel("Value")

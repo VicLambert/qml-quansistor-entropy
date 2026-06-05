@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 
 from pathlib import Path
 from typing import Literal
@@ -15,10 +16,11 @@ from tqdm import tqdm
 
 from .train_config import FAMILY_GATE_TYPES, MASTER_GATE_TYPES
 
-
+logger = logging.getLogger(__name__)
 DatasetSplit = Literal["all", "target", "prediction"]
 
 import ast
+
 
 def to_scalar(x):
     # Already numeric
@@ -215,7 +217,6 @@ def collect_dataset_indices(
             p for p in sorted(root.iterdir())
             if p.is_dir()
         ] if root.exists() else []
-
     index_paths: list[Path] = []
 
     for search_dir in search_dirs:
@@ -224,7 +225,6 @@ def collect_dataset_indices(
 
     if not index_paths:
         index_paths = sorted(root.glob("index_*.jsonl"))
-
     return [str(p.resolve()) for p in index_paths]
 
 def collect_dataset_paths(
