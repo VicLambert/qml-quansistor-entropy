@@ -688,13 +688,13 @@ def build_data_object(
             ee_result = result.results.get(ee_key)
             EE_value = float(ee_result.value) if ee_result else None
 
-        x = graph_data.x.detach().cpu()
-        if x.numel() > 0 and x.min().item() >= 0 and x.max().item() <= 1:
-            x = x.to(torch.uint8)
-        else:
-            x = x.to(torch.float16)
+        x = graph_data.x.detach().cpu().to(torch.float32)
+        # if x.numel() > 0 and x.min().item() >= 0 and x.max().item() <= 1:
+        #     x = x.to(torch.uint8)
+        # else:
+        #     x = x.to(torch.float16)
 
-        edge_index = graph_data.edge_index.detach().cpu().to(torch.int32)
+        edge_index = graph_data.edge_index.detach().cpu().to(torch.long)
         global_features = graph_data.global_features.detach().cpu().to(torch.float32)
 
         data = Data(
@@ -719,8 +719,8 @@ def build_data_object(
         data.family = family
         data.regime = str(controls["sampling_regime"])
 
-        data.n_qubits = torch.tensor([int(n_qubits)])
-        data.n_layers = torch.tensor([int(n_layers)])
+        data.n_qubits = torch.tensor([int(n_qubits)], dtype=torch.long)
+        data.n_layers = torch.tensor([int(n_layers)], dtype=torch.long)
         data.seed = torch.tensor([int(seed)], dtype=torch.long)
         data.has_target = torch.tensor([bool(should_compute_target)], dtype=torch.bool)
 
@@ -1003,8 +1003,8 @@ def compute_entry(
         else:
             x = x.to(torch.float16)
 
-        edge_index = graph_data.edge_index.detach().cpu().to(torch.int32)
-        global_features = graph_data.global_features.detach().cpu().to(torch.float32)
+        edge_index = graph_data.edge_index.detach().cpu().to(torch.int64)
+        global_features = graph_data.global_features.detach().cpu().to(torch.float64)
 
         payload = {
             "x": x,
