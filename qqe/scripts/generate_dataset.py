@@ -94,7 +94,7 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random,clifford,haar,quansistor",
+        "quansistor",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
@@ -115,7 +115,7 @@ def main(
         "4,6,8,10",
         help="Comma-separated qubit values for which the target is computed",
     ),
-    max_configs: int | None = typer.Option(None),
+    max_shards: int | None = typer.Option(None),
     dask_n_workers: int = typer.Option(4),
     dask_memory_per_worker: str = typer.Option("32GiB"),
     block_size: int = typer.Option(10, help="Number of layers per block for layer-wise processing"),
@@ -158,7 +158,7 @@ def main(
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
         output_dir=output_path,
-        max_configs=max_configs,
+        max_configs=max_shards,
     )
 
     run_dataset_pipeline(
@@ -168,7 +168,7 @@ def main(
         layers_values=layers_values,
         n_seeds=n_seeds_option,
         use_dask=use_dask,
-        max_configs=max_configs,
+        max_shards=max_shards,
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
         sampling_config=default_sampling_config(),

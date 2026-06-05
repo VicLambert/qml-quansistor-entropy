@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 
 from pathlib import Path
 from typing import Literal
@@ -15,12 +16,44 @@ from tqdm import tqdm
 
 from .train_config import FAMILY_GATE_TYPES, MASTER_GATE_TYPES
 
-
+logger = logging.getLogger(__name__)
 DatasetSplit = Literal["all", "target", "prediction"]
 
-def _amp_device_type() -> str:
-    return "cuda" if torch.cuda.is_available() else "cpu"
+import ast
 
+
+def to_scalar(x):
+    # Already numeric
+    if isinstance(x, (int, float)):
+        return x
+
+    # torch / numpy scalar
+    if hasattr(x, "item"):
+        return x.item()
+
+    # Strings
+    if isinstance(x, str):
+        x = x.strip()
+
+        # Handle tensor(...) by stripping wrapper FIRST
+        if x.startswith("tensor(") and x.endswith(")"):
+            x = x[len("tensor("):-1].strip()
+
+        try:
+            val = ast.literal_eval(x)
+        except Exception:
+            # fallback: plain float string
+            return float(x)
+
+        # If it's a list/tuple like [10]
+        if isinstance(val, (list, tuple)):
+            if len(val) == 1:
+                return float(val[0])
+            raise ValueError(f"Unexpected list length: {val}")
+
+        return float(val)
+
+    raise ValueError(f"Unsupported type: {type(x)}")
 
 def _family_global_gate_keys(family: str, all_gate_keys: list[str]) -> list[str]:
     """Return the subset of global gate-feature keys relevant for a given family.
@@ -184,7 +217,6 @@ def collect_dataset_indices(
             p for p in sorted(root.iterdir())
             if p.is_dir()
         ] if root.exists() else []
-
     index_paths: list[Path] = []
 
     for search_dir in search_dirs:
@@ -193,7 +225,6 @@ def collect_dataset_indices(
 
     if not index_paths:
         index_paths = sorted(root.glob("index_*.jsonl"))
-
     return [str(p.resolve()) for p in index_paths]
 
 def collect_dataset_paths(

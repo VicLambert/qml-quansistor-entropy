@@ -1,0 +1,470 @@
+2026-06-03 08:41:54,316 - GNN.dataset_builder - INFO - Processing family: random
+2026-06-03 08:41:54,340 - GNN.dataset_builder - INFO - Generated 24 shards for random
+2026-06-03 08:41:54,634 - parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-06-03 08:41:55,059 - distributed.http.proxy - INFO - To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+2026-06-03 08:41:55,081 - distributed.scheduler - INFO - State start
+2026-06-03 08:41:55,101 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:58394
+2026-06-03 08:41:55,102 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-06-03 08:41:55,102 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-06-03 08:41:55,173 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58401'
+2026-06-03 08:41:55,176 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58397'
+2026-06-03 08:41:55,179 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58403'
+2026-06-03 08:41:55,182 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58399'
+2026-06-03 08:41:56,062 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:59021 name: 1
+2026-06-03 08:41:56,073 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:59021
+2026-06-03 08:41:56,074 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59027
+2026-06-03 08:41:56,075 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:59022 name: 2
+2026-06-03 08:41:56,076 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:59022
+2026-06-03 08:41:56,077 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59028
+2026-06-03 08:41:56,102 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:59024 name: 3
+2026-06-03 08:41:56,103 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:59024
+2026-06-03 08:41:56,103 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59032
+2026-06-03 08:41:56,113 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:59023 name: 0
+2026-06-03 08:41:56,114 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:59023
+2026-06-03 08:41:56,114 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59031
+2026-06-03 08:41:56,123 - distributed.scheduler - INFO - Receive client connection: Client-9ae5341b-5f49-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:41:56,123 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:59033
+2026-06-03 08:41:56,125 - parallel.dask - INFO - Dask client created successfully.
+2026-06-03 08:41:56,125 - parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-06-03 08:44:25,688 - distributed.scheduler - INFO - Remove client Client-9ae5341b-5f49-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:44:25,689 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59033; closing.
+2026-06-03 08:44:25,690 - distributed.scheduler - INFO - Remove client Client-9ae5341b-5f49-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:44:25,692 - distributed.scheduler - INFO - Close client connection: Client-9ae5341b-5f49-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:44:25,694 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1780490665.6943028') (0, 1, 2, 3)
+2026-06-03 08:44:25,695 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58397'. Reason: nanny-close
+2026-06-03 08:44:25,696 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:44:25,696 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58399'. Reason: nanny-close
+2026-06-03 08:44:25,697 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:44:25,698 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58401'. Reason: nanny-close
+2026-06-03 08:44:25,698 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:44:25,699 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58403'. Reason: nanny-close
+2026-06-03 08:44:25,699 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:44:25,721 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59028; closing.
+2026-06-03 08:44:25,722 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59022 name: 2 (stimulus_id='handle-worker-cleanup-1780490665.7225986')
+2026-06-03 08:44:25,739 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59031; closing.
+2026-06-03 08:44:25,741 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59023 name: 0 (stimulus_id='handle-worker-cleanup-1780490665.7406182')
+2026-06-03 08:44:25,816 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59027; closing.
+2026-06-03 08:44:25,817 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59021 name: 1 (stimulus_id='handle-worker-cleanup-1780490665.8173892')
+2026-06-03 08:44:25,896 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:59032; closing.
+2026-06-03 08:44:25,897 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:59024 name: 3 (stimulus_id='handle-worker-cleanup-1780490665.8970323')
+2026-06-03 08:44:25,897 - distributed.scheduler - INFO - Lost all workers
+2026-06-03 08:44:29,713 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-06-03 08:44:29,713 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-06-03 08:44:29,715 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-06-03 08:44:29,716 - distributed.nanny - WARNING - Worker process still alive after 4.0 seconds, killing
+2026-06-03 08:44:29,777 - distributed.nanny - INFO - Worker process 276772 was killed by signal 15
+2026-06-03 08:44:29,779 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58401' closed.
+2026-06-03 08:44:29,781 - distributed.nanny - INFO - Worker process 153508 was killed by signal 15
+2026-06-03 08:44:29,782 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58397' closed.
+2026-06-03 08:44:29,792 - distributed.nanny - INFO - Worker process 227632 was killed by signal 15
+2026-06-03 08:44:29,795 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58399' closed.
+2026-06-03 08:44:29,800 - distributed.nanny - INFO - Worker process 135988 was killed by signal 15
+2026-06-03 08:44:29,802 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58403' closed.
+2026-06-03 08:44:29,803 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-06-03 08:44:29,803 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-06-03 08:44:29,806 - parallel.dask - INFO - Dask client and cluster closed.
+2026-06-03 08:50:24,346 - GNN.dataset_builder - INFO - Processing family: random
+2026-06-03 08:50:24,352 - GNN.dataset_builder - INFO - Generated 8 shards for random
+2026-06-03 08:50:24,353 - parallel.dask - INFO - Creating local Dask cluster with 4 workers, 1 threads per worker.
+2026-06-03 08:50:24,372 - distributed.scheduler - INFO - State start
+2026-06-03 08:50:24,396 - distributed.scheduler - INFO -   Scheduler at:     tcp://127.0.0.1:58197
+2026-06-03 08:50:24,398 - distributed.scheduler - INFO -   dashboard at:  http://127.0.0.1:8787/status
+2026-06-03 08:50:24,398 - distributed.scheduler - INFO - Registering Worker plugin shuffle
+2026-06-03 08:50:24,462 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58202'
+2026-06-03 08:50:24,463 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58204'
+2026-06-03 08:50:24,467 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58200'
+2026-06-03 08:50:24,469 - distributed.nanny - INFO -         Start Nanny at: 'tcp://127.0.0.1:58206'
+2026-06-03 08:50:25,315 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:58218 name: 2
+2026-06-03 08:50:25,315 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:58218
+2026-06-03 08:50:25,316 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:58223
+2026-06-03 08:50:25,316 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:58217 name: 3
+2026-06-03 08:50:25,318 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:58217
+2026-06-03 08:50:25,318 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:58222
+2026-06-03 08:50:25,369 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:58219 name: 0
+2026-06-03 08:50:25,370 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:58219
+2026-06-03 08:50:25,370 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:58226
+2026-06-03 08:50:25,420 - distributed.scheduler - INFO - Register worker addr: tcp://127.0.0.1:58224 name: 1
+2026-06-03 08:50:25,421 - distributed.scheduler - INFO - Starting worker compute stream, tcp://127.0.0.1:58224
+2026-06-03 08:50:25,421 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:58228
+2026-06-03 08:50:25,458 - distributed.scheduler - INFO - Receive client connection: Client-ca7bd81f-5f4a-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:50:25,458 - distributed.core - INFO - Starting established connection to tcp://127.0.0.1:58232
+2026-06-03 08:50:25,459 - parallel.dask - INFO - Dask client created successfully.
+2026-06-03 08:50:25,460 - parallel.dask - INFO - Client dashboard available at: http://127.0.0.1:8787/status
+2026-06-03 08:53:48,074 - distributed.scheduler - INFO - Remove client Client-ca7bd81f-5f4a-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:53:48,075 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:58232; closing.
+2026-06-03 08:53:48,075 - distributed.scheduler - INFO - Remove client Client-ca7bd81f-5f4a-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:53:48,076 - distributed.scheduler - INFO - Close client connection: Client-ca7bd81f-5f4a-11f1-aa8c-fcb0de6e8d72
+2026-06-03 08:53:48,077 - distributed.scheduler - INFO - Retire worker addresses (stimulus_id='retire-workers-1780491228.0779176') (0, 1, 2, 3)
+2026-06-03 08:53:48,077 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58200'. Reason: nanny-close
+2026-06-03 08:53:48,077 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:53:48,079 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58202'. Reason: nanny-close
+2026-06-03 08:53:48,080 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:53:48,080 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58204'. Reason: nanny-close
+2026-06-03 08:53:48,081 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:53:48,081 - distributed.nanny - INFO - Closing Nanny at 'tcp://127.0.0.1:58206'. Reason: nanny-close
+2026-06-03 08:53:48,082 - distributed.nanny - INFO - Nanny asking worker to close. Reason: nanny-close
+2026-06-03 08:53:48,083 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:58226; closing.
+2026-06-03 08:53:48,084 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:58223; closing.
+2026-06-03 08:53:48,084 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:58228; closing.
+2026-06-03 08:53:48,085 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:58219 name: 0 (stimulus_id='handle-worker-cleanup-1780491228.086006')
+2026-06-03 08:53:48,086 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:58218 name: 2 (stimulus_id='handle-worker-cleanup-1780491228.0867252')
+2026-06-03 08:53:48,087 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:58224 name: 1 (stimulus_id='handle-worker-cleanup-1780491228.0876048')
+2026-06-03 08:53:48,088 - distributed.core - INFO - Received 'close-stream' from tcp://127.0.0.1:58222; closing.
+2026-06-03 08:53:48,089 - distributed.scheduler - INFO - Remove worker addr: tcp://127.0.0.1:58217 name: 3 (stimulus_id='handle-worker-cleanup-1780491228.0902307')
+2026-06-03 08:53:48,090 - distributed.scheduler - INFO - Lost all workers
+2026-06-03 08:53:49,540 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58206' closed.
+2026-06-03 08:53:49,540 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58202' closed.
+2026-06-03 08:53:49,541 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58204' closed.
+2026-06-03 08:53:49,541 - distributed.nanny - INFO - Nanny at 'tcp://127.0.0.1:58200' closed.
+2026-06-03 08:53:49,542 - distributed.scheduler - INFO - Closing scheduler. Reason: unknown
+2026-06-03 08:53:49,543 - distributed.scheduler - INFO - Scheduler closing all comms
+2026-06-03 08:53:49,545 - parallel.dask - INFO - Dask client and cluster closed.
+2026-06-03 08:53:49,550 - GNN.dataset_builder - INFO - Completed random: 8 shards
+2026-06-03 08:53:49,551 - GNN.dataset_builder - INFO - Metadata: C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\qqe\outputs\data\SRE_datasets_test\random\metadata_random.json
+2026-06-03 08:53:49,551 - GNN.dataset_builder - INFO - Samples: C:\Users\Victor\Desktop\Université\Research\qml-quansistor-entropy\qqe\outputs\data\SRE_datasets_test\random
+2026-06-03 08:53:49,552 - GNN.dataset_builder - INFO - All families processed successfully
+2026-06-03 16:29:53,559 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-06-03 16:29:53,562 - scripts.optuna_search - INFO - Found 0 dataset files for target=sre in data_dir=../outputs/data/datasets_SRE.
+2026-06-03 16:31:01,408 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-06-03 16:31:01,409 - scripts.optuna_search - INFO - Found 0 dataset files for target=sre in data_dir=../outputs/data/datasets_SRE/processed.
+2026-06-03 16:32:32,414 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-06-03 16:32:32,416 - scripts.optuna_search - INFO - Found 0 dataset files for target=sre in data_dir=../outputs/data/datasets_SRE/random.
+2026-06-03 16:32:58,081 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-06-03 16:34:16,519 - scripts.optuna_search - INFO - Starting Optuna hyperparameter search...
+2026-06-03 16:34:16,522 - scripts.optuna_search - INFO - Found 1 dataset files for target=sre in data_dir=../outputs/data/datasets_SRE.
+2026-06-03 16:36:23,833 - scripts.optuna_search - INFO - Prepared datasets with loader_kind=gnn. Starting Optuna study with name='optuna_search_gnn_per_family_random_sre_542342_sre_density' and storage='sqlite:///optuna_studies.db'...
+2026-06-03 16:36:24,465 - scripts.optuna_search - INFO - Running Optuna optimization for 10 trials...
+2026-06-03 16:36:25,091 - GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-06-03 16:37:25,465 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 80/1607 | loss 0.122963 | elapsed 60.4s | graphs 1280
+2026-06-03 16:38:25,521 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 162/1607 | loss 0.098232 | elapsed 120.4s | graphs 2592
+2026-06-03 16:39:25,724 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 250/1607 | loss 0.088377 | elapsed 180.6s | graphs 4000
+2026-06-03 16:40:25,888 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 341/1607 | loss 0.080141 | elapsed 240.8s | graphs 5456
+2026-06-03 16:41:26,157 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 433/1607 | loss 0.074294 | elapsed 301.1s | graphs 6928
+2026-06-03 16:42:27,025 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 527/1607 | loss 0.071553 | elapsed 361.9s | graphs 8432
+2026-06-03 16:43:27,368 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 622/1607 | loss 0.068555 | elapsed 422.3s | graphs 9952
+2026-06-03 16:44:27,481 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 712/1607 | loss 0.065533 | elapsed 482.4s | graphs 11392
+2026-06-03 16:45:27,569 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 802/1607 | loss 0.063196 | elapsed 542.5s | graphs 12832
+2026-06-03 16:46:28,087 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 892/1607 | loss 0.061546 | elapsed 603.0s | graphs 14272
+2026-06-03 16:47:28,626 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 979/1607 | loss 0.060461 | elapsed 663.5s | graphs 15664
+2026-06-03 16:48:29,182 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1070/1607 | loss 0.059047 | elapsed 724.1s | graphs 17120
+2026-06-03 16:49:29,817 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1162/1607 | loss 0.058105 | elapsed 784.7s | graphs 18592
+2026-06-03 16:50:30,441 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1252/1607 | loss 0.056922 | elapsed 845.3s | graphs 20032
+2026-06-03 16:51:30,584 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1344/1607 | loss 0.056125 | elapsed 905.5s | graphs 21504
+2026-06-03 16:52:30,931 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1437/1607 | loss 0.055233 | elapsed 965.8s | graphs 22992
+2026-06-03 16:53:31,056 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 1529/1607 | loss 0.054495 | elapsed 1026.0s | graphs 24464
+2026-06-03 16:54:22,314 - GNN.training.train - INFO - Training complete (1077.2s) | running validation...
+2026-06-03 16:56:06,736 - GNN.training.train - INFO - Losses | train 0.053972 | val 0.036321 | lr 9.63e-04 | time train=1077.2s val=104.4s total=1181.6s
+2026-06-03 16:56:06,738 - GNN.training.train - WARNING - Epoch 1 took 1181.6s (>300s threshold).
+2026-06-03 16:56:06,769 - GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-06-03 16:57:06,914 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 89/1607 | loss 0.040938 | elapsed 60.1s | graphs 1424
+2026-06-03 16:58:07,281 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 179/1607 | loss 0.041672 | elapsed 120.5s | graphs 2864
+2026-06-03 16:59:07,356 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 269/1607 | loss 0.042312 | elapsed 180.6s | graphs 4304
+2026-06-03 17:00:07,421 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 360/1607 | loss 0.041737 | elapsed 240.7s | graphs 5760
+2026-06-03 17:01:07,679 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 453/1607 | loss 0.041337 | elapsed 300.9s | graphs 7248
+2026-06-03 17:02:08,053 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 546/1607 | loss 0.041468 | elapsed 361.3s | graphs 8736
+2026-06-03 17:03:08,449 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 638/1607 | loss 0.041684 | elapsed 421.7s | graphs 10208
+2026-06-03 17:04:08,943 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 730/1607 | loss 0.041624 | elapsed 482.2s | graphs 11680
+2026-06-03 17:05:09,197 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 820/1607 | loss 0.042001 | elapsed 542.4s | graphs 13120
+2026-06-03 17:06:09,434 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 913/1607 | loss 0.041718 | elapsed 602.7s | graphs 14608
+2026-06-03 17:07:09,762 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1007/1607 | loss 0.041637 | elapsed 663.0s | graphs 16112
+2026-06-03 17:08:09,941 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1101/1607 | loss 0.041651 | elapsed 723.2s | graphs 17616
+2026-06-03 17:09:10,076 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1195/1607 | loss 0.041613 | elapsed 783.3s | graphs 19120
+2026-06-03 17:10:10,644 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1291/1607 | loss 0.041597 | elapsed 843.9s | graphs 20656
+2026-06-03 17:11:10,750 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1385/1607 | loss 0.041409 | elapsed 904.0s | graphs 22160
+2026-06-03 17:12:11,067 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1478/1607 | loss 0.041259 | elapsed 964.3s | graphs 23648
+2026-06-03 17:13:11,593 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 1575/1607 | loss 0.041078 | elapsed 1024.8s | graphs 25200
+2026-06-03 17:13:31,296 - GNN.training.train - INFO - Training complete (1044.5s) | running validation...
+2026-06-03 17:15:09,123 - GNN.training.train - INFO - Losses | train 0.040959 | val 0.041925 | lr 9.63e-04 | time train=1044.5s val=97.8s total=1142.4s
+2026-06-03 17:15:09,124 - GNN.training.train - WARNING - Epoch 2 took 1142.4s (>300s threshold).
+2026-06-03 17:15:09,125 - GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-06-03 17:16:09,140 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 99/1607 | loss 0.040418 | elapsed 60.0s | graphs 1584
+2026-06-03 17:17:09,345 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 196/1607 | loss 0.040928 | elapsed 120.2s | graphs 3136
+2026-06-03 17:18:09,869 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 290/1607 | loss 0.040784 | elapsed 180.7s | graphs 4640
+2026-06-03 17:19:10,067 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 378/1607 | loss 0.040211 | elapsed 240.9s | graphs 6048
+2026-06-03 17:20:10,387 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 466/1607 | loss 0.040353 | elapsed 301.3s | graphs 7456
+2026-06-03 17:21:10,549 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 555/1607 | loss 0.040415 | elapsed 361.4s | graphs 8880
+2026-06-03 17:22:10,785 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 643/1607 | loss 0.040121 | elapsed 421.7s | graphs 10288
+2026-06-03 17:23:10,930 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 731/1607 | loss 0.040343 | elapsed 481.8s | graphs 11696
+2026-06-03 17:24:10,969 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 819/1607 | loss 0.040364 | elapsed 541.8s | graphs 13104
+2026-06-03 17:25:11,199 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 907/1607 | loss 0.040362 | elapsed 602.1s | graphs 14512
+2026-06-03 17:26:11,680 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 995/1607 | loss 0.040267 | elapsed 662.6s | graphs 15920
+2026-06-03 17:27:11,975 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1083/1607 | loss 0.040325 | elapsed 722.8s | graphs 17328
+2026-06-03 17:28:12,388 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1171/1607 | loss 0.040167 | elapsed 783.3s | graphs 18736
+2026-06-03 17:29:12,871 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1258/1607 | loss 0.040053 | elapsed 843.7s | graphs 20128
+2026-06-03 17:30:13,148 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1347/1607 | loss 0.039809 | elapsed 904.0s | graphs 21552
+2026-06-03 17:31:13,202 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1435/1607 | loss 0.039658 | elapsed 964.1s | graphs 22960
+2026-06-03 17:32:13,239 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 1521/1607 | loss 0.039667 | elapsed 1024.1s | graphs 24336
+2026-06-03 17:33:11,926 - GNN.training.train - INFO - Training complete (1082.8s) | running validation...
+2026-06-03 17:34:58,667 - GNN.training.train - INFO - Losses | train 0.039702 | val 0.036468 | lr 9.63e-04 | time train=1082.8s val=106.7s total=1189.5s
+2026-06-03 17:34:58,669 - GNN.training.train - WARNING - Epoch 3 took 1189.5s (>300s threshold).
+2026-06-03 17:34:58,669 - GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-06-03 17:35:59,541 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 89/1607 | loss 0.038351 | elapsed 60.9s | graphs 1424
+2026-06-03 17:37:00,253 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 179/1607 | loss 0.037885 | elapsed 121.6s | graphs 2864
+2026-06-03 17:38:00,302 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 266/1607 | loss 0.039598 | elapsed 181.6s | graphs 4256
+2026-06-03 17:39:00,729 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 355/1607 | loss 0.040000 | elapsed 242.1s | graphs 5680
+2026-06-03 17:40:01,641 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 444/1607 | loss 0.040106 | elapsed 303.0s | graphs 7104
+2026-06-03 17:41:01,693 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 534/1607 | loss 0.040053 | elapsed 363.0s | graphs 8544
+2026-06-03 17:42:02,141 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 622/1607 | loss 0.039712 | elapsed 423.5s | graphs 9952
+2026-06-03 17:43:02,557 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 710/1607 | loss 0.039366 | elapsed 483.9s | graphs 11360
+2026-06-03 17:44:02,805 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 798/1607 | loss 0.039471 | elapsed 544.1s | graphs 12768
+2026-06-03 17:45:03,338 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 886/1607 | loss 0.039315 | elapsed 604.7s | graphs 14176
+2026-06-03 17:46:03,834 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 974/1607 | loss 0.039546 | elapsed 665.2s | graphs 15584
+2026-06-03 17:47:04,027 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1063/1607 | loss 0.039519 | elapsed 725.4s | graphs 17008
+2026-06-03 17:48:04,131 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1151/1607 | loss 0.039442 | elapsed 785.5s | graphs 18416
+2026-06-03 17:49:04,638 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1242/1607 | loss 0.039371 | elapsed 846.0s | graphs 19872
+2026-06-03 17:50:04,901 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1330/1607 | loss 0.039203 | elapsed 906.2s | graphs 21280
+2026-06-03 17:51:05,747 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1419/1607 | loss 0.039156 | elapsed 967.1s | graphs 22704
+2026-06-03 17:52:06,094 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1506/1607 | loss 0.039081 | elapsed 1027.4s | graphs 24096
+2026-06-03 17:53:06,490 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 1592/1607 | loss 0.038935 | elapsed 1087.8s | graphs 25472
+2026-06-03 17:53:16,634 - GNN.training.train - INFO - Training complete (1098.0s) | running validation...
+2026-06-03 17:55:04,092 - GNN.training.train - INFO - Losses | train 0.038999 | val 0.040673 | lr 9.63e-04 | time train=1098.0s val=107.5s total=1205.4s
+2026-06-03 17:55:04,093 - GNN.training.train - WARNING - Epoch 4 took 1205.4s (>300s threshold).
+2026-06-03 17:55:04,093 - GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-06-03 17:56:04,279 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 87/1607 | loss 0.040788 | elapsed 60.2s | graphs 1392
+2026-06-03 17:57:04,876 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 175/1607 | loss 0.039567 | elapsed 120.8s | graphs 2800
+2026-06-03 17:58:05,016 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 264/1607 | loss 0.039751 | elapsed 180.9s | graphs 4224
+2026-06-03 17:59:05,290 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 351/1607 | loss 0.039366 | elapsed 241.2s | graphs 5616
+2026-06-03 18:00:05,617 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 440/1607 | loss 0.039471 | elapsed 301.5s | graphs 7040
+2026-06-03 18:01:05,799 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 527/1607 | loss 0.039640 | elapsed 361.7s | graphs 8432
+2026-06-03 18:02:06,195 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 615/1607 | loss 0.039148 | elapsed 422.1s | graphs 9840
+2026-06-03 18:03:06,255 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 703/1607 | loss 0.038808 | elapsed 482.2s | graphs 11248
+2026-06-03 18:04:06,733 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 793/1607 | loss 0.038649 | elapsed 542.6s | graphs 12688
+2026-06-03 18:05:06,929 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 879/1607 | loss 0.038506 | elapsed 602.8s | graphs 14064
+2026-06-03 18:06:07,233 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 963/1607 | loss 0.038673 | elapsed 663.1s | graphs 15408
+2026-06-03 18:07:07,487 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1050/1607 | loss 0.038930 | elapsed 723.4s | graphs 16800
+2026-06-03 18:08:07,983 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1138/1607 | loss 0.039011 | elapsed 783.9s | graphs 18208
+2026-06-03 18:09:08,556 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1226/1607 | loss 0.039020 | elapsed 844.5s | graphs 19616
+2026-06-03 18:10:09,070 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1313/1607 | loss 0.039162 | elapsed 905.0s | graphs 21008
+2026-06-03 18:11:09,253 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1400/1607 | loss 0.039152 | elapsed 965.2s | graphs 22400
+2026-06-03 18:12:09,468 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1489/1607 | loss 0.038938 | elapsed 1025.4s | graphs 23824
+2026-06-03 18:13:09,525 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 1578/1607 | loss 0.038736 | elapsed 1085.4s | graphs 25248
+2026-06-03 18:13:29,641 - GNN.training.train - INFO - Training complete (1105.5s) | running validation...
+2026-06-03 18:15:17,093 - GNN.training.train - INFO - Losses | train 0.038740 | val 0.038788 | lr 9.63e-04 | time train=1105.5s val=107.5s total=1213.0s
+2026-06-03 18:15:17,093 - GNN.training.train - WARNING - Epoch 5 took 1213.0s (>300s threshold).
+2026-06-03 18:15:17,094 - GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-06-03 18:16:17,786 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 90/1607 | loss 0.038151 | elapsed 60.7s | graphs 1440
+2026-06-03 18:17:17,832 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 177/1607 | loss 0.037870 | elapsed 120.7s | graphs 2832
+2026-06-03 18:18:18,021 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 265/1607 | loss 0.039205 | elapsed 180.9s | graphs 4240
+2026-06-03 18:19:18,958 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 357/1607 | loss 0.038108 | elapsed 241.9s | graphs 5712
+2026-06-03 18:20:19,285 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 448/1607 | loss 0.038266 | elapsed 302.2s | graphs 7168
+2026-06-03 18:21:19,811 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 539/1607 | loss 0.038434 | elapsed 362.7s | graphs 8624
+2026-06-03 18:22:20,129 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 631/1607 | loss 0.038659 | elapsed 423.0s | graphs 10096
+2026-06-03 18:23:20,550 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 724/1607 | loss 0.038628 | elapsed 483.5s | graphs 11584
+2026-06-03 18:24:21,185 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 816/1607 | loss 0.038857 | elapsed 544.1s | graphs 13056
+2026-06-03 18:25:21,715 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 907/1607 | loss 0.039000 | elapsed 604.6s | graphs 14512
+2026-06-03 18:26:22,152 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1000/1607 | loss 0.038811 | elapsed 665.1s | graphs 16000
+2026-06-03 18:27:22,650 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1091/1607 | loss 0.038649 | elapsed 725.6s | graphs 17456
+2026-06-03 18:28:23,109 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1183/1607 | loss 0.038717 | elapsed 786.0s | graphs 18928
+2026-06-03 18:29:23,395 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1275/1607 | loss 0.038722 | elapsed 846.3s | graphs 20400
+2026-06-03 18:30:23,781 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1367/1607 | loss 0.038668 | elapsed 906.7s | graphs 21872
+2026-06-03 18:31:23,947 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1457/1607 | loss 0.038637 | elapsed 966.9s | graphs 23312
+2026-06-03 18:32:24,346 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 1548/1607 | loss 0.038480 | elapsed 1027.3s | graphs 24768
+2026-06-03 18:33:02,847 - GNN.training.train - INFO - Training complete (1065.8s) | running validation...
+2026-06-03 18:34:44,954 - GNN.training.train - INFO - Losses | train 0.038511 | val 0.038416 | lr 9.63e-04 | time train=1065.8s val=102.1s total=1167.9s
+2026-06-03 18:34:44,954 - GNN.training.train - WARNING - Epoch 6 took 1167.9s (>300s threshold).
+2026-06-03 18:34:44,956 - GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-06-03 18:35:45,014 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 91/1607 | loss 0.037704 | elapsed 60.1s | graphs 1456
+2026-06-03 18:36:45,136 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 181/1607 | loss 0.038024 | elapsed 120.2s | graphs 2896
+2026-06-03 18:37:45,479 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 272/1607 | loss 0.038030 | elapsed 180.5s | graphs 4352
+2026-06-03 18:38:45,491 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 364/1607 | loss 0.037788 | elapsed 240.5s | graphs 5824
+2026-06-03 18:39:46,063 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 456/1607 | loss 0.037875 | elapsed 301.1s | graphs 7296
+2026-06-03 18:40:46,082 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 546/1607 | loss 0.038073 | elapsed 361.1s | graphs 8736
+2026-06-03 18:41:46,286 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 638/1607 | loss 0.038200 | elapsed 421.3s | graphs 10208
+2026-06-03 18:42:46,662 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 727/1607 | loss 0.038394 | elapsed 481.7s | graphs 11632
+2026-06-03 18:43:47,274 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 818/1607 | loss 0.038536 | elapsed 542.3s | graphs 13088
+2026-06-03 18:44:47,531 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 909/1607 | loss 0.038380 | elapsed 602.6s | graphs 14544
+2026-06-03 18:45:48,203 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1001/1607 | loss 0.038349 | elapsed 663.2s | graphs 16016
+2026-06-03 18:46:48,447 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1091/1607 | loss 0.038201 | elapsed 723.5s | graphs 17456
+2026-06-03 18:47:48,859 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1182/1607 | loss 0.038219 | elapsed 783.9s | graphs 18912
+2026-06-03 18:48:49,271 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1274/1607 | loss 0.038304 | elapsed 844.3s | graphs 20384
+2026-06-03 18:49:50,004 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1366/1607 | loss 0.038211 | elapsed 905.0s | graphs 21856
+2026-06-03 18:50:50,585 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1457/1607 | loss 0.038264 | elapsed 965.6s | graphs 23312
+2026-06-03 18:51:50,904 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 1547/1607 | loss 0.038248 | elapsed 1025.9s | graphs 24752
+2026-06-03 18:52:29,422 - GNN.training.train - INFO - Training complete (1064.5s) | running validation...
+2026-06-03 18:54:12,708 - GNN.training.train - INFO - Losses | train 0.038338 | val 0.044236 | lr 4.81e-04 | time train=1064.5s val=103.3s total=1167.8s
+2026-06-03 18:54:12,709 - GNN.training.train - WARNING - Epoch 7 took 1167.8s (>300s threshold).
+2026-06-03 18:54:12,710 - GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-06-03 18:55:12,843 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 90/1607 | loss 0.037991 | elapsed 60.1s | graphs 1440
+2026-06-03 18:56:13,018 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 181/1607 | loss 0.038997 | elapsed 120.3s | graphs 2896
+2026-06-03 18:57:13,601 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 272/1607 | loss 0.038161 | elapsed 180.9s | graphs 4352
+2026-06-03 18:58:14,066 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 363/1607 | loss 0.037933 | elapsed 241.4s | graphs 5808
+2026-06-03 18:59:14,475 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 454/1607 | loss 0.037732 | elapsed 301.8s | graphs 7264
+2026-06-03 19:00:14,624 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 544/1607 | loss 0.037806 | elapsed 361.9s | graphs 8704
+2026-06-03 19:01:14,777 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 635/1607 | loss 0.037815 | elapsed 422.1s | graphs 10160
+2026-06-03 19:02:15,092 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 727/1607 | loss 0.037805 | elapsed 482.4s | graphs 11632
+2026-06-03 19:03:15,388 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 819/1607 | loss 0.037811 | elapsed 542.7s | graphs 13104
+2026-06-03 19:04:16,201 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 909/1607 | loss 0.037729 | elapsed 603.5s | graphs 14544
+2026-06-03 19:05:16,483 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 999/1607 | loss 0.037573 | elapsed 663.8s | graphs 15984
+2026-06-03 19:06:16,867 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1089/1607 | loss 0.037404 | elapsed 724.2s | graphs 17424
+2026-06-03 19:07:16,949 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1178/1607 | loss 0.037393 | elapsed 784.2s | graphs 18848
+2026-06-03 19:08:17,263 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1268/1607 | loss 0.037422 | elapsed 844.6s | graphs 20288
+2026-06-03 19:09:17,454 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1357/1607 | loss 0.037355 | elapsed 904.7s | graphs 21712
+2026-06-03 19:10:17,612 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1447/1607 | loss 0.037360 | elapsed 964.9s | graphs 23152
+2026-06-03 19:11:18,522 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 1538/1607 | loss 0.037492 | elapsed 1025.8s | graphs 24608
+2026-06-03 19:12:03,792 - GNN.training.train - INFO - Training complete (1071.1s) | running validation...
+2026-06-03 19:13:47,319 - GNN.training.train - INFO - Losses | train 0.037431 | val 0.042378 | lr 4.81e-04 | time train=1071.1s val=103.5s total=1174.6s
+2026-06-03 19:13:47,321 - GNN.training.train - WARNING - Epoch 8 took 1174.6s (>300s threshold).
+2026-06-03 19:13:47,321 - GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-06-03 19:14:47,646 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 91/1607 | loss 0.038911 | elapsed 60.3s | graphs 1456
+2026-06-03 19:15:48,034 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 181/1607 | loss 0.038610 | elapsed 120.7s | graphs 2896
+2026-06-03 19:16:48,405 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 271/1607 | loss 0.037690 | elapsed 181.1s | graphs 4336
+2026-06-03 19:17:49,420 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 361/1607 | loss 0.037044 | elapsed 242.1s | graphs 5776
+2026-06-03 19:18:49,837 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 453/1607 | loss 0.037216 | elapsed 302.5s | graphs 7248
+2026-06-03 19:19:50,225 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 545/1607 | loss 0.037016 | elapsed 362.9s | graphs 8720
+2026-06-03 19:20:50,840 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 637/1607 | loss 0.037262 | elapsed 423.5s | graphs 10192
+2026-06-03 19:21:50,870 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 726/1607 | loss 0.037554 | elapsed 483.5s | graphs 11616
+2026-06-03 19:22:51,367 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 817/1607 | loss 0.037429 | elapsed 544.0s | graphs 13072
+2026-06-03 19:23:51,530 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 906/1607 | loss 0.037487 | elapsed 604.2s | graphs 14496
+2026-06-03 19:24:52,059 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 996/1607 | loss 0.037630 | elapsed 664.7s | graphs 15936
+2026-06-03 19:25:52,417 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1087/1607 | loss 0.037587 | elapsed 725.1s | graphs 17392
+2026-06-03 19:26:52,435 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1175/1607 | loss 0.037694 | elapsed 785.1s | graphs 18800
+2026-06-03 19:27:52,495 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1265/1607 | loss 0.037716 | elapsed 845.2s | graphs 20240
+2026-06-03 19:28:53,045 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1356/1607 | loss 0.037653 | elapsed 905.7s | graphs 21696
+2026-06-03 19:29:53,498 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1449/1607 | loss 0.037558 | elapsed 966.2s | graphs 23184
+2026-06-03 19:30:53,981 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 1541/1607 | loss 0.037401 | elapsed 1026.7s | graphs 24656
+2026-06-03 19:31:38,090 - GNN.training.train - INFO - Training complete (1070.8s) | running validation...
+2026-06-03 19:33:20,815 - GNN.training.train - INFO - Losses | train 0.037430 | val 0.040729 | lr 4.81e-04 | time train=1070.8s val=102.7s total=1173.5s
+2026-06-03 19:33:20,816 - GNN.training.train - WARNING - Epoch 9 took 1173.5s (>300s threshold).
+2026-06-03 19:33:20,816 - GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-06-03 19:34:21,282 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 91/1607 | loss 0.037023 | elapsed 60.5s | graphs 1456
+2026-06-03 19:35:21,331 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 181/1607 | loss 0.037804 | elapsed 120.5s | graphs 2896
+2026-06-03 19:36:21,642 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 272/1607 | loss 0.037576 | elapsed 180.8s | graphs 4352
+2026-06-03 19:37:21,832 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 363/1607 | loss 0.037866 | elapsed 241.0s | graphs 5808
+2026-06-03 19:38:22,311 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 453/1607 | loss 0.037857 | elapsed 301.5s | graphs 7248
+2026-06-03 19:39:22,479 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 543/1607 | loss 0.037710 | elapsed 361.7s | graphs 8688
+2026-06-03 19:40:22,591 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 633/1607 | loss 0.037682 | elapsed 421.8s | graphs 10128
+2026-06-03 19:41:22,733 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 723/1607 | loss 0.037660 | elapsed 481.9s | graphs 11568
+2026-06-03 19:42:22,906 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 814/1607 | loss 0.037419 | elapsed 542.1s | graphs 13024
+2026-06-03 19:43:22,942 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 903/1607 | loss 0.037602 | elapsed 602.1s | graphs 14448
+2026-06-03 19:44:23,447 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 993/1607 | loss 0.037767 | elapsed 662.6s | graphs 15888
+2026-06-03 19:45:23,690 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1084/1607 | loss 0.037624 | elapsed 722.9s | graphs 17344
+2026-06-03 19:46:24,289 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1176/1607 | loss 0.037807 | elapsed 783.5s | graphs 18816
+2026-06-03 19:47:24,893 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1267/1607 | loss 0.037873 | elapsed 844.1s | graphs 20272
+2026-06-03 19:48:24,973 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1359/1607 | loss 0.037810 | elapsed 904.2s | graphs 21744
+2026-06-03 19:49:25,189 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1449/1607 | loss 0.037670 | elapsed 964.4s | graphs 23184
+2026-06-03 19:50:25,454 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 1538/1607 | loss 0.037592 | elapsed 1024.6s | graphs 24608
+2026-06-03 19:51:10,269 - GNN.training.train - INFO - Training complete (1069.5s) | running validation...
+2026-06-03 19:52:53,053 - GNN.training.train - INFO - Losses | train 0.037493 | val 0.038508 | lr 4.81e-04 | time train=1069.5s val=102.8s total=1172.2s
+2026-06-03 19:52:53,053 - GNN.training.train - WARNING - Epoch 10 took 1172.2s (>300s threshold).
+2026-06-03 19:52:53,054 - GNN.training.train - INFO - -------- EPOCH 011 --------
+2026-06-03 19:53:53,356 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 91/1607 | loss 0.036905 | elapsed 60.3s | graphs 1456
+2026-06-03 19:54:53,742 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 182/1607 | loss 0.036814 | elapsed 120.7s | graphs 2912
+2026-06-03 19:55:54,211 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 274/1607 | loss 0.035794 | elapsed 181.2s | graphs 4384
+2026-06-03 19:56:54,384 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 366/1607 | loss 0.036558 | elapsed 241.3s | graphs 5856
+2026-06-03 19:57:54,717 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 455/1607 | loss 0.037176 | elapsed 301.7s | graphs 7280
+2026-06-03 19:58:54,993 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 546/1607 | loss 0.037519 | elapsed 361.9s | graphs 8736
+2026-06-03 19:59:55,132 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 637/1607 | loss 0.037173 | elapsed 422.1s | graphs 10192
+2026-06-03 20:00:55,665 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 728/1607 | loss 0.037332 | elapsed 482.6s | graphs 11648
+2026-06-03 20:01:56,010 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 818/1607 | loss 0.037088 | elapsed 543.0s | graphs 13088
+2026-06-03 20:02:56,315 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 909/1607 | loss 0.037214 | elapsed 603.3s | graphs 14544
+2026-06-03 20:03:56,823 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1001/1607 | loss 0.037258 | elapsed 663.8s | graphs 16016
+2026-06-03 20:04:57,170 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1091/1607 | loss 0.037209 | elapsed 724.1s | graphs 17456
+2026-06-03 20:05:57,353 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1182/1607 | loss 0.037273 | elapsed 784.3s | graphs 18912
+2026-06-03 20:06:57,628 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1273/1607 | loss 0.037304 | elapsed 844.6s | graphs 20368
+2026-06-03 20:07:57,773 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1365/1607 | loss 0.037514 | elapsed 904.7s | graphs 21840
+2026-06-03 20:08:57,855 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1455/1607 | loss 0.037467 | elapsed 964.8s | graphs 23280
+2026-06-03 20:09:58,088 - GNN.training.train - INFO - [Heartbeat] Epoch 11 batch 1547/1607 | loss 0.037391 | elapsed 1025.0s | graphs 24752
+2026-06-03 20:10:37,028 - GNN.training.train - INFO - Training complete (1064.0s) | running validation...
+2026-06-03 20:12:18,911 - GNN.training.train - INFO - Losses | train 0.037372 | val 0.042972 | lr 4.81e-04 | time train=1064.0s val=101.9s total=1165.9s
+2026-06-03 20:12:18,912 - GNN.training.train - WARNING - Epoch 11 took 1165.9s (>300s threshold).
+2026-06-03 20:12:18,912 - GNN.training.train - INFO - Early stopping at epoch 011 | best val 0.036321 | patience exhausted (10/10)
+2026-06-03 20:12:19,419 - GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-06-03 20:13:51,779 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 2/201 | loss 0.239581 | elapsed 92.4s | graphs 256
+2026-06-03 20:15:23,712 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 4/201 | loss 0.231170 | elapsed 184.3s | graphs 512
+2026-06-03 20:16:49,957 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 6/201 | loss 0.216779 | elapsed 270.5s | graphs 768
+2026-06-03 20:18:23,303 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 8/201 | loss 0.214700 | elapsed 363.9s | graphs 1024
+2026-06-03 20:19:26,156 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 10/201 | loss 0.207016 | elapsed 426.7s | graphs 1280
+2026-06-03 20:20:26,945 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 18/201 | loss 0.187152 | elapsed 487.5s | graphs 2304
+2026-06-03 20:21:29,742 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 28/201 | loss 0.169661 | elapsed 550.3s | graphs 3584
+2026-06-03 20:22:35,528 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 37/201 | loss 0.161654 | elapsed 616.1s | graphs 4736
+2026-06-03 20:23:39,376 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 45/201 | loss 0.154777 | elapsed 680.0s | graphs 5760
+2026-06-03 20:24:54,638 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 48/201 | loss 0.152225 | elapsed 755.2s | graphs 6144
+2026-06-03 20:26:23,001 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 51/201 | loss 0.150507 | elapsed 843.6s | graphs 6528
+2026-06-03 20:27:45,937 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 54/201 | loss 0.147858 | elapsed 926.5s | graphs 6912
+2026-06-03 20:29:09,216 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 57/201 | loss 0.145901 | elapsed 1009.8s | graphs 7296
+2026-06-03 20:30:32,994 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 60/201 | loss 0.144105 | elapsed 1093.6s | graphs 7680
+2026-06-03 20:31:59,603 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 63/201 | loss 0.142786 | elapsed 1180.2s | graphs 8064
+2026-06-03 20:33:24,353 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 66/201 | loss 0.141867 | elapsed 1264.9s | graphs 8448
+2026-06-03 20:34:52,880 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 69/201 | loss 0.140812 | elapsed 1353.5s | graphs 8832
+2026-06-03 20:36:19,642 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 72/201 | loss 0.139621 | elapsed 1440.2s | graphs 9216
+2026-06-03 20:37:43,586 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 75/201 | loss 0.138629 | elapsed 1524.2s | graphs 9600
+2026-06-03 20:39:07,844 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 78/201 | loss 0.137913 | elapsed 1608.4s | graphs 9984
+2026-06-03 20:40:28,832 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 81/201 | loss 0.137162 | elapsed 1689.4s | graphs 10368
+2026-06-03 20:41:52,684 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 84/201 | loss 0.136242 | elapsed 1773.3s | graphs 10752
+2026-06-03 20:43:17,100 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 87/201 | loss 0.135085 | elapsed 1857.7s | graphs 11136
+2026-06-03 20:45:01,814 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 90/201 | loss 0.134205 | elapsed 1962.4s | graphs 11520
+2026-06-03 20:46:18,673 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 92/201 | loss 0.133685 | elapsed 2039.3s | graphs 11776
+2026-06-03 20:47:34,153 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 94/201 | loss 0.133151 | elapsed 2114.7s | graphs 12032
+2026-06-03 20:48:47,273 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 96/201 | loss 0.132689 | elapsed 2187.9s | graphs 12288
+2026-06-03 20:49:57,604 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 98/201 | loss 0.132056 | elapsed 2258.2s | graphs 12544
+2026-06-03 20:51:05,418 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 100/201 | loss 0.131419 | elapsed 2326.0s | graphs 12800
+2026-06-03 20:52:15,830 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 102/201 | loss 0.130974 | elapsed 2396.4s | graphs 13056
+2026-06-03 20:53:22,840 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 104/201 | loss 0.130505 | elapsed 2463.4s | graphs 13312
+2026-06-03 20:54:31,281 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 106/201 | loss 0.129986 | elapsed 2531.9s | graphs 13568
+2026-06-03 20:55:39,520 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 108/201 | loss 0.129498 | elapsed 2600.1s | graphs 13824
+2026-06-03 20:56:53,118 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 110/201 | loss 0.128867 | elapsed 2673.7s | graphs 14080
+2026-06-03 20:58:07,497 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 112/201 | loss 0.128265 | elapsed 2748.1s | graphs 14336
+2026-06-03 20:59:22,115 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 114/201 | loss 0.127801 | elapsed 2822.7s | graphs 14592
+2026-06-03 21:00:36,573 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 116/201 | loss 0.127501 | elapsed 2897.2s | graphs 14848
+2026-06-03 21:01:52,934 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 118/201 | loss 0.127020 | elapsed 2973.5s | graphs 15104
+2026-06-03 21:03:07,251 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 120/201 | loss 0.126910 | elapsed 3047.8s | graphs 15360
+2026-06-03 21:04:22,306 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 122/201 | loss 0.126488 | elapsed 3122.9s | graphs 15616
+2026-06-03 21:05:36,195 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 124/201 | loss 0.126188 | elapsed 3196.8s | graphs 15872
+2026-06-03 21:06:52,303 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 126/201 | loss 0.125959 | elapsed 3272.9s | graphs 16128
+2026-06-03 21:08:06,258 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 128/201 | loss 0.125547 | elapsed 3346.8s | graphs 16384
+2026-06-03 21:09:18,460 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 130/201 | loss 0.125121 | elapsed 3419.0s | graphs 16640
+2026-06-03 21:10:30,833 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 132/201 | loss 0.124707 | elapsed 3491.4s | graphs 16896
+2026-06-03 21:11:43,835 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 134/201 | loss 0.124318 | elapsed 3564.4s | graphs 17152
+2026-06-03 21:12:57,615 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 136/201 | loss 0.123980 | elapsed 3638.2s | graphs 17408
+2026-06-03 21:14:09,370 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 138/201 | loss 0.123696 | elapsed 3710.0s | graphs 17664
+2026-06-03 21:15:17,306 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 140/201 | loss 0.123385 | elapsed 3777.9s | graphs 17920
+2026-06-03 21:16:28,611 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 142/201 | loss 0.122946 | elapsed 3849.2s | graphs 18176
+2026-06-03 21:17:41,102 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 144/201 | loss 0.122597 | elapsed 3921.7s | graphs 18432
+2026-06-03 21:18:56,986 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 146/201 | loss 0.122271 | elapsed 3997.6s | graphs 18688
+2026-06-03 21:20:10,124 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 148/201 | loss 0.121801 | elapsed 4070.7s | graphs 18944
+2026-06-03 21:21:23,877 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 150/201 | loss 0.121442 | elapsed 4144.5s | graphs 19200
+2026-06-03 21:22:38,797 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 152/201 | loss 0.121261 | elapsed 4219.4s | graphs 19456
+2026-06-03 21:23:50,589 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 154/201 | loss 0.121059 | elapsed 4291.2s | graphs 19712
+2026-06-03 21:25:03,465 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 156/201 | loss 0.120808 | elapsed 4364.0s | graphs 19968
+2026-06-03 21:26:15,776 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 158/201 | loss 0.120556 | elapsed 4436.4s | graphs 20224
+2026-06-03 21:27:28,183 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 160/201 | loss 0.120324 | elapsed 4508.8s | graphs 20480
+2026-06-03 21:28:40,745 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 162/201 | loss 0.120074 | elapsed 4581.3s | graphs 20736
+2026-06-03 21:29:51,730 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 164/201 | loss 0.119738 | elapsed 4652.3s | graphs 20992
+2026-06-03 21:31:03,208 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 166/201 | loss 0.119503 | elapsed 4723.8s | graphs 21248
+2026-06-03 21:32:15,202 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 168/201 | loss 0.119374 | elapsed 4795.8s | graphs 21504
+2026-06-03 21:33:29,291 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 170/201 | loss 0.119129 | elapsed 4869.9s | graphs 21760
+2026-06-03 21:34:40,967 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 172/201 | loss 0.118785 | elapsed 4941.5s | graphs 22016
+2026-06-03 21:35:53,981 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 174/201 | loss 0.118642 | elapsed 5014.6s | graphs 22272
+2026-06-03 21:37:07,726 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 176/201 | loss 0.118425 | elapsed 5088.3s | graphs 22528
+2026-06-03 21:38:20,639 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 178/201 | loss 0.118381 | elapsed 5161.2s | graphs 22784
+2026-06-03 21:39:33,520 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 180/201 | loss 0.118253 | elapsed 5234.1s | graphs 23040
+2026-06-03 21:40:45,997 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 182/201 | loss 0.117972 | elapsed 5306.6s | graphs 23296
+2026-06-03 21:41:56,957 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 184/201 | loss 0.117865 | elapsed 5377.5s | graphs 23552
+2026-06-03 21:43:04,189 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 186/201 | loss 0.117639 | elapsed 5444.8s | graphs 23808
+2026-06-03 21:44:15,690 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 188/201 | loss 0.117317 | elapsed 5516.3s | graphs 24064
+2026-06-03 21:45:28,967 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 190/201 | loss 0.117000 | elapsed 5589.5s | graphs 24320
+2026-06-03 21:47:01,640 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 192/201 | loss 0.116904 | elapsed 5682.2s | graphs 24576
+2026-06-03 21:48:17,203 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 194/201 | loss 0.116684 | elapsed 5757.8s | graphs 24832
+2026-06-03 21:49:32,699 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 196/201 | loss 0.116324 | elapsed 5833.3s | graphs 25088
+2026-06-03 21:50:53,778 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 198/201 | loss 0.116220 | elapsed 5914.4s | graphs 25344
+2026-06-03 21:52:10,293 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 200/201 | loss 0.115921 | elapsed 5990.9s | graphs 25600
+2026-06-03 21:52:42,505 - GNN.training.train - INFO - Training complete (6023.1s) | running validation...
+2026-06-03 21:55:24,172 - GNN.training.train - INFO - Losses | train 0.115763 | val 0.066882 | lr 4.40e-05 | time train=6023.1s val=161.7s total=6184.8s
+2026-06-03 21:55:24,173 - GNN.training.train - WARNING - Epoch 1 took 6184.8s (>300s threshold).
+2026-06-03 21:55:24,185 - GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-06-03 21:56:41,286 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 2/201 | loss 0.088492 | elapsed 77.1s | graphs 256
+2026-06-03 21:57:55,477 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 4/201 | loss 0.088125 | elapsed 151.3s | graphs 512
+2026-06-03 21:59:20,225 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 6/201 | loss 0.094057 | elapsed 236.0s | graphs 768
+2026-06-03 22:00:42,545 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 8/201 | loss 0.095228 | elapsed 318.4s | graphs 1024
+2026-06-03 22:01:54,117 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 10/201 | loss 0.095212 | elapsed 389.9s | graphs 1280
+2026-06-03 22:03:13,245 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 12/201 | loss 0.093540 | elapsed 469.1s | graphs 1536
+2026-06-03 22:04:29,532 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 14/201 | loss 0.093428 | elapsed 545.3s | graphs 1792
+2026-06-03 22:05:46,448 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 16/201 | loss 0.092047 | elapsed 622.3s | graphs 2048
+2026-06-03 22:07:05,853 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 18/201 | loss 0.091365 | elapsed 701.7s | graphs 2304
+2026-06-03 22:08:23,335 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 20/201 | loss 0.091323 | elapsed 779.1s | graphs 2560
+2026-06-03 22:09:33,991 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 22/201 | loss 0.091337 | elapsed 849.8s | graphs 2816
+2026-06-03 22:10:53,462 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 24/201 | loss 0.091961 | elapsed 929.3s | graphs 3072
+2026-06-03 22:12:08,513 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 26/201 | loss 0.090840 | elapsed 1004.3s | graphs 3328
+2026-06-03 22:13:26,375 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 28/201 | loss 0.091391 | elapsed 1082.2s | graphs 3584
+2026-06-03 22:14:44,540 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 30/201 | loss 0.092347 | elapsed 1160.4s | graphs 3840
+2026-06-03 22:16:00,745 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 32/201 | loss 0.092296 | elapsed 1236.6s | graphs 4096
