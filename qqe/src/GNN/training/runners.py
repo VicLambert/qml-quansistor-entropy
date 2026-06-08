@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import logging
-
+import os
 from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
@@ -291,7 +291,7 @@ def train(
         },
         "history": hist,
     }
-
+    os.mkdir("../outputs/models", exist_ok=True)
     if save_checkpoint and model_save_path is None:
         model_save_path = _resolve_model_save_path(
             f"../outputs/models/{run_name}.pt",

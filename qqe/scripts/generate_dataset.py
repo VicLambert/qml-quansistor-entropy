@@ -94,7 +94,7 @@ def main(
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "quansistor",
+        "random,clifford,quansistor,haar",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
