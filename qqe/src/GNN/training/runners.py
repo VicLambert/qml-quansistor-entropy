@@ -291,15 +291,18 @@ def train(
         },
         "history": hist,
     }
-    os.mkdir("../outputs/models", exist_ok=True)
+    model_path_root = "../outputs/models"
+    model_path_root.mkdir(parents=True, exist_ok=True)
     if save_checkpoint and model_save_path is None:
         model_save_path = _resolve_model_save_path(
-            f"../outputs/models/{run_name}.pt",
+            f"{model_path_root}/{run_name}.pt",
             allow_overwrite=allow_overwrite,
         )
+        model_save_path.mkdir(parents=True, exist_ok=True)
         torch.save(checkpoint, model_save_path)
         logger.info(f"Saved model checkpoint to {model_save_path}")
     elif save_checkpoint and model_save_path is not None:
+        model_save_path.mkdir(parents=True, exist_ok=True)
         torch.save(checkpoint, model_save_path)
         logger.info(f"Saved model checkpoint to {model_save_path}")
 
