@@ -92,9 +92,9 @@ def main(
     )
 
     logger.info(f"Final test loss: {loss:.6f}")
-    logger.info(f"Test R2 score: {chkpt['test_r2_score']:.4f}")
-    logger.info(f"Validation R2 score: {chkpt['val_r2_score']:.4f}")
-    logger.info(f"Training R2 score: {chkpt['train_r2_score']:.4f}")
+    logger.info(f"Test R2 score: {chkpt['final_metrics'].get('test_r2_score', 0):.4f}")
+    logger.info(f"Validation R2 score: {chkpt['final_metrics'].get('val_r2_score', 0):.4f}")
+    logger.info(f"Training R2 score: {chkpt['final_metrics'].get('train_r2_score', 0):.4f}")
 
 if __name__ == "__main__":
     configure_logger(logging.INFO, logging.INFO)
