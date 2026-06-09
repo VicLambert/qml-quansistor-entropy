@@ -226,12 +226,12 @@ def train(
         use_amp=True,
         show_progress=show_progress,
     )
-    train_r2_score = evaluate_r2(
-        model,
-        train_loader,
-        dev,
-        show_progress=show_progress,
-    )
+    #train_r2_score = evaluate_r2(
+    #    model,
+    #    train_loader,
+    #    dev,
+    #    show_progress=show_progress,
+    #)
     val_r2_score = evaluate_r2(
         model,
         val_loader,
@@ -286,18 +286,19 @@ def train(
         "final_metrics": {
             "test_loss": float(test_loss),
             "test_r2_score": float(test_r2_score),
-            "train_r2_score": float(train_r2_score),
+            "train_r2_score": None,
             "val_r2_score": float(val_r2_score),
         },
         "history": hist,
     }
-    model_path_root = "../outputs/models"
+    model_path_root = Path("../outputs/models")
     model_path_root.mkdir(parents=True, exist_ok=True)
     if save_checkpoint and model_save_path is None:
         model_save_path = _resolve_model_save_path(
             f"{model_path_root}/{run_name}.pt",
             allow_overwrite=allow_overwrite,
         )
+        model_save_path = Path(model_save_path)
         model_save_path.mkdir(parents=True, exist_ok=True)
         torch.save(checkpoint, model_save_path)
         logger.info(f"Saved model checkpoint to {model_save_path}")
