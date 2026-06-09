@@ -1,6 +1,6 @@
 *.md
 *.png
-*.pt
+
 
 example_visualization.py
 cleanup.py

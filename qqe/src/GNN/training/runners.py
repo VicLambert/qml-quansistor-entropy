@@ -299,9 +299,14 @@ def train(
             allow_overwrite=allow_overwrite,
         )
         model_save_path = Path(model_save_path)
-        model_save_path.mkdir(parents=True, exist_ok=True)
-        torch.save(checkpoint, model_save_path)
-        logger.info(f"Saved model checkpoint to {model_save_path}")
+        if model_save_path.suffix == "":
+            model_save_path.mkdir(parents=True, exist_ok=True)
+            checkpoint_file = model_save_path / f"{family}_model_{model_type}_{training_scope}.pt"
+        else:
+            model_save_path.parent.mkdir(parents=True, exist_ok=True)
+            checkpoint_file = model_save_path
+        torch.save(checkpoint, checkpoint_file)
+        logger.info(f"Saved model checkpoint to {checkpoint_file}")
     elif save_checkpoint and model_save_path is not None:
         model_save_path.mkdir(parents=True, exist_ok=True)
         torch.save(checkpoint, model_save_path)
