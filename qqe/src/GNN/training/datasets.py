@@ -1,14 +1,21 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
+
+from dataclasses import dataclass
+from typing import cast
 
 import torch
 import torch.nn.functional as F
 
-from GNN.physics_aware_NN import QuantumCircuitGraphDataset, ShardedQuantumCircuitGraphDataset
 from torch.utils.data import DataLoader as TorchDataLoader, random_split
+from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader as PyGDataLoader
+
+from GNN.physics_aware_NN import (
+    QuantumCircuitGraphDataset,
+    ShardedQuantumCircuitGraphDataset,
+)
 
 from .utils import FamilyFeatureProjector, ProjectedDatasetWrapper, cache_root_paths
 
@@ -17,13 +24,15 @@ class PaddedGraphDatasetWrapper:
     def __init__(self, dataset, target_dim: int | None = None):
         self.dataset = dataset
         self.target_dim = target_dim or self._compute_max_dim()
+        print(f"[PaddedGraphDatasetWrapper] target_dim={self.target_dim}")
 
     def _compute_max_dim(self) -> int:
         max_dim = 0
         for i in range(len(self.dataset)):
             data = self.dataset[i]
-            if hasattr(data, "x") and data.x.dim() > 1:
-                max_dim = max(max_dim, data.x.shape[1])
+            x = getattr(data, "x", None)
+            if x is not None and x.dim() > 1:
+                max_dim = max(max_dim, int(x.shape[1]))
         return max_dim
 
     def __len__(self) -> int:
@@ -31,13 +40,24 @@ class PaddedGraphDatasetWrapper:
 
     def __getitem__(self, idx: int):
         data = self.dataset[idx]
+        x = getattr(data, "x", None)
 
-        if hasattr(data, "x") and data.x.shape[1] < self.target_dim:
-            # Pad the feature matrix with zeros
+        if x is None or x.dim() <= 1:
+            return data
+
+        current_dim = int(x.shape[1])
+
+        if current_dim < self.target_dim:
             out = data.clone()
-            pad_size = self.target_dim - data.x.shape[1]
+            pad_size = self.target_dim - current_dim
             out.x = F.pad(out.x, (0, pad_size), value=0)
             return out
+
+        if current_dim > self.target_dim:
+            out = data.clone()
+            out.x = out.x[:, : self.target_dim]
+            return out
+
         return data
 
 
@@ -101,10 +121,11 @@ def prepare_datasets(
     #     target_variant=target_variant,
     # )
     base_dataset = ShardedQuantumCircuitGraphDataset(
-            index_paths=index_paths,
-            target_variant=target_variant,
-            split=split,
-        )
+        index_paths=index_paths,
+        target_variant=target_variant,
+        split=split,
+        cache_size=64,
+    )
 
     if len(base_dataset) < 3:
         raise RuntimeError("Dataset too small for train/val/test splitting.")
@@ -123,9 +144,18 @@ def prepare_datasets(
 
     if loader_kind == "gnn":
         final_dataset = PaddedGraphDatasetWrapper(working_dataset)
+
         sample0 = final_dataset[0]
-        node_in_dim = int(sample0.x.shape[1])
-        global_in_dim = int(sample0.global_features.numel())
+        x = getattr(sample0, "x", None)
+        if x is None:
+            raise ValueError("Sample is missing node feature matrix 'x'.")
+
+        g = getattr(sample0, "global_features", None)
+        if g is None:
+            raise ValueError("Sample is missing 'global_features'.")
+
+        node_in_dim = int(x.shape[1])
+        global_in_dim = int(g.numel())
 
     elif loader_kind == "nn" or loader_kind == "regressor":
         final_dataset = GlobalTargetDatasetWrapper(working_dataset)

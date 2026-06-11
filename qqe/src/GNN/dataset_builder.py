@@ -262,7 +262,6 @@ def generate_pyg_shard(
 
     for block_idx, start in enumerate(range(0, len(layers_list), layer_blocks_size)):
         layer_block = tuple(layers_list[start:start + layer_blocks_size])
-        print("Layer block : %s", layer_block)
         for layer in layer_block:
             layer_to_block[int(layer)] = (block_idx, layer_block)
 
@@ -590,7 +589,7 @@ def build_data_object(
         base_dir = config.output_dir or DATASET_DIR
         base_dir.mkdir(parents=True, exist_ok=True)
         path = base_dir / f"{cid}.pt"
-        tmp_path = path.with_suffix(".pt.tmp")
+        tmp_path: Path = path.with_suffix(".pt.tmp")
 
         if path.exists():
             return {"cid": cid, "path": str(path), "cached": True}
