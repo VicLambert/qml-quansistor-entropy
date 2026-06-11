@@ -262,7 +262,6 @@ def generate_pyg_shard(
 
     for block_idx, start in enumerate(range(0, len(layers_list), layer_blocks_size)):
         layer_block = tuple(layers_list[start:start + layer_blocks_size])
-        print("Layer block : %s", layer_block)
         for layer in layer_block:
             layer_to_block[int(layer)] = (block_idx, layer_block)
 
