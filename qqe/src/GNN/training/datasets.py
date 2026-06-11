@@ -24,13 +24,15 @@ class PaddedGraphDatasetWrapper:
     def __init__(self, dataset, target_dim: int | None = None):
         self.dataset = dataset
         self.target_dim = target_dim or self._compute_max_dim()
+        print(f"[PaddedGraphDatasetWrapper] target_dim={self.target_dim}")
 
     def _compute_max_dim(self) -> int:
         max_dim = 0
         for i in range(len(self.dataset)):
             data = self.dataset[i]
-            if hasattr(data, "x") and data.x.dim() > 1:
-                max_dim = max(max_dim, data.x.shape[1])
+            x = getattr(data, "x", None)
+            if x is not None and x.dim() > 1:
+                max_dim = max(max_dim, int(x.shape[1]))
         return max_dim
 
     def __len__(self) -> int:
@@ -38,13 +40,24 @@ class PaddedGraphDatasetWrapper:
 
     def __getitem__(self, idx: int):
         data = self.dataset[idx]
+        x = getattr(data, "x", None)
 
-        if hasattr(data, "x") and data.x.shape[1] < self.target_dim:
-            # Pad the feature matrix with zeros
+        if x is None or x.dim() <= 1:
+            return data
+
+        current_dim = int(x.shape[1])
+
+        if current_dim < self.target_dim:
             out = data.clone()
-            pad_size = self.target_dim - data.x.shape[1]
+            pad_size = self.target_dim - current_dim
             out.x = F.pad(out.x, (0, pad_size), value=0)
             return out
+
+        if current_dim > self.target_dim:
+            out = data.clone()
+            out.x = out.x[:, : self.target_dim]
+            return out
+
         return data
 
 
@@ -130,17 +143,9 @@ def prepare_datasets(
         )
 
     if loader_kind == "gnn":
-        raw_sample0 = working_dataset[0]
+        final_dataset = PaddedGraphDatasetWrapper(working_dataset)
 
-        # This branch should receive a PyG Data object, not a tuple.
-        if isinstance(raw_sample0, tuple):
-            raise TypeError(
-                "Expected a PyG Data object for loader_kind='gnn', "
-                f"but got tuple: {type(raw_sample0)}"
-            )
-
-        sample0 = cast(Data, raw_sample0)
-
+        sample0 = final_dataset[0]
         x = getattr(sample0, "x", None)
         if x is None:
             raise ValueError("Sample is missing node feature matrix 'x'.")
@@ -151,11 +156,6 @@ def prepare_datasets(
 
         node_in_dim = int(x.shape[1])
         global_in_dim = int(g.numel())
-
-        final_dataset = PaddedGraphDatasetWrapper(
-            working_dataset,
-            target_dim=node_in_dim,
-        )
 
     elif loader_kind == "nn" or loader_kind == "regressor":
         final_dataset = GlobalTargetDatasetWrapper(working_dataset)
