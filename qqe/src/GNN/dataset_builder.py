@@ -590,7 +590,7 @@ def build_data_object(
         base_dir = config.output_dir or DATASET_DIR
         base_dir.mkdir(parents=True, exist_ok=True)
         path = base_dir / f"{cid}.pt"
-        tmp_path = path.with_suffix(".pt.tmp")
+        tmp_path: Path = path.with_suffix(".pt.tmp")
 
         if path.exists():
             return {"cid": cid, "path": str(path), "cached": True}

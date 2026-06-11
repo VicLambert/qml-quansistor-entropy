@@ -4,6 +4,7 @@ from scripts.generate_pred_datasets import main as generate_pred_datasets
 from scripts.optuna_search import main as optuna_search
 from scripts.predictions import main as predictions
 from scripts.train_model import main as training
+from scripts.simulate_circuits import main as simulate_circuit
 
 __all__ = [
     "generate_dataset",
@@ -11,5 +12,6 @@ __all__ = [
     "optuna_search",
     "predictions",
     "training",
+    "simulate_circuit",
 ]
 
