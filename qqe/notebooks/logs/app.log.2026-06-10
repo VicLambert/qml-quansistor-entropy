@@ -1,0 +1,10 @@
+2026-06-10 19:26:23,094 - scripts.simulate_circuits - INFO - Simulating circuit family: random
+2026-06-10 19:27:00,830 - scripts.simulate_circuits - INFO - Simulating circuit family: random
+2026-06-10 19:28:57,524 - scripts.simulate_circuits - INFO - Simulating circuit family: random
+2026-06-10 19:29:46,508 - scripts.simulate_circuits - INFO - Simulating circuit family: random
+2026-06-10 19:30:59,122 - scripts.simulate_circuits - INFO - Simulating circuit family: clifford
+2026-06-10 19:30:59,126 - circuit.families - INFO - Generating gates for CliffordBrickwork with tdoping=TdopingRules(count=20, placement='center_pair', per_layer=2)
+2026-06-10 19:31:33,558 - scripts.simulate_circuits - INFO - Simulating circuit family: quansistor
+2026-06-10 19:33:04,610 - scripts.simulate_circuits - INFO - Simulating circuit family: quansistor
+2026-06-10 19:33:54,034 - scripts.simulate_circuits - INFO - Simulating circuit family: quansistor
+2026-06-10 19:34:04,236 - scripts.simulate_circuits - INFO - Simulating circuit family: quansistor
