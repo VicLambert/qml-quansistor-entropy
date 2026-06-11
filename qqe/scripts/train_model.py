@@ -24,6 +24,7 @@ default_train_hparams = {
     "grad_clip": 1.0289214665544766,
     "early_stopping_patience": 10,
     "early_stopping_min_delta": 0.0,
+    "num_workers": 0,
 }
 
 def main(

@@ -152,7 +152,7 @@ def train(
 
     family_filter = family if training_mode == "per_family" else None
     family_projection = family if training_mode == "per_family" else None
-
+    num_workers = int(train_hparams.get("num_workers", 0))
     logger.info("Collecting data paths...")
     # data_paths = collect_files_path(training_data_dir, family=family_filter)
     train_paths = collect_dataset_indices(
@@ -179,6 +179,7 @@ def train(
             family_projection=family_projection,
             target_variant=target_variant,
             split = split,
+            num_workers = num_workers,
         )
     else:
         train_loader, val_loader, test_loader, global_in_dim, base_dataset = loader_fn(
@@ -190,6 +191,7 @@ def train(
             family_projection=family_projection,
             target_variant=target_variant,
             split = split,
+            num_workers = num_workers,
         )
         node_in_dim = global_in_dim
 

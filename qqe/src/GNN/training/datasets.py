@@ -1,14 +1,21 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
+
+from dataclasses import dataclass
+from typing import cast
 
 import torch
 import torch.nn.functional as F
 
-from GNN.physics_aware_NN import QuantumCircuitGraphDataset, ShardedQuantumCircuitGraphDataset
 from torch.utils.data import DataLoader as TorchDataLoader, random_split
+from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader as PyGDataLoader
+
+from GNN.physics_aware_NN import (
+    QuantumCircuitGraphDataset,
+    ShardedQuantumCircuitGraphDataset,
+)
 
 from .utils import FamilyFeatureProjector, ProjectedDatasetWrapper, cache_root_paths
 
@@ -101,10 +108,11 @@ def prepare_datasets(
     #     target_variant=target_variant,
     # )
     base_dataset = ShardedQuantumCircuitGraphDataset(
-            index_paths=index_paths,
-            target_variant=target_variant,
-            split=split,
-        )
+        index_paths=index_paths,
+        target_variant=target_variant,
+        split=split,
+        cache_size=64,
+    )
 
     if len(base_dataset) < 3:
         raise RuntimeError("Dataset too small for train/val/test splitting.")
@@ -122,10 +130,32 @@ def prepare_datasets(
         )
 
     if loader_kind == "gnn":
-        final_dataset = PaddedGraphDatasetWrapper(working_dataset)
-        sample0 = final_dataset[0]
-        node_in_dim = int(sample0.x.shape[1])
-        global_in_dim = int(sample0.global_features.numel())
+        raw_sample0 = working_dataset[0]
+
+        # This branch should receive a PyG Data object, not a tuple.
+        if isinstance(raw_sample0, tuple):
+            raise TypeError(
+                "Expected a PyG Data object for loader_kind='gnn', "
+                f"but got tuple: {type(raw_sample0)}"
+            )
+
+        sample0 = cast(Data, raw_sample0)
+
+        x = getattr(sample0, "x", None)
+        if x is None:
+            raise ValueError("Sample is missing node feature matrix 'x'.")
+
+        g = getattr(sample0, "global_features", None)
+        if g is None:
+            raise ValueError("Sample is missing 'global_features'.")
+
+        node_in_dim = int(x.shape[1])
+        global_in_dim = int(g.numel())
+
+        final_dataset = PaddedGraphDatasetWrapper(
+            working_dataset,
+            target_dim=node_in_dim,
+        )
 
     elif loader_kind == "nn" or loader_kind == "regressor":
         final_dataset = GlobalTargetDatasetWrapper(working_dataset)
