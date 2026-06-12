@@ -6,6 +6,7 @@ example_visualization.py
 cleanup.py
 notebooks/temp
 notebooks/data/
+notebooks/final/data/
 qqe/outputs/data/
 qqe/outputs/cache/
 

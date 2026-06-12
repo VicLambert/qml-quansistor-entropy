@@ -288,7 +288,7 @@ def train(
         "final_metrics": {
             "test_loss": float(test_loss),
             "test_r2_score": float(test_r2_score),
-            "train_r2_score": None,
+            "train_r2_score": 0.0,
             "val_r2_score": float(val_r2_score),
         },
         "history": hist,
@@ -300,7 +300,7 @@ def train(
             f"{model_path_root}/{run_name}.pt",
             allow_overwrite=allow_overwrite,
         )
-        model_save_path = Path(model_save_path)
+        model_save_path = Path(str(model_save_path))
         if model_save_path.suffix == "":
             model_save_path.mkdir(parents=True, exist_ok=True)
             checkpoint_file = model_save_path / f"{family}_model_{model_type}_{training_scope}.pt"
@@ -310,7 +310,15 @@ def train(
         torch.save(checkpoint, checkpoint_file)
         logger.info(f"Saved model checkpoint to {checkpoint_file}")
     elif save_checkpoint and model_save_path is not None:
-        model_save_path.mkdir(parents=True, exist_ok=True)
+        model_save_path = Path(
+            _resolve_model_save_path(
+                model_save_path,
+                allow_overwrite=allow_overwrite,
+            )
+        )
+
+        model_save_path.parent.mkdir(parents=True, exist_ok=True)
+
         torch.save(checkpoint, model_save_path)
         logger.info(f"Saved model checkpoint to {model_save_path}")
 

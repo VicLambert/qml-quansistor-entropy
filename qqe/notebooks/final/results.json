@@ -1,0 +1,82 @@
+[
+    {
+        "family": "clifford",
+        "n_qubits": 12,
+        "n_layers": 6,
+        "method": "fwht",
+        "seed": 53,
+        "SRE:fwht": 9.770450836635532e-15
+    },
+    {
+        "family": "clifford",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 53,
+        "SRE:fwht": 2.5098846657392065e-13
+    },
+    {
+        "family": "haar",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 3,
+        "SRE:fwht": 10.000881736146038
+    },
+    {
+        "family": "haar",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 53,
+        "SRE:fwht": 9.999057575123095
+    },
+    {
+        "family": "haar",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 1679,
+        "SRE:fwht": -0.0
+    },
+    {
+        "family": "haar",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 5970,
+        "SRE:fwht": 10.000757211701927
+    },
+    {
+        "family": "quansistor",
+        "n_qubits": 14,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 53,
+        "SRE:fwht": 12.000034861658742
+    },
+    {
+        "family": "random",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 53,
+        "SRE:fwht": 0.017524219987704835
+    },
+    {
+        "family": "random",
+        "n_qubits": 14,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 9743,
+        "SRE:fwht": 0.013685666137176927
+    },
+    {
+        "family": "random",
+        "n_qubits": 12,
+        "n_layers": 60,
+        "method": "fwht",
+        "seed": 5199,
+        "SRE:fwht": 9.955925598672426
+    }
+]

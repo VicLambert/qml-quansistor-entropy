@@ -35,7 +35,7 @@ class SimulationConfig:
     backend: str
     n_bins: int = 50
 
-sampling_config = SamplingConfig(
+sampling_config_saturated = SamplingConfig(
         clifford=RegimeDistribution(
             regimes=[
                 "zero",
@@ -98,12 +98,76 @@ sampling_config = SamplingConfig(
         ),
     )
 
+sampling_config_identity_like = SamplingConfig(
+        clifford=RegimeDistribution(
+            regimes=[
+                "zero",
+                "tiny",
+                "very_low",
+                "low",
+                "medium_low",
+                "medium",
+                "medium_high",
+                "high",
+            ],
+            probabilities=[
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+            ],
+        ),
+        random=RegimeDistribution(
+            regimes=[
+                "identity_like",
+                "near_clifford",
+                "small_angles",
+                "medium_angles",
+                "generic_sparse",
+                "generic_dense",
+            ],
+            probabilities=[1.00, 0.0, 0., 0.0, 0.0, 0.0],
+        ),
+        quansistor=RegimeDistribution(
+            regimes=[
+                "identity_like",
+                "weak",
+                "moderate",
+                "structured_equal_ab",
+                "structured_opposite_ab",
+                "generic_uniform",
+            ],
+            probabilities=[1., 0., 0., 0., 0., 0.0],
+        ),
+        haar=RegimeDistribution(
+            regimes=[
+                "identity_like",
+                "very_weak",
+                "sparse_weak",
+                "medium_weak",
+                "dense_weak",
+                "sparse_full",
+                "medium",
+                "dense_medium",
+                "sparse_full",
+                "medium_full",
+                "full",
+            ],
+            probabilities=[1.0, 0.0, 0.0, 0., 0., 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        ),
+    )
+
 def main(
     family: str = typer.Option("random", help="Circuit family to simulate."),
     n_qubits: int = typer.Option(4, help="Number of qubits in the circuit."),
     n_layers: int = typer.Option(4, help="Number of layers in the circuit."),
     backend: str = typer.Option("pennylane", help="Simulation backend to use."),
     seed = typer.Option(42, help="Random seed for reproducibility."),
+    regime_type: str = typer.Option("saturated", help="Regime type to sample from (default, balanced)"),
 ):
     """Simulate quantum circuits and saves the circuit plot and the circuit DAG."""
     seed = seed
@@ -114,6 +178,12 @@ def main(
         backend=backend,
     )
     logger.info(f"Simulating circuit family: {family}")
+
+    if regime_type == "saturated":
+        sampling_config = sampling_config_saturated
+    elif regime_type == "identity_like":
+        sampling_config = sampling_config_identity_like
+
     controls = sample_generation_controls(
         family=family,
         n_layers=int(n_layers),
@@ -171,7 +241,7 @@ def main(
     dag = circuit_to_dag(qc)
 
     img = dag_drawer(dag)
-    return img, qc, graph_data, gate_counts
+    return img, qc, graph_data, gate_counts, spec
 
 
 if __name__ == "__main__":

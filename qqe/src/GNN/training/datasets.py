@@ -24,7 +24,6 @@ class PaddedGraphDatasetWrapper:
     def __init__(self, dataset, target_dim: int | None = None):
         self.dataset = dataset
         self.target_dim = target_dim or self._compute_max_dim()
-        print(f"[PaddedGraphDatasetWrapper] target_dim={self.target_dim}")
 
     def _compute_max_dim(self) -> int:
         max_dim = 0

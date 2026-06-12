@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import typer
+
 from GNN.dataset_builder import (
     DataGenConfig,
     RegimeDistribution,
@@ -119,6 +120,7 @@ def main(
     dask_n_workers: int = typer.Option(4),
     dask_memory_per_worker: str = typer.Option("32GiB"),
     block_size: int = typer.Option(10, help="Number of layers per block for layer-wise processing"),
+    sampling_config : SamplingConfig | None = None,
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
 
@@ -171,7 +173,7 @@ def main(
         max_shards=max_shards,
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
-        sampling_config=default_sampling_config(),
+        sampling_config=sampling_config if sampling_config is not None else default_sampling_config(),
         layer_block_size = block_size,
     )
 
