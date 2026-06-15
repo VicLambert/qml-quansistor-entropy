@@ -196,6 +196,8 @@ def train_model(
 ) -> tuple[nn.Module, TrainHistory, torch.device]:
     """Train a GNN model and return the trained model, history, and device."""
     dev = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+    if dev == "cuda":
+        torch.backends.cudnn.benchmark = True
     logger.info(f"Using device: {dev}")
     model = model.to(dev)
 

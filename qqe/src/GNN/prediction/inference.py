@@ -127,12 +127,12 @@ def predict(
                         "n_layers": get_sample_field(sample, "n_layers"),
 
                         # model-space values
-                        "target": target,
+                        "transformed_target": target,
                         "prediction_model_output": pred_model_output,
 
                         # raw-SRE values
-                        "target_sre": target_sre,
-                        "prediction": pred_sre,
+                        "target_SRE": target_sre,
+                        "predicted_SRE": pred_sre,
                         "error": abs(pred_sre - target_sre) if target_sre is not None else None,
                     },
                 )

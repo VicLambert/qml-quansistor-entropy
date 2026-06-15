@@ -518,7 +518,13 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
 
         return data
 
-    def __getitem__(self, idx: int):
+    def __getitem__(self, idx):
+        """Return the sample at the given dataset index."""
+        if isinstance(idx, slice):
+            raise TypeError("Slicing is not supported for this dataset")
+
+        idx = int(idx.item()) if isinstance(idx, torch.Tensor) else int(idx)
+
         row = self.rows[idx]
 
         data, slices, shard_meta = self._load_shard(row["shard_path"])

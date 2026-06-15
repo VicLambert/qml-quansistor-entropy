@@ -40,7 +40,6 @@ def main(
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
-    ckpt_path = checkpoint_path(model_kind, training_scope, model_family, loss_type)
     logger.info("Loading checkpoint: %s", model_path)
     output_csv = f"../outputs/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
