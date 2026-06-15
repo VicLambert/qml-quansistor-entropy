@@ -24,13 +24,13 @@ logger = logging.getLogger(__name__)
 
 
 def main(
-    model_path: str = typer.Option("models/nn_model_huber_global.pt", help="Path to model checkpoint."),
+    model_path: str = typer.Option("C:\\Users\\Victor\\Desktop\\Université\\Research\\qml-quansistor-entropy\\qqe\\outputs\\models\\final\\gnn_huber_quansistor.pt", help="Path to model checkpoint."),
     model_kind: str = typer.Option("gnn", help="Model type: 'gnn' or 'nn'."),
     training_scope: str = typer.Option("family", help="'global' or 'family'."),
     loss_type: str = typer.Option("huber", help="Loss type used during training, e.g. 'mse' or 'huber'."),
-    model_family: str | None = typer.Option("haar", help="Family used if training_scope='family'."),
-    dataset_root: str = typer.Option("outputs/data", help="Root folder containing prediction files."),
-    dataset_family: str | None = typer.Option("haar", help="Optional family to predict on."),
+    model_family: str | None = typer.Option("quansistor", help="Family used if training_scope='family'."),
+    dataset_root: str = typer.Option("C:\\Users\\Victor\\Desktop\\Université\\Research\\qml-quansistor-entropy\\qqe\\outputs\\data\\datasets_SRE", help="Root folder containing prediction files."),
+    dataset_family: str | None = typer.Option("quansistor", help="Optional family to predict on."),
     batch_size: int = typer.Option(32, help="Batch size."),
     target_variant: str = typer.Option("sre_density", help="Target variant, e.g. 'sre', 'sre_density', 'log_sre', or 'sqrt_sre'."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
