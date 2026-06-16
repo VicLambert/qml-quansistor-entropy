@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 import logging
@@ -41,7 +42,7 @@ def main(
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
     logger.info("Loading checkpoint: %s", model_path)
-    output_csv = f"../outputs/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
+    output_csv = f"outputs/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
 
     state_dict, model_config, feature_config = load_checkpoint(model_path)
 
@@ -86,25 +87,25 @@ def main(
 
     logger.info("Saved %d predictions to %s", len(rows), output_csv)
 
-    if plot_n_layers is not None:
-        plot_path = f"../outputs/figures/predictions/{training_scope}/{model_kind}_pred_layers_{model_family or 'global'}.png"
-        plot_fixed_layers_vary_qubits(
-            rows,
-            n_layers=plot_n_layers,
-            output_path=plot_path,
-            split_by_family=split_by_family,
-        )
-        logger.info("Saved fixed-layer plot to %s", plot_path)
+    #if plot_n_layers is not None:
+    #    plot_path = f"../outputs/figures/predictions/{training_scope}/{model_kind}_pred_layers_{model_family or 'global'}.png"
+    #    plot_fixed_layers_vary_qubits(
+    #        rows,
+    #        n_layers=plot_n_layers,
+    #        output_path=plot_path,
+    #        split_by_family=split_by_family,
+    #    )
+    #    logger.info("Saved fixed-layer plot to %s", plot_path)
 
-    if plot_n_qubits is not None:
-        plot_path = f"../outputs/figures/predictions/{training_scope}/{model_kind}_pred_qubits_{model_family or 'global'}.png"
-        plot_fixed_qubits_vary_layers(
-            rows,
-            n_qubits=plot_n_qubits,
-            output_path=plot_path,
-            split_by_family=split_by_family,
-        )
-        logger.info("Saved fixed-qubit plot to %s", plot_path)
+    #if plot_n_qubits is not None:
+    #    plot_path = f"../outputs/figures/predictions/{training_scope}/{model_kind}_pred_qubits_{model_family or 'global'}.png"
+    #    plot_fixed_qubits_vary_layers(
+    #        rows,
+    #        n_qubits=plot_n_qubits,
+    #        output_path=plot_path,
+    #        split_by_family=split_by_family,
+    #    )
+    #    logger.info("Saved fixed-qubit plot to %s", plot_path)
 
 
 if __name__ == "__main__":
