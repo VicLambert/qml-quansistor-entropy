@@ -11,19 +11,19 @@ logger = logging.getLogger(__name__)
 
 
 default_model_hparams = {
-    "gnn_hidden": 32,
-    "gnn_heads": 4,
-    "global_hidden": 128,
+    "gnn_hidden": 64,
+    "gnn_heads": 2,
+    "global_hidden": 32,
     "reg_hidden": 128,
-    "num_layers": 3,
-    "dropout_rate": 0.13173830279748305,
+    "num_layers": 6,
+    "dropout_rate": 0.06640302989664926,
 }
 
 default_train_hparams = {
-    "weight_decay": 0.0003324725858640221,
-    "grad_clip": 1.0289214665544766,
-    "early_stopping_patience": 10,
-    "early_stopping_min_delta": 0.0,
+    "weight_decay": 3.0500428108369453e-05,
+    "grad_clip": 4.379744711312854,
+    "early_stopping_patience": 15,
+    "early_stopping_min_delta": 1.0,
     "num_workers": 0,
 }
 
