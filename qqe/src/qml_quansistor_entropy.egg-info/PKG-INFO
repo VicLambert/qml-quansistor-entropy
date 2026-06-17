@@ -37,6 +37,7 @@ Requires-Dist: plotly>=6.7.0
 Requires-Dist: ipython>=9.13.0
 Requires-Dist: jupyter>=1.1.1
 Requires-Dist: graphviz>=0.21
+Requires-Dist: qutip>=5.3.0
 Provides-Extra: dev
 Requires-Dist: black>=23.0.0; extra == "dev"
 Requires-Dist: ruff>=0.1.0; extra == "dev"

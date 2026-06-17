@@ -15,17 +15,97 @@ default_model_hparams = {
     "gnn_heads": 2,
     "global_hidden": 32,
     "reg_hidden": 128,
-    "num_layers": 6,
-    "dropout_rate": 0.06640302989664926,
+    "num_layers": 3,
+    "dropout_rate": 0.10,
 }
 
 default_train_hparams = {
-    "weight_decay": 3.0500428108369453e-05,
-    "grad_clip": 4.379744711312854,
+    "weight_decay": 3e-3,
+    "grad_clip": 1.0,
     "early_stopping_patience": 15,
-    "early_stopping_min_delta": 1.0,
+    "early_stopping_min_delta": 0.0,
     "num_workers": 0,
 }
+
+PARAMS = {
+    "random" : {
+        "lr" : 0.0009860340204413903,
+        "batch_size" : 128,
+        "model_hparams": {
+            "gnn_hidden" : 64,
+            "gnn_heads": 2,
+            "global_hidden": 32,
+            "reg_hidden": 128,
+            "num_layers": 6,
+            "dropout_rate": 0.06640302989664926,
+        },
+        "train_params": {
+            "weight_decay": 3.0500428108369453e-05,
+            "grad_clip": 4.379744711312854,
+            "early_stopping_patience": 15,
+            "early_stopping_min_delta": 0.0,
+            "num_workers": 0,
+        },
+    },
+    "clifford" : {
+        "lr" : 2.5223176427539664e-05,
+        "batch_size" : 32,
+        "model_hparams": {
+            "gnn_hidden" : 128,
+            "gnn_heads": 2,
+            "global_hidden": 16,
+            "reg_hidden": 32,
+            "num_layers": 6,
+            "dropout_rate": 0.014842423657881243,
+        },
+        "train_params": {
+            "weight_decay": 1.560010639264171e-05,
+            "grad_clip": 7.2440146231033875,
+            "early_stopping_patience": 15,
+            "early_stopping_min_delta": 0.0,
+            "num_workers": 0,
+        },
+    },
+    "haar" : {
+        "lr" : 0.0005456850011484297,
+        "batch_size" : 16,
+        "model_hparams": {
+            "gnn_hidden" : 64,
+            "gnn_heads": 2,
+            "global_hidden": 128,
+            "reg_hidden": 16,
+            "num_layers": 2,
+            "dropout_rate": 0.004127592869557634,
+        },
+        "train_params": {
+            "weight_decay": 1.0439900428164368e-05,
+            "grad_clip":  0.011242628935673588,
+            "early_stopping_patience": 15,
+            "early_stopping_min_delta": 0.0,
+            "num_workers": 0,
+        },
+    },
+    "quansistor" : {
+        "lr" : 0.0005456850011484297,
+        "batch_size" : 16,
+        "model_hparams": {
+            "gnn_hidden" : 64,
+            "gnn_heads": 2,
+            "global_hidden": 128,
+            "reg_hidden": 16,
+            "num_layers": 2,
+            "dropout_rate": 0.004127592869557634,
+        },
+        "train_params": {
+            "weight_decay": 1.0439900428164368e-05,
+            "grad_clip":  0.011242628935673588,
+            "early_stopping_patience": 15,
+            "early_stopping_min_delta": 0.0,
+            "num_workers": 0,
+        },
+    },
+}
+
 
 def main(
     epochs: int = 40,
@@ -67,6 +147,11 @@ def main(
         help="Warn if epoch exceeds N seconds (0=disable)",
     ),
 ):
+    lr = PARAMS.get(family, {}).get("lr", lr)
+    batch_size = PARAMS.get(family, {}).get("batch_size", batch_size)
+    model_hparams = PARAMS.get(family, {}).get("model_hparams", default_model_hparams) if model_hparams is None else default_model_hparams
+    train_hparams = PARAMS.get(family, {}).get("train_hparams", default_train_hparams) if train_hparams is None else default_train_hparams
+
     model, loss, hist, chkpt = train(
         model_type=model_type,
         epochs = epochs,
@@ -77,8 +162,8 @@ def main(
         family = family,  # required if training_mode == "per_family"
         target = target,
         target_variant = target_variant,
-        model_hparams = default_model_hparams,
-        train_hparams = default_train_hparams,
+        model_hparams = model_hparams,
+        train_hparams = train_hparams,
         training_data_dir = training_data_dir,
         split = split,
         allow_overwrite = allow_overwrite,
