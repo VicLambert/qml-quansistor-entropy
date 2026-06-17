@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 
 
 default_model_hparams = {
-    "gnn_hidden": 32,
-    "gnn_heads": 4,
-    "global_hidden": 128,
+    "gnn_hidden": 64,
+    "gnn_heads": 2,
+    "global_hidden": 32,
     "reg_hidden": 128,
     "num_layers": 3,
     "dropout_rate": 0.10,
