@@ -108,11 +108,11 @@ def predict(
                 if target is not None:
                     if target_variant == "sre_density":
                         n_qubits = (get_sample_field(sample, "n_qubits"))
-                        target_sre = float(target) * float(n_qubits) if n_qubits is not None else None
+                        target_sre = float(target) / float(n_qubits) if n_qubits is not None else None
                     elif target_variant == "log_sre":
-                        target_sre = float(torch.expm1(torch.tensor(float(target))).item())
+                        target_sre = float(torch.log(torch.tensor(float(target))).item())
                     elif target_variant == "sqrt_sre":
-                        target_sre = float(target) ** 2
+                        target_sre = np.sqrt(float(target))
                     else:
                         target_sre = float(target)
                 else:
@@ -127,12 +127,12 @@ def predict(
                         "n_layers": get_sample_field(sample, "n_layers"),
 
                         # model-space values
-                        "target": target,
+                        "transformed_target": target_sre,
                         "prediction_model_output": pred_model_output,
 
                         # raw-SRE values
-                        "target_sre": target_sre,
-                        "prediction": pred_sre,
+                        "target_SRE": target,
+                        "predicted_SRE": pred_sre,
                         "error": abs(pred_sre - target_sre) if target_sre is not None else None,
                     },
                 )

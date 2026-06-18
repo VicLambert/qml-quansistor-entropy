@@ -247,12 +247,12 @@ def save_predictions_csv(rows: list[dict[str, Any]], path: str | Path) -> None:
         "n_layers",
 
         # model-space values
-        "target",
+        "transformed_target",
         "prediction_model_output",
 
         # raw SRE values
         "target_sre",
-        "prediction",
+        "predicted_sre",
         "error",
     ]
 

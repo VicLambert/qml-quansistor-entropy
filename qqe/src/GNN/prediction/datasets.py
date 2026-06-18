@@ -169,7 +169,7 @@ def build_prediction_dataset(
         index_paths=index_paths,
         target_variant=target_variant,
         split=split,
-        fixed_all_gate_keys=fixed_all_gate_keys,
+        cache_size=64,
     )
 
 def build_loader(
