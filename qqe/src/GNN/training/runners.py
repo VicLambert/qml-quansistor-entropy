@@ -87,7 +87,7 @@ MODEL_REGISTRY = {
     },
 }
 
-def train(
+def  train(
     *,
     model_type: str = "gnn",
     epochs: int = 150,

@@ -522,6 +522,7 @@ def plot_training_curves(
     if save_fig and fig_path is not None:
         safe_path = _unique_path(fig_path)
         plt.savefig(safe_path)
+        logger.info("Saved training curve plot to %s", safe_path)
     plt.close()
     # plt.show()
 

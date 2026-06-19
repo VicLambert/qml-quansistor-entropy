@@ -101,9 +101,9 @@ def predict(
 
             for sample, pred_model_output in zip(samples, preds):
                 pred_model_output = float(pred_model_output)
-                pred_sre = denormalize_prediction(pred_model_output, sample, target_variant)
+                pred_sre = denormalize_prediction(pred_model_output, sample, target_variant)  # raw predicted SRE
 
-                target = extract_target_value(sample)
+                target = extract_target_value(sample)   # raw target SRE
 
                 if target is not None:
                     if target_variant == "sre_density":
@@ -125,15 +125,10 @@ def predict(
                         "seed": get_sample_field(sample, "seed"),
                         "n_qubits": get_sample_field(sample, "n_qubits"),
                         "n_layers": get_sample_field(sample, "n_layers"),
-
-                        # model-space values
-                        "transformed_target": target_sre,
-                        "prediction_model_output": pred_model_output,
-
                         # raw-SRE values
                         "target_SRE": target,
                         "predicted_SRE": pred_sre,
-                        "error": abs(pred_sre - target_sre) if target_sre is not None else None,
+                        "error": abs(pred_sre - target) if target is not None else None,
                     },
                 )
         return rows
