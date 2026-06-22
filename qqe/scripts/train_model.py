@@ -86,19 +86,19 @@ PARAMS = {
         },
     },
     "quansistor" : {
-        "lr" : 0.0005456850011484297,
-        "batch_size" : 16,
+        "lr" : 1.0600038808287122e-05,
+        "batch_size" : 32,
         "model_hparams": {
-            "gnn_hidden" : 64,
-            "gnn_heads": 2,
-            "global_hidden": 128,
-            "reg_hidden": 16,
-            "num_layers": 2,
-            "dropout_rate": 0.004127592869557634,
+            "gnn_hidden" : 128,
+            "gnn_heads": 8,
+            "global_hidden": 16,
+            "reg_hidden": 64,
+            "num_layers": 3,
+            "dropout_rate": 0.4050959484660077,
         },
         "train_params": {
-            "weight_decay": 1.0439900428164368e-05,
-            "grad_clip":  0.011242628935673588,
+            "weight_decay": 0.0006626449388616718,
+            "grad_clip":  4.779019014790367,
             "early_stopping_patience": 15,
             "early_stopping_min_delta": 0.0,
             "num_workers": 0,
@@ -150,7 +150,7 @@ def main(
     lr = PARAMS.get(family, {}).get("lr", lr)
     batch_size = PARAMS.get(family, {}).get("batch_size", batch_size)
     model_hparams = PARAMS.get(family, {}).get("model_hparams", default_model_hparams) if model_hparams is None else default_model_hparams
-    train_hparams = PARAMS.get(family, {}).get("train_hparams", default_train_hparams) if train_hparams is None else default_train_hparams
+    train_hparams = PARAMS.get(family, {}).get("train_params", default_train_hparams) if train_hparams is None else default_train_hparams
 
     model, loss, hist, chkpt = train(
         model_type=model_type,
