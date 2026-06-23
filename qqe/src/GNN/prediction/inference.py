@@ -100,23 +100,20 @@ def predict(
             preds = model(batch).view(-1).cpu().tolist()
 
             for sample, pred_model_output in zip(samples, preds):
+                target_raw_sre = extract_target_value(sample)
+
                 pred_model_output = float(pred_model_output)
-                pred_sre = denormalize_prediction(pred_model_output, sample, target_variant)  # raw predicted SRE
+                pred_raw_sre = denormalize_prediction(
+                    pred_model_output,
+                    sample,
+                    target_variant,
+                )
 
-                target = extract_target_value(sample)   # raw target SRE
-
-                if target is not None:
-                    if target_variant == "sre_density":
-                        n_qubits = (get_sample_field(sample, "n_qubits"))
-                        target_sre = float(target) / float(n_qubits) if n_qubits is not None else None
-                    elif target_variant == "log_sre":
-                        target_sre = float(torch.log(torch.tensor(float(target))).item())
-                    elif target_variant == "sqrt_sre":
-                        target_sre = np.sqrt(float(target))
-                    else:
-                        target_sre = float(target)
+                if target_raw_sre is not None:
+                    error_raw_sre = abs(pred_raw_sre - float(target_raw_sre))
                 else:
-                    target_sre = None
+                    error_raw_sre = None
+
                 rows.append(
                     {
                         "cid": get_sample_field(sample, "cid"),
@@ -125,10 +122,13 @@ def predict(
                         "seed": get_sample_field(sample, "seed"),
                         "n_qubits": get_sample_field(sample, "n_qubits"),
                         "n_layers": get_sample_field(sample, "n_layers"),
-                        # raw-SRE values
-                        "target_SRE": target,
-                        "predicted_SRE": pred_sre,
-                        "error": abs(pred_sre - target) if target is not None else None,
+
+                        "target_variant": target_variant,
+                        "prediction_model_output": pred_model_output,
+
+                        "target_sre": target_raw_sre,
+                        "predicted_sre": pred_raw_sre,
+                        "error_sre": error_raw_sre,
                     },
                 )
         return rows

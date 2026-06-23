@@ -41,15 +41,26 @@ def main(
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
-    logger.info("Loading checkpoint: %s", model_path)
     output_csv = f"outputs/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    state_dict, model_config, feature_config = load_checkpoint(model_path)
+    logger.info("Loading checkpoint: %s", model_path)
+
+    checkpoint = torch.load(model_path, map_location="cpu", weights_only=False)
+
+    state_dict = checkpoint["model_state_dict"]
+    model_config = checkpoint["model_config"]
+    feature_config = checkpoint.get("feature_config", {})
+
+    target_variant = checkpoint.get(
+        "target_variant",
+        checkpoint.get("train_config", {}).get("target_variant", target_variant),
+    )
+
+    logger.info("Using target_variant from checkpoint: %s", target_variant)
 
     model = build_model(model_kind, model_config)
     model.load_state_dict(state_dict, strict=False)
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
 
     # pt_paths = collect_prediction_paths(dataset_root, dataset_family)
@@ -62,10 +73,23 @@ def main(
 
     logger.info("Found %d prediction files", len(prediction_paths))
 
+    # target_variant = checkpoint_target_variant
+
     dataset = build_prediction_dataset(
         prediction_paths,
+        target_variant=target_variant,
         split="all",
     )
+    family_projection = feature_config.get("family_projection")
+
+    # if family_projection is not None:
+    #     dataset = ProjectedDatasetWrapper(
+    #         dataset,
+    #         transform=FamilyFeatureProjector(
+    #             family=family_projection,
+    #             all_gate_keys=feature_config.get("all_gate_keys") or dataset.all_gate_keys,
+    #         ),
+    #     )
 
     loader = build_loader(
         model_kind,
@@ -74,6 +98,21 @@ def main(
         target_node_dim=model_config.get("node_in_dim"),
         target_global_dim=model_config.get("global_in_dim"),
     )
+
+    sample = dataset[0]
+
+    print("=== Prediction dataset sample ===")
+    print("target_variant:", target_variant)
+    print("x:", sample.x.shape if hasattr(sample, "x") else None)
+    print("global_features:", sample.global_features.shape if hasattr(sample, "global_features") else None)
+    print("y:", getattr(sample, "y", None))
+    print("sre:", getattr(sample, "sre", None))
+    print("raw_sre:", getattr(sample, "raw_sre", None))
+    print("n_qubits:", getattr(sample, "n_qubits", None))
+    print("node_in_dim checkpoint:", model_config.get("node_in_dim"))
+    print("global_in_dim checkpoint:", model_config.get("global_in_dim"))
+    print("family_projection:", feature_config.get("family_projection"))
+    print("all_gate_keys len:", len(feature_config.get("all_gate_keys") or []))
 
     rows = predict(
         model,

@@ -277,6 +277,7 @@ def  train(
         "model_state_dict": model.state_dict(),
         "model_type": model_type,
         "model_config": model_config,
+        "target_variant": target_variant,
         "train_config": asdict(cfg),
         "train_hparams": train_hparams,
         "feature_config": {
