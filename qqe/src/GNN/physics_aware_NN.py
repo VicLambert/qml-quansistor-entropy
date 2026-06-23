@@ -402,6 +402,8 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         self.rows = self._load_index_rows()
 
         self.all_gate_keys = self._collect_all_gate_keys_from_shards()
+        self.node_feature_dim = self._collect_node_feature_dim_from_shards()
+        self.global_feature_dim = self._collect_global_feature_dim_from_shards()
 
     def _load_index_rows(self):
         rows = []
@@ -478,6 +480,100 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
 
         return sorted(keys)
 
+    def _collect_node_feature_dim_from_shards(self) -> int:
+        dims = set()
+        seen = set()
+
+        for row in self.rows:
+            shard_path = row["shard_path"]
+
+            if shard_path in seen:
+                continue
+            seen.add(shard_path)
+
+            data, slices, shard_meta = torch.load(
+                shard_path,
+                map_location="cpu",
+                weights_only=False,
+            )
+
+            if hasattr(data, "x") and data.x is not None:
+                dims.add(int(data.x.shape[-1]))
+
+        if not dims:
+            raise RuntimeError("Could not infer node feature dimension from shards.")
+
+        print("Detected node feature dims:", sorted(dims))
+        return max(dims)
+    
+    def _collect_global_feature_dim_from_shards(self) -> int:
+        dims = set()
+        seen = set()
+
+        for row in self.rows:
+            shard_path = row["shard_path"]
+
+            if shard_path in seen:
+                continue
+            seen.add(shard_path)
+
+            data, slices, shard_meta = torch.load(
+                shard_path,
+                map_location="cpu",
+                weights_only=False,
+            )
+
+            if hasattr(data, "global_features") and data.global_features is not None:
+                g = data.global_features
+                if torch.is_tensor(g):
+                    if g.ndim >= 2:
+                        dims.add(int(g.shape[-1]))
+                    else:
+                        dims.add(int(g.numel()))
+
+        if not dims:
+            return 0
+
+        print("Detected global feature dims:", sorted(dims))
+        return max(dims)
+
+    def _sanitize_global_features(self, sample):
+        if not hasattr(sample, "global_features") or sample.global_features is None:
+            return sample
+
+        g = sample.global_features
+
+        if not torch.is_tensor(g):
+            g = torch.as_tensor(g, dtype=torch.float32)
+
+        g = g.flatten().to(torch.float32)
+
+        if self.global_feature_dim > 0:
+            if g.numel() < self.global_feature_dim:
+                g = F.pad(g, (0, self.global_feature_dim - g.numel()))
+            elif g.numel() > self.global_feature_dim:
+                g = g[: self.global_feature_dim]
+
+        sample.global_features = g.view(1, -1)
+
+        return sample
+
+    def _sanitize_x(self, sample: Data) -> Data:
+        if not hasattr(sample, "x") or sample.x is None:
+            raise AttributeError("Sample is missing x.")
+
+        x = sample.x.to(torch.float32)
+
+        d = int(x.shape[-1])
+
+        if d < self.node_feature_dim:
+            x = F.pad(x, (0, self.node_feature_dim - d))
+        elif d > self.node_feature_dim:
+            x = x[:, : self.node_feature_dim]
+
+        sample.x = x
+        return sample
+
     def __len__(self):
         return len(self.rows)
 
@@ -537,6 +633,8 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
             decrement=False,
         )
 
+        sample = self._sanitize_x(sample)
+        sample = self._sanitize_global_features(sample)
         sample = self._apply_target_transform(sample)
 
         return sample

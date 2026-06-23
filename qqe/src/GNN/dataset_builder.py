@@ -588,11 +588,11 @@ def build_data_object(
     try:
         base_dir = config.output_dir or DATASET_DIR
         base_dir.mkdir(parents=True, exist_ok=True)
-        path = base_dir / f"{cid}.pt"
-        tmp_path: Path = path.with_suffix(".pt.tmp")
+        # path = base_dir / f"{cid}.pt"
+        # tmp_path: Path = path.with_suffix(".pt.tmp")
 
-        if path.exists():
-            return {"cid": cid, "path": str(path), "cached": True}
+        # if path.exists():
+        #     return {"cid": cid, "path": str(path), "cached": True}
 
         controls = sample_generation_controls(
             family=family,
@@ -694,7 +694,7 @@ def build_data_object(
         #     x = x.to(torch.float16)
 
         edge_index = graph_data.edge_index.detach().cpu().to(torch.long)
-        global_features = graph_data.global_features.detach().cpu().to(torch.float32)
+        global_features = graph_data.global_features.detach().cpu().to(torch.float32).flatten().view(1,-1)
 
         data = Data(
             x = x,
@@ -713,7 +713,19 @@ def build_data_object(
         if not hasattr(data, "y"):
             data.y = torch.tensor([float("nan")], dtype=torch.float32)
 
+        has_valid_sre = (
+            should_compute_target
+            and config.compute_sre
+            and sre_value is not None
+            and np.isfinite(float(sre_value))
+        )
 
+        has_valid_ee = (
+            should_compute_target
+            and config.compute_EE
+            and EE_value is not None
+            and np.isfinite(float(EE_value))
+        )
         data.cid = cid
         data.family = family
         data.regime = str(controls["sampling_regime"])
@@ -721,7 +733,9 @@ def build_data_object(
         data.n_qubits = torch.tensor([int(n_qubits)], dtype=torch.long)
         data.n_layers = torch.tensor([int(n_layers)], dtype=torch.long)
         data.seed = torch.tensor([int(seed)], dtype=torch.long)
-        data.has_target = torch.tensor([bool(should_compute_target)], dtype=torch.bool)
+        has_valid_target = has_valid_sre or has_valid_ee
+
+        data.has_target = torch.tensor([has_valid_target], dtype=torch.bool)
 
         data.backend = config.backend
         data.method = config.method
