@@ -503,9 +503,8 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         if not dims:
             raise RuntimeError("Could not infer node feature dimension from shards.")
 
-        print("Detected node feature dims:", sorted(dims))
         return max(dims)
-    
+
     def _collect_global_feature_dim_from_shards(self) -> int:
         dims = set()
         seen = set()
@@ -534,7 +533,6 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         if not dims:
             return 0
 
-        print("Detected global feature dims:", sorted(dims))
         return max(dims)
 
     def _sanitize_global_features(self, sample):
