@@ -1,0 +1,89 @@
+2026-06-22 09:39:07,105 - GNN.training.runners - INFO - Starting training | model_type=gnn | training_mode=per_family | family=quansistor | loss_type=huber
+2026-06-22 09:39:07,111 - GNN.training.runners - INFO - Training configuration done.
+2026-06-22 09:39:07,111 - GNN.training.runners - INFO - Collecting data paths...
+2026-06-22 09:39:07,113 - GNN.training.runners - INFO - Found 1 data paths.
+2026-06-22 09:39:07,114 - GNN.training.runners - INFO - Data paths collected.
+2026-06-22 09:39:07,114 - GNN.training.runners - INFO - Building loaders and model for model_type=gnn...
+2026-06-22 09:41:44,350 - GNN.training.runners - INFO - Loaders and model built.
+2026-06-22 09:41:44,351 - GNN.training.runners - INFO - Starting training...
+2026-06-22 09:41:44,352 - GNN.training.train - INFO - Using device: cuda
+2026-06-22 09:41:44,557 - GNN.training.train - INFO - -------- EPOCH 001 --------
+2026-06-22 09:42:44,653 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 197/804 | loss 0.048350 | elapsed 60.1s | graphs 6304
+2026-06-22 09:43:44,851 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 396/804 | loss 0.039553 | elapsed 120.3s | graphs 12672
+2026-06-22 09:44:45,069 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 594/804 | loss 0.035048 | elapsed 180.5s | graphs 19008
+2026-06-22 09:45:45,317 - GNN.training.train - INFO - [Heartbeat] Epoch 1 batch 792/804 | loss 0.032148 | elapsed 240.8s | graphs 25344
+2026-06-22 09:45:49,373 - GNN.training.train - INFO - Training complete (244.8s) | running validation...
+2026-06-22 09:46:17,942 - GNN.training.train - INFO - Losses | train 0.032022 | val 0.010387 | lr 1.06e-05 | time train=244.8s val=28.6s total=273.4s
+2026-06-22 09:46:17,952 - GNN.training.train - INFO - -------- EPOCH 002 --------
+2026-06-22 09:47:18,086 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 186/804 | loss 0.020868 | elapsed 60.1s | graphs 5952
+2026-06-22 09:48:18,140 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 368/804 | loss 0.021119 | elapsed 120.2s | graphs 11776
+2026-06-22 09:49:18,405 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 552/804 | loss 0.020667 | elapsed 180.5s | graphs 17664
+2026-06-22 09:50:18,629 - GNN.training.train - INFO - [Heartbeat] Epoch 2 batch 735/804 | loss 0.020372 | elapsed 240.7s | graphs 23520
+2026-06-22 09:50:41,045 - GNN.training.train - INFO - Training complete (263.1s) | running validation...
+2026-06-22 09:51:09,619 - GNN.training.train - INFO - Losses | train 0.020289 | val 0.010522 | lr 1.06e-05 | time train=263.1s val=28.6s total=291.7s
+2026-06-22 09:51:09,621 - GNN.training.train - INFO - -------- EPOCH 003 --------
+2026-06-22 09:52:09,643 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 183/804 | loss 0.018597 | elapsed 60.0s | graphs 5856
+2026-06-22 09:53:09,647 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 364/804 | loss 0.018172 | elapsed 120.0s | graphs 11648
+2026-06-22 09:54:09,899 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 550/804 | loss 0.018098 | elapsed 180.3s | graphs 17600
+2026-06-22 09:55:10,078 - GNN.training.train - INFO - [Heartbeat] Epoch 3 batch 734/804 | loss 0.018023 | elapsed 240.5s | graphs 23488
+2026-06-22 09:55:32,870 - GNN.training.train - INFO - Training complete (263.2s) | running validation...
+2026-06-22 09:56:00,753 - GNN.training.train - INFO - Losses | train 0.017923 | val 0.010654 | lr 1.06e-05 | time train=263.2s val=27.9s total=291.1s
+2026-06-22 09:56:00,755 - GNN.training.train - INFO - -------- EPOCH 004 --------
+2026-06-22 09:57:01,187 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 183/804 | loss 0.017384 | elapsed 60.4s | graphs 5856
+2026-06-22 09:58:01,366 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 364/804 | loss 0.016945 | elapsed 120.6s | graphs 11648
+2026-06-22 09:59:01,388 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 555/804 | loss 0.016870 | elapsed 180.6s | graphs 17760
+2026-06-22 10:00:01,631 - GNN.training.train - INFO - [Heartbeat] Epoch 4 batch 755/804 | loss 0.016746 | elapsed 240.9s | graphs 24160
+2026-06-22 10:00:16,548 - GNN.training.train - INFO - Training complete (255.8s) | running validation...
+2026-06-22 10:00:42,583 - GNN.training.train - INFO - Losses | train 0.016652 | val 0.009463 | lr 1.06e-05 | time train=255.8s val=26.0s total=281.8s
+2026-06-22 10:00:42,592 - GNN.training.train - INFO - -------- EPOCH 005 --------
+2026-06-22 10:01:42,819 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 195/804 | loss 0.015856 | elapsed 60.2s | graphs 6240
+2026-06-22 10:02:42,886 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 389/804 | loss 0.015593 | elapsed 120.3s | graphs 12448
+2026-06-22 10:03:43,049 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 579/804 | loss 0.015518 | elapsed 180.5s | graphs 18528
+2026-06-22 10:04:43,159 - GNN.training.train - INFO - [Heartbeat] Epoch 5 batch 762/804 | loss 0.015253 | elapsed 240.6s | graphs 24384
+2026-06-22 10:04:57,235 - GNN.training.train - INFO - Training complete (254.6s) | running validation...
+2026-06-22 10:05:25,136 - GNN.training.train - INFO - Losses | train 0.015218 | val 0.010707 | lr 1.06e-05 | time train=254.6s val=27.9s total=282.5s
+2026-06-22 10:05:25,136 - GNN.training.train - INFO - -------- EPOCH 006 --------
+2026-06-22 10:06:25,157 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 180/804 | loss 0.014058 | elapsed 60.0s | graphs 5760
+2026-06-22 10:07:25,282 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 360/804 | loss 0.013751 | elapsed 120.1s | graphs 11520
+2026-06-22 10:08:25,496 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 540/804 | loss 0.013731 | elapsed 180.4s | graphs 17280
+2026-06-22 10:09:25,536 - GNN.training.train - INFO - [Heartbeat] Epoch 6 batch 722/804 | loss 0.013702 | elapsed 240.4s | graphs 23104
+2026-06-22 10:09:51,928 - GNN.training.train - INFO - Training complete (266.8s) | running validation...
+2026-06-22 10:10:19,988 - GNN.training.train - INFO - Losses | train 0.013681 | val 0.009190 | lr 1.06e-05 | time train=266.8s val=28.1s total=294.9s
+2026-06-22 10:10:19,998 - GNN.training.train - INFO - -------- EPOCH 007 --------
+2026-06-22 10:11:20,156 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 181/804 | loss 0.013107 | elapsed 60.2s | graphs 5792
+2026-06-22 10:12:20,256 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 363/804 | loss 0.012975 | elapsed 120.3s | graphs 11616
+2026-06-22 10:13:20,295 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 546/804 | loss 0.012738 | elapsed 180.3s | graphs 17472
+2026-06-22 10:14:20,339 - GNN.training.train - INFO - [Heartbeat] Epoch 7 batch 734/804 | loss 0.012645 | elapsed 240.3s | graphs 23488
+2026-06-22 10:14:41,728 - GNN.training.train - INFO - Training complete (261.7s) | running validation...
+2026-06-22 10:15:07,913 - GNN.training.train - INFO - Losses | train 0.012614 | val 0.008053 | lr 1.06e-05 | time train=261.7s val=26.2s total=287.9s
+2026-06-22 10:15:07,922 - GNN.training.train - INFO - -------- EPOCH 008 --------
+2026-06-22 10:16:08,127 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 194/804 | loss 0.011731 | elapsed 60.2s | graphs 6208
+2026-06-22 10:17:08,170 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 388/804 | loss 0.011772 | elapsed 120.2s | graphs 12416
+2026-06-22 10:18:08,298 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 581/804 | loss 0.011619 | elapsed 180.4s | graphs 18592
+2026-06-22 10:19:08,407 - GNN.training.train - INFO - [Heartbeat] Epoch 8 batch 774/804 | loss 0.011577 | elapsed 240.5s | graphs 24768
+2026-06-22 10:19:17,377 - GNN.training.train - INFO - Training complete (249.5s) | running validation...
+2026-06-22 10:19:44,325 - GNN.training.train - INFO - Losses | train 0.011566 | val 0.009212 | lr 1.06e-05 | time train=249.5s val=26.9s total=276.4s
+2026-06-22 10:19:44,327 - GNN.training.train - INFO - -------- EPOCH 009 --------
+2026-06-22 10:20:44,561 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 184/804 | loss 0.011461 | elapsed 60.2s | graphs 5888
+2026-06-22 10:21:44,892 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 367/804 | loss 0.011448 | elapsed 120.6s | graphs 11744
+2026-06-22 10:22:45,197 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 552/804 | loss 0.011268 | elapsed 180.9s | graphs 17664
+2026-06-22 10:23:45,529 - GNN.training.train - INFO - [Heartbeat] Epoch 9 batch 734/804 | loss 0.011095 | elapsed 241.2s | graphs 23488
+2026-06-22 10:24:08,120 - GNN.training.train - INFO - Training complete (263.8s) | running validation...
+2026-06-22 10:24:35,438 - GNN.training.train - INFO - Losses | train 0.011108 | val 0.007826 | lr 1.06e-05 | time train=263.8s val=27.3s total=291.1s
+2026-06-22 10:24:35,448 - GNN.training.train - INFO - -------- EPOCH 010 --------
+2026-06-22 10:25:35,533 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 183/804 | loss 0.010621 | elapsed 60.1s | graphs 5856
+2026-06-22 10:26:35,684 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 366/804 | loss 0.010629 | elapsed 120.2s | graphs 11712
+2026-06-22 10:27:35,949 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 552/804 | loss 0.010608 | elapsed 180.5s | graphs 17664
+2026-06-22 10:28:36,275 - GNN.training.train - INFO - [Heartbeat] Epoch 10 batch 735/804 | loss 0.010543 | elapsed 240.8s | graphs 23520
+2026-06-22 10:28:59,545 - GNN.training.train - INFO - Training complete (264.1s) | running validation...
+2026-06-22 10:29:28,065 - GNN.training.train - INFO - Losses | train 0.010472 | val 0.006258 | lr 1.06e-05 | time train=264.1s val=28.5s total=292.6s
+2026-06-22 10:36:30,912 - GNN.training.runners - INFO - Training complete.
+2026-06-22 10:36:31,035 - experiments.plotting - INFO - Saved training curve plot to outputs\figures\training_curves\training_curves_gnn_huber_quansistor_2.png
+2026-06-22 10:36:31,066 - GNN.training.runners - INFO - Saved model checkpoint to ..\notebooks\outputs\models\final\quansistor_model_gnn_per_family_sre_density.pt
+2026-06-22 10:36:31,126 - scripts.train_model - INFO - Final test loss: 0.006092
+2026-06-22 10:36:31,127 - scripts.train_model - INFO - Test R2 score: 0.7593
+2026-06-22 10:36:31,127 - scripts.train_model - INFO - Validation R2 score: 0.7390
+2026-06-22 10:36:31,128 - scripts.train_model - INFO - Training R2 score: 0.7657
+2026-06-22 10:36:32,011 - scripts.predictions - INFO - Loading checkpoint: ../notebooks/outputs/models/final/quansistor_model_gnn_per_family_sre_density.pt
+2026-06-22 10:36:32,098 - scripts.predictions - INFO - Found 1 prediction files
+2026-06-22 11:45:31,815 - scripts.predictions - INFO - Saved 124950 predictions to outputs/predictions/family/gnn_predictions_quansistor.csv

@@ -175,6 +175,7 @@ def main(
         dask_memory_per_worker=dask_memory_per_worker,
         sampling_config=sampling_config if sampling_config is not None else default_sampling_config(),
         layer_block_size = block_size,
+        use_sharded=False,
     )
 
 

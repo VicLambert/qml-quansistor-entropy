@@ -1378,6 +1378,7 @@ def run_dataset_pipeline(
     dask_memory_per_worker: str | None = None,
     sampling_config: SamplingConfig | None = None,
     layer_block_size: int = 10,
+    use_sharded: bool = True,
 ) -> None:
     invalid = [f for f in families if f not in FAMILY_REGISTRY]
     if invalid:
@@ -1396,29 +1397,50 @@ def run_dataset_pipeline(
         family_output_dir = base_output_dir / family
         family_output_dir.mkdir(parents=True, exist_ok=True)
 
-        shards = generate_pyg_shard(
-            [family],
-            qubits_values,
-            layers_values,
-            n_seeds,
-            layer_blocks_size=layer_block_size,
-        )
+        if use_sharded:
+            shards = generate_pyg_shard(
+                [family],
+                qubits_values,
+                layers_values,
+                n_seeds,
+                layer_blocks_size=layer_block_size,
+            )
 
-        if max_shards is not None:
-            shards = shards[:max_shards]
+            if max_shards is not None:
+                shards = shards[:max_shards]
 
-        logger.info("Generated %d shards for %s", len(shards), family)
+            logger.info("Generated %d shards for %s", len(shards), family)
 
-        family_config = dataclasses.replace(config, output_dir=family_output_dir)
+            family_config = dataclasses.replace(config, output_dir=family_output_dir)
 
-        entries = compute_all_shards(
-            shards,
-            family_config,
-            use_dask=use_dask,
-            dask_n_workers=dask_n_workers,
-            dask_memory_per_worker=dask_memory_per_worker,
-            sampling_config=sampling_config,
-        )
+            entries = compute_all_shards(
+                shards,
+                family_config,
+                use_dask=use_dask,
+                dask_n_workers=dask_n_workers,
+                dask_memory_per_worker=dask_memory_per_worker,
+                sampling_config=sampling_config,
+            )
+        else:
+            params = generate_dataset_params(
+                [family],
+                qubits_values,
+                layers_values,
+                n_seeds,
+            )
+
+            logger.info("Generated %d entries for %s", len(params), family)
+
+            family_config = dataclasses.replace(config, output_dir=family_output_dir)
+
+            entries = compute_all_entries(
+                params,
+                family_config,
+                use_dask=use_dask,
+                dask_n_workers=dask_n_workers,
+                dask_memory_per_worker=dask_memory_per_worker,
+                sampling_config=sampling_config,
+            )
 
         meta_path = family_output_dir / f"metadata_{family}.json"
         metadata = {
@@ -1441,7 +1463,7 @@ def run_dataset_pipeline(
 
         meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
-        logger.info("Completed %s: %d shards", family, len(entries))
+        logger.info("Completed %s: %d entries", family, len(entries))
         logger.info("Metadata: %s", meta_path)
         logger.info("Samples: %s", family_output_dir)
 
