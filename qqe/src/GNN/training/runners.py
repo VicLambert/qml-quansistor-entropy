@@ -20,6 +20,7 @@ from GNN.training.utils import (
     collect_dataset_paths,
     collect_files_path,
     evaluate_loss,
+    evaluate_r2,
 )
 
 logger = logging.getLogger(__name__)
@@ -224,6 +225,24 @@ def train(
         use_amp=True,
         show_progress=show_progress,
     )
+    train_r2_score = evaluate_r2(
+        model,
+        train_loader,
+        dev,
+        show_progress=show_progress,
+    )
+    val_r2_score = evaluate_r2(
+        model,
+        val_loader,
+        dev,
+        show_progress=show_progress,
+    )
+    test_r2_score = evaluate_r2(
+        model,
+        test_loader,
+        dev,
+        show_progress=show_progress,
+    )
     logger.info("Training complete.")
 
     run_name = f"{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}"
@@ -265,6 +284,9 @@ def train(
         },
         "final_metrics": {
             "test_loss": float(test_loss),
+            "test_r2_score": float(test_r2_score),
+            "train_r2_score": float(train_r2_score),
+            "val_r2_score": float(val_r2_score),
         },
         "history": hist,
     }
