@@ -308,7 +308,11 @@ def sanitize_gate_counts(gate_counts: dict[str, int]) -> dict[str, int]:
         return {}
     safe: dict[str, int] = {}
     for key, value in gate_counts.items():
-        safe[str(key)] = int(value)
+        # Handle Tensors by calling .item() if needed
+        if isinstance(value, torch.Tensor):
+            safe[str(key)] = int(value.item())
+        else:
+            safe[str(key)] = int(value)
     return safe
 
 
@@ -743,6 +747,11 @@ def build_data_object(
         data.n_bins = torch.tensor([int(config.n_bins)], dtype=torch.long)
 
         clean_counts = sanitize_gate_counts(gate_counts)
+        
+        # Ensure all values are Python ints (not Tensors)
+        data.gate_counts = {str(k): int(v) for k, v in clean_counts.items()}
+        
+        # Also keep individual count_* attributes for backward compatibility
         for key, value in clean_counts.items():
             if isinstance(value, (int, float)):
                 setattr(
@@ -798,6 +807,7 @@ def compute_pyg_shard(
     data_list: list[Data] = []
     index_rows: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
+    all_gate_keys_collected: set[str] = set()
 
     for cfg in shard.configs:
         cid = (
@@ -828,6 +838,8 @@ def compute_pyg_shard(
                 },
             )
             continue
+        if hasattr(data, "gate_counts") and isinstance(data.gate_counts, dict):
+            all_gate_keys_collected.update(data.gate_counts.keys())
 
         local_idx = len(data_list)
         data_list.append(data)
@@ -879,9 +891,11 @@ def compute_pyg_shard(
         "compute_sre": bool(config.compute_sre),
         "compute_EE": bool(config.compute_EE),
         "target_qubits": list(config.target_qubits),
+        "all_gate_keys": sorted(all_gate_keys_collected),  # NEW
         "index_rows": index_rows,
         "failures": failures,
     }
+
     if failures:
         logger.warning(
             "Shard %s had %d failures out of %d samples",

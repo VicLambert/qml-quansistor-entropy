@@ -392,16 +392,22 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         split = "target",
         cache_size = 4,
         fixed_all_gate_keys = None,
+        global_feature_variant: str = "binned",
     ):
         self.index_paths = [Path(p) for p in index_paths]
         self.target_variant = target_variant
+        self.global_feature_variant = global_feature_variant
 
         self.split = split
         self.cache_size = cache_size
         self._cache = OrderedDict()
         self.rows = self._load_index_rows()
 
-        self.all_gate_keys = self._collect_all_gate_keys_from_shards()
+        if fixed_all_gate_keys is None:
+            self.all_gate_keys = self._collect_all_gate_keys_from_shards()
+        else:
+            self.all_gate_keys = list(fixed_all_gate_keys)
+
         self.node_feature_dim = self._collect_node_feature_dim_from_shards()
         self.global_feature_dim = self._collect_global_feature_dim_from_shards()
 
@@ -459,6 +465,7 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         return rows
 
     def _collect_all_gate_keys_from_shards(self) -> list[str]:
+        """Collect all unique gate count keys from shard metadata."""
         keys = set()
         seen = set()
 
@@ -476,6 +483,7 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
                 weights_only=False,
             )
 
+            # Now reads from shard_meta where it's stored
             keys.update(shard_meta.get("all_gate_keys", []))
 
         return sorted(keys)
@@ -534,27 +542,54 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
             return 0
 
         return max(dims)
+    
+    def _build_uniform_binned_global(self, normalized_gate_counts: dict[str, int], meta: dict) -> torch.Tensor:
+        """Build uniform binned global feature vector from normalized gate counts.
+        """
+        feature_list = [
+            float(meta.get("n_qubits", 0)),
+            float(meta.get("n_bins", 50)),
+        ]
+        feature_list.extend(float(normalized_gate_counts.get(k, 0)) for k in self.all_gate_keys)
+        return torch.tensor(feature_list, dtype=torch.float32)
+
+    def _sanitize_gate_counts(self, sample: Data) -> dict[str, int]:
+        """Normalize gate_counts: ensure all keys present, missing ones → 0.
+        
+        MATCHES QuantumCircuitGraphDataset behavior.
+        """
+        gate_counts = getattr(sample, "gate_counts", {})
+        if isinstance(gate_counts, dict):
+            normalized = {key: gate_counts.get(key, 0) for key in self.all_gate_keys}
+        else:
+            normalized = {key: 0 for key in self.all_gate_keys}
+        return normalized
 
     def _sanitize_global_features(self, sample):
+        meta = getattr(sample, "meta", {}) or {}
+        
+        # If binned variant, REBUILD from gate counts
+        if self.global_feature_variant == "binned":
+            gate_counts = getattr(sample, "gate_counts", {})
+            g = self._build_uniform_binned_global(gate_counts, meta)
+            return g.view(1, -1)
+        
+        # Otherwise, sanitize existing features
         if not hasattr(sample, "global_features") or sample.global_features is None:
-            return sample
+            g = torch.zeros(1, self.global_feature_dim, dtype=torch.float32)
+        else:
+            g = sample.global_features
+            if not torch.is_tensor(g):
+                g = torch.as_tensor(g, dtype=torch.float32)
+            g = g.flatten().to(torch.float32)
 
-        g = sample.global_features
+            if self.global_feature_dim > 0:
+                if g.numel() < self.global_feature_dim:
+                    g = F.pad(g, (0, self.global_feature_dim - g.numel()))
+                elif g.numel() > self.global_feature_dim:
+                    g = g[: self.global_feature_dim]
 
-        if not torch.is_tensor(g):
-            g = torch.as_tensor(g, dtype=torch.float32)
-
-        g = g.flatten().to(torch.float32)
-
-        if self.global_feature_dim > 0:
-            if g.numel() < self.global_feature_dim:
-                g = F.pad(g, (0, self.global_feature_dim - g.numel()))
-            elif g.numel() > self.global_feature_dim:
-                g = g[: self.global_feature_dim]
-
-        sample.global_features = g.view(1, -1)
-
-        return sample
+        return g.view(1, -1)
 
     def _sanitize_x(self, sample: Data) -> Data:
         if not hasattr(sample, "x") or sample.x is None:
@@ -618,7 +653,6 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
             raise TypeError("Slicing is not supported for this dataset")
 
         idx = int(idx.item()) if isinstance(idx, torch.Tensor) else int(idx)
-
         row = self.rows[idx]
 
         data, slices, shard_meta = self._load_shard(row["shard_path"])
@@ -631,8 +665,24 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
             decrement=False,
         )
 
+        # Sanitize in order
         sample = self._sanitize_x(sample)
-        sample = self._sanitize_global_features(sample)
+        
+        # NORMALIZE gate counts first
+        if hasattr(sample, "gate_counts") and isinstance(sample.gate_counts, dict):
+            normalized_gate_counts = {
+                key: sample.gate_counts.get(key, 0) 
+                for key in self.all_gate_keys
+            }
+        else:
+            normalized_gate_counts = {key: 0 for key in self.all_gate_keys}
+
+        sample.gate_counts = normalized_gate_counts
+        # BUILD global features (respects variant)
+        g = self._sanitize_global_features(sample)
+        sample.global_features = g
+        
+        # Apply target transform
         sample = self._apply_target_transform(sample)
 
         return sample
