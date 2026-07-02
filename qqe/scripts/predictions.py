@@ -99,21 +99,6 @@ def main(
         target_global_dim=model_config.get("global_in_dim"),
     )
 
-    sample = dataset[0]
-
-    print("=== Prediction dataset sample ===")
-    print("target_variant:", target_variant)
-    print("x:", sample.x.shape if hasattr(sample, "x") else None)
-    print("global_features:", sample.global_features.shape if hasattr(sample, "global_features") else None)
-    print("y:", getattr(sample, "y", None))
-    print("sre:", getattr(sample, "sre", None))
-    print("raw_sre:", getattr(sample, "raw_sre", None))
-    print("n_qubits:", getattr(sample, "n_qubits", None))
-    print("node_in_dim checkpoint:", model_config.get("node_in_dim"))
-    print("global_in_dim checkpoint:", model_config.get("global_in_dim"))
-    print("family_projection:", feature_config.get("family_projection"))
-    print("all_gate_keys len:", len(feature_config.get("all_gate_keys") or []))
-
     rows = predict(
         model,
         loader,

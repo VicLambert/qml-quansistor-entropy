@@ -411,6 +411,7 @@ class ShardedQuantumCircuitGraphDataset(PyGDataset):
         self.node_feature_dim = self._collect_node_feature_dim_from_shards()
         self.global_feature_dim = self._collect_global_feature_dim_from_shards()
 
+
     def _load_index_rows(self):
         rows = []
         for index_path in self.index_paths:
