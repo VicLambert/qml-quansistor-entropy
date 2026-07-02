@@ -194,7 +194,7 @@ def  train(
             num_workers = num_workers,
         )
         node_in_dim = global_in_dim
-
+    logger.info(f"Loaders built | train_loader={len(train_loader.dataset)} graphs | val_loader={len(val_loader.dataset)} graphs | test_loader={len(test_loader.dataset)} graphs")
     model = spec["build_model"](node_in_dim, global_in_dim, model_hparams)
     logger.info("Loaders and model built.")
 

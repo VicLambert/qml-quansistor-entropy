@@ -86,24 +86,24 @@ def default_sampling_config() -> SamplingConfig:
 
 def main(
     backend: str = typer.Option("pennylane", help="Backend to use"),
-    target: str = typer.Option("EE", help="Target to compute: SRE, EE, or none"),
-    method: str = typer.Option("von_neumann", help="SRE/EE computation method"),
+    target: str = typer.Option("SRE", help="Target to compute: SRE, EE, or none"),
+    method: str = typer.Option("fwht", help="SRE/EE computation method"),
     use_dask: bool = typer.Option(True, help="Use Dask"),
     output_dir: str = typer.Option(
-        "/outputs/data/datasets_VNEE",
+        "/outputs/data/datasets_SRE",
         help="Output folder",
     ),
     n_bins_option: int = typer.Option(50, help="Number of bins for graph encoding"),
     families: str = typer.Option(
-        "random,clifford,quansistor,haar",
+        "clifford,quansistor,haar",
         help="Comma-separated circuit families",
     ),
     n_seeds_option: int = typer.Option(
-        250,
+        175,
         help="Seeds per (family, qubits, layers)",
     ),
     prediction_n_seeds_option: int | None = typer.Option(
-        100,
+        75,
         help="Optional different number of seeds for qubits without target",
     ),
     qubits_min: int = typer.Option(4),
@@ -120,7 +120,6 @@ def main(
     dask_n_workers: int = typer.Option(4),
     dask_memory_per_worker: str = typer.Option("32GiB"),
     block_size: int = typer.Option(10, help="Number of layers per block for layer-wise processing"),
-    sampling_config : SamplingConfig | None = None,
 ):
     selected_families = [f.strip() for f in families.split(",") if f.strip()]
 
@@ -173,9 +172,9 @@ def main(
         max_shards=max_shards,
         dask_n_workers=dask_n_workers,
         dask_memory_per_worker=dask_memory_per_worker,
-        sampling_config=sampling_config if sampling_config is not None else default_sampling_config(),
+        sampling_config=default_sampling_config(),
         layer_block_size = block_size,
-        use_sharded=False,
+        use_sharded=True,
     )
 
 
