@@ -126,6 +126,9 @@ def main(
     training_data_dir = "outputs/data/datasets_SRE",
     split: str = "target",
     model_save_path: str | None = None,
+    save_fig_path: str = typer.Option(
+        "outputs/figures/training_curves/training_curves",
+    ),
     show_progress: bool = typer.Option(
         default=True,
         help="Show progress bars during training",
@@ -170,6 +173,7 @@ def main(
         save_checkpoint = True,
         model_save_path=model_save_path,
         save_fig = True,
+        save_fig_path = save_fig_path,
         show_progress = show_progress,
         show_val_progress = show_val_progress,
         log_every_n_batches = log_every_n_batches,

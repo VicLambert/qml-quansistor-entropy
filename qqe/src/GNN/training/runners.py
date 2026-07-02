@@ -106,6 +106,7 @@ def  train(
     save_checkpoint: bool = True,
     model_save_path: str | None = None,
     save_fig: bool = True,
+    save_fig_path=f"outputs/figures/training_curves/training_curves",
     show_progress: bool = True,
     show_val_progress: bool = False,
     log_every_n_batches: int = 10,
@@ -249,12 +250,13 @@ def  train(
     logger.info("Training complete.")
 
     run_name = f"{model_type}_{loss_type}_{family if training_mode == 'per_family' else 'global'}"
+    save_fig_path = save_fig_path + f"_{run_name}.png"
 
     plot_training_curves(
         hist,
         title=f"{model_type.upper()} SRE regression",
         save_fig=save_fig,
-        fig_path=f"outputs/figures/training_curves/training_curves_{run_name}.png",
+        fig_path=save_fig_path,
     )
 
     # Build model config safely, providing defaults for missing hparams depending on model

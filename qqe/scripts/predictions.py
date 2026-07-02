@@ -32,6 +32,7 @@ def main(
     model_family: str | None = typer.Option("quansistor", help="Family used if training_scope='family'."),
     dataset_root: str = typer.Option("C:\\Users\\Victor\\Desktop\\Université\\Research\\qml-quansistor-entropy\\qqe\\outputs\\data\\datasets_SRE", help="Root folder containing prediction files."),
     dataset_family: str | None = typer.Option("quansistor", help="Optional family to predict on."),
+    output_root: str = typer.Option("final/predictions/", help="Root folder to save predictions."),
     batch_size: int = typer.Option(32, help="Batch size."),
     target_variant: str = typer.Option("sre_density", help="Target variant, e.g. 'sre', 'sre_density', 'log_sre', or 'sqrt_sre'."),
     global_feature_variant: str = typer.Option("binned", help="Global feature variant."),
@@ -41,7 +42,7 @@ def main(
     split_by_family: bool = typer.Option(True, help="Plot separate curves for each family."),
     show_progress: bool = typer.Option(True, help="Show progress bar during prediction."),
 ):
-    output_csv = f"outputs/predictions/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
+    output_csv = f"{output_root}/{training_scope}/{model_kind}_predictions_{model_family or 'global'}.csv"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     logger.info("Loading checkpoint: %s", model_path)
